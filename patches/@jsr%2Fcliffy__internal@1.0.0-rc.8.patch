@@ -1,0 +1,31 @@
+diff --git a/runtime/read.js b/runtime/read.js
+index ead4bdea22be124a85ed89428cd0267f48bdb5ba..abcf9a1c30c02a54fd393da0d6fbedf554c2d838 100755
+--- a/runtime/read.js
++++ b/runtime/read.js
+@@ -9,23 +9,15 @@
+   const { Deno, Bun, process } = globalThis;
+   if (Deno) {
+     return await Deno.stdin.read(data);
+-  } else if (Bun) {
+-    const reader = Bun.stdin.stream().getReader();
+-    const { value: buffer } = await reader.read();
+-    await reader.cancel();
+-    for(let i = 0; i < buffer.length; i++){
+-      data[i] = buffer[i];
+-    }
+-    return buffer.length;
+   } else if (process) {
+-    return await new Promise((resolve, reject)=>{
+-      process.stdin.once("readable", ()=>{
++    return await new Promise((resolve, reject) => {
++      process.stdin.once("readable", () => {
+         try {
+           const buffer = process.stdin.read();
+           if (buffer === null) {
+             return resolve(null);
+           }
+-          for(let i = 0; i < buffer.length; i++){
++          for (let i = 0; i < buffer.length; i++) {
+             data[i] = buffer[i];
+           }
+           resolve(buffer.length);

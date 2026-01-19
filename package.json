@@ -1,0 +1,86 @@
+{
+  "name": "bun-apple-tv",
+  "version": "0.0.0-alpha.1",
+  "description": "Apple TV remote control library and CLI for Bun/TypeScript",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "bunatv": "./dist/bin/bunatv"
+  },
+  "scripts": {
+    "test": "bun test",
+    "test:unit": "bun test tests/unit",
+    "test:integration": "bun test tests/integration",
+    "test:watch": "bun test --watch",
+    "test:coverage": "bun test --coverage",
+    "format": "prettier --write src/ cli/ tests/",
+    "format:check": "prettier --check src/ cli/ tests/",
+    "typecheck": "tsc --noEmit",
+    "build:cli": "bun build ./src/cli/cli.ts --outfile ./dist/bin/bunatv --compile",
+    "cli": "bun run src/cli/cli.ts"
+  },
+  "keywords": [
+    "apple-tv",
+    "remote-control",
+    "companion",
+    "streaming",
+    "bun",
+    "typescript",
+    "homekit",
+    "mdns"
+  ],
+  "author": "Jarek Toro",
+  "license": "MIT",
+  "homepage": "https://github.com/JarekToro/bunatv#readme",
+  "dependencies": {
+    "@cliffy/ansi": "^1.0.0-rc.8",
+    "@cliffy/command": "^1.0.0-rc.8",
+    "@cliffy/prompt": "^1.0.0-rc.8",
+    "@cliffy/table": "^1.0.0-rc.8",
+    "@collight/dns-sd": "^0.1.6",
+    "@noble/ciphers": "^1.3.0",
+    "@noble/curves": "^1.9.7",
+    "@noble/hashes": "^1.8.0",
+    "@plist/plist": "^1.0.0",
+    "@types/multicast-dns": "^7.2.4",
+    "@types/prompt-sync": "^4.2.3",
+    "bplist-parser": "^0.3.2",
+    "colorette": "^2.0.20",
+    "commander": "^11.1.0",
+    "debug": "^4.4.3",
+    "dns-packet": "^5.6.1",
+    "eventemitter3": "^5.0.1",
+    "fast-srp-hap": "^2.0.4",
+    "multicast-dns": "^7.2.5",
+    "picospinner": "^3.0.0",
+    "pino": "^9.9.0",
+    "pino-debug": "^3.0.0",
+    "pino-pretty": "^13.1.1",
+    "plist": "^3.1.0",
+    "prompt-sync": "^4.2.0",
+    "protobufjs": "^7.2.5",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.20",
+    "@types/pino": "^7.0.5",
+    "@types/ws": "^8.5.8",
+    "prettier": "^3.0.3",
+    "protobufjs-cli": "^1.1.1",
+    "ts-patch": "^3.3.0",
+    "typescript": "~5.9.3"
+  },
+  "engines": {
+    "bun": ">=1.2.20"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "private": false,
+  "patchedDependencies": {
+    "@jsr/cliffy__internal@1.0.0-rc.8": "patches/@jsr%2Fcliffy__internal@1.0.0-rc.8.patch"
+  }
+}
