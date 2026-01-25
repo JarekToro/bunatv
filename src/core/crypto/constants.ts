@@ -49,6 +49,18 @@ export const COMPANION_CRYPTO = {
 }
 
 /**
+ * Airplay Protocol specific constants
+ * Based on pyatv implementation for AirPlay
+ */
+export const AIRPLAY_CRYPTO = {
+  /** Salt for AirPlay session keys */
+  SESSION_SALT: Buffer.from('Control-Salt', 'utf8'),
+  /** Info for client-to-server encryption (data we send) */
+  CLIENT_ENCRYPT_INFO: Buffer.from('Control-Write-Encryption-Key', 'utf8'),
+  /** Info for server-to-client encryption (data we receive) */
+  SERVER_ENCRYPT_INFO: Buffer.from('Control-Read-Encryption-Key', 'utf8'),
+}
+/**
  * SRP configuration for HAP pairing
  */
 export const SRP_CONFIG = {

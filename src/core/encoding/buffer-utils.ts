@@ -369,6 +369,13 @@ export class BufferWriter {
     this.buffer = pool ? pool.acquire(initialSize) : Buffer.allocUnsafe(initialSize)
   }
 
+  writeUtf8(str: string): void {
+    const bytes = Buffer.byteLength(str, 'utf-8')
+    this.ensureCapacity(bytes)
+    this.buffer.write(str, this.offset, bytes, 'utf-8')
+    this.offset += bytes
+  }
+
   writeUInt8(value: number): void {
     this.ensureCapacity(1)
     this.buffer.writeUInt8(value, this.offset)

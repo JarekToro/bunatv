@@ -8,10 +8,14 @@
 import crypto from 'node:crypto'
 import { createLogger } from '../../logging/logging'
 import { CryptoError } from './errors'
-import { HAP_SALT, HAP_INFO, COMPANION_CRYPTO } from './constants'
+import { HAP_SALT, HAP_INFO, COMPANION_CRYPTO, AIRPLAY_CRYPTO } from './constants'
 
 const logger = createLogger("bunatv:crypto:hkdf");
 
+export type DerivedKeys = {
+  readKey: Uint8Array
+  writeKey: Uint8Array
+}
 /**
  * HKDF utilities for HAP key derivation - Bun Native Implementation
  */
@@ -231,10 +235,7 @@ export class HkdfUtils {
   /**
    * Derive session encryption keys synchronously (Bun optimized)
    */
-  static deriveSessionKeysSync(sharedSecret: Uint8Array): {
-    readKey: Uint8Array
-    writeKey: Uint8Array
-  } {
+  static deriveSessionKeysSync(sharedSecret: Uint8Array): DerivedKeys {
     const readKey = this.deriveSync(
       sharedSecret,
       HAP_SALT.PAIR_VERIFY_ENCRYPT,
@@ -251,6 +252,41 @@ export class HkdfUtils {
     return { readKey, writeKey }
   }
 
+  static deriveAirPlaySessionKeysSync(sharedSecret: Uint8Array): DerivedKeys {
+    logger.info('Deriving Companion protocol session keys')
+
+    // Server encrypts with ServerEncrypt-main, we decrypt with it
+    const readKey = this.deriveSync(
+      sharedSecret,
+      AIRPLAY_CRYPTO.SESSION_SALT,
+      AIRPLAY_CRYPTO.SERVER_ENCRYPT_INFO,
+      32
+    )
+    // We encrypt with ClientEncrypt-main
+    const writeKey = this.deriveSync(
+      sharedSecret,
+      AIRPLAY_CRYPTO.SESSION_SALT,
+      AIRPLAY_CRYPTO.CLIENT_ENCRYPT_INFO,
+      32
+    )
+
+    logger.info(
+      {
+        sharedSecretHex: Buffer.from(sharedSecret).toString('hex'),
+        sharedSecretLength: sharedSecret.length,
+        saltHex: AIRPLAY_CRYPTO.SESSION_SALT.toString('hex') || '(empty)',
+        saltLength: AIRPLAY_CRYPTO.SESSION_SALT.length,
+        writeInfo: AIRPLAY_CRYPTO.CLIENT_ENCRYPT_INFO.toString('utf8'),
+        readInfo: AIRPLAY_CRYPTO.SERVER_ENCRYPT_INFO.toString('utf8'),
+        readKeyHex: Buffer.from(readKey).toString('hex'), // Full key
+        writeKeyHex: Buffer.from(writeKey).toString('hex'), // Full key
+      },
+      '✅ Derived Companion protocol session keys'
+    )
+
+    return { readKey, writeKey }
+  }
+
   /**
    * Derive Companion protocol session keys synchronously
    *
@@ -260,10 +296,7 @@ export class HkdfUtils {
    *
    * Based on pyatv's implementation for Apple TV Companion Link
    */
-  static deriveCompanionSessionKeysSync(sharedSecret: Uint8Array): {
-    readKey: Uint8Array
-    writeKey: Uint8Array
-  } {
+  static deriveCompanionSessionKeysSync(sharedSecret: Uint8Array): DerivedKeys {
     logger.info('Deriving Companion protocol session keys')
 
     // Server encrypts with ServerEncrypt-main, we decrypt with it

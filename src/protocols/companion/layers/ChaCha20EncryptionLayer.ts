@@ -1,16 +1,9 @@
 import { BunOptimizedUtils } from '@/core/encoding/buffer-utils.ts'
 import { ChaCha20Utils } from '@/core/crypto/chacha20.ts'
 import { createLogger } from '@/logging/logging'
+import type { DerivedKeys } from '@/core/crypto/hkdf.ts'
 
-/**
- * Session keys derived during pair-verify
- */
-export interface SessionKeys {
-  /** Key for encrypting data we send */
-  writeKey: Uint8Array
-  /** Key for decrypting data we receive */
-  readKey: Uint8Array
-}
+
 
 /**
  * Encryption layer states
@@ -31,7 +24,7 @@ const logger = createLogger("bunatv:companion:chacha20-encryption");
  */
 export class ChaCha20EncryptionLayer {
   private _state: EncryptionState = EncryptionState.Disabled
-  private sessionKeys?: SessionKeys
+  private sessionKeys?: DerivedKeys
   private sendNonce: number = 0
   private receiveNonce: number = 0
 
@@ -43,7 +36,7 @@ export class ChaCha20EncryptionLayer {
     return this._state === EncryptionState.Enabled
   }
 
-  enable(keys: SessionKeys): void {
+  enable(keys: DerivedKeys): void {
     logger.info(
       {
         writeKeyHex: Buffer.from(keys.writeKey).toString('hex'),
