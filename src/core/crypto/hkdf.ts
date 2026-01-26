@@ -8,7 +8,14 @@
 import crypto from 'node:crypto'
 import { createLogger } from '../../logging/logging'
 import { CryptoError } from './errors'
-import { HAP_SALT, HAP_INFO, COMPANION_CRYPTO, AIRPLAY_CRYPTO } from './constants'
+import {
+  HAP_SALT,
+  HAP_INFO,
+  COMPANION_CRYPTO,
+  AIRPLAY_CRYPTO,
+  AIRPLAY_EVENT_CRYPTO,
+  AIRPLAY_DATASTREAM_CRYPTO,
+} from './constants'
 
 const logger = createLogger("bunatv:crypto:hkdf");
 
@@ -330,4 +337,51 @@ export class HkdfUtils {
 
     return { readKey, writeKey }
   }
+
+  /**
+   * Derive AirPlay Event channel session keys synchronously
+   *
+   * Event channel uses REVERSED keys because connection originates from receiver:
+   * - Salt: "Events-Salt"
+   * - Output: "Events-Read-Encryption-Key" (we write)
+   * - Input: "Events-Write-Encryption-Key" (we read)
+   */
+  static deriveAirPlayEventKeysSync(sharedSecret: Uint8Array): DerivedKeys {
+    const readKey = this.deriveSync(
+      sharedSecret,
+      AIRPLAY_EVENT_CRYPTO.SESSION_SALT,
+      AIRPLAY_EVENT_CRYPTO.SERVER_ENCRYPT_INFO,
+      32
+    )
+    const writeKey = this.deriveSync(
+      sharedSecret,
+      AIRPLAY_EVENT_CRYPTO.SESSION_SALT,
+      AIRPLAY_EVENT_CRYPTO.CLIENT_ENCRYPT_INFO,
+      32
+    )
+    return { readKey, writeKey }
+  }
+
+  /**
+   * Derive AirPlay DataStream channel session keys synchronously
+   *
+   * DataStream channel uses seed from SETUP response:
+   * - Salt: "DataStream-Salt" + seed (int64 little-endian bytes)
+   * - Output: "DataStream-Output-Encryption-Key" (we write)
+   * - Input: "DataStream-Input-Encryption-Key" (we read)
+   */
+  static deriveAirPlayDataStreamKeysSync(sharedSecret: Uint8Array, seed: bigint): DerivedKeys {
+    // Convert seed to little-endian int64 bytes
+    const seedBytes = new ArrayBuffer(8)
+    const view = new DataView(seedBytes)
+    view.setBigInt64(0, seed, true) // true = little-endian
+
+    // Concatenate salt prefix with seed bytes
+    const salt = Buffer.concat([AIRPLAY_DATASTREAM_CRYPTO.SALT_PREFIX, Buffer.from(seedBytes)])
+
+    const readKey = this.deriveSync(sharedSecret, salt, AIRPLAY_DATASTREAM_CRYPTO.INPUT_INFO, 32)
+    const writeKey = this.deriveSync(sharedSecret, salt, AIRPLAY_DATASTREAM_CRYPTO.OUTPUT_INFO, 32)
+    return { readKey, writeKey }
+  }
 }
+

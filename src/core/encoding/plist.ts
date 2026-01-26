@@ -12,6 +12,10 @@ export class Plist {
   static decode(buffer: ArrayBufferLike | ArrayBufferView): PlistValue {
     return parse(BunOptimizedUtils.ensureArrayBuffer(buffer))
   }
+
+
 }
 
-
+export function plistObjectGuard(value: PlistValue): value is  Record<string, PlistValue> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value) && !(value instanceof Date)
+}

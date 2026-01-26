@@ -179,18 +179,28 @@ export class StreamBuffer {
 // ============================================================================
 // 3. BUN-SPECIFIC: Optimized utilities
 // ============================================================================
-
+export enum NonceFormat {
+  Companion,
+  Hap,
+}
 export class BunOptimizedUtils {
   /**
    * Optimized nonce creation for ChaCha20
    */
-  static createNonce(counter: number): Uint8Array {
+  static createNonce(counter: number, format: NonceFormat): Uint8Array {
     const nonce = new Uint8Array(12)
     const view = new DataView(nonce.buffer)
-    // Counter goes at the START (offset 0), not the end
-    // Format: [counter_bytes (little-endian)][zero_padding]
-    // Example: counter=1 -> [0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
-    view.setUint32(0, counter, true) // Little-endian at offset 0
+
+    if (format === NonceFormat.Companion) {
+      // Companion format: 12-byte counter directly at offset 0
+      // counter=1 -> [0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
+      view.setUint32(0, counter, true)
+    } else {
+      // HAP format: 4 zero bytes + 8-byte counter
+      // counter=1 -> [0x00,0x00,0x00,0x00,0x01,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
+      // First 4 bytes stay zero
+      view.setBigUint64(4, BigInt(counter), true)
+    }
     return nonce
   }
 
@@ -267,10 +277,9 @@ export class BunOptimizedUtils {
     return result
   }
 
-
   static ensureArrayBuffer(input: ArrayBufferLike | ArrayBufferView): ArrayBuffer {
     if (input instanceof ArrayBuffer) {
-      return input;
+      return input
     }
     if (ArrayBuffer.isView(input)) {
       // Handle views with byteOffset/byteLength
@@ -279,7 +288,7 @@ export class BunOptimizedUtils {
       )
     }
     // SharedArrayBuffer or other - copy it
-    return new Uint8Array(input).slice().buffer;
+    return new Uint8Array(input).slice().buffer
   }
 }
 

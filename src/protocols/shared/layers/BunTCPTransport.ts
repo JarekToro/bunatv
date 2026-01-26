@@ -46,7 +46,12 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
   private reconnectTimer?: NodeJS.Timeout
   private host?: string
   private port?: number
-
+  get localAddress(): string | undefined {
+    return this.socket?.localAddress
+  }
+  get remoteAddress(): string | undefined {
+    return this.socket?.remoteAddress
+  }
   constructor(defaultOptions?: TransportOptions) {
     super()
     this.options = {

@@ -1,4 +1,4 @@
-import { BunOptimizedUtils } from '@/core/encoding/buffer-utils.ts'
+import { BunOptimizedUtils, NonceFormat } from '@/core/encoding/buffer-utils.ts'
 import { ChaCha20Utils } from '@/core/crypto/chacha20.ts'
 import { createLogger } from '@/logging/logging.ts'
 import type { DerivedKeys } from '@/core/crypto/hkdf.ts'
@@ -27,6 +27,10 @@ export class ChaCha20EncryptionLayer {
   private sessionKeys?: DerivedKeys
   private sendNonce: number = 0
   private receiveNonce: number = 0
+  private nonceFormat: NonceFormat = NonceFormat.Companion
+  constructor(options?: {format?: NonceFormat}) {
+    this.nonceFormat = options?.format ?? NonceFormat.Companion
+  }
 
   get state(): EncryptionState {
     return this._state
@@ -70,7 +74,7 @@ export class ChaCha20EncryptionLayer {
 
     try {
       const counterValue = this.sendNonce
-      const nonce = BunOptimizedUtils.createNonce(this.sendNonce++)
+      const nonce = BunOptimizedUtils.createNonce(this.sendNonce++, this.nonceFormat)
 
       // DETAILED DEBUG LOGGING
       logger.info(
@@ -114,7 +118,7 @@ export class ChaCha20EncryptionLayer {
 
     try {
       const counterValue = this.receiveNonce
-      const nonce = BunOptimizedUtils.createNonce(this.receiveNonce++)
+      const nonce = BunOptimizedUtils.createNonce(this.receiveNonce++, this.nonceFormat)
 
       logger.trace(
         {

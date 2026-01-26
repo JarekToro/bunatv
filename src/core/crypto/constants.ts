@@ -60,6 +60,21 @@ export const AIRPLAY_CRYPTO = {
   /** Info for server-to-client encryption (data we receive) */
   SERVER_ENCRYPT_INFO: Buffer.from('Control-Read-Encryption-Key', 'utf8'),
 }
+
+
+export const AIRPLAY_EVENT_CRYPTO = {
+  SESSION_SALT: Buffer.from('Events-Salt', 'utf8'),
+  // Reversed because connection originates from receiver
+  CLIENT_ENCRYPT_INFO: Buffer.from('Events-Read-Encryption-Key', 'utf8'),
+  SERVER_ENCRYPT_INFO: Buffer.from('Events-Write-Encryption-Key', 'utf8'),
+}
+
+export const AIRPLAY_DATASTREAM_CRYPTO = {
+  SALT_PREFIX: Buffer.from('DataStream-Salt', 'utf8'),
+  INPUT_INFO: Buffer.from('DataStream-Input-Encryption-Key', 'utf8'),
+  OUTPUT_INFO: Buffer.from('DataStream-Output-Encryption-Key', 'utf8'),
+}
+
 /**
  * SRP configuration for HAP pairing
  */
