@@ -7,24 +7,23 @@ import {
 } from '@/protocols/types/BaseProtocol.ts'
 import { ProtocolStateMachine } from '@/core/utils/ProtocolStateMachine.ts'
 import { RecoveryManager } from '@/core/utils/RecoveryManager.ts'
-import type { AppleDevice, DiscoveredDevice } from '@/core/discovery/discovery-types.ts'
+import type { AppleDevice } from '@/core/discovery/discovery-types.ts'
 import type { ClientDeviceInfo } from '@/core/client-identity.ts'
-import {
-  BunTCPTransport,
-} from '@/protocols/shared/layers/BunTCPTransport.ts'
+import { BunTCPTransport } from '@/protocols/shared/layers/BunTCPTransport.ts'
 import { ChaCha20EncryptionLayer } from '@/protocols/shared/layers/ChaCha20EncryptionLayer.ts'
 import { HttpFramedChannel } from './HttpFramedChannel.ts'
+import { AirPlayAuthClient, type AirPlayCredentials } from './AirPlayAuthenticationService.ts'
 import {
-  AirPlayAuthClient,
-  type AirPlayCredentials,
-} from './AirPlayAuthenticationService.ts'
-import {
-  RtspSession,
-  type RemoteControlSetupInfo,
   type DataStreamConfig,
+  type RemoteControlSetupInfo,
+  RtspSession,
 } from '@/protocols/rtsp/RtspSession.ts'
 import type { Storage } from '@/core/storage/types.ts'
 import { createLogger } from '@/logging/logging.ts'
+import { DataStreamChannel } from '@/protocols/airplay/layers/DataStreamChannel.ts'
+import { HkdfUtils } from '@/core/crypto/hkdf.ts'
+import { NonceFormat } from '@/core/encoding/buffer-utils.ts'
+import { EventStreamChannel } from '@/protocols/airplay/layers/EventStreamChannel.ts'
 
 const logger = createLogger('bunatv:airplay:session')
 
@@ -67,14 +66,14 @@ export class Airplay2Session
 
   // Core protocol layers
   private readonly transport = new BunTCPTransport()
-  private readonly encryption = new ChaCha20EncryptionLayer()
+  private readonly encryption = new ChaCha20EncryptionLayer({ format: NonceFormat.Hap })
   private readonly channel: HttpFramedChannel
   private readonly authClient: AirPlayAuthClient
   private readonly rtsp: RtspSession
 
   // Secondary channels (for event and data streams)
-  private eventTransport?: BunTCPTransport
-  private dataTransport?: BunTCPTransport
+  private eventChannel?: EventStreamChannel
+  private dataChannel?: DataStreamChannel
 
   // Keep-alive
   private keepAliveInterval?: ReturnType<typeof setInterval>
@@ -89,6 +88,7 @@ export class Airplay2Session
   // ============================================================================
   // Factory & Constructor
   // ============================================================================
+  private sharedSecret: Uint8Array<ArrayBufferLike> | undefined
 
   static async create(device: AppleDevice, storage: Storage): Promise<Airplay2Session> {
     const clientDeviceInfo = await storage.getClientDeviceInfo()
@@ -141,29 +141,13 @@ export class Airplay2Session
     })
   }
 
-  private setupEventChannel(): void {
-    if (!this.eventTransport) return
-
-    this.eventTransport.on('data', (data: Buffer) => {
-      logger.trace({ length: data.length }, 'Event channel data received')
-      this.emit('event-received', data)
-    })
-
-    this.eventTransport.on('error', error => {
-      this.emit('error', error, 'event-channel')
-    })
-  }
 
   private setupDataChannel(): void {
-    if (!this.dataTransport) return
+    if (!this.dataChannel) return
 
-    this.dataTransport.on('data', (data: Buffer) => {
+    this.dataChannel.on('protobufMessage', data => {
       logger.trace({ length: data.length }, 'Data channel data received')
       this.emit('data-received', data)
-    })
-
-    this.dataTransport.on('error', error => {
-      this.emit('error', error, 'data-channel')
     })
   }
 
@@ -224,14 +208,14 @@ export class Airplay2Session
     }
 
     // Disconnect secondary channels
-    if (this.dataTransport) {
-      await this.dataTransport.disconnect()
-      this.dataTransport = undefined
+    if (this.dataChannel) {
+      await this.dataChannel.disconnect()
+      this.dataChannel = undefined
     }
 
-    if (this.eventTransport) {
-      await this.eventTransport.disconnect()
-      this.eventTransport = undefined
+    if (this.eventChannel) {
+      await this.eventChannel.disconnect()
+      this.eventChannel = undefined
     }
 
     // Disable encryption
@@ -248,11 +232,11 @@ export class Airplay2Session
   /**
    * Send data on the data channel
    */
-  async send(data: Buffer): Promise<void> {
-    if (!this.dataTransport) {
+  async send(data: Buffer) {
+    if (!this.dataChannel) {
       throw new Error('Data channel not connected')
     }
-    await this.dataTransport.send(data)
+    this.dataChannel.send(data)
   }
 
   /**
@@ -320,6 +304,7 @@ export class Airplay2Session
       credentials = authResult.credentials
     }
 
+    this.sharedSecret = authResult.sharedSecret
     // Step 3: Enable encryption with derived keys
     logger.debug('Enabling encryption')
     this.encryption.enable(authResult.keys)
@@ -335,8 +320,9 @@ export class Airplay2Session
   }
 
   private async setupRtspSession(): Promise<void> {
-    // Initialize RTSP session
-    this.rtsp.initSession(this.connectionInfo.address)
+    if (!this.sharedSecret) {
+      throw new Error('Shared secret is not available for RTSP session setup')
+    }
 
     // // AirPlay 2 auth-setup (required before SETUP)
     // logger.debug('Performing auth-setup')
@@ -352,14 +338,22 @@ export class Airplay2Session
     }
     logger.debug({ eventPort: rcResult.eventPort }, 'Remote control setup complete')
 
-    // Connect event channel
-    this.eventTransport = new BunTCPTransport()
-    await this.eventTransport.connect(this.connectionInfo.address, rcResult.eventPort, {
-      timeout: 5000,
-    })
-    this.setupEventChannel()
     logger.debug('Event channel connected')
 
+    const eventEncryptionLayer = new ChaCha20EncryptionLayer({ format: NonceFormat.Hap })
+    const eventDataKeys = HkdfUtils.deriveAirPlayEventKeysSync(this.sharedSecret)
+    eventEncryptionLayer.enable({
+      readKey: eventDataKeys.readKey,
+      writeKey: eventDataKeys.writeKey,
+    })
+
+    logger.debug('Event channel connecting')
+
+    this.eventChannel = new EventStreamChannel({address: this.connectionInfo.address, port: rcResult.eventPort}, eventEncryptionLayer)
+    await this.eventChannel.start();
+
+
+    logger.debug('Starting RTSP session setup')
     // Send RECORD to start session
     await this.rtsp.record()
     logger.debug('RTSP RECORD sent')
@@ -376,10 +370,12 @@ export class Airplay2Session
     )
 
     // Connect data channel
-    this.dataTransport = new BunTCPTransport()
-    await this.dataTransport.connect(this.connectionInfo.address, dsResult.dataPort, {
-      timeout: 5000,
-    })
+
+    const encryptionLayer = new ChaCha20EncryptionLayer({ format: NonceFormat.Hap })
+    const dataKeys = HkdfUtils.deriveAirPlayDataStreamKeysSync(this.sharedSecret, streamConfig.seed)
+    encryptionLayer.enable(dataKeys)
+    this.dataChannel = new DataStreamChannel({address: this.connectionInfo.address, port: dsResult.dataPort}, encryptionLayer)
+
     this.setupDataChannel()
     logger.debug('Data channel connected')
 

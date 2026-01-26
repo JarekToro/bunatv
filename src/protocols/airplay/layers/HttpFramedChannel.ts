@@ -8,6 +8,7 @@ import {
   BufferWriter,
   BunOptimizedUtils,
 } from '@/core/encoding/buffer-utils.ts'
+import { HapFrameLayer } from '@/protocols/airplay/layers/HapFrameLayer.ts'
 
 export interface HttpResponse {
   statusCode: number
@@ -16,10 +17,23 @@ export interface HttpResponse {
   body: Buffer
 }
 
+export interface HttpRequest {
+  method: string
+  path: string
+  protocol: string
+  headers: Map<string, string>
+  body: Buffer
+}
+
 export interface HttpFramedChannelEvents {
   response: (response: HttpResponse) => void
+  request: (request: HttpRequest) => void
   error: (error: Error) => void
 }
+
+type PendingMessage =
+  | { type: 'response'; data: Partial<HttpResponse> }
+  | { type: 'request'; data: Partial<HttpRequest> }
 
 const logger = createLogger('bunatv:http:framed-channel')
 
@@ -27,28 +41,35 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
   private readonly bufferPool = new BufferPool()
   private readonly streamBuffer: StreamBuffer
   private encryptedBuffer: Buffer<ArrayBufferLike> = Buffer.alloc(0)
-  private pendingResponse: Partial<HttpResponse> | null = null
+  private pendingMessage: PendingMessage | null = null
   private expectedBodyLength = 0
+  private hapFrame: HapFrameLayer
 
   constructor(
     private readonly transport: BunTCPTransport,
-    private readonly encryption?: ChaCha20EncryptionLayer
+    private readonly encryption: ChaCha20EncryptionLayer
   ) {
     super()
     this.streamBuffer = new StreamBuffer(4096, 1048576, this.bufferPool)
+    this.hapFrame = new HapFrameLayer(encryption)
 
     this.transport.on('data', (data: Buffer) => {
       this.handleData(data)
     })
   }
 
-  private handleData(data: Buffer): void {
-    if (this.encryption?.isEnabled) {
-      // Append to encrypted buffer first
-      this.encryptedBuffer = Buffer.concat([this.encryptedBuffer, data])
+  get localAddress(): string | undefined {
+    return this.transport.localAddress
+  }
 
-      // Try to decrypt complete frames
-      const { decrypted, remaining } = this.decryptHapFrames(this.encryptedBuffer)
+  get remoteAddress(): string | undefined {
+    return this.transport.remoteAddress
+  }
+
+  private handleData(data: Buffer): void {
+    if (this.hapFrame?.isEnabled) {
+      this.encryptedBuffer = Buffer.concat([this.encryptedBuffer, data])
+      const { decrypted, remaining } = this.hapFrame.decrypt(this.encryptedBuffer)
       this.encryptedBuffer = remaining
 
       // Only append if we got decrypted data
@@ -59,61 +80,22 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
       this.streamBuffer.append(data)
     }
 
-    this.parseResponses()
+    this.parseMessages()
   }
 
-  private decryptHapFrames(encrypted: Buffer): {
-    decrypted: Buffer
-    remaining: Buffer
-  } {
-    const decryptedChunks: Buffer[] = []
-    let offset = 0
-
-    while (offset < encrypted.length) {
-      // Need at least length header
-      if (encrypted.length - offset < 2) break
-
-      const length = encrypted.readUInt16LE(offset)
-      const frameEnd = offset + 2 + length + 16
-
-      // Don't have complete frame yet
-      if (encrypted.length < frameEnd) break
-
-      const ciphertext = encrypted.subarray(offset + 2, frameEnd)
-      const aad = encrypted.subarray(offset, offset + 2)
-
-      const decrypted = this.encryption!.decrypt(ciphertext, aad)
-      decryptedChunks.push(decrypted)
-
-      offset = frameEnd
-    }
-
-    return {
-      decrypted:
-        decryptedChunks.length > 0 ? BunOptimizedUtils.concat(decryptedChunks) : Buffer.alloc(0),
-      remaining: encrypted.subarray(offset), // Keep incomplete frame
-    }
-  }
-
-  private parseResponses(): void {
+  private parseMessages(): void {
     while (this.streamBuffer.available > 0) {
-      if (!this.pendingResponse) {
+      if (!this.pendingMessage) {
         const headerEndPos = this.findHeaderEnd()
         if (headerEndPos === -1) return
 
         const headerData = this.streamBuffer.consume(headerEndPos + 4)!
         const headerSection = headerData.subarray(0, headerEndPos).toString('utf-8')
 
-        // type assertion: first line + headers as its already validated above
         const lines = headerSection.split('\r\n') as [string, ...string[]]
-        const statusMatch = lines[0].match(/^(?:HTTP|RTSP)\/\d\.\d\s+(\d+)\s+(.*)$/)
+        const firstLine = lines[0]
 
-        if (!statusMatch) {
-          logger.error({ statusLine: lines[0] }, 'Invalid status line')
-          this.emit('error', new Error(`Invalid status line: ${lines[0]}`))
-          return
-        }
-
+        // Parse headers (common to both request and response)
         const headers = new Map<string, string>()
         for (let i = 1; i < lines.length; i++) {
           const colonIdx = lines[i]!.indexOf(':')
@@ -123,15 +105,39 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
             headers.set(key, value)
           }
         }
-        if (statusMatch[1] == null) {
-          logger.error({ statusLine: lines[0] }, 'Invalid status code')
-          this.emit('error', new Error(`Invalid status code: ${lines[0]}`))
+
+        // Determine if this is a request or response based on the first line
+        const responseMatch = firstLine.match(/^(?:HTTP|RTSP)\/\d\.\d\s+(\d+)\s*(.*)$/)
+        const requestMatch = firstLine.match(/^([A-Z]+)\s+(\S+)\s+(HTTP|RTSP)\/\d\.\d$/)
+
+        if (responseMatch) {
+          if (responseMatch[1] == null) {
+            logger.error({ statusLine: firstLine }, 'Invalid status code')
+            this.emit('error', new Error(`Invalid status code: ${firstLine}`))
+            return
+          }
+          this.pendingMessage = {
+            type: 'response',
+            data: {
+              statusCode: parseInt(responseMatch[1], 10),
+              statusText: responseMatch[2] ?? '',
+              headers,
+            },
+          }
+        } else if (requestMatch) {
+          this.pendingMessage = {
+            type: 'request',
+            data: {
+              method: requestMatch[1],
+              path: requestMatch[2],
+              protocol: `${requestMatch[3]}/1.0`,
+              headers,
+            },
+          }
+        } else {
+          logger.error({ firstLine }, 'Invalid HTTP message first line')
+          this.emit('error', new Error(`Invalid HTTP message: ${firstLine}`))
           return
-        }
-        this.pendingResponse = {
-          statusCode: parseInt(statusMatch[1], 10),
-          statusText: statusMatch[2],
-          headers,
         }
 
         this.expectedBodyLength = parseInt(headers.get('content-length') || '0', 10)
@@ -144,31 +150,65 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
 
       const body = this.streamBuffer.consume(this.expectedBodyLength)!
 
-      const response: HttpResponse = {
-        statusCode: this.pendingResponse.statusCode!,
-        statusText: this.pendingResponse.statusText!,
-        headers: this.pendingResponse.headers!,
-        body,
+      if (this.pendingMessage.type === 'response') {
+        const response: HttpResponse = {
+          statusCode: this.pendingMessage.data.statusCode!,
+          statusText: this.pendingMessage.data.statusText!,
+          headers: this.pendingMessage.data.headers!,
+          body,
+        }
+
+        this.pendingMessage = null
+        this.expectedBodyLength = 0
+
+        logger.debug(
+          {
+            statusCode: response.statusCode,
+            bodyLength: response.body.length,
+            headers: Object.fromEntries(response.headers),
+          },
+          'Received HTTP response'
+        )
+        logger.trace(
+          {
+            statusCode: response.statusCode,
+            statusText: response.statusText,
+            headers: Object.fromEntries(response.headers),
+            body: response.body.toString('utf-8'),
+          },
+          'Full HTTP response'
+        )
+
+        this.emit('response', response)
+      } else {
+        const request: HttpRequest = {
+          method: this.pendingMessage.data.method!,
+          path: this.pendingMessage.data.path!,
+          protocol: this.pendingMessage.data.protocol!,
+          headers: this.pendingMessage.data.headers!,
+          body,
+        }
+
+        logger.debug(
+          { method: request.method, path: request.path, bodyLength: request.body.length },
+          'Received HTTP request'
+        )
+        logger.trace(
+          {
+            method: request.method,
+            path: request.path,
+            protocol: request.protocol,
+            headers: Object.fromEntries(request.headers),
+            body: request.body.toString('utf-8'),
+          },
+          'Full HTTP request'
+        )
+
+        this.emit('request', request)
       }
 
-      this.pendingResponse = null
+      this.pendingMessage = null
       this.expectedBodyLength = 0
-
-      logger.debug(
-        { statusCode: response.statusCode, bodyLength: response.body.length },
-        'Received HTTP response'
-      )
-      logger.trace(
-        {
-          statusCode: response.statusCode,
-          statusText: response.statusText,
-          headers: Object.fromEntries(response.headers),
-          body: response.body.toString('utf-8'),
-        },
-        'Full HTTP response'
-      )
-
-      this.emit('response', response)
     }
   }
 
@@ -189,6 +229,36 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
     return -1
   }
 
+  async sendResponse(response: HttpResponse): Promise<void> {
+    const writer = new BufferWriter(512, this.bufferPool)
+
+    writer.writeUtf8(`HTTP/1.1 ${response.statusCode} ${response.statusText}\r\n`)
+
+    for (const [key, value] of response.headers.entries()) {
+      writer.writeUtf8(`${key}: ${value}\r\n`)
+    }
+
+    if (response.body && !response.headers.has('Content-Length')) {
+      writer.writeUtf8(`Content-Length: ${response.body.length}\r\n`)
+    }
+
+    writer.writeUtf8('\r\n')
+
+    if (response.body) {
+      writer.writeBuffer(response.body)
+    }
+
+    let responseBuffer = writer.toBuffer()
+
+    // Encrypt if enabled
+    if (this.hapFrame?.isEnabled) {
+      responseBuffer = this.hapFrame.encrypt(responseBuffer)
+    }
+
+    logger.debug({ statusCode: response.statusCode }, 'Sending HTTP response')
+
+    await this.transport.send(responseBuffer)
+  }
   async sendRequest(
     method: string,
     path: string,
@@ -217,9 +287,20 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
 
       let requestBuffer = writer.toBuffer()
 
+
+      const asdad = requestBuffer.toString('hex')
+      logger.trace(
+        {
+          method,
+          path,
+          requestData: asdad,
+          encryption: this.hapFrame.isEnabled,
+        },
+        'Sending HTTP request'
+      )
       // Encrypt if enabled
-      if (this.encryption?.isEnabled) {
-        requestBuffer = this.encryptHapFrame(requestBuffer)
+      if (this.hapFrame?.isEnabled) {
+        requestBuffer = this.hapFrame.encrypt(requestBuffer)
       }
 
       const handler = (response: HttpResponse) => {
@@ -227,32 +308,14 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
       }
       this.once('response', handler)
 
-      logger.debug({ method, path }, 'Sending HTTP request')
+      logger.debug({ method, path, headers }, `Sending ${protocol} request`)
+
 
       this.transport.send(requestBuffer).catch(err => {
         this.off('response', handler)
         reject(err)
       })
     })
-  }
-
-  private encryptHapFrame(plaintext: Buffer): Buffer {
-    const frames: Buffer[] = []
-    let offset = 0
-
-    // HAP max frame size is 1024 bytes
-    while (offset < plaintext.length) {
-      const chunk = plaintext.subarray(offset, offset + 1024)
-      const lengthBytes = Buffer.alloc(2)
-      lengthBytes.writeUInt16LE(chunk.length, 0)
-
-      const ciphertext = this.encryption!.encrypt(chunk, lengthBytes)
-      frames.push(Buffer.concat([lengthBytes, ciphertext]))
-
-      offset += chunk.length
-    }
-
-    return BunOptimizedUtils.concat(frames)
   }
 
   // Convenience methods
@@ -264,4 +327,7 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
     return this.sendRequest('POST', path, headers, body, 'HTTP/1.1')
   }
 
+  async disconnect(): Promise<void> {
+    await this.transport.disconnect('HttpFramedChannel disconnect requested')
+  }
 }

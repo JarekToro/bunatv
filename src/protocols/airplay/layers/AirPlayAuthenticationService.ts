@@ -89,8 +89,8 @@ export class AirPlayAuthClient extends EventEmitter<AirPlayAuthEvents> {
   ) {
     if (credentials) {
       logger.info('Verifying existing AirPlay credentials')
-      const keys = await this.verify(credentials)
-      return { keys, credentials }
+      const { keys, sharedSecret } = await this.verify(credentials)
+      return { keys, credentials, sharedSecret }
     }
 
     if (!callbacks?.onPinRequired) {
@@ -101,8 +101,8 @@ export class AirPlayAuthClient extends EventEmitter<AirPlayAuthEvents> {
     const newCredentials = await this.pair(callbacks, generateClientId())
 
     logger.info('Pairing complete, verifying new credentials')
-    const keys = await this.verify(newCredentials)
-    return { keys, credentials: newCredentials }
+    const {keys, sharedSecret} = await this.verify(newCredentials)
+    return { keys, credentials: newCredentials, sharedSecret }
   }
 
   /**
@@ -193,7 +193,7 @@ export class AirPlayAuthClient extends EventEmitter<AirPlayAuthEvents> {
       this.setState(AirPlayAuthState.Verified)
       logger.info('AirPlay verification completed successfully')
 
-      return keys
+      return { keys, sharedSecret: handler.sharedSecret }
     } catch (error) {
       this.setState(AirPlayAuthState.Failed)
       throw error
@@ -395,7 +395,7 @@ class AirPlayPairingHandler {
  */
 class AirPlayVerifyHandler {
   private sessionKeyPair: { privateKey: Uint8Array; publicKey: Uint8Array }
-  private sharedSecret?: Uint8Array
+  sharedSecret?: Uint8Array
 
   constructor(private readonly credentials: AirPlayCredentials) {
     // Generate ephemeral X25519 keypair for this session
