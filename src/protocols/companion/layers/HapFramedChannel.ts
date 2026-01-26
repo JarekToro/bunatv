@@ -1,11 +1,11 @@
-import type { BunTCPTransport } from '@/protocols/companion/layers/BunTCPTransport.ts'
+import type { BunTCPTransport } from '@/protocols/shared/layers/BunTCPTransport.ts'
 import {
   type HAPFrame,
   HapFrameHandler,
   HAPFrameType,
 } from '@/protocols/companion/layers/HapFrameHandler.ts'
 import { EventEmitter } from 'eventemitter3'
-import type { ChaCha20EncryptionLayer } from '@/protocols/companion/layers/ChaCha20EncryptionLayer.ts'
+import type { ChaCha20EncryptionLayer } from '@/protocols/shared/layers/ChaCha20EncryptionLayer.ts'
 import type { CompanionOpackMessage } from '@/protocols/companion/messages/CompanionOpackMessage.ts'
 import { OPACK } from '@/core/encoding/opack.ts'
 import { createLogger } from '@/logging/logging.ts'

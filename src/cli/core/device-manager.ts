@@ -59,7 +59,7 @@ export class DeviceManager {
       device =
         allDevices.find(d => {
           const ipMatch = d.ipv4.includes(identifier) || d.ipv6.includes(identifier)
-          const idMatch = d.services.airplay?.txt.deviceid === identifier
+          const idMatch = d.services.airPlay?.txt.deviceid === identifier
           return ipMatch || idMatch
         }) || null
     }
@@ -92,7 +92,7 @@ export class DeviceManager {
    * Map AppleDevice to DiscoveredDevice
    */
   private mapToDiscoveredDevice(device: AppleDevice): DiscoveredDevice {
-    const airplay = device.services.airplay
+    const airplay = device.services.airPlay
     const companion = device.services.companionLink
     const raop = device.services.raop
 
@@ -115,7 +115,7 @@ export class DeviceManager {
       osVersion: airplay?.txt.osvers,
       manufacturer: 'Apple',
       services: {
-        airplay: airplay ? { port: airplay.port } : undefined,
+        airPlay: airplay ? { port: airplay.port } : undefined,
         raop: raop ? { port: raop.port } : undefined,
         companionLink: companion ? { port: companion.port } : undefined,
       },

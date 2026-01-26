@@ -38,7 +38,7 @@ export interface DiscoveredDevice {
   osVersion?: string
   manufacturer?: string
   services?: {
-    airplay?: { port: number }
+    airPlay?: { port: number }
     raop?: { port: number }
     companionLink?: { port: number }
     mrp?: { port: number }
@@ -350,6 +350,10 @@ export type AppleServiceInstance =
 export interface AppleTVDevice {
   /** Display name (e.g., "Apple TV 4K", "Living Room") */
   name: string
+  /** Main address (first IPv4 or IPv6) */
+  address: string
+  /** identifier (Device ID from AirPlay TXT record) */
+  identifier: string
   /** Hostname (e.g., "Apple-TV-4K.local") */
   hostname: string
   /** IPv4 addresses */
@@ -360,7 +364,7 @@ export interface AppleTVDevice {
   model: string
   /** Associated services */
   services: {
-    airplay?: AirPlayService
+    airPlay?: AirPlayService
     raop?: RAOPService
     companionLink?: CompanionLinkService
     deviceInfo?: DeviceInfoService
@@ -369,17 +373,21 @@ export interface AppleTVDevice {
   lastSeen: number
 }
 
+
+
 /**
  * HomePod device
  */
 export interface HomePodDevice {
   name: string
+  identifier: string
+  address: string
   hostname: string
   ipv4: string[]
   ipv6: string[]
   model: string
   services: {
-    airplay?: AirPlayService
+    airPlay?: AirPlayService
     raop?: RAOPService
     companionLink?: CompanionLinkService
   }
@@ -391,13 +399,15 @@ export interface HomePodDevice {
  */
 export interface MacDevice {
   name: string
+  identifier: string
+  address: string
   hostname: string
   ipv4: string[]
   ipv6: string[]
   model: string
   osxVersion?: string
   services: {
-    airplay?: AirPlayService
+    airPlay?: AirPlayService
     raop?: RAOPService
     companionLink?: CompanionLinkService
     deviceInfo?: DeviceInfoService

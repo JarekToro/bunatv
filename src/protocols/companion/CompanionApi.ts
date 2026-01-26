@@ -80,7 +80,7 @@ export class CompanionApi extends EventEmitter<CompanionApiEvents> {
 
   constructor(
     private readonly protocol: CompanionProtocol,
-    private readonly device: ClientDeviceInfo & { clientId: string }
+    private readonly device: ClientDeviceInfo
   ) {
     super()
     this.setupEventHandlers()
@@ -160,10 +160,14 @@ export class CompanionApi extends EventEmitter<CompanionApiEvents> {
   }
 
   async systemInfo() {
+    const clientId = this.protocol.getClientId()
+    if (!clientId) {
+      throw new Error('clientid is missing from protocol, has it authenticated?')
+    }
     const resp = await this.protocol.sendCommand(
       createSystemInfoCommand({
         _i: this.device.rpId,
-        _idsID: this.device.clientId,
+        _idsID: clientId,
         _pubID: this.device.deviceId,
         model: this.device.model,
         name: this.device.name,

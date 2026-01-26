@@ -162,6 +162,21 @@ export class AppleTVDiscoveryService {
     return device
   }
 
+  /**
+   * Get a specific Apple device by IP address
+   */
+  async getAppleDeviceByIPAddress(ipAddress: string): Promise<AppleDevice | null> {
+    await this.registry.ensureLoaded()
+    // Check if device exists and is not expired
+    let device = this._getDeviceByIPAddress(ipAddress)
+    if (!device || this._isDeviceExpired(device)) {
+      // If we have a stale device with an IP, use it for unicast refresh
+      await this._refreshDevice(ipAddress)
+      device = this._getDeviceByIPAddress(ipAddress)
+    }
+    return device
+  }
+
   // ========================================================================
   // Typed Service Access
   // ========================================================================
@@ -290,12 +305,14 @@ export class AppleTVDiscoveryService {
       if (deviceType === 'appletv') {
         const device: AppleTVDevice = {
           name,
+          identifier: airplay.txt.deviceid,
+          address: (addresses.ipv4[0] || addresses.ipv6[0])!,
           hostname,
           ipv4: addresses.ipv4,
           ipv6: addresses.ipv6,
           model: getFriendlyDeviceName(model),
           services: {
-            airplay,
+            airPlay: airplay,
             raop,
             companionLink,
             deviceInfo,
@@ -306,12 +323,14 @@ export class AppleTVDiscoveryService {
       } else if (deviceType === 'homepod') {
         const device: HomePodDevice = {
           name,
+          identifier: airplay.txt.deviceid,
+          address: (addresses.ipv4[0] || addresses.ipv6[0])!,
           hostname,
           ipv4: addresses.ipv4,
           ipv6: addresses.ipv6,
           model: getFriendlyDeviceName(model),
           services: {
-            airplay,
+            airPlay: airplay,
             raop,
             companionLink,
           },
@@ -321,13 +340,15 @@ export class AppleTVDiscoveryService {
       } else if (deviceType === 'mac') {
         const device: MacDevice = {
           name,
+          identifier: airplay.txt.deviceid,
+          address: (addresses.ipv4[0] || addresses.ipv6[0])!,
           hostname,
           ipv4: addresses.ipv4,
           ipv6: addresses.ipv6,
           model,
           osxVersion: deviceInfo?.txt.osxvers,
           services: {
-            airplay,
+            airPlay: airplay,
             raop,
             companionLink,
             deviceInfo,
@@ -421,10 +442,25 @@ export class AppleTVDiscoveryService {
     return all.find(device => device.hostname === hostname) || null
   }
 
+  private _getDeviceByIPAddress(ipAddress: string): AppleDevice | null {
+    const all = [
+      ...this._getAppleDevices('appletv'),
+      ...this._getAppleDevices('homepod'),
+      ...this._getAppleDevices('mac'),
+    ]
+    console.log('Looking for device with IP:', ipAddress)
+    all.forEach(device => {
+      console.log(`Checking device ${device.name} with IPs: ${device.ipv4.join(', ')} / ${device.ipv6.join(', ')}`)
+    })
+    return all.find(
+      device => device.ipv4.includes(ipAddress) || device.ipv6.includes(ipAddress)
+    ) || null
+  }
+
   private _isDeviceExpired(device: AppleDevice): boolean {
     // Check if primary service (AirPlay) is expired
-    if (device.services.airplay) {
-      return device.services.airplay.expiresAt <= Date.now()
+    if (device.services.airPlay) {
+      return device.services.airPlay.expiresAt <= Date.now()
     }
     return true
   }
@@ -470,12 +506,12 @@ export class AppleTVDiscoveryService {
     features: string
   } | null> {
     const device = await this.getAppleDevice(deviceName)
-    if (!device?.services.airplay) return null
+    if (!device?.services.airPlay) return null
 
     const ip = device.ipv4[0] || device.ipv6[0]
     if (!ip) return null
 
-    const airplay = device.services.airplay
+    const airplay = device.services.airPlay
     return {
       host: ip,
       port: airplay.port,
@@ -490,9 +526,9 @@ export class AppleTVDiscoveryService {
    */
   async supportsAirPlayFeatures(deviceName: string, features: string[]): Promise<boolean> {
     const device = await this.getAppleDevice(deviceName)
-    if (!device?.services.airplay) return false
+    if (!device?.services.airPlay) return false
 
-    const deviceFeatures = device.services.airplay.txt.features
+    const deviceFeatures = device.services.airPlay.txt.features
     // Note: This is a simplified check. Real feature checking would parse the hex flags
     return features.every(feature => deviceFeatures.includes(feature))
   }
@@ -509,7 +545,7 @@ export class AppleTVDiscoveryService {
     const device = await this.getAppleDevice(deviceName)
     if (!device) return null
 
-    const airplay = device.services.airplay
+    const airplay = device.services.airPlay
     if (!('deviceInfo' in device.services)) {
       return null
     }

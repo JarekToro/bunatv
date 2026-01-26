@@ -54,9 +54,5 @@ export async function connectToDevice(
 
   const deviceInfo = await storage.getClientDeviceInfo()
 
-  const creds = await credManager.loadCredentials(device.identifier)
-
-  const clientId = creds?.clientId!
-
-  return new CompanionApi(protocol, { ...deviceInfo, clientId })
+  return new CompanionApi(protocol, { ...deviceInfo })
 }

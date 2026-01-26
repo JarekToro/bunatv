@@ -1,7 +1,7 @@
 import { EventEmitter } from 'eventemitter3'
 
 import type { Socket } from 'bun'
-import { createLogger } from '@/logging/logging'
+import { createLogger } from '@/logging/logging.ts'
 
 /**
  * Transport connection states

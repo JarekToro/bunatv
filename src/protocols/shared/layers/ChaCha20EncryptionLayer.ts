@@ -1,6 +1,6 @@
 import { BunOptimizedUtils } from '@/core/encoding/buffer-utils.ts'
 import { ChaCha20Utils } from '@/core/crypto/chacha20.ts'
-import { createLogger } from '@/logging/logging'
+import { createLogger } from '@/logging/logging.ts'
 import type { DerivedKeys } from '@/core/crypto/hkdf.ts'
 
 

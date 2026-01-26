@@ -26,7 +26,7 @@ import type { BaseCredentials } from '@/protocols/types/BaseProtocol.ts'
 
 import { createLogger } from '@/logging/logging'
 
-import type { ClientDeviceInfo } from '@/core/client-identity'
+import { type ClientDeviceInfo, generateClientId } from '@/core/client-identity'
 import type { HapFramedChannel } from '@/protocols/companion/layers/HapFramedChannel.ts'
 
 const logger = createLogger("bunatv:hap:auth");
@@ -97,7 +97,6 @@ interface HapAuthEvents {
 
 export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
   private _session?: AuthenticationSession
-  private _credentials?: HAPCredentials
   private internalState: HAPAuthState = HAPAuthState.Idle
 
   // Flow handlers
@@ -106,9 +105,6 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
 
   // Ephemeral keypair for current operation
   private ephemeralKeyPair?: { privateKey: Uint8Array; publicKey: Uint8Array }
-
-  // Stored credentials
-  private credentials?: HAPCredentials
 
   private pinCallback?: () => Promise<string>
 
@@ -130,6 +126,7 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
     logger.info({ deviceId: config.deviceId }, 'HAPAuthenticationService initialized')
   }
 
+
   get state(): HAPAuthState {
     return this.internalState
   }
@@ -150,17 +147,6 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
     logger.debug({ oldState: oldInternalState, newState }, 'HAP authentication state changed')
   }
 
-  private getActiveClientId(credentials?: HAPCredentials): string {
-    // If we have credentials, ALWAYS use their clientId
-    if (credentials?.clientId) {
-      logger.debug({ clientId: credentials.clientId }, 'Using clientId from credentials')
-      return credentials.clientId
-    }
-
-    // For pairing, resolve and cache if not already done
-    return this.config.clientDeviceInfo.rpId
-  }
-
   /**
    * Unified authentication method
    */
@@ -178,8 +164,8 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
       return this.verify(credentials)
     } else if (callbacks?.onPinRequired) {
       logger.info('No credentials found, starting pairing flow')
-      // No credentials - do pairing
-      const creds = await this.pair(callbacks)
+
+      const creds = await this.pair(callbacks, generateClientId())
       logger.debug('Pairing completed, now verifying credentials')
       return this.verify(creds)
     } else {
@@ -191,7 +177,7 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
   /**
    * Pairing flow (implements optional pair method)
    */
-  async pair(callbacks: AuthenticationCallbacks): Promise<HAPCredentials> {
+  async pair(callbacks: AuthenticationCallbacks, clientId: string): Promise<HAPCredentials> {
     if (!callbacks.onPinRequired) {
       logger.error('PIN callback required for pairing but not provided')
       throw new Error('PIN callback required for pairing')
@@ -199,7 +185,7 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
 
     logger.info('Starting HAP pairing flow')
     // Use existing pairing logic but wrap result
-    const credentials = await this.startPairingInternal(callbacks.onPinRequired)
+    const credentials = await this.startPairingInternal(callbacks.onPinRequired, clientId)
     logger.info({ clientId: credentials.clientId }, 'HAP pairing completed successfully')
     return credentials
   }
@@ -217,7 +203,6 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
       credentials,
     }
 
-    this._credentials = credentials
     logger.info('Credential verification completed successfully')
     return this._session
   }
@@ -226,7 +211,8 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
    * Start pairing flow
    */
   private async startPairingInternal(
-    onPinRequired: () => Promise<string>
+    onPinRequired: () => Promise<string>,
+    clientId: string
   ): Promise<HAPCredentials> {
     if (this.internalState !== HAPAuthState.Idle) {
       logger.error({ currentState: this.internalState }, 'Authentication already in progress')
@@ -236,15 +222,9 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
     logger.debug('Initializing pairing flow')
     this.pinCallback = onPinRequired
 
-    // Resolve client ID once for entire pairing flow
-    const clientId = this.getActiveClientId()
-
-    // Generate ephemeral keypair
-    logger.trace('Generating ephemeral X25519 keypair')
-    this.ephemeralKeyPair = await X25519Utils.generateKeyPair()
 
     // Create pairing handler with resolved client ID
-    this.pairingHandler = new PairingFlowHandler(this.config, clientId, this.ephemeralKeyPair)
+    this.pairingHandler = new PairingFlowHandler(this.config, clientId)
 
     // Send M1
     logger.debug('Sending pairing M1 message')
@@ -277,8 +257,6 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
     }
 
     logger.debug({ clientId: credentials.clientId }, 'Initializing credential verification flow')
-    this._credentials = credentials
-
     // Generate ephemeral keypair
     logger.trace('Generating ephemeral X25519 keypair for verification')
     this.ephemeralKeyPair = await X25519Utils.generateKeyPair()
@@ -449,7 +427,6 @@ export class HAPAuthenticationService extends EventEmitter<HapAuthEvents> {
 
     // Process M6 and get credentials
     const credentials = await this.pairingHandler.processM6(tlv)
-    this.credentials = credentials
 
     logger.info({ clientId: credentials.clientId }, 'Pairing completed successfully')
     this.setState(HAPAuthState.Paired)
@@ -580,7 +557,6 @@ class PairingFlowHandler {
   constructor(
     private config: Omit<HAPAuthConfig, 'clientIdProvider'>,
     private clientId: string,
-    private clientKeyPair: { privateKey: Uint8Array; publicKey: Uint8Array }
   ) {}
 
   /**

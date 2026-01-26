@@ -253,7 +253,7 @@ export class HkdfUtils {
   }
 
   static deriveAirPlaySessionKeysSync(sharedSecret: Uint8Array): DerivedKeys {
-    logger.info('Deriving Companion protocol session keys')
+    logger.info('Deriving AirPlay protocol session keys')
 
     // Server encrypts with ServerEncrypt-main, we decrypt with it
     const readKey = this.deriveSync(
@@ -281,7 +281,7 @@ export class HkdfUtils {
         readKeyHex: Buffer.from(readKey).toString('hex'), // Full key
         writeKeyHex: Buffer.from(writeKey).toString('hex'), // Full key
       },
-      '✅ Derived Companion protocol session keys'
+      '✅ Derived AirPlay protocol session keys'
     )
 
     return { readKey, writeKey }

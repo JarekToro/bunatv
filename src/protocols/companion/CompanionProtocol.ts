@@ -19,8 +19,8 @@ import type { ClientDeviceInfo } from '@/core/client-identity.ts'
 import {
   BunTCPTransport,
   type TransportOptions,
-} from '@/protocols/companion/layers/BunTCPTransport.ts'
-import { ChaCha20EncryptionLayer } from '@/protocols/companion/layers/ChaCha20EncryptionLayer.ts'
+} from '@/protocols/shared/layers/BunTCPTransport.ts'
+import { ChaCha20EncryptionLayer } from '@/protocols/shared/layers/ChaCha20EncryptionLayer.ts'
 import type { Storage } from '@/core/storage/types.ts'
 import { createLogger } from '@/logging/logging.ts'
 import type { CompanionCommand } from '@/protocols/companion/messages/CompanionOpackMessage.ts'
@@ -99,6 +99,10 @@ export class CompanionProtocol
 
     this.session = new CompanionSessionService(this.hapFramedChannel)
     this.setupEventHandlers()
+  }
+
+  getClientId(): string  | undefined {
+      return this.authService.session?.credentials?.clientId
   }
 
   private setupEventHandlers() {
