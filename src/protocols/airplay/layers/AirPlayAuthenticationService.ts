@@ -16,6 +16,7 @@ import { HkdfUtils } from '@/core/crypto/hkdf'
 import { ChaCha20Utils } from '@/core/crypto/chacha20'
 import type { HttpFramedChannel, HttpResponse } from './HttpFramedChannel'
 import { createLogger } from '@/logging/logging'
+import { generateClientId } from '@/core/client-identity.ts'
 
 const logger = createLogger('bunatv:airplay:auth')
 
@@ -24,6 +25,7 @@ export interface AirPlayCredentials {
   publicKey: Uint8Array
   privateKey: Uint8Array
   serverPublicKey: Uint8Array
+  [key: string]: unknown
 }
 
 
@@ -64,14 +66,11 @@ interface AirPlayAuthEvents {
  */
 export class AirPlayAuthClient extends EventEmitter<AirPlayAuthEvents> {
   private state: AirPlayAuthState = AirPlayAuthState.Idle
-  private clientId: string
 
   constructor(
-    private readonly channel: HttpFramedChannel,
-    private readonly deviceInfo: { clientId: string; name: string }
+    private readonly channel: HttpFramedChannel
   ) {
     super()
-    this.clientId = deviceInfo.clientId
   }
 
   private setState(newState: AirPlayAuthState): void {
@@ -99,7 +98,7 @@ export class AirPlayAuthClient extends EventEmitter<AirPlayAuthEvents> {
     }
 
     logger.info('Starting AirPlay pairing flow')
-    const newCredentials = await this.pair(callbacks)
+    const newCredentials = await this.pair(callbacks, generateClientId())
 
     logger.info('Pairing complete, verifying new credentials')
     const keys = await this.verify(newCredentials)
@@ -109,12 +108,12 @@ export class AirPlayAuthClient extends EventEmitter<AirPlayAuthEvents> {
   /**
    * Pair-Setup flow (M1-M6) - requires PIN
    */
-  async pair(callbacks: AirPlayAuthCallbacks): Promise<AirPlayCredentials> {
+  async pair(callbacks: AirPlayAuthCallbacks, clientId: string): Promise<AirPlayCredentials> {
     if (!callbacks.onPinRequired) {
       throw new Error('PIN callback required for pairing')
     }
 
-    const handler = new AirPlayPairingHandler(this.clientId)
+    const handler = new AirPlayPairingHandler(clientId)
 
     try {
       // Trigger PIN display on Apple TV

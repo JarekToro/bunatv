@@ -266,6 +266,21 @@ export class BunOptimizedUtils {
 
     return result
   }
+
+
+  static ensureArrayBuffer(input: ArrayBufferLike | ArrayBufferView): ArrayBuffer {
+    if (input instanceof ArrayBuffer) {
+      return input;
+    }
+    if (ArrayBuffer.isView(input)) {
+      // Handle views with byteOffset/byteLength
+      return BunOptimizedUtils.ensureArrayBuffer(
+        input.buffer.slice(input.byteOffset, input.byteOffset + input.byteLength)
+      )
+    }
+    // SharedArrayBuffer or other - copy it
+    return new Uint8Array(input).slice().buffer;
+  }
 }
 
 // ============================================================================

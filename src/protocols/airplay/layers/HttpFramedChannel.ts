@@ -1,7 +1,7 @@
 import { EventEmitter } from 'eventemitter3'
 import { createLogger } from '@/logging/logging'
-import type { BunTCPTransport } from '@/protocols/companion/layers/BunTCPTransport.ts'
-import type { ChaCha20EncryptionLayer } from '@/protocols/companion/layers/ChaCha20EncryptionLayer.ts'
+import type { BunTCPTransport } from '@/protocols/shared/layers/BunTCPTransport.ts'
+import type { ChaCha20EncryptionLayer } from '@/protocols/shared/layers/ChaCha20EncryptionLayer.ts'
 import {
   BufferPool,
   StreamBuffer,
@@ -158,6 +158,15 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
         { statusCode: response.statusCode, bodyLength: response.body.length },
         'Received HTTP response'
       )
+      logger.trace(
+        {
+          statusCode: response.statusCode,
+          statusText: response.statusText,
+          headers: Object.fromEntries(response.headers),
+          body: response.body.toString('utf-8'),
+        },
+        'Full HTTP response'
+      )
 
       this.emit('response', response)
     }
@@ -217,6 +226,8 @@ export class HttpFramedChannel extends EventEmitter<HttpFramedChannelEvents> {
         resolve(response)
       }
       this.once('response', handler)
+
+      logger.debug({ method, path }, 'Sending HTTP request')
 
       this.transport.send(requestBuffer).catch(err => {
         this.off('response', handler)

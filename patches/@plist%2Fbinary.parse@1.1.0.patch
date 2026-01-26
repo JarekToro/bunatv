@@ -1,0 +1,13 @@
+diff --git a/lib/esm/index.js b/lib/esm/index.js
+index bcfc139a930bcfae8acdf8eb1020c7c40db185b7..3f66a9c68dca98f5dac5e71d03279a39a159e4b1 100644
+--- a/lib/esm/index.js
++++ b/lib/esm/index.js
+@@ -150,7 +150,7 @@ export const parse = (buffer) => {
+             const length = Math.pow(2, objInfo);
+             if (length < maxObjectSize) {
+                 const data = buffer.slice(offset + 1, offset + 1 + length);
+-                return readInt(data);
++                return objInfo >= 3 ? readInt(data) : readUInt(data);
+             }
+             throw new Error('Too little heap space available! Wanted to read ' +
+                 length +
