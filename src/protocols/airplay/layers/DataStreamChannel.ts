@@ -64,7 +64,7 @@ export class DataStreamChannel extends EmitterEx<DataStreamChannelEvents> {
   ) {
     super()
     this.bufferPool = new BufferPool()
-    this.streamBuffer = new StreamBuffer(4096, 1048576, this.bufferPool, logger)
+    this.streamBuffer = new StreamBuffer(4096, 1048576, this.bufferPool)
     this.hapFrame = new HapFrameLayer(encryption)
 
     // Random start seqno between 0x100000000 and 0x1FFFFFFFF (like pyatv)
