@@ -95,6 +95,12 @@ export interface ClientDeviceInfo {
    * Optional - pyatv hardcodes "550.10"
    */
   sourceVersion: string
+
+  /** Unique Identifier - UUID format identifier
+   * Format: UUID string (e.g., "123E4567-E89B-12D3-A456-426614174000")
+   * Used in MRP in the DeviceInfoMessage
+   */
+  uniqueIdentifier: string
 }
 
 /**
@@ -122,6 +128,7 @@ export function generateClientDeviceInfo(customName?: string): ClientDeviceInfo 
     osBuild: '18G82',
     model: 'iPhone10,6',
     name: customName || 'BunATV Remote',
+    uniqueIdentifier: Bun.randomUUIDv7()
   }
 }
 

@@ -2,17 +2,8 @@ import { EventEmitter } from 'eventemitter3'
 
 import type { Socket } from 'bun'
 import { createLogger } from '@/logging/logging.ts'
+import { ConnectionState } from '@/protocols/types/ConnectionState.ts'
 
-/**
- * Transport connection states
- */
-export enum TransportState {
-  Disconnected = 'disconnected',
-  Connecting = 'connecting',
-  Connected = 'connected',
-  Disconnecting = 'disconnecting',
-  Error = 'error',
-}
 
 /**
  * Transport configuration options
@@ -33,14 +24,14 @@ export interface TransportOptions {
 export interface TransportEvents {
   data: (data: Buffer) => void
   error: (error: Error) => void
-  'state-changed': (state: TransportState, previous: TransportState) => void
+  connectionStatus: (state: ConnectionState, previous: ConnectionState) => void
   drain: () => void
 }
 
 const logger = createLogger("bunatv:net:tcp-transport");
 export class BunTCPTransport extends EventEmitter<TransportEvents> {
   private socket?: Socket
-  private _state: TransportState = TransportState.Disconnected
+  private _connectionState: ConnectionState = ConnectionState.DISCONNECTED
   private reconnectAttempts: number = 0
   private options: Required<TransportOptions>
   private reconnectTimer?: NodeJS.Timeout
@@ -63,17 +54,17 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
     }
   }
 
-  get state(): TransportState {
-    return this._state
+  get connectionState(): ConnectionState {
+    return this._connectionState
   }
   get isConnected(): boolean {
-    return this._state === TransportState.Connected
+    return this._connectionState === ConnectionState.CONNECTED
   }
 
   async connect(host: string, port: number, options?: TransportOptions): Promise<void> {
-    if (this._state === TransportState.Connected || this._state === TransportState.Connecting) {
-      logger.warn({ state: this._state }, `Cannot connect: already ${this._state}`)
-      throw new Error(`Cannot connect: already ${this._state}`)
+    if (this._connectionState === ConnectionState.CONNECTED || this._connectionState === ConnectionState.CONNECTING) {
+      logger.warn({ state: this._connectionState }, `Cannot connect: already ${this._connectionState}`)
+      throw new Error(`Cannot connect: already ${this._connectionState}`)
     }
 
     logger.info({ host, port }, 'Connecting to TCP endpoint')
@@ -83,14 +74,14 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
       this.options = { ...this.options, ...options }
     }
 
-    this.setState(TransportState.Connecting)
+    this.updateConnectionState(ConnectionState.CONNECTING)
 
     try {
       await this.establishConnection()
       logger.info({ host, port }, 'TCP connection established successfully')
     } catch (error) {
       logger.error({ error, host, port }, 'Failed to establish TCP connection')
-      this.setState(TransportState.Error)
+      this.updateConnectionState(ConnectionState.ERROR)
       if (this.options.autoReconnect) {
         this.scheduleReconnect()
       }
@@ -105,7 +96,7 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
       const timeout = setTimeout(() => {
         if (!isResolved) {
           isResolved = true
-          this.setState(TransportState.Error)
+          this.updateConnectionState(ConnectionState.ERROR)
           reject(new Error('Connection timeout'))
         }
       }, this.options.timeout)
@@ -127,18 +118,21 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
               { remoteAddress: socket.remoteAddress, localPort: socket.localPort },
               'TCP socket opened'
             )
-            this.setState(TransportState.Connected)
+            this.updateConnectionState(ConnectionState.CONNECTED)
             resolve()
           },
           close: () => {
-            logger.info('TCP socket closed by remote')
+            logger.info(
+              { address: this.remoteAddress, port: this.port },
+              'TCP socket closed by remote'
+            )
             this.handleDisconnection('Remote closed connection')
           },
           error: (socket, error) => {
-            logger.error({ error }, 'TCP socket error')
+            logger.error(error, 'TCP socket error')
             isResolved = true
             clearTimeout(timeout)
-            this.setState(TransportState.Error)
+            this.updateConnectionState(ConnectionState.ERROR)
             this.emit('error', error)
             reject(error)
           },
@@ -155,13 +149,13 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
   }
 
   async disconnect(reason?: string): Promise<void> {
-    if (this._state === TransportState.Disconnected) {
+    if (this._connectionState === ConnectionState.DISCONNECTED) {
       logger.debug('Already disconnected, ignoring disconnect request')
       return
     }
 
     logger.info({ reason }, 'Disconnecting TCP transport')
-    this.setState(TransportState.Disconnecting)
+    this.updateConnectionState(ConnectionState.DISCONNECTING)
     this.clearTimers()
 
     if (this.socket) {
@@ -169,7 +163,7 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
       this.socket = undefined
     }
 
-    this.setState(TransportState.Disconnected)
+    this.updateConnectionState(ConnectionState.DISCONNECTED)
   }
 
   async send(data: Buffer): Promise<void> {
@@ -216,18 +210,18 @@ export class BunTCPTransport extends EventEmitter<TransportEvents> {
     this.options.timeout = timeout
   }
 
-  private setState(state: TransportState): void {
-    const previous = this._state
-    this._state = state
+  private updateConnectionState(state: ConnectionState): void {
+    const previous = this._connectionState
+    this._connectionState = state
     if (state !== previous) {
-      this.emit('state-changed', state, previous)
+      this.emit('connectionStatus', state, previous)
     }
   }
 
   private handleDisconnection(reason: string): void {
     const wasConnected = this.isConnected
     logger.info({ reason, wasConnected }, 'Handling disconnection')
-    this.setState(TransportState.Disconnected)
+    this.updateConnectionState(ConnectionState.DISCONNECTED)
     this.clearTimers()
     this.socket = undefined
 

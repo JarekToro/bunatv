@@ -24,6 +24,9 @@ import { DataStreamChannel } from '@/protocols/airplay/layers/DataStreamChannel.
 import { HkdfUtils } from '@/core/crypto/hkdf.ts'
 import { NonceFormat } from '@/core/encoding/buffer-utils.ts'
 import { EventStreamChannel } from '@/protocols/airplay/layers/EventStreamChannel.ts'
+import { ProtocolMessage } from '@/protocols/mrp/generated/ProtocolMessage.ts'
+import { deviceInfoMessage } from '@/protocols/mrp/generated/DeviceInfoMessage.ts'
+import { EmitterEx } from '@/core/eventing/EmitterEx.ts'
 
 const logger = createLogger('bunatv:airplay:session')
 
@@ -57,7 +60,7 @@ const DEFAULT_AIRPLAY_PORT = 7000
 const KEEP_ALIVE_INTERVAL_MS = 2000
 
 export class Airplay2Session
-  extends EventEmitter<Airplay2SessionEvents>
+  extends EmitterEx<Airplay2SessionEvents>
   implements Protocol<Airplay2SessionEvents>
 {
   // State management
@@ -73,7 +76,7 @@ export class Airplay2Session
 
   // Secondary channels (for event and data streams)
   private eventChannel?: EventStreamChannel
-  private dataChannel?: DataStreamChannel
+  dataChannel?: DataStreamChannel
 
   // Keep-alive
   private keepAliveInterval?: ReturnType<typeof setInterval>
@@ -141,12 +144,15 @@ export class Airplay2Session
     })
   }
 
-
   private setupDataChannel(): void {
     if (!this.dataChannel) return
 
-    this.dataChannel.on('protobufMessage', data => {
+    this.dataChannel.on('protobuf', data => {
       logger.trace({ length: data.length }, 'Data channel data received')
+      const message = ProtocolMessage.decode(data)
+      const deviceInfo = ProtocolMessage.getExtension(message, deviceInfoMessage)
+
+      logger.trace({ message, deviceInfo }, 'Decoded ProtocolMessage from data channel')
       this.emit('data-received', data)
     })
   }
@@ -227,16 +233,6 @@ export class Airplay2Session
     this.sessionInfo = undefined
     this.stateMachine.setState(ProtocolState.Idle)
     this.emit('disconnected', reason)
-  }
-
-  /**
-   * Send data on the data channel
-   */
-  async send(data: Buffer) {
-    if (!this.dataChannel) {
-      throw new Error('Data channel not connected')
-    }
-    this.dataChannel.send(data)
   }
 
   /**
@@ -349,9 +345,11 @@ export class Airplay2Session
 
     logger.debug('Event channel connecting')
 
-    this.eventChannel = new EventStreamChannel({address: this.connectionInfo.address, port: rcResult.eventPort}, eventEncryptionLayer)
-    await this.eventChannel.start();
-
+    this.eventChannel = new EventStreamChannel(
+      { address: this.connectionInfo.address, port: rcResult.eventPort },
+      eventEncryptionLayer
+    )
+    await this.eventChannel.start()
 
     logger.debug('Starting RTSP session setup')
     // Send RECORD to start session
@@ -374,8 +372,11 @@ export class Airplay2Session
     const encryptionLayer = new ChaCha20EncryptionLayer({ format: NonceFormat.Hap })
     const dataKeys = HkdfUtils.deriveAirPlayDataStreamKeysSync(this.sharedSecret, streamConfig.seed)
     encryptionLayer.enable(dataKeys)
-    this.dataChannel = new DataStreamChannel({address: this.connectionInfo.address, port: dsResult.dataPort}, encryptionLayer)
-
+    this.dataChannel = new DataStreamChannel(
+      { address: this.connectionInfo.address, port: dsResult.dataPort },
+      encryptionLayer
+    )
+    await this.dataChannel.connect()
     this.setupDataChannel()
     logger.debug('Data channel connected')
 

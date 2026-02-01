@@ -372,12 +372,13 @@ export class HkdfUtils {
    */
   static deriveAirPlayDataStreamKeysSync(sharedSecret: Uint8Array, seed: bigint): DerivedKeys {
     // Convert seed to little-endian int64 bytes
-    const seedBytes = new ArrayBuffer(8)
-    const view = new DataView(seedBytes)
-    view.setBigInt64(0, seed, true) // true = little-endian
+    const seedString = seed.toString()
 
     // Concatenate salt prefix with seed bytes
-    const salt = Buffer.concat([AIRPLAY_DATASTREAM_CRYPTO.SALT_PREFIX, Buffer.from(seedBytes)])
+    const salt = Buffer.concat([
+      AIRPLAY_DATASTREAM_CRYPTO.SALT_PREFIX,
+      Buffer.from(seedString, 'utf8'),
+    ])
 
     const readKey = this.deriveSync(sharedSecret, salt, AIRPLAY_DATASTREAM_CRYPTO.INPUT_INFO, 32)
     const writeKey = this.deriveSync(sharedSecret, salt, AIRPLAY_DATASTREAM_CRYPTO.OUTPUT_INFO, 32)

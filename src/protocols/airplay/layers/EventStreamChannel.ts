@@ -36,7 +36,12 @@ export class EventStreamChannel  {
       }
       headers.set('Content-Length', '0')
       headers.set('Audio-Latency', '0')
-      logger.debug('Sending event channel response')
+      logger.debug({
+        statusCode: 200,
+        statusText: 'OK',
+        headers: headers,
+        body: Buffer.from(''),
+    },'Sending event channel response')
       this.eventChannel?.sendResponse({
         statusCode: 200,
         statusText: 'OK',

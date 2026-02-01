@@ -11,6 +11,8 @@ import {
 } from '@/core/encoding/buffer-utils.ts'
 import { createLogger } from '@/logging/logging'
 import { Plist, plistObjectGuard, type PlistValue } from '@/core/encoding/plist.ts'
+import { ConnectionState } from '@/protocols/types/ConnectionState.ts'
+import { EmitterEx } from '@/core/eventing/EmitterEx.ts'
 
 const logger = createLogger('bunatv:airplay:data-stream-channel')
 
@@ -37,15 +39,24 @@ export interface DataStreamChannelEvents {
   protobuf: (message: Buffer) => void
   /** Emitted on error */
   error: (error: Error) => void
+  /** Emitted on connection state change */
+  connectionStatus: (state: ConnectionState) => void
 }
 
-export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
+export class DataStreamChannel extends EmitterEx<DataStreamChannelEvents> {
   private readonly hapFrame: HapFrameLayer
   private readonly transport: BunTCPTransport = new BunTCPTransport()
   private encryptedBuffer: Buffer = Buffer.alloc(0)
   private readonly streamBuffer: StreamBuffer
   private readonly bufferPool: BufferPool
   private sendSeqno: bigint
+  private _connectionState: ConnectionState = ConnectionState.UNKNOWN
+  public get connectionState(): ConnectionState {
+    return this._connectionState
+  }
+  public get isConnected(): boolean {
+    return this._connectionState === ConnectionState.CONNECTED
+  }
 
   constructor(
     private connectionInfo: { address: string; port: number },
@@ -53,7 +64,7 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
   ) {
     super()
     this.bufferPool = new BufferPool()
-    this.streamBuffer = new StreamBuffer(4096, 1048576, this.bufferPool)
+    this.streamBuffer = new StreamBuffer(4096, 1048576, this.bufferPool, logger)
     this.hapFrame = new HapFrameLayer(encryption)
 
     // Random start seqno between 0x100000000 and 0x1FFFFFFFF (like pyatv)
@@ -61,39 +72,74 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
 
     this.transport.on('data', (data: Buffer) => this.handleData(data))
     this.transport.on('error', (err: Error) => this.emit('error', err))
+    this.transport.on('connectionStatus', async (state: ConnectionState) => {
+      if (state === ConnectionState.DISCONNECTED) {
+        await this.teardown()
+      }
+    })
   }
 
   async connect(): Promise<void> {
+    if (this._connectionState === ConnectionState.CONNECTED || this._connectionState === ConnectionState.CONNECTING) {
+      logger.debug('Data stream channel already connected or connecting')
+      return
+    }
+    this.updateConnectionState(ConnectionState.CONNECTING)
     await this.transport.connect(this.connectionInfo.address, this.connectionInfo.port)
-    logger.debug({ address: this.connectionInfo.address, port: this.connectionInfo.port }, 'Data stream channel connected')
+    logger.debug(
+      { address: this.connectionInfo.address, port: this.connectionInfo.port },
+      'Data stream channel connected'
+    )
+    this.updateConnectionState(ConnectionState.CONNECTED)
+  }
+
+  private updateConnectionState(state: ConnectionState): void {
+    if (this._connectionState !== state) {
+      this._connectionState = state
+      this.emit('connectionStatus', state)
+    }
   }
 
   /**
    * Send a protobuf message over the data channel
    */
-  async sendProtobuf(protobufData: Buffer): Promise<void> {
+  async sendProtobuf(protobufData: Uint8Array<ArrayBufferLike>): Promise<void> {
     const payload = Plist.encode({
       params: {
-        data: BunOptimizedUtils.ensureArrayBuffer(this.encodeProtobufs([protobufData])),
+        data: BunOptimizedUtils.ensureArrayBuffer(this.encodeProtobufs([Buffer.from(protobufData)])),
       },
     })
 
     const message: DataStreamMessage = {
       messageType: MSG_TYPE_SYNC,
       command: CMD_COMM,
-      seqno: this.sendSeqno,
+      seqno: this.sendSeqno++,
       padding: DATA_HEADER_PADDING,
       payload: Buffer.from(payload),
     }
 
+    logger.trace({ message }, 'Sending protobuf message')
     const encoded = this.encodeMessage(message)
+    logger.trace({ encoded }, 'Encoded protobuf message')
+
     const encrypted = this.hapFrame.encrypt(encoded)
     await this.transport.send(encrypted)
 
-    logger.debug({ seqno: this.sendSeqno.toString(), payloadSize: payload.byteLength }, 'Sent protobuf message')
+    logger.debug(
+      { seqno: this.sendSeqno.toString(), payloadSize: payload.byteLength },
+      'Sent protobuf message'
+    )
+    // await Bun.write(`./${this.sendSeqno.toString(10)}-message.bin`, encoded)
   }
 
-  disconnect(): Promise<void> {
+  private async teardown(): Promise<void> {
+    logger.debug('Tearing down data stream channel')
+    this.streamBuffer.reset()
+    this.encryptedBuffer = Buffer.alloc(0)
+    this.updateConnectionState(ConnectionState.DISCONNECTED)
+  }
+  async disconnect(): Promise<void> {
+    await this.teardown()
     return this.transport.disconnect()
   }
 
@@ -156,7 +202,7 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
     if (this.hapFrame?.isEnabled) {
       this.encryptedBuffer = Buffer.concat([this.encryptedBuffer, data])
 
-    // Decrypt HAP frames
+      // Decrypt HAP frames
       const { decrypted, remaining } = this.hapFrame.decrypt(this.encryptedBuffer)
       this.encryptedBuffer = remaining
 
@@ -176,8 +222,12 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
       const message = this.decodeMessage()
       if (!message) break
 
-      // Decode the plist payload
-      const payload = this.decodePayload(message.payload)
+      if (message.messageType.equals(MSG_TYPE_REPLY)){
+        logger.debug({ seqno: message.seqno.toString() }, 'Received reply message')
+        continue
+      }
+        // Decode the plist payload
+        const payload = this.decodePayload(message.payload)
       if (payload) {
         this.processPayload(payload, message.seqno)
       }
@@ -203,7 +253,10 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
 
     // Check if we have the full message
     if (this.streamBuffer.available < size) {
-      logger.debug({ available: this.streamBuffer.available, expected: size }, 'Not enough data for full message')
+      logger.debug(
+        { available: this.streamBuffer.available, expected: size },
+        'Not enough data for full message'
+      )
       return null
     }
 
@@ -222,13 +275,16 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
     const padding = msgReader.readUInt32BE()
     const payload = msgReader.readRemaining()
 
-    logger.debug({
-      size: totalSize,
-      messageType: messageType.subarray(0, 4).toString(),
-      command: command.toString(),
-      seqno: seqno.toString(),
-      payloadSize: payload.length,
-    }, 'Decoded data stream message')
+    logger.debug(
+      {
+        size: totalSize,
+        messageType: messageType.subarray(0, 4).toString(),
+        command: command.toString(),
+        seqno: seqno.toString(),
+        payloadSize: payload.length,
+      },
+      'Decoded data stream message'
+    )
 
     return { messageType, command, seqno, padding, payload }
   }
@@ -251,6 +307,7 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
       logger.debug({ payload }, 'Message has unsupported format (not an object)')
       return
     }
+
     const params = payload.params as Record<string, unknown> | undefined
     const data = params?.data as Buffer | undefined
 
@@ -285,7 +342,10 @@ export class DataStreamChannel extends EventEmitter<DataStreamChannelEvents> {
         offset += bytesRead
 
         if (offset + length > data.length) {
-          logger.warn({ expected: length, available: data.length - offset }, 'Not enough data for protobuf')
+          logger.warn(
+            { expected: length, available: data.length - offset },
+            'Not enough data for protobuf'
+          )
           break
         }
 
