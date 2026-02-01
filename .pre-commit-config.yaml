@@ -1,5 +1,5 @@
 fail_fast: true
-default_install_hook_types: [pre-push]
+
 exclude: |
   (?x)^(
     .*/(snapshots)/.*|
@@ -21,6 +21,5 @@ repos:
         name: prettier
         language: bun
         types: [text]
-        pass_filenames: false
         entry: bun run prettier --write --ignore-unknown .
         description: "Run Prettier to format code."
