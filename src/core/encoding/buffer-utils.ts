@@ -92,7 +92,18 @@ export class StreamBuffer {
    * Append data to buffer
    */
   append(data: Buffer): void {
-    const required = this.writePos + data.length
+
+    let required = this.writePos + data.length
+
+    // Compact first if it would help avoid/reduce growth
+    if (required > this.buffer.length && this.readPos > 0) {
+      this.compact()
+      required = this.writePos + data.length
+    }
+
+    if (required > this.buffer.length) {
+      this.grow(required)
+    }
 
     if (required > this.maxSize) {
       throw new Error(`StreamBuffer overflow: ${required} > ${this.maxSize}`)
@@ -142,9 +153,18 @@ export class StreamBuffer {
   }
 
   private grow(minSize: number): void {
-    const newSize = Math.min(this.buffer.length * 2, this.maxSize)
+    let newSize = this.buffer.length
+    while (newSize < minSize && newSize < this.maxSize) {
+      newSize *= 2
+    }
+    newSize = Math.min(newSize, this.maxSize)
+
+
     if (newSize < minSize) {
-      throw new Error('StreamBuffer cannot grow enough')
+
+      throw new Error(
+        `StreamBuffer cannot grow enough: need ${minSize}, max possible ${newSize}, limit ${this.maxSize}`
+      )
     }
 
     const newBuffer = this.allocate(newSize)
