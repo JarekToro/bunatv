@@ -10,7 +10,7 @@ function getDEBUG() {
 }
 
 function getLogLevel() {
-  return process.env.LOG_LEVEL || 'silent'
+  return process.env.LOG_LEVEL || 'debug'
 }
 
 let _baseLogger: pino.Logger | null = null
