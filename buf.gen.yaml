@@ -1,0 +1,15 @@
+version: v2
+
+clean: true          # Delete output dirs before generating (fresh start)
+
+plugins:
+  - out: src/protocols/mrp/generated
+    strategy: all
+    local: ./node_modules/ts-proto/protoc-gen-ts_proto
+    opt:
+      - unknownFields=true
+      - outputExtensions=true
+      - env=node
+
+inputs:
+  - directory: src/protocols/mrp/protobuf   # Where to find .proto files

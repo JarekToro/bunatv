@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     // Environment setup & latest features
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["ES2024"],
+    "types": ["bun-types"],
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
@@ -26,15 +25,9 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@/protocols/*": [
-        "src/protocols/*"
-      ],
-      "@/core/*": [
-        "src/core/*"
-      ]
+      "@/*": ["src/*"],
+      "@/protocols/*": ["src/protocols/*"],
+      "@/core/*": ["src/core/*"]
     },
     "strictNullChecks": true
   },

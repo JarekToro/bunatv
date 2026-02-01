@@ -17,7 +17,9 @@
     "format:check": "prettier --check src/ cli/ tests/",
     "typecheck": "tsc --noEmit",
     "build:cli": "bun build ./src/cli/cli.ts --outfile ./dist/bin/bunatv --compile",
-    "cli": "bun run src/cli/cli.ts"
+    "cli": "bun run src/cli/cli.ts",
+    "proto:generate": "buf generate; prettier --write src/protocols/mrp/generated/",
+    "proto:postprocess": "bun run ./tooling/post-process-proto.ts"
   },
   "keywords": [
     "apple-tv",
@@ -45,6 +47,7 @@
     "@plist/binary.serialize": "^1.1.0",
     "@plist/common": "^1.1.0",
     "@plist/plist": "^1.0.0",
+    "@protobuf-ts/runtime": "^2.11.1",
     "@types/multicast-dns": "^7.2.4",
     "@types/prompt-sync": "^4.2.3",
     "colorette": "^2.0.20",
@@ -63,13 +66,16 @@
     "ws": "^8.14.2"
   },
   "devDependencies": {
+    "@bufbuild/buf": "^1.64.0",
     "@types/bun": "^1.2.20",
     "@types/pino": "^7.0.5",
     "@types/ws": "^8.5.8",
     "bun-types": "^1.3.6",
     "prettier": "^3.0.3",
     "protobufjs-cli": "^1.1.1",
+    "ts-morph": "^27.0.2",
     "ts-patch": "^3.3.0",
+    "ts-proto": "^2.11.1",
     "typescript": "~5.9.3"
   },
   "engines": {
