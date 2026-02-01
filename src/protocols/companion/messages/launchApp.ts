@@ -6,35 +6,37 @@ import {
   type CompanionEventOpackMessage,
   createCompanionCommand,
   MessageType,
-} from '@/protocols/companion/messages/CompanionOpackMessage.ts'
+} from "@/protocols/companion/messages/CompanionOpackMessage.ts";
 
 export interface LaunchAppRequestContent {
-  _bundleID?: string
-  _urlS?: string
+  _bundleID?: string;
+  _urlS?: string;
 }
 
 export interface LaunchAppRequest extends CompanionRequestOpackMessage {
-  _i: '_launchApp'
-  _c: LaunchAppRequestContent
+  _i: "_launchApp";
+  _c: LaunchAppRequestContent;
 }
 
 export interface LaunchAppResponse extends CompanionResponseOpackMessage {
-  _i: '_launchApp'
-  _c: {}
+  _i: "_launchApp";
+  _c: {};
 }
 
 export interface FetchLaunchableApplicationsEventContent {
-  [bundleId: string]: string // bundleId -> name
+  [bundleId: string]: string; // bundleId -> name
 }
 
-export interface FetchLaunchableApplicationsRequest extends CompanionRequestOpackMessage {
-  _i: 'FetchLaunchableApplicationsEvent'
-  _c: LaunchAppRequestContent
+export interface FetchLaunchableApplicationsRequest
+  extends CompanionRequestOpackMessage {
+  _i: "FetchLaunchableApplicationsEvent";
+  _c: LaunchAppRequestContent;
 }
 
-export interface FetchLaunchableApplicationsResponse extends CompanionResponseOpackMessage {
-  _i: 'FetchLaunchableApplicationsEvent'
-  _c: FetchLaunchableApplicationsEventContent
+export interface FetchLaunchableApplicationsResponse
+  extends CompanionResponseOpackMessage {
+  _i: "FetchLaunchableApplicationsEvent";
+  _c: FetchLaunchableApplicationsEventContent;
 }
 
 /**
@@ -45,14 +47,14 @@ export function createLaunchAppCommand(
   url?: string
 ): CompanionCommand<LaunchAppRequest, LaunchAppResponse, void> {
   return createCompanionCommand({
-    identifier: '_launchApp',
-    name: `LaunchApp${bundleId ? `:${bundleId}` : ''}${url ? `:${url}` : ''}`,
+    identifier: "_launchApp",
+    name: `LaunchApp${bundleId ? `:${bundleId}` : ""}${url ? `:${url}` : ""}`,
     buildContent: () => ({
       ...(bundleId && { _bundleID: bundleId }),
       ...(url && { _urlS: url }),
     }),
     parse: () => undefined,
-  })
+  });
 }
 
 export function createFetchLaunchableApplicationsCommand(): CompanionCommand<
@@ -61,18 +63,18 @@ export function createFetchLaunchableApplicationsCommand(): CompanionCommand<
   ParsedFetchLaunchableApplicationsEvent
 > {
   return createCompanionCommand({
-    identifier: 'FetchLaunchableApplicationsEvent',
-    name: 'FetchLaunchableApplications',
+    identifier: "FetchLaunchableApplicationsEvent",
+    name: "FetchLaunchableApplications",
     buildContent: () => ({}),
-    parse: response => parseFetchLaunchableApplicationsEvent(response),
-  })
+    parse: (response) => parseFetchLaunchableApplicationsEvent(response),
+  });
 }
 
 export interface ParsedFetchLaunchableApplicationsEvent {
-  type: 'fetch-applications'
-  apps: { bundleId: string; name: string }[]
-  count: number
-  raw: FetchLaunchableApplicationsResponse
+  type: "fetch-applications";
+  apps: { bundleId: string; name: string }[];
+  count: number;
+  raw: FetchLaunchableApplicationsResponse;
 }
 
 export function parseFetchLaunchableApplicationsEvent(
@@ -81,11 +83,11 @@ export function parseFetchLaunchableApplicationsEvent(
   const apps = Object.entries(message._c).map(([bundleId, name]) => ({
     bundleId,
     name: name as string,
-  }))
+  }));
   return {
-    type: 'fetch-applications',
+    type: "fetch-applications",
     apps,
     count: apps.length,
     raw: message,
-  }
+  };
 }

@@ -5,92 +5,114 @@
 // source: PlaybackQueueContext.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface PlaybackQueueContext {
-  revision?: string | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  revision?: string | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBasePlaybackQueueContext(): PlaybackQueueContext {
-  return { revision: '', _unknownFields: {} }
+  return { revision: "", _unknownFields: {} };
 }
 
 export const PlaybackQueueContext: MessageFns<PlaybackQueueContext> = {
-  encode(message: PlaybackQueueContext, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.revision !== undefined && message.revision !== '') {
-      writer.uint32(10).string(message.revision)
+  encode(
+    message: PlaybackQueueContext,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (message.revision !== undefined && message.revision !== "") {
+      writer.uint32(10).string(message.revision);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): PlaybackQueueContext {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBasePlaybackQueueContext()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): PlaybackQueueContext {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlaybackQueueContext();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.revision = reader.string()
-          continue
+          message.revision = reader.string();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): PlaybackQueueContext {
-    return { revision: isSet(object.revision) ? globalThis.String(object.revision) : '' }
+    return {
+      revision: isSet(object.revision)
+        ? globalThis.String(object.revision)
+        : "",
+    };
   },
 
   toJSON(message: PlaybackQueueContext): unknown {
-    const obj: any = {}
-    if (message.revision !== undefined && message.revision !== '') {
-      obj.revision = message.revision
+    const obj: any = {};
+    if (message.revision !== undefined && message.revision !== "") {
+      obj.revision = message.revision;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<PlaybackQueueContext>, I>>(base?: I): PlaybackQueueContext {
-    return PlaybackQueueContext.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<PlaybackQueueContext>, I>>(
+    base?: I
+  ): PlaybackQueueContext {
+    return PlaybackQueueContext.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<PlaybackQueueContext>, I>>(
     object: I
   ): PlaybackQueueContext {
-    const message = createBasePlaybackQueueContext()
-    message.revision = object.revision ?? ''
-    return message
+    const message = createBasePlaybackQueueContext();
+    message.revision = object.revision ?? "";
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -100,22 +122,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

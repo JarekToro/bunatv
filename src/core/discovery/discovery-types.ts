@@ -1,7 +1,7 @@
 /**
  * Discovery-related type definitions
  */
-import type { ProtocolType } from '@/core/storage/types.ts'
+import type { ProtocolType } from "@/core/storage/types.ts";
 import type {
   Answer,
   BufferAnswer,
@@ -23,57 +23,57 @@ import type {
   StringAnswer,
   TlsaAnswer,
   TxtAnswer,
-} from 'dns-packet'
-import type { ResponsePacket } from 'multicast-dns'
+} from "dns-packet";
+import type { ResponsePacket } from "multicast-dns";
 
 export interface DiscoveredDevice {
-  name: string
-  identifier: string
-  macAddress?: string
-  deviceId: string
-  address: string
-  port: number
-  protocols: ProtocolType[]
-  model?: string
-  osVersion?: string
-  manufacturer?: string
+  name: string;
+  identifier: string;
+  macAddress?: string;
+  deviceId: string;
+  address: string;
+  port: number;
+  protocols: ProtocolType[];
+  model?: string;
+  osVersion?: string;
+  manufacturer?: string;
   services?: {
-    airPlay?: { port: number }
-    raop?: { port: number }
-    companionLink?: { port: number }
-    mrp?: { port: number }
-  }
-  records?: any[]
+    airPlay?: { port: number };
+    raop?: { port: number };
+    companionLink?: { port: number };
+    mrp?: { port: number };
+  };
+  records?: any[];
 }
 
 export interface RawDevice {
-  records: any[]
-  id: string
-  name: string
-  hostname: string | null
-  macAddress: string | null
-  addresses: string[]
+  records: any[];
+  id: string;
+  name: string;
+  hostname: string | null;
+  macAddress: string | null;
+  addresses: string[];
   services: {
-    airplay: RawServiceInfo
-    raop: RawServiceInfo
-    'companion-link': RawServiceInfo
-    mrp: RawServiceInfo
-  }
-  model: string | null
-  manufacturer: string | null
-  osVersion?: string
-  availableServices?: string[]
+    airplay: RawServiceInfo;
+    raop: RawServiceInfo;
+    "companion-link": RawServiceInfo;
+    mrp: RawServiceInfo;
+  };
+  model: string | null;
+  manufacturer: string | null;
+  osVersion?: string;
+  availableServices?: string[];
 }
 
 export interface RawServiceInfo {
-  txt: Record<string, string>
-  srv: any | null
-  ptr: any | null
+  txt: Record<string, string>;
+  srv: any | null;
+  ptr: any | null;
 }
 
 export type ParsedTxtAnswer = {
-  [key: string]: string | number | boolean
-} & Omit<TxtAnswer, 'data'>
+  [key: string]: string | number | boolean;
+} & Omit<TxtAnswer, "data">;
 
 export type MDNSResponseAnswers =
   | StringAnswer
@@ -93,7 +93,7 @@ export type MDNSResponseAnswers =
   | SrvAnswer
   | SshfpAnswer
   | TlsaAnswer
-  | ParsedTxtAnswer
+  | ParsedTxtAnswer;
 
 export type MDNSResponsePacket = {
   /**
@@ -101,14 +101,14 @@ export type MDNSResponsePacket = {
    * omitted if it is clear from the context of usage what type of packet
    * it is.
    */
-  type?: 'response'
-  id?: number | undefined
-  flags?: number | undefined
-  questions: Question[]
-  answers: MDNSResponseAnswers[]
-  additionals: MDNSResponseAnswers[]
-  authorities: MDNSResponseAnswers[]
-}
+  type?: "response";
+  id?: number | undefined;
+  flags?: number | undefined;
+  questions: Question[];
+  answers: MDNSResponseAnswers[];
+  additionals: MDNSResponseAnswers[];
+  authorities: MDNSResponseAnswers[];
+};
 
 // ============================================================================
 // Apple Service Types
@@ -118,14 +118,15 @@ export type MDNSResponsePacket = {
  * Apple mDNS service types commonly used by Apple TV and other Apple devices
  */
 export const APPLE_SERVICE_TYPES = {
-  AIRPLAY: '_airplay._tcp.local',
-  RAOP: '_raop._tcp.local', // Remote Audio Output Protocol
-  COMPANION_LINK: '_companion-link._tcp.local',
-  DEVICE_INFO: '_device-info._tcp.local',
-  HOMEKIT: '_hap._tcp.local',
-} as const
+  AIRPLAY: "_airplay._tcp.local",
+  RAOP: "_raop._tcp.local", // Remote Audio Output Protocol
+  COMPANION_LINK: "_companion-link._tcp.local",
+  DEVICE_INFO: "_device-info._tcp.local",
+  HOMEKIT: "_hap._tcp.local",
+} as const;
 
-export type AppleServiceType = (typeof APPLE_SERVICE_TYPES)[keyof typeof APPLE_SERVICE_TYPES]
+export type AppleServiceType =
+  (typeof APPLE_SERVICE_TYPES)[keyof typeof APPLE_SERVICE_TYPES];
 
 // ============================================================================
 // Device Info (_device-info._tcp.local)
@@ -136,16 +137,16 @@ export type AppleServiceType = (typeof APPLE_SERVICE_TYPES)[keyof typeof APPLE_S
  */
 export interface DeviceInfoMetadata extends Record<string, string | undefined> {
   /** Apple model identifier (e.g., "J305AP" for Apple TV 4K, "Mac14,9" for MacBook) */
-  model: string
+  model: string;
   /** macOS version (e.g., "25" for macOS 15.x) - only on Macs */
-  osxvers?: string
+  osxvers?: string;
   /** Icon color code - only on Macs */
-  icolor?: string
+  icolor?: string;
 }
 
 export const isDeviceInfoMetadata = (arg: any): arg is DeviceInfoMetadata => {
-  return true
-}
+  return true;
+};
 
 // ============================================================================
 // AirPlay (_airplay._tcp.local)
@@ -156,60 +157,60 @@ export const isDeviceInfoMetadata = (arg: any): arg is DeviceInfoMetadata => {
  */
 export interface AirPlayMetadata extends Record<string, string | undefined> {
   /** Access control level (usually "0" or "2") */
-  acl?: string
+  acl?: string;
   /** Activity level */
-  act?: string
+  act?: string;
   /** Bluetooth address (MAC format: XX:XX:XX:XX:XX:XX) */
-  btaddr?: string
+  btaddr?: string;
   /** Device ID (MAC format) */
-  deviceid: string
+  deviceid: string;
   /** Feature exchange token (base64) */
-  fex?: string
+  fex?: string;
   /** Feature flags (hex format: "0x4A7FDFD5,0x3C175FDE") */
-  features: string
+  features: string;
   /** Status flags (hex format: "0x18644") */
-  flags: string
+  flags: string;
   /** Group ID (UUID or compound UUID) */
-  gid?: string
+  gid?: string;
   /** iGLU flag */
-  igl?: string
+  igl?: string;
   /** GC GL flag */
-  gcgl?: string
+  gcgl?: string;
   /** Model identifier (e.g., "AppleTV11,1", "AudioAccessory5,1") */
-  model: string
+  model: string;
   /** Protocol version (e.g., "1.1") */
-  protovers: string
+  protovers: string;
   /** Public instance ID (UUID) */
-  pi: string
+  pi: string;
   /** Private service instance ID (UUID) */
-  psi: string
+  psi: string;
   /** Public key (hex string) */
-  pk: string
+  pk: string;
   /** Source version (e.g., "890.79.2") */
-  srcvers: string
+  srcvers: string;
   /** OS version (e.g., "26.0.1" for tvOS 18.0.1, "18.6" for HomePod) */
-  osvers: string
+  osvers: string;
   /** Video codec version */
-  vv: string
+  vv: string;
   /** Firmware version (non-Apple devices) */
-  fv?: string
+  fv?: string;
   /** Receiver session flags (non-Apple devices) */
-  rsf?: string
+  rsf?: string;
   /** Audio type (non-Apple devices) */
-  at?: string
+  at?: string;
   /** Company name (non-Apple devices, e.g., "LG Electronics") */
-  company?: string
+  company?: string;
   /** Manufacturer (non-Apple devices) */
-  manufacturer?: string
+  manufacturer?: string;
   /** Serial number (non-Apple devices) */
-  serialNumber?: string
+  serialNumber?: string;
   /** Configuration seed (non-Apple devices) */
-  'protovers-seed'?: string
+  "protovers-seed"?: string;
 }
 
 export const isAirPlayMetadata = (arg: any): arg is AirPlayMetadata => {
-  return true
-}
+  return true;
+};
 
 // ============================================================================
 // RAOP - Remote Audio Output Protocol (_raop._tcp.local)
@@ -221,36 +222,36 @@ export const isAirPlayMetadata = (arg: any): arg is AirPlayMetadata => {
  */
 export interface RAOPMetadata extends Record<string, string | undefined> {
   /** Channels (e.g., "0,1,2,3") */
-  cn: string
+  cn: string;
   /** Device announcement (usually "true") */
-  da: string
+  da: string;
   /** Encryption types (e.g., "0,3,5") */
-  et: string
+  et: string;
   /** Feature flags (hex format) */
-  ft: string
+  ft: string;
   /** Status flags (hex format) */
-  sf: string
+  sf: string;
   /** Metadata support (e.g., "0,1,2") */
-  md: string
+  md: string;
   /** Apple model (e.g., "AppleTV11,1", "AudioAccessory5,1") */
-  am: string
+  am: string;
   /** Public key (hex string) */
-  pk: string
+  pk: string;
   /** Transport protocol (usually "UDP") */
-  tp: string
+  tp: string;
   /** Version number */
-  vn: string
+  vn: string;
   /** Version string (e.g., "890.79.2") */
-  vs: string
+  vs: string;
   /** OS version (e.g., "26.0.1") */
-  ov: string
+  ov: string;
   /** Video version */
-  vv: string
+  vv: string;
 }
 
 export const isRAOPMetadata = (arg: any): arg is RAOPMetadata => {
-  return true
-}
+  return true;
+};
 
 // ============================================================================
 // Companion Link (_companion-link._tcp.local)
@@ -260,32 +261,35 @@ export const isRAOPMetadata = (arg: any): arg is RAOPMetadata => {
  * Companion Link metadata from TXT record
  * Used for Apple Continuity features and Companion protocol pairing
  */
-export interface CompanionLinkMetadata extends Record<string, string | undefined> {
+export interface CompanionLinkMetadata
+  extends Record<string, string | undefined> {
   /** Mac version - Used when publishing Companion services */
-  rpMac?: string
+  rpMac?: string;
   /** Discovery Nonce - Changes periodically for privacy reasons (hex) */
-  rpHN?: string
+  rpHN?: string;
   /** Status flags/supported features (hex) - Indicates pairing requirements (e.g., 0x36782 = mandatory pairing) */
-  rpFl?: string
+  rpFl?: string;
   /** HomeKit AuthTag - Rotates periodically for security (hex) */
-  rpHA?: string
+  rpHA?: string;
   /** Device model name - Identifies specific device model (e.g., "AppleTV11,1" for Apple TV 4K 2nd gen) */
-  rpMd?: string
+  rpMd?: string;
   /** Protocol version - The Companion Link protocol version supported */
-  rpVr?: string
+  rpVr?: string;
   /** Bonjour Auth Tag - Rotates periodically for security (hex) */
-  rpAD?: string
+  rpAD?: string;
   /** HomeKit rotating ID - Changes periodically for privacy (hex) */
-  rpHI?: string
+  rpHI?: string;
   /** Bluetooth Address - Can rotate for privacy reasons (MAC format) */
-  rpBA?: string
+  rpBA?: string;
   /** Media Remote Route Identifier - Used for mediaRemoteRouteIdentifier in Companion protocol (UUID) */
-  rpMRtID?: string
+  rpMRtID?: string;
 }
 
-export const isCompanionLinkMetadata = (arg: any): arg is CompanionLinkMetadata => {
-  return true
-}
+export const isCompanionLinkMetadata = (
+  arg: any
+): arg is CompanionLinkMetadata => {
+  return true;
+};
 
 // ============================================================================
 // Service Instance Types
@@ -294,41 +298,45 @@ export const isCompanionLinkMetadata = (arg: any): arg is CompanionLinkMetadata 
 /**
  * Base service instance with common propertieisCompanionLinkMetadatas
  */
-export interface BaseServiceInstance<TMetadata = Record<string, string | undefined>> {
-  instanceName: string
-  serviceType: string
-  hostname: string
-  port: number
-  txt: TMetadata
-  expiresAt: number
+export interface BaseServiceInstance<
+  TMetadata = Record<string, string | undefined>,
+> {
+  instanceName: string;
+  serviceType: string;
+  hostname: string;
+  port: number;
+  txt: TMetadata;
+  expiresAt: number;
 }
 
 /**
  * AirPlay service instance
  */
 export interface AirPlayService extends BaseServiceInstance<AirPlayMetadata> {
-  serviceType: typeof APPLE_SERVICE_TYPES.AIRPLAY
+  serviceType: typeof APPLE_SERVICE_TYPES.AIRPLAY;
 }
 
 /**
  * RAOP service instance
  */
 export interface RAOPService extends BaseServiceInstance<RAOPMetadata> {
-  serviceType: typeof APPLE_SERVICE_TYPES.RAOP
+  serviceType: typeof APPLE_SERVICE_TYPES.RAOP;
 }
 
 /**
  * Companion Link service instance
  */
-export interface CompanionLinkService extends BaseServiceInstance<CompanionLinkMetadata> {
-  serviceType: typeof APPLE_SERVICE_TYPES.COMPANION_LINK
+export interface CompanionLinkService
+  extends BaseServiceInstance<CompanionLinkMetadata> {
+  serviceType: typeof APPLE_SERVICE_TYPES.COMPANION_LINK;
 }
 
 /**
  * Device Info service instance
  */
-export interface DeviceInfoService extends BaseServiceInstance<DeviceInfoMetadata> {
-  serviceType: typeof APPLE_SERVICE_TYPES.DEVICE_INFO
+export interface DeviceInfoService
+  extends BaseServiceInstance<DeviceInfoMetadata> {
+  serviceType: typeof APPLE_SERVICE_TYPES.DEVICE_INFO;
 }
 
 /**
@@ -338,7 +346,7 @@ export type AppleServiceInstance =
   | AirPlayService
   | RAOPService
   | CompanionLinkService
-  | DeviceInfoService
+  | DeviceInfoService;
 
 // ============================================================================
 // Apple Device Types
@@ -349,76 +357,74 @@ export type AppleServiceInstance =
  */
 export interface AppleTVDevice {
   /** Display name (e.g., "Apple TV 4K", "Living Room") */
-  name: string
+  name: string;
   /** Main address (first IPv4 or IPv6) */
-  address: string
+  address: string;
   /** identifier (Device ID from AirPlay TXT record) */
-  identifier: string
+  identifier: string;
   /** Hostname (e.g., "Apple-TV-4K.local") */
-  hostname: string
+  hostname: string;
   /** IPv4 addresses */
-  ipv4: string[]
+  ipv4: string[];
   /** IPv6 addresses */
-  ipv6: string[]
+  ipv6: string[];
   /** Device model (e.g., "J305AP", "B520AP") */
-  model: string
+  model: string;
   /** Associated services */
   services: {
-    airPlay?: AirPlayService
-    raop?: RAOPService
-    companionLink?: CompanionLinkService
-    deviceInfo?: DeviceInfoService
-  }
+    airPlay?: AirPlayService;
+    raop?: RAOPService;
+    companionLink?: CompanionLinkService;
+    deviceInfo?: DeviceInfoService;
+  };
   /** Last seen timestamp */
-  lastSeen: number
+  lastSeen: number;
 }
-
-
 
 /**
  * HomePod device
  */
 export interface HomePodDevice {
-  name: string
-  identifier: string
-  address: string
-  hostname: string
-  ipv4: string[]
-  ipv6: string[]
-  model: string
+  name: string;
+  identifier: string;
+  address: string;
+  hostname: string;
+  ipv4: string[];
+  ipv6: string[];
+  model: string;
   services: {
-    airPlay?: AirPlayService
-    raop?: RAOPService
-    companionLink?: CompanionLinkService
-  }
-  lastSeen: number
+    airPlay?: AirPlayService;
+    raop?: RAOPService;
+    companionLink?: CompanionLinkService;
+  };
+  lastSeen: number;
 }
 
 /**
  * Mac device
  */
 export interface MacDevice {
-  name: string
-  identifier: string
-  address: string
-  hostname: string
-  ipv4: string[]
-  ipv6: string[]
-  model: string
-  osxVersion?: string
+  name: string;
+  identifier: string;
+  address: string;
+  hostname: string;
+  ipv4: string[];
+  ipv6: string[];
+  model: string;
+  osxVersion?: string;
   services: {
-    airPlay?: AirPlayService
-    raop?: RAOPService
-    companionLink?: CompanionLinkService
-    deviceInfo?: DeviceInfoService
-  }
-  lastSeen: number
+    airPlay?: AirPlayService;
+    raop?: RAOPService;
+    companionLink?: CompanionLinkService;
+    deviceInfo?: DeviceInfoService;
+  };
+  lastSeen: number;
 }
 
 /**
  * Union type for all Apple devices
  */
-export type AppleDevice = AppleTVDevice | HomePodDevice | MacDevice
+export type AppleDevice = AppleTVDevice | HomePodDevice | MacDevice;
 
 // ============================================================================
 // Model Identifiers
@@ -429,42 +435,50 @@ export type AppleDevice = AppleTVDevice | HomePodDevice | MacDevice
  */
 export const APPLE_TV_MODELS = {
   // Apple TV 4K (3rd generation)
-  J305AP: 'Apple TV 4K (3rd gen)',
+  J305AP: "Apple TV 4K (3rd gen)",
   // Apple TV 4K (2nd generation)
-  J255AP: 'Apple TV 4K (2nd gen)',
+  J255AP: "Apple TV 4K (2nd gen)",
   // Apple TV 4K (1st generation)
-  J105aAP: 'Apple TV 4K (1st gen)',
+  J105aAP: "Apple TV 4K (1st gen)",
   // Apple TV HD
-  J42dAP: 'Apple TV HD',
+  J42dAP: "Apple TV HD",
   // Internal model names
-  'AppleTV11,1': 'Apple TV 4K (2nd gen)',
-  'AppleTV6,2': 'Apple TV 4K (1st gen)',
-  'AppleTV5,3': 'Apple TV HD',
-} as const
+  "AppleTV11,1": "Apple TV 4K (2nd gen)",
+  "AppleTV6,2": "Apple TV 4K (1st gen)",
+  "AppleTV5,3": "Apple TV HD",
+} as const;
 
 /**
  * Known HomePod model identifiers
  */
 export const HOMEPOD_MODELS = {
-  'AudioAccessory1,1': 'HomePod',
-  'AudioAccessory1,2': 'HomePod',
-  'AudioAccessory5,1': 'HomePod mini',
-  'AudioAccessory6,1': 'HomePod (2nd gen)',
-  B520AP: 'HomePod mini',
-} as const
+  "AudioAccessory1,1": "HomePod",
+  "AudioAccessory1,2": "HomePod",
+  "AudioAccessory5,1": "HomePod mini",
+  "AudioAccessory6,1": "HomePod (2nd gen)",
+  B520AP: "HomePod mini",
+} as const;
 
 /**
  * Type guard to check if a model is an Apple TV
  */
 export function isAppleTVModel(model: string): boolean {
-  return model in APPLE_TV_MODELS || model.startsWith('AppleTV') || model.endsWith('AP')
+  return (
+    model in APPLE_TV_MODELS ||
+    model.startsWith("AppleTV") ||
+    model.endsWith("AP")
+  );
 }
 
 /**
  * Type guard to check if a model is a HomePod
  */
 export function isHomePodModel(model: string): boolean {
-  return model in HOMEPOD_MODELS || model.startsWith('AudioAccessory') || model === 'B520AP'
+  return (
+    model in HOMEPOD_MODELS ||
+    model.startsWith("AudioAccessory") ||
+    model === "B520AP"
+  );
 }
 
 /**
@@ -475,7 +489,7 @@ export function getFriendlyDeviceName(model: string): string {
     APPLE_TV_MODELS[model as keyof typeof APPLE_TV_MODELS] ||
     HOMEPOD_MODELS[model as keyof typeof HOMEPOD_MODELS] ||
     model
-  )
+  );
 }
 
 // ============================================================================
@@ -485,15 +499,19 @@ export function getFriendlyDeviceName(model: string): string {
 /**
  * Type guard for AirPlay service
  */
-export function isAirPlayService(service: BaseServiceInstance): service is AirPlayService {
-  return service.serviceType === APPLE_SERVICE_TYPES.AIRPLAY
+export function isAirPlayService(
+  service: BaseServiceInstance
+): service is AirPlayService {
+  return service.serviceType === APPLE_SERVICE_TYPES.AIRPLAY;
 }
 
 /**
  * Type guard for RAOP service
  */
-export function isRAOPService(service: BaseServiceInstance): service is RAOPService {
-  return service.serviceType === APPLE_SERVICE_TYPES.RAOP
+export function isRAOPService(
+  service: BaseServiceInstance
+): service is RAOPService {
+  return service.serviceType === APPLE_SERVICE_TYPES.RAOP;
 }
 
 /**
@@ -502,12 +520,14 @@ export function isRAOPService(service: BaseServiceInstance): service is RAOPServ
 export function isCompanionLinkService(
   service: BaseServiceInstance
 ): service is CompanionLinkService {
-  return service.serviceType === APPLE_SERVICE_TYPES.COMPANION_LINK
+  return service.serviceType === APPLE_SERVICE_TYPES.COMPANION_LINK;
 }
 
 /**
  * Type guard for Device Info service
  */
-export function isDeviceInfoService(service: BaseServiceInstance): service is DeviceInfoService {
-  return service.serviceType === APPLE_SERVICE_TYPES.DEVICE_INFO
+export function isDeviceInfoService(
+  service: BaseServiceInstance
+): service is DeviceInfoService {
+  return service.serviceType === APPLE_SERVICE_TYPES.DEVICE_INFO;
 }

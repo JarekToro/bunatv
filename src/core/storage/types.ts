@@ -5,22 +5,25 @@
  * Reworked Storage with CredentialStore support
  */
 
-import type { BaseCredentials, CredentialStore } from '@/protocols/types/BaseProtocol.ts'
-import type { DiscoveredDevice } from '../discovery/discovery-types'
-import type { ClientDeviceInfo } from '@/core/client-identity.ts'
+import type {
+  BaseCredentials,
+  CredentialStore,
+} from "@/protocols/types/BaseProtocol.ts";
+import type { DiscoveredDevice } from "../discovery/discovery-types";
+import type { ClientDeviceInfo } from "@/core/client-identity.ts";
 
 /**
  * Extended device information with storage metadata
  */
 export interface StoredDevice extends DiscoveredDevice {
   /** When this device was first discovered */
-  firstSeen: string
+  firstSeen: string;
   /** When this device was last seen/updated */
-  lastSeen: string
+  lastSeen: string;
   /** User-friendly alias for the device */
-  alias?: string
+  alias?: string;
   /** Additional metadata */
-  metadata?: Record<string, unknown>
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -28,9 +31,9 @@ export interface StoredDevice extends DiscoveredDevice {
  */
 export interface StorageSettings {
   /** Global client device identity (BunATV's identity presented to Apple devices) */
-  clientDeviceInfo?: ClientDeviceInfo
+  clientDeviceInfo?: ClientDeviceInfo;
   /** Other settings */
-  [key: string]: unknown
+  [key: string]: unknown;
 }
 
 /**
@@ -38,56 +41,59 @@ export interface StorageSettings {
  */
 export interface StorageData {
   /** Schema version for migrations */
-  version: number
+  version: number;
   /** Map of device identifier to stored device */
-  devices: Record<string, StoredDevice>
+  devices: Record<string, StoredDevice>;
   /** Map of composite key (deviceId:protocol) to pairing */
-  credentials: Record<string, StoredCredentials>
+  credentials: Record<string, StoredCredentials>;
   /** Global settings */
-  settings?: StorageSettings
+  settings?: StorageSettings;
 }
 
 // ============================================================================
 // Core Types
 // ============================================================================
 
-export type ProtocolType = 'companion' | 'airplay' | 'raop' | 'dmap' | 'mrp'
+export type ProtocolType = "companion" | "airplay" | "raop" | "dmap" | "mrp";
 
 /**
  * Generic stored credentials that extend BaseCredentials
  */
-export interface StoredCredentials<T extends BaseCredentials = BaseCredentials> {
+export interface StoredCredentials<
+  T extends BaseCredentials = BaseCredentials,
+> {
   /** Device identifier this belongs to */
-  deviceId: string
+  deviceId: string;
   /** Protocol type */
-  protocol: ProtocolType
+  protocol: ProtocolType;
   /** When created */
-  createdAt: Date
+  createdAt: Date;
   /** When last updated */
-  updatedAt: Date
+  updatedAt: Date;
   /** When last used */
-  lastUsed: Date
+  lastUsed: Date;
   /** The actual credentials */
-  credentials: T
+  credentials: T;
   /** Additional metadata (protocol-specific data like ClientDeviceInfo) */
-  metadata?: Record<string, unknown>
+  metadata?: Record<string, unknown>;
 }
 
 /**
  * Helper type for Companion protocol stored credentials with device info
  */
-export interface CompanionStoredCredentials<T extends BaseCredentials = BaseCredentials>
-  extends StoredCredentials<T> {
+export interface CompanionStoredCredentials<
+  T extends BaseCredentials = BaseCredentials,
+> extends StoredCredentials<T> {
   metadata?: {
     /** Client device identity for system_info message */
     clientDeviceInfo?: {
-      rpId: string
-      deviceId: string
-      model: string
-      name: string
-    }
-    [key: string]: unknown
-  }
+      rpId: string;
+      deviceId: string;
+      model: string;
+      name: string;
+    };
+    [key: string]: unknown;
+  };
 }
 
 // ============================================================================
@@ -98,7 +104,9 @@ export interface CompanionStoredCredentials<T extends BaseCredentials = BaseCred
  * Scoped credential store for a specific device and protocol
  * This implements the CredentialStore interface that orchestrators need
  */
-export class ScopedCredentialStore<T extends BaseCredentials> implements CredentialStore<T> {
+export class ScopedCredentialStore<T extends BaseCredentials>
+  implements CredentialStore<T>
+{
   constructor(
     private storage: Storage,
     private deviceId: string,
@@ -114,30 +122,36 @@ export class ScopedCredentialStore<T extends BaseCredentials> implements Credent
       lastUsed: new Date(),
       credentials,
       metadata: { identifier },
-    }
+    };
 
-    await this.storage.saveCredentials(this.deviceId, this.protocol, stored)
+    await this.storage.saveCredentials(this.deviceId, this.protocol, stored);
   }
 
   async load(identifier: string): Promise<T | undefined> {
-    const stored = await this.storage.getCredentials<T>(this.deviceId, this.protocol)
+    const stored = await this.storage.getCredentials<T>(
+      this.deviceId,
+      this.protocol
+    );
 
     // Verify identifier matches if provided in metadata
-    if (stored?.metadata?.identifier && stored.metadata.identifier !== identifier) {
-      return undefined
+    if (
+      stored?.metadata?.identifier &&
+      stored.metadata.identifier !== identifier
+    ) {
+      return undefined;
     }
 
     if (stored) {
       // Update last used
-      await this.storage.updateLastUsed(this.deviceId, this.protocol)
-      return stored.credentials
+      await this.storage.updateLastUsed(this.deviceId, this.protocol);
+      return stored.credentials;
     }
 
-    return undefined
+    return undefined;
   }
 
   async delete(identifier: string): Promise<void> {
-    await this.storage.removeCredentials(this.deviceId, this.protocol)
+    await this.storage.removeCredentials(this.deviceId, this.protocol);
   }
 }
 
@@ -147,34 +161,34 @@ export class ScopedCredentialStore<T extends BaseCredentials> implements Credent
 
 export interface Storage {
   // Device operations (unchanged)
-  getDevice(identifier: string): Promise<StoredDevice | null>
-  saveDevice(device: StoredDevice): Promise<void>
-  removeDevice(identifier: string): Promise<void>
-  listDevices(): Promise<StoredDevice[]>
+  getDevice(identifier: string): Promise<StoredDevice | null>;
+  saveDevice(device: StoredDevice): Promise<void>;
+  removeDevice(identifier: string): Promise<void>;
+  listDevices(): Promise<StoredDevice[]>;
 
   // Credential operations (replaces pairing operations)
   getCredentials<T extends BaseCredentials>(
     deviceId: string,
     protocol: ProtocolType
-  ): Promise<StoredCredentials<T> | null>
+  ): Promise<StoredCredentials<T> | null>;
 
   saveCredentials<T extends BaseCredentials>(
     deviceId: string,
     protocol: ProtocolType,
     credentials: StoredCredentials<T>
-  ): Promise<void>
+  ): Promise<void>;
 
-  removeCredentials(deviceId: string, protocol: ProtocolType): Promise<void>
+  removeCredentials(deviceId: string, protocol: ProtocolType): Promise<void>;
 
-  listCredentials(deviceId: string): Promise<StoredCredentials[]>
+  listCredentials(deviceId: string): Promise<StoredCredentials[]>;
 
-  updateLastUsed(deviceId: string, protocol: ProtocolType): Promise<void>
+  updateLastUsed(deviceId: string, protocol: ProtocolType): Promise<void>;
 
   // Get a credential store scoped to device/protocol
   getCredentialStore<T extends BaseCredentials>(
     deviceId: string,
     protocol: ProtocolType
-  ): CredentialStore<T>
+  ): CredentialStore<T>;
 
   // Client device identity methods
   /**
@@ -182,16 +196,16 @@ export interface Storage {
    * Storage ensures this always exists - generates on first initialization
    * @returns The stored client device info
    */
-  getClientDeviceInfo(): Promise<ClientDeviceInfo>
+  getClientDeviceInfo(): Promise<ClientDeviceInfo>;
 
   /**
    * Save the global client device info (BunATV's identity)
    * @param info - The client device info to save
    */
-  saveClientDeviceInfo(info: ClientDeviceInfo): Promise<void>
+  saveClientDeviceInfo(info: ClientDeviceInfo): Promise<void>;
 
   // Data operations
-  clear(): Promise<void>
-  export(): Promise<StorageData>
-  import(data: StorageData): Promise<void>
+  clear(): Promise<void>;
+  export(): Promise<StorageData>;
+  import(data: StorageData): Promise<void>;
 }

@@ -7,7 +7,7 @@ import {
   type SimpleCompanionCommand,
   createCompanionCommand,
   createSimpleCompanionCommand,
-} from '@/protocols/companion/messages/CompanionOpackMessage.ts'
+} from "@/protocols/companion/messages/CompanionOpackMessage.ts";
 
 export enum AttentionState {
   Unknown = 0,
@@ -17,18 +17,20 @@ export enum AttentionState {
   Idle = 4,
 }
 
-export interface FetchAttentionStateRequest extends CompanionRequestOpackMessage {
-  _i: 'FetchAttentionState'
-  _c: {}
+export interface FetchAttentionStateRequest
+  extends CompanionRequestOpackMessage {
+  _i: "FetchAttentionState";
+  _c: {};
 }
 
 export interface FetchAttentionStateResponseContent {
-  state: AttentionState
+  state: AttentionState;
 }
 
-export interface FetchAttentionStateResponse extends CompanionResponseOpackMessage {
-  _i: 'FetchAttentionState'
-  _c: FetchAttentionStateResponseContent
+export interface FetchAttentionStateResponse
+  extends CompanionResponseOpackMessage {
+  _i: "FetchAttentionState";
+  _c: FetchAttentionStateResponseContent;
 }
 
 // Factory function instead of class
@@ -38,23 +40,23 @@ export function createFetchAttentionStateCommand(): CompanionCommand<
   AttentionState
 > {
   return createCompanionCommand({
-    identifier: 'FetchAttentionState',
-    name: 'FetchAttentionState',
+    identifier: "FetchAttentionState",
+    name: "FetchAttentionState",
     buildContent: () => ({}),
-    parse: response => {
-      return response._c.state
+    parse: (response) => {
+      return response._c.state;
     },
-  })
+  });
 }
 
 // Simple factory function for empty command
-export function createSystemSleepCommand(): SimpleCompanionCommand<'_systemSleep'> {
-  return createSimpleCompanionCommand('_systemSleep', 'SystemSleep')
+export function createSystemSleepCommand(): SimpleCompanionCommand<"_systemSleep"> {
+  return createSimpleCompanionCommand("_systemSleep", "SystemSleep");
 }
 
 // Simple factory function for empty command
-export function createSystemWakeCommand(): SimpleCompanionCommand<'_systemWake'> {
-  return createSimpleCompanionCommand('_systemWake', 'SystemWake')
+export function createSystemWakeCommand(): SimpleCompanionCommand<"_systemWake"> {
+  return createSimpleCompanionCommand("_systemWake", "SystemWake");
 }
 
 // Usage:

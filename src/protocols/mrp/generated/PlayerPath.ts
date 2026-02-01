@@ -5,138 +5,162 @@
 // source: PlayerPath.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { NowPlayingClient } from './NowPlayingClient'
-import { NowPlayingPlayer } from './NowPlayingPlayer'
-import { Origin } from './Origin'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { NowPlayingClient } from "./NowPlayingClient";
+import { NowPlayingPlayer } from "./NowPlayingPlayer";
+import { Origin } from "./Origin";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface PlayerPath {
-  origin?: Origin | undefined
-  client?: NowPlayingClient | undefined
-  player?: NowPlayingPlayer | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  origin?: Origin | undefined;
+  client?: NowPlayingClient | undefined;
+  player?: NowPlayingPlayer | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBasePlayerPath(): PlayerPath {
-  return { origin: undefined, client: undefined, player: undefined, _unknownFields: {} }
+  return {
+    origin: undefined,
+    client: undefined,
+    player: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const PlayerPath: MessageFns<PlayerPath> = {
-  encode(message: PlayerPath, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PlayerPath,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.origin !== undefined) {
-      Origin.encode(message.origin, writer.uint32(10).fork()).join()
+      Origin.encode(message.origin, writer.uint32(10).fork()).join();
     }
     if (message.client !== undefined) {
-      NowPlayingClient.encode(message.client, writer.uint32(18).fork()).join()
+      NowPlayingClient.encode(message.client, writer.uint32(18).fork()).join();
     }
     if (message.player !== undefined) {
-      NowPlayingPlayer.encode(message.player, writer.uint32(26).fork()).join()
+      NowPlayingPlayer.encode(message.player, writer.uint32(26).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PlayerPath {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBasePlayerPath()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlayerPath();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.origin = Origin.decode(reader, reader.uint32())
-          continue
+          message.origin = Origin.decode(reader, reader.uint32());
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.client = NowPlayingClient.decode(reader, reader.uint32())
-          continue
+          message.client = NowPlayingClient.decode(reader, reader.uint32());
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.player = NowPlayingPlayer.decode(reader, reader.uint32())
-          continue
+          message.player = NowPlayingPlayer.decode(reader, reader.uint32());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): PlayerPath {
     return {
       origin: isSet(object.origin) ? Origin.fromJSON(object.origin) : undefined,
-      client: isSet(object.client) ? NowPlayingClient.fromJSON(object.client) : undefined,
-      player: isSet(object.player) ? NowPlayingPlayer.fromJSON(object.player) : undefined,
-    }
+      client: isSet(object.client)
+        ? NowPlayingClient.fromJSON(object.client)
+        : undefined,
+      player: isSet(object.player)
+        ? NowPlayingPlayer.fromJSON(object.player)
+        : undefined,
+    };
   },
 
   toJSON(message: PlayerPath): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.origin !== undefined) {
-      obj.origin = Origin.toJSON(message.origin)
+      obj.origin = Origin.toJSON(message.origin);
     }
     if (message.client !== undefined) {
-      obj.client = NowPlayingClient.toJSON(message.client)
+      obj.client = NowPlayingClient.toJSON(message.client);
     }
     if (message.player !== undefined) {
-      obj.player = NowPlayingPlayer.toJSON(message.player)
+      obj.player = NowPlayingPlayer.toJSON(message.player);
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<PlayerPath>, I>>(base?: I): PlayerPath {
-    return PlayerPath.fromPartial(base ?? ({} as any))
+    return PlayerPath.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PlayerPath>, I>>(object: I): PlayerPath {
-    const message = createBasePlayerPath()
+  fromPartial<I extends Exact<DeepPartial<PlayerPath>, I>>(
+    object: I
+  ): PlayerPath {
+    const message = createBasePlayerPath();
     message.origin =
       object.origin !== undefined && object.origin !== null
         ? Origin.fromPartial(object.origin)
-        : undefined
+        : undefined;
     message.client =
       object.client !== undefined && object.client !== null
         ? NowPlayingClient.fromPartial(object.client)
-        : undefined
+        : undefined;
     message.player =
       object.player !== undefined && object.player !== null
         ? NowPlayingPlayer.fromPartial(object.player)
-        : undefined
-    return message
+        : undefined;
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -146,22 +170,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

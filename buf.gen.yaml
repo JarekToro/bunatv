@@ -1,6 +1,6 @@
 version: v2
 
-clean: true          # Delete output dirs before generating (fresh start)
+clean: true # Delete output dirs before generating (fresh start)
 
 plugins:
   - out: src/protocols/mrp/generated
@@ -12,4 +12,4 @@ plugins:
       - env=node
 
 inputs:
-  - directory: src/protocols/mrp/protobuf   # Where to find .proto files
+  - directory: src/protocols/mrp/protobuf # Where to find .proto files

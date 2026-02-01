@@ -5,68 +5,77 @@
 // source: AudioFormatSettingsMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface AudioFormatSettings {
-  formatSettingsPlistData?: Buffer | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  formatSettingsPlistData?: Buffer | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseAudioFormatSettings(): AudioFormatSettings {
-  return { formatSettingsPlistData: Buffer.alloc(0), _unknownFields: {} }
+  return { formatSettingsPlistData: Buffer.alloc(0), _unknownFields: {} };
 }
 
 export const AudioFormatSettings: MessageFns<AudioFormatSettings> = {
-  encode(message: AudioFormatSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AudioFormatSettings,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (
       message.formatSettingsPlistData !== undefined &&
       message.formatSettingsPlistData.length !== 0
     ) {
-      writer.uint32(10).bytes(message.formatSettingsPlistData)
+      writer.uint32(10).bytes(message.formatSettingsPlistData);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AudioFormatSettings {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioFormatSettings()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AudioFormatSettings {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudioFormatSettings();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.formatSettingsPlistData = Buffer.from(reader.bytes())
-          continue
+          message.formatSettingsPlistData = Buffer.from(reader.bytes());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AudioFormatSettings {
@@ -74,41 +83,53 @@ export const AudioFormatSettings: MessageFns<AudioFormatSettings> = {
       formatSettingsPlistData: isSet(object.formatSettingsPlistData)
         ? Buffer.from(bytesFromBase64(object.formatSettingsPlistData))
         : Buffer.alloc(0),
-    }
+    };
   },
 
   toJSON(message: AudioFormatSettings): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (
       message.formatSettingsPlistData !== undefined &&
       message.formatSettingsPlistData.length !== 0
     ) {
-      obj.formatSettingsPlistData = base64FromBytes(message.formatSettingsPlistData)
+      obj.formatSettingsPlistData = base64FromBytes(
+        message.formatSettingsPlistData
+      );
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<AudioFormatSettings>, I>>(base?: I): AudioFormatSettings {
-    return AudioFormatSettings.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<AudioFormatSettings>, I>>(
+    base?: I
+  ): AudioFormatSettings {
+    return AudioFormatSettings.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<AudioFormatSettings>, I>>(
     object: I
   ): AudioFormatSettings {
-    const message = createBaseAudioFormatSettings()
-    message.formatSettingsPlistData = object.formatSettingsPlistData ?? Buffer.alloc(0)
-    return message
+    const message = createBaseAudioFormatSettings();
+    message.formatSettingsPlistData =
+      object.formatSettingsPlistData ?? Buffer.alloc(0);
+    return message;
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -118,22 +139,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

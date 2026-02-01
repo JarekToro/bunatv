@@ -5,111 +5,123 @@
 // source: AudioFadeMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { PlayerPath } from './PlayerPath'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { PlayerPath } from "./PlayerPath";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface AudioFadeMessage {
-  playerPath?: PlayerPath | undefined
-  fadeType?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  playerPath?: PlayerPath | undefined;
+  fadeType?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseAudioFadeMessage(): AudioFadeMessage {
-  return { playerPath: undefined, fadeType: 0, _unknownFields: {} }
+  return { playerPath: undefined, fadeType: 0, _unknownFields: {} };
 }
 
 export const AudioFadeMessage: MessageFns<AudioFadeMessage> = {
-  encode(message: AudioFadeMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AudioFadeMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join()
+      PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join();
     }
     if (message.fadeType !== undefined && message.fadeType !== 0) {
-      writer.uint32(16).int32(message.fadeType)
+      writer.uint32(16).int32(message.fadeType);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AudioFadeMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioFadeMessage()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudioFadeMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
+          message.playerPath = PlayerPath.decode(reader, reader.uint32());
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.fadeType = reader.int32()
-          continue
+          message.fadeType = reader.int32();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AudioFadeMessage {
     return {
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
+      playerPath: isSet(object.playerPath)
+        ? PlayerPath.fromJSON(object.playerPath)
+        : undefined,
       fadeType: isSet(object.fadeType) ? globalThis.Number(object.fadeType) : 0,
-    }
+    };
   },
 
   toJSON(message: AudioFadeMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
+      obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
     if (message.fadeType !== undefined && message.fadeType !== 0) {
-      obj.fadeType = Math.round(message.fadeType)
+      obj.fadeType = Math.round(message.fadeType);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<AudioFadeMessage>, I>>(base?: I): AudioFadeMessage {
-    return AudioFadeMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<AudioFadeMessage>, I>>(
+    base?: I
+  ): AudioFadeMessage {
+    return AudioFadeMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AudioFadeMessage>, I>>(object: I): AudioFadeMessage {
-    const message = createBaseAudioFadeMessage()
+  fromPartial<I extends Exact<DeepPartial<AudioFadeMessage>, I>>(
+    object: I
+  ): AudioFadeMessage {
+    const message = createBaseAudioFadeMessage();
     message.playerPath =
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
-    message.fadeType = object.fadeType ?? 0
-    return message
+        : undefined;
+    message.fadeType = object.fadeType ?? 0;
+    return message;
   },
-}
+};
 
 export const audioFadeMessage: Extension<AudioFadeMessage | undefined> = {
   number: 88,
@@ -117,19 +129,26 @@ export const audioFadeMessage: Extension<AudioFadeMessage | undefined> = {
   repeated: false,
   packed: false,
   encode: (value: AudioFadeMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    AudioFadeMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    AudioFadeMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
   decode: (tag: number, input: Uint8Array[]): AudioFadeMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return AudioFadeMessage.decode(reader, reader.uint32())
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return AudioFadeMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -139,37 +158,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

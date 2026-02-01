@@ -10,7 +10,7 @@ message SetRecordingStateMessage {
   enum RecordingState {
     Unknown = 0;
     Recording = 1;
-    NotRecording = 2;    
+    NotRecording = 2;
   }
 
   optional RecordingState state = 1;

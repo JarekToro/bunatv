@@ -5,21 +5,21 @@
  * with focus on Bun's native performance capabilities.
  */
 
-import { expect } from 'bun:test'
+import { expect } from "bun:test";
 import {
   ERROR_TEST_VECTORS,
   HAP_TEST_CONSTANTS,
   TestVectorUtils,
-} from '../fixtures/crypto-test-vectors'
-import { createLogger } from '@/logging/logging.ts'
+} from "../fixtures/crypto-test-vectors";
+import { createLogger } from "@/logging/logging.ts";
 
-const logger = createLogger('CryptoTestUtils')
+const logger = createLogger("CryptoTestUtils");
 
 /**
  * Performance measurement utilities optimized for Bun
  */
 export class PerformanceUtils {
-  private static measurements: Map<string, number[]> = new Map()
+  private static measurements: Map<string, number[]> = new Map();
 
   /**
    * Measure execution time of an operation using Bun's high-resolution timer
@@ -28,24 +28,27 @@ export class PerformanceUtils {
     name: string,
     operation: () => Promise<T>
   ): Promise<{ result: T; duration: number }> {
-    const start = performance.now()
-    const result = await operation()
-    const duration = performance.now() - start
+    const start = performance.now();
+    const result = await operation();
+    const duration = performance.now() - start;
 
-    this.recordMeasurement(name, duration)
-    return { result, duration }
+    this.recordMeasurement(name, duration);
+    return { result, duration };
   }
 
   /**
    * Measure execution time of a synchronous operation
    */
-  static measureSync<T>(name: string, operation: () => T): { result: T; duration: number } {
-    const start = performance.now()
-    const result = operation()
-    const duration = performance.now() - start
+  static measureSync<T>(
+    name: string,
+    operation: () => T
+  ): { result: T; duration: number } {
+    const start = performance.now();
+    const result = operation();
+    const duration = performance.now() - start;
 
-    this.recordMeasurement(name, duration)
-    return { result, duration }
+    this.recordMeasurement(name, duration);
+    return { result, duration };
   }
 
   /**
@@ -53,42 +56,42 @@ export class PerformanceUtils {
    */
   private static recordMeasurement(name: string, duration: number): void {
     if (!this.measurements.has(name)) {
-      this.measurements.set(name, [])
+      this.measurements.set(name, []);
     }
-    this.measurements.get(name)!.push(duration)
+    this.measurements.get(name)!.push(duration);
   }
 
   /**
    * Get performance statistics for an operation
    */
   static getStats(name: string): {
-    count: number
-    min: number
-    max: number
-    avg: number
-    median: number
+    count: number;
+    min: number;
+    max: number;
+    avg: number;
+    median: number;
   } | null {
-    const measurements = this.measurements.get(name)
-    if (!measurements || measurements.length === 0) return null
+    const measurements = this.measurements.get(name);
+    if (!measurements || measurements.length === 0) return null;
 
-    const sorted = [...measurements].sort((a, b) => a - b)
-    const count = measurements.length
-    const min = sorted[0]!
-    const max = sorted[count - 1]!
-    const avg = measurements.reduce((a, b) => a + b, 0) / count
+    const sorted = [...measurements].sort((a, b) => a - b);
+    const count = measurements.length;
+    const min = sorted[0]!;
+    const max = sorted[count - 1]!;
+    const avg = measurements.reduce((a, b) => a + b, 0) / count;
     const median =
       count % 2 === 0
         ? (sorted[count / 2 - 1]! + sorted[count / 2]!) / 2
-        : sorted[Math.floor(count / 2)]!
+        : sorted[Math.floor(count / 2)]!;
 
-    return { count, min, max, avg, median }
+    return { count, min, max, avg, median };
   }
 
   /**
    * Clear all measurements
    */
   static reset(): void {
-    this.measurements.clear()
+    this.measurements.clear();
   }
 
   /**
@@ -98,21 +101,24 @@ export class PerformanceUtils {
     name: string,
     operation: () => Promise<T>,
     iterations: number = 100
-  ): Promise<{ avgDuration: number; stats: ReturnType<typeof PerformanceUtils.getStats> }> {
+  ): Promise<{
+    avgDuration: number;
+    stats: ReturnType<typeof PerformanceUtils.getStats>;
+  }> {
     // Warm up
-    await operation()
-    await operation()
+    await operation();
+    await operation();
 
     // Actual benchmark
     for (let i = 0; i < iterations; i++) {
-      await this.measureAsync(`${name}_bench`, operation)
+      await this.measureAsync(`${name}_bench`, operation);
     }
 
-    const stats = this.getStats(`${name}_bench`)
+    const stats = this.getStats(`${name}_bench`);
     return {
       avgDuration: stats?.avg ?? 0,
       stats,
-    }
+    };
   }
 
   /**
@@ -122,21 +128,24 @@ export class PerformanceUtils {
     name: string,
     operation: () => T,
     iterations: number = 1000
-  ): { avgDuration: number; stats: ReturnType<typeof PerformanceUtils.getStats> } {
+  ): {
+    avgDuration: number;
+    stats: ReturnType<typeof PerformanceUtils.getStats>;
+  } {
     // Warm up
-    operation()
-    operation()
+    operation();
+    operation();
 
     // Actual benchmark
     for (let i = 0; i < iterations; i++) {
-      this.measureSync(`${name}_bench`, operation)
+      this.measureSync(`${name}_bench`, operation);
     }
 
-    const stats = this.getStats(`${name}_bench`)
+    const stats = this.getStats(`${name}_bench`);
     return {
       avgDuration: stats?.avg ?? 0,
       stats,
-    }
+    };
   }
 }
 
@@ -148,8 +157,8 @@ export class MemoryUtils {
    * Force garbage collection if available (Bun/Node.js specific)
    */
   static forceGC(): void {
-    if (typeof global !== 'undefined' && global.gc) {
-      global.gc()
+    if (typeof global !== "undefined" && global.gc) {
+      global.gc();
     }
   }
 
@@ -157,41 +166,41 @@ export class MemoryUtils {
    * Get current memory usage
    */
   static getMemoryUsage(): {
-    rss: number
-    heapTotal: number
-    heapUsed: number
-    external: number
+    rss: number;
+    heapTotal: number;
+    heapUsed: number;
+    external: number;
   } {
-    if (typeof process !== 'undefined' && process.memoryUsage) {
-      return process.memoryUsage()
+    if (typeof process !== "undefined" && process.memoryUsage) {
+      return process.memoryUsage();
     }
-    return { rss: 0, heapTotal: 0, heapUsed: 0, external: 0 }
+    return { rss: 0, heapTotal: 0, heapUsed: 0, external: 0 };
   }
 
   /**
    * Monitor memory usage during an operation
    */
   static async monitorOperation<T>(operation: () => Promise<T>): Promise<{
-    result: T
-    memoryBefore: ReturnType<typeof MemoryUtils.getMemoryUsage>
-    memoryAfter: ReturnType<typeof MemoryUtils.getMemoryUsage>
-    memoryDelta: number
+    result: T;
+    memoryBefore: ReturnType<typeof MemoryUtils.getMemoryUsage>;
+    memoryAfter: ReturnType<typeof MemoryUtils.getMemoryUsage>;
+    memoryDelta: number;
   }> {
-    this.forceGC()
-    const memoryBefore = this.getMemoryUsage()
+    this.forceGC();
+    const memoryBefore = this.getMemoryUsage();
 
-    const result = await operation()
+    const result = await operation();
 
-    this.forceGC()
-    const memoryAfter = this.getMemoryUsage()
-    const memoryDelta = memoryAfter.heapUsed - memoryBefore.heapUsed
+    this.forceGC();
+    const memoryAfter = this.getMemoryUsage();
+    const memoryDelta = memoryAfter.heapUsed - memoryBefore.heapUsed;
 
     return {
       result,
       memoryBefore,
       memoryAfter,
       memoryDelta,
-    }
+    };
   }
 
   /**
@@ -200,17 +209,17 @@ export class MemoryUtils {
   static async measureMemoryUsage<T>(
     operation: () => Promise<T>
   ): Promise<{ result: T; memoryUsed: number }> {
-    this.forceGC()
-    const before = this.getMemoryUsage()
+    this.forceGC();
+    const before = this.getMemoryUsage();
 
-    const result = await operation()
+    const result = await operation();
 
-    this.forceGC()
-    const after = this.getMemoryUsage()
+    this.forceGC();
+    const after = this.getMemoryUsage();
 
-    const memoryUsed = after.heapUsed - before.heapUsed
+    const memoryUsed = after.heapUsed - before.heapUsed;
 
-    return { result, memoryUsed }
+    return { result, memoryUsed };
   }
 }
 
@@ -221,41 +230,55 @@ export class KeyValidationUtils {
   /**
    * Validate Ed25519 key sizes
    */
-  static validateEd25519Keys(privateKey: Uint8Array, publicKey: Uint8Array): void {
+  static validateEd25519Keys(
+    privateKey: Uint8Array,
+    publicKey: Uint8Array
+  ): void {
     TestVectorUtils.validateSize(
       privateKey,
       HAP_TEST_CONSTANTS.ED25519_PRIVATE_KEY_SIZE,
-      'Ed25519 private key'
-    )
+      "Ed25519 private key"
+    );
     TestVectorUtils.validateSize(
       publicKey,
       HAP_TEST_CONSTANTS.ED25519_PUBLIC_KEY_SIZE,
-      'Ed25519 public key'
-    )
+      "Ed25519 public key"
+    );
   }
 
   /**
    * Validate X25519 key sizes
    */
-  static validateX25519Keys(privateKey: Uint8Array, publicKey: Uint8Array): void {
+  static validateX25519Keys(
+    privateKey: Uint8Array,
+    publicKey: Uint8Array
+  ): void {
     TestVectorUtils.validateSize(
       privateKey,
       HAP_TEST_CONSTANTS.X25519_PRIVATE_KEY_SIZE,
-      'X25519 private key'
-    )
+      "X25519 private key"
+    );
     TestVectorUtils.validateSize(
       publicKey,
       HAP_TEST_CONSTANTS.X25519_PUBLIC_KEY_SIZE,
-      'X25519 public key'
-    )
+      "X25519 public key"
+    );
   }
 
   /**
    * Validate ChaCha20-Poly1305 parameters
    */
   static validateChaCha20Params(key: Uint8Array, nonce: Uint8Array): void {
-    TestVectorUtils.validateSize(key, HAP_TEST_CONSTANTS.CHACHA20_KEY_SIZE, 'ChaCha20 key')
-    TestVectorUtils.validateSize(nonce, HAP_TEST_CONSTANTS.CHACHA20_NONCE_SIZE, 'ChaCha20 nonce')
+    TestVectorUtils.validateSize(
+      key,
+      HAP_TEST_CONSTANTS.CHACHA20_KEY_SIZE,
+      "ChaCha20 key"
+    );
+    TestVectorUtils.validateSize(
+      nonce,
+      HAP_TEST_CONSTANTS.CHACHA20_NONCE_SIZE,
+      "ChaCha20 nonce"
+    );
   }
 
   /**
@@ -265,8 +288,8 @@ export class KeyValidationUtils {
     TestVectorUtils.validateSize(
       signature,
       HAP_TEST_CONSTANTS.ED25519_SIGNATURE_SIZE,
-      'Ed25519 signature'
-    )
+      "Ed25519 signature"
+    );
   }
 
   /**
@@ -276,7 +299,7 @@ export class KeyValidationUtils {
     derivedKey: Uint8Array,
     expectedSize: number = HAP_TEST_CONSTANTS.HKDF_KEY_SIZE
   ): void {
-    TestVectorUtils.validateSize(derivedKey, expectedSize, 'HKDF derived key')
+    TestVectorUtils.validateSize(derivedKey, expectedSize, "HKDF derived key");
   }
 }
 
@@ -297,10 +320,10 @@ export class ErrorTestUtils {
       ERROR_TEST_VECTORS.invalidKeys.tooLong,
       new Uint8Array(validKeySize - 1), // One byte short
       new Uint8Array(validKeySize + 1), // One byte too long
-    ]
+    ];
 
     for (const invalidKey of invalidKeys) {
-      await expect(operation(invalidKey)).rejects.toThrow()
+      await expect(operation(invalidKey)).rejects.toThrow();
     }
   }
 
@@ -317,10 +340,10 @@ export class ErrorTestUtils {
       ERROR_TEST_VECTORS.invalidNonces.tooLong,
       new Uint8Array(validNonceSize - 1), // One byte short
       new Uint8Array(validNonceSize + 1), // One byte too long
-    ]
+    ];
 
     for (const invalidNonce of invalidNonces) {
-      await expect(operation(invalidNonce)).rejects.toThrow()
+      await expect(operation(invalidNonce)).rejects.toThrow();
     }
   }
 
@@ -333,26 +356,26 @@ export class ErrorTestUtils {
     const corruptedSigs = [
       ERROR_TEST_VECTORS.corruptedSignatures.allZeros,
       ERROR_TEST_VECTORS.corruptedSignatures.flippedBit,
-    ]
+    ];
 
     // Test wrong length signature - should throw an error
     try {
-      await verifyOperation(ERROR_TEST_VECTORS.corruptedSignatures.wrongLength)
+      await verifyOperation(ERROR_TEST_VECTORS.corruptedSignatures.wrongLength);
       // If it doesn't throw, that's fine - just expect false
-      expect(false).toBe(false)
+      expect(false).toBe(false);
     } catch (error) {
       // Expected - wrong length should cause an error
-      expect(error).toBeDefined()
+      expect(error).toBeDefined();
     }
 
     // Test other corrupted signatures - should return false
     for (const corruptedSig of corruptedSigs) {
       try {
-        const result = await verifyOperation(corruptedSig)
-        expect(result).toBe(false)
+        const result = await verifyOperation(corruptedSig);
+        expect(result).toBe(false);
       } catch (error) {
         // Some implementations may throw for invalid signatures, which is also acceptable
-        expect(error).toBeDefined()
+        expect(error).toBeDefined();
       }
     }
   }
@@ -367,10 +390,10 @@ export class ErrorTestUtils {
       ERROR_TEST_VECTORS.invalidEncryptedData.tooShort,
       ERROR_TEST_VECTORS.invalidEncryptedData.truncatedTag,
       ERROR_TEST_VECTORS.invalidEncryptedData.wrongTag,
-    ]
+    ];
 
     for (const invalidEncData of invalidData) {
-      await expect(decryptOperation(invalidEncData)).rejects.toThrow()
+      await expect(decryptOperation(invalidEncData)).rejects.toThrow();
     }
   }
 
@@ -378,7 +401,7 @@ export class ErrorTestUtils {
    * Expect async operation to throw
    */
   static async expectAsyncError<T>(operation: () => Promise<T>): Promise<void> {
-    await expect(operation()).rejects.toThrow()
+    await expect(operation()).rejects.toThrow();
   }
 }
 
@@ -390,33 +413,43 @@ export class ComparisonUtils {
    * Compare two arrays for exact equality
    */
   static arraysEqual(a: Uint8Array, b: Uint8Array): boolean {
-    if (a.length !== b.length) return false
+    if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
-      if (a[i] !== b[i]) return false
+      if (a[i] !== b[i]) return false;
     }
-    return true
+    return true;
   }
 
   /**
    * Compare arrays with detailed error message
    */
-  static expectArraysEqual(actual: Uint8Array, expected: Uint8Array, context: string): void {
+  static expectArraysEqual(
+    actual: Uint8Array,
+    expected: Uint8Array,
+    context: string
+  ): void {
     if (!this.arraysEqual(actual, expected)) {
       throw new Error(
         `${context}: Arrays not equal\n` +
           `Expected: ${TestVectorUtils.toHex(expected)}\n` +
           `Actual:   ${TestVectorUtils.toHex(actual)}`
-      )
+      );
     }
   }
 
   /**
    * Expect operation to complete within time limit
    */
-  static expectWithinTimeLimit(duration: number, maxDuration: number, operation: string): void {
-    expect(duration).toBeLessThan(maxDuration)
+  static expectWithinTimeLimit(
+    duration: number,
+    maxDuration: number,
+    operation: string
+  ): void {
+    expect(duration).toBeLessThan(maxDuration);
     if (duration >= maxDuration) {
-      throw new Error(`${operation} took ${duration}ms, expected < ${maxDuration}ms`)
+      throw new Error(
+        `${operation} took ${duration}ms, expected < ${maxDuration}ms`
+      );
     }
   }
 
@@ -428,10 +461,12 @@ export class ComparisonUtils {
     maxMemoryMB: number,
     operation: string
   ): void {
-    const memoryMB = memoryDelta / (1024 * 1024)
-    expect(memoryMB).toBeLessThan(maxMemoryMB)
+    const memoryMB = memoryDelta / (1024 * 1024);
+    expect(memoryMB).toBeLessThan(maxMemoryMB);
     if (memoryMB >= maxMemoryMB) {
-      throw new Error(`${operation} used ${memoryMB}MB memory, expected < ${maxMemoryMB}MB`)
+      throw new Error(
+        `${operation} used ${memoryMB}MB memory, expected < ${maxMemoryMB}MB`
+      );
     }
   }
 }
@@ -444,17 +479,17 @@ export class BunTestUtils {
    * Check if running in Bun runtime
    */
   static isBun(): boolean {
-    return typeof Bun !== 'undefined'
+    return typeof Bun !== "undefined";
   }
 
   /**
    * Get Bun version if available
    */
   static getBunVersion(): string | null {
-    if (this.isBun() && typeof Bun !== 'undefined' && Bun.version) {
-      return Bun.version
+    if (this.isBun() && typeof Bun !== "undefined" && Bun.version) {
+      return Bun.version;
     }
-    return null
+    return null;
   }
 
   /**
@@ -462,7 +497,7 @@ export class BunTestUtils {
    */
   static skipIfNotBun(): void {
     if (!this.isBun()) {
-      throw new Error('Test requires Bun runtime')
+      throw new Error("Test requires Bun runtime");
     }
   }
 
@@ -470,41 +505,44 @@ export class BunTestUtils {
    * Get available crypto capabilities in Bun
    */
   static getCryptoCapabilities(): {
-    webCrypto: boolean
-    ed25519: boolean
-    x25519: boolean
-    hkdf: boolean
-    chacha20: boolean
+    webCrypto: boolean;
+    ed25519: boolean;
+    x25519: boolean;
+    hkdf: boolean;
+    chacha20: boolean;
   } {
     const capabilities = {
-      webCrypto: typeof crypto !== 'undefined' && typeof crypto.subtle !== 'undefined',
+      webCrypto:
+        typeof crypto !== "undefined" && typeof crypto.subtle !== "undefined",
       ed25519: false,
       x25519: false,
       hkdf: false,
       chacha20: false,
-    }
+    };
 
     if (capabilities.webCrypto) {
       try {
         // Test Ed25519 support
-        crypto.subtle.generateKey({ name: 'Ed25519' }, false, ['sign'])
-        capabilities.ed25519 = true
+        crypto.subtle.generateKey({ name: "Ed25519" }, false, ["sign"]);
+        capabilities.ed25519 = true;
       } catch {
         // Ed25519 not supported
       }
 
       try {
         // Test X25519 support
-        crypto.subtle.generateKey({ name: 'X25519' }, false, ['deriveKey'])
-        capabilities.x25519 = true
+        crypto.subtle.generateKey({ name: "X25519" }, false, ["deriveKey"]);
+        capabilities.x25519 = true;
       } catch {
         // X25519 not supported
       }
 
       try {
         // Test HKDF support
-        crypto.subtle.importKey('raw', new Uint8Array(32), 'HKDF', false, ['deriveKey'])
-        capabilities.hkdf = true
+        crypto.subtle.importKey("raw", new Uint8Array(32), "HKDF", false, [
+          "deriveKey",
+        ]);
+        capabilities.hkdf = true;
       } catch {
         // HKDF not supported
       }
@@ -512,24 +550,24 @@ export class BunTestUtils {
 
     // ChaCha20-Poly1305 requires external library
     try {
-      require('@noble/ciphers/chacha')
-      capabilities.chacha20 = true
+      require("@noble/ciphers/chacha");
+      capabilities.chacha20 = true;
     } catch {
       // ChaCha20-Poly1305 library not available
     }
 
-    return capabilities
+    return capabilities;
   }
 
   /**
    * Log crypto capabilities for debugging
    */
   static logCryptoCapabilities(): void {
-    const capabilities = this.getCryptoCapabilities()
-    logger.debug({ capabilities })
+    const capabilities = this.getCryptoCapabilities();
+    logger.debug({ capabilities });
 
     if (this.isBun()) {
-      logger.debug(`Bun Version: ${this.getBunVersion()}`)
+      logger.debug(`Bun Version: ${this.getBunVersion()}`);
     }
   }
 
@@ -538,22 +576,22 @@ export class BunTestUtils {
    */
   static getBunRuntimeInfo(): { bunVersion: string; isBun: boolean } {
     return {
-      bunVersion: this.getBunVersion() || 'unknown',
+      bunVersion: this.getBunVersion() || "unknown",
       isBun: this.isBun(),
-    }
+    };
   }
 
   /**
    * Detect crypto capabilities
    */
   static detectCryptoCapabilities(): {
-    webCrypto: boolean
-    ed25519: boolean
-    x25519: boolean
-    hkdf: boolean
-    chacha20: boolean
+    webCrypto: boolean;
+    ed25519: boolean;
+    x25519: boolean;
+    hkdf: boolean;
+    chacha20: boolean;
   } {
-    return this.getCryptoCapabilities()
+    return this.getCryptoCapabilities();
   }
 }
 
@@ -565,42 +603,46 @@ export class RandomTestDataUtils {
    * Generate random bytes for testing (using Bun's crypto)
    */
   static randomBytes(length: number): Uint8Array {
-    const bytes = new Uint8Array(length)
-    crypto.getRandomValues(bytes)
-    return bytes
+    const bytes = new Uint8Array(length);
+    crypto.getRandomValues(bytes);
+    return bytes;
   }
 
   /**
    * Generate random test message
    */
-  static randomMessage(minLength: number = 16, maxLength: number = 256): Uint8Array {
-    const length = Math.floor(Math.random() * (maxLength - minLength)) + minLength
-    return this.randomBytes(length)
+  static randomMessage(
+    minLength: number = 16,
+    maxLength: number = 256
+  ): Uint8Array {
+    const length =
+      Math.floor(Math.random() * (maxLength - minLength)) + minLength;
+    return this.randomBytes(length);
   }
 
   /**
    * Generate test PIN code
    */
   static randomPinCode(): string {
-    const pin = Math.floor(Math.random() * 10000)
-    return pin.toString().padStart(4, '0')
+    const pin = Math.floor(Math.random() * 10000);
+    return pin.toString().padStart(4, "0");
   }
 
   /**
    * Generate random identifier string
    */
   static randomIdentifier(): string {
-    const chars = 'ABCDEF0123456789'
-    const segments = []
+    const chars = "ABCDEF0123456789";
+    const segments = [];
     for (let i = 0; i < 5; i++) {
-      let segment = ''
-      const segmentLength = i === 0 ? 8 : 4
+      let segment = "";
+      const segmentLength = i === 0 ? 8 : 4;
       for (let j = 0; j < segmentLength; j++) {
-        segment += chars[Math.floor(Math.random() * chars.length)]
+        segment += chars[Math.floor(Math.random() * chars.length)];
       }
-      segments.push(segment)
+      segments.push(segment);
     }
-    return segments.join('-')
+    return segments.join("-");
   }
 }
 
@@ -608,13 +650,13 @@ export class RandomTestDataUtils {
  * Logging utilities for crypto tests
  */
 export class CryptoLoggingUtils {
-  private static enabled = false
+  private static enabled = false;
 
   /**
    * Enable/disable verbose logging
    */
   static setVerbose(enabled: boolean): void {
-    this.enabled = enabled
+    this.enabled = enabled;
   }
 
   /**
@@ -622,21 +664,25 @@ export class CryptoLoggingUtils {
    */
   static logHex(label: string, data: Uint8Array): void {
     if (this.enabled) {
-      logger.debug(`${label}: ${TestVectorUtils.toHex(data)}`)
+      logger.debug(`${label}: ${TestVectorUtils.toHex(data)}`);
     }
   }
 
   /**
    * Log performance results
    */
-  static logPerformance(operation: string, duration: number, dataSize?: number): void {
+  static logPerformance(
+    operation: string,
+    duration: number,
+    dataSize?: number
+  ): void {
     if (this.enabled) {
-      let message = `${operation}: ${duration.toFixed(2)}ms`
+      let message = `${operation}: ${duration.toFixed(2)}ms`;
       if (dataSize) {
-        const rate = (((dataSize / duration) * 1000) / 1024 / 1024).toFixed(2)
-        message += ` (${dataSize} bytes, ${rate} MB/s)`
+        const rate = (((dataSize / duration) * 1000) / 1024 / 1024).toFixed(2);
+        message += ` (${dataSize} bytes, ${rate} MB/s)`;
       }
-      logger.debug(message)
+      logger.debug(message);
     }
   }
 
@@ -645,47 +691,59 @@ export class CryptoLoggingUtils {
    */
   static logMemory(operation: string, memoryDelta: number): void {
     if (this.enabled) {
-      const memoryMB = (memoryDelta / 1024 / 1024).toFixed(2)
-      logger.debug(`${operation}: ${memoryMB}MB memory delta`)
+      const memoryMB = (memoryDelta / 1024 / 1024).toFixed(2);
+      logger.debug(`${operation}: ${memoryMB}MB memory delta`);
     }
   }
 
   /**
    * Log test vector validation
    */
-  static logValidation(operation: string, success: boolean, details?: string): void {
+  static logValidation(
+    operation: string,
+    success: boolean,
+    details?: string
+  ): void {
     if (this.enabled) {
-      const status = success ? '✓' : '✗'
-      let message = `${status} ${operation}`
+      const status = success ? "✓" : "✗";
+      let message = `${status} ${operation}`;
       if (details) {
-        message += `: ${details}`
+        message += `: ${details}`;
       }
-      logger.debug(message)
+      logger.debug(message);
     }
   }
 
   /**
    * Log benchmark results
    */
-  static logBenchmark(operation: string, totalDuration: number, iterations: number): void {
+  static logBenchmark(
+    operation: string,
+    totalDuration: number,
+    iterations: number
+  ): void {
     if (this.enabled) {
-      const avgDuration = totalDuration / iterations
+      const avgDuration = totalDuration / iterations;
       logger.debug(
         `${operation} Benchmark: avg=${avgDuration.toFixed(2)}ms, total=${totalDuration.toFixed(2)}ms over ${iterations} iterations`
-      )
+      );
     }
   }
 
   /**
    * Log memory usage for operations
    */
-  static logMemoryUsage(operation: string, memoryUsed: number, iterations: number): void {
+  static logMemoryUsage(
+    operation: string,
+    memoryUsed: number,
+    iterations: number
+  ): void {
     if (this.enabled) {
-      const memoryMB = (memoryUsed / 1024 / 1024).toFixed(2)
-      const avgMemoryKB = (memoryUsed / iterations / 1024).toFixed(2)
+      const memoryMB = (memoryUsed / 1024 / 1024).toFixed(2);
+      const avgMemoryKB = (memoryUsed / iterations / 1024).toFixed(2);
       logger.debug(
         `${operation} Memory: ${memoryMB}MB total (${avgMemoryKB}KB per operation) over ${iterations} iterations`
-      )
+      );
     }
   }
 }

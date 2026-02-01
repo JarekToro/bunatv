@@ -5,37 +5,37 @@
 // source: ContentItem.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { ContentItemMetadata } from './ContentItemMetadata'
-import { LanguageOption } from './LanguageOption'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { ContentItemMetadata } from "./ContentItemMetadata";
+import { LanguageOption } from "./LanguageOption";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface LanguageOptionGroup {
-  allowEmptySelection?: boolean | undefined
-  defaultLanguageOption?: LanguageOption | undefined
-  languageOptions: LanguageOption[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  allowEmptySelection?: boolean | undefined;
+  defaultLanguageOption?: LanguageOption | undefined;
+  languageOptions: LanguageOption[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface ContentItem {
-  identifier?: string | undefined
-  metadata?: ContentItemMetadata | undefined
-  artworkData?: Buffer | undefined
-  info?: string | undefined
-  availableLanguageOptions: LanguageOptionGroup[]
-  currentLanguageOptions: LanguageOption[]
+  identifier?: string | undefined;
+  metadata?: ContentItemMetadata | undefined;
+  artworkData?: Buffer | undefined;
+  info?: string | undefined;
+  availableLanguageOptions: LanguageOptionGroup[];
+  currentLanguageOptions: LanguageOption[];
   /**
    * optional Lyrics lyrics = 7;
    *  repeated Sections sections = 8;
    */
-  parentIdentifier?: string | undefined
-  ancestorIdentifier?: string | undefined
-  queueIdentifier?: string | undefined
-  requestIdentifier?: string | undefined
-  artworkDataWidth?: number | undefined
-  artworkDataHeight?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  parentIdentifier?: string | undefined;
+  ancestorIdentifier?: string | undefined;
+  queueIdentifier?: string | undefined;
+  requestIdentifier?: string | undefined;
+  artworkDataWidth?: number | undefined;
+  artworkDataHeight?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseLanguageOptionGroup(): LanguageOptionGroup {
@@ -44,77 +44,97 @@ function createBaseLanguageOptionGroup(): LanguageOptionGroup {
     defaultLanguageOption: undefined,
     languageOptions: [],
     _unknownFields: {},
-  }
+  };
 }
 
 export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
-  encode(message: LanguageOptionGroup, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.allowEmptySelection !== undefined && message.allowEmptySelection !== false) {
-      writer.uint32(8).bool(message.allowEmptySelection)
+  encode(
+    message: LanguageOptionGroup,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (
+      message.allowEmptySelection !== undefined &&
+      message.allowEmptySelection !== false
+    ) {
+      writer.uint32(8).bool(message.allowEmptySelection);
     }
     if (message.defaultLanguageOption !== undefined) {
-      LanguageOption.encode(message.defaultLanguageOption, writer.uint32(18).fork()).join()
+      LanguageOption.encode(
+        message.defaultLanguageOption,
+        writer.uint32(18).fork()
+      ).join();
     }
     for (const v of message.languageOptions) {
-      LanguageOption.encode(v!, writer.uint32(26).fork()).join()
+      LanguageOption.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): LanguageOptionGroup {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseLanguageOptionGroup()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): LanguageOptionGroup {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLanguageOptionGroup();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.allowEmptySelection = reader.bool()
-          continue
+          message.allowEmptySelection = reader.bool();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.defaultLanguageOption = LanguageOption.decode(reader, reader.uint32())
-          continue
+          message.defaultLanguageOption = LanguageOption.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.languageOptions.push(LanguageOption.decode(reader, reader.uint32()))
-          continue
+          message.languageOptions.push(
+            LanguageOption.decode(reader, reader.uint32())
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): LanguageOptionGroup {
@@ -128,340 +148,430 @@ export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
       languageOptions: globalThis.Array.isArray(object?.languageOptions)
         ? object.languageOptions.map((e: any) => LanguageOption.fromJSON(e))
         : [],
-    }
+    };
   },
 
   toJSON(message: LanguageOptionGroup): unknown {
-    const obj: any = {}
-    if (message.allowEmptySelection !== undefined && message.allowEmptySelection !== false) {
-      obj.allowEmptySelection = message.allowEmptySelection
+    const obj: any = {};
+    if (
+      message.allowEmptySelection !== undefined &&
+      message.allowEmptySelection !== false
+    ) {
+      obj.allowEmptySelection = message.allowEmptySelection;
     }
     if (message.defaultLanguageOption !== undefined) {
-      obj.defaultLanguageOption = LanguageOption.toJSON(message.defaultLanguageOption)
+      obj.defaultLanguageOption = LanguageOption.toJSON(
+        message.defaultLanguageOption
+      );
     }
     if (message.languageOptions?.length) {
-      obj.languageOptions = message.languageOptions.map(e => LanguageOption.toJSON(e))
+      obj.languageOptions = message.languageOptions.map((e) =>
+        LanguageOption.toJSON(e)
+      );
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<LanguageOptionGroup>, I>>(base?: I): LanguageOptionGroup {
-    return LanguageOptionGroup.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<LanguageOptionGroup>, I>>(
+    base?: I
+  ): LanguageOptionGroup {
+    return LanguageOptionGroup.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<LanguageOptionGroup>, I>>(
     object: I
   ): LanguageOptionGroup {
-    const message = createBaseLanguageOptionGroup()
-    message.allowEmptySelection = object.allowEmptySelection ?? false
+    const message = createBaseLanguageOptionGroup();
+    message.allowEmptySelection = object.allowEmptySelection ?? false;
     message.defaultLanguageOption =
-      object.defaultLanguageOption !== undefined && object.defaultLanguageOption !== null
+      object.defaultLanguageOption !== undefined &&
+      object.defaultLanguageOption !== null
         ? LanguageOption.fromPartial(object.defaultLanguageOption)
-        : undefined
-    message.languageOptions = object.languageOptions?.map(e => LanguageOption.fromPartial(e)) || []
-    return message
+        : undefined;
+    message.languageOptions =
+      object.languageOptions?.map((e) => LanguageOption.fromPartial(e)) || [];
+    return message;
   },
-}
+};
 
 function createBaseContentItem(): ContentItem {
   return {
-    identifier: '',
+    identifier: "",
     metadata: undefined,
     artworkData: Buffer.alloc(0),
-    info: '',
+    info: "",
     availableLanguageOptions: [],
     currentLanguageOptions: [],
-    parentIdentifier: '',
-    ancestorIdentifier: '',
-    queueIdentifier: '',
-    requestIdentifier: '',
+    parentIdentifier: "",
+    ancestorIdentifier: "",
+    queueIdentifier: "",
+    requestIdentifier: "",
     artworkDataWidth: 0,
     artworkDataHeight: 0,
     _unknownFields: {},
-  }
+  };
 }
 
 export const ContentItem: MessageFns<ContentItem> = {
-  encode(message: ContentItem, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== '') {
-      writer.uint32(10).string(message.identifier)
+  encode(
+    message: ContentItem,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (message.identifier !== undefined && message.identifier !== "") {
+      writer.uint32(10).string(message.identifier);
     }
     if (message.metadata !== undefined) {
-      ContentItemMetadata.encode(message.metadata, writer.uint32(18).fork()).join()
+      ContentItemMetadata.encode(
+        message.metadata,
+        writer.uint32(18).fork()
+      ).join();
     }
     if (message.artworkData !== undefined && message.artworkData.length !== 0) {
-      writer.uint32(26).bytes(message.artworkData)
+      writer.uint32(26).bytes(message.artworkData);
     }
-    if (message.info !== undefined && message.info !== '') {
-      writer.uint32(34).string(message.info)
+    if (message.info !== undefined && message.info !== "") {
+      writer.uint32(34).string(message.info);
     }
     for (const v of message.availableLanguageOptions) {
-      LanguageOptionGroup.encode(v!, writer.uint32(42).fork()).join()
+      LanguageOptionGroup.encode(v!, writer.uint32(42).fork()).join();
     }
     for (const v of message.currentLanguageOptions) {
-      LanguageOption.encode(v!, writer.uint32(50).fork()).join()
+      LanguageOption.encode(v!, writer.uint32(50).fork()).join();
     }
-    if (message.parentIdentifier !== undefined && message.parentIdentifier !== '') {
-      writer.uint32(74).string(message.parentIdentifier)
+    if (
+      message.parentIdentifier !== undefined &&
+      message.parentIdentifier !== ""
+    ) {
+      writer.uint32(74).string(message.parentIdentifier);
     }
-    if (message.ancestorIdentifier !== undefined && message.ancestorIdentifier !== '') {
-      writer.uint32(82).string(message.ancestorIdentifier)
+    if (
+      message.ancestorIdentifier !== undefined &&
+      message.ancestorIdentifier !== ""
+    ) {
+      writer.uint32(82).string(message.ancestorIdentifier);
     }
-    if (message.queueIdentifier !== undefined && message.queueIdentifier !== '') {
-      writer.uint32(90).string(message.queueIdentifier)
+    if (
+      message.queueIdentifier !== undefined &&
+      message.queueIdentifier !== ""
+    ) {
+      writer.uint32(90).string(message.queueIdentifier);
     }
-    if (message.requestIdentifier !== undefined && message.requestIdentifier !== '') {
-      writer.uint32(98).string(message.requestIdentifier)
+    if (
+      message.requestIdentifier !== undefined &&
+      message.requestIdentifier !== ""
+    ) {
+      writer.uint32(98).string(message.requestIdentifier);
     }
-    if (message.artworkDataWidth !== undefined && message.artworkDataWidth !== 0) {
-      writer.uint32(104).int32(message.artworkDataWidth)
+    if (
+      message.artworkDataWidth !== undefined &&
+      message.artworkDataWidth !== 0
+    ) {
+      writer.uint32(104).int32(message.artworkDataWidth);
     }
-    if (message.artworkDataHeight !== undefined && message.artworkDataHeight !== 0) {
-      writer.uint32(112).int32(message.artworkDataHeight)
+    if (
+      message.artworkDataHeight !== undefined &&
+      message.artworkDataHeight !== 0
+    ) {
+      writer.uint32(112).int32(message.artworkDataHeight);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ContentItem {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseContentItem()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseContentItem();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.identifier = reader.string()
-          continue
+          message.identifier = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.metadata = ContentItemMetadata.decode(reader, reader.uint32())
-          continue
+          message.metadata = ContentItemMetadata.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.artworkData = Buffer.from(reader.bytes())
-          continue
+          message.artworkData = Buffer.from(reader.bytes());
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.info = reader.string()
-          continue
+          message.info = reader.string();
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.availableLanguageOptions.push(LanguageOptionGroup.decode(reader, reader.uint32()))
-          continue
+          message.availableLanguageOptions.push(
+            LanguageOptionGroup.decode(reader, reader.uint32())
+          );
+          continue;
         }
         case 6: {
           if (tag !== 50) {
-            break
+            break;
           }
 
-          message.currentLanguageOptions.push(LanguageOption.decode(reader, reader.uint32()))
-          continue
+          message.currentLanguageOptions.push(
+            LanguageOption.decode(reader, reader.uint32())
+          );
+          continue;
         }
         case 9: {
           if (tag !== 74) {
-            break
+            break;
           }
 
-          message.parentIdentifier = reader.string()
-          continue
+          message.parentIdentifier = reader.string();
+          continue;
         }
         case 10: {
           if (tag !== 82) {
-            break
+            break;
           }
 
-          message.ancestorIdentifier = reader.string()
-          continue
+          message.ancestorIdentifier = reader.string();
+          continue;
         }
         case 11: {
           if (tag !== 90) {
-            break
+            break;
           }
 
-          message.queueIdentifier = reader.string()
-          continue
+          message.queueIdentifier = reader.string();
+          continue;
         }
         case 12: {
           if (tag !== 98) {
-            break
+            break;
           }
 
-          message.requestIdentifier = reader.string()
-          continue
+          message.requestIdentifier = reader.string();
+          continue;
         }
         case 13: {
           if (tag !== 104) {
-            break
+            break;
           }
 
-          message.artworkDataWidth = reader.int32()
-          continue
+          message.artworkDataWidth = reader.int32();
+          continue;
         }
         case 14: {
           if (tag !== 112) {
-            break
+            break;
           }
 
-          message.artworkDataHeight = reader.int32()
-          continue
+          message.artworkDataHeight = reader.int32();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): ContentItem {
     return {
-      identifier: isSet(object.identifier) ? globalThis.String(object.identifier) : '',
-      metadata: isSet(object.metadata) ? ContentItemMetadata.fromJSON(object.metadata) : undefined,
+      identifier: isSet(object.identifier)
+        ? globalThis.String(object.identifier)
+        : "",
+      metadata: isSet(object.metadata)
+        ? ContentItemMetadata.fromJSON(object.metadata)
+        : undefined,
       artworkData: isSet(object.artworkData)
         ? Buffer.from(bytesFromBase64(object.artworkData))
         : Buffer.alloc(0),
-      info: isSet(object.info) ? globalThis.String(object.info) : '',
-      availableLanguageOptions: globalThis.Array.isArray(object?.availableLanguageOptions)
-        ? object.availableLanguageOptions.map((e: any) => LanguageOptionGroup.fromJSON(e))
+      info: isSet(object.info) ? globalThis.String(object.info) : "",
+      availableLanguageOptions: globalThis.Array.isArray(
+        object?.availableLanguageOptions
+      )
+        ? object.availableLanguageOptions.map((e: any) =>
+            LanguageOptionGroup.fromJSON(e)
+          )
         : [],
-      currentLanguageOptions: globalThis.Array.isArray(object?.currentLanguageOptions)
-        ? object.currentLanguageOptions.map((e: any) => LanguageOption.fromJSON(e))
+      currentLanguageOptions: globalThis.Array.isArray(
+        object?.currentLanguageOptions
+      )
+        ? object.currentLanguageOptions.map((e: any) =>
+            LanguageOption.fromJSON(e)
+          )
         : [],
       parentIdentifier: isSet(object.parentIdentifier)
         ? globalThis.String(object.parentIdentifier)
-        : '',
+        : "",
       ancestorIdentifier: isSet(object.ancestorIdentifier)
         ? globalThis.String(object.ancestorIdentifier)
-        : '',
+        : "",
       queueIdentifier: isSet(object.queueIdentifier)
         ? globalThis.String(object.queueIdentifier)
-        : '',
+        : "",
       requestIdentifier: isSet(object.requestIdentifier)
         ? globalThis.String(object.requestIdentifier)
-        : '',
+        : "",
       artworkDataWidth: isSet(object.artworkDataWidth)
         ? globalThis.Number(object.artworkDataWidth)
         : 0,
       artworkDataHeight: isSet(object.artworkDataHeight)
         ? globalThis.Number(object.artworkDataHeight)
         : 0,
-    }
+    };
   },
 
   toJSON(message: ContentItem): unknown {
-    const obj: any = {}
-    if (message.identifier !== undefined && message.identifier !== '') {
-      obj.identifier = message.identifier
+    const obj: any = {};
+    if (message.identifier !== undefined && message.identifier !== "") {
+      obj.identifier = message.identifier;
     }
     if (message.metadata !== undefined) {
-      obj.metadata = ContentItemMetadata.toJSON(message.metadata)
+      obj.metadata = ContentItemMetadata.toJSON(message.metadata);
     }
     if (message.artworkData !== undefined && message.artworkData.length !== 0) {
-      obj.artworkData = base64FromBytes(message.artworkData)
+      obj.artworkData = base64FromBytes(message.artworkData);
     }
-    if (message.info !== undefined && message.info !== '') {
-      obj.info = message.info
+    if (message.info !== undefined && message.info !== "") {
+      obj.info = message.info;
     }
     if (message.availableLanguageOptions?.length) {
-      obj.availableLanguageOptions = message.availableLanguageOptions.map(e =>
+      obj.availableLanguageOptions = message.availableLanguageOptions.map((e) =>
         LanguageOptionGroup.toJSON(e)
-      )
+      );
     }
     if (message.currentLanguageOptions?.length) {
-      obj.currentLanguageOptions = message.currentLanguageOptions.map(e => LanguageOption.toJSON(e))
+      obj.currentLanguageOptions = message.currentLanguageOptions.map((e) =>
+        LanguageOption.toJSON(e)
+      );
     }
-    if (message.parentIdentifier !== undefined && message.parentIdentifier !== '') {
-      obj.parentIdentifier = message.parentIdentifier
+    if (
+      message.parentIdentifier !== undefined &&
+      message.parentIdentifier !== ""
+    ) {
+      obj.parentIdentifier = message.parentIdentifier;
     }
-    if (message.ancestorIdentifier !== undefined && message.ancestorIdentifier !== '') {
-      obj.ancestorIdentifier = message.ancestorIdentifier
+    if (
+      message.ancestorIdentifier !== undefined &&
+      message.ancestorIdentifier !== ""
+    ) {
+      obj.ancestorIdentifier = message.ancestorIdentifier;
     }
-    if (message.queueIdentifier !== undefined && message.queueIdentifier !== '') {
-      obj.queueIdentifier = message.queueIdentifier
+    if (
+      message.queueIdentifier !== undefined &&
+      message.queueIdentifier !== ""
+    ) {
+      obj.queueIdentifier = message.queueIdentifier;
     }
-    if (message.requestIdentifier !== undefined && message.requestIdentifier !== '') {
-      obj.requestIdentifier = message.requestIdentifier
+    if (
+      message.requestIdentifier !== undefined &&
+      message.requestIdentifier !== ""
+    ) {
+      obj.requestIdentifier = message.requestIdentifier;
     }
-    if (message.artworkDataWidth !== undefined && message.artworkDataWidth !== 0) {
-      obj.artworkDataWidth = Math.round(message.artworkDataWidth)
+    if (
+      message.artworkDataWidth !== undefined &&
+      message.artworkDataWidth !== 0
+    ) {
+      obj.artworkDataWidth = Math.round(message.artworkDataWidth);
     }
-    if (message.artworkDataHeight !== undefined && message.artworkDataHeight !== 0) {
-      obj.artworkDataHeight = Math.round(message.artworkDataHeight)
+    if (
+      message.artworkDataHeight !== undefined &&
+      message.artworkDataHeight !== 0
+    ) {
+      obj.artworkDataHeight = Math.round(message.artworkDataHeight);
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<ContentItem>, I>>(base?: I): ContentItem {
-    return ContentItem.fromPartial(base ?? ({} as any))
+    return ContentItem.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ContentItem>, I>>(object: I): ContentItem {
-    const message = createBaseContentItem()
-    message.identifier = object.identifier ?? ''
+  fromPartial<I extends Exact<DeepPartial<ContentItem>, I>>(
+    object: I
+  ): ContentItem {
+    const message = createBaseContentItem();
+    message.identifier = object.identifier ?? "";
     message.metadata =
       object.metadata !== undefined && object.metadata !== null
         ? ContentItemMetadata.fromPartial(object.metadata)
-        : undefined
-    message.artworkData = object.artworkData ?? Buffer.alloc(0)
-    message.info = object.info ?? ''
+        : undefined;
+    message.artworkData = object.artworkData ?? Buffer.alloc(0);
+    message.info = object.info ?? "";
     message.availableLanguageOptions =
-      object.availableLanguageOptions?.map(e => LanguageOptionGroup.fromPartial(e)) || []
+      object.availableLanguageOptions?.map((e) =>
+        LanguageOptionGroup.fromPartial(e)
+      ) || [];
     message.currentLanguageOptions =
-      object.currentLanguageOptions?.map(e => LanguageOption.fromPartial(e)) || []
-    message.parentIdentifier = object.parentIdentifier ?? ''
-    message.ancestorIdentifier = object.ancestorIdentifier ?? ''
-    message.queueIdentifier = object.queueIdentifier ?? ''
-    message.requestIdentifier = object.requestIdentifier ?? ''
-    message.artworkDataWidth = object.artworkDataWidth ?? 0
-    message.artworkDataHeight = object.artworkDataHeight ?? 0
-    return message
+      object.currentLanguageOptions?.map((e) =>
+        LanguageOption.fromPartial(e)
+      ) || [];
+    message.parentIdentifier = object.parentIdentifier ?? "";
+    message.ancestorIdentifier = object.ancestorIdentifier ?? "";
+    message.queueIdentifier = object.queueIdentifier ?? "";
+    message.requestIdentifier = object.requestIdentifier ?? "";
+    message.artworkDataWidth = object.artworkDataWidth ?? 0;
+    message.artworkDataHeight = object.artworkDataHeight ?? 0;
+    return message;
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -471,22 +581,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

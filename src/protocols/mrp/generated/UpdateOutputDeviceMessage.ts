@@ -5,7 +5,7 @@
 // source: UpdateOutputDeviceMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import {
   DeviceSubType_Enum,
   deviceSubType_EnumFromJSON,
@@ -13,94 +13,100 @@ import {
   DeviceType_Enum,
   deviceType_EnumFromJSON,
   deviceType_EnumToJSON,
-} from './Common'
+} from "./Common";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface AVOutputDeviceSourceInfo {
-  routingContextUID?: string | undefined
-  multipleBuiltInDevices?: boolean | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  routingContextUID?: string | undefined;
+  multipleBuiltInDevices?: boolean | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface AVOutputDeviceDescriptor {
-  name?: string | undefined
-  uniqueIdentifier?: string | undefined
-  groupID?: string | undefined
-  modelID?: string | undefined
-  macAddress?: Buffer | undefined
-  canAccessRemoteAssets?: boolean | undefined
-  isRemoteControllable?: boolean | undefined
-  isGroupLeader?: boolean | undefined
-  isGroupable?: boolean | undefined
-  deviceType?: DeviceType_Enum | undefined
-  deviceSubType?: DeviceSubType_Enum | undefined
-  modelSpecificInfoData?: Buffer | undefined
-  batteryLevel?: number | undefined
-  isLocalDevice?: boolean | undefined
-  supportsExternalScreen?: boolean | undefined
-  requiresAuthorization?: boolean | undefined
-  shouldForceRemoteControlabillity?: boolean | undefined
-  sourceInfo?: AVOutputDeviceSourceInfo | undefined
-  isDeviceGroupable?: boolean | undefined
-  canRelayCommunicationChannel?: boolean | undefined
-  logicalDeviceID?: string | undefined
-  isProxyGroupPlayer?: boolean | undefined
-  firmwareVersion?: string | undefined
-  volume?: number | undefined
-  isVolumeControlAvailable?: boolean | undefined
-  canAccessAppleMusic?: boolean | undefined
-  canAccessiCloudMusicLibrary?: boolean | undefined
-  groupContainsGroupLeader?: boolean | undefined
-  supportsBufferedAirPlay?: boolean | undefined
-  canPlayEncryptedProgressiveDownloadAssets?: boolean | undefined
-  canFetchMediaDataFromSender?: boolean | undefined
-  resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets?: boolean | undefined
-  isAirPlayReceiverSessionActive?: boolean | undefined
-  parentGroupIdentifier?: string | undefined
-  parentGroupContainsDiscoverableLeader?: boolean | undefined
-  isAddedToHomeKit?: boolean | undefined
-  volumeCapabilities?: number | undefined
-  bluetoothID?: string | undefined
-  supportsHAP?: boolean | undefined
-  usingJSONProtocol?: boolean | undefined
-  clusterCompositions: AVOutputDeviceDescriptor[]
-  clusterType?: number | undefined
-  primaryUID?: string | undefined
-  configuredClusterSize?: number | undefined
-  supportsRapportRemoteControlTransport?: boolean | undefined
-  currentBluetoothListeningMode?: string | undefined
-  availableBluetoothListeningModes: string[]
-  supportsMultiplayer: boolean[]
-  producesLowFidelityAudio?: boolean | undefined
-  hostDeviceClass?: number | undefined
-  airPlayGroupID?: string | undefined
-  supportsSharePlayHandoff?: boolean | undefined
-  distance?: number | undefined
-  discoveredOnSameInfra?: boolean | undefined
-  activatedClusterMembers: AVOutputDeviceDescriptor[]
-  pickable: boolean[]
-  transportType?: number | undefined
-  clusterID?: string | undefined
-  isClusterLeader?: boolean | undefined
-  isAppleAccessory?: boolean | undefined
-  parentUniqueIdentifier?: string | undefined
-  roomID?: string | undefined
-  roomName?: string | undefined
-  allClusterMembers: AVOutputDeviceDescriptor[]
-  engageOnClusterActivate?: boolean | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  name?: string | undefined;
+  uniqueIdentifier?: string | undefined;
+  groupID?: string | undefined;
+  modelID?: string | undefined;
+  macAddress?: Buffer | undefined;
+  canAccessRemoteAssets?: boolean | undefined;
+  isRemoteControllable?: boolean | undefined;
+  isGroupLeader?: boolean | undefined;
+  isGroupable?: boolean | undefined;
+  deviceType?: DeviceType_Enum | undefined;
+  deviceSubType?: DeviceSubType_Enum | undefined;
+  modelSpecificInfoData?: Buffer | undefined;
+  batteryLevel?: number | undefined;
+  isLocalDevice?: boolean | undefined;
+  supportsExternalScreen?: boolean | undefined;
+  requiresAuthorization?: boolean | undefined;
+  shouldForceRemoteControlabillity?: boolean | undefined;
+  sourceInfo?: AVOutputDeviceSourceInfo | undefined;
+  isDeviceGroupable?: boolean | undefined;
+  canRelayCommunicationChannel?: boolean | undefined;
+  logicalDeviceID?: string | undefined;
+  isProxyGroupPlayer?: boolean | undefined;
+  firmwareVersion?: string | undefined;
+  volume?: number | undefined;
+  isVolumeControlAvailable?: boolean | undefined;
+  canAccessAppleMusic?: boolean | undefined;
+  canAccessiCloudMusicLibrary?: boolean | undefined;
+  groupContainsGroupLeader?: boolean | undefined;
+  supportsBufferedAirPlay?: boolean | undefined;
+  canPlayEncryptedProgressiveDownloadAssets?: boolean | undefined;
+  canFetchMediaDataFromSender?: boolean | undefined;
+  resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets?:
+    | boolean
+    | undefined;
+  isAirPlayReceiverSessionActive?: boolean | undefined;
+  parentGroupIdentifier?: string | undefined;
+  parentGroupContainsDiscoverableLeader?: boolean | undefined;
+  isAddedToHomeKit?: boolean | undefined;
+  volumeCapabilities?: number | undefined;
+  bluetoothID?: string | undefined;
+  supportsHAP?: boolean | undefined;
+  usingJSONProtocol?: boolean | undefined;
+  clusterCompositions: AVOutputDeviceDescriptor[];
+  clusterType?: number | undefined;
+  primaryUID?: string | undefined;
+  configuredClusterSize?: number | undefined;
+  supportsRapportRemoteControlTransport?: boolean | undefined;
+  currentBluetoothListeningMode?: string | undefined;
+  availableBluetoothListeningModes: string[];
+  supportsMultiplayer: boolean[];
+  producesLowFidelityAudio?: boolean | undefined;
+  hostDeviceClass?: number | undefined;
+  airPlayGroupID?: string | undefined;
+  supportsSharePlayHandoff?: boolean | undefined;
+  distance?: number | undefined;
+  discoveredOnSameInfra?: boolean | undefined;
+  activatedClusterMembers: AVOutputDeviceDescriptor[];
+  pickable: boolean[];
+  transportType?: number | undefined;
+  clusterID?: string | undefined;
+  isClusterLeader?: boolean | undefined;
+  isAppleAccessory?: boolean | undefined;
+  parentUniqueIdentifier?: string | undefined;
+  roomID?: string | undefined;
+  roomName?: string | undefined;
+  allClusterMembers: AVOutputDeviceDescriptor[];
+  engageOnClusterActivate?: boolean | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface UpdateOutputDeviceMessage {
-  outputDevices: AVOutputDeviceDescriptor[]
-  endpointUID?: string | undefined
-  clusterAwareOutputDevices: AVOutputDeviceDescriptor[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  outputDevices: AVOutputDeviceDescriptor[];
+  endpointUID?: string | undefined;
+  clusterAwareOutputDevices: AVOutputDeviceDescriptor[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseAVOutputDeviceSourceInfo(): AVOutputDeviceSourceInfo {
-  return { routingContextUID: '', multipleBuiltInDevices: false, _unknownFields: {} }
+  return {
+    routingContextUID: "",
+    multipleBuiltInDevices: false,
+    _unknownFields: {},
+  };
 }
 
 export const AVOutputDeviceSourceInfo: MessageFns<AVOutputDeviceSourceInfo> = {
@@ -108,106 +114,124 @@ export const AVOutputDeviceSourceInfo: MessageFns<AVOutputDeviceSourceInfo> = {
     message: AVOutputDeviceSourceInfo,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.routingContextUID !== undefined && message.routingContextUID !== '') {
-      writer.uint32(10).string(message.routingContextUID)
+    if (
+      message.routingContextUID !== undefined &&
+      message.routingContextUID !== ""
+    ) {
+      writer.uint32(10).string(message.routingContextUID);
     }
-    if (message.multipleBuiltInDevices !== undefined && message.multipleBuiltInDevices !== false) {
-      writer.uint32(16).bool(message.multipleBuiltInDevices)
+    if (
+      message.multipleBuiltInDevices !== undefined &&
+      message.multipleBuiltInDevices !== false
+    ) {
+      writer.uint32(16).bool(message.multipleBuiltInDevices);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AVOutputDeviceSourceInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAVOutputDeviceSourceInfo()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AVOutputDeviceSourceInfo {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAVOutputDeviceSourceInfo();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.routingContextUID = reader.string()
-          continue
+          message.routingContextUID = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.multipleBuiltInDevices = reader.bool()
-          continue
+          message.multipleBuiltInDevices = reader.bool();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AVOutputDeviceSourceInfo {
     return {
       routingContextUID: isSet(object.routingContextUID)
         ? globalThis.String(object.routingContextUID)
-        : '',
+        : "",
       multipleBuiltInDevices: isSet(object.multipleBuiltInDevices)
         ? globalThis.Boolean(object.multipleBuiltInDevices)
         : false,
-    }
+    };
   },
 
   toJSON(message: AVOutputDeviceSourceInfo): unknown {
-    const obj: any = {}
-    if (message.routingContextUID !== undefined && message.routingContextUID !== '') {
-      obj.routingContextUID = message.routingContextUID
+    const obj: any = {};
+    if (
+      message.routingContextUID !== undefined &&
+      message.routingContextUID !== ""
+    ) {
+      obj.routingContextUID = message.routingContextUID;
     }
-    if (message.multipleBuiltInDevices !== undefined && message.multipleBuiltInDevices !== false) {
-      obj.multipleBuiltInDevices = message.multipleBuiltInDevices
+    if (
+      message.multipleBuiltInDevices !== undefined &&
+      message.multipleBuiltInDevices !== false
+    ) {
+      obj.multipleBuiltInDevices = message.multipleBuiltInDevices;
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<AVOutputDeviceSourceInfo>, I>>(
     base?: I
   ): AVOutputDeviceSourceInfo {
-    return AVOutputDeviceSourceInfo.fromPartial(base ?? ({} as any))
+    return AVOutputDeviceSourceInfo.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<AVOutputDeviceSourceInfo>, I>>(
     object: I
   ): AVOutputDeviceSourceInfo {
-    const message = createBaseAVOutputDeviceSourceInfo()
-    message.routingContextUID = object.routingContextUID ?? ''
-    message.multipleBuiltInDevices = object.multipleBuiltInDevices ?? false
-    return message
+    const message = createBaseAVOutputDeviceSourceInfo();
+    message.routingContextUID = object.routingContextUID ?? "";
+    message.multipleBuiltInDevices = object.multipleBuiltInDevices ?? false;
+    return message;
   },
-}
+};
 
 function createBaseAVOutputDeviceDescriptor(): AVOutputDeviceDescriptor {
   return {
-    name: '',
-    uniqueIdentifier: '',
-    groupID: '',
-    modelID: '',
+    name: "",
+    uniqueIdentifier: "",
+    groupID: "",
+    modelID: "",
     macAddress: Buffer.alloc(0),
     canAccessRemoteAssets: false,
     isRemoteControllable: false,
@@ -224,9 +248,9 @@ function createBaseAVOutputDeviceDescriptor(): AVOutputDeviceDescriptor {
     sourceInfo: undefined,
     isDeviceGroupable: false,
     canRelayCommunicationChannel: false,
-    logicalDeviceID: '',
+    logicalDeviceID: "",
     isProxyGroupPlayer: false,
-    firmwareVersion: '',
+    firmwareVersion: "",
     volume: 0,
     isVolumeControlAvailable: false,
     canAccessAppleMusic: false,
@@ -237,40 +261,40 @@ function createBaseAVOutputDeviceDescriptor(): AVOutputDeviceDescriptor {
     canFetchMediaDataFromSender: false,
     resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets: false,
     isAirPlayReceiverSessionActive: false,
-    parentGroupIdentifier: '',
+    parentGroupIdentifier: "",
     parentGroupContainsDiscoverableLeader: false,
     isAddedToHomeKit: false,
     volumeCapabilities: 0,
-    bluetoothID: '',
+    bluetoothID: "",
     supportsHAP: false,
     usingJSONProtocol: false,
     clusterCompositions: [],
     clusterType: 0,
-    primaryUID: '',
+    primaryUID: "",
     configuredClusterSize: 0,
     supportsRapportRemoteControlTransport: false,
-    currentBluetoothListeningMode: '',
+    currentBluetoothListeningMode: "",
     availableBluetoothListeningModes: [],
     supportsMultiplayer: [],
     producesLowFidelityAudio: false,
     hostDeviceClass: 0,
-    airPlayGroupID: '',
+    airPlayGroupID: "",
     supportsSharePlayHandoff: false,
     distance: 0,
     discoveredOnSameInfra: false,
     activatedClusterMembers: [],
     pickable: [],
     transportType: 0,
-    clusterID: '',
+    clusterID: "",
     isClusterLeader: false,
     isAppleAccessory: false,
-    parentUniqueIdentifier: '',
-    roomID: '',
-    roomName: '',
+    parentUniqueIdentifier: "",
+    roomID: "",
+    roomName: "",
     allClusterMembers: [],
     engageOnClusterActivate: false,
     _unknownFields: {},
-  }
+  };
 }
 
 export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
@@ -278,836 +302,928 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
     message: AVOutputDeviceDescriptor,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.name !== undefined && message.name !== '') {
-      writer.uint32(10).string(message.name)
+    if (message.name !== undefined && message.name !== "") {
+      writer.uint32(10).string(message.name);
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== '') {
-      writer.uint32(18).string(message.uniqueIdentifier)
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== ""
+    ) {
+      writer.uint32(18).string(message.uniqueIdentifier);
     }
-    if (message.groupID !== undefined && message.groupID !== '') {
-      writer.uint32(26).string(message.groupID)
+    if (message.groupID !== undefined && message.groupID !== "") {
+      writer.uint32(26).string(message.groupID);
     }
-    if (message.modelID !== undefined && message.modelID !== '') {
-      writer.uint32(34).string(message.modelID)
+    if (message.modelID !== undefined && message.modelID !== "") {
+      writer.uint32(34).string(message.modelID);
     }
     if (message.macAddress !== undefined && message.macAddress.length !== 0) {
-      writer.uint32(42).bytes(message.macAddress)
+      writer.uint32(42).bytes(message.macAddress);
     }
-    if (message.canAccessRemoteAssets !== undefined && message.canAccessRemoteAssets !== false) {
-      writer.uint32(48).bool(message.canAccessRemoteAssets)
+    if (
+      message.canAccessRemoteAssets !== undefined &&
+      message.canAccessRemoteAssets !== false
+    ) {
+      writer.uint32(48).bool(message.canAccessRemoteAssets);
     }
-    if (message.isRemoteControllable !== undefined && message.isRemoteControllable !== false) {
-      writer.uint32(56).bool(message.isRemoteControllable)
+    if (
+      message.isRemoteControllable !== undefined &&
+      message.isRemoteControllable !== false
+    ) {
+      writer.uint32(56).bool(message.isRemoteControllable);
     }
-    if (message.isGroupLeader !== undefined && message.isGroupLeader !== false) {
-      writer.uint32(64).bool(message.isGroupLeader)
+    if (
+      message.isGroupLeader !== undefined &&
+      message.isGroupLeader !== false
+    ) {
+      writer.uint32(64).bool(message.isGroupLeader);
     }
     if (message.isGroupable !== undefined && message.isGroupable !== false) {
-      writer.uint32(72).bool(message.isGroupable)
+      writer.uint32(72).bool(message.isGroupable);
     }
     if (message.deviceType !== undefined && message.deviceType !== 0) {
-      writer.uint32(80).int32(message.deviceType)
+      writer.uint32(80).int32(message.deviceType);
     }
     if (message.deviceSubType !== undefined && message.deviceSubType !== 0) {
-      writer.uint32(88).int32(message.deviceSubType)
+      writer.uint32(88).int32(message.deviceSubType);
     }
-    if (message.modelSpecificInfoData !== undefined && message.modelSpecificInfoData.length !== 0) {
-      writer.uint32(98).bytes(message.modelSpecificInfoData)
+    if (
+      message.modelSpecificInfoData !== undefined &&
+      message.modelSpecificInfoData.length !== 0
+    ) {
+      writer.uint32(98).bytes(message.modelSpecificInfoData);
     }
     if (message.batteryLevel !== undefined && message.batteryLevel !== 0) {
-      writer.uint32(109).float(message.batteryLevel)
+      writer.uint32(109).float(message.batteryLevel);
     }
-    if (message.isLocalDevice !== undefined && message.isLocalDevice !== false) {
-      writer.uint32(112).bool(message.isLocalDevice)
+    if (
+      message.isLocalDevice !== undefined &&
+      message.isLocalDevice !== false
+    ) {
+      writer.uint32(112).bool(message.isLocalDevice);
     }
-    if (message.supportsExternalScreen !== undefined && message.supportsExternalScreen !== false) {
-      writer.uint32(120).bool(message.supportsExternalScreen)
+    if (
+      message.supportsExternalScreen !== undefined &&
+      message.supportsExternalScreen !== false
+    ) {
+      writer.uint32(120).bool(message.supportsExternalScreen);
     }
-    if (message.requiresAuthorization !== undefined && message.requiresAuthorization !== false) {
-      writer.uint32(128).bool(message.requiresAuthorization)
+    if (
+      message.requiresAuthorization !== undefined &&
+      message.requiresAuthorization !== false
+    ) {
+      writer.uint32(128).bool(message.requiresAuthorization);
     }
     if (
       message.shouldForceRemoteControlabillity !== undefined &&
       message.shouldForceRemoteControlabillity !== false
     ) {
-      writer.uint32(136).bool(message.shouldForceRemoteControlabillity)
+      writer.uint32(136).bool(message.shouldForceRemoteControlabillity);
     }
     if (message.sourceInfo !== undefined) {
-      AVOutputDeviceSourceInfo.encode(message.sourceInfo, writer.uint32(146).fork()).join()
+      AVOutputDeviceSourceInfo.encode(
+        message.sourceInfo,
+        writer.uint32(146).fork()
+      ).join();
     }
-    if (message.isDeviceGroupable !== undefined && message.isDeviceGroupable !== false) {
-      writer.uint32(152).bool(message.isDeviceGroupable)
+    if (
+      message.isDeviceGroupable !== undefined &&
+      message.isDeviceGroupable !== false
+    ) {
+      writer.uint32(152).bool(message.isDeviceGroupable);
     }
     if (
       message.canRelayCommunicationChannel !== undefined &&
       message.canRelayCommunicationChannel !== false
     ) {
-      writer.uint32(160).bool(message.canRelayCommunicationChannel)
+      writer.uint32(160).bool(message.canRelayCommunicationChannel);
     }
-    if (message.logicalDeviceID !== undefined && message.logicalDeviceID !== '') {
-      writer.uint32(170).string(message.logicalDeviceID)
+    if (
+      message.logicalDeviceID !== undefined &&
+      message.logicalDeviceID !== ""
+    ) {
+      writer.uint32(170).string(message.logicalDeviceID);
     }
-    if (message.isProxyGroupPlayer !== undefined && message.isProxyGroupPlayer !== false) {
-      writer.uint32(176).bool(message.isProxyGroupPlayer)
+    if (
+      message.isProxyGroupPlayer !== undefined &&
+      message.isProxyGroupPlayer !== false
+    ) {
+      writer.uint32(176).bool(message.isProxyGroupPlayer);
     }
-    if (message.firmwareVersion !== undefined && message.firmwareVersion !== '') {
-      writer.uint32(186).string(message.firmwareVersion)
+    if (
+      message.firmwareVersion !== undefined &&
+      message.firmwareVersion !== ""
+    ) {
+      writer.uint32(186).string(message.firmwareVersion);
     }
     if (message.volume !== undefined && message.volume !== 0) {
-      writer.uint32(197).float(message.volume)
+      writer.uint32(197).float(message.volume);
     }
     if (
       message.isVolumeControlAvailable !== undefined &&
       message.isVolumeControlAvailable !== false
     ) {
-      writer.uint32(200).bool(message.isVolumeControlAvailable)
+      writer.uint32(200).bool(message.isVolumeControlAvailable);
     }
-    if (message.canAccessAppleMusic !== undefined && message.canAccessAppleMusic !== false) {
-      writer.uint32(208).bool(message.canAccessAppleMusic)
+    if (
+      message.canAccessAppleMusic !== undefined &&
+      message.canAccessAppleMusic !== false
+    ) {
+      writer.uint32(208).bool(message.canAccessAppleMusic);
     }
     if (
       message.canAccessiCloudMusicLibrary !== undefined &&
       message.canAccessiCloudMusicLibrary !== false
     ) {
-      writer.uint32(216).bool(message.canAccessiCloudMusicLibrary)
+      writer.uint32(216).bool(message.canAccessiCloudMusicLibrary);
     }
     if (
       message.groupContainsGroupLeader !== undefined &&
       message.groupContainsGroupLeader !== false
     ) {
-      writer.uint32(224).bool(message.groupContainsGroupLeader)
+      writer.uint32(224).bool(message.groupContainsGroupLeader);
     }
     if (
       message.supportsBufferedAirPlay !== undefined &&
       message.supportsBufferedAirPlay !== false
     ) {
-      writer.uint32(232).bool(message.supportsBufferedAirPlay)
+      writer.uint32(232).bool(message.supportsBufferedAirPlay);
     }
     if (
       message.canPlayEncryptedProgressiveDownloadAssets !== undefined &&
       message.canPlayEncryptedProgressiveDownloadAssets !== false
     ) {
-      writer.uint32(240).bool(message.canPlayEncryptedProgressiveDownloadAssets)
+      writer
+        .uint32(240)
+        .bool(message.canPlayEncryptedProgressiveDownloadAssets);
     }
     if (
       message.canFetchMediaDataFromSender !== undefined &&
       message.canFetchMediaDataFromSender !== false
     ) {
-      writer.uint32(248).bool(message.canFetchMediaDataFromSender)
+      writer.uint32(248).bool(message.canFetchMediaDataFromSender);
     }
     if (
-      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !== undefined &&
-      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !== false
+      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !==
+        undefined &&
+      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !==
+        false
     ) {
       writer
         .uint32(256)
-        .bool(message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets)
+        .bool(
+          message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets
+        );
     }
     if (
       message.isAirPlayReceiverSessionActive !== undefined &&
       message.isAirPlayReceiverSessionActive !== false
     ) {
-      writer.uint32(264).bool(message.isAirPlayReceiverSessionActive)
+      writer.uint32(264).bool(message.isAirPlayReceiverSessionActive);
     }
-    if (message.parentGroupIdentifier !== undefined && message.parentGroupIdentifier !== '') {
-      writer.uint32(274).string(message.parentGroupIdentifier)
+    if (
+      message.parentGroupIdentifier !== undefined &&
+      message.parentGroupIdentifier !== ""
+    ) {
+      writer.uint32(274).string(message.parentGroupIdentifier);
     }
     if (
       message.parentGroupContainsDiscoverableLeader !== undefined &&
       message.parentGroupContainsDiscoverableLeader !== false
     ) {
-      writer.uint32(280).bool(message.parentGroupContainsDiscoverableLeader)
+      writer.uint32(280).bool(message.parentGroupContainsDiscoverableLeader);
     }
-    if (message.isAddedToHomeKit !== undefined && message.isAddedToHomeKit !== false) {
-      writer.uint32(288).bool(message.isAddedToHomeKit)
+    if (
+      message.isAddedToHomeKit !== undefined &&
+      message.isAddedToHomeKit !== false
+    ) {
+      writer.uint32(288).bool(message.isAddedToHomeKit);
     }
-    if (message.volumeCapabilities !== undefined && message.volumeCapabilities !== 0) {
-      writer.uint32(296).int32(message.volumeCapabilities)
+    if (
+      message.volumeCapabilities !== undefined &&
+      message.volumeCapabilities !== 0
+    ) {
+      writer.uint32(296).int32(message.volumeCapabilities);
     }
-    if (message.bluetoothID !== undefined && message.bluetoothID !== '') {
-      writer.uint32(306).string(message.bluetoothID)
+    if (message.bluetoothID !== undefined && message.bluetoothID !== "") {
+      writer.uint32(306).string(message.bluetoothID);
     }
     if (message.supportsHAP !== undefined && message.supportsHAP !== false) {
-      writer.uint32(312).bool(message.supportsHAP)
+      writer.uint32(312).bool(message.supportsHAP);
     }
-    if (message.usingJSONProtocol !== undefined && message.usingJSONProtocol !== false) {
-      writer.uint32(320).bool(message.usingJSONProtocol)
+    if (
+      message.usingJSONProtocol !== undefined &&
+      message.usingJSONProtocol !== false
+    ) {
+      writer.uint32(320).bool(message.usingJSONProtocol);
     }
     for (const v of message.clusterCompositions) {
-      AVOutputDeviceDescriptor.encode(v!, writer.uint32(330).fork()).join()
+      AVOutputDeviceDescriptor.encode(v!, writer.uint32(330).fork()).join();
     }
     if (message.clusterType !== undefined && message.clusterType !== 0) {
-      writer.uint32(336).uint32(message.clusterType)
+      writer.uint32(336).uint32(message.clusterType);
     }
-    if (message.primaryUID !== undefined && message.primaryUID !== '') {
-      writer.uint32(346).string(message.primaryUID)
+    if (message.primaryUID !== undefined && message.primaryUID !== "") {
+      writer.uint32(346).string(message.primaryUID);
     }
-    if (message.configuredClusterSize !== undefined && message.configuredClusterSize !== 0) {
-      writer.uint32(352).uint32(message.configuredClusterSize)
+    if (
+      message.configuredClusterSize !== undefined &&
+      message.configuredClusterSize !== 0
+    ) {
+      writer.uint32(352).uint32(message.configuredClusterSize);
     }
     if (
       message.supportsRapportRemoteControlTransport !== undefined &&
       message.supportsRapportRemoteControlTransport !== false
     ) {
-      writer.uint32(360).bool(message.supportsRapportRemoteControlTransport)
+      writer.uint32(360).bool(message.supportsRapportRemoteControlTransport);
     }
     if (
       message.currentBluetoothListeningMode !== undefined &&
-      message.currentBluetoothListeningMode !== ''
+      message.currentBluetoothListeningMode !== ""
     ) {
-      writer.uint32(370).string(message.currentBluetoothListeningMode)
+      writer.uint32(370).string(message.currentBluetoothListeningMode);
     }
     for (const v of message.availableBluetoothListeningModes) {
-      writer.uint32(378).string(v!)
+      writer.uint32(378).string(v!);
     }
     for (const v of message.supportsMultiplayer) {
-      writer.uint32(384).bool(v!)
+      writer.uint32(384).bool(v!);
     }
     if (
       message.producesLowFidelityAudio !== undefined &&
       message.producesLowFidelityAudio !== false
     ) {
-      writer.uint32(392).bool(message.producesLowFidelityAudio)
+      writer.uint32(392).bool(message.producesLowFidelityAudio);
     }
-    if (message.hostDeviceClass !== undefined && message.hostDeviceClass !== 0) {
-      writer.uint32(400).int32(message.hostDeviceClass)
+    if (
+      message.hostDeviceClass !== undefined &&
+      message.hostDeviceClass !== 0
+    ) {
+      writer.uint32(400).int32(message.hostDeviceClass);
     }
-    if (message.airPlayGroupID !== undefined && message.airPlayGroupID !== '') {
-      writer.uint32(410).string(message.airPlayGroupID)
+    if (message.airPlayGroupID !== undefined && message.airPlayGroupID !== "") {
+      writer.uint32(410).string(message.airPlayGroupID);
     }
     if (
       message.supportsSharePlayHandoff !== undefined &&
       message.supportsSharePlayHandoff !== false
     ) {
-      writer.uint32(416).bool(message.supportsSharePlayHandoff)
+      writer.uint32(416).bool(message.supportsSharePlayHandoff);
     }
     if (message.distance !== undefined && message.distance !== 0) {
-      writer.uint32(429).float(message.distance)
+      writer.uint32(429).float(message.distance);
     }
-    if (message.discoveredOnSameInfra !== undefined && message.discoveredOnSameInfra !== false) {
-      writer.uint32(432).bool(message.discoveredOnSameInfra)
+    if (
+      message.discoveredOnSameInfra !== undefined &&
+      message.discoveredOnSameInfra !== false
+    ) {
+      writer.uint32(432).bool(message.discoveredOnSameInfra);
     }
     for (const v of message.activatedClusterMembers) {
-      AVOutputDeviceDescriptor.encode(v!, writer.uint32(442).fork()).join()
+      AVOutputDeviceDescriptor.encode(v!, writer.uint32(442).fork()).join();
     }
     for (const v of message.pickable) {
-      writer.uint32(448).bool(v!)
+      writer.uint32(448).bool(v!);
     }
     if (message.transportType !== undefined && message.transportType !== 0) {
-      writer.uint32(456).int32(message.transportType)
+      writer.uint32(456).int32(message.transportType);
     }
-    if (message.clusterID !== undefined && message.clusterID !== '') {
-      writer.uint32(466).string(message.clusterID)
+    if (message.clusterID !== undefined && message.clusterID !== "") {
+      writer.uint32(466).string(message.clusterID);
     }
-    if (message.isClusterLeader !== undefined && message.isClusterLeader !== false) {
-      writer.uint32(472).bool(message.isClusterLeader)
+    if (
+      message.isClusterLeader !== undefined &&
+      message.isClusterLeader !== false
+    ) {
+      writer.uint32(472).bool(message.isClusterLeader);
     }
-    if (message.isAppleAccessory !== undefined && message.isAppleAccessory !== false) {
-      writer.uint32(480).bool(message.isAppleAccessory)
+    if (
+      message.isAppleAccessory !== undefined &&
+      message.isAppleAccessory !== false
+    ) {
+      writer.uint32(480).bool(message.isAppleAccessory);
     }
-    if (message.parentUniqueIdentifier !== undefined && message.parentUniqueIdentifier !== '') {
-      writer.uint32(490).string(message.parentUniqueIdentifier)
+    if (
+      message.parentUniqueIdentifier !== undefined &&
+      message.parentUniqueIdentifier !== ""
+    ) {
+      writer.uint32(490).string(message.parentUniqueIdentifier);
     }
-    if (message.roomID !== undefined && message.roomID !== '') {
-      writer.uint32(498).string(message.roomID)
+    if (message.roomID !== undefined && message.roomID !== "") {
+      writer.uint32(498).string(message.roomID);
     }
-    if (message.roomName !== undefined && message.roomName !== '') {
-      writer.uint32(506).string(message.roomName)
+    if (message.roomName !== undefined && message.roomName !== "") {
+      writer.uint32(506).string(message.roomName);
     }
     for (const v of message.allClusterMembers) {
-      AVOutputDeviceDescriptor.encode(v!, writer.uint32(514).fork()).join()
+      AVOutputDeviceDescriptor.encode(v!, writer.uint32(514).fork()).join();
     }
     if (
       message.engageOnClusterActivate !== undefined &&
       message.engageOnClusterActivate !== false
     ) {
-      writer.uint32(536).bool(message.engageOnClusterActivate)
+      writer.uint32(536).bool(message.engageOnClusterActivate);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AVOutputDeviceDescriptor {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAVOutputDeviceDescriptor()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AVOutputDeviceDescriptor {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAVOutputDeviceDescriptor();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.name = reader.string()
-          continue
+          message.name = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.uniqueIdentifier = reader.string()
-          continue
+          message.uniqueIdentifier = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.groupID = reader.string()
-          continue
+          message.groupID = reader.string();
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.modelID = reader.string()
-          continue
+          message.modelID = reader.string();
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.macAddress = Buffer.from(reader.bytes())
-          continue
+          message.macAddress = Buffer.from(reader.bytes());
+          continue;
         }
         case 6: {
           if (tag !== 48) {
-            break
+            break;
           }
 
-          message.canAccessRemoteAssets = reader.bool()
-          continue
+          message.canAccessRemoteAssets = reader.bool();
+          continue;
         }
         case 7: {
           if (tag !== 56) {
-            break
+            break;
           }
 
-          message.isRemoteControllable = reader.bool()
-          continue
+          message.isRemoteControllable = reader.bool();
+          continue;
         }
         case 8: {
           if (tag !== 64) {
-            break
+            break;
           }
 
-          message.isGroupLeader = reader.bool()
-          continue
+          message.isGroupLeader = reader.bool();
+          continue;
         }
         case 9: {
           if (tag !== 72) {
-            break
+            break;
           }
 
-          message.isGroupable = reader.bool()
-          continue
+          message.isGroupable = reader.bool();
+          continue;
         }
         case 10: {
           if (tag !== 80) {
-            break
+            break;
           }
 
-          message.deviceType = reader.int32() as any
-          continue
+          message.deviceType = reader.int32() as any;
+          continue;
         }
         case 11: {
           if (tag !== 88) {
-            break
+            break;
           }
 
-          message.deviceSubType = reader.int32() as any
-          continue
+          message.deviceSubType = reader.int32() as any;
+          continue;
         }
         case 12: {
           if (tag !== 98) {
-            break
+            break;
           }
 
-          message.modelSpecificInfoData = Buffer.from(reader.bytes())
-          continue
+          message.modelSpecificInfoData = Buffer.from(reader.bytes());
+          continue;
         }
         case 13: {
           if (tag !== 109) {
-            break
+            break;
           }
 
-          message.batteryLevel = reader.float()
-          continue
+          message.batteryLevel = reader.float();
+          continue;
         }
         case 14: {
           if (tag !== 112) {
-            break
+            break;
           }
 
-          message.isLocalDevice = reader.bool()
-          continue
+          message.isLocalDevice = reader.bool();
+          continue;
         }
         case 15: {
           if (tag !== 120) {
-            break
+            break;
           }
 
-          message.supportsExternalScreen = reader.bool()
-          continue
+          message.supportsExternalScreen = reader.bool();
+          continue;
         }
         case 16: {
           if (tag !== 128) {
-            break
+            break;
           }
 
-          message.requiresAuthorization = reader.bool()
-          continue
+          message.requiresAuthorization = reader.bool();
+          continue;
         }
         case 17: {
           if (tag !== 136) {
-            break
+            break;
           }
 
-          message.shouldForceRemoteControlabillity = reader.bool()
-          continue
+          message.shouldForceRemoteControlabillity = reader.bool();
+          continue;
         }
         case 18: {
           if (tag !== 146) {
-            break
+            break;
           }
 
-          message.sourceInfo = AVOutputDeviceSourceInfo.decode(reader, reader.uint32())
-          continue
+          message.sourceInfo = AVOutputDeviceSourceInfo.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 19: {
           if (tag !== 152) {
-            break
+            break;
           }
 
-          message.isDeviceGroupable = reader.bool()
-          continue
+          message.isDeviceGroupable = reader.bool();
+          continue;
         }
         case 20: {
           if (tag !== 160) {
-            break
+            break;
           }
 
-          message.canRelayCommunicationChannel = reader.bool()
-          continue
+          message.canRelayCommunicationChannel = reader.bool();
+          continue;
         }
         case 21: {
           if (tag !== 170) {
-            break
+            break;
           }
 
-          message.logicalDeviceID = reader.string()
-          continue
+          message.logicalDeviceID = reader.string();
+          continue;
         }
         case 22: {
           if (tag !== 176) {
-            break
+            break;
           }
 
-          message.isProxyGroupPlayer = reader.bool()
-          continue
+          message.isProxyGroupPlayer = reader.bool();
+          continue;
         }
         case 23: {
           if (tag !== 186) {
-            break
+            break;
           }
 
-          message.firmwareVersion = reader.string()
-          continue
+          message.firmwareVersion = reader.string();
+          continue;
         }
         case 24: {
           if (tag !== 197) {
-            break
+            break;
           }
 
-          message.volume = reader.float()
-          continue
+          message.volume = reader.float();
+          continue;
         }
         case 25: {
           if (tag !== 200) {
-            break
+            break;
           }
 
-          message.isVolumeControlAvailable = reader.bool()
-          continue
+          message.isVolumeControlAvailable = reader.bool();
+          continue;
         }
         case 26: {
           if (tag !== 208) {
-            break
+            break;
           }
 
-          message.canAccessAppleMusic = reader.bool()
-          continue
+          message.canAccessAppleMusic = reader.bool();
+          continue;
         }
         case 27: {
           if (tag !== 216) {
-            break
+            break;
           }
 
-          message.canAccessiCloudMusicLibrary = reader.bool()
-          continue
+          message.canAccessiCloudMusicLibrary = reader.bool();
+          continue;
         }
         case 28: {
           if (tag !== 224) {
-            break
+            break;
           }
 
-          message.groupContainsGroupLeader = reader.bool()
-          continue
+          message.groupContainsGroupLeader = reader.bool();
+          continue;
         }
         case 29: {
           if (tag !== 232) {
-            break
+            break;
           }
 
-          message.supportsBufferedAirPlay = reader.bool()
-          continue
+          message.supportsBufferedAirPlay = reader.bool();
+          continue;
         }
         case 30: {
           if (tag !== 240) {
-            break
+            break;
           }
 
-          message.canPlayEncryptedProgressiveDownloadAssets = reader.bool()
-          continue
+          message.canPlayEncryptedProgressiveDownloadAssets = reader.bool();
+          continue;
         }
         case 31: {
           if (tag !== 248) {
-            break
+            break;
           }
 
-          message.canFetchMediaDataFromSender = reader.bool()
-          continue
+          message.canFetchMediaDataFromSender = reader.bool();
+          continue;
         }
         case 32: {
           if (tag !== 256) {
-            break
+            break;
           }
 
-          message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets = reader.bool()
-          continue
+          message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets =
+            reader.bool();
+          continue;
         }
         case 33: {
           if (tag !== 264) {
-            break
+            break;
           }
 
-          message.isAirPlayReceiverSessionActive = reader.bool()
-          continue
+          message.isAirPlayReceiverSessionActive = reader.bool();
+          continue;
         }
         case 34: {
           if (tag !== 274) {
-            break
+            break;
           }
 
-          message.parentGroupIdentifier = reader.string()
-          continue
+          message.parentGroupIdentifier = reader.string();
+          continue;
         }
         case 35: {
           if (tag !== 280) {
-            break
+            break;
           }
 
-          message.parentGroupContainsDiscoverableLeader = reader.bool()
-          continue
+          message.parentGroupContainsDiscoverableLeader = reader.bool();
+          continue;
         }
         case 36: {
           if (tag !== 288) {
-            break
+            break;
           }
 
-          message.isAddedToHomeKit = reader.bool()
-          continue
+          message.isAddedToHomeKit = reader.bool();
+          continue;
         }
         case 37: {
           if (tag !== 296) {
-            break
+            break;
           }
 
-          message.volumeCapabilities = reader.int32()
-          continue
+          message.volumeCapabilities = reader.int32();
+          continue;
         }
         case 38: {
           if (tag !== 306) {
-            break
+            break;
           }
 
-          message.bluetoothID = reader.string()
-          continue
+          message.bluetoothID = reader.string();
+          continue;
         }
         case 39: {
           if (tag !== 312) {
-            break
+            break;
           }
 
-          message.supportsHAP = reader.bool()
-          continue
+          message.supportsHAP = reader.bool();
+          continue;
         }
         case 40: {
           if (tag !== 320) {
-            break
+            break;
           }
 
-          message.usingJSONProtocol = reader.bool()
-          continue
+          message.usingJSONProtocol = reader.bool();
+          continue;
         }
         case 41: {
           if (tag !== 330) {
-            break
+            break;
           }
 
-          message.clusterCompositions.push(AVOutputDeviceDescriptor.decode(reader, reader.uint32()))
-          continue
+          message.clusterCompositions.push(
+            AVOutputDeviceDescriptor.decode(reader, reader.uint32())
+          );
+          continue;
         }
         case 42: {
           if (tag !== 336) {
-            break
+            break;
           }
 
-          message.clusterType = reader.uint32()
-          continue
+          message.clusterType = reader.uint32();
+          continue;
         }
         case 43: {
           if (tag !== 346) {
-            break
+            break;
           }
 
-          message.primaryUID = reader.string()
-          continue
+          message.primaryUID = reader.string();
+          continue;
         }
         case 44: {
           if (tag !== 352) {
-            break
+            break;
           }
 
-          message.configuredClusterSize = reader.uint32()
-          continue
+          message.configuredClusterSize = reader.uint32();
+          continue;
         }
         case 45: {
           if (tag !== 360) {
-            break
+            break;
           }
 
-          message.supportsRapportRemoteControlTransport = reader.bool()
-          continue
+          message.supportsRapportRemoteControlTransport = reader.bool();
+          continue;
         }
         case 46: {
           if (tag !== 370) {
-            break
+            break;
           }
 
-          message.currentBluetoothListeningMode = reader.string()
-          continue
+          message.currentBluetoothListeningMode = reader.string();
+          continue;
         }
         case 47: {
           if (tag !== 378) {
-            break
+            break;
           }
 
-          message.availableBluetoothListeningModes.push(reader.string())
-          continue
+          message.availableBluetoothListeningModes.push(reader.string());
+          continue;
         }
         case 48: {
           if (tag === 384) {
-            message.supportsMultiplayer.push(reader.bool())
+            message.supportsMultiplayer.push(reader.bool());
 
-            continue
+            continue;
           }
 
           if (tag === 386) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.supportsMultiplayer.push(reader.bool())
+              message.supportsMultiplayer.push(reader.bool());
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 49: {
           if (tag !== 392) {
-            break
+            break;
           }
 
-          message.producesLowFidelityAudio = reader.bool()
-          continue
+          message.producesLowFidelityAudio = reader.bool();
+          continue;
         }
         case 50: {
           if (tag !== 400) {
-            break
+            break;
           }
 
-          message.hostDeviceClass = reader.int32()
-          continue
+          message.hostDeviceClass = reader.int32();
+          continue;
         }
         case 51: {
           if (tag !== 410) {
-            break
+            break;
           }
 
-          message.airPlayGroupID = reader.string()
-          continue
+          message.airPlayGroupID = reader.string();
+          continue;
         }
         case 52: {
           if (tag !== 416) {
-            break
+            break;
           }
 
-          message.supportsSharePlayHandoff = reader.bool()
-          continue
+          message.supportsSharePlayHandoff = reader.bool();
+          continue;
         }
         case 53: {
           if (tag !== 429) {
-            break
+            break;
           }
 
-          message.distance = reader.float()
-          continue
+          message.distance = reader.float();
+          continue;
         }
         case 54: {
           if (tag !== 432) {
-            break
+            break;
           }
 
-          message.discoveredOnSameInfra = reader.bool()
-          continue
+          message.discoveredOnSameInfra = reader.bool();
+          continue;
         }
         case 55: {
           if (tag !== 442) {
-            break
+            break;
           }
 
           message.activatedClusterMembers.push(
             AVOutputDeviceDescriptor.decode(reader, reader.uint32())
-          )
-          continue
+          );
+          continue;
         }
         case 56: {
           if (tag === 448) {
-            message.pickable.push(reader.bool())
+            message.pickable.push(reader.bool());
 
-            continue
+            continue;
           }
 
           if (tag === 450) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.pickable.push(reader.bool())
+              message.pickable.push(reader.bool());
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 57: {
           if (tag !== 456) {
-            break
+            break;
           }
 
-          message.transportType = reader.int32()
-          continue
+          message.transportType = reader.int32();
+          continue;
         }
         case 58: {
           if (tag !== 466) {
-            break
+            break;
           }
 
-          message.clusterID = reader.string()
-          continue
+          message.clusterID = reader.string();
+          continue;
         }
         case 59: {
           if (tag !== 472) {
-            break
+            break;
           }
 
-          message.isClusterLeader = reader.bool()
-          continue
+          message.isClusterLeader = reader.bool();
+          continue;
         }
         case 60: {
           if (tag !== 480) {
-            break
+            break;
           }
 
-          message.isAppleAccessory = reader.bool()
-          continue
+          message.isAppleAccessory = reader.bool();
+          continue;
         }
         case 61: {
           if (tag !== 490) {
-            break
+            break;
           }
 
-          message.parentUniqueIdentifier = reader.string()
-          continue
+          message.parentUniqueIdentifier = reader.string();
+          continue;
         }
         case 62: {
           if (tag !== 498) {
-            break
+            break;
           }
 
-          message.roomID = reader.string()
-          continue
+          message.roomID = reader.string();
+          continue;
         }
         case 63: {
           if (tag !== 506) {
-            break
+            break;
           }
 
-          message.roomName = reader.string()
-          continue
+          message.roomName = reader.string();
+          continue;
         }
         case 64: {
           if (tag !== 514) {
-            break
+            break;
           }
 
-          message.allClusterMembers.push(AVOutputDeviceDescriptor.decode(reader, reader.uint32()))
-          continue
+          message.allClusterMembers.push(
+            AVOutputDeviceDescriptor.decode(reader, reader.uint32())
+          );
+          continue;
         }
         case 67: {
           if (tag !== 536) {
-            break
+            break;
           }
 
-          message.engageOnClusterActivate = reader.bool()
-          continue
+          message.engageOnClusterActivate = reader.bool();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AVOutputDeviceDescriptor {
     return {
-      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.String(object.uniqueIdentifier)
-        : '',
-      groupID: isSet(object.groupID) ? globalThis.String(object.groupID) : '',
-      modelID: isSet(object.modelID) ? globalThis.String(object.modelID) : '',
+        : "",
+      groupID: isSet(object.groupID) ? globalThis.String(object.groupID) : "",
+      modelID: isSet(object.modelID) ? globalThis.String(object.modelID) : "",
       macAddress: isSet(object.macAddress)
         ? Buffer.from(bytesFromBase64(object.macAddress))
         : Buffer.alloc(0),
@@ -1117,24 +1233,36 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
       isRemoteControllable: isSet(object.isRemoteControllable)
         ? globalThis.Boolean(object.isRemoteControllable)
         : false,
-      isGroupLeader: isSet(object.isGroupLeader) ? globalThis.Boolean(object.isGroupLeader) : false,
-      isGroupable: isSet(object.isGroupable) ? globalThis.Boolean(object.isGroupable) : false,
-      deviceType: isSet(object.deviceType) ? deviceType_EnumFromJSON(object.deviceType) : 0,
+      isGroupLeader: isSet(object.isGroupLeader)
+        ? globalThis.Boolean(object.isGroupLeader)
+        : false,
+      isGroupable: isSet(object.isGroupable)
+        ? globalThis.Boolean(object.isGroupable)
+        : false,
+      deviceType: isSet(object.deviceType)
+        ? deviceType_EnumFromJSON(object.deviceType)
+        : 0,
       deviceSubType: isSet(object.deviceSubType)
         ? deviceSubType_EnumFromJSON(object.deviceSubType)
         : 0,
       modelSpecificInfoData: isSet(object.modelSpecificInfoData)
         ? Buffer.from(bytesFromBase64(object.modelSpecificInfoData))
         : Buffer.alloc(0),
-      batteryLevel: isSet(object.batteryLevel) ? globalThis.Number(object.batteryLevel) : 0,
-      isLocalDevice: isSet(object.isLocalDevice) ? globalThis.Boolean(object.isLocalDevice) : false,
+      batteryLevel: isSet(object.batteryLevel)
+        ? globalThis.Number(object.batteryLevel)
+        : 0,
+      isLocalDevice: isSet(object.isLocalDevice)
+        ? globalThis.Boolean(object.isLocalDevice)
+        : false,
       supportsExternalScreen: isSet(object.supportsExternalScreen)
         ? globalThis.Boolean(object.supportsExternalScreen)
         : false,
       requiresAuthorization: isSet(object.requiresAuthorization)
         ? globalThis.Boolean(object.requiresAuthorization)
         : false,
-      shouldForceRemoteControlabillity: isSet(object.shouldForceRemoteControlabillity)
+      shouldForceRemoteControlabillity: isSet(
+        object.shouldForceRemoteControlabillity
+      )
         ? globalThis.Boolean(object.shouldForceRemoteControlabillity)
         : false,
       sourceInfo: isSet(object.sourceInfo)
@@ -1148,13 +1276,13 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
         : false,
       logicalDeviceID: isSet(object.logicalDeviceID)
         ? globalThis.String(object.logicalDeviceID)
-        : '',
+        : "",
       isProxyGroupPlayer: isSet(object.isProxyGroupPlayer)
         ? globalThis.Boolean(object.isProxyGroupPlayer)
         : false,
       firmwareVersion: isSet(object.firmwareVersion)
         ? globalThis.String(object.firmwareVersion)
-        : '',
+        : "",
       volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
       isVolumeControlAvailable: isSet(object.isVolumeControlAvailable)
         ? globalThis.Boolean(object.isVolumeControlAvailable)
@@ -1182,15 +1310,21 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
       resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets: isSet(
         object.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets
       )
-        ? globalThis.Boolean(object.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets)
+        ? globalThis.Boolean(
+            object.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets
+          )
         : false,
-      isAirPlayReceiverSessionActive: isSet(object.isAirPlayReceiverSessionActive)
+      isAirPlayReceiverSessionActive: isSet(
+        object.isAirPlayReceiverSessionActive
+      )
         ? globalThis.Boolean(object.isAirPlayReceiverSessionActive)
         : false,
       parentGroupIdentifier: isSet(object.parentGroupIdentifier)
         ? globalThis.String(object.parentGroupIdentifier)
-        : '',
-      parentGroupContainsDiscoverableLeader: isSet(object.parentGroupContainsDiscoverableLeader)
+        : "",
+      parentGroupContainsDiscoverableLeader: isSet(
+        object.parentGroupContainsDiscoverableLeader
+      )
         ? globalThis.Boolean(object.parentGroupContainsDiscoverableLeader)
         : false,
       isAddedToHomeKit: isSet(object.isAddedToHomeKit)
@@ -1199,29 +1333,43 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
       volumeCapabilities: isSet(object.volumeCapabilities)
         ? globalThis.Number(object.volumeCapabilities)
         : 0,
-      bluetoothID: isSet(object.bluetoothID) ? globalThis.String(object.bluetoothID) : '',
-      supportsHAP: isSet(object.supportsHAP) ? globalThis.Boolean(object.supportsHAP) : false,
+      bluetoothID: isSet(object.bluetoothID)
+        ? globalThis.String(object.bluetoothID)
+        : "",
+      supportsHAP: isSet(object.supportsHAP)
+        ? globalThis.Boolean(object.supportsHAP)
+        : false,
       usingJSONProtocol: isSet(object.usingJSONProtocol)
         ? globalThis.Boolean(object.usingJSONProtocol)
         : false,
       clusterCompositions: globalThis.Array.isArray(object?.clusterCompositions)
-        ? object.clusterCompositions.map((e: any) => AVOutputDeviceDescriptor.fromJSON(e))
+        ? object.clusterCompositions.map((e: any) =>
+            AVOutputDeviceDescriptor.fromJSON(e)
+          )
         : [],
-      clusterType: isSet(object.clusterType) ? globalThis.Number(object.clusterType) : 0,
-      primaryUID: isSet(object.primaryUID) ? globalThis.String(object.primaryUID) : '',
+      clusterType: isSet(object.clusterType)
+        ? globalThis.Number(object.clusterType)
+        : 0,
+      primaryUID: isSet(object.primaryUID)
+        ? globalThis.String(object.primaryUID)
+        : "",
       configuredClusterSize: isSet(object.configuredClusterSize)
         ? globalThis.Number(object.configuredClusterSize)
         : 0,
-      supportsRapportRemoteControlTransport: isSet(object.supportsRapportRemoteControlTransport)
+      supportsRapportRemoteControlTransport: isSet(
+        object.supportsRapportRemoteControlTransport
+      )
         ? globalThis.Boolean(object.supportsRapportRemoteControlTransport)
         : false,
       currentBluetoothListeningMode: isSet(object.currentBluetoothListeningMode)
         ? globalThis.String(object.currentBluetoothListeningMode)
-        : '',
+        : "",
       availableBluetoothListeningModes: globalThis.Array.isArray(
         object?.availableBluetoothListeningModes
       )
-        ? object.availableBluetoothListeningModes.map((e: any) => globalThis.String(e))
+        ? object.availableBluetoothListeningModes.map((e: any) =>
+            globalThis.String(e)
+          )
         : [],
       supportsMultiplayer: globalThis.Array.isArray(object?.supportsMultiplayer)
         ? object.supportsMultiplayer.map((e: any) => globalThis.Boolean(e))
@@ -1232,7 +1380,9 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
       hostDeviceClass: isSet(object.hostDeviceClass)
         ? globalThis.Number(object.hostDeviceClass)
         : 0,
-      airPlayGroupID: isSet(object.airPlayGroupID) ? globalThis.String(object.airPlayGroupID) : '',
+      airPlayGroupID: isSet(object.airPlayGroupID)
+        ? globalThis.String(object.airPlayGroupID)
+        : "",
       supportsSharePlayHandoff: isSet(object.supportsSharePlayHandoff)
         ? globalThis.Boolean(object.supportsSharePlayHandoff)
         : false,
@@ -1240,14 +1390,22 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
       discoveredOnSameInfra: isSet(object.discoveredOnSameInfra)
         ? globalThis.Boolean(object.discoveredOnSameInfra)
         : false,
-      activatedClusterMembers: globalThis.Array.isArray(object?.activatedClusterMembers)
-        ? object.activatedClusterMembers.map((e: any) => AVOutputDeviceDescriptor.fromJSON(e))
+      activatedClusterMembers: globalThis.Array.isArray(
+        object?.activatedClusterMembers
+      )
+        ? object.activatedClusterMembers.map((e: any) =>
+            AVOutputDeviceDescriptor.fromJSON(e)
+          )
         : [],
       pickable: globalThis.Array.isArray(object?.pickable)
         ? object.pickable.map((e: any) => globalThis.Boolean(e))
         : [],
-      transportType: isSet(object.transportType) ? globalThis.Number(object.transportType) : 0,
-      clusterID: isSet(object.clusterID) ? globalThis.String(object.clusterID) : '',
+      transportType: isSet(object.transportType)
+        ? globalThis.Number(object.transportType)
+        : 0,
+      clusterID: isSet(object.clusterID)
+        ? globalThis.String(object.clusterID)
+        : "",
       isClusterLeader: isSet(object.isClusterLeader)
         ? globalThis.Boolean(object.isClusterLeader)
         : false,
@@ -1256,513 +1414,652 @@ export const AVOutputDeviceDescriptor: MessageFns<AVOutputDeviceDescriptor> = {
         : false,
       parentUniqueIdentifier: isSet(object.parentUniqueIdentifier)
         ? globalThis.String(object.parentUniqueIdentifier)
-        : '',
-      roomID: isSet(object.roomID) ? globalThis.String(object.roomID) : '',
-      roomName: isSet(object.roomName) ? globalThis.String(object.roomName) : '',
+        : "",
+      roomID: isSet(object.roomID) ? globalThis.String(object.roomID) : "",
+      roomName: isSet(object.roomName)
+        ? globalThis.String(object.roomName)
+        : "",
       allClusterMembers: globalThis.Array.isArray(object?.allClusterMembers)
-        ? object.allClusterMembers.map((e: any) => AVOutputDeviceDescriptor.fromJSON(e))
+        ? object.allClusterMembers.map((e: any) =>
+            AVOutputDeviceDescriptor.fromJSON(e)
+          )
         : [],
       engageOnClusterActivate: isSet(object.engageOnClusterActivate)
         ? globalThis.Boolean(object.engageOnClusterActivate)
         : false,
-    }
+    };
   },
 
   toJSON(message: AVOutputDeviceDescriptor): unknown {
-    const obj: any = {}
-    if (message.name !== undefined && message.name !== '') {
-      obj.name = message.name
+    const obj: any = {};
+    if (message.name !== undefined && message.name !== "") {
+      obj.name = message.name;
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== '') {
-      obj.uniqueIdentifier = message.uniqueIdentifier
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== ""
+    ) {
+      obj.uniqueIdentifier = message.uniqueIdentifier;
     }
-    if (message.groupID !== undefined && message.groupID !== '') {
-      obj.groupID = message.groupID
+    if (message.groupID !== undefined && message.groupID !== "") {
+      obj.groupID = message.groupID;
     }
-    if (message.modelID !== undefined && message.modelID !== '') {
-      obj.modelID = message.modelID
+    if (message.modelID !== undefined && message.modelID !== "") {
+      obj.modelID = message.modelID;
     }
     if (message.macAddress !== undefined && message.macAddress.length !== 0) {
-      obj.macAddress = base64FromBytes(message.macAddress)
+      obj.macAddress = base64FromBytes(message.macAddress);
     }
-    if (message.canAccessRemoteAssets !== undefined && message.canAccessRemoteAssets !== false) {
-      obj.canAccessRemoteAssets = message.canAccessRemoteAssets
+    if (
+      message.canAccessRemoteAssets !== undefined &&
+      message.canAccessRemoteAssets !== false
+    ) {
+      obj.canAccessRemoteAssets = message.canAccessRemoteAssets;
     }
-    if (message.isRemoteControllable !== undefined && message.isRemoteControllable !== false) {
-      obj.isRemoteControllable = message.isRemoteControllable
+    if (
+      message.isRemoteControllable !== undefined &&
+      message.isRemoteControllable !== false
+    ) {
+      obj.isRemoteControllable = message.isRemoteControllable;
     }
-    if (message.isGroupLeader !== undefined && message.isGroupLeader !== false) {
-      obj.isGroupLeader = message.isGroupLeader
+    if (
+      message.isGroupLeader !== undefined &&
+      message.isGroupLeader !== false
+    ) {
+      obj.isGroupLeader = message.isGroupLeader;
     }
     if (message.isGroupable !== undefined && message.isGroupable !== false) {
-      obj.isGroupable = message.isGroupable
+      obj.isGroupable = message.isGroupable;
     }
     if (message.deviceType !== undefined && message.deviceType !== 0) {
-      obj.deviceType = deviceType_EnumToJSON(message.deviceType)
+      obj.deviceType = deviceType_EnumToJSON(message.deviceType);
     }
     if (message.deviceSubType !== undefined && message.deviceSubType !== 0) {
-      obj.deviceSubType = deviceSubType_EnumToJSON(message.deviceSubType)
+      obj.deviceSubType = deviceSubType_EnumToJSON(message.deviceSubType);
     }
-    if (message.modelSpecificInfoData !== undefined && message.modelSpecificInfoData.length !== 0) {
-      obj.modelSpecificInfoData = base64FromBytes(message.modelSpecificInfoData)
+    if (
+      message.modelSpecificInfoData !== undefined &&
+      message.modelSpecificInfoData.length !== 0
+    ) {
+      obj.modelSpecificInfoData = base64FromBytes(
+        message.modelSpecificInfoData
+      );
     }
     if (message.batteryLevel !== undefined && message.batteryLevel !== 0) {
-      obj.batteryLevel = message.batteryLevel
+      obj.batteryLevel = message.batteryLevel;
     }
-    if (message.isLocalDevice !== undefined && message.isLocalDevice !== false) {
-      obj.isLocalDevice = message.isLocalDevice
+    if (
+      message.isLocalDevice !== undefined &&
+      message.isLocalDevice !== false
+    ) {
+      obj.isLocalDevice = message.isLocalDevice;
     }
-    if (message.supportsExternalScreen !== undefined && message.supportsExternalScreen !== false) {
-      obj.supportsExternalScreen = message.supportsExternalScreen
+    if (
+      message.supportsExternalScreen !== undefined &&
+      message.supportsExternalScreen !== false
+    ) {
+      obj.supportsExternalScreen = message.supportsExternalScreen;
     }
-    if (message.requiresAuthorization !== undefined && message.requiresAuthorization !== false) {
-      obj.requiresAuthorization = message.requiresAuthorization
+    if (
+      message.requiresAuthorization !== undefined &&
+      message.requiresAuthorization !== false
+    ) {
+      obj.requiresAuthorization = message.requiresAuthorization;
     }
     if (
       message.shouldForceRemoteControlabillity !== undefined &&
       message.shouldForceRemoteControlabillity !== false
     ) {
-      obj.shouldForceRemoteControlabillity = message.shouldForceRemoteControlabillity
+      obj.shouldForceRemoteControlabillity =
+        message.shouldForceRemoteControlabillity;
     }
     if (message.sourceInfo !== undefined) {
-      obj.sourceInfo = AVOutputDeviceSourceInfo.toJSON(message.sourceInfo)
+      obj.sourceInfo = AVOutputDeviceSourceInfo.toJSON(message.sourceInfo);
     }
-    if (message.isDeviceGroupable !== undefined && message.isDeviceGroupable !== false) {
-      obj.isDeviceGroupable = message.isDeviceGroupable
+    if (
+      message.isDeviceGroupable !== undefined &&
+      message.isDeviceGroupable !== false
+    ) {
+      obj.isDeviceGroupable = message.isDeviceGroupable;
     }
     if (
       message.canRelayCommunicationChannel !== undefined &&
       message.canRelayCommunicationChannel !== false
     ) {
-      obj.canRelayCommunicationChannel = message.canRelayCommunicationChannel
+      obj.canRelayCommunicationChannel = message.canRelayCommunicationChannel;
     }
-    if (message.logicalDeviceID !== undefined && message.logicalDeviceID !== '') {
-      obj.logicalDeviceID = message.logicalDeviceID
+    if (
+      message.logicalDeviceID !== undefined &&
+      message.logicalDeviceID !== ""
+    ) {
+      obj.logicalDeviceID = message.logicalDeviceID;
     }
-    if (message.isProxyGroupPlayer !== undefined && message.isProxyGroupPlayer !== false) {
-      obj.isProxyGroupPlayer = message.isProxyGroupPlayer
+    if (
+      message.isProxyGroupPlayer !== undefined &&
+      message.isProxyGroupPlayer !== false
+    ) {
+      obj.isProxyGroupPlayer = message.isProxyGroupPlayer;
     }
-    if (message.firmwareVersion !== undefined && message.firmwareVersion !== '') {
-      obj.firmwareVersion = message.firmwareVersion
+    if (
+      message.firmwareVersion !== undefined &&
+      message.firmwareVersion !== ""
+    ) {
+      obj.firmwareVersion = message.firmwareVersion;
     }
     if (message.volume !== undefined && message.volume !== 0) {
-      obj.volume = message.volume
+      obj.volume = message.volume;
     }
     if (
       message.isVolumeControlAvailable !== undefined &&
       message.isVolumeControlAvailable !== false
     ) {
-      obj.isVolumeControlAvailable = message.isVolumeControlAvailable
+      obj.isVolumeControlAvailable = message.isVolumeControlAvailable;
     }
-    if (message.canAccessAppleMusic !== undefined && message.canAccessAppleMusic !== false) {
-      obj.canAccessAppleMusic = message.canAccessAppleMusic
+    if (
+      message.canAccessAppleMusic !== undefined &&
+      message.canAccessAppleMusic !== false
+    ) {
+      obj.canAccessAppleMusic = message.canAccessAppleMusic;
     }
     if (
       message.canAccessiCloudMusicLibrary !== undefined &&
       message.canAccessiCloudMusicLibrary !== false
     ) {
-      obj.canAccessiCloudMusicLibrary = message.canAccessiCloudMusicLibrary
+      obj.canAccessiCloudMusicLibrary = message.canAccessiCloudMusicLibrary;
     }
     if (
       message.groupContainsGroupLeader !== undefined &&
       message.groupContainsGroupLeader !== false
     ) {
-      obj.groupContainsGroupLeader = message.groupContainsGroupLeader
+      obj.groupContainsGroupLeader = message.groupContainsGroupLeader;
     }
     if (
       message.supportsBufferedAirPlay !== undefined &&
       message.supportsBufferedAirPlay !== false
     ) {
-      obj.supportsBufferedAirPlay = message.supportsBufferedAirPlay
+      obj.supportsBufferedAirPlay = message.supportsBufferedAirPlay;
     }
     if (
       message.canPlayEncryptedProgressiveDownloadAssets !== undefined &&
       message.canPlayEncryptedProgressiveDownloadAssets !== false
     ) {
       obj.canPlayEncryptedProgressiveDownloadAssets =
-        message.canPlayEncryptedProgressiveDownloadAssets
+        message.canPlayEncryptedProgressiveDownloadAssets;
     }
     if (
       message.canFetchMediaDataFromSender !== undefined &&
       message.canFetchMediaDataFromSender !== false
     ) {
-      obj.canFetchMediaDataFromSender = message.canFetchMediaDataFromSender
+      obj.canFetchMediaDataFromSender = message.canFetchMediaDataFromSender;
     }
     if (
-      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !== undefined &&
-      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !== false
+      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !==
+        undefined &&
+      message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets !==
+        false
     ) {
       obj.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets =
-        message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets
+        message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets;
     }
     if (
       message.isAirPlayReceiverSessionActive !== undefined &&
       message.isAirPlayReceiverSessionActive !== false
     ) {
-      obj.isAirPlayReceiverSessionActive = message.isAirPlayReceiverSessionActive
+      obj.isAirPlayReceiverSessionActive =
+        message.isAirPlayReceiverSessionActive;
     }
-    if (message.parentGroupIdentifier !== undefined && message.parentGroupIdentifier !== '') {
-      obj.parentGroupIdentifier = message.parentGroupIdentifier
+    if (
+      message.parentGroupIdentifier !== undefined &&
+      message.parentGroupIdentifier !== ""
+    ) {
+      obj.parentGroupIdentifier = message.parentGroupIdentifier;
     }
     if (
       message.parentGroupContainsDiscoverableLeader !== undefined &&
       message.parentGroupContainsDiscoverableLeader !== false
     ) {
-      obj.parentGroupContainsDiscoverableLeader = message.parentGroupContainsDiscoverableLeader
+      obj.parentGroupContainsDiscoverableLeader =
+        message.parentGroupContainsDiscoverableLeader;
     }
-    if (message.isAddedToHomeKit !== undefined && message.isAddedToHomeKit !== false) {
-      obj.isAddedToHomeKit = message.isAddedToHomeKit
+    if (
+      message.isAddedToHomeKit !== undefined &&
+      message.isAddedToHomeKit !== false
+    ) {
+      obj.isAddedToHomeKit = message.isAddedToHomeKit;
     }
-    if (message.volumeCapabilities !== undefined && message.volumeCapabilities !== 0) {
-      obj.volumeCapabilities = Math.round(message.volumeCapabilities)
+    if (
+      message.volumeCapabilities !== undefined &&
+      message.volumeCapabilities !== 0
+    ) {
+      obj.volumeCapabilities = Math.round(message.volumeCapabilities);
     }
-    if (message.bluetoothID !== undefined && message.bluetoothID !== '') {
-      obj.bluetoothID = message.bluetoothID
+    if (message.bluetoothID !== undefined && message.bluetoothID !== "") {
+      obj.bluetoothID = message.bluetoothID;
     }
     if (message.supportsHAP !== undefined && message.supportsHAP !== false) {
-      obj.supportsHAP = message.supportsHAP
+      obj.supportsHAP = message.supportsHAP;
     }
-    if (message.usingJSONProtocol !== undefined && message.usingJSONProtocol !== false) {
-      obj.usingJSONProtocol = message.usingJSONProtocol
+    if (
+      message.usingJSONProtocol !== undefined &&
+      message.usingJSONProtocol !== false
+    ) {
+      obj.usingJSONProtocol = message.usingJSONProtocol;
     }
     if (message.clusterCompositions?.length) {
-      obj.clusterCompositions = message.clusterCompositions.map(e =>
+      obj.clusterCompositions = message.clusterCompositions.map((e) =>
         AVOutputDeviceDescriptor.toJSON(e)
-      )
+      );
     }
     if (message.clusterType !== undefined && message.clusterType !== 0) {
-      obj.clusterType = Math.round(message.clusterType)
+      obj.clusterType = Math.round(message.clusterType);
     }
-    if (message.primaryUID !== undefined && message.primaryUID !== '') {
-      obj.primaryUID = message.primaryUID
+    if (message.primaryUID !== undefined && message.primaryUID !== "") {
+      obj.primaryUID = message.primaryUID;
     }
-    if (message.configuredClusterSize !== undefined && message.configuredClusterSize !== 0) {
-      obj.configuredClusterSize = Math.round(message.configuredClusterSize)
+    if (
+      message.configuredClusterSize !== undefined &&
+      message.configuredClusterSize !== 0
+    ) {
+      obj.configuredClusterSize = Math.round(message.configuredClusterSize);
     }
     if (
       message.supportsRapportRemoteControlTransport !== undefined &&
       message.supportsRapportRemoteControlTransport !== false
     ) {
-      obj.supportsRapportRemoteControlTransport = message.supportsRapportRemoteControlTransport
+      obj.supportsRapportRemoteControlTransport =
+        message.supportsRapportRemoteControlTransport;
     }
     if (
       message.currentBluetoothListeningMode !== undefined &&
-      message.currentBluetoothListeningMode !== ''
+      message.currentBluetoothListeningMode !== ""
     ) {
-      obj.currentBluetoothListeningMode = message.currentBluetoothListeningMode
+      obj.currentBluetoothListeningMode = message.currentBluetoothListeningMode;
     }
     if (message.availableBluetoothListeningModes?.length) {
-      obj.availableBluetoothListeningModes = message.availableBluetoothListeningModes
+      obj.availableBluetoothListeningModes =
+        message.availableBluetoothListeningModes;
     }
     if (message.supportsMultiplayer?.length) {
-      obj.supportsMultiplayer = message.supportsMultiplayer
+      obj.supportsMultiplayer = message.supportsMultiplayer;
     }
     if (
       message.producesLowFidelityAudio !== undefined &&
       message.producesLowFidelityAudio !== false
     ) {
-      obj.producesLowFidelityAudio = message.producesLowFidelityAudio
+      obj.producesLowFidelityAudio = message.producesLowFidelityAudio;
     }
-    if (message.hostDeviceClass !== undefined && message.hostDeviceClass !== 0) {
-      obj.hostDeviceClass = Math.round(message.hostDeviceClass)
+    if (
+      message.hostDeviceClass !== undefined &&
+      message.hostDeviceClass !== 0
+    ) {
+      obj.hostDeviceClass = Math.round(message.hostDeviceClass);
     }
-    if (message.airPlayGroupID !== undefined && message.airPlayGroupID !== '') {
-      obj.airPlayGroupID = message.airPlayGroupID
+    if (message.airPlayGroupID !== undefined && message.airPlayGroupID !== "") {
+      obj.airPlayGroupID = message.airPlayGroupID;
     }
     if (
       message.supportsSharePlayHandoff !== undefined &&
       message.supportsSharePlayHandoff !== false
     ) {
-      obj.supportsSharePlayHandoff = message.supportsSharePlayHandoff
+      obj.supportsSharePlayHandoff = message.supportsSharePlayHandoff;
     }
     if (message.distance !== undefined && message.distance !== 0) {
-      obj.distance = message.distance
+      obj.distance = message.distance;
     }
-    if (message.discoveredOnSameInfra !== undefined && message.discoveredOnSameInfra !== false) {
-      obj.discoveredOnSameInfra = message.discoveredOnSameInfra
+    if (
+      message.discoveredOnSameInfra !== undefined &&
+      message.discoveredOnSameInfra !== false
+    ) {
+      obj.discoveredOnSameInfra = message.discoveredOnSameInfra;
     }
     if (message.activatedClusterMembers?.length) {
-      obj.activatedClusterMembers = message.activatedClusterMembers.map(e =>
+      obj.activatedClusterMembers = message.activatedClusterMembers.map((e) =>
         AVOutputDeviceDescriptor.toJSON(e)
-      )
+      );
     }
     if (message.pickable?.length) {
-      obj.pickable = message.pickable
+      obj.pickable = message.pickable;
     }
     if (message.transportType !== undefined && message.transportType !== 0) {
-      obj.transportType = Math.round(message.transportType)
+      obj.transportType = Math.round(message.transportType);
     }
-    if (message.clusterID !== undefined && message.clusterID !== '') {
-      obj.clusterID = message.clusterID
+    if (message.clusterID !== undefined && message.clusterID !== "") {
+      obj.clusterID = message.clusterID;
     }
-    if (message.isClusterLeader !== undefined && message.isClusterLeader !== false) {
-      obj.isClusterLeader = message.isClusterLeader
+    if (
+      message.isClusterLeader !== undefined &&
+      message.isClusterLeader !== false
+    ) {
+      obj.isClusterLeader = message.isClusterLeader;
     }
-    if (message.isAppleAccessory !== undefined && message.isAppleAccessory !== false) {
-      obj.isAppleAccessory = message.isAppleAccessory
+    if (
+      message.isAppleAccessory !== undefined &&
+      message.isAppleAccessory !== false
+    ) {
+      obj.isAppleAccessory = message.isAppleAccessory;
     }
-    if (message.parentUniqueIdentifier !== undefined && message.parentUniqueIdentifier !== '') {
-      obj.parentUniqueIdentifier = message.parentUniqueIdentifier
+    if (
+      message.parentUniqueIdentifier !== undefined &&
+      message.parentUniqueIdentifier !== ""
+    ) {
+      obj.parentUniqueIdentifier = message.parentUniqueIdentifier;
     }
-    if (message.roomID !== undefined && message.roomID !== '') {
-      obj.roomID = message.roomID
+    if (message.roomID !== undefined && message.roomID !== "") {
+      obj.roomID = message.roomID;
     }
-    if (message.roomName !== undefined && message.roomName !== '') {
-      obj.roomName = message.roomName
+    if (message.roomName !== undefined && message.roomName !== "") {
+      obj.roomName = message.roomName;
     }
     if (message.allClusterMembers?.length) {
-      obj.allClusterMembers = message.allClusterMembers.map(e => AVOutputDeviceDescriptor.toJSON(e))
+      obj.allClusterMembers = message.allClusterMembers.map((e) =>
+        AVOutputDeviceDescriptor.toJSON(e)
+      );
     }
     if (
       message.engageOnClusterActivate !== undefined &&
       message.engageOnClusterActivate !== false
     ) {
-      obj.engageOnClusterActivate = message.engageOnClusterActivate
+      obj.engageOnClusterActivate = message.engageOnClusterActivate;
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<AVOutputDeviceDescriptor>, I>>(
     base?: I
   ): AVOutputDeviceDescriptor {
-    return AVOutputDeviceDescriptor.fromPartial(base ?? ({} as any))
+    return AVOutputDeviceDescriptor.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<AVOutputDeviceDescriptor>, I>>(
     object: I
   ): AVOutputDeviceDescriptor {
-    const message = createBaseAVOutputDeviceDescriptor()
-    message.name = object.name ?? ''
-    message.uniqueIdentifier = object.uniqueIdentifier ?? ''
-    message.groupID = object.groupID ?? ''
-    message.modelID = object.modelID ?? ''
-    message.macAddress = object.macAddress ?? Buffer.alloc(0)
-    message.canAccessRemoteAssets = object.canAccessRemoteAssets ?? false
-    message.isRemoteControllable = object.isRemoteControllable ?? false
-    message.isGroupLeader = object.isGroupLeader ?? false
-    message.isGroupable = object.isGroupable ?? false
-    message.deviceType = object.deviceType ?? 0
-    message.deviceSubType = object.deviceSubType ?? 0
-    message.modelSpecificInfoData = object.modelSpecificInfoData ?? Buffer.alloc(0)
-    message.batteryLevel = object.batteryLevel ?? 0
-    message.isLocalDevice = object.isLocalDevice ?? false
-    message.supportsExternalScreen = object.supportsExternalScreen ?? false
-    message.requiresAuthorization = object.requiresAuthorization ?? false
-    message.shouldForceRemoteControlabillity = object.shouldForceRemoteControlabillity ?? false
+    const message = createBaseAVOutputDeviceDescriptor();
+    message.name = object.name ?? "";
+    message.uniqueIdentifier = object.uniqueIdentifier ?? "";
+    message.groupID = object.groupID ?? "";
+    message.modelID = object.modelID ?? "";
+    message.macAddress = object.macAddress ?? Buffer.alloc(0);
+    message.canAccessRemoteAssets = object.canAccessRemoteAssets ?? false;
+    message.isRemoteControllable = object.isRemoteControllable ?? false;
+    message.isGroupLeader = object.isGroupLeader ?? false;
+    message.isGroupable = object.isGroupable ?? false;
+    message.deviceType = object.deviceType ?? 0;
+    message.deviceSubType = object.deviceSubType ?? 0;
+    message.modelSpecificInfoData =
+      object.modelSpecificInfoData ?? Buffer.alloc(0);
+    message.batteryLevel = object.batteryLevel ?? 0;
+    message.isLocalDevice = object.isLocalDevice ?? false;
+    message.supportsExternalScreen = object.supportsExternalScreen ?? false;
+    message.requiresAuthorization = object.requiresAuthorization ?? false;
+    message.shouldForceRemoteControlabillity =
+      object.shouldForceRemoteControlabillity ?? false;
     message.sourceInfo =
       object.sourceInfo !== undefined && object.sourceInfo !== null
         ? AVOutputDeviceSourceInfo.fromPartial(object.sourceInfo)
-        : undefined
-    message.isDeviceGroupable = object.isDeviceGroupable ?? false
-    message.canRelayCommunicationChannel = object.canRelayCommunicationChannel ?? false
-    message.logicalDeviceID = object.logicalDeviceID ?? ''
-    message.isProxyGroupPlayer = object.isProxyGroupPlayer ?? false
-    message.firmwareVersion = object.firmwareVersion ?? ''
-    message.volume = object.volume ?? 0
-    message.isVolumeControlAvailable = object.isVolumeControlAvailable ?? false
-    message.canAccessAppleMusic = object.canAccessAppleMusic ?? false
-    message.canAccessiCloudMusicLibrary = object.canAccessiCloudMusicLibrary ?? false
-    message.groupContainsGroupLeader = object.groupContainsGroupLeader ?? false
-    message.supportsBufferedAirPlay = object.supportsBufferedAirPlay ?? false
+        : undefined;
+    message.isDeviceGroupable = object.isDeviceGroupable ?? false;
+    message.canRelayCommunicationChannel =
+      object.canRelayCommunicationChannel ?? false;
+    message.logicalDeviceID = object.logicalDeviceID ?? "";
+    message.isProxyGroupPlayer = object.isProxyGroupPlayer ?? false;
+    message.firmwareVersion = object.firmwareVersion ?? "";
+    message.volume = object.volume ?? 0;
+    message.isVolumeControlAvailable = object.isVolumeControlAvailable ?? false;
+    message.canAccessAppleMusic = object.canAccessAppleMusic ?? false;
+    message.canAccessiCloudMusicLibrary =
+      object.canAccessiCloudMusicLibrary ?? false;
+    message.groupContainsGroupLeader = object.groupContainsGroupLeader ?? false;
+    message.supportsBufferedAirPlay = object.supportsBufferedAirPlay ?? false;
     message.canPlayEncryptedProgressiveDownloadAssets =
-      object.canPlayEncryptedProgressiveDownloadAssets ?? false
-    message.canFetchMediaDataFromSender = object.canFetchMediaDataFromSender ?? false
+      object.canPlayEncryptedProgressiveDownloadAssets ?? false;
+    message.canFetchMediaDataFromSender =
+      object.canFetchMediaDataFromSender ?? false;
     message.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets =
-      object.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets ?? false
-    message.isAirPlayReceiverSessionActive = object.isAirPlayReceiverSessionActive ?? false
-    message.parentGroupIdentifier = object.parentGroupIdentifier ?? ''
+      object.resentsOptimizedUserInterfaceWhenPlayingFetchedAudioOnlyAssets ??
+      false;
+    message.isAirPlayReceiverSessionActive =
+      object.isAirPlayReceiverSessionActive ?? false;
+    message.parentGroupIdentifier = object.parentGroupIdentifier ?? "";
     message.parentGroupContainsDiscoverableLeader =
-      object.parentGroupContainsDiscoverableLeader ?? false
-    message.isAddedToHomeKit = object.isAddedToHomeKit ?? false
-    message.volumeCapabilities = object.volumeCapabilities ?? 0
-    message.bluetoothID = object.bluetoothID ?? ''
-    message.supportsHAP = object.supportsHAP ?? false
-    message.usingJSONProtocol = object.usingJSONProtocol ?? false
+      object.parentGroupContainsDiscoverableLeader ?? false;
+    message.isAddedToHomeKit = object.isAddedToHomeKit ?? false;
+    message.volumeCapabilities = object.volumeCapabilities ?? 0;
+    message.bluetoothID = object.bluetoothID ?? "";
+    message.supportsHAP = object.supportsHAP ?? false;
+    message.usingJSONProtocol = object.usingJSONProtocol ?? false;
     message.clusterCompositions =
-      object.clusterCompositions?.map(e => AVOutputDeviceDescriptor.fromPartial(e)) || []
-    message.clusterType = object.clusterType ?? 0
-    message.primaryUID = object.primaryUID ?? ''
-    message.configuredClusterSize = object.configuredClusterSize ?? 0
+      object.clusterCompositions?.map((e) =>
+        AVOutputDeviceDescriptor.fromPartial(e)
+      ) || [];
+    message.clusterType = object.clusterType ?? 0;
+    message.primaryUID = object.primaryUID ?? "";
+    message.configuredClusterSize = object.configuredClusterSize ?? 0;
     message.supportsRapportRemoteControlTransport =
-      object.supportsRapportRemoteControlTransport ?? false
-    message.currentBluetoothListeningMode = object.currentBluetoothListeningMode ?? ''
+      object.supportsRapportRemoteControlTransport ?? false;
+    message.currentBluetoothListeningMode =
+      object.currentBluetoothListeningMode ?? "";
     message.availableBluetoothListeningModes =
-      object.availableBluetoothListeningModes?.map(e => e) || []
-    message.supportsMultiplayer = object.supportsMultiplayer?.map(e => e) || []
-    message.producesLowFidelityAudio = object.producesLowFidelityAudio ?? false
-    message.hostDeviceClass = object.hostDeviceClass ?? 0
-    message.airPlayGroupID = object.airPlayGroupID ?? ''
-    message.supportsSharePlayHandoff = object.supportsSharePlayHandoff ?? false
-    message.distance = object.distance ?? 0
-    message.discoveredOnSameInfra = object.discoveredOnSameInfra ?? false
+      object.availableBluetoothListeningModes?.map((e) => e) || [];
+    message.supportsMultiplayer =
+      object.supportsMultiplayer?.map((e) => e) || [];
+    message.producesLowFidelityAudio = object.producesLowFidelityAudio ?? false;
+    message.hostDeviceClass = object.hostDeviceClass ?? 0;
+    message.airPlayGroupID = object.airPlayGroupID ?? "";
+    message.supportsSharePlayHandoff = object.supportsSharePlayHandoff ?? false;
+    message.distance = object.distance ?? 0;
+    message.discoveredOnSameInfra = object.discoveredOnSameInfra ?? false;
     message.activatedClusterMembers =
-      object.activatedClusterMembers?.map(e => AVOutputDeviceDescriptor.fromPartial(e)) || []
-    message.pickable = object.pickable?.map(e => e) || []
-    message.transportType = object.transportType ?? 0
-    message.clusterID = object.clusterID ?? ''
-    message.isClusterLeader = object.isClusterLeader ?? false
-    message.isAppleAccessory = object.isAppleAccessory ?? false
-    message.parentUniqueIdentifier = object.parentUniqueIdentifier ?? ''
-    message.roomID = object.roomID ?? ''
-    message.roomName = object.roomName ?? ''
+      object.activatedClusterMembers?.map((e) =>
+        AVOutputDeviceDescriptor.fromPartial(e)
+      ) || [];
+    message.pickable = object.pickable?.map((e) => e) || [];
+    message.transportType = object.transportType ?? 0;
+    message.clusterID = object.clusterID ?? "";
+    message.isClusterLeader = object.isClusterLeader ?? false;
+    message.isAppleAccessory = object.isAppleAccessory ?? false;
+    message.parentUniqueIdentifier = object.parentUniqueIdentifier ?? "";
+    message.roomID = object.roomID ?? "";
+    message.roomName = object.roomName ?? "";
     message.allClusterMembers =
-      object.allClusterMembers?.map(e => AVOutputDeviceDescriptor.fromPartial(e)) || []
-    message.engageOnClusterActivate = object.engageOnClusterActivate ?? false
-    return message
+      object.allClusterMembers?.map((e) =>
+        AVOutputDeviceDescriptor.fromPartial(e)
+      ) || [];
+    message.engageOnClusterActivate = object.engageOnClusterActivate ?? false;
+    return message;
   },
-}
+};
 
 function createBaseUpdateOutputDeviceMessage(): UpdateOutputDeviceMessage {
-  return { outputDevices: [], endpointUID: '', clusterAwareOutputDevices: [], _unknownFields: {} }
+  return {
+    outputDevices: [],
+    endpointUID: "",
+    clusterAwareOutputDevices: [],
+    _unknownFields: {},
+  };
 }
 
-export const UpdateOutputDeviceMessage: MessageFns<UpdateOutputDeviceMessage> = {
-  encode(
-    message: UpdateOutputDeviceMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    for (const v of message.outputDevices) {
-      AVOutputDeviceDescriptor.encode(v!, writer.uint32(10).fork()).join()
-    }
-    if (message.endpointUID !== undefined && message.endpointUID !== '') {
-      writer.uint32(18).string(message.endpointUID)
-    }
-    for (const v of message.clusterAwareOutputDevices) {
-      AVOutputDeviceDescriptor.encode(v!, writer.uint32(26).fork()).join()
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const UpdateOutputDeviceMessage: MessageFns<UpdateOutputDeviceMessage> =
+  {
+    encode(
+      message: UpdateOutputDeviceMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      for (const v of message.outputDevices) {
+        AVOutputDeviceDescriptor.encode(v!, writer.uint32(10).fork()).join();
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateOutputDeviceMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseUpdateOutputDeviceMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break
+      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+        writer.uint32(18).string(message.endpointUID);
+      }
+      for (const v of message.clusterAwareOutputDevices) {
+        AVOutputDeviceDescriptor.encode(v!, writer.uint32(26).fork()).join();
+      }
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.outputDevices.push(AVOutputDeviceDescriptor.decode(reader, reader.uint32()))
-          continue
         }
-        case 2: {
-          if (tag !== 18) {
-            break
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): UpdateOutputDeviceMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseUpdateOutputDeviceMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.outputDevices.push(
+              AVOutputDeviceDescriptor.decode(reader, reader.uint32())
+            );
+            continue;
           }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-          message.endpointUID = reader.string()
-          continue
-        }
-        case 3: {
-          if (tag !== 26) {
-            break
+            message.endpointUID = reader.string();
+            continue;
           }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
 
-          message.clusterAwareOutputDevices.push(
-            AVOutputDeviceDescriptor.decode(reader, reader.uint32())
-          )
-          continue
+            message.clusterAwareOutputDevices.push(
+              AVOutputDeviceDescriptor.decode(reader, reader.uint32())
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return message;
+    },
+
+    fromJSON(object: any): UpdateOutputDeviceMessage {
+      return {
+        outputDevices: globalThis.Array.isArray(object?.outputDevices)
+          ? object.outputDevices.map((e: any) =>
+              AVOutputDeviceDescriptor.fromJSON(e)
+            )
+          : [],
+        endpointUID: isSet(object.endpointUID)
+          ? globalThis.String(object.endpointUID)
+          : "",
+        clusterAwareOutputDevices: globalThis.Array.isArray(
+          object?.clusterAwareOutputDevices
+        )
+          ? object.clusterAwareOutputDevices.map((e: any) =>
+              AVOutputDeviceDescriptor.fromJSON(e)
+            )
+          : [],
+      };
+    },
+
+    toJSON(message: UpdateOutputDeviceMessage): unknown {
+      const obj: any = {};
+      if (message.outputDevices?.length) {
+        obj.outputDevices = message.outputDevices.map((e) =>
+          AVOutputDeviceDescriptor.toJSON(e)
+        );
       }
-      const buf = reader.skip(tag & 7)
-
-      const list = message._unknownFields![tag]
-
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+        obj.endpointUID = message.endpointUID;
       }
-    }
-    return message
-  },
+      if (message.clusterAwareOutputDevices?.length) {
+        obj.clusterAwareOutputDevices = message.clusterAwareOutputDevices.map(
+          (e) => AVOutputDeviceDescriptor.toJSON(e)
+        );
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): UpdateOutputDeviceMessage {
-    return {
-      outputDevices: globalThis.Array.isArray(object?.outputDevices)
-        ? object.outputDevices.map((e: any) => AVOutputDeviceDescriptor.fromJSON(e))
-        : [],
-      endpointUID: isSet(object.endpointUID) ? globalThis.String(object.endpointUID) : '',
-      clusterAwareOutputDevices: globalThis.Array.isArray(object?.clusterAwareOutputDevices)
-        ? object.clusterAwareOutputDevices.map((e: any) => AVOutputDeviceDescriptor.fromJSON(e))
-        : [],
-    }
-  },
+    create<I extends Exact<DeepPartial<UpdateOutputDeviceMessage>, I>>(
+      base?: I
+    ): UpdateOutputDeviceMessage {
+      return UpdateOutputDeviceMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<UpdateOutputDeviceMessage>, I>>(
+      object: I
+    ): UpdateOutputDeviceMessage {
+      const message = createBaseUpdateOutputDeviceMessage();
+      message.outputDevices =
+        object.outputDevices?.map((e) =>
+          AVOutputDeviceDescriptor.fromPartial(e)
+        ) || [];
+      message.endpointUID = object.endpointUID ?? "";
+      message.clusterAwareOutputDevices =
+        object.clusterAwareOutputDevices?.map((e) =>
+          AVOutputDeviceDescriptor.fromPartial(e)
+        ) || [];
+      return message;
+    },
+  };
 
-  toJSON(message: UpdateOutputDeviceMessage): unknown {
-    const obj: any = {}
-    if (message.outputDevices?.length) {
-      obj.outputDevices = message.outputDevices.map(e => AVOutputDeviceDescriptor.toJSON(e))
-    }
-    if (message.endpointUID !== undefined && message.endpointUID !== '') {
-      obj.endpointUID = message.endpointUID
-    }
-    if (message.clusterAwareOutputDevices?.length) {
-      obj.clusterAwareOutputDevices = message.clusterAwareOutputDevices.map(e =>
-        AVOutputDeviceDescriptor.toJSON(e)
-      )
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<UpdateOutputDeviceMessage>, I>>(
-    base?: I
-  ): UpdateOutputDeviceMessage {
-    return UpdateOutputDeviceMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<UpdateOutputDeviceMessage>, I>>(
-    object: I
-  ): UpdateOutputDeviceMessage {
-    const message = createBaseUpdateOutputDeviceMessage()
-    message.outputDevices =
-      object.outputDevices?.map(e => AVOutputDeviceDescriptor.fromPartial(e)) || []
-    message.endpointUID = object.endpointUID ?? ''
-    message.clusterAwareOutputDevices =
-      object.clusterAwareOutputDevices?.map(e => AVOutputDeviceDescriptor.fromPartial(e)) || []
-    return message
-  },
-}
-
-export const updateOutputDeviceMessage: Extension<UpdateOutputDeviceMessage | undefined> = {
+export const updateOutputDeviceMessage: Extension<
+  UpdateOutputDeviceMessage | undefined
+> = {
   number: 69,
   tag: 554,
   repeated: false,
   packed: false,
   encode: (value: UpdateOutputDeviceMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    UpdateOutputDeviceMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    UpdateOutputDeviceMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): UpdateOutputDeviceMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return UpdateOutputDeviceMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): UpdateOutputDeviceMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return UpdateOutputDeviceMessage.decode(reader, reader.uint32());
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1772,37 +2069,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

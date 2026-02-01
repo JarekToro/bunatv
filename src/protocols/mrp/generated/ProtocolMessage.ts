@@ -5,12 +5,12 @@
 // source: ProtocolMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface ErrorCode {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum ErrorCode_Enum {
@@ -84,340 +84,340 @@ export enum ErrorCode_Enum {
 export function errorCode_EnumFromJSON(object: any): ErrorCode_Enum {
   switch (object) {
     case 0:
-    case 'NoError':
-      return ErrorCode_Enum.NoError
+    case "NoError":
+      return ErrorCode_Enum.NoError;
     case 1:
-    case 'UnknownError':
-      return ErrorCode_Enum.UnknownError
+    case "UnknownError":
+      return ErrorCode_Enum.UnknownError;
     case 2:
-    case 'InvalidOperation':
-      return ErrorCode_Enum.InvalidOperation
+    case "InvalidOperation":
+      return ErrorCode_Enum.InvalidOperation;
     case 3:
-    case 'OperationNotPermitted':
-      return ErrorCode_Enum.OperationNotPermitted
+    case "OperationNotPermitted":
+      return ErrorCode_Enum.OperationNotPermitted;
     case 4:
-    case 'ClientDoesNotExist':
-      return ErrorCode_Enum.ClientDoesNotExist
+    case "ClientDoesNotExist":
+      return ErrorCode_Enum.ClientDoesNotExist;
     case 5:
-    case 'OriginDoesNotExist':
-      return ErrorCode_Enum.OriginDoesNotExist
+    case "OriginDoesNotExist":
+      return ErrorCode_Enum.OriginDoesNotExist;
     case 6:
-    case 'UnsupportedOperation':
-      return ErrorCode_Enum.UnsupportedOperation
+    case "UnsupportedOperation":
+      return ErrorCode_Enum.UnsupportedOperation;
     case 7:
-    case 'FailedToSetPickedRoute':
-      return ErrorCode_Enum.FailedToSetPickedRoute
+    case "FailedToSetPickedRoute":
+      return ErrorCode_Enum.FailedToSetPickedRoute;
     case 8:
-    case 'FailedToRegisterCustomOrigin':
-      return ErrorCode_Enum.FailedToRegisterCustomOrigin
+    case "FailedToRegisterCustomOrigin":
+      return ErrorCode_Enum.FailedToRegisterCustomOrigin;
     case 9:
-    case 'FailedToRemoveCustomOrigin':
-      return ErrorCode_Enum.FailedToRemoveCustomOrigin
+    case "FailedToRemoveCustomOrigin":
+      return ErrorCode_Enum.FailedToRemoveCustomOrigin;
     case 10:
-    case 'TheApplicationActivityDoesNotExist':
-      return ErrorCode_Enum.TheApplicationActivityDoesNotExist
+    case "TheApplicationActivityDoesNotExist":
+      return ErrorCode_Enum.TheApplicationActivityDoesNotExist;
     case 11:
-    case 'TheAppHasNotSetupABrowsableContentEndpoint':
-      return ErrorCode_Enum.TheAppHasNotSetupABrowsableContentEndpoint
+    case "TheAppHasNotSetupABrowsableContentEndpoint":
+      return ErrorCode_Enum.TheAppHasNotSetupABrowsableContentEndpoint;
     case 12:
-    case 'TheRequestedBrowsableContentApiIsNotSupportedByTheApplication':
-      return ErrorCode_Enum.TheRequestedBrowsableContentApiIsNotSupportedByTheApplication
+    case "TheRequestedBrowsableContentApiIsNotSupportedByTheApplication":
+      return ErrorCode_Enum.TheRequestedBrowsableContentApiIsNotSupportedByTheApplication;
     case 13:
-    case 'TheNotficationHasNotBeenWhitelistedByTheServer':
-      return ErrorCode_Enum.TheNotficationHasNotBeenWhitelistedByTheServer
+    case "TheNotficationHasNotBeenWhitelistedByTheServer":
+      return ErrorCode_Enum.TheNotficationHasNotBeenWhitelistedByTheServer;
     case 14:
-    case 'OperationRequiresAClientCallbackToHaveBeenRegistered':
-      return ErrorCode_Enum.OperationRequiresAClientCallbackToHaveBeenRegistered
+    case "OperationRequiresAClientCallbackToHaveBeenRegistered":
+      return ErrorCode_Enum.OperationRequiresAClientCallbackToHaveBeenRegistered;
     case 15:
-    case 'OperationRequiresAClientDataSourceToHaveBeenRegistered':
-      return ErrorCode_Enum.OperationRequiresAClientDataSourceToHaveBeenRegistered
+    case "OperationRequiresAClientDataSourceToHaveBeenRegistered":
+      return ErrorCode_Enum.OperationRequiresAClientDataSourceToHaveBeenRegistered;
     case 16:
-    case 'RequestedDataIsOutOfDateAndShouldBeRequestedAgain':
-      return ErrorCode_Enum.RequestedDataIsOutOfDateAndShouldBeRequestedAgain
+    case "RequestedDataIsOutOfDateAndShouldBeRequestedAgain":
+      return ErrorCode_Enum.RequestedDataIsOutOfDateAndShouldBeRequestedAgain;
     case 17:
-    case 'TheDevicesEnforcedVolumeLimitHasBeenExceeded':
-      return ErrorCode_Enum.TheDevicesEnforcedVolumeLimitHasBeenExceeded
+    case "TheDevicesEnforcedVolumeLimitHasBeenExceeded":
+      return ErrorCode_Enum.TheDevicesEnforcedVolumeLimitHasBeenExceeded;
     case 18:
-    case 'VolumeValueIsOutOfRange':
-      return ErrorCode_Enum.VolumeValueIsOutOfRange
+    case "VolumeValueIsOutOfRange":
+      return ErrorCode_Enum.VolumeValueIsOutOfRange;
     case 19:
-    case 'VolumeIsAlreadyAtTheMaximumValue':
-      return ErrorCode_Enum.VolumeIsAlreadyAtTheMaximumValue
+    case "VolumeIsAlreadyAtTheMaximumValue":
+      return ErrorCode_Enum.VolumeIsAlreadyAtTheMaximumValue;
     case 20:
-    case 'VolumeIsAlreadyMuted':
-      return ErrorCode_Enum.VolumeIsAlreadyMuted
+    case "VolumeIsAlreadyMuted":
+      return ErrorCode_Enum.VolumeIsAlreadyMuted;
     case 21:
-    case 'VoiceInputEndpointDoesNotExist':
-      return ErrorCode_Enum.VoiceInputEndpointDoesNotExist
+    case "VoiceInputEndpointDoesNotExist":
+      return ErrorCode_Enum.VoiceInputEndpointDoesNotExist;
     case 22:
-    case 'TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist':
-      return ErrorCode_Enum.TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist
+    case "TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist":
+      return ErrorCode_Enum.TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist;
     case 23:
-    case 'EncryptionFailure':
-      return ErrorCode_Enum.EncryptionFailure
+    case "EncryptionFailure":
+      return ErrorCode_Enum.EncryptionFailure;
     case 24:
-    case 'EndpointDoesNotExist':
-      return ErrorCode_Enum.EndpointDoesNotExist
+    case "EndpointDoesNotExist":
+      return ErrorCode_Enum.EndpointDoesNotExist;
     case 25:
-    case 'TheClientsApplicationCancelledTheOperation':
-      return ErrorCode_Enum.TheClientsApplicationCancelledTheOperation
+    case "TheClientsApplicationCancelledTheOperation":
+      return ErrorCode_Enum.TheClientsApplicationCancelledTheOperation;
     case 26:
-    case 'TheOperationTimedOut':
-      return ErrorCode_Enum.TheOperationTimedOut
+    case "TheOperationTimedOut":
+      return ErrorCode_Enum.TheOperationTimedOut;
     case 27:
-    case 'TheSpecifiedPlayerPathObjectWasInvalid':
-      return ErrorCode_Enum.TheSpecifiedPlayerPathObjectWasInvalid
+    case "TheSpecifiedPlayerPathObjectWasInvalid":
+      return ErrorCode_Enum.TheSpecifiedPlayerPathObjectWasInvalid;
     case 28:
-    case 'AddingOrRemovingDevicesFromTheAvOutputContextHasFailed':
-      return ErrorCode_Enum.AddingOrRemovingDevicesFromTheAvOutputContextHasFailed
+    case "AddingOrRemovingDevicesFromTheAvOutputContextHasFailed":
+      return ErrorCode_Enum.AddingOrRemovingDevicesFromTheAvOutputContextHasFailed;
     case 29:
-    case 'CouldNotFindTheSpecifiedNowPlayingPlayer':
-      return ErrorCode_Enum.CouldNotFindTheSpecifiedNowPlayingPlayer
+    case "CouldNotFindTheSpecifiedNowPlayingPlayer":
+      return ErrorCode_Enum.CouldNotFindTheSpecifiedNowPlayingPlayer;
     case 30:
-    case 'TheSpecifiedContentItemDoesNotExist':
-      return ErrorCode_Enum.TheSpecifiedContentItemDoesNotExist
+    case "TheSpecifiedContentItemDoesNotExist":
+      return ErrorCode_Enum.TheSpecifiedContentItemDoesNotExist;
     case 31:
-    case 'TheSpecifiedOffsetIsInvalid':
-      return ErrorCode_Enum.TheSpecifiedOffsetIsInvalid
+    case "TheSpecifiedOffsetIsInvalid":
+      return ErrorCode_Enum.TheSpecifiedOffsetIsInvalid;
     case 32:
-    case 'TheSpecifiedOutputContextIsInvalid':
-      return ErrorCode_Enum.TheSpecifiedOutputContextIsInvalid
+    case "TheSpecifiedOutputContextIsInvalid":
+      return ErrorCode_Enum.TheSpecifiedOutputContextIsInvalid;
     case 33:
-    case 'OneOrMoreSpecifiedOutputDevicesAreNotGroupable':
-      return ErrorCode_Enum.OneOrMoreSpecifiedOutputDevicesAreNotGroupable
+    case "OneOrMoreSpecifiedOutputDevicesAreNotGroupable":
+      return ErrorCode_Enum.OneOrMoreSpecifiedOutputDevicesAreNotGroupable;
     case 34:
-    case 'TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice':
-      return ErrorCode_Enum.TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice
+    case "TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice":
+      return ErrorCode_Enum.TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice;
     case 35:
-    case 'CouldNotFindTheSpecifiedNowPlayingClient':
-      return ErrorCode_Enum.CouldNotFindTheSpecifiedNowPlayingClient
+    case "CouldNotFindTheSpecifiedNowPlayingClient":
+      return ErrorCode_Enum.CouldNotFindTheSpecifiedNowPlayingClient;
     case 36:
-    case 'EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable':
-      return ErrorCode_Enum.EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable
+    case "EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable":
+      return ErrorCode_Enum.EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable;
     case 37:
-    case 'OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable':
-      return ErrorCode_Enum.OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable
+    case "OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable":
+      return ErrorCode_Enum.OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable;
     case 38:
-    case 'CoderMustSupportKeyValueCoding':
-      return ErrorCode_Enum.CoderMustSupportKeyValueCoding
+    case "CoderMustSupportKeyValueCoding":
+      return ErrorCode_Enum.CoderMustSupportKeyValueCoding;
     case 39:
-    case 'CouldNotFindTheGivenOutputdevice':
-      return ErrorCode_Enum.CouldNotFindTheGivenOutputdevice
+    case "CouldNotFindTheGivenOutputdevice":
+      return ErrorCode_Enum.CouldNotFindTheGivenOutputdevice;
     case 100:
-    case 'FailedToConnectToRemoteDevice':
-      return ErrorCode_Enum.FailedToConnectToRemoteDevice
+    case "FailedToConnectToRemoteDevice":
+      return ErrorCode_Enum.FailedToConnectToRemoteDevice;
     case 101:
-    case 'AuthenticationTokenIsInvalid':
-      return ErrorCode_Enum.AuthenticationTokenIsInvalid
+    case "AuthenticationTokenIsInvalid":
+      return ErrorCode_Enum.AuthenticationTokenIsInvalid;
     case 102:
-    case 'RecordingSessionIsAlreadyInProgressOnThisDevice':
-      return ErrorCode_Enum.RecordingSessionIsAlreadyInProgressOnThisDevice
+    case "RecordingSessionIsAlreadyInProgressOnThisDevice":
+      return ErrorCode_Enum.RecordingSessionIsAlreadyInProgressOnThisDevice;
     case 103:
-    case 'TheDeviceIsNotCurrentlyRecording':
-      return ErrorCode_Enum.TheDeviceIsNotCurrentlyRecording
+    case "TheDeviceIsNotCurrentlyRecording":
+      return ErrorCode_Enum.TheDeviceIsNotCurrentlyRecording;
     case 104:
-    case 'TheClientHasDisconnected':
-      return ErrorCode_Enum.TheClientHasDisconnected
+    case "TheClientHasDisconnected":
+      return ErrorCode_Enum.TheClientHasDisconnected;
     case 105:
-    case 'TheServerHasDisconnected':
-      return ErrorCode_Enum.TheServerHasDisconnected
+    case "TheServerHasDisconnected":
+      return ErrorCode_Enum.TheServerHasDisconnected;
     case 106:
-    case 'TheConnectionHasBeenCancelledByTheClient':
-      return ErrorCode_Enum.TheConnectionHasBeenCancelledByTheClient
+    case "TheConnectionHasBeenCancelledByTheClient":
+      return ErrorCode_Enum.TheConnectionHasBeenCancelledByTheClient;
     case 107:
-    case 'PairingFunctionalityIsLockedDueToSecurityReasons':
-      return ErrorCode_Enum.PairingFunctionalityIsLockedDueToSecurityReasons
+    case "PairingFunctionalityIsLockedDueToSecurityReasons":
+      return ErrorCode_Enum.PairingFunctionalityIsLockedDueToSecurityReasons;
     case 108:
-    case 'TheClientsOperatingSystemVersionIsTooOld':
-      return ErrorCode_Enum.TheClientsOperatingSystemVersionIsTooOld
+    case "TheClientsOperatingSystemVersionIsTooOld":
+      return ErrorCode_Enum.TheClientsOperatingSystemVersionIsTooOld;
     case 109:
-    case 'TheClientsApplicationVersionIsTooOld':
-      return ErrorCode_Enum.TheClientsApplicationVersionIsTooOld
+    case "TheClientsApplicationVersionIsTooOld":
+      return ErrorCode_Enum.TheClientsApplicationVersionIsTooOld;
     case 110:
-    case 'TheDeviceIsNotPaired':
-      return ErrorCode_Enum.TheDeviceIsNotPaired
+    case "TheDeviceIsNotPaired":
+      return ErrorCode_Enum.TheDeviceIsNotPaired;
     case 111:
-    case 'ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured':
-      return ErrorCode_Enum.ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured
+    case "ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured":
+      return ErrorCode_Enum.ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured;
     case 112:
-    case 'ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured':
-      return ErrorCode_Enum.ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured
+    case "ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured":
+      return ErrorCode_Enum.ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured;
     case 113:
-    case 'TheConnectionTimedout':
-      return ErrorCode_Enum.TheConnectionTimedout
+    case "TheConnectionTimedout":
+      return ErrorCode_Enum.TheConnectionTimedout;
     case 114:
-    case 'PairingWithThisDeviceIsBlocked':
-      return ErrorCode_Enum.PairingWithThisDeviceIsBlocked
+    case "PairingWithThisDeviceIsBlocked":
+      return ErrorCode_Enum.PairingWithThisDeviceIsBlocked;
     case 115:
-    case 'TheDeviceIsGoingToSleep':
-      return ErrorCode_Enum.TheDeviceIsGoingToSleep
+    case "TheDeviceIsGoingToSleep":
+      return ErrorCode_Enum.TheDeviceIsGoingToSleep;
     case 116:
-    case 'ConnectionBlockedByServer':
-      return ErrorCode_Enum.ConnectionBlockedByServer
+    case "ConnectionBlockedByServer":
+      return ErrorCode_Enum.ConnectionBlockedByServer;
     case 117:
-    case 'MravendpointWasDeallocatedWhileWaitingForDeviceToConnect':
-      return ErrorCode_Enum.MravendpointWasDeallocatedWhileWaitingForDeviceToConnect
+    case "MravendpointWasDeallocatedWhileWaitingForDeviceToConnect":
+      return ErrorCode_Enum.MravendpointWasDeallocatedWhileWaitingForDeviceToConnect;
     case 200:
-    case 'OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer':
-      return ErrorCode_Enum.OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer
+    case "OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer":
+      return ErrorCode_Enum.OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer;
     case 201:
-    case 'OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer':
-      return ErrorCode_Enum.OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer
+    case "OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer":
+      return ErrorCode_Enum.OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer;
     case 202:
-    case 'OutputContextModificationRequestedNoTopologyChange':
-      return ErrorCode_Enum.OutputContextModificationRequestedNoTopologyChange
+    case "OutputContextModificationRequestedNoTopologyChange":
+      return ErrorCode_Enum.OutputContextModificationRequestedNoTopologyChange;
     case 299:
-    case 'OtherUnknownError':
-      return ErrorCode_Enum.OtherUnknownError
+    case "OtherUnknownError":
+      return ErrorCode_Enum.OtherUnknownError;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return ErrorCode_Enum.UNRECOGNIZED
+      return ErrorCode_Enum.UNRECOGNIZED;
   }
 }
 
 export function errorCode_EnumToJSON(object: ErrorCode_Enum): string {
   switch (object) {
     case ErrorCode_Enum.NoError:
-      return 'NoError'
+      return "NoError";
     case ErrorCode_Enum.UnknownError:
-      return 'UnknownError'
+      return "UnknownError";
     case ErrorCode_Enum.InvalidOperation:
-      return 'InvalidOperation'
+      return "InvalidOperation";
     case ErrorCode_Enum.OperationNotPermitted:
-      return 'OperationNotPermitted'
+      return "OperationNotPermitted";
     case ErrorCode_Enum.ClientDoesNotExist:
-      return 'ClientDoesNotExist'
+      return "ClientDoesNotExist";
     case ErrorCode_Enum.OriginDoesNotExist:
-      return 'OriginDoesNotExist'
+      return "OriginDoesNotExist";
     case ErrorCode_Enum.UnsupportedOperation:
-      return 'UnsupportedOperation'
+      return "UnsupportedOperation";
     case ErrorCode_Enum.FailedToSetPickedRoute:
-      return 'FailedToSetPickedRoute'
+      return "FailedToSetPickedRoute";
     case ErrorCode_Enum.FailedToRegisterCustomOrigin:
-      return 'FailedToRegisterCustomOrigin'
+      return "FailedToRegisterCustomOrigin";
     case ErrorCode_Enum.FailedToRemoveCustomOrigin:
-      return 'FailedToRemoveCustomOrigin'
+      return "FailedToRemoveCustomOrigin";
     case ErrorCode_Enum.TheApplicationActivityDoesNotExist:
-      return 'TheApplicationActivityDoesNotExist'
+      return "TheApplicationActivityDoesNotExist";
     case ErrorCode_Enum.TheAppHasNotSetupABrowsableContentEndpoint:
-      return 'TheAppHasNotSetupABrowsableContentEndpoint'
+      return "TheAppHasNotSetupABrowsableContentEndpoint";
     case ErrorCode_Enum.TheRequestedBrowsableContentApiIsNotSupportedByTheApplication:
-      return 'TheRequestedBrowsableContentApiIsNotSupportedByTheApplication'
+      return "TheRequestedBrowsableContentApiIsNotSupportedByTheApplication";
     case ErrorCode_Enum.TheNotficationHasNotBeenWhitelistedByTheServer:
-      return 'TheNotficationHasNotBeenWhitelistedByTheServer'
+      return "TheNotficationHasNotBeenWhitelistedByTheServer";
     case ErrorCode_Enum.OperationRequiresAClientCallbackToHaveBeenRegistered:
-      return 'OperationRequiresAClientCallbackToHaveBeenRegistered'
+      return "OperationRequiresAClientCallbackToHaveBeenRegistered";
     case ErrorCode_Enum.OperationRequiresAClientDataSourceToHaveBeenRegistered:
-      return 'OperationRequiresAClientDataSourceToHaveBeenRegistered'
+      return "OperationRequiresAClientDataSourceToHaveBeenRegistered";
     case ErrorCode_Enum.RequestedDataIsOutOfDateAndShouldBeRequestedAgain:
-      return 'RequestedDataIsOutOfDateAndShouldBeRequestedAgain'
+      return "RequestedDataIsOutOfDateAndShouldBeRequestedAgain";
     case ErrorCode_Enum.TheDevicesEnforcedVolumeLimitHasBeenExceeded:
-      return 'TheDevicesEnforcedVolumeLimitHasBeenExceeded'
+      return "TheDevicesEnforcedVolumeLimitHasBeenExceeded";
     case ErrorCode_Enum.VolumeValueIsOutOfRange:
-      return 'VolumeValueIsOutOfRange'
+      return "VolumeValueIsOutOfRange";
     case ErrorCode_Enum.VolumeIsAlreadyAtTheMaximumValue:
-      return 'VolumeIsAlreadyAtTheMaximumValue'
+      return "VolumeIsAlreadyAtTheMaximumValue";
     case ErrorCode_Enum.VolumeIsAlreadyMuted:
-      return 'VolumeIsAlreadyMuted'
+      return "VolumeIsAlreadyMuted";
     case ErrorCode_Enum.VoiceInputEndpointDoesNotExist:
-      return 'VoiceInputEndpointDoesNotExist'
+      return "VoiceInputEndpointDoesNotExist";
     case ErrorCode_Enum.TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist:
-      return 'TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist'
+      return "TheVoiceInputDeviceIsNotRegisteredOrDoesNotExist";
     case ErrorCode_Enum.EncryptionFailure:
-      return 'EncryptionFailure'
+      return "EncryptionFailure";
     case ErrorCode_Enum.EndpointDoesNotExist:
-      return 'EndpointDoesNotExist'
+      return "EndpointDoesNotExist";
     case ErrorCode_Enum.TheClientsApplicationCancelledTheOperation:
-      return 'TheClientsApplicationCancelledTheOperation'
+      return "TheClientsApplicationCancelledTheOperation";
     case ErrorCode_Enum.TheOperationTimedOut:
-      return 'TheOperationTimedOut'
+      return "TheOperationTimedOut";
     case ErrorCode_Enum.TheSpecifiedPlayerPathObjectWasInvalid:
-      return 'TheSpecifiedPlayerPathObjectWasInvalid'
+      return "TheSpecifiedPlayerPathObjectWasInvalid";
     case ErrorCode_Enum.AddingOrRemovingDevicesFromTheAvOutputContextHasFailed:
-      return 'AddingOrRemovingDevicesFromTheAvOutputContextHasFailed'
+      return "AddingOrRemovingDevicesFromTheAvOutputContextHasFailed";
     case ErrorCode_Enum.CouldNotFindTheSpecifiedNowPlayingPlayer:
-      return 'CouldNotFindTheSpecifiedNowPlayingPlayer'
+      return "CouldNotFindTheSpecifiedNowPlayingPlayer";
     case ErrorCode_Enum.TheSpecifiedContentItemDoesNotExist:
-      return 'TheSpecifiedContentItemDoesNotExist'
+      return "TheSpecifiedContentItemDoesNotExist";
     case ErrorCode_Enum.TheSpecifiedOffsetIsInvalid:
-      return 'TheSpecifiedOffsetIsInvalid'
+      return "TheSpecifiedOffsetIsInvalid";
     case ErrorCode_Enum.TheSpecifiedOutputContextIsInvalid:
-      return 'TheSpecifiedOutputContextIsInvalid'
+      return "TheSpecifiedOutputContextIsInvalid";
     case ErrorCode_Enum.OneOrMoreSpecifiedOutputDevicesAreNotGroupable:
-      return 'OneOrMoreSpecifiedOutputDevicesAreNotGroupable'
+      return "OneOrMoreSpecifiedOutputDevicesAreNotGroupable";
     case ErrorCode_Enum.TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice:
-      return 'TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice'
+      return "TheSpecifiedOutputContextDoesNotSupportAddingMoreThanOneOutputDevice";
     case ErrorCode_Enum.CouldNotFindTheSpecifiedNowPlayingClient:
-      return 'CouldNotFindTheSpecifiedNowPlayingClient'
+      return "CouldNotFindTheSpecifiedNowPlayingClient";
     case ErrorCode_Enum.EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable:
-      return 'EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable'
+      return "EndpointVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable";
     case ErrorCode_Enum.OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable:
-      return 'OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable'
+      return "OutputDeviceVolumeControlIsOnlyPossibleIfTheEndpointIsPickedOrRemoteControllable";
     case ErrorCode_Enum.CoderMustSupportKeyValueCoding:
-      return 'CoderMustSupportKeyValueCoding'
+      return "CoderMustSupportKeyValueCoding";
     case ErrorCode_Enum.CouldNotFindTheGivenOutputdevice:
-      return 'CouldNotFindTheGivenOutputdevice'
+      return "CouldNotFindTheGivenOutputdevice";
     case ErrorCode_Enum.FailedToConnectToRemoteDevice:
-      return 'FailedToConnectToRemoteDevice'
+      return "FailedToConnectToRemoteDevice";
     case ErrorCode_Enum.AuthenticationTokenIsInvalid:
-      return 'AuthenticationTokenIsInvalid'
+      return "AuthenticationTokenIsInvalid";
     case ErrorCode_Enum.RecordingSessionIsAlreadyInProgressOnThisDevice:
-      return 'RecordingSessionIsAlreadyInProgressOnThisDevice'
+      return "RecordingSessionIsAlreadyInProgressOnThisDevice";
     case ErrorCode_Enum.TheDeviceIsNotCurrentlyRecording:
-      return 'TheDeviceIsNotCurrentlyRecording'
+      return "TheDeviceIsNotCurrentlyRecording";
     case ErrorCode_Enum.TheClientHasDisconnected:
-      return 'TheClientHasDisconnected'
+      return "TheClientHasDisconnected";
     case ErrorCode_Enum.TheServerHasDisconnected:
-      return 'TheServerHasDisconnected'
+      return "TheServerHasDisconnected";
     case ErrorCode_Enum.TheConnectionHasBeenCancelledByTheClient:
-      return 'TheConnectionHasBeenCancelledByTheClient'
+      return "TheConnectionHasBeenCancelledByTheClient";
     case ErrorCode_Enum.PairingFunctionalityIsLockedDueToSecurityReasons:
-      return 'PairingFunctionalityIsLockedDueToSecurityReasons'
+      return "PairingFunctionalityIsLockedDueToSecurityReasons";
     case ErrorCode_Enum.TheClientsOperatingSystemVersionIsTooOld:
-      return 'TheClientsOperatingSystemVersionIsTooOld'
+      return "TheClientsOperatingSystemVersionIsTooOld";
     case ErrorCode_Enum.TheClientsApplicationVersionIsTooOld:
-      return 'TheClientsApplicationVersionIsTooOld'
+      return "TheClientsApplicationVersionIsTooOld";
     case ErrorCode_Enum.TheDeviceIsNotPaired:
-      return 'TheDeviceIsNotPaired'
+      return "TheDeviceIsNotPaired";
     case ErrorCode_Enum.ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured:
-      return 'ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured'
+      return "ThePinPairingDialogWasRemovedByTheUserBeforePairingOccoured";
     case ErrorCode_Enum.ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured:
-      return 'ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured'
+      return "ThePinPairingDialogWasRemovedByATimeoutBeforePairingOccoured";
     case ErrorCode_Enum.TheConnectionTimedout:
-      return 'TheConnectionTimedout'
+      return "TheConnectionTimedout";
     case ErrorCode_Enum.PairingWithThisDeviceIsBlocked:
-      return 'PairingWithThisDeviceIsBlocked'
+      return "PairingWithThisDeviceIsBlocked";
     case ErrorCode_Enum.TheDeviceIsGoingToSleep:
-      return 'TheDeviceIsGoingToSleep'
+      return "TheDeviceIsGoingToSleep";
     case ErrorCode_Enum.ConnectionBlockedByServer:
-      return 'ConnectionBlockedByServer'
+      return "ConnectionBlockedByServer";
     case ErrorCode_Enum.MravendpointWasDeallocatedWhileWaitingForDeviceToConnect:
-      return 'MravendpointWasDeallocatedWhileWaitingForDeviceToConnect'
+      return "MravendpointWasDeallocatedWhileWaitingForDeviceToConnect";
     case ErrorCode_Enum.OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer:
-      return 'OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer'
+      return "OutputContextModificationCausedADeviceToNoLongerBeAProxyGroupPlayer";
     case ErrorCode_Enum.OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer:
-      return 'OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer'
+      return "OutputContextModificationCausedADeviceToBecomeAProxyGroupPlayer";
     case ErrorCode_Enum.OutputContextModificationRequestedNoTopologyChange:
-      return 'OutputContextModificationRequestedNoTopologyChange'
+      return "OutputContextModificationRequestedNoTopologyChange";
     case ErrorCode_Enum.OtherUnknownError:
-      return 'OtherUnknownError'
+      return "OtherUnknownError";
     case ErrorCode_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface ProtocolMessage {
   /** Identifies which underlying message is filled in. */
-  type?: ProtocolMessage_Type | undefined
-  identifier?: string | undefined
-  authenticationToken?: string | undefined
-  errorCode?: ErrorCode_Enum | undefined
-  timestamp?: number | undefined
-  errorDescription?: string | undefined
-  uniqueIdentifier?: string | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  type?: ProtocolMessage_Type | undefined;
+  identifier?: string | undefined;
+  authenticationToken?: string | undefined;
+  errorCode?: ErrorCode_Enum | undefined;
+  timestamp?: number | undefined;
+  errorDescription?: string | undefined;
+  uniqueIdentifier?: string | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum ProtocolMessage_Type {
@@ -508,742 +508,806 @@ export enum ProtocolMessage_Type {
   UNRECOGNIZED = -1,
 }
 
-export function protocolMessage_TypeFromJSON(object: any): ProtocolMessage_Type {
+export function protocolMessage_TypeFromJSON(
+  object: any
+): ProtocolMessage_Type {
   switch (object) {
     case 0:
-    case 'UNKNOWN_MESSAGE':
-      return ProtocolMessage_Type.UNKNOWN_MESSAGE
+    case "UNKNOWN_MESSAGE":
+      return ProtocolMessage_Type.UNKNOWN_MESSAGE;
     case 1:
-    case 'SEND_COMMAND_MESSAGE':
-      return ProtocolMessage_Type.SEND_COMMAND_MESSAGE
+    case "SEND_COMMAND_MESSAGE":
+      return ProtocolMessage_Type.SEND_COMMAND_MESSAGE;
     case 2:
-    case 'SEND_COMMAND_RESULT_MESSAGE':
-      return ProtocolMessage_Type.SEND_COMMAND_RESULT_MESSAGE
+    case "SEND_COMMAND_RESULT_MESSAGE":
+      return ProtocolMessage_Type.SEND_COMMAND_RESULT_MESSAGE;
     case 3:
-    case 'GET_STATE_MESSAGE':
-      return ProtocolMessage_Type.GET_STATE_MESSAGE
+    case "GET_STATE_MESSAGE":
+      return ProtocolMessage_Type.GET_STATE_MESSAGE;
     case 4:
-    case 'SET_STATE_MESSAGE':
-      return ProtocolMessage_Type.SET_STATE_MESSAGE
+    case "SET_STATE_MESSAGE":
+      return ProtocolMessage_Type.SET_STATE_MESSAGE;
     case 5:
-    case 'SET_ARTWORK_MESSAGE':
-      return ProtocolMessage_Type.SET_ARTWORK_MESSAGE
+    case "SET_ARTWORK_MESSAGE":
+      return ProtocolMessage_Type.SET_ARTWORK_MESSAGE;
     case 6:
-    case 'REGISTER_HID_DEVICE_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_HID_DEVICE_MESSAGE
+    case "REGISTER_HID_DEVICE_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_HID_DEVICE_MESSAGE;
     case 7:
-    case 'REGISTER_HID_DEVICE_RESULT_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_HID_DEVICE_RESULT_MESSAGE
+    case "REGISTER_HID_DEVICE_RESULT_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_HID_DEVICE_RESULT_MESSAGE;
     case 8:
-    case 'SEND_HID_EVENT_MESSAGE':
-      return ProtocolMessage_Type.SEND_HID_EVENT_MESSAGE
+    case "SEND_HID_EVENT_MESSAGE":
+      return ProtocolMessage_Type.SEND_HID_EVENT_MESSAGE;
     case 9:
-    case 'SEND_HID_REPORT_MESSAGE':
-      return ProtocolMessage_Type.SEND_HID_REPORT_MESSAGE
+    case "SEND_HID_REPORT_MESSAGE":
+      return ProtocolMessage_Type.SEND_HID_REPORT_MESSAGE;
     case 10:
-    case 'SEND_VIRTUAL_TOUCH_EVENT_MESSAGE':
-      return ProtocolMessage_Type.SEND_VIRTUAL_TOUCH_EVENT_MESSAGE
+    case "SEND_VIRTUAL_TOUCH_EVENT_MESSAGE":
+      return ProtocolMessage_Type.SEND_VIRTUAL_TOUCH_EVENT_MESSAGE;
     case 11:
-    case 'NOTIFICATION_MESSAGE':
-      return ProtocolMessage_Type.NOTIFICATION_MESSAGE
+    case "NOTIFICATION_MESSAGE":
+      return ProtocolMessage_Type.NOTIFICATION_MESSAGE;
     case 12:
-    case 'CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE':
-      return ProtocolMessage_Type.CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE
+    case "CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE":
+      return ProtocolMessage_Type.CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE;
     case 15:
-    case 'DEVICE_INFO_MESSAGE':
-      return ProtocolMessage_Type.DEVICE_INFO_MESSAGE
+    case "DEVICE_INFO_MESSAGE":
+      return ProtocolMessage_Type.DEVICE_INFO_MESSAGE;
     case 16:
-    case 'CLIENT_UPDATES_CONFIG_MESSAGE':
-      return ProtocolMessage_Type.CLIENT_UPDATES_CONFIG_MESSAGE
+    case "CLIENT_UPDATES_CONFIG_MESSAGE":
+      return ProtocolMessage_Type.CLIENT_UPDATES_CONFIG_MESSAGE;
     case 17:
-    case 'VOLUME_CONTROL_AVAILABILITY_MESSAGE':
-      return ProtocolMessage_Type.VOLUME_CONTROL_AVAILABILITY_MESSAGE
+    case "VOLUME_CONTROL_AVAILABILITY_MESSAGE":
+      return ProtocolMessage_Type.VOLUME_CONTROL_AVAILABILITY_MESSAGE;
     case 18:
-    case 'GAME_CONTROLLER_MESSAGE':
-      return ProtocolMessage_Type.GAME_CONTROLLER_MESSAGE
+    case "GAME_CONTROLLER_MESSAGE":
+      return ProtocolMessage_Type.GAME_CONTROLLER_MESSAGE;
     case 19:
-    case 'REGISTER_GAME_CONTROLLER_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_GAME_CONTROLLER_MESSAGE
+    case "REGISTER_GAME_CONTROLLER_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_GAME_CONTROLLER_MESSAGE;
     case 20:
-    case 'REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE
+    case "REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE;
     case 21:
-    case 'UNREGISTER_GAME_CONTROLLER_MESSAGE':
-      return ProtocolMessage_Type.UNREGISTER_GAME_CONTROLLER_MESSAGE
+    case "UNREGISTER_GAME_CONTROLLER_MESSAGE":
+      return ProtocolMessage_Type.UNREGISTER_GAME_CONTROLLER_MESSAGE;
     case 22:
-    case 'REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE
+    case "REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE;
     case 23:
-    case 'KEYBOARD_MESSAGE':
-      return ProtocolMessage_Type.KEYBOARD_MESSAGE
+    case "KEYBOARD_MESSAGE":
+      return ProtocolMessage_Type.KEYBOARD_MESSAGE;
     case 24:
-    case 'GET_KEYBOARD_SESSION_MESSAGE':
-      return ProtocolMessage_Type.GET_KEYBOARD_SESSION_MESSAGE
+    case "GET_KEYBOARD_SESSION_MESSAGE":
+      return ProtocolMessage_Type.GET_KEYBOARD_SESSION_MESSAGE;
     case 25:
-    case 'TEXT_INPUT_MESSAGE':
-      return ProtocolMessage_Type.TEXT_INPUT_MESSAGE
+    case "TEXT_INPUT_MESSAGE":
+      return ProtocolMessage_Type.TEXT_INPUT_MESSAGE;
     case 26:
-    case 'GET_VOICE_INPUT_DEVICES_MESSAGE':
-      return ProtocolMessage_Type.GET_VOICE_INPUT_DEVICES_MESSAGE
+    case "GET_VOICE_INPUT_DEVICES_MESSAGE":
+      return ProtocolMessage_Type.GET_VOICE_INPUT_DEVICES_MESSAGE;
     case 27:
-    case 'GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE
+    case "GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE;
     case 28:
-    case 'REGISTER_VOICE_INPUT_DEVICE_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_VOICE_INPUT_DEVICE_MESSAGE
+    case "REGISTER_VOICE_INPUT_DEVICE_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_VOICE_INPUT_DEVICE_MESSAGE;
     case 29:
-    case 'REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE
+    case "REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE;
     case 30:
-    case 'SET_RECORDING_STATE_MESSAGE':
-      return ProtocolMessage_Type.SET_RECORDING_STATE_MESSAGE
+    case "SET_RECORDING_STATE_MESSAGE":
+      return ProtocolMessage_Type.SET_RECORDING_STATE_MESSAGE;
     case 31:
-    case 'SEND_VOICE_INPUT_MESSAGE':
-      return ProtocolMessage_Type.SEND_VOICE_INPUT_MESSAGE
+    case "SEND_VOICE_INPUT_MESSAGE":
+      return ProtocolMessage_Type.SEND_VOICE_INPUT_MESSAGE;
     case 32:
-    case 'PLAYBACK_QUEUE_REQUEST_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_QUEUE_REQUEST_MESSAGE
+    case "PLAYBACK_QUEUE_REQUEST_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_QUEUE_REQUEST_MESSAGE;
     case 33:
-    case 'TRANSACTION_MESSAGE':
-      return ProtocolMessage_Type.TRANSACTION_MESSAGE
+    case "TRANSACTION_MESSAGE":
+      return ProtocolMessage_Type.TRANSACTION_MESSAGE;
     case 34:
-    case 'CRYPTO_PAIRING_MESSAGE':
-      return ProtocolMessage_Type.CRYPTO_PAIRING_MESSAGE
+    case "CRYPTO_PAIRING_MESSAGE":
+      return ProtocolMessage_Type.CRYPTO_PAIRING_MESSAGE;
     case 35:
-    case 'GAME_CONTROLLER_PROPERTIES_MESSAGE':
-      return ProtocolMessage_Type.GAME_CONTROLLER_PROPERTIES_MESSAGE
+    case "GAME_CONTROLLER_PROPERTIES_MESSAGE":
+      return ProtocolMessage_Type.GAME_CONTROLLER_PROPERTIES_MESSAGE;
     case 36:
-    case 'SET_READY_STATE_MESSAGE':
-      return ProtocolMessage_Type.SET_READY_STATE_MESSAGE
+    case "SET_READY_STATE_MESSAGE":
+      return ProtocolMessage_Type.SET_READY_STATE_MESSAGE;
     case 37:
-    case 'DEVICE_INFO_UPDATE_MESSAGE':
-      return ProtocolMessage_Type.DEVICE_INFO_UPDATE_MESSAGE
+    case "DEVICE_INFO_UPDATE_MESSAGE":
+      return ProtocolMessage_Type.DEVICE_INFO_UPDATE_MESSAGE;
     case 38:
-    case 'SET_CONNECTION_STATE_MESSAGE':
-      return ProtocolMessage_Type.SET_CONNECTION_STATE_MESSAGE
+    case "SET_CONNECTION_STATE_MESSAGE":
+      return ProtocolMessage_Type.SET_CONNECTION_STATE_MESSAGE;
     case 39:
-    case 'SEND_BUTTON_EVENT_MESSAGE':
-      return ProtocolMessage_Type.SEND_BUTTON_EVENT_MESSAGE
+    case "SEND_BUTTON_EVENT_MESSAGE":
+      return ProtocolMessage_Type.SEND_BUTTON_EVENT_MESSAGE;
     case 40:
-    case 'SET_HILITE_MODE_MESSAGE':
-      return ProtocolMessage_Type.SET_HILITE_MODE_MESSAGE
+    case "SET_HILITE_MODE_MESSAGE":
+      return ProtocolMessage_Type.SET_HILITE_MODE_MESSAGE;
     case 41:
-    case 'WAKE_DEVICE_MESSAGE':
-      return ProtocolMessage_Type.WAKE_DEVICE_MESSAGE
+    case "WAKE_DEVICE_MESSAGE":
+      return ProtocolMessage_Type.WAKE_DEVICE_MESSAGE;
     case 42:
-    case 'GENERIC_MESSAGE':
-      return ProtocolMessage_Type.GENERIC_MESSAGE
+    case "GENERIC_MESSAGE":
+      return ProtocolMessage_Type.GENERIC_MESSAGE;
     case 43:
-    case 'SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE':
-      return ProtocolMessage_Type.SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE
+    case "SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE":
+      return ProtocolMessage_Type.SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE;
     case 44:
-    case 'SEND_LYRICS_EVENT':
-      return ProtocolMessage_Type.SEND_LYRICS_EVENT
+    case "SEND_LYRICS_EVENT":
+      return ProtocolMessage_Type.SEND_LYRICS_EVENT;
     case 46:
-    case 'SET_NOW_PLAYING_CLIENT_MESSAGE':
-      return ProtocolMessage_Type.SET_NOW_PLAYING_CLIENT_MESSAGE
+    case "SET_NOW_PLAYING_CLIENT_MESSAGE":
+      return ProtocolMessage_Type.SET_NOW_PLAYING_CLIENT_MESSAGE;
     case 47:
-    case 'SET_NOW_PLAYING_PLAYER_MESSAGE':
-      return ProtocolMessage_Type.SET_NOW_PLAYING_PLAYER_MESSAGE
+    case "SET_NOW_PLAYING_PLAYER_MESSAGE":
+      return ProtocolMessage_Type.SET_NOW_PLAYING_PLAYER_MESSAGE;
     case 48:
-    case 'MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE':
-      return ProtocolMessage_Type.MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE
+    case "MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE":
+      return ProtocolMessage_Type.MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE;
     case 49:
-    case 'GET_VOLUME_MESSAGE':
-      return ProtocolMessage_Type.GET_VOLUME_MESSAGE
+    case "GET_VOLUME_MESSAGE":
+      return ProtocolMessage_Type.GET_VOLUME_MESSAGE;
     case 50:
-    case 'GET_VOLUME_RESULT_MESSAGE':
-      return ProtocolMessage_Type.GET_VOLUME_RESULT_MESSAGE
+    case "GET_VOLUME_RESULT_MESSAGE":
+      return ProtocolMessage_Type.GET_VOLUME_RESULT_MESSAGE;
     case 51:
-    case 'SET_VOLUME_MESSAGE':
-      return ProtocolMessage_Type.SET_VOLUME_MESSAGE
+    case "SET_VOLUME_MESSAGE":
+      return ProtocolMessage_Type.SET_VOLUME_MESSAGE;
     case 52:
-    case 'VOLUME_DID_CHANGE_MESSAGE':
-      return ProtocolMessage_Type.VOLUME_DID_CHANGE_MESSAGE
+    case "VOLUME_DID_CHANGE_MESSAGE":
+      return ProtocolMessage_Type.VOLUME_DID_CHANGE_MESSAGE;
     case 53:
-    case 'REMOVE_CLIENT_MESSAGE':
-      return ProtocolMessage_Type.REMOVE_CLIENT_MESSAGE
+    case "REMOVE_CLIENT_MESSAGE":
+      return ProtocolMessage_Type.REMOVE_CLIENT_MESSAGE;
     case 54:
-    case 'REMOVE_PLAYER_MESSAGE':
-      return ProtocolMessage_Type.REMOVE_PLAYER_MESSAGE
+    case "REMOVE_PLAYER_MESSAGE":
+      return ProtocolMessage_Type.REMOVE_PLAYER_MESSAGE;
     case 55:
-    case 'UPDATE_CLIENT_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_CLIENT_MESSAGE
+    case "UPDATE_CLIENT_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_CLIENT_MESSAGE;
     case 56:
-    case 'UPDATE_CONTENT_ITEM_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_CONTENT_ITEM_MESSAGE
+    case "UPDATE_CONTENT_ITEM_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_CONTENT_ITEM_MESSAGE;
     case 57:
-    case 'UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE
+    case "UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE;
     case 58:
-    case 'UPDATE_PLAYER_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_PLAYER_MESSAGE
+    case "UPDATE_PLAYER_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_PLAYER_MESSAGE;
     case 59:
-    case 'PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE':
-      return ProtocolMessage_Type.PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE
+    case "PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE":
+      return ProtocolMessage_Type.PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE;
     case 60:
-    case 'PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE
+    case "PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE;
     case 61:
-    case 'PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE':
-      return ProtocolMessage_Type.PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE
+    case "PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE":
+      return ProtocolMessage_Type.PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE;
     case 62:
-    case 'GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE':
-      return ProtocolMessage_Type.GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE
+    case "GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE":
+      return ProtocolMessage_Type.GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE;
     case 63:
-    case 'GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE':
-      return ProtocolMessage_Type.GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE
+    case "GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE":
+      return ProtocolMessage_Type.GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE;
     case 64:
-    case 'VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE':
-      return ProtocolMessage_Type.VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE
+    case "VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE":
+      return ProtocolMessage_Type.VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE;
     case 65:
-    case 'UPDATE_OUTPUT_DEVICE_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_OUTPUT_DEVICE_MESSAGE
+    case "UPDATE_OUTPUT_DEVICE_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_OUTPUT_DEVICE_MESSAGE;
     case 66:
-    case 'REMOVE_OUTPUT_DEVICES_MESSAGE':
-      return ProtocolMessage_Type.REMOVE_OUTPUT_DEVICES_MESSAGE
+    case "REMOVE_OUTPUT_DEVICES_MESSAGE":
+      return ProtocolMessage_Type.REMOVE_OUTPUT_DEVICES_MESSAGE;
     case 67:
-    case 'REMOTE_TEXT_INPUT_MESSAGE':
-      return ProtocolMessage_Type.REMOTE_TEXT_INPUT_MESSAGE
+    case "REMOTE_TEXT_INPUT_MESSAGE":
+      return ProtocolMessage_Type.REMOTE_TEXT_INPUT_MESSAGE;
     case 68:
-    case 'GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE':
-      return ProtocolMessage_Type.GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE
+    case "GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE":
+      return ProtocolMessage_Type.GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE;
     case 69:
-    case 'REMOVE_OUTPUT_DEVICES_MESSAGE2':
-      return ProtocolMessage_Type.REMOVE_OUTPUT_DEVICES_MESSAGE2
+    case "REMOVE_OUTPUT_DEVICES_MESSAGE2":
+      return ProtocolMessage_Type.REMOVE_OUTPUT_DEVICES_MESSAGE2;
     case 70:
-    case 'PLAYBACK_SESSION_REQUEST_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_SESSION_REQUEST_MESSAGE
+    case "PLAYBACK_SESSION_REQUEST_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_SESSION_REQUEST_MESSAGE;
     case 71:
-    case 'PLAYBACK_SESSION_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_SESSION_RESPONSE_MESSAGE
+    case "PLAYBACK_SESSION_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_SESSION_RESPONSE_MESSAGE;
     case 72:
-    case 'SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE':
-      return ProtocolMessage_Type.SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE
+    case "SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE":
+      return ProtocolMessage_Type.SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE;
     case 73:
-    case 'PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE
+    case "PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE;
     case 74:
-    case 'PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE
+    case "PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE;
     case 75:
-    case 'PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE
+    case "PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE;
     case 76:
-    case 'PLAYBACK_SESSION_MIGRATE_END_MESSAGE':
-      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_END_MESSAGE
+    case "PLAYBACK_SESSION_MIGRATE_END_MESSAGE":
+      return ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_END_MESSAGE;
     case 77:
-    case 'UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE
+    case "UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE;
     case 101:
-    case 'SET_DISCOVERY_MODE_MESSAGE':
-      return ProtocolMessage_Type.SET_DISCOVERY_MODE_MESSAGE
+    case "SET_DISCOVERY_MODE_MESSAGE":
+      return ProtocolMessage_Type.SET_DISCOVERY_MODE_MESSAGE;
     case 102:
-    case 'UPDATE_END_POINTS_MESSAGE':
-      return ProtocolMessage_Type.UPDATE_END_POINTS_MESSAGE
+    case "UPDATE_END_POINTS_MESSAGE":
+      return ProtocolMessage_Type.UPDATE_END_POINTS_MESSAGE;
     case 103:
-    case 'REMOVE_ENDPOINTS_MESSAGE':
-      return ProtocolMessage_Type.REMOVE_ENDPOINTS_MESSAGE
+    case "REMOVE_ENDPOINTS_MESSAGE":
+      return ProtocolMessage_Type.REMOVE_ENDPOINTS_MESSAGE;
     case 104:
-    case 'PLAYER_CLIENT_PROPERTIES_MESSAGE':
-      return ProtocolMessage_Type.PLAYER_CLIENT_PROPERTIES_MESSAGE
+    case "PLAYER_CLIENT_PROPERTIES_MESSAGE":
+      return ProtocolMessage_Type.PLAYER_CLIENT_PROPERTIES_MESSAGE;
     case 105:
-    case 'ORIGIN_CLIENT_PROPERTIES_MESSAGE':
-      return ProtocolMessage_Type.ORIGIN_CLIENT_PROPERTIES_MESSAGE
+    case "ORIGIN_CLIENT_PROPERTIES_MESSAGE":
+      return ProtocolMessage_Type.ORIGIN_CLIENT_PROPERTIES_MESSAGE;
     case 106:
-    case 'AUDIO_FADE_MESSAGE':
-      return ProtocolMessage_Type.AUDIO_FADE_MESSAGE
+    case "AUDIO_FADE_MESSAGE":
+      return ProtocolMessage_Type.AUDIO_FADE_MESSAGE;
     case 107:
-    case 'AUDIO_FADE_RESPONSE_MESSAGE':
-      return ProtocolMessage_Type.AUDIO_FADE_RESPONSE_MESSAGE
+    case "AUDIO_FADE_RESPONSE_MESSAGE":
+      return ProtocolMessage_Type.AUDIO_FADE_RESPONSE_MESSAGE;
     case 120:
-    case 'CONFIGURE_CONNECTION_MESSAGE':
-      return ProtocolMessage_Type.CONFIGURE_CONNECTION_MESSAGE
+    case "CONFIGURE_CONNECTION_MESSAGE":
+      return ProtocolMessage_Type.CONFIGURE_CONNECTION_MESSAGE;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return ProtocolMessage_Type.UNRECOGNIZED
+      return ProtocolMessage_Type.UNRECOGNIZED;
   }
 }
 
-export function protocolMessage_TypeToJSON(object: ProtocolMessage_Type): string {
+export function protocolMessage_TypeToJSON(
+  object: ProtocolMessage_Type
+): string {
   switch (object) {
     case ProtocolMessage_Type.UNKNOWN_MESSAGE:
-      return 'UNKNOWN_MESSAGE'
+      return "UNKNOWN_MESSAGE";
     case ProtocolMessage_Type.SEND_COMMAND_MESSAGE:
-      return 'SEND_COMMAND_MESSAGE'
+      return "SEND_COMMAND_MESSAGE";
     case ProtocolMessage_Type.SEND_COMMAND_RESULT_MESSAGE:
-      return 'SEND_COMMAND_RESULT_MESSAGE'
+      return "SEND_COMMAND_RESULT_MESSAGE";
     case ProtocolMessage_Type.GET_STATE_MESSAGE:
-      return 'GET_STATE_MESSAGE'
+      return "GET_STATE_MESSAGE";
     case ProtocolMessage_Type.SET_STATE_MESSAGE:
-      return 'SET_STATE_MESSAGE'
+      return "SET_STATE_MESSAGE";
     case ProtocolMessage_Type.SET_ARTWORK_MESSAGE:
-      return 'SET_ARTWORK_MESSAGE'
+      return "SET_ARTWORK_MESSAGE";
     case ProtocolMessage_Type.REGISTER_HID_DEVICE_MESSAGE:
-      return 'REGISTER_HID_DEVICE_MESSAGE'
+      return "REGISTER_HID_DEVICE_MESSAGE";
     case ProtocolMessage_Type.REGISTER_HID_DEVICE_RESULT_MESSAGE:
-      return 'REGISTER_HID_DEVICE_RESULT_MESSAGE'
+      return "REGISTER_HID_DEVICE_RESULT_MESSAGE";
     case ProtocolMessage_Type.SEND_HID_EVENT_MESSAGE:
-      return 'SEND_HID_EVENT_MESSAGE'
+      return "SEND_HID_EVENT_MESSAGE";
     case ProtocolMessage_Type.SEND_HID_REPORT_MESSAGE:
-      return 'SEND_HID_REPORT_MESSAGE'
+      return "SEND_HID_REPORT_MESSAGE";
     case ProtocolMessage_Type.SEND_VIRTUAL_TOUCH_EVENT_MESSAGE:
-      return 'SEND_VIRTUAL_TOUCH_EVENT_MESSAGE'
+      return "SEND_VIRTUAL_TOUCH_EVENT_MESSAGE";
     case ProtocolMessage_Type.NOTIFICATION_MESSAGE:
-      return 'NOTIFICATION_MESSAGE'
+      return "NOTIFICATION_MESSAGE";
     case ProtocolMessage_Type.CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE:
-      return 'CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE'
+      return "CONTENT_ITEMS_CHANGED_NOTIFICATION_MESSAGE";
     case ProtocolMessage_Type.DEVICE_INFO_MESSAGE:
-      return 'DEVICE_INFO_MESSAGE'
+      return "DEVICE_INFO_MESSAGE";
     case ProtocolMessage_Type.CLIENT_UPDATES_CONFIG_MESSAGE:
-      return 'CLIENT_UPDATES_CONFIG_MESSAGE'
+      return "CLIENT_UPDATES_CONFIG_MESSAGE";
     case ProtocolMessage_Type.VOLUME_CONTROL_AVAILABILITY_MESSAGE:
-      return 'VOLUME_CONTROL_AVAILABILITY_MESSAGE'
+      return "VOLUME_CONTROL_AVAILABILITY_MESSAGE";
     case ProtocolMessage_Type.GAME_CONTROLLER_MESSAGE:
-      return 'GAME_CONTROLLER_MESSAGE'
+      return "GAME_CONTROLLER_MESSAGE";
     case ProtocolMessage_Type.REGISTER_GAME_CONTROLLER_MESSAGE:
-      return 'REGISTER_GAME_CONTROLLER_MESSAGE'
+      return "REGISTER_GAME_CONTROLLER_MESSAGE";
     case ProtocolMessage_Type.REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE:
-      return 'REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE'
+      return "REGISTER_GAME_CONTROLLER_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.UNREGISTER_GAME_CONTROLLER_MESSAGE:
-      return 'UNREGISTER_GAME_CONTROLLER_MESSAGE'
+      return "UNREGISTER_GAME_CONTROLLER_MESSAGE";
     case ProtocolMessage_Type.REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE:
-      return 'REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE'
+      return "REGISTER_FOR_GAME_CONTROLLER_EVENTS_MESSAGE";
     case ProtocolMessage_Type.KEYBOARD_MESSAGE:
-      return 'KEYBOARD_MESSAGE'
+      return "KEYBOARD_MESSAGE";
     case ProtocolMessage_Type.GET_KEYBOARD_SESSION_MESSAGE:
-      return 'GET_KEYBOARD_SESSION_MESSAGE'
+      return "GET_KEYBOARD_SESSION_MESSAGE";
     case ProtocolMessage_Type.TEXT_INPUT_MESSAGE:
-      return 'TEXT_INPUT_MESSAGE'
+      return "TEXT_INPUT_MESSAGE";
     case ProtocolMessage_Type.GET_VOICE_INPUT_DEVICES_MESSAGE:
-      return 'GET_VOICE_INPUT_DEVICES_MESSAGE'
+      return "GET_VOICE_INPUT_DEVICES_MESSAGE";
     case ProtocolMessage_Type.GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE:
-      return 'GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE'
+      return "GET_VOICE_INPUT_DEVICES_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.REGISTER_VOICE_INPUT_DEVICE_MESSAGE:
-      return 'REGISTER_VOICE_INPUT_DEVICE_MESSAGE'
+      return "REGISTER_VOICE_INPUT_DEVICE_MESSAGE";
     case ProtocolMessage_Type.REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE:
-      return 'REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE'
+      return "REGISTER_VOICE_INPUT_DEVICE_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.SET_RECORDING_STATE_MESSAGE:
-      return 'SET_RECORDING_STATE_MESSAGE'
+      return "SET_RECORDING_STATE_MESSAGE";
     case ProtocolMessage_Type.SEND_VOICE_INPUT_MESSAGE:
-      return 'SEND_VOICE_INPUT_MESSAGE'
+      return "SEND_VOICE_INPUT_MESSAGE";
     case ProtocolMessage_Type.PLAYBACK_QUEUE_REQUEST_MESSAGE:
-      return 'PLAYBACK_QUEUE_REQUEST_MESSAGE'
+      return "PLAYBACK_QUEUE_REQUEST_MESSAGE";
     case ProtocolMessage_Type.TRANSACTION_MESSAGE:
-      return 'TRANSACTION_MESSAGE'
+      return "TRANSACTION_MESSAGE";
     case ProtocolMessage_Type.CRYPTO_PAIRING_MESSAGE:
-      return 'CRYPTO_PAIRING_MESSAGE'
+      return "CRYPTO_PAIRING_MESSAGE";
     case ProtocolMessage_Type.GAME_CONTROLLER_PROPERTIES_MESSAGE:
-      return 'GAME_CONTROLLER_PROPERTIES_MESSAGE'
+      return "GAME_CONTROLLER_PROPERTIES_MESSAGE";
     case ProtocolMessage_Type.SET_READY_STATE_MESSAGE:
-      return 'SET_READY_STATE_MESSAGE'
+      return "SET_READY_STATE_MESSAGE";
     case ProtocolMessage_Type.DEVICE_INFO_UPDATE_MESSAGE:
-      return 'DEVICE_INFO_UPDATE_MESSAGE'
+      return "DEVICE_INFO_UPDATE_MESSAGE";
     case ProtocolMessage_Type.SET_CONNECTION_STATE_MESSAGE:
-      return 'SET_CONNECTION_STATE_MESSAGE'
+      return "SET_CONNECTION_STATE_MESSAGE";
     case ProtocolMessage_Type.SEND_BUTTON_EVENT_MESSAGE:
-      return 'SEND_BUTTON_EVENT_MESSAGE'
+      return "SEND_BUTTON_EVENT_MESSAGE";
     case ProtocolMessage_Type.SET_HILITE_MODE_MESSAGE:
-      return 'SET_HILITE_MODE_MESSAGE'
+      return "SET_HILITE_MODE_MESSAGE";
     case ProtocolMessage_Type.WAKE_DEVICE_MESSAGE:
-      return 'WAKE_DEVICE_MESSAGE'
+      return "WAKE_DEVICE_MESSAGE";
     case ProtocolMessage_Type.GENERIC_MESSAGE:
-      return 'GENERIC_MESSAGE'
+      return "GENERIC_MESSAGE";
     case ProtocolMessage_Type.SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE:
-      return 'SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE'
+      return "SEND_PACKED_VIRTUAL_TOUCH_EVENT_MESSAGE";
     case ProtocolMessage_Type.SEND_LYRICS_EVENT:
-      return 'SEND_LYRICS_EVENT'
+      return "SEND_LYRICS_EVENT";
     case ProtocolMessage_Type.SET_NOW_PLAYING_CLIENT_MESSAGE:
-      return 'SET_NOW_PLAYING_CLIENT_MESSAGE'
+      return "SET_NOW_PLAYING_CLIENT_MESSAGE";
     case ProtocolMessage_Type.SET_NOW_PLAYING_PLAYER_MESSAGE:
-      return 'SET_NOW_PLAYING_PLAYER_MESSAGE'
+      return "SET_NOW_PLAYING_PLAYER_MESSAGE";
     case ProtocolMessage_Type.MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE:
-      return 'MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE'
+      return "MODIFY_OUTPUT_CONTEXT_REQUEST_MESSAGE";
     case ProtocolMessage_Type.GET_VOLUME_MESSAGE:
-      return 'GET_VOLUME_MESSAGE'
+      return "GET_VOLUME_MESSAGE";
     case ProtocolMessage_Type.GET_VOLUME_RESULT_MESSAGE:
-      return 'GET_VOLUME_RESULT_MESSAGE'
+      return "GET_VOLUME_RESULT_MESSAGE";
     case ProtocolMessage_Type.SET_VOLUME_MESSAGE:
-      return 'SET_VOLUME_MESSAGE'
+      return "SET_VOLUME_MESSAGE";
     case ProtocolMessage_Type.VOLUME_DID_CHANGE_MESSAGE:
-      return 'VOLUME_DID_CHANGE_MESSAGE'
+      return "VOLUME_DID_CHANGE_MESSAGE";
     case ProtocolMessage_Type.REMOVE_CLIENT_MESSAGE:
-      return 'REMOVE_CLIENT_MESSAGE'
+      return "REMOVE_CLIENT_MESSAGE";
     case ProtocolMessage_Type.REMOVE_PLAYER_MESSAGE:
-      return 'REMOVE_PLAYER_MESSAGE'
+      return "REMOVE_PLAYER_MESSAGE";
     case ProtocolMessage_Type.UPDATE_CLIENT_MESSAGE:
-      return 'UPDATE_CLIENT_MESSAGE'
+      return "UPDATE_CLIENT_MESSAGE";
     case ProtocolMessage_Type.UPDATE_CONTENT_ITEM_MESSAGE:
-      return 'UPDATE_CONTENT_ITEM_MESSAGE'
+      return "UPDATE_CONTENT_ITEM_MESSAGE";
     case ProtocolMessage_Type.UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE:
-      return 'UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE'
+      return "UPDATE_CONTENT_ITEM_ARTWORK_MESSAGE";
     case ProtocolMessage_Type.UPDATE_PLAYER_MESSAGE:
-      return 'UPDATE_PLAYER_MESSAGE'
+      return "UPDATE_PLAYER_MESSAGE";
     case ProtocolMessage_Type.PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE:
-      return 'PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE'
+      return "PROMPT_FOR_ROUTE_AUTHORIZATION_MESSAGE";
     case ProtocolMessage_Type.PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE:
-      return 'PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE'
+      return "PROMPT_FOR_ROUTE_AUTHORIZATION_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE:
-      return 'PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE'
+      return "PRESENT_ROUTE_AUTHORIZATION_STATUS_MESSAGE";
     case ProtocolMessage_Type.GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE:
-      return 'GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE'
+      return "GET_VOLUME_CONTROL_CAPABILITIES_MESSAGE";
     case ProtocolMessage_Type.GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE:
-      return 'GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE'
+      return "GET_VOLUME_CONTROL_CAPABILITIES_RESULT_MESSAGE";
     case ProtocolMessage_Type.VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE:
-      return 'VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE'
+      return "VOLUME_CONTROL_CAPABILITIES_DID_CHANGE_MESSAGE";
     case ProtocolMessage_Type.UPDATE_OUTPUT_DEVICE_MESSAGE:
-      return 'UPDATE_OUTPUT_DEVICE_MESSAGE'
+      return "UPDATE_OUTPUT_DEVICE_MESSAGE";
     case ProtocolMessage_Type.REMOVE_OUTPUT_DEVICES_MESSAGE:
-      return 'REMOVE_OUTPUT_DEVICES_MESSAGE'
+      return "REMOVE_OUTPUT_DEVICES_MESSAGE";
     case ProtocolMessage_Type.REMOTE_TEXT_INPUT_MESSAGE:
-      return 'REMOTE_TEXT_INPUT_MESSAGE'
+      return "REMOTE_TEXT_INPUT_MESSAGE";
     case ProtocolMessage_Type.GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE:
-      return 'GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE'
+      return "GET_REMOTE_TEXT_INPUT_SESSION_MESSAGE";
     case ProtocolMessage_Type.REMOVE_OUTPUT_DEVICES_MESSAGE2:
-      return 'REMOVE_OUTPUT_DEVICES_MESSAGE2'
+      return "REMOVE_OUTPUT_DEVICES_MESSAGE2";
     case ProtocolMessage_Type.PLAYBACK_SESSION_REQUEST_MESSAGE:
-      return 'PLAYBACK_SESSION_REQUEST_MESSAGE'
+      return "PLAYBACK_SESSION_REQUEST_MESSAGE";
     case ProtocolMessage_Type.PLAYBACK_SESSION_RESPONSE_MESSAGE:
-      return 'PLAYBACK_SESSION_RESPONSE_MESSAGE'
+      return "PLAYBACK_SESSION_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE:
-      return 'SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE'
+      return "SET_DEFAULT_SUPPORTED_COMMANDS_MESSAGE";
     case ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE:
-      return 'PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE'
+      return "PLAYBACK_SESSION_MIGRATE_REQUEST_MESSAGE";
     case ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE:
-      return 'PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE'
+      return "PLAYBACK_SESSION_MIGRATE_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE:
-      return 'PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE'
+      return "PLAYBACK_SESSION_MIGRATE_BEGIN_MESSAGE";
     case ProtocolMessage_Type.PLAYBACK_SESSION_MIGRATE_END_MESSAGE:
-      return 'PLAYBACK_SESSION_MIGRATE_END_MESSAGE'
+      return "PLAYBACK_SESSION_MIGRATE_END_MESSAGE";
     case ProtocolMessage_Type.UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE:
-      return 'UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE'
+      return "UPDATE_ACTIVE_SYSTEM_ENDPOINT_MESSAGE";
     case ProtocolMessage_Type.SET_DISCOVERY_MODE_MESSAGE:
-      return 'SET_DISCOVERY_MODE_MESSAGE'
+      return "SET_DISCOVERY_MODE_MESSAGE";
     case ProtocolMessage_Type.UPDATE_END_POINTS_MESSAGE:
-      return 'UPDATE_END_POINTS_MESSAGE'
+      return "UPDATE_END_POINTS_MESSAGE";
     case ProtocolMessage_Type.REMOVE_ENDPOINTS_MESSAGE:
-      return 'REMOVE_ENDPOINTS_MESSAGE'
+      return "REMOVE_ENDPOINTS_MESSAGE";
     case ProtocolMessage_Type.PLAYER_CLIENT_PROPERTIES_MESSAGE:
-      return 'PLAYER_CLIENT_PROPERTIES_MESSAGE'
+      return "PLAYER_CLIENT_PROPERTIES_MESSAGE";
     case ProtocolMessage_Type.ORIGIN_CLIENT_PROPERTIES_MESSAGE:
-      return 'ORIGIN_CLIENT_PROPERTIES_MESSAGE'
+      return "ORIGIN_CLIENT_PROPERTIES_MESSAGE";
     case ProtocolMessage_Type.AUDIO_FADE_MESSAGE:
-      return 'AUDIO_FADE_MESSAGE'
+      return "AUDIO_FADE_MESSAGE";
     case ProtocolMessage_Type.AUDIO_FADE_RESPONSE_MESSAGE:
-      return 'AUDIO_FADE_RESPONSE_MESSAGE'
+      return "AUDIO_FADE_RESPONSE_MESSAGE";
     case ProtocolMessage_Type.CONFIGURE_CONNECTION_MESSAGE:
-      return 'CONFIGURE_CONNECTION_MESSAGE'
+      return "CONFIGURE_CONNECTION_MESSAGE";
     case ProtocolMessage_Type.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 function createBaseErrorCode(): ErrorCode {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const ErrorCode: MessageFns<ErrorCode> = {
-  encode(message: ErrorCode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ErrorCode,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ErrorCode {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseErrorCode()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseErrorCode();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): ErrorCode {
-    return {}
+    return {};
   },
 
   toJSON(_: ErrorCode): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<ErrorCode>, I>>(base?: I): ErrorCode {
-    return ErrorCode.fromPartial(base ?? ({} as any))
+    return ErrorCode.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<ErrorCode>, I>>(_: I): ErrorCode {
-    const message = createBaseErrorCode()
-    return message
+    const message = createBaseErrorCode();
+    return message;
   },
-}
+};
 
 function createBaseProtocolMessage(): ProtocolMessage {
   return {
     type: 0,
-    identifier: '',
-    authenticationToken: '',
+    identifier: "",
+    authenticationToken: "",
     errorCode: 0,
     timestamp: 0,
-    errorDescription: '',
-    uniqueIdentifier: '',
+    errorDescription: "",
+    uniqueIdentifier: "",
     _unknownFields: {},
-  }
+  };
 }
 
-export const ProtocolMessage: MessageFns<ProtocolMessage> & ExtensionFns<ProtocolMessage> = {
-  encode(message: ProtocolMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const ProtocolMessage: MessageFns<ProtocolMessage> &
+  ExtensionFns<ProtocolMessage> = {
+  encode(
+    message: ProtocolMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.type !== undefined && message.type !== 0) {
-      writer.uint32(8).int32(message.type)
+      writer.uint32(8).int32(message.type);
     }
-    if (message.identifier !== undefined && message.identifier !== '') {
-      writer.uint32(18).string(message.identifier)
+    if (message.identifier !== undefined && message.identifier !== "") {
+      writer.uint32(18).string(message.identifier);
     }
-    if (message.authenticationToken !== undefined && message.authenticationToken !== '') {
-      writer.uint32(26).string(message.authenticationToken)
+    if (
+      message.authenticationToken !== undefined &&
+      message.authenticationToken !== ""
+    ) {
+      writer.uint32(26).string(message.authenticationToken);
     }
     if (message.errorCode !== undefined && message.errorCode !== 0) {
-      writer.uint32(32).int32(message.errorCode)
+      writer.uint32(32).int32(message.errorCode);
     }
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      writer.uint32(40).uint64(message.timestamp)
+      writer.uint32(40).uint64(message.timestamp);
     }
-    if (message.errorDescription !== undefined && message.errorDescription !== '') {
-      writer.uint32(626).string(message.errorDescription)
+    if (
+      message.errorDescription !== undefined &&
+      message.errorDescription !== ""
+    ) {
+      writer.uint32(626).string(message.errorDescription);
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== '') {
-      writer.uint32(682).string(message.uniqueIdentifier)
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== ""
+    ) {
+      writer.uint32(682).string(message.uniqueIdentifier);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  setExtension<T>(message: ProtocolMessage, extension: Extension<T>, value: T): void {
-    const encoded = extension.encode!(value)
+  setExtension<T>(
+    message: ProtocolMessage,
+    extension: Extension<T>,
+    value: T
+  ): void {
+    const encoded = extension.encode!(value);
 
     if (message._unknownFields !== undefined) {
-      delete message._unknownFields[extension.tag]
+      delete message._unknownFields[extension.tag];
 
       if (extension.singularTag !== undefined) {
-        delete message._unknownFields[extension.singularTag]
+        delete message._unknownFields[extension.singularTag];
       }
       if (extension.packedTag !== undefined) {
-        delete message._unknownFields[extension.packedTag]
+        delete message._unknownFields[extension.packedTag];
       }
     }
 
     if (encoded.length !== 0) {
       if (message._unknownFields === undefined) {
-        message._unknownFields = {}
+        message._unknownFields = {};
       }
 
-      message._unknownFields[extension.tag] = encoded
+      message._unknownFields[extension.tag] = encoded;
     }
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ProtocolMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseProtocolMessage()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProtocolMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.type = reader.int32() as any
-          continue
+          message.type = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.identifier = reader.string()
-          continue
+          message.identifier = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.authenticationToken = reader.string()
-          continue
+          message.authenticationToken = reader.string();
+          continue;
         }
         case 4: {
           if (tag !== 32) {
-            break
+            break;
           }
 
-          message.errorCode = reader.int32() as any
-          continue
+          message.errorCode = reader.int32() as any;
+          continue;
         }
         case 5: {
           if (tag !== 40) {
-            break
+            break;
           }
 
-          message.timestamp = longToNumber(reader.uint64())
-          continue
+          message.timestamp = longToNumber(reader.uint64());
+          continue;
         }
         case 78: {
           if (tag !== 626) {
-            break
+            break;
           }
 
-          message.errorDescription = reader.string()
-          continue
+          message.errorDescription = reader.string();
+          continue;
         }
         case 85: {
           if (tag !== 682) {
-            break
+            break;
           }
 
-          message.uniqueIdentifier = reader.string()
-          continue
+          message.uniqueIdentifier = reader.string();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
-  getExtension<T>(message: ProtocolMessage, extension: Extension<T>): T | undefined {
-    let results: T | undefined = undefined
+  getExtension<T>(
+    message: ProtocolMessage,
+    extension: Extension<T>
+  ): T | undefined {
+    let results: T | undefined = undefined;
 
     if (message._unknownFields === undefined) {
-      return undefined
+      return undefined;
     }
 
-    let list = message._unknownFields[extension.tag]
+    let list = message._unknownFields[extension.tag];
 
     if (list !== undefined) {
-      results = extension.decode!(extension.tag, list)
+      results = extension.decode!(extension.tag, list);
     }
 
-    if (extension.singularTag === undefined || extension.packedTag === undefined) {
-      return results
+    if (
+      extension.singularTag === undefined ||
+      extension.packedTag === undefined
+    ) {
+      return results;
     }
 
     const nonDefaultTag =
-      extension.singularTag === extension.tag ? extension.packedTag : extension.singularTag
-    list = message._unknownFields[nonDefaultTag]
+      extension.singularTag === extension.tag
+        ? extension.packedTag
+        : extension.singularTag;
+    list = message._unknownFields[nonDefaultTag];
 
     if (list !== undefined) {
-      const results2 = extension.decode!(nonDefaultTag, list)
+      const results2 = extension.decode!(nonDefaultTag, list);
 
       if (results !== undefined && (results as any).length !== 0) {
-        results = (results as any).concat(results2)
+        results = (results as any).concat(results2);
       } else {
-        results = results2
+        results = results2;
       }
     }
 
-    return results
+    return results;
   },
 
   fromJSON(object: any): ProtocolMessage {
     return {
       type: isSet(object.type) ? protocolMessage_TypeFromJSON(object.type) : 0,
-      identifier: isSet(object.identifier) ? globalThis.String(object.identifier) : '',
+      identifier: isSet(object.identifier)
+        ? globalThis.String(object.identifier)
+        : "",
       authenticationToken: isSet(object.authenticationToken)
         ? globalThis.String(object.authenticationToken)
-        : '',
-      errorCode: isSet(object.errorCode) ? errorCode_EnumFromJSON(object.errorCode) : 0,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+        : "",
+      errorCode: isSet(object.errorCode)
+        ? errorCode_EnumFromJSON(object.errorCode)
+        : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
       errorDescription: isSet(object.errorDescription)
         ? globalThis.String(object.errorDescription)
-        : '',
+        : "",
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.String(object.uniqueIdentifier)
-        : '',
-    }
+        : "",
+    };
   },
 
   toJSON(message: ProtocolMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.type !== undefined && message.type !== 0) {
-      obj.type = protocolMessage_TypeToJSON(message.type)
+      obj.type = protocolMessage_TypeToJSON(message.type);
     }
-    if (message.identifier !== undefined && message.identifier !== '') {
-      obj.identifier = message.identifier
+    if (message.identifier !== undefined && message.identifier !== "") {
+      obj.identifier = message.identifier;
     }
-    if (message.authenticationToken !== undefined && message.authenticationToken !== '') {
-      obj.authenticationToken = message.authenticationToken
+    if (
+      message.authenticationToken !== undefined &&
+      message.authenticationToken !== ""
+    ) {
+      obj.authenticationToken = message.authenticationToken;
     }
     if (message.errorCode !== undefined && message.errorCode !== 0) {
-      obj.errorCode = errorCode_EnumToJSON(message.errorCode)
+      obj.errorCode = errorCode_EnumToJSON(message.errorCode);
     }
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      obj.timestamp = Math.round(message.timestamp)
+      obj.timestamp = Math.round(message.timestamp);
     }
-    if (message.errorDescription !== undefined && message.errorDescription !== '') {
-      obj.errorDescription = message.errorDescription
+    if (
+      message.errorDescription !== undefined &&
+      message.errorDescription !== ""
+    ) {
+      obj.errorDescription = message.errorDescription;
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== '') {
-      obj.uniqueIdentifier = message.uniqueIdentifier
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== ""
+    ) {
+      obj.uniqueIdentifier = message.uniqueIdentifier;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProtocolMessage>, I>>(base?: I): ProtocolMessage {
-    return ProtocolMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<ProtocolMessage>, I>>(
+    base?: I
+  ): ProtocolMessage {
+    return ProtocolMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ProtocolMessage>, I>>(object: I): ProtocolMessage {
-    const message = createBaseProtocolMessage()
-    message.type = object.type ?? 0
-    message.identifier = object.identifier ?? ''
-    message.authenticationToken = object.authenticationToken ?? ''
-    message.errorCode = object.errorCode ?? 0
-    message.timestamp = object.timestamp ?? 0
-    message.errorDescription = object.errorDescription ?? ''
-    message.uniqueIdentifier = object.uniqueIdentifier ?? ''
-    return message
+  fromPartial<I extends Exact<DeepPartial<ProtocolMessage>, I>>(
+    object: I
+  ): ProtocolMessage {
+    const message = createBaseProtocolMessage();
+    message.type = object.type ?? 0;
+    message.identifier = object.identifier ?? "";
+    message.authenticationToken = object.authenticationToken ?? "";
+    message.errorCode = object.errorCode ?? 0;
+    message.timestamp = object.timestamp ?? 0;
+    message.errorDescription = object.errorDescription ?? "";
+    message.uniqueIdentifier = object.uniqueIdentifier ?? "";
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1253,49 +1317,51 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString())
+  const num = globalThis.Number(int64.toString());
   if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
   if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is smaller than Number.MIN_SAFE_INTEGER')
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
   }
-  return num
+  return num;
 }
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }
 
 export interface ExtensionFns<T> {
-  setExtension<E>(message: T, extension: Extension<E>, value: E): void
-  getExtension<E>(message: T, extension: Extension<E>): E | undefined
+  setExtension<E>(message: T, extension: Extension<E>, value: E): void;
+  getExtension<E>(message: T, extension: Extension<E>): E | undefined;
 }

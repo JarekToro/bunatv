@@ -13,4 +13,3 @@ message ClientUpdatesConfigMessage {
   optional bool keyboardUpdates = 4;
   optional bool outputDeviceUpdates = 5;
 }
-

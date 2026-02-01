@@ -5,7 +5,7 @@
 // source: CommandInfo.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import {
   RepeatMode_Enum,
   repeatMode_EnumFromJSON,
@@ -13,9 +13,9 @@ import {
   ShuffleMode_Enum,
   shuffleMode_EnumFromJSON,
   shuffleMode_EnumToJSON,
-} from './Common'
+} from "./Common";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export enum Command {
   Unknown = 0,
@@ -80,302 +80,302 @@ export enum Command {
 export function commandFromJSON(object: any): Command {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return Command.Unknown
+    case "Unknown":
+      return Command.Unknown;
     case 1:
-    case 'Play':
-      return Command.Play
+    case "Play":
+      return Command.Play;
     case 2:
-    case 'Pause':
-      return Command.Pause
+    case "Pause":
+      return Command.Pause;
     case 3:
-    case 'TogglePlayPause':
-      return Command.TogglePlayPause
+    case "TogglePlayPause":
+      return Command.TogglePlayPause;
     case 4:
-    case 'Stop':
-      return Command.Stop
+    case "Stop":
+      return Command.Stop;
     case 5:
-    case 'NextTrack':
-      return Command.NextTrack
+    case "NextTrack":
+      return Command.NextTrack;
     case 6:
-    case 'PreviousTrack':
-      return Command.PreviousTrack
+    case "PreviousTrack":
+      return Command.PreviousTrack;
     case 7:
-    case 'AdvanceShuffleMode':
-      return Command.AdvanceShuffleMode
+    case "AdvanceShuffleMode":
+      return Command.AdvanceShuffleMode;
     case 8:
-    case 'AdvanceRepeatMode':
-      return Command.AdvanceRepeatMode
+    case "AdvanceRepeatMode":
+      return Command.AdvanceRepeatMode;
     case 9:
-    case 'BeginFastForward':
-      return Command.BeginFastForward
+    case "BeginFastForward":
+      return Command.BeginFastForward;
     case 10:
-    case 'EndFastForward':
-      return Command.EndFastForward
+    case "EndFastForward":
+      return Command.EndFastForward;
     case 11:
-    case 'BeginRewind':
-      return Command.BeginRewind
+    case "BeginRewind":
+      return Command.BeginRewind;
     case 12:
-    case 'EndRewind':
-      return Command.EndRewind
+    case "EndRewind":
+      return Command.EndRewind;
     case 13:
-    case 'Rewind15Seconds':
-      return Command.Rewind15Seconds
+    case "Rewind15Seconds":
+      return Command.Rewind15Seconds;
     case 14:
-    case 'FastForward15Seconds':
-      return Command.FastForward15Seconds
+    case "FastForward15Seconds":
+      return Command.FastForward15Seconds;
     case 15:
-    case 'Rewind30Seconds':
-      return Command.Rewind30Seconds
+    case "Rewind30Seconds":
+      return Command.Rewind30Seconds;
     case 16:
-    case 'FastForward30Seconds':
-      return Command.FastForward30Seconds
+    case "FastForward30Seconds":
+      return Command.FastForward30Seconds;
     case 18:
-    case 'SkipForward':
-      return Command.SkipForward
+    case "SkipForward":
+      return Command.SkipForward;
     case 19:
-    case 'SkipBackward':
-      return Command.SkipBackward
+    case "SkipBackward":
+      return Command.SkipBackward;
     case 20:
-    case 'ChangePlaybackRate':
-      return Command.ChangePlaybackRate
+    case "ChangePlaybackRate":
+      return Command.ChangePlaybackRate;
     case 21:
-    case 'RateTrack':
-      return Command.RateTrack
+    case "RateTrack":
+      return Command.RateTrack;
     case 22:
-    case 'LikeTrack':
-      return Command.LikeTrack
+    case "LikeTrack":
+      return Command.LikeTrack;
     case 23:
-    case 'DislikeTrack':
-      return Command.DislikeTrack
+    case "DislikeTrack":
+      return Command.DislikeTrack;
     case 24:
-    case 'BookmarkTrack':
-      return Command.BookmarkTrack
+    case "BookmarkTrack":
+      return Command.BookmarkTrack;
     case 45:
-    case 'SeekToPlaybackPosition':
-      return Command.SeekToPlaybackPosition
+    case "SeekToPlaybackPosition":
+      return Command.SeekToPlaybackPosition;
     case 46:
-    case 'ChangeRepeatMode':
-      return Command.ChangeRepeatMode
+    case "ChangeRepeatMode":
+      return Command.ChangeRepeatMode;
     case 47:
-    case 'ChangeShuffleMode':
-      return Command.ChangeShuffleMode
+    case "ChangeShuffleMode":
+      return Command.ChangeShuffleMode;
     case 53:
-    case 'EnableLanguageOption':
-      return Command.EnableLanguageOption
+    case "EnableLanguageOption":
+      return Command.EnableLanguageOption;
     case 54:
-    case 'DisableLanguageOption':
-      return Command.DisableLanguageOption
+    case "DisableLanguageOption":
+      return Command.DisableLanguageOption;
     case 25:
-    case 'NextChapter':
-      return Command.NextChapter
+    case "NextChapter":
+      return Command.NextChapter;
     case 26:
-    case 'PreviousChapter':
-      return Command.PreviousChapter
+    case "PreviousChapter":
+      return Command.PreviousChapter;
     case 27:
-    case 'NextAlbum':
-      return Command.NextAlbum
+    case "NextAlbum":
+      return Command.NextAlbum;
     case 28:
-    case 'PreviousAlbum':
-      return Command.PreviousAlbum
+    case "PreviousAlbum":
+      return Command.PreviousAlbum;
     case 29:
-    case 'NextPlaylist':
-      return Command.NextPlaylist
+    case "NextPlaylist":
+      return Command.NextPlaylist;
     case 30:
-    case 'PreviousPlaylist':
-      return Command.PreviousPlaylist
+    case "PreviousPlaylist":
+      return Command.PreviousPlaylist;
     case 31:
-    case 'BanTrack':
-      return Command.BanTrack
+    case "BanTrack":
+      return Command.BanTrack;
     case 32:
-    case 'AddTrackToWishList':
-      return Command.AddTrackToWishList
+    case "AddTrackToWishList":
+      return Command.AddTrackToWishList;
     case 33:
-    case 'RemoveTrackFromWishList':
-      return Command.RemoveTrackFromWishList
+    case "RemoveTrackFromWishList":
+      return Command.RemoveTrackFromWishList;
     case 34:
-    case 'NextInContext':
-      return Command.NextInContext
+    case "NextInContext":
+      return Command.NextInContext;
     case 35:
-    case 'PreviousInContext':
-      return Command.PreviousInContext
+    case "PreviousInContext":
+      return Command.PreviousInContext;
     case 41:
-    case 'ResetPlaybackTimeout':
-      return Command.ResetPlaybackTimeout
+    case "ResetPlaybackTimeout":
+      return Command.ResetPlaybackTimeout;
     case 48:
-    case 'SetPlaybackQueue':
-      return Command.SetPlaybackQueue
+    case "SetPlaybackQueue":
+      return Command.SetPlaybackQueue;
     case 49:
-    case 'AddNowPlayingItemToLibrary':
-      return Command.AddNowPlayingItemToLibrary
+    case "AddNowPlayingItemToLibrary":
+      return Command.AddNowPlayingItemToLibrary;
     case 50:
-    case 'CreateRadioStation':
-      return Command.CreateRadioStation
+    case "CreateRadioStation":
+      return Command.CreateRadioStation;
     case 51:
-    case 'AddItemToLibrary':
-      return Command.AddItemToLibrary
+    case "AddItemToLibrary":
+      return Command.AddItemToLibrary;
     case 52:
-    case 'InsertIntoPlaybackQueue':
-      return Command.InsertIntoPlaybackQueue
+    case "InsertIntoPlaybackQueue":
+      return Command.InsertIntoPlaybackQueue;
     case 55:
-    case 'ReorderPlaybackQueue':
-      return Command.ReorderPlaybackQueue
+    case "ReorderPlaybackQueue":
+      return Command.ReorderPlaybackQueue;
     case 56:
-    case 'RemoveFromPlaybackQueue':
-      return Command.RemoveFromPlaybackQueue
+    case "RemoveFromPlaybackQueue":
+      return Command.RemoveFromPlaybackQueue;
     case 57:
-    case 'PlayItemInPlaybackQueue':
-      return Command.PlayItemInPlaybackQueue
+    case "PlayItemInPlaybackQueue":
+      return Command.PlayItemInPlaybackQueue;
     case 58:
-    case 'PrepareForSetQueue':
-      return Command.PrepareForSetQueue
+    case "PrepareForSetQueue":
+      return Command.PrepareForSetQueue;
     case 59:
-    case 'SetPlaybackSession':
-      return Command.SetPlaybackSession
+    case "SetPlaybackSession":
+      return Command.SetPlaybackSession;
     case 60:
-    case 'PreloadedPlaybackSession':
-      return Command.PreloadedPlaybackSession
+    case "PreloadedPlaybackSession":
+      return Command.PreloadedPlaybackSession;
     case 61:
-    case 'SetPriorityForPlaybackSession':
-      return Command.SetPriorityForPlaybackSession
+    case "SetPriorityForPlaybackSession":
+      return Command.SetPriorityForPlaybackSession;
     case 62:
-    case 'DiscardPlaybackSession':
-      return Command.DiscardPlaybackSession
+    case "DiscardPlaybackSession":
+      return Command.DiscardPlaybackSession;
     case 63:
-    case 'Reshuffle':
-      return Command.Reshuffle
+    case "Reshuffle":
+      return Command.Reshuffle;
     case 135:
-    case 'ChangeQueueEndAction':
-      return Command.ChangeQueueEndAction
+    case "ChangeQueueEndAction":
+      return Command.ChangeQueueEndAction;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return Command.UNRECOGNIZED
+      return Command.UNRECOGNIZED;
   }
 }
 
 export function commandToJSON(object: Command): string {
   switch (object) {
     case Command.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case Command.Play:
-      return 'Play'
+      return "Play";
     case Command.Pause:
-      return 'Pause'
+      return "Pause";
     case Command.TogglePlayPause:
-      return 'TogglePlayPause'
+      return "TogglePlayPause";
     case Command.Stop:
-      return 'Stop'
+      return "Stop";
     case Command.NextTrack:
-      return 'NextTrack'
+      return "NextTrack";
     case Command.PreviousTrack:
-      return 'PreviousTrack'
+      return "PreviousTrack";
     case Command.AdvanceShuffleMode:
-      return 'AdvanceShuffleMode'
+      return "AdvanceShuffleMode";
     case Command.AdvanceRepeatMode:
-      return 'AdvanceRepeatMode'
+      return "AdvanceRepeatMode";
     case Command.BeginFastForward:
-      return 'BeginFastForward'
+      return "BeginFastForward";
     case Command.EndFastForward:
-      return 'EndFastForward'
+      return "EndFastForward";
     case Command.BeginRewind:
-      return 'BeginRewind'
+      return "BeginRewind";
     case Command.EndRewind:
-      return 'EndRewind'
+      return "EndRewind";
     case Command.Rewind15Seconds:
-      return 'Rewind15Seconds'
+      return "Rewind15Seconds";
     case Command.FastForward15Seconds:
-      return 'FastForward15Seconds'
+      return "FastForward15Seconds";
     case Command.Rewind30Seconds:
-      return 'Rewind30Seconds'
+      return "Rewind30Seconds";
     case Command.FastForward30Seconds:
-      return 'FastForward30Seconds'
+      return "FastForward30Seconds";
     case Command.SkipForward:
-      return 'SkipForward'
+      return "SkipForward";
     case Command.SkipBackward:
-      return 'SkipBackward'
+      return "SkipBackward";
     case Command.ChangePlaybackRate:
-      return 'ChangePlaybackRate'
+      return "ChangePlaybackRate";
     case Command.RateTrack:
-      return 'RateTrack'
+      return "RateTrack";
     case Command.LikeTrack:
-      return 'LikeTrack'
+      return "LikeTrack";
     case Command.DislikeTrack:
-      return 'DislikeTrack'
+      return "DislikeTrack";
     case Command.BookmarkTrack:
-      return 'BookmarkTrack'
+      return "BookmarkTrack";
     case Command.SeekToPlaybackPosition:
-      return 'SeekToPlaybackPosition'
+      return "SeekToPlaybackPosition";
     case Command.ChangeRepeatMode:
-      return 'ChangeRepeatMode'
+      return "ChangeRepeatMode";
     case Command.ChangeShuffleMode:
-      return 'ChangeShuffleMode'
+      return "ChangeShuffleMode";
     case Command.EnableLanguageOption:
-      return 'EnableLanguageOption'
+      return "EnableLanguageOption";
     case Command.DisableLanguageOption:
-      return 'DisableLanguageOption'
+      return "DisableLanguageOption";
     case Command.NextChapter:
-      return 'NextChapter'
+      return "NextChapter";
     case Command.PreviousChapter:
-      return 'PreviousChapter'
+      return "PreviousChapter";
     case Command.NextAlbum:
-      return 'NextAlbum'
+      return "NextAlbum";
     case Command.PreviousAlbum:
-      return 'PreviousAlbum'
+      return "PreviousAlbum";
     case Command.NextPlaylist:
-      return 'NextPlaylist'
+      return "NextPlaylist";
     case Command.PreviousPlaylist:
-      return 'PreviousPlaylist'
+      return "PreviousPlaylist";
     case Command.BanTrack:
-      return 'BanTrack'
+      return "BanTrack";
     case Command.AddTrackToWishList:
-      return 'AddTrackToWishList'
+      return "AddTrackToWishList";
     case Command.RemoveTrackFromWishList:
-      return 'RemoveTrackFromWishList'
+      return "RemoveTrackFromWishList";
     case Command.NextInContext:
-      return 'NextInContext'
+      return "NextInContext";
     case Command.PreviousInContext:
-      return 'PreviousInContext'
+      return "PreviousInContext";
     case Command.ResetPlaybackTimeout:
-      return 'ResetPlaybackTimeout'
+      return "ResetPlaybackTimeout";
     case Command.SetPlaybackQueue:
-      return 'SetPlaybackQueue'
+      return "SetPlaybackQueue";
     case Command.AddNowPlayingItemToLibrary:
-      return 'AddNowPlayingItemToLibrary'
+      return "AddNowPlayingItemToLibrary";
     case Command.CreateRadioStation:
-      return 'CreateRadioStation'
+      return "CreateRadioStation";
     case Command.AddItemToLibrary:
-      return 'AddItemToLibrary'
+      return "AddItemToLibrary";
     case Command.InsertIntoPlaybackQueue:
-      return 'InsertIntoPlaybackQueue'
+      return "InsertIntoPlaybackQueue";
     case Command.ReorderPlaybackQueue:
-      return 'ReorderPlaybackQueue'
+      return "ReorderPlaybackQueue";
     case Command.RemoveFromPlaybackQueue:
-      return 'RemoveFromPlaybackQueue'
+      return "RemoveFromPlaybackQueue";
     case Command.PlayItemInPlaybackQueue:
-      return 'PlayItemInPlaybackQueue'
+      return "PlayItemInPlaybackQueue";
     case Command.PrepareForSetQueue:
-      return 'PrepareForSetQueue'
+      return "PrepareForSetQueue";
     case Command.SetPlaybackSession:
-      return 'SetPlaybackSession'
+      return "SetPlaybackSession";
     case Command.PreloadedPlaybackSession:
-      return 'PreloadedPlaybackSession'
+      return "PreloadedPlaybackSession";
     case Command.SetPriorityForPlaybackSession:
-      return 'SetPriorityForPlaybackSession'
+      return "SetPriorityForPlaybackSession";
     case Command.DiscardPlaybackSession:
-      return 'DiscardPlaybackSession'
+      return "DiscardPlaybackSession";
     case Command.Reshuffle:
-      return 'Reshuffle'
+      return "Reshuffle";
     case Command.ChangeQueueEndAction:
-      return 'ChangeQueueEndAction'
+      return "ChangeQueueEndAction";
     case Command.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface QueueEndAction {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum QueueEndAction_Enum {
@@ -389,42 +389,42 @@ export enum QueueEndAction_Enum {
 export function queueEndAction_EnumFromJSON(object: any): QueueEndAction_Enum {
   switch (object) {
     case 0:
-    case 'ClearAction':
-      return QueueEndAction_Enum.ClearAction
+    case "ClearAction":
+      return QueueEndAction_Enum.ClearAction;
     case 1:
-    case 'None':
-      return QueueEndAction_Enum.None
+    case "None":
+      return QueueEndAction_Enum.None;
     case 2:
-    case 'Reset':
-      return QueueEndAction_Enum.Reset
+    case "Reset":
+      return QueueEndAction_Enum.Reset;
     case 3:
-    case 'AutoPlay':
-      return QueueEndAction_Enum.AutoPlay
+    case "AutoPlay":
+      return QueueEndAction_Enum.AutoPlay;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return QueueEndAction_Enum.UNRECOGNIZED
+      return QueueEndAction_Enum.UNRECOGNIZED;
   }
 }
 
 export function queueEndAction_EnumToJSON(object: QueueEndAction_Enum): string {
   switch (object) {
     case QueueEndAction_Enum.ClearAction:
-      return 'ClearAction'
+      return "ClearAction";
     case QueueEndAction_Enum.None:
-      return 'None'
+      return "None";
     case QueueEndAction_Enum.Reset:
-      return 'Reset'
+      return "Reset";
     case QueueEndAction_Enum.AutoPlay:
-      return 'AutoPlay'
+      return "AutoPlay";
     case QueueEndAction_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface DisableReason {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum DisableReason_Enum {
@@ -437,324 +437,366 @@ export enum DisableReason_Enum {
 export function disableReason_EnumFromJSON(object: any): DisableReason_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return DisableReason_Enum.Unknown
+    case "Unknown":
+      return DisableReason_Enum.Unknown;
     case 1:
-    case 'AdPlayback':
-      return DisableReason_Enum.AdPlayback
+    case "AdPlayback":
+      return DisableReason_Enum.AdPlayback;
     case 2:
-    case 'SkipLimitReached':
-      return DisableReason_Enum.SkipLimitReached
+    case "SkipLimitReached":
+      return DisableReason_Enum.SkipLimitReached;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return DisableReason_Enum.UNRECOGNIZED
+      return DisableReason_Enum.UNRECOGNIZED;
   }
 }
 
 export function disableReason_EnumToJSON(object: DisableReason_Enum): string {
   switch (object) {
     case DisableReason_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case DisableReason_Enum.AdPlayback:
-      return 'AdPlayback'
+      return "AdPlayback";
     case DisableReason_Enum.SkipLimitReached:
-      return 'SkipLimitReached'
+      return "SkipLimitReached";
     case DisableReason_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface PreloadedPlaybackSessionInfo {
-  playbackSessionIdentifier?: string | undefined
-  playbackSessionRevision?: string | undefined
-  playbackSessionPriority?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  playbackSessionIdentifier?: string | undefined;
+  playbackSessionRevision?: string | undefined;
+  playbackSessionPriority?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface CommandInfo {
-  command?: Command | undefined
-  enabled?: boolean | undefined
-  active?: boolean | undefined
-  preferredIntervals: number[]
-  localizedTitle?: string | undefined
-  minimumRating?: number | undefined
-  maximumRating?: number | undefined
-  supportedRates: number[]
-  localizedShortTitle?: string | undefined
-  repeatMode?: RepeatMode_Enum | undefined
-  shuffleMode?: ShuffleMode_Enum | undefined
-  presentationStyle?: number | undefined
-  skipInterval?: number | undefined
-  numAvailableSkips?: number | undefined
-  skipFrequency?: number | undefined
-  canScrub?: number | undefined
-  supportedPlaybackQueueTypes: number[]
-  supportedCustomQueueIdentifiers: string[]
-  supportedInsertionPositions: number[]
-  supportsSharedQueue?: boolean | undefined
-  upNextItemCount?: number | undefined
-  preferredPlaybackRate?: number | undefined
-  supportedPlaybackSessionTypes: string[]
-  currentPlaybackSessionTypes: string[]
-  playbackSessionIdentifier?: string | undefined
-  currentQueueEndAction?: QueueEndAction_Enum | undefined
-  supportedEndQueueActions: QueueEndAction_Enum[]
-  disableReason?: DisableReason_Enum | undefined
-  supportedPlaybackSessionIdentifiers: PreloadedPlaybackSessionInfo[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  command?: Command | undefined;
+  enabled?: boolean | undefined;
+  active?: boolean | undefined;
+  preferredIntervals: number[];
+  localizedTitle?: string | undefined;
+  minimumRating?: number | undefined;
+  maximumRating?: number | undefined;
+  supportedRates: number[];
+  localizedShortTitle?: string | undefined;
+  repeatMode?: RepeatMode_Enum | undefined;
+  shuffleMode?: ShuffleMode_Enum | undefined;
+  presentationStyle?: number | undefined;
+  skipInterval?: number | undefined;
+  numAvailableSkips?: number | undefined;
+  skipFrequency?: number | undefined;
+  canScrub?: number | undefined;
+  supportedPlaybackQueueTypes: number[];
+  supportedCustomQueueIdentifiers: string[];
+  supportedInsertionPositions: number[];
+  supportsSharedQueue?: boolean | undefined;
+  upNextItemCount?: number | undefined;
+  preferredPlaybackRate?: number | undefined;
+  supportedPlaybackSessionTypes: string[];
+  currentPlaybackSessionTypes: string[];
+  playbackSessionIdentifier?: string | undefined;
+  currentQueueEndAction?: QueueEndAction_Enum | undefined;
+  supportedEndQueueActions: QueueEndAction_Enum[];
+  disableReason?: DisableReason_Enum | undefined;
+  supportedPlaybackSessionIdentifiers: PreloadedPlaybackSessionInfo[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseQueueEndAction(): QueueEndAction {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const QueueEndAction: MessageFns<QueueEndAction> = {
-  encode(message: QueueEndAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: QueueEndAction,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): QueueEndAction {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseQueueEndAction()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueueEndAction();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): QueueEndAction {
-    return {}
+    return {};
   },
 
   toJSON(_: QueueEndAction): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<QueueEndAction>, I>>(base?: I): QueueEndAction {
-    return QueueEndAction.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<QueueEndAction>, I>>(
+    base?: I
+  ): QueueEndAction {
+    return QueueEndAction.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<QueueEndAction>, I>>(_: I): QueueEndAction {
-    const message = createBaseQueueEndAction()
-    return message
+  fromPartial<I extends Exact<DeepPartial<QueueEndAction>, I>>(
+    _: I
+  ): QueueEndAction {
+    const message = createBaseQueueEndAction();
+    return message;
   },
-}
+};
 
 function createBaseDisableReason(): DisableReason {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const DisableReason: MessageFns<DisableReason> = {
-  encode(message: DisableReason, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DisableReason,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DisableReason {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseDisableReason()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisableReason();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): DisableReason {
-    return {}
+    return {};
   },
 
   toJSON(_: DisableReason): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<DisableReason>, I>>(base?: I): DisableReason {
-    return DisableReason.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<DisableReason>, I>>(
+    base?: I
+  ): DisableReason {
+    return DisableReason.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DisableReason>, I>>(_: I): DisableReason {
-    const message = createBaseDisableReason()
-    return message
+  fromPartial<I extends Exact<DeepPartial<DisableReason>, I>>(
+    _: I
+  ): DisableReason {
+    const message = createBaseDisableReason();
+    return message;
   },
-}
+};
 
 function createBasePreloadedPlaybackSessionInfo(): PreloadedPlaybackSessionInfo {
   return {
-    playbackSessionIdentifier: '',
-    playbackSessionRevision: '',
+    playbackSessionIdentifier: "",
+    playbackSessionRevision: "",
     playbackSessionPriority: 0,
     _unknownFields: {},
-  }
+  };
 }
 
-export const PreloadedPlaybackSessionInfo: MessageFns<PreloadedPlaybackSessionInfo> = {
-  encode(
-    message: PreloadedPlaybackSessionInfo,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (
-      message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ''
-    ) {
-      writer.uint32(10).string(message.playbackSessionIdentifier)
-    }
-    if (message.playbackSessionRevision !== undefined && message.playbackSessionRevision !== '') {
-      writer.uint32(18).string(message.playbackSessionRevision)
-    }
-    if (message.playbackSessionPriority !== undefined && message.playbackSessionPriority !== 0) {
-      writer.uint32(24).int32(message.playbackSessionPriority)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const PreloadedPlaybackSessionInfo: MessageFns<PreloadedPlaybackSessionInfo> =
+  {
+    encode(
+      message: PreloadedPlaybackSessionInfo,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (
+        message.playbackSessionIdentifier !== undefined &&
+        message.playbackSessionIdentifier !== ""
+      ) {
+        writer.uint32(10).string(message.playbackSessionIdentifier);
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): PreloadedPlaybackSessionInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBasePreloadedPlaybackSessionInfo()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break
+      if (
+        message.playbackSessionRevision !== undefined &&
+        message.playbackSessionRevision !== ""
+      ) {
+        writer.uint32(18).string(message.playbackSessionRevision);
+      }
+      if (
+        message.playbackSessionPriority !== undefined &&
+        message.playbackSessionPriority !== 0
+      ) {
+        writer.uint32(24).int32(message.playbackSessionPriority);
+      }
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.playbackSessionIdentifier = reader.string()
-          continue
         }
-        case 2: {
-          if (tag !== 18) {
-            break
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): PreloadedPlaybackSessionInfo {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePreloadedPlaybackSessionInfo();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.playbackSessionIdentifier = reader.string();
+            continue;
           }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-          message.playbackSessionRevision = reader.string()
-          continue
-        }
-        case 3: {
-          if (tag !== 24) {
-            break
+            message.playbackSessionRevision = reader.string();
+            continue;
           }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
 
-          message.playbackSessionPriority = reader.int32()
-          continue
+            message.playbackSessionPriority = reader.int32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return message;
+    },
+
+    fromJSON(object: any): PreloadedPlaybackSessionInfo {
+      return {
+        playbackSessionIdentifier: isSet(object.playbackSessionIdentifier)
+          ? globalThis.String(object.playbackSessionIdentifier)
+          : "",
+        playbackSessionRevision: isSet(object.playbackSessionRevision)
+          ? globalThis.String(object.playbackSessionRevision)
+          : "",
+        playbackSessionPriority: isSet(object.playbackSessionPriority)
+          ? globalThis.Number(object.playbackSessionPriority)
+          : 0,
+      };
+    },
+
+    toJSON(message: PreloadedPlaybackSessionInfo): unknown {
+      const obj: any = {};
+      if (
+        message.playbackSessionIdentifier !== undefined &&
+        message.playbackSessionIdentifier !== ""
+      ) {
+        obj.playbackSessionIdentifier = message.playbackSessionIdentifier;
       }
-      const buf = reader.skip(tag & 7)
-
-      const list = message._unknownFields![tag]
-
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+      if (
+        message.playbackSessionRevision !== undefined &&
+        message.playbackSessionRevision !== ""
+      ) {
+        obj.playbackSessionRevision = message.playbackSessionRevision;
       }
-    }
-    return message
-  },
+      if (
+        message.playbackSessionPriority !== undefined &&
+        message.playbackSessionPriority !== 0
+      ) {
+        obj.playbackSessionPriority = Math.round(
+          message.playbackSessionPriority
+        );
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): PreloadedPlaybackSessionInfo {
-    return {
-      playbackSessionIdentifier: isSet(object.playbackSessionIdentifier)
-        ? globalThis.String(object.playbackSessionIdentifier)
-        : '',
-      playbackSessionRevision: isSet(object.playbackSessionRevision)
-        ? globalThis.String(object.playbackSessionRevision)
-        : '',
-      playbackSessionPriority: isSet(object.playbackSessionPriority)
-        ? globalThis.Number(object.playbackSessionPriority)
-        : 0,
-    }
-  },
-
-  toJSON(message: PreloadedPlaybackSessionInfo): unknown {
-    const obj: any = {}
-    if (
-      message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ''
-    ) {
-      obj.playbackSessionIdentifier = message.playbackSessionIdentifier
-    }
-    if (message.playbackSessionRevision !== undefined && message.playbackSessionRevision !== '') {
-      obj.playbackSessionRevision = message.playbackSessionRevision
-    }
-    if (message.playbackSessionPriority !== undefined && message.playbackSessionPriority !== 0) {
-      obj.playbackSessionPriority = Math.round(message.playbackSessionPriority)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<PreloadedPlaybackSessionInfo>, I>>(
-    base?: I
-  ): PreloadedPlaybackSessionInfo {
-    return PreloadedPlaybackSessionInfo.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<PreloadedPlaybackSessionInfo>, I>>(
-    object: I
-  ): PreloadedPlaybackSessionInfo {
-    const message = createBasePreloadedPlaybackSessionInfo()
-    message.playbackSessionIdentifier = object.playbackSessionIdentifier ?? ''
-    message.playbackSessionRevision = object.playbackSessionRevision ?? ''
-    message.playbackSessionPriority = object.playbackSessionPriority ?? 0
-    return message
-  },
-}
+    create<I extends Exact<DeepPartial<PreloadedPlaybackSessionInfo>, I>>(
+      base?: I
+    ): PreloadedPlaybackSessionInfo {
+      return PreloadedPlaybackSessionInfo.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<PreloadedPlaybackSessionInfo>, I>>(
+      object: I
+    ): PreloadedPlaybackSessionInfo {
+      const message = createBasePreloadedPlaybackSessionInfo();
+      message.playbackSessionIdentifier =
+        object.playbackSessionIdentifier ?? "";
+      message.playbackSessionRevision = object.playbackSessionRevision ?? "";
+      message.playbackSessionPriority = object.playbackSessionPriority ?? 0;
+      return message;
+    },
+  };
 
 function createBaseCommandInfo(): CommandInfo {
   return {
@@ -762,11 +804,11 @@ function createBaseCommandInfo(): CommandInfo {
     enabled: false,
     active: false,
     preferredIntervals: [],
-    localizedTitle: '',
+    localizedTitle: "",
     minimumRating: 0,
     maximumRating: 0,
     supportedRates: [],
-    localizedShortTitle: '',
+    localizedShortTitle: "",
     repeatMode: 0,
     shuffleMode: 0,
     presentationStyle: 0,
@@ -782,464 +824,517 @@ function createBaseCommandInfo(): CommandInfo {
     preferredPlaybackRate: 0,
     supportedPlaybackSessionTypes: [],
     currentPlaybackSessionTypes: [],
-    playbackSessionIdentifier: '',
+    playbackSessionIdentifier: "",
     currentQueueEndAction: 0,
     supportedEndQueueActions: [],
     disableReason: 0,
     supportedPlaybackSessionIdentifiers: [],
     _unknownFields: {},
-  }
+  };
 }
 
 export const CommandInfo: MessageFns<CommandInfo> = {
-  encode(message: CommandInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CommandInfo,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.command !== undefined && message.command !== 0) {
-      writer.uint32(8).int32(message.command)
+      writer.uint32(8).int32(message.command);
     }
     if (message.enabled !== undefined && message.enabled !== false) {
-      writer.uint32(16).bool(message.enabled)
+      writer.uint32(16).bool(message.enabled);
     }
     if (message.active !== undefined && message.active !== false) {
-      writer.uint32(24).bool(message.active)
+      writer.uint32(24).bool(message.active);
     }
     for (const v of message.preferredIntervals) {
-      writer.uint32(33).double(v!)
+      writer.uint32(33).double(v!);
     }
-    if (message.localizedTitle !== undefined && message.localizedTitle !== '') {
-      writer.uint32(42).string(message.localizedTitle)
+    if (message.localizedTitle !== undefined && message.localizedTitle !== "") {
+      writer.uint32(42).string(message.localizedTitle);
     }
     if (message.minimumRating !== undefined && message.minimumRating !== 0) {
-      writer.uint32(53).float(message.minimumRating)
+      writer.uint32(53).float(message.minimumRating);
     }
     if (message.maximumRating !== undefined && message.maximumRating !== 0) {
-      writer.uint32(61).float(message.maximumRating)
+      writer.uint32(61).float(message.maximumRating);
     }
     for (const v of message.supportedRates) {
-      writer.uint32(69).float(v!)
+      writer.uint32(69).float(v!);
     }
-    if (message.localizedShortTitle !== undefined && message.localizedShortTitle !== '') {
-      writer.uint32(74).string(message.localizedShortTitle)
+    if (
+      message.localizedShortTitle !== undefined &&
+      message.localizedShortTitle !== ""
+    ) {
+      writer.uint32(74).string(message.localizedShortTitle);
     }
     if (message.repeatMode !== undefined && message.repeatMode !== 0) {
-      writer.uint32(80).int32(message.repeatMode)
+      writer.uint32(80).int32(message.repeatMode);
     }
     if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
-      writer.uint32(88).int32(message.shuffleMode)
+      writer.uint32(88).int32(message.shuffleMode);
     }
-    if (message.presentationStyle !== undefined && message.presentationStyle !== 0) {
-      writer.uint32(96).int32(message.presentationStyle)
+    if (
+      message.presentationStyle !== undefined &&
+      message.presentationStyle !== 0
+    ) {
+      writer.uint32(96).int32(message.presentationStyle);
     }
     if (message.skipInterval !== undefined && message.skipInterval !== 0) {
-      writer.uint32(104).int32(message.skipInterval)
+      writer.uint32(104).int32(message.skipInterval);
     }
-    if (message.numAvailableSkips !== undefined && message.numAvailableSkips !== 0) {
-      writer.uint32(112).int32(message.numAvailableSkips)
+    if (
+      message.numAvailableSkips !== undefined &&
+      message.numAvailableSkips !== 0
+    ) {
+      writer.uint32(112).int32(message.numAvailableSkips);
     }
     if (message.skipFrequency !== undefined && message.skipFrequency !== 0) {
-      writer.uint32(120).int32(message.skipFrequency)
+      writer.uint32(120).int32(message.skipFrequency);
     }
     if (message.canScrub !== undefined && message.canScrub !== 0) {
-      writer.uint32(128).int32(message.canScrub)
+      writer.uint32(128).int32(message.canScrub);
     }
     for (const v of message.supportedPlaybackQueueTypes) {
-      writer.uint32(136).int32(v!)
+      writer.uint32(136).int32(v!);
     }
     for (const v of message.supportedCustomQueueIdentifiers) {
-      writer.uint32(146).string(v!)
+      writer.uint32(146).string(v!);
     }
     for (const v of message.supportedInsertionPositions) {
-      writer.uint32(152).int32(v!)
+      writer.uint32(152).int32(v!);
     }
-    if (message.supportsSharedQueue !== undefined && message.supportsSharedQueue !== false) {
-      writer.uint32(160).bool(message.supportsSharedQueue)
+    if (
+      message.supportsSharedQueue !== undefined &&
+      message.supportsSharedQueue !== false
+    ) {
+      writer.uint32(160).bool(message.supportsSharedQueue);
     }
-    if (message.upNextItemCount !== undefined && message.upNextItemCount !== 0) {
-      writer.uint32(168).int32(message.upNextItemCount)
+    if (
+      message.upNextItemCount !== undefined &&
+      message.upNextItemCount !== 0
+    ) {
+      writer.uint32(168).int32(message.upNextItemCount);
     }
-    if (message.preferredPlaybackRate !== undefined && message.preferredPlaybackRate !== 0) {
-      writer.uint32(181).float(message.preferredPlaybackRate)
+    if (
+      message.preferredPlaybackRate !== undefined &&
+      message.preferredPlaybackRate !== 0
+    ) {
+      writer.uint32(181).float(message.preferredPlaybackRate);
     }
     for (const v of message.supportedPlaybackSessionTypes) {
-      writer.uint32(186).string(v!)
+      writer.uint32(186).string(v!);
     }
     for (const v of message.currentPlaybackSessionTypes) {
-      writer.uint32(194).string(v!)
+      writer.uint32(194).string(v!);
     }
     if (
       message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ''
+      message.playbackSessionIdentifier !== ""
     ) {
-      writer.uint32(202).string(message.playbackSessionIdentifier)
+      writer.uint32(202).string(message.playbackSessionIdentifier);
     }
-    if (message.currentQueueEndAction !== undefined && message.currentQueueEndAction !== 0) {
-      writer.uint32(208).int32(message.currentQueueEndAction)
+    if (
+      message.currentQueueEndAction !== undefined &&
+      message.currentQueueEndAction !== 0
+    ) {
+      writer.uint32(208).int32(message.currentQueueEndAction);
     }
     for (const v of message.supportedEndQueueActions) {
-      writer.uint32(216).int32(v!)
+      writer.uint32(216).int32(v!);
     }
     if (message.disableReason !== undefined && message.disableReason !== 0) {
-      writer.uint32(224).int32(message.disableReason)
+      writer.uint32(224).int32(message.disableReason);
     }
     for (const v of message.supportedPlaybackSessionIdentifiers) {
-      PreloadedPlaybackSessionInfo.encode(v!, writer.uint32(234).fork()).join()
+      PreloadedPlaybackSessionInfo.encode(v!, writer.uint32(234).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): CommandInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseCommandInfo()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommandInfo();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.command = reader.int32() as any
-          continue
+          message.command = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.enabled = reader.bool()
-          continue
+          message.enabled = reader.bool();
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.active = reader.bool()
-          continue
+          message.active = reader.bool();
+          continue;
         }
         case 4: {
           if (tag === 33) {
-            message.preferredIntervals.push(reader.double())
+            message.preferredIntervals.push(reader.double());
 
-            continue
+            continue;
           }
 
           if (tag === 34) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.preferredIntervals.push(reader.double())
+              message.preferredIntervals.push(reader.double());
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.localizedTitle = reader.string()
-          continue
+          message.localizedTitle = reader.string();
+          continue;
         }
         case 6: {
           if (tag !== 53) {
-            break
+            break;
           }
 
-          message.minimumRating = reader.float()
-          continue
+          message.minimumRating = reader.float();
+          continue;
         }
         case 7: {
           if (tag !== 61) {
-            break
+            break;
           }
 
-          message.maximumRating = reader.float()
-          continue
+          message.maximumRating = reader.float();
+          continue;
         }
         case 8: {
           if (tag === 69) {
-            message.supportedRates.push(reader.float())
+            message.supportedRates.push(reader.float());
 
-            continue
+            continue;
           }
 
           if (tag === 66) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.supportedRates.push(reader.float())
+              message.supportedRates.push(reader.float());
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 9: {
           if (tag !== 74) {
-            break
+            break;
           }
 
-          message.localizedShortTitle = reader.string()
-          continue
+          message.localizedShortTitle = reader.string();
+          continue;
         }
         case 10: {
           if (tag !== 80) {
-            break
+            break;
           }
 
-          message.repeatMode = reader.int32() as any
-          continue
+          message.repeatMode = reader.int32() as any;
+          continue;
         }
         case 11: {
           if (tag !== 88) {
-            break
+            break;
           }
 
-          message.shuffleMode = reader.int32() as any
-          continue
+          message.shuffleMode = reader.int32() as any;
+          continue;
         }
         case 12: {
           if (tag !== 96) {
-            break
+            break;
           }
 
-          message.presentationStyle = reader.int32()
-          continue
+          message.presentationStyle = reader.int32();
+          continue;
         }
         case 13: {
           if (tag !== 104) {
-            break
+            break;
           }
 
-          message.skipInterval = reader.int32()
-          continue
+          message.skipInterval = reader.int32();
+          continue;
         }
         case 14: {
           if (tag !== 112) {
-            break
+            break;
           }
 
-          message.numAvailableSkips = reader.int32()
-          continue
+          message.numAvailableSkips = reader.int32();
+          continue;
         }
         case 15: {
           if (tag !== 120) {
-            break
+            break;
           }
 
-          message.skipFrequency = reader.int32()
-          continue
+          message.skipFrequency = reader.int32();
+          continue;
         }
         case 16: {
           if (tag !== 128) {
-            break
+            break;
           }
 
-          message.canScrub = reader.int32()
-          continue
+          message.canScrub = reader.int32();
+          continue;
         }
         case 17: {
           if (tag === 136) {
-            message.supportedPlaybackQueueTypes.push(reader.int32())
+            message.supportedPlaybackQueueTypes.push(reader.int32());
 
-            continue
+            continue;
           }
 
           if (tag === 138) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.supportedPlaybackQueueTypes.push(reader.int32())
+              message.supportedPlaybackQueueTypes.push(reader.int32());
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 18: {
           if (tag !== 146) {
-            break
+            break;
           }
 
-          message.supportedCustomQueueIdentifiers.push(reader.string())
-          continue
+          message.supportedCustomQueueIdentifiers.push(reader.string());
+          continue;
         }
         case 19: {
           if (tag === 152) {
-            message.supportedInsertionPositions.push(reader.int32())
+            message.supportedInsertionPositions.push(reader.int32());
 
-            continue
+            continue;
           }
 
           if (tag === 154) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.supportedInsertionPositions.push(reader.int32())
+              message.supportedInsertionPositions.push(reader.int32());
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 20: {
           if (tag !== 160) {
-            break
+            break;
           }
 
-          message.supportsSharedQueue = reader.bool()
-          continue
+          message.supportsSharedQueue = reader.bool();
+          continue;
         }
         case 21: {
           if (tag !== 168) {
-            break
+            break;
           }
 
-          message.upNextItemCount = reader.int32()
-          continue
+          message.upNextItemCount = reader.int32();
+          continue;
         }
         case 22: {
           if (tag !== 181) {
-            break
+            break;
           }
 
-          message.preferredPlaybackRate = reader.float()
-          continue
+          message.preferredPlaybackRate = reader.float();
+          continue;
         }
         case 23: {
           if (tag !== 186) {
-            break
+            break;
           }
 
-          message.supportedPlaybackSessionTypes.push(reader.string())
-          continue
+          message.supportedPlaybackSessionTypes.push(reader.string());
+          continue;
         }
         case 24: {
           if (tag !== 194) {
-            break
+            break;
           }
 
-          message.currentPlaybackSessionTypes.push(reader.string())
-          continue
+          message.currentPlaybackSessionTypes.push(reader.string());
+          continue;
         }
         case 25: {
           if (tag !== 202) {
-            break
+            break;
           }
 
-          message.playbackSessionIdentifier = reader.string()
-          continue
+          message.playbackSessionIdentifier = reader.string();
+          continue;
         }
         case 26: {
           if (tag !== 208) {
-            break
+            break;
           }
 
-          message.currentQueueEndAction = reader.int32() as any
-          continue
+          message.currentQueueEndAction = reader.int32() as any;
+          continue;
         }
         case 27: {
           if (tag === 216) {
-            message.supportedEndQueueActions.push(reader.int32() as any)
+            message.supportedEndQueueActions.push(reader.int32() as any);
 
-            continue
+            continue;
           }
 
           if (tag === 218) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.supportedEndQueueActions.push(reader.int32() as any)
+              message.supportedEndQueueActions.push(reader.int32() as any);
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
         case 28: {
           if (tag !== 224) {
-            break
+            break;
           }
 
-          message.disableReason = reader.int32() as any
-          continue
+          message.disableReason = reader.int32() as any;
+          continue;
         }
         case 29: {
           if (tag !== 234) {
-            break
+            break;
           }
 
           message.supportedPlaybackSessionIdentifiers.push(
             PreloadedPlaybackSessionInfo.decode(reader, reader.uint32())
-          )
-          continue
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): CommandInfo {
     return {
       command: isSet(object.command) ? commandFromJSON(object.command) : 0,
-      enabled: isSet(object.enabled) ? globalThis.Boolean(object.enabled) : false,
+      enabled: isSet(object.enabled)
+        ? globalThis.Boolean(object.enabled)
+        : false,
       active: isSet(object.active) ? globalThis.Boolean(object.active) : false,
       preferredIntervals: globalThis.Array.isArray(object?.preferredIntervals)
         ? object.preferredIntervals.map((e: any) => globalThis.Number(e))
         : [],
-      localizedTitle: isSet(object.localizedTitle) ? globalThis.String(object.localizedTitle) : '',
-      minimumRating: isSet(object.minimumRating) ? globalThis.Number(object.minimumRating) : 0,
-      maximumRating: isSet(object.maximumRating) ? globalThis.Number(object.maximumRating) : 0,
+      localizedTitle: isSet(object.localizedTitle)
+        ? globalThis.String(object.localizedTitle)
+        : "",
+      minimumRating: isSet(object.minimumRating)
+        ? globalThis.Number(object.minimumRating)
+        : 0,
+      maximumRating: isSet(object.maximumRating)
+        ? globalThis.Number(object.maximumRating)
+        : 0,
       supportedRates: globalThis.Array.isArray(object?.supportedRates)
         ? object.supportedRates.map((e: any) => globalThis.Number(e))
         : [],
       localizedShortTitle: isSet(object.localizedShortTitle)
         ? globalThis.String(object.localizedShortTitle)
-        : '',
-      repeatMode: isSet(object.repeatMode) ? repeatMode_EnumFromJSON(object.repeatMode) : 0,
-      shuffleMode: isSet(object.shuffleMode) ? shuffleMode_EnumFromJSON(object.shuffleMode) : 0,
+        : "",
+      repeatMode: isSet(object.repeatMode)
+        ? repeatMode_EnumFromJSON(object.repeatMode)
+        : 0,
+      shuffleMode: isSet(object.shuffleMode)
+        ? shuffleMode_EnumFromJSON(object.shuffleMode)
+        : 0,
       presentationStyle: isSet(object.presentationStyle)
         ? globalThis.Number(object.presentationStyle)
         : 0,
-      skipInterval: isSet(object.skipInterval) ? globalThis.Number(object.skipInterval) : 0,
+      skipInterval: isSet(object.skipInterval)
+        ? globalThis.Number(object.skipInterval)
+        : 0,
       numAvailableSkips: isSet(object.numAvailableSkips)
         ? globalThis.Number(object.numAvailableSkips)
         : 0,
-      skipFrequency: isSet(object.skipFrequency) ? globalThis.Number(object.skipFrequency) : 0,
+      skipFrequency: isSet(object.skipFrequency)
+        ? globalThis.Number(object.skipFrequency)
+        : 0,
       canScrub: isSet(object.canScrub) ? globalThis.Number(object.canScrub) : 0,
-      supportedPlaybackQueueTypes: globalThis.Array.isArray(object?.supportedPlaybackQueueTypes)
-        ? object.supportedPlaybackQueueTypes.map((e: any) => globalThis.Number(e))
+      supportedPlaybackQueueTypes: globalThis.Array.isArray(
+        object?.supportedPlaybackQueueTypes
+      )
+        ? object.supportedPlaybackQueueTypes.map((e: any) =>
+            globalThis.Number(e)
+          )
         : [],
       supportedCustomQueueIdentifiers: globalThis.Array.isArray(
         object?.supportedCustomQueueIdentifiers
       )
-        ? object.supportedCustomQueueIdentifiers.map((e: any) => globalThis.String(e))
+        ? object.supportedCustomQueueIdentifiers.map((e: any) =>
+            globalThis.String(e)
+          )
         : [],
-      supportedInsertionPositions: globalThis.Array.isArray(object?.supportedInsertionPositions)
-        ? object.supportedInsertionPositions.map((e: any) => globalThis.Number(e))
+      supportedInsertionPositions: globalThis.Array.isArray(
+        object?.supportedInsertionPositions
+      )
+        ? object.supportedInsertionPositions.map((e: any) =>
+            globalThis.Number(e)
+          )
         : [],
       supportsSharedQueue: isSet(object.supportsSharedQueue)
         ? globalThis.Boolean(object.supportsSharedQueue)
@@ -1250,20 +1345,32 @@ export const CommandInfo: MessageFns<CommandInfo> = {
       preferredPlaybackRate: isSet(object.preferredPlaybackRate)
         ? globalThis.Number(object.preferredPlaybackRate)
         : 0,
-      supportedPlaybackSessionTypes: globalThis.Array.isArray(object?.supportedPlaybackSessionTypes)
-        ? object.supportedPlaybackSessionTypes.map((e: any) => globalThis.String(e))
+      supportedPlaybackSessionTypes: globalThis.Array.isArray(
+        object?.supportedPlaybackSessionTypes
+      )
+        ? object.supportedPlaybackSessionTypes.map((e: any) =>
+            globalThis.String(e)
+          )
         : [],
-      currentPlaybackSessionTypes: globalThis.Array.isArray(object?.currentPlaybackSessionTypes)
-        ? object.currentPlaybackSessionTypes.map((e: any) => globalThis.String(e))
+      currentPlaybackSessionTypes: globalThis.Array.isArray(
+        object?.currentPlaybackSessionTypes
+      )
+        ? object.currentPlaybackSessionTypes.map((e: any) =>
+            globalThis.String(e)
+          )
         : [],
       playbackSessionIdentifier: isSet(object.playbackSessionIdentifier)
         ? globalThis.String(object.playbackSessionIdentifier)
-        : '',
+        : "",
       currentQueueEndAction: isSet(object.currentQueueEndAction)
         ? queueEndAction_EnumFromJSON(object.currentQueueEndAction)
         : 0,
-      supportedEndQueueActions: globalThis.Array.isArray(object?.supportedEndQueueActions)
-        ? object.supportedEndQueueActions.map((e: any) => queueEndAction_EnumFromJSON(e))
+      supportedEndQueueActions: globalThis.Array.isArray(
+        object?.supportedEndQueueActions
+      )
+        ? object.supportedEndQueueActions.map((e: any) =>
+            queueEndAction_EnumFromJSON(e)
+          )
         : [],
       disableReason: isSet(object.disableReason)
         ? disableReason_EnumFromJSON(object.disableReason)
@@ -1275,151 +1382,194 @@ export const CommandInfo: MessageFns<CommandInfo> = {
             PreloadedPlaybackSessionInfo.fromJSON(e)
           )
         : [],
-    }
+    };
   },
 
   toJSON(message: CommandInfo): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.command !== undefined && message.command !== 0) {
-      obj.command = commandToJSON(message.command)
+      obj.command = commandToJSON(message.command);
     }
     if (message.enabled !== undefined && message.enabled !== false) {
-      obj.enabled = message.enabled
+      obj.enabled = message.enabled;
     }
     if (message.active !== undefined && message.active !== false) {
-      obj.active = message.active
+      obj.active = message.active;
     }
     if (message.preferredIntervals?.length) {
-      obj.preferredIntervals = message.preferredIntervals
+      obj.preferredIntervals = message.preferredIntervals;
     }
-    if (message.localizedTitle !== undefined && message.localizedTitle !== '') {
-      obj.localizedTitle = message.localizedTitle
+    if (message.localizedTitle !== undefined && message.localizedTitle !== "") {
+      obj.localizedTitle = message.localizedTitle;
     }
     if (message.minimumRating !== undefined && message.minimumRating !== 0) {
-      obj.minimumRating = message.minimumRating
+      obj.minimumRating = message.minimumRating;
     }
     if (message.maximumRating !== undefined && message.maximumRating !== 0) {
-      obj.maximumRating = message.maximumRating
+      obj.maximumRating = message.maximumRating;
     }
     if (message.supportedRates?.length) {
-      obj.supportedRates = message.supportedRates
+      obj.supportedRates = message.supportedRates;
     }
-    if (message.localizedShortTitle !== undefined && message.localizedShortTitle !== '') {
-      obj.localizedShortTitle = message.localizedShortTitle
+    if (
+      message.localizedShortTitle !== undefined &&
+      message.localizedShortTitle !== ""
+    ) {
+      obj.localizedShortTitle = message.localizedShortTitle;
     }
     if (message.repeatMode !== undefined && message.repeatMode !== 0) {
-      obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode)
+      obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode);
     }
     if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
-      obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode)
+      obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode);
     }
-    if (message.presentationStyle !== undefined && message.presentationStyle !== 0) {
-      obj.presentationStyle = Math.round(message.presentationStyle)
+    if (
+      message.presentationStyle !== undefined &&
+      message.presentationStyle !== 0
+    ) {
+      obj.presentationStyle = Math.round(message.presentationStyle);
     }
     if (message.skipInterval !== undefined && message.skipInterval !== 0) {
-      obj.skipInterval = Math.round(message.skipInterval)
+      obj.skipInterval = Math.round(message.skipInterval);
     }
-    if (message.numAvailableSkips !== undefined && message.numAvailableSkips !== 0) {
-      obj.numAvailableSkips = Math.round(message.numAvailableSkips)
+    if (
+      message.numAvailableSkips !== undefined &&
+      message.numAvailableSkips !== 0
+    ) {
+      obj.numAvailableSkips = Math.round(message.numAvailableSkips);
     }
     if (message.skipFrequency !== undefined && message.skipFrequency !== 0) {
-      obj.skipFrequency = Math.round(message.skipFrequency)
+      obj.skipFrequency = Math.round(message.skipFrequency);
     }
     if (message.canScrub !== undefined && message.canScrub !== 0) {
-      obj.canScrub = Math.round(message.canScrub)
+      obj.canScrub = Math.round(message.canScrub);
     }
     if (message.supportedPlaybackQueueTypes?.length) {
-      obj.supportedPlaybackQueueTypes = message.supportedPlaybackQueueTypes.map(e => Math.round(e))
+      obj.supportedPlaybackQueueTypes = message.supportedPlaybackQueueTypes.map(
+        (e) => Math.round(e)
+      );
     }
     if (message.supportedCustomQueueIdentifiers?.length) {
-      obj.supportedCustomQueueIdentifiers = message.supportedCustomQueueIdentifiers
+      obj.supportedCustomQueueIdentifiers =
+        message.supportedCustomQueueIdentifiers;
     }
     if (message.supportedInsertionPositions?.length) {
-      obj.supportedInsertionPositions = message.supportedInsertionPositions.map(e => Math.round(e))
+      obj.supportedInsertionPositions = message.supportedInsertionPositions.map(
+        (e) => Math.round(e)
+      );
     }
-    if (message.supportsSharedQueue !== undefined && message.supportsSharedQueue !== false) {
-      obj.supportsSharedQueue = message.supportsSharedQueue
+    if (
+      message.supportsSharedQueue !== undefined &&
+      message.supportsSharedQueue !== false
+    ) {
+      obj.supportsSharedQueue = message.supportsSharedQueue;
     }
-    if (message.upNextItemCount !== undefined && message.upNextItemCount !== 0) {
-      obj.upNextItemCount = Math.round(message.upNextItemCount)
+    if (
+      message.upNextItemCount !== undefined &&
+      message.upNextItemCount !== 0
+    ) {
+      obj.upNextItemCount = Math.round(message.upNextItemCount);
     }
-    if (message.preferredPlaybackRate !== undefined && message.preferredPlaybackRate !== 0) {
-      obj.preferredPlaybackRate = message.preferredPlaybackRate
+    if (
+      message.preferredPlaybackRate !== undefined &&
+      message.preferredPlaybackRate !== 0
+    ) {
+      obj.preferredPlaybackRate = message.preferredPlaybackRate;
     }
     if (message.supportedPlaybackSessionTypes?.length) {
-      obj.supportedPlaybackSessionTypes = message.supportedPlaybackSessionTypes
+      obj.supportedPlaybackSessionTypes = message.supportedPlaybackSessionTypes;
     }
     if (message.currentPlaybackSessionTypes?.length) {
-      obj.currentPlaybackSessionTypes = message.currentPlaybackSessionTypes
+      obj.currentPlaybackSessionTypes = message.currentPlaybackSessionTypes;
     }
     if (
       message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ''
+      message.playbackSessionIdentifier !== ""
     ) {
-      obj.playbackSessionIdentifier = message.playbackSessionIdentifier
+      obj.playbackSessionIdentifier = message.playbackSessionIdentifier;
     }
-    if (message.currentQueueEndAction !== undefined && message.currentQueueEndAction !== 0) {
-      obj.currentQueueEndAction = queueEndAction_EnumToJSON(message.currentQueueEndAction)
+    if (
+      message.currentQueueEndAction !== undefined &&
+      message.currentQueueEndAction !== 0
+    ) {
+      obj.currentQueueEndAction = queueEndAction_EnumToJSON(
+        message.currentQueueEndAction
+      );
     }
     if (message.supportedEndQueueActions?.length) {
-      obj.supportedEndQueueActions = message.supportedEndQueueActions.map(e =>
+      obj.supportedEndQueueActions = message.supportedEndQueueActions.map((e) =>
         queueEndAction_EnumToJSON(e)
-      )
+      );
     }
     if (message.disableReason !== undefined && message.disableReason !== 0) {
-      obj.disableReason = disableReason_EnumToJSON(message.disableReason)
+      obj.disableReason = disableReason_EnumToJSON(message.disableReason);
     }
     if (message.supportedPlaybackSessionIdentifiers?.length) {
-      obj.supportedPlaybackSessionIdentifiers = message.supportedPlaybackSessionIdentifiers.map(e =>
-        PreloadedPlaybackSessionInfo.toJSON(e)
-      )
+      obj.supportedPlaybackSessionIdentifiers =
+        message.supportedPlaybackSessionIdentifiers.map((e) =>
+          PreloadedPlaybackSessionInfo.toJSON(e)
+        );
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<CommandInfo>, I>>(base?: I): CommandInfo {
-    return CommandInfo.fromPartial(base ?? ({} as any))
+    return CommandInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CommandInfo>, I>>(object: I): CommandInfo {
-    const message = createBaseCommandInfo()
-    message.command = object.command ?? 0
-    message.enabled = object.enabled ?? false
-    message.active = object.active ?? false
-    message.preferredIntervals = object.preferredIntervals?.map(e => e) || []
-    message.localizedTitle = object.localizedTitle ?? ''
-    message.minimumRating = object.minimumRating ?? 0
-    message.maximumRating = object.maximumRating ?? 0
-    message.supportedRates = object.supportedRates?.map(e => e) || []
-    message.localizedShortTitle = object.localizedShortTitle ?? ''
-    message.repeatMode = object.repeatMode ?? 0
-    message.shuffleMode = object.shuffleMode ?? 0
-    message.presentationStyle = object.presentationStyle ?? 0
-    message.skipInterval = object.skipInterval ?? 0
-    message.numAvailableSkips = object.numAvailableSkips ?? 0
-    message.skipFrequency = object.skipFrequency ?? 0
-    message.canScrub = object.canScrub ?? 0
-    message.supportedPlaybackQueueTypes = object.supportedPlaybackQueueTypes?.map(e => e) || []
+  fromPartial<I extends Exact<DeepPartial<CommandInfo>, I>>(
+    object: I
+  ): CommandInfo {
+    const message = createBaseCommandInfo();
+    message.command = object.command ?? 0;
+    message.enabled = object.enabled ?? false;
+    message.active = object.active ?? false;
+    message.preferredIntervals = object.preferredIntervals?.map((e) => e) || [];
+    message.localizedTitle = object.localizedTitle ?? "";
+    message.minimumRating = object.minimumRating ?? 0;
+    message.maximumRating = object.maximumRating ?? 0;
+    message.supportedRates = object.supportedRates?.map((e) => e) || [];
+    message.localizedShortTitle = object.localizedShortTitle ?? "";
+    message.repeatMode = object.repeatMode ?? 0;
+    message.shuffleMode = object.shuffleMode ?? 0;
+    message.presentationStyle = object.presentationStyle ?? 0;
+    message.skipInterval = object.skipInterval ?? 0;
+    message.numAvailableSkips = object.numAvailableSkips ?? 0;
+    message.skipFrequency = object.skipFrequency ?? 0;
+    message.canScrub = object.canScrub ?? 0;
+    message.supportedPlaybackQueueTypes =
+      object.supportedPlaybackQueueTypes?.map((e) => e) || [];
     message.supportedCustomQueueIdentifiers =
-      object.supportedCustomQueueIdentifiers?.map(e => e) || []
-    message.supportedInsertionPositions = object.supportedInsertionPositions?.map(e => e) || []
-    message.supportsSharedQueue = object.supportsSharedQueue ?? false
-    message.upNextItemCount = object.upNextItemCount ?? 0
-    message.preferredPlaybackRate = object.preferredPlaybackRate ?? 0
-    message.supportedPlaybackSessionTypes = object.supportedPlaybackSessionTypes?.map(e => e) || []
-    message.currentPlaybackSessionTypes = object.currentPlaybackSessionTypes?.map(e => e) || []
-    message.playbackSessionIdentifier = object.playbackSessionIdentifier ?? ''
-    message.currentQueueEndAction = object.currentQueueEndAction ?? 0
-    message.supportedEndQueueActions = object.supportedEndQueueActions?.map(e => e) || []
-    message.disableReason = object.disableReason ?? 0
+      object.supportedCustomQueueIdentifiers?.map((e) => e) || [];
+    message.supportedInsertionPositions =
+      object.supportedInsertionPositions?.map((e) => e) || [];
+    message.supportsSharedQueue = object.supportsSharedQueue ?? false;
+    message.upNextItemCount = object.upNextItemCount ?? 0;
+    message.preferredPlaybackRate = object.preferredPlaybackRate ?? 0;
+    message.supportedPlaybackSessionTypes =
+      object.supportedPlaybackSessionTypes?.map((e) => e) || [];
+    message.currentPlaybackSessionTypes =
+      object.currentPlaybackSessionTypes?.map((e) => e) || [];
+    message.playbackSessionIdentifier = object.playbackSessionIdentifier ?? "";
+    message.currentQueueEndAction = object.currentQueueEndAction ?? 0;
+    message.supportedEndQueueActions =
+      object.supportedEndQueueActions?.map((e) => e) || [];
+    message.disableReason = object.disableReason ?? 0;
     message.supportedPlaybackSessionIdentifiers =
-      object.supportedPlaybackSessionIdentifiers?.map(e =>
+      object.supportedPlaybackSessionIdentifiers?.map((e) =>
         PreloadedPlaybackSessionInfo.fromPartial(e)
-      ) || []
-    return message
+      ) || [];
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1429,22 +1579,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

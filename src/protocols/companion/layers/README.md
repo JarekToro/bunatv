@@ -2,7 +2,7 @@
 
 This folder contains the **transport + framing + security + session** building blocks used by the Companion protocol implementation.
 
-> This doc explains how the pieces fit together in *this* codebase. It’s not intended to be a complete spec for HAP/Companion.
+> This doc explains how the pieces fit together in _this_ codebase. It’s not intended to be a complete spec for HAP/Companion.
 
 ---
 

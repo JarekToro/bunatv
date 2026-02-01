@@ -5,169 +5,192 @@
 // source: LanguageOption.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface LanguageOption {
-  type?: number | undefined
-  languageTag?: string | undefined
-  characteristics: string[]
-  displayName?: string | undefined
-  identifier?: string | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  type?: number | undefined;
+  languageTag?: string | undefined;
+  characteristics: string[];
+  displayName?: string | undefined;
+  identifier?: string | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseLanguageOption(): LanguageOption {
   return {
     type: 0,
-    languageTag: '',
+    languageTag: "",
     characteristics: [],
-    displayName: '',
-    identifier: '',
+    displayName: "",
+    identifier: "",
     _unknownFields: {},
-  }
+  };
 }
 
 export const LanguageOption: MessageFns<LanguageOption> = {
-  encode(message: LanguageOption, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: LanguageOption,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.type !== undefined && message.type !== 0) {
-      writer.uint32(8).int32(message.type)
+      writer.uint32(8).int32(message.type);
     }
-    if (message.languageTag !== undefined && message.languageTag !== '') {
-      writer.uint32(18).string(message.languageTag)
+    if (message.languageTag !== undefined && message.languageTag !== "") {
+      writer.uint32(18).string(message.languageTag);
     }
     for (const v of message.characteristics) {
-      writer.uint32(26).string(v!)
+      writer.uint32(26).string(v!);
     }
-    if (message.displayName !== undefined && message.displayName !== '') {
-      writer.uint32(34).string(message.displayName)
+    if (message.displayName !== undefined && message.displayName !== "") {
+      writer.uint32(34).string(message.displayName);
     }
-    if (message.identifier !== undefined && message.identifier !== '') {
-      writer.uint32(42).string(message.identifier)
+    if (message.identifier !== undefined && message.identifier !== "") {
+      writer.uint32(42).string(message.identifier);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): LanguageOption {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseLanguageOption()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseLanguageOption();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.type = reader.int32()
-          continue
+          message.type = reader.int32();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.languageTag = reader.string()
-          continue
+          message.languageTag = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.characteristics.push(reader.string())
-          continue
+          message.characteristics.push(reader.string());
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.displayName = reader.string()
-          continue
+          message.displayName = reader.string();
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.identifier = reader.string()
-          continue
+          message.identifier = reader.string();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): LanguageOption {
     return {
       type: isSet(object.type) ? globalThis.Number(object.type) : 0,
-      languageTag: isSet(object.languageTag) ? globalThis.String(object.languageTag) : '',
+      languageTag: isSet(object.languageTag)
+        ? globalThis.String(object.languageTag)
+        : "",
       characteristics: globalThis.Array.isArray(object?.characteristics)
         ? object.characteristics.map((e: any) => globalThis.String(e))
         : [],
-      displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : '',
-      identifier: isSet(object.identifier) ? globalThis.String(object.identifier) : '',
-    }
+      displayName: isSet(object.displayName)
+        ? globalThis.String(object.displayName)
+        : "",
+      identifier: isSet(object.identifier)
+        ? globalThis.String(object.identifier)
+        : "",
+    };
   },
 
   toJSON(message: LanguageOption): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.type !== undefined && message.type !== 0) {
-      obj.type = Math.round(message.type)
+      obj.type = Math.round(message.type);
     }
-    if (message.languageTag !== undefined && message.languageTag !== '') {
-      obj.languageTag = message.languageTag
+    if (message.languageTag !== undefined && message.languageTag !== "") {
+      obj.languageTag = message.languageTag;
     }
     if (message.characteristics?.length) {
-      obj.characteristics = message.characteristics
+      obj.characteristics = message.characteristics;
     }
-    if (message.displayName !== undefined && message.displayName !== '') {
-      obj.displayName = message.displayName
+    if (message.displayName !== undefined && message.displayName !== "") {
+      obj.displayName = message.displayName;
     }
-    if (message.identifier !== undefined && message.identifier !== '') {
-      obj.identifier = message.identifier
+    if (message.identifier !== undefined && message.identifier !== "") {
+      obj.identifier = message.identifier;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<LanguageOption>, I>>(base?: I): LanguageOption {
-    return LanguageOption.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<LanguageOption>, I>>(
+    base?: I
+  ): LanguageOption {
+    return LanguageOption.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<LanguageOption>, I>>(object: I): LanguageOption {
-    const message = createBaseLanguageOption()
-    message.type = object.type ?? 0
-    message.languageTag = object.languageTag ?? ''
-    message.characteristics = object.characteristics?.map(e => e) || []
-    message.displayName = object.displayName ?? ''
-    message.identifier = object.identifier ?? ''
-    return message
+  fromPartial<I extends Exact<DeepPartial<LanguageOption>, I>>(
+    object: I
+  ): LanguageOption {
+    const message = createBaseLanguageOption();
+    message.type = object.type ?? 0;
+    message.languageTag = object.languageTag ?? "";
+    message.characteristics = object.characteristics?.map((e) => e) || [];
+    message.displayName = object.displayName ?? "";
+    message.identifier = object.identifier ?? "";
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -177,22 +200,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

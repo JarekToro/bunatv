@@ -5,9 +5,9 @@
  * in the HAP pairing and verification processes.
  */
 
-import crypto from 'node:crypto'
-import { createLogger } from '../../logging/logging'
-import { CryptoError } from './errors'
+import crypto from "node:crypto";
+import { createLogger } from "../../logging/logging";
+import { CryptoError } from "./errors";
 import {
   HAP_SALT,
   HAP_INFO,
@@ -15,14 +15,14 @@ import {
   AIRPLAY_CRYPTO,
   AIRPLAY_EVENT_CRYPTO,
   AIRPLAY_DATASTREAM_CRYPTO,
-} from './constants'
+} from "./constants";
 
 const logger = createLogger("bunatv:crypto:hkdf");
 
 export type DerivedKeys = {
-  readKey: Uint8Array
-  writeKey: Uint8Array
-}
+  readKey: Uint8Array;
+  writeKey: Uint8Array;
+};
 /**
  * HKDF utilities for HAP key derivation - Bun Native Implementation
  */
@@ -44,30 +44,32 @@ export class HkdfUtils {
   ): Promise<Uint8Array> {
     // Validate length parameter
     if (length <= 0) {
-      throw new CryptoError('HKDF length must be greater than 0')
+      throw new CryptoError("HKDF length must be greater than 0");
     }
 
     return new Promise((resolve, reject) => {
       try {
         // Use Bun's native crypto.hkdf (available in Bun v1.2.6+)
         crypto.hkdf(
-          'sha512',
+          "sha512",
           Buffer.from(inputKeyMaterial),
           Buffer.from(salt),
           Buffer.from(info),
           length,
           (err, derivedKey) => {
             if (err) {
-              reject(new CryptoError('Failed to derive key with HKDF', err))
+              reject(new CryptoError("Failed to derive key with HKDF", err));
             } else {
-              resolve(new Uint8Array(derivedKey))
+              resolve(new Uint8Array(derivedKey));
             }
           }
-        )
+        );
       } catch (error) {
-        reject(new CryptoError('Failed to derive key with HKDF', error as Error))
+        reject(
+          new CryptoError("Failed to derive key with HKDF", error as Error)
+        );
       }
-    })
+    });
   }
 
   /**
@@ -82,21 +84,21 @@ export class HkdfUtils {
   ): Uint8Array {
     // Validate length parameter
     if (length <= 0) {
-      throw new CryptoError('HKDF length must be greater than 0')
+      throw new CryptoError("HKDF length must be greater than 0");
     }
 
     try {
       // Use Bun's native crypto.hkdfSync
       const derivedKey = crypto.hkdfSync(
-        'sha512',
+        "sha512",
         Buffer.from(inputKeyMaterial),
         Buffer.from(salt),
         Buffer.from(info),
         length
-      )
-      return new Uint8Array(derivedKey)
+      );
+      return new Uint8Array(derivedKey);
     } catch (error) {
-      throw new CryptoError('Failed to derive key with HKDF', error as Error)
+      throw new CryptoError("Failed to derive key with HKDF", error as Error);
     }
   }
 
@@ -107,32 +109,34 @@ export class HkdfUtils {
    * @param sharedSecret - SRP session key (needs hex transformation)
    * @returns 32-byte encryption key
    */
-  static async derivePairSetupKey(sharedSecret: Uint8Array): Promise<Uint8Array> {
+  static async derivePairSetupKey(
+    sharedSecret: Uint8Array
+  ): Promise<Uint8Array> {
     logger.debug(
-      `derivePairSetupKey: input=${sharedSecret.length}B, hex=${Buffer.from(sharedSecret).toString('hex').substring(0, 32)}...`
-    )
+      `derivePairSetupKey: input=${sharedSecret.length}B, hex=${Buffer.from(sharedSecret).toString("hex").substring(0, 32)}...`
+    );
 
     // Transform SRP key like PyATV does: convert to hex string then back to bytes
-    const hexString = Buffer.from(sharedSecret).toString('hex')
-    const transformedKey = Buffer.from(hexString, 'hex')
+    const hexString = Buffer.from(sharedSecret).toString("hex");
+    const transformedKey = Buffer.from(hexString, "hex");
 
     logger.debug(
-      `derivePairSetupKey: transformed=${transformedKey.length}B, hex=${transformedKey.toString('hex').substring(0, 32)}...`
-    )
+      `derivePairSetupKey: transformed=${transformedKey.length}B, hex=${transformedKey.toString("hex").substring(0, 32)}...`
+    );
     logger.debug(
-      `derivePairSetupKey: salt="${HAP_SALT.PAIR_SETUP_ENCRYPT.toString('utf8')}", info="${HAP_INFO.PAIR_SETUP_ENCRYPT_INFO.toString('utf8')}"`
-    )
+      `derivePairSetupKey: salt="${HAP_SALT.PAIR_SETUP_ENCRYPT.toString("utf8")}", info="${HAP_INFO.PAIR_SETUP_ENCRYPT_INFO.toString("utf8")}"`
+    );
 
     const result = await this.derive(
       transformedKey,
       HAP_SALT.PAIR_SETUP_ENCRYPT,
       HAP_INFO.PAIR_SETUP_ENCRYPT_INFO,
       32
-    )
+    );
     logger.debug(
-      `derivePairSetupKey: result=${result.length}B, hex=${Buffer.from(result).toString('hex').substring(0, 32)}...`
-    )
-    return result
+      `derivePairSetupKey: result=${result.length}B, hex=${Buffer.from(result).toString("hex").substring(0, 32)}...`
+    );
+    return result;
   }
 
   /**
@@ -142,32 +146,34 @@ export class HkdfUtils {
    * @param sharedSecret - SRP session key (needs hex transformation)
    * @returns 32-byte authentication key (ios_device_x)
    */
-  static async deriveControllerKey(sharedSecret: Uint8Array): Promise<Uint8Array> {
+  static async deriveControllerKey(
+    sharedSecret: Uint8Array
+  ): Promise<Uint8Array> {
     logger.debug(
-      `deriveControllerKey: input=${sharedSecret.length}B, hex=${Buffer.from(sharedSecret).toString('hex').substring(0, 32)}...`
-    )
+      `deriveControllerKey: input=${sharedSecret.length}B, hex=${Buffer.from(sharedSecret).toString("hex").substring(0, 32)}...`
+    );
 
     // Transform SRP key like PyATV does: convert to hex string then back to bytes
-    const hexString = Buffer.from(sharedSecret).toString('hex')
-    const transformedKey = Buffer.from(hexString, 'hex')
+    const hexString = Buffer.from(sharedSecret).toString("hex");
+    const transformedKey = Buffer.from(hexString, "hex");
 
     logger.debug(
-      `deriveControllerKey: transformed=${transformedKey.length}B, hex=${transformedKey.toString('hex').substring(0, 32)}...`
-    )
+      `deriveControllerKey: transformed=${transformedKey.length}B, hex=${transformedKey.toString("hex").substring(0, 32)}...`
+    );
     logger.debug(
-      `deriveControllerKey: salt="${HAP_SALT.PAIR_SETUP_CONTROLLER.toString('utf8')}", info="${HAP_INFO.PAIR_SETUP_CONTROLLER_SIGN_INFO.toString('utf8')}"`
-    )
+      `deriveControllerKey: salt="${HAP_SALT.PAIR_SETUP_CONTROLLER.toString("utf8")}", info="${HAP_INFO.PAIR_SETUP_CONTROLLER_SIGN_INFO.toString("utf8")}"`
+    );
 
     const result = await this.derive(
       transformedKey,
       HAP_SALT.PAIR_SETUP_CONTROLLER,
       HAP_INFO.PAIR_SETUP_CONTROLLER_SIGN_INFO,
       32
-    )
+    );
     logger.debug(
-      `deriveControllerKey: result=${result.length}B, hex=${Buffer.from(result).toString('hex').substring(0, 32)}...`
-    )
-    return result
+      `deriveControllerKey: result=${result.length}B, hex=${Buffer.from(result).toString("hex").substring(0, 32)}...`
+    );
+    return result;
   }
 
   /**
@@ -176,8 +182,15 @@ export class HkdfUtils {
    * @param sharedSecret - X25519 shared secret
    * @returns 32-byte authentication key
    */
-  static async deriveAccessoryKey(sharedSecret: Uint8Array): Promise<Uint8Array> {
-    return await this.derive(sharedSecret, HAP_SALT.PAIR_SETUP_ACCESSORY, Buffer.alloc(0), 32)
+  static async deriveAccessoryKey(
+    sharedSecret: Uint8Array
+  ): Promise<Uint8Array> {
+    return await this.derive(
+      sharedSecret,
+      HAP_SALT.PAIR_SETUP_ACCESSORY,
+      Buffer.alloc(0),
+      32
+    );
   }
 
   /**
@@ -187,15 +200,25 @@ export class HkdfUtils {
    * @returns Object with read and write keys
    */
   static async deriveSessionKeys(sharedSecret: Uint8Array): Promise<{
-    readKey: Uint8Array
-    writeKey: Uint8Array
+    readKey: Uint8Array;
+    writeKey: Uint8Array;
   }> {
     const [readKey, writeKey] = await Promise.all([
-      this.derive(sharedSecret, HAP_SALT.PAIR_VERIFY_ENCRYPT, HAP_INFO.CONTROL_READ, 32),
-      this.derive(sharedSecret, HAP_SALT.PAIR_VERIFY_ENCRYPT, HAP_INFO.CONTROL_WRITE, 32),
-    ])
+      this.derive(
+        sharedSecret,
+        HAP_SALT.PAIR_VERIFY_ENCRYPT,
+        HAP_INFO.CONTROL_READ,
+        32
+      ),
+      this.derive(
+        sharedSecret,
+        HAP_SALT.PAIR_VERIFY_ENCRYPT,
+        HAP_INFO.CONTROL_WRITE,
+        32
+      ),
+    ]);
 
-    return { readKey, writeKey }
+    return { readKey, writeKey };
   }
 
   /**
@@ -204,15 +227,15 @@ export class HkdfUtils {
    */
   static derivePairSetupKeySync(sharedSecret: Uint8Array): Uint8Array {
     // Transform SRP key like PyATV does: convert to hex string then back to bytes
-    const hexString = Buffer.from(sharedSecret).toString('hex')
-    const transformedKey = Buffer.from(hexString, 'hex')
+    const hexString = Buffer.from(sharedSecret).toString("hex");
+    const transformedKey = Buffer.from(hexString, "hex");
 
     return this.deriveSync(
       transformedKey,
       HAP_SALT.PAIR_SETUP_ENCRYPT,
       HAP_INFO.PAIR_SETUP_ENCRYPT_INFO,
       32
-    )
+    );
   }
 
   /**
@@ -221,22 +244,27 @@ export class HkdfUtils {
    */
   static deriveControllerKeySync(sharedSecret: Uint8Array): Uint8Array {
     // Transform SRP key like PyATV does: convert to hex string then back to bytes
-    const hexString = Buffer.from(sharedSecret).toString('hex')
-    const transformedKey = Buffer.from(hexString, 'hex')
+    const hexString = Buffer.from(sharedSecret).toString("hex");
+    const transformedKey = Buffer.from(hexString, "hex");
 
     return this.deriveSync(
       transformedKey,
       HAP_SALT.PAIR_SETUP_CONTROLLER,
       HAP_INFO.PAIR_SETUP_CONTROLLER_SIGN_INFO,
       32
-    )
+    );
   }
 
   /**
    * Derive accessory authentication key synchronously (Bun optimized)
    */
   static deriveAccessoryKeySync(sharedSecret: Uint8Array): Uint8Array {
-    return this.deriveSync(sharedSecret, HAP_SALT.PAIR_SETUP_ACCESSORY, Buffer.alloc(0), 32)
+    return this.deriveSync(
+      sharedSecret,
+      HAP_SALT.PAIR_SETUP_ACCESSORY,
+      Buffer.alloc(0),
+      32
+    );
   }
 
   /**
@@ -248,19 +276,19 @@ export class HkdfUtils {
       HAP_SALT.PAIR_VERIFY_ENCRYPT,
       HAP_INFO.CONTROL_READ,
       32
-    )
+    );
     const writeKey = this.deriveSync(
       sharedSecret,
       HAP_SALT.PAIR_VERIFY_ENCRYPT,
       HAP_INFO.CONTROL_WRITE,
       32
-    )
+    );
 
-    return { readKey, writeKey }
+    return { readKey, writeKey };
   }
 
   static deriveAirPlaySessionKeysSync(sharedSecret: Uint8Array): DerivedKeys {
-    logger.info('Deriving AirPlay protocol session keys')
+    logger.info("Deriving AirPlay protocol session keys");
 
     // Server encrypts with ServerEncrypt-main, we decrypt with it
     const readKey = this.deriveSync(
@@ -268,30 +296,30 @@ export class HkdfUtils {
       AIRPLAY_CRYPTO.SESSION_SALT,
       AIRPLAY_CRYPTO.SERVER_ENCRYPT_INFO,
       32
-    )
+    );
     // We encrypt with ClientEncrypt-main
     const writeKey = this.deriveSync(
       sharedSecret,
       AIRPLAY_CRYPTO.SESSION_SALT,
       AIRPLAY_CRYPTO.CLIENT_ENCRYPT_INFO,
       32
-    )
+    );
 
     logger.info(
       {
-        sharedSecretHex: Buffer.from(sharedSecret).toString('hex'),
+        sharedSecretHex: Buffer.from(sharedSecret).toString("hex"),
         sharedSecretLength: sharedSecret.length,
-        saltHex: AIRPLAY_CRYPTO.SESSION_SALT.toString('hex') || '(empty)',
+        saltHex: AIRPLAY_CRYPTO.SESSION_SALT.toString("hex") || "(empty)",
         saltLength: AIRPLAY_CRYPTO.SESSION_SALT.length,
-        writeInfo: AIRPLAY_CRYPTO.CLIENT_ENCRYPT_INFO.toString('utf8'),
-        readInfo: AIRPLAY_CRYPTO.SERVER_ENCRYPT_INFO.toString('utf8'),
-        readKeyHex: Buffer.from(readKey).toString('hex'), // Full key
-        writeKeyHex: Buffer.from(writeKey).toString('hex'), // Full key
+        writeInfo: AIRPLAY_CRYPTO.CLIENT_ENCRYPT_INFO.toString("utf8"),
+        readInfo: AIRPLAY_CRYPTO.SERVER_ENCRYPT_INFO.toString("utf8"),
+        readKeyHex: Buffer.from(readKey).toString("hex"), // Full key
+        writeKeyHex: Buffer.from(writeKey).toString("hex"), // Full key
       },
-      '✅ Derived AirPlay protocol session keys'
-    )
+      "✅ Derived AirPlay protocol session keys"
+    );
 
-    return { readKey, writeKey }
+    return { readKey, writeKey };
   }
 
   /**
@@ -304,7 +332,7 @@ export class HkdfUtils {
    * Based on pyatv's implementation for Apple TV Companion Link
    */
   static deriveCompanionSessionKeysSync(sharedSecret: Uint8Array): DerivedKeys {
-    logger.info('Deriving Companion protocol session keys')
+    logger.info("Deriving Companion protocol session keys");
 
     // Server encrypts with ServerEncrypt-main, we decrypt with it
     const readKey = this.deriveSync(
@@ -312,30 +340,30 @@ export class HkdfUtils {
       COMPANION_CRYPTO.SESSION_SALT,
       COMPANION_CRYPTO.SERVER_ENCRYPT_INFO,
       32
-    )
+    );
     // We encrypt with ClientEncrypt-main
     const writeKey = this.deriveSync(
       sharedSecret,
       COMPANION_CRYPTO.SESSION_SALT,
       COMPANION_CRYPTO.CLIENT_ENCRYPT_INFO,
       32
-    )
+    );
 
     logger.info(
       {
-        sharedSecretHex: Buffer.from(sharedSecret).toString('hex'),
+        sharedSecretHex: Buffer.from(sharedSecret).toString("hex"),
         sharedSecretLength: sharedSecret.length,
-        saltHex: COMPANION_CRYPTO.SESSION_SALT.toString('hex') || '(empty)',
+        saltHex: COMPANION_CRYPTO.SESSION_SALT.toString("hex") || "(empty)",
         saltLength: COMPANION_CRYPTO.SESSION_SALT.length,
-        writeInfo: COMPANION_CRYPTO.CLIENT_ENCRYPT_INFO.toString('utf8'),
-        readInfo: COMPANION_CRYPTO.SERVER_ENCRYPT_INFO.toString('utf8'),
-        readKeyHex: Buffer.from(readKey).toString('hex'), // Full key
-        writeKeyHex: Buffer.from(writeKey).toString('hex'), // Full key
+        writeInfo: COMPANION_CRYPTO.CLIENT_ENCRYPT_INFO.toString("utf8"),
+        readInfo: COMPANION_CRYPTO.SERVER_ENCRYPT_INFO.toString("utf8"),
+        readKeyHex: Buffer.from(readKey).toString("hex"), // Full key
+        writeKeyHex: Buffer.from(writeKey).toString("hex"), // Full key
       },
-      '✅ Derived Companion protocol session keys'
-    )
+      "✅ Derived Companion protocol session keys"
+    );
 
-    return { readKey, writeKey }
+    return { readKey, writeKey };
   }
 
   /**
@@ -352,14 +380,14 @@ export class HkdfUtils {
       AIRPLAY_EVENT_CRYPTO.SESSION_SALT,
       AIRPLAY_EVENT_CRYPTO.SERVER_ENCRYPT_INFO,
       32
-    )
+    );
     const writeKey = this.deriveSync(
       sharedSecret,
       AIRPLAY_EVENT_CRYPTO.SESSION_SALT,
       AIRPLAY_EVENT_CRYPTO.CLIENT_ENCRYPT_INFO,
       32
-    )
-    return { readKey, writeKey }
+    );
+    return { readKey, writeKey };
   }
 
   /**
@@ -370,19 +398,31 @@ export class HkdfUtils {
    * - Output: "DataStream-Output-Encryption-Key" (we write)
    * - Input: "DataStream-Input-Encryption-Key" (we read)
    */
-  static deriveAirPlayDataStreamKeysSync(sharedSecret: Uint8Array, seed: bigint): DerivedKeys {
+  static deriveAirPlayDataStreamKeysSync(
+    sharedSecret: Uint8Array,
+    seed: bigint
+  ): DerivedKeys {
     // Convert seed to little-endian int64 bytes
-    const seedString = seed.toString()
+    const seedString = seed.toString();
 
     // Concatenate salt prefix with seed bytes
     const salt = Buffer.concat([
       AIRPLAY_DATASTREAM_CRYPTO.SALT_PREFIX,
-      Buffer.from(seedString, 'utf8'),
-    ])
+      Buffer.from(seedString, "utf8"),
+    ]);
 
-    const readKey = this.deriveSync(sharedSecret, salt, AIRPLAY_DATASTREAM_CRYPTO.INPUT_INFO, 32)
-    const writeKey = this.deriveSync(sharedSecret, salt, AIRPLAY_DATASTREAM_CRYPTO.OUTPUT_INFO, 32)
-    return { readKey, writeKey }
+    const readKey = this.deriveSync(
+      sharedSecret,
+      salt,
+      AIRPLAY_DATASTREAM_CRYPTO.INPUT_INFO,
+      32
+    );
+    const writeKey = this.deriveSync(
+      sharedSecret,
+      salt,
+      AIRPLAY_DATASTREAM_CRYPTO.OUTPUT_INFO,
+      32
+    );
+    return { readKey, writeKey };
   }
 }
-

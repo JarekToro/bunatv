@@ -5,119 +5,144 @@
 // source: OriginClientPropertiesMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface OriginClientPropertiesMessage {
-  lastPlayingTimestamp?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  lastPlayingTimestamp?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseOriginClientPropertiesMessage(): OriginClientPropertiesMessage {
-  return { lastPlayingTimestamp: 0, _unknownFields: {} }
+  return { lastPlayingTimestamp: 0, _unknownFields: {} };
 }
 
-export const OriginClientPropertiesMessage: MessageFns<OriginClientPropertiesMessage> = {
-  encode(
-    message: OriginClientPropertiesMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.lastPlayingTimestamp !== undefined && message.lastPlayingTimestamp !== 0) {
-      writer.uint32(9).double(message.lastPlayingTimestamp)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const OriginClientPropertiesMessage: MessageFns<OriginClientPropertiesMessage> =
+  {
+    encode(
+      message: OriginClientPropertiesMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (
+        message.lastPlayingTimestamp !== undefined &&
+        message.lastPlayingTimestamp !== 0
+      ) {
+        writer.uint32(9).double(message.lastPlayingTimestamp);
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): OriginClientPropertiesMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseOriginClientPropertiesMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 9) {
-            break
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.lastPlayingTimestamp = reader.double()
-          continue
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): OriginClientPropertiesMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseOriginClientPropertiesMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 9) {
+              break;
+            }
+
+            message.lastPlayingTimestamp = reader.double();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
+        }
       }
-      const buf = reader.skip(tag & 7)
+      return message;
+    },
 
-      const list = message._unknownFields![tag]
+    fromJSON(object: any): OriginClientPropertiesMessage {
+      return {
+        lastPlayingTimestamp: isSet(object.lastPlayingTimestamp)
+          ? globalThis.Number(object.lastPlayingTimestamp)
+          : 0,
+      };
+    },
 
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+    toJSON(message: OriginClientPropertiesMessage): unknown {
+      const obj: any = {};
+      if (
+        message.lastPlayingTimestamp !== undefined &&
+        message.lastPlayingTimestamp !== 0
+      ) {
+        obj.lastPlayingTimestamp = message.lastPlayingTimestamp;
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): OriginClientPropertiesMessage {
-    return {
-      lastPlayingTimestamp: isSet(object.lastPlayingTimestamp)
-        ? globalThis.Number(object.lastPlayingTimestamp)
-        : 0,
-    }
-  },
+    create<I extends Exact<DeepPartial<OriginClientPropertiesMessage>, I>>(
+      base?: I
+    ): OriginClientPropertiesMessage {
+      return OriginClientPropertiesMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<OriginClientPropertiesMessage>, I>>(
+      object: I
+    ): OriginClientPropertiesMessage {
+      const message = createBaseOriginClientPropertiesMessage();
+      message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? 0;
+      return message;
+    },
+  };
 
-  toJSON(message: OriginClientPropertiesMessage): unknown {
-    const obj: any = {}
-    if (message.lastPlayingTimestamp !== undefined && message.lastPlayingTimestamp !== 0) {
-      obj.lastPlayingTimestamp = message.lastPlayingTimestamp
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<OriginClientPropertiesMessage>, I>>(
-    base?: I
-  ): OriginClientPropertiesMessage {
-    return OriginClientPropertiesMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<OriginClientPropertiesMessage>, I>>(
-    object: I
-  ): OriginClientPropertiesMessage {
-    const message = createBaseOriginClientPropertiesMessage()
-    message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? 0
-    return message
-  },
-}
-
-export const originClientPropertiesMessage: Extension<OriginClientPropertiesMessage | undefined> = {
+export const originClientPropertiesMessage: Extension<
+  OriginClientPropertiesMessage | undefined
+> = {
   number: 87,
   tag: 698,
   repeated: false,
   packed: false,
   encode: (value: OriginClientPropertiesMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    OriginClientPropertiesMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    OriginClientPropertiesMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): OriginClientPropertiesMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return OriginClientPropertiesMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): OriginClientPropertiesMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return OriginClientPropertiesMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -127,37 +152,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

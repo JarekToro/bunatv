@@ -6,15 +6,15 @@
  */
 
 // SRP library is external as Bun doesn't have native SRP support
-import { SRP, SrpClient, SrpServer } from 'fast-srp-hap'
-import { CryptoError } from './errors'
+import { SRP, SrpClient, SrpServer } from "fast-srp-hap";
+import { CryptoError } from "./errors";
 
 /**
  * SRP utilities for HAP pairing authentication
  */
 export class SrpUtils {
   // Use HAP-specific parameters from the library
-  private static params = SRP.params.hap
+  private static params = SRP.params.hap;
 
   /**
    * Create SRP client for pair-setup
@@ -39,9 +39,9 @@ export class SrpUtils {
         Buffer.from(password),
         secretKey,
         true // HAP mode
-      )
+      );
     } catch (error) {
-      throw new CryptoError('Failed to create SRP client', error as Error)
+      throw new CryptoError("Failed to create SRP client", error as Error);
     }
   }
 
@@ -67,9 +67,9 @@ export class SrpUtils {
         Buffer.from(username),
         Buffer.from(password),
         secretKey
-      )
+      );
     } catch (error) {
-      throw new CryptoError('Failed to create SRP server', error as Error)
+      throw new CryptoError("Failed to create SRP server", error as Error);
     }
   }
 
@@ -78,20 +78,29 @@ export class SrpUtils {
    */
   static async generateKey(bytes: number = 32): Promise<Buffer> {
     try {
-      return await SRP.genKey(bytes)
+      return await SRP.genKey(bytes);
     } catch (error) {
-      throw new CryptoError('Failed to generate SRP key', error as Error)
+      throw new CryptoError("Failed to generate SRP key", error as Error);
     }
   }
 
   /**
    * Compute SRP verifier
    */
-  static computeVerifier(salt: Buffer, username: string, password: string): Buffer {
+  static computeVerifier(
+    salt: Buffer,
+    username: string,
+    password: string
+  ): Buffer {
     try {
-      return SRP.computeVerifier(this.params, salt, Buffer.from(username), Buffer.from(password))
+      return SRP.computeVerifier(
+        this.params,
+        salt,
+        Buffer.from(username),
+        Buffer.from(password)
+      );
     } catch (error) {
-      throw new CryptoError('Failed to compute SRP verifier', error as Error)
+      throw new CryptoError("Failed to compute SRP verifier", error as Error);
     }
   }
 }

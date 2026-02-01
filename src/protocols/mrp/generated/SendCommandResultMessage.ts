@@ -5,13 +5,13 @@
 // source: SendCommandResultMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { PlayerPath } from './PlayerPath'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { PlayerPath } from "./PlayerPath";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SendError {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum SendError_Enum {
@@ -33,77 +33,77 @@ export enum SendError_Enum {
 export function sendError_EnumFromJSON(object: any): SendError_Enum {
   switch (object) {
     case 0:
-    case 'NoError':
-      return SendError_Enum.NoError
+    case "NoError":
+      return SendError_Enum.NoError;
     case 1:
-    case 'ApplicationNotFound':
-      return SendError_Enum.ApplicationNotFound
+    case "ApplicationNotFound":
+      return SendError_Enum.ApplicationNotFound;
     case 2:
-    case 'ConnectionFailed':
-      return SendError_Enum.ConnectionFailed
+    case "ConnectionFailed":
+      return SendError_Enum.ConnectionFailed;
     case 3:
-    case 'Ignored':
-      return SendError_Enum.Ignored
+    case "Ignored":
+      return SendError_Enum.Ignored;
     case 4:
-    case 'CouldNotLaunchApplication':
-      return SendError_Enum.CouldNotLaunchApplication
+    case "CouldNotLaunchApplication":
+      return SendError_Enum.CouldNotLaunchApplication;
     case 5:
-    case 'TimedOut':
-      return SendError_Enum.TimedOut
+    case "TimedOut":
+      return SendError_Enum.TimedOut;
     case 6:
-    case 'OriginDoesNotExist':
-      return SendError_Enum.OriginDoesNotExist
+    case "OriginDoesNotExist":
+      return SendError_Enum.OriginDoesNotExist;
     case 7:
-    case 'InvalidOptions':
-      return SendError_Enum.InvalidOptions
+    case "InvalidOptions":
+      return SendError_Enum.InvalidOptions;
     case 8:
-    case 'NoCommandHandlers':
-      return SendError_Enum.NoCommandHandlers
+    case "NoCommandHandlers":
+      return SendError_Enum.NoCommandHandlers;
     case 9:
-    case 'ApplicationNotInstalled':
-      return SendError_Enum.ApplicationNotInstalled
+    case "ApplicationNotInstalled":
+      return SendError_Enum.ApplicationNotInstalled;
     case 10:
-    case 'NotSupported':
-      return SendError_Enum.NotSupported
+    case "NotSupported":
+      return SendError_Enum.NotSupported;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return SendError_Enum.UNRECOGNIZED
+      return SendError_Enum.UNRECOGNIZED;
   }
 }
 
 export function sendError_EnumToJSON(object: SendError_Enum): string {
   switch (object) {
     case SendError_Enum.NoError:
-      return 'NoError'
+      return "NoError";
     case SendError_Enum.ApplicationNotFound:
-      return 'ApplicationNotFound'
+      return "ApplicationNotFound";
     case SendError_Enum.ConnectionFailed:
-      return 'ConnectionFailed'
+      return "ConnectionFailed";
     case SendError_Enum.Ignored:
-      return 'Ignored'
+      return "Ignored";
     case SendError_Enum.CouldNotLaunchApplication:
-      return 'CouldNotLaunchApplication'
+      return "CouldNotLaunchApplication";
     case SendError_Enum.TimedOut:
-      return 'TimedOut'
+      return "TimedOut";
     case SendError_Enum.OriginDoesNotExist:
-      return 'OriginDoesNotExist'
+      return "OriginDoesNotExist";
     case SendError_Enum.InvalidOptions:
-      return 'InvalidOptions'
+      return "InvalidOptions";
     case SendError_Enum.NoCommandHandlers:
-      return 'NoCommandHandlers'
+      return "NoCommandHandlers";
     case SendError_Enum.ApplicationNotInstalled:
-      return 'ApplicationNotInstalled'
+      return "ApplicationNotInstalled";
     case SendError_Enum.NotSupported:
-      return 'NotSupported'
+      return "NotSupported";
     case SendError_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface HandlerReturnStatus {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum HandlerReturnStatus_Enum {
@@ -127,110 +127,114 @@ export enum HandlerReturnStatus_Enum {
   UNRECOGNIZED = -1,
 }
 
-export function handlerReturnStatus_EnumFromJSON(object: any): HandlerReturnStatus_Enum {
+export function handlerReturnStatus_EnumFromJSON(
+  object: any
+): HandlerReturnStatus_Enum {
   switch (object) {
     case 0:
-    case 'Success':
-      return HandlerReturnStatus_Enum.Success
+    case "Success":
+      return HandlerReturnStatus_Enum.Success;
     case 1:
-    case 'NoSuchContent':
-      return HandlerReturnStatus_Enum.NoSuchContent
+    case "NoSuchContent":
+      return HandlerReturnStatus_Enum.NoSuchContent;
     case 2:
-    case 'CommandFailed':
-      return HandlerReturnStatus_Enum.CommandFailed
+    case "CommandFailed":
+      return HandlerReturnStatus_Enum.CommandFailed;
     case 10:
-    case 'NoActionableNowPlayingItem':
-      return HandlerReturnStatus_Enum.NoActionableNowPlayingItem
+    case "NoActionableNowPlayingItem":
+      return HandlerReturnStatus_Enum.NoActionableNowPlayingItem;
     case 20:
-    case 'DeviceNotFound':
-      return HandlerReturnStatus_Enum.DeviceNotFound
+    case "DeviceNotFound":
+      return HandlerReturnStatus_Enum.DeviceNotFound;
     case 3:
-    case 'UIKitLegacy':
-      return HandlerReturnStatus_Enum.UIKitLegacy
+    case "UIKitLegacy":
+      return HandlerReturnStatus_Enum.UIKitLegacy;
     case 100:
-    case 'SkipAdProhibited':
-      return HandlerReturnStatus_Enum.SkipAdProhibited
+    case "SkipAdProhibited":
+      return HandlerReturnStatus_Enum.SkipAdProhibited;
     case 101:
-    case 'QueueIsUserCurated':
-      return HandlerReturnStatus_Enum.QueueIsUserCurated
+    case "QueueIsUserCurated":
+      return HandlerReturnStatus_Enum.QueueIsUserCurated;
     case 102:
-    case 'UserModifiedQueueDisabled':
-      return HandlerReturnStatus_Enum.UserModifiedQueueDisabled
+    case "UserModifiedQueueDisabled":
+      return HandlerReturnStatus_Enum.UserModifiedQueueDisabled;
     case 103:
-    case 'UserQueueModificationNotSupportedForCurrentItem':
-      return HandlerReturnStatus_Enum.UserQueueModificationNotSupportedForCurrentItem
+    case "UserQueueModificationNotSupportedForCurrentItem":
+      return HandlerReturnStatus_Enum.UserQueueModificationNotSupportedForCurrentItem;
     case 104:
-    case 'SubscriptionRequiredForSharedQueue':
-      return HandlerReturnStatus_Enum.SubscriptionRequiredForSharedQueue
+    case "SubscriptionRequiredForSharedQueue":
+      return HandlerReturnStatus_Enum.SubscriptionRequiredForSharedQueue;
     case 105:
-    case 'InsertionPositionNotSpecified':
-      return HandlerReturnStatus_Enum.InsertionPositionNotSpecified
+    case "InsertionPositionNotSpecified":
+      return HandlerReturnStatus_Enum.InsertionPositionNotSpecified;
     case 106:
-    case 'InvalidInsertionPosition':
-      return HandlerReturnStatus_Enum.InvalidInsertionPosition
+    case "InvalidInsertionPosition":
+      return HandlerReturnStatus_Enum.InvalidInsertionPosition;
     case 107:
-    case 'RequestParametersOutOfBounds':
-      return HandlerReturnStatus_Enum.RequestParametersOutOfBounds
+    case "RequestParametersOutOfBounds":
+      return HandlerReturnStatus_Enum.RequestParametersOutOfBounds;
     case 108:
-    case 'SkipLimitReached':
-      return HandlerReturnStatus_Enum.SkipLimitReached
+    case "SkipLimitReached":
+      return HandlerReturnStatus_Enum.SkipLimitReached;
     case 401:
-    case 'AuthenticationFailure':
-      return HandlerReturnStatus_Enum.AuthenticationFailure
+    case "AuthenticationFailure":
+      return HandlerReturnStatus_Enum.AuthenticationFailure;
     case 501:
-    case 'MediaServiceUnavailable':
-      return HandlerReturnStatus_Enum.MediaServiceUnavailable
+    case "MediaServiceUnavailable":
+      return HandlerReturnStatus_Enum.MediaServiceUnavailable;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return HandlerReturnStatus_Enum.UNRECOGNIZED
+      return HandlerReturnStatus_Enum.UNRECOGNIZED;
   }
 }
 
-export function handlerReturnStatus_EnumToJSON(object: HandlerReturnStatus_Enum): string {
+export function handlerReturnStatus_EnumToJSON(
+  object: HandlerReturnStatus_Enum
+): string {
   switch (object) {
     case HandlerReturnStatus_Enum.Success:
-      return 'Success'
+      return "Success";
     case HandlerReturnStatus_Enum.NoSuchContent:
-      return 'NoSuchContent'
+      return "NoSuchContent";
     case HandlerReturnStatus_Enum.CommandFailed:
-      return 'CommandFailed'
+      return "CommandFailed";
     case HandlerReturnStatus_Enum.NoActionableNowPlayingItem:
-      return 'NoActionableNowPlayingItem'
+      return "NoActionableNowPlayingItem";
     case HandlerReturnStatus_Enum.DeviceNotFound:
-      return 'DeviceNotFound'
+      return "DeviceNotFound";
     case HandlerReturnStatus_Enum.UIKitLegacy:
-      return 'UIKitLegacy'
+      return "UIKitLegacy";
     case HandlerReturnStatus_Enum.SkipAdProhibited:
-      return 'SkipAdProhibited'
+      return "SkipAdProhibited";
     case HandlerReturnStatus_Enum.QueueIsUserCurated:
-      return 'QueueIsUserCurated'
+      return "QueueIsUserCurated";
     case HandlerReturnStatus_Enum.UserModifiedQueueDisabled:
-      return 'UserModifiedQueueDisabled'
+      return "UserModifiedQueueDisabled";
     case HandlerReturnStatus_Enum.UserQueueModificationNotSupportedForCurrentItem:
-      return 'UserQueueModificationNotSupportedForCurrentItem'
+      return "UserQueueModificationNotSupportedForCurrentItem";
     case HandlerReturnStatus_Enum.SubscriptionRequiredForSharedQueue:
-      return 'SubscriptionRequiredForSharedQueue'
+      return "SubscriptionRequiredForSharedQueue";
     case HandlerReturnStatus_Enum.InsertionPositionNotSpecified:
-      return 'InsertionPositionNotSpecified'
+      return "InsertionPositionNotSpecified";
     case HandlerReturnStatus_Enum.InvalidInsertionPosition:
-      return 'InvalidInsertionPosition'
+      return "InvalidInsertionPosition";
     case HandlerReturnStatus_Enum.RequestParametersOutOfBounds:
-      return 'RequestParametersOutOfBounds'
+      return "RequestParametersOutOfBounds";
     case HandlerReturnStatus_Enum.SkipLimitReached:
-      return 'SkipLimitReached'
+      return "SkipLimitReached";
     case HandlerReturnStatus_Enum.AuthenticationFailure:
-      return 'AuthenticationFailure'
+      return "AuthenticationFailure";
     case HandlerReturnStatus_Enum.MediaServiceUnavailable:
-      return 'MediaServiceUnavailable'
+      return "MediaServiceUnavailable";
     case HandlerReturnStatus_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface SendCommandStatusCode {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum SendCommandStatusCode_Enum {
@@ -254,110 +258,114 @@ export enum SendCommandStatusCode_Enum {
   UNRECOGNIZED = -1,
 }
 
-export function sendCommandStatusCode_EnumFromJSON(object: any): SendCommandStatusCode_Enum {
+export function sendCommandStatusCode_EnumFromJSON(
+  object: any
+): SendCommandStatusCode_Enum {
   switch (object) {
     case 0:
-    case 'Success':
-      return SendCommandStatusCode_Enum.Success
+    case "Success":
+      return SendCommandStatusCode_Enum.Success;
     case 1:
-    case 'NoSuchContent':
-      return SendCommandStatusCode_Enum.NoSuchContent
+    case "NoSuchContent":
+      return SendCommandStatusCode_Enum.NoSuchContent;
     case 2:
-    case 'CommandFailed':
-      return SendCommandStatusCode_Enum.CommandFailed
+    case "CommandFailed":
+      return SendCommandStatusCode_Enum.CommandFailed;
     case 10:
-    case 'NoActionableNowPlayingItem':
-      return SendCommandStatusCode_Enum.NoActionableNowPlayingItem
+    case "NoActionableNowPlayingItem":
+      return SendCommandStatusCode_Enum.NoActionableNowPlayingItem;
     case 20:
-    case 'DeviceNotFound':
-      return SendCommandStatusCode_Enum.DeviceNotFound
+    case "DeviceNotFound":
+      return SendCommandStatusCode_Enum.DeviceNotFound;
     case 3:
-    case 'UIKitLegacy':
-      return SendCommandStatusCode_Enum.UIKitLegacy
+    case "UIKitLegacy":
+      return SendCommandStatusCode_Enum.UIKitLegacy;
     case 100:
-    case 'SkipAdProhibited':
-      return SendCommandStatusCode_Enum.SkipAdProhibited
+    case "SkipAdProhibited":
+      return SendCommandStatusCode_Enum.SkipAdProhibited;
     case 101:
-    case 'QueueIsUserCurated':
-      return SendCommandStatusCode_Enum.QueueIsUserCurated
+    case "QueueIsUserCurated":
+      return SendCommandStatusCode_Enum.QueueIsUserCurated;
     case 102:
-    case 'UserModifiedQueueDisabled':
-      return SendCommandStatusCode_Enum.UserModifiedQueueDisabled
+    case "UserModifiedQueueDisabled":
+      return SendCommandStatusCode_Enum.UserModifiedQueueDisabled;
     case 103:
-    case 'UserQueueModificationNotSupportedForCurrentItem':
-      return SendCommandStatusCode_Enum.UserQueueModificationNotSupportedForCurrentItem
+    case "UserQueueModificationNotSupportedForCurrentItem":
+      return SendCommandStatusCode_Enum.UserQueueModificationNotSupportedForCurrentItem;
     case 104:
-    case 'SubscriptionRequiredForSharedQueue':
-      return SendCommandStatusCode_Enum.SubscriptionRequiredForSharedQueue
+    case "SubscriptionRequiredForSharedQueue":
+      return SendCommandStatusCode_Enum.SubscriptionRequiredForSharedQueue;
     case 105:
-    case 'InsertionPositionNotSpecified':
-      return SendCommandStatusCode_Enum.InsertionPositionNotSpecified
+    case "InsertionPositionNotSpecified":
+      return SendCommandStatusCode_Enum.InsertionPositionNotSpecified;
     case 106:
-    case 'InvalidInsertionPosition':
-      return SendCommandStatusCode_Enum.InvalidInsertionPosition
+    case "InvalidInsertionPosition":
+      return SendCommandStatusCode_Enum.InvalidInsertionPosition;
     case 107:
-    case 'RequestParametersOutOfBounds':
-      return SendCommandStatusCode_Enum.RequestParametersOutOfBounds
+    case "RequestParametersOutOfBounds":
+      return SendCommandStatusCode_Enum.RequestParametersOutOfBounds;
     case 108:
-    case 'SkipLimitReached':
-      return SendCommandStatusCode_Enum.SkipLimitReached
+    case "SkipLimitReached":
+      return SendCommandStatusCode_Enum.SkipLimitReached;
     case 401:
-    case 'AuthenticationFailure':
-      return SendCommandStatusCode_Enum.AuthenticationFailure
+    case "AuthenticationFailure":
+      return SendCommandStatusCode_Enum.AuthenticationFailure;
     case 501:
-    case 'MediaServiceUnavailable':
-      return SendCommandStatusCode_Enum.MediaServiceUnavailable
+    case "MediaServiceUnavailable":
+      return SendCommandStatusCode_Enum.MediaServiceUnavailable;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return SendCommandStatusCode_Enum.UNRECOGNIZED
+      return SendCommandStatusCode_Enum.UNRECOGNIZED;
   }
 }
 
-export function sendCommandStatusCode_EnumToJSON(object: SendCommandStatusCode_Enum): string {
+export function sendCommandStatusCode_EnumToJSON(
+  object: SendCommandStatusCode_Enum
+): string {
   switch (object) {
     case SendCommandStatusCode_Enum.Success:
-      return 'Success'
+      return "Success";
     case SendCommandStatusCode_Enum.NoSuchContent:
-      return 'NoSuchContent'
+      return "NoSuchContent";
     case SendCommandStatusCode_Enum.CommandFailed:
-      return 'CommandFailed'
+      return "CommandFailed";
     case SendCommandStatusCode_Enum.NoActionableNowPlayingItem:
-      return 'NoActionableNowPlayingItem'
+      return "NoActionableNowPlayingItem";
     case SendCommandStatusCode_Enum.DeviceNotFound:
-      return 'DeviceNotFound'
+      return "DeviceNotFound";
     case SendCommandStatusCode_Enum.UIKitLegacy:
-      return 'UIKitLegacy'
+      return "UIKitLegacy";
     case SendCommandStatusCode_Enum.SkipAdProhibited:
-      return 'SkipAdProhibited'
+      return "SkipAdProhibited";
     case SendCommandStatusCode_Enum.QueueIsUserCurated:
-      return 'QueueIsUserCurated'
+      return "QueueIsUserCurated";
     case SendCommandStatusCode_Enum.UserModifiedQueueDisabled:
-      return 'UserModifiedQueueDisabled'
+      return "UserModifiedQueueDisabled";
     case SendCommandStatusCode_Enum.UserQueueModificationNotSupportedForCurrentItem:
-      return 'UserQueueModificationNotSupportedForCurrentItem'
+      return "UserQueueModificationNotSupportedForCurrentItem";
     case SendCommandStatusCode_Enum.SubscriptionRequiredForSharedQueue:
-      return 'SubscriptionRequiredForSharedQueue'
+      return "SubscriptionRequiredForSharedQueue";
     case SendCommandStatusCode_Enum.InsertionPositionNotSpecified:
-      return 'InsertionPositionNotSpecified'
+      return "InsertionPositionNotSpecified";
     case SendCommandStatusCode_Enum.InvalidInsertionPosition:
-      return 'InvalidInsertionPosition'
+      return "InvalidInsertionPosition";
     case SendCommandStatusCode_Enum.RequestParametersOutOfBounds:
-      return 'RequestParametersOutOfBounds'
+      return "RequestParametersOutOfBounds";
     case SendCommandStatusCode_Enum.SkipLimitReached:
-      return 'SkipLimitReached'
+      return "SkipLimitReached";
     case SendCommandStatusCode_Enum.AuthenticationFailure:
-      return 'AuthenticationFailure'
+      return "AuthenticationFailure";
     case SendCommandStatusCode_Enum.MediaServiceUnavailable:
-      return 'MediaServiceUnavailable'
+      return "MediaServiceUnavailable";
     case SendCommandStatusCode_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface SendCommandResultType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum SendCommandResultType_Enum {
@@ -367,311 +375,360 @@ export enum SendCommandResultType_Enum {
   UNRECOGNIZED = -1,
 }
 
-export function sendCommandResultType_EnumFromJSON(object: any): SendCommandResultType_Enum {
+export function sendCommandResultType_EnumFromJSON(
+  object: any
+): SendCommandResultType_Enum {
   switch (object) {
     case 1:
-    case 'Dialog':
-      return SendCommandResultType_Enum.Dialog
+    case "Dialog":
+      return SendCommandResultType_Enum.Dialog;
     case 2:
-    case 'Error':
-      return SendCommandResultType_Enum.Error
+    case "Error":
+      return SendCommandResultType_Enum.Error;
     case 999:
-    case 'Custom':
-      return SendCommandResultType_Enum.Custom
+    case "Custom":
+      return SendCommandResultType_Enum.Custom;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return SendCommandResultType_Enum.UNRECOGNIZED
+      return SendCommandResultType_Enum.UNRECOGNIZED;
   }
 }
 
-export function sendCommandResultType_EnumToJSON(object: SendCommandResultType_Enum): string {
+export function sendCommandResultType_EnumToJSON(
+  object: SendCommandResultType_Enum
+): string {
   switch (object) {
     case SendCommandResultType_Enum.Dialog:
-      return 'Dialog'
+      return "Dialog";
     case SendCommandResultType_Enum.Error:
-      return 'Error'
+      return "Error";
     case SendCommandResultType_Enum.Custom:
-      return 'Custom'
+      return "Custom";
     case SendCommandResultType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface SendCommandResultStatus {
-  statusCode?: SendCommandStatusCode_Enum | undefined
-  type?: SendCommandResultType_Enum | undefined
+  statusCode?: SendCommandStatusCode_Enum | undefined;
+  type?: SendCommandResultType_Enum | undefined;
   /**
    * optional ... dialog = 3;
    * optional ... error = 4;
    */
-  customData?: Buffer | undefined
-  customDataType?: string | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  customData?: Buffer | undefined;
+  customDataType?: string | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface SendCommandResult {
-  playerPath?: PlayerPath | undefined
-  sendError?: SendError_Enum | undefined
-  statuses: SendCommandResultStatus[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  playerPath?: PlayerPath | undefined;
+  sendError?: SendError_Enum | undefined;
+  statuses: SendCommandResultStatus[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface SendCommandResultMessage {
-  sendError?: SendError_Enum | undefined
-  handlerReturnStatus?: HandlerReturnStatus_Enum | undefined
-  handlerReturnStatusDatas: Buffer[]
-  commandID?: string | undefined
-  playerPath?: PlayerPath | undefined
-  commandResult?: SendCommandResult | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  sendError?: SendError_Enum | undefined;
+  handlerReturnStatus?: HandlerReturnStatus_Enum | undefined;
+  handlerReturnStatusDatas: Buffer[];
+  commandID?: string | undefined;
+  playerPath?: PlayerPath | undefined;
+  commandResult?: SendCommandResult | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSendError(): SendError {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const SendError: MessageFns<SendError> = {
-  encode(message: SendError, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendError,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SendError {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendError()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendError();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): SendError {
-    return {}
+    return {};
   },
 
   toJSON(_: SendError): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<SendError>, I>>(base?: I): SendError {
-    return SendError.fromPartial(base ?? ({} as any))
+    return SendError.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<SendError>, I>>(_: I): SendError {
-    const message = createBaseSendError()
-    return message
+    const message = createBaseSendError();
+    return message;
   },
-}
+};
 
 function createBaseHandlerReturnStatus(): HandlerReturnStatus {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const HandlerReturnStatus: MessageFns<HandlerReturnStatus> = {
-  encode(message: HandlerReturnStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: HandlerReturnStatus,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): HandlerReturnStatus {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseHandlerReturnStatus()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): HandlerReturnStatus {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHandlerReturnStatus();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): HandlerReturnStatus {
-    return {}
+    return {};
   },
 
   toJSON(_: HandlerReturnStatus): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<HandlerReturnStatus>, I>>(base?: I): HandlerReturnStatus {
-    return HandlerReturnStatus.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<HandlerReturnStatus>, I>>(
+    base?: I
+  ): HandlerReturnStatus {
+    return HandlerReturnStatus.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<HandlerReturnStatus>, I>>(_: I): HandlerReturnStatus {
-    const message = createBaseHandlerReturnStatus()
-    return message
+  fromPartial<I extends Exact<DeepPartial<HandlerReturnStatus>, I>>(
+    _: I
+  ): HandlerReturnStatus {
+    const message = createBaseHandlerReturnStatus();
+    return message;
   },
-}
+};
 
 function createBaseSendCommandStatusCode(): SendCommandStatusCode {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const SendCommandStatusCode: MessageFns<SendCommandStatusCode> = {
-  encode(message: SendCommandStatusCode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendCommandStatusCode,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendCommandStatusCode {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendCommandStatusCode()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendCommandStatusCode {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendCommandStatusCode();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): SendCommandStatusCode {
-    return {}
+    return {};
   },
 
   toJSON(_: SendCommandStatusCode): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SendCommandStatusCode>, I>>(base?: I): SendCommandStatusCode {
-    return SendCommandStatusCode.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SendCommandStatusCode>, I>>(
+    base?: I
+  ): SendCommandStatusCode {
+    return SendCommandStatusCode.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SendCommandStatusCode>, I>>(_: I): SendCommandStatusCode {
-    const message = createBaseSendCommandStatusCode()
-    return message
+  fromPartial<I extends Exact<DeepPartial<SendCommandStatusCode>, I>>(
+    _: I
+  ): SendCommandStatusCode {
+    const message = createBaseSendCommandStatusCode();
+    return message;
   },
-}
+};
 
 function createBaseSendCommandResultType(): SendCommandResultType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const SendCommandResultType: MessageFns<SendCommandResultType> = {
-  encode(message: SendCommandResultType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendCommandResultType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendCommandResultType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendCommandResultType()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendCommandResultType {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendCommandResultType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): SendCommandResultType {
-    return {}
+    return {};
   },
 
   toJSON(_: SendCommandResultType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SendCommandResultType>, I>>(base?: I): SendCommandResultType {
-    return SendCommandResultType.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SendCommandResultType>, I>>(
+    base?: I
+  ): SendCommandResultType {
+    return SendCommandResultType.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SendCommandResultType>, I>>(_: I): SendCommandResultType {
-    const message = createBaseSendCommandResultType()
-    return message
+  fromPartial<I extends Exact<DeepPartial<SendCommandResultType>, I>>(
+    _: I
+  ): SendCommandResultType {
+    const message = createBaseSendCommandResultType();
+    return message;
   },
-}
+};
 
 function createBaseSendCommandResultStatus(): SendCommandResultStatus {
   return {
     statusCode: 0,
     type: 1,
     customData: Buffer.alloc(0),
-    customDataType: '',
+    customDataType: "",
     _unknownFields: {},
-  }
+  };
 }
 
 export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
@@ -680,82 +737,88 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
     if (message.statusCode !== undefined && message.statusCode !== 0) {
-      writer.uint32(8).int32(message.statusCode)
+      writer.uint32(8).int32(message.statusCode);
     }
     if (message.type !== undefined && message.type !== 1) {
-      writer.uint32(16).int32(message.type)
+      writer.uint32(16).int32(message.type);
     }
     if (message.customData !== undefined && message.customData.length !== 0) {
-      writer.uint32(42).bytes(message.customData)
+      writer.uint32(42).bytes(message.customData);
     }
-    if (message.customDataType !== undefined && message.customDataType !== '') {
-      writer.uint32(50).string(message.customDataType)
+    if (message.customDataType !== undefined && message.customDataType !== "") {
+      writer.uint32(50).string(message.customDataType);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendCommandResultStatus {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendCommandResultStatus()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendCommandResultStatus {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendCommandResultStatus();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.statusCode = reader.int32() as any
-          continue
+          message.statusCode = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.type = reader.int32() as any
-          continue
+          message.type = reader.int32() as any;
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.customData = Buffer.from(reader.bytes())
-          continue
+          message.customData = Buffer.from(reader.bytes());
+          continue;
         }
         case 6: {
           if (tag !== 50) {
-            break
+            break;
           }
 
-          message.customDataType = reader.string()
-          continue
+          message.customDataType = reader.string();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SendCommandResultStatus {
@@ -763,171 +826,199 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
       statusCode: isSet(object.statusCode)
         ? sendCommandStatusCode_EnumFromJSON(object.statusCode)
         : 0,
-      type: isSet(object.type) ? sendCommandResultType_EnumFromJSON(object.type) : 1,
+      type: isSet(object.type)
+        ? sendCommandResultType_EnumFromJSON(object.type)
+        : 1,
       customData: isSet(object.customData)
         ? Buffer.from(bytesFromBase64(object.customData))
         : Buffer.alloc(0),
-      customDataType: isSet(object.customDataType) ? globalThis.String(object.customDataType) : '',
-    }
+      customDataType: isSet(object.customDataType)
+        ? globalThis.String(object.customDataType)
+        : "",
+    };
   },
 
   toJSON(message: SendCommandResultStatus): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.statusCode !== undefined && message.statusCode !== 0) {
-      obj.statusCode = sendCommandStatusCode_EnumToJSON(message.statusCode)
+      obj.statusCode = sendCommandStatusCode_EnumToJSON(message.statusCode);
     }
     if (message.type !== undefined && message.type !== 1) {
-      obj.type = sendCommandResultType_EnumToJSON(message.type)
+      obj.type = sendCommandResultType_EnumToJSON(message.type);
     }
     if (message.customData !== undefined && message.customData.length !== 0) {
-      obj.customData = base64FromBytes(message.customData)
+      obj.customData = base64FromBytes(message.customData);
     }
-    if (message.customDataType !== undefined && message.customDataType !== '') {
-      obj.customDataType = message.customDataType
+    if (message.customDataType !== undefined && message.customDataType !== "") {
+      obj.customDataType = message.customDataType;
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<SendCommandResultStatus>, I>>(
     base?: I
   ): SendCommandResultStatus {
-    return SendCommandResultStatus.fromPartial(base ?? ({} as any))
+    return SendCommandResultStatus.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<SendCommandResultStatus>, I>>(
     object: I
   ): SendCommandResultStatus {
-    const message = createBaseSendCommandResultStatus()
-    message.statusCode = object.statusCode ?? 0
-    message.type = object.type ?? 1
-    message.customData = object.customData ?? Buffer.alloc(0)
-    message.customDataType = object.customDataType ?? ''
-    return message
+    const message = createBaseSendCommandResultStatus();
+    message.statusCode = object.statusCode ?? 0;
+    message.type = object.type ?? 1;
+    message.customData = object.customData ?? Buffer.alloc(0);
+    message.customDataType = object.customDataType ?? "";
+    return message;
   },
-}
+};
 
 function createBaseSendCommandResult(): SendCommandResult {
-  return { playerPath: undefined, sendError: 0, statuses: [], _unknownFields: {} }
+  return {
+    playerPath: undefined,
+    sendError: 0,
+    statuses: [],
+    _unknownFields: {},
+  };
 }
 
 export const SendCommandResult: MessageFns<SendCommandResult> = {
-  encode(message: SendCommandResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendCommandResult,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join()
+      PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join();
     }
     if (message.sendError !== undefined && message.sendError !== 0) {
-      writer.uint32(16).int32(message.sendError)
+      writer.uint32(16).int32(message.sendError);
     }
     for (const v of message.statuses) {
-      SendCommandResultStatus.encode(v!, writer.uint32(26).fork()).join()
+      SendCommandResultStatus.encode(v!, writer.uint32(26).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SendCommandResult {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendCommandResult()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendCommandResult();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
+          message.playerPath = PlayerPath.decode(reader, reader.uint32());
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.sendError = reader.int32() as any
-          continue
+          message.sendError = reader.int32() as any;
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.statuses.push(SendCommandResultStatus.decode(reader, reader.uint32()))
-          continue
+          message.statuses.push(
+            SendCommandResultStatus.decode(reader, reader.uint32())
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SendCommandResult {
     return {
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
-      sendError: isSet(object.sendError) ? sendError_EnumFromJSON(object.sendError) : 0,
+      playerPath: isSet(object.playerPath)
+        ? PlayerPath.fromJSON(object.playerPath)
+        : undefined,
+      sendError: isSet(object.sendError)
+        ? sendError_EnumFromJSON(object.sendError)
+        : 0,
       statuses: globalThis.Array.isArray(object?.statuses)
         ? object.statuses.map((e: any) => SendCommandResultStatus.fromJSON(e))
         : [],
-    }
+    };
   },
 
   toJSON(message: SendCommandResult): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
+      obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
     if (message.sendError !== undefined && message.sendError !== 0) {
-      obj.sendError = sendError_EnumToJSON(message.sendError)
+      obj.sendError = sendError_EnumToJSON(message.sendError);
     }
     if (message.statuses?.length) {
-      obj.statuses = message.statuses.map(e => SendCommandResultStatus.toJSON(e))
+      obj.statuses = message.statuses.map((e) =>
+        SendCommandResultStatus.toJSON(e)
+      );
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SendCommandResult>, I>>(base?: I): SendCommandResult {
-    return SendCommandResult.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SendCommandResult>, I>>(
+    base?: I
+  ): SendCommandResult {
+    return SendCommandResult.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SendCommandResult>, I>>(object: I): SendCommandResult {
-    const message = createBaseSendCommandResult()
+  fromPartial<I extends Exact<DeepPartial<SendCommandResult>, I>>(
+    object: I
+  ): SendCommandResult {
+    const message = createBaseSendCommandResult();
     message.playerPath =
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
-    message.sendError = object.sendError ?? 0
-    message.statuses = object.statuses?.map(e => SendCommandResultStatus.fromPartial(e)) || []
-    return message
+        : undefined;
+    message.sendError = object.sendError ?? 0;
+    message.statuses =
+      object.statuses?.map((e) => SendCommandResultStatus.fromPartial(e)) || [];
+    return message;
   },
-}
+};
 
 function createBaseSendCommandResultMessage(): SendCommandResultMessage {
   return {
     sendError: 0,
     handlerReturnStatus: 0,
     handlerReturnStatusDatas: [],
-    commandID: '',
+    commandID: "",
     playerPath: undefined,
     commandResult: undefined,
     _unknownFields: {},
-  }
+  };
 }
 
 export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
@@ -936,198 +1027,243 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
     if (message.sendError !== undefined && message.sendError !== 0) {
-      writer.uint32(8).int32(message.sendError)
+      writer.uint32(8).int32(message.sendError);
     }
-    if (message.handlerReturnStatus !== undefined && message.handlerReturnStatus !== 0) {
-      writer.uint32(16).int32(message.handlerReturnStatus)
+    if (
+      message.handlerReturnStatus !== undefined &&
+      message.handlerReturnStatus !== 0
+    ) {
+      writer.uint32(16).int32(message.handlerReturnStatus);
     }
     for (const v of message.handlerReturnStatusDatas) {
-      writer.uint32(26).bytes(v!)
+      writer.uint32(26).bytes(v!);
     }
-    if (message.commandID !== undefined && message.commandID !== '') {
-      writer.uint32(34).string(message.commandID)
+    if (message.commandID !== undefined && message.commandID !== "") {
+      writer.uint32(34).string(message.commandID);
     }
     if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(42).fork()).join()
+      PlayerPath.encode(message.playerPath, writer.uint32(42).fork()).join();
     }
     if (message.commandResult !== undefined) {
-      SendCommandResult.encode(message.commandResult, writer.uint32(50).fork()).join()
+      SendCommandResult.encode(
+        message.commandResult,
+        writer.uint32(50).fork()
+      ).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendCommandResultMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendCommandResultMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendCommandResultMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendCommandResultMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.sendError = reader.int32() as any
-          continue
+          message.sendError = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.handlerReturnStatus = reader.int32() as any
-          continue
+          message.handlerReturnStatus = reader.int32() as any;
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.handlerReturnStatusDatas.push(Buffer.from(reader.bytes()))
-          continue
+          message.handlerReturnStatusDatas.push(Buffer.from(reader.bytes()));
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.commandID = reader.string()
-          continue
+          message.commandID = reader.string();
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
+          message.playerPath = PlayerPath.decode(reader, reader.uint32());
+          continue;
         }
         case 6: {
           if (tag !== 50) {
-            break
+            break;
           }
 
-          message.commandResult = SendCommandResult.decode(reader, reader.uint32())
-          continue
+          message.commandResult = SendCommandResult.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SendCommandResultMessage {
     return {
-      sendError: isSet(object.sendError) ? sendError_EnumFromJSON(object.sendError) : 0,
+      sendError: isSet(object.sendError)
+        ? sendError_EnumFromJSON(object.sendError)
+        : 0,
       handlerReturnStatus: isSet(object.handlerReturnStatus)
         ? handlerReturnStatus_EnumFromJSON(object.handlerReturnStatus)
         : 0,
-      handlerReturnStatusDatas: globalThis.Array.isArray(object?.handlerReturnStatusDatas)
-        ? object.handlerReturnStatusDatas.map((e: any) => Buffer.from(bytesFromBase64(e)))
+      handlerReturnStatusDatas: globalThis.Array.isArray(
+        object?.handlerReturnStatusDatas
+      )
+        ? object.handlerReturnStatusDatas.map((e: any) =>
+            Buffer.from(bytesFromBase64(e))
+          )
         : [],
-      commandID: isSet(object.commandID) ? globalThis.String(object.commandID) : '',
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
+      commandID: isSet(object.commandID)
+        ? globalThis.String(object.commandID)
+        : "",
+      playerPath: isSet(object.playerPath)
+        ? PlayerPath.fromJSON(object.playerPath)
+        : undefined,
       commandResult: isSet(object.commandResult)
         ? SendCommandResult.fromJSON(object.commandResult)
         : undefined,
-    }
+    };
   },
 
   toJSON(message: SendCommandResultMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.sendError !== undefined && message.sendError !== 0) {
-      obj.sendError = sendError_EnumToJSON(message.sendError)
+      obj.sendError = sendError_EnumToJSON(message.sendError);
     }
-    if (message.handlerReturnStatus !== undefined && message.handlerReturnStatus !== 0) {
-      obj.handlerReturnStatus = handlerReturnStatus_EnumToJSON(message.handlerReturnStatus)
+    if (
+      message.handlerReturnStatus !== undefined &&
+      message.handlerReturnStatus !== 0
+    ) {
+      obj.handlerReturnStatus = handlerReturnStatus_EnumToJSON(
+        message.handlerReturnStatus
+      );
     }
     if (message.handlerReturnStatusDatas?.length) {
-      obj.handlerReturnStatusDatas = message.handlerReturnStatusDatas.map(e => base64FromBytes(e))
+      obj.handlerReturnStatusDatas = message.handlerReturnStatusDatas.map((e) =>
+        base64FromBytes(e)
+      );
     }
-    if (message.commandID !== undefined && message.commandID !== '') {
-      obj.commandID = message.commandID
+    if (message.commandID !== undefined && message.commandID !== "") {
+      obj.commandID = message.commandID;
     }
     if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
+      obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
     if (message.commandResult !== undefined) {
-      obj.commandResult = SendCommandResult.toJSON(message.commandResult)
+      obj.commandResult = SendCommandResult.toJSON(message.commandResult);
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<SendCommandResultMessage>, I>>(
     base?: I
   ): SendCommandResultMessage {
-    return SendCommandResultMessage.fromPartial(base ?? ({} as any))
+    return SendCommandResultMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<SendCommandResultMessage>, I>>(
     object: I
   ): SendCommandResultMessage {
-    const message = createBaseSendCommandResultMessage()
-    message.sendError = object.sendError ?? 0
-    message.handlerReturnStatus = object.handlerReturnStatus ?? 0
-    message.handlerReturnStatusDatas = object.handlerReturnStatusDatas?.map(e => e) || []
-    message.commandID = object.commandID ?? ''
+    const message = createBaseSendCommandResultMessage();
+    message.sendError = object.sendError ?? 0;
+    message.handlerReturnStatus = object.handlerReturnStatus ?? 0;
+    message.handlerReturnStatusDatas =
+      object.handlerReturnStatusDatas?.map((e) => e) || [];
+    message.commandID = object.commandID ?? "";
     message.playerPath =
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
+        : undefined;
     message.commandResult =
       object.commandResult !== undefined && object.commandResult !== null
         ? SendCommandResult.fromPartial(object.commandResult)
-        : undefined
-    return message
+        : undefined;
+    return message;
   },
-}
+};
 
-export const sendCommandResultMessage: Extension<SendCommandResultMessage | undefined> = {
+export const sendCommandResultMessage: Extension<
+  SendCommandResultMessage | undefined
+> = {
   number: 7,
   tag: 58,
   repeated: false,
   packed: false,
   encode: (value: SendCommandResultMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SendCommandResultMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SendCommandResultMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SendCommandResultMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SendCommandResultMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SendCommandResultMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SendCommandResultMessage.decode(reader, reader.uint32());
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1137,37 +1273,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

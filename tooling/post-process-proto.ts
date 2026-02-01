@@ -8,161 +8,171 @@
  * -> { pathname: 'src/protocols/mrp/generated/DeviceInfoMessage.ts', exportName: 'deviceInfoMessage' }
  */
 
-import { Project } from 'ts-morph'
-import { writeFileSync } from 'fs'
-import { join, basename } from 'path'
-import { format, resolveConfig } from 'prettier'
+import { Project } from "ts-morph";
+import { writeFileSync } from "fs";
+import { join, basename } from "path";
+import { format, resolveConfig } from "prettier";
 interface MessageTypeMapEntry {
-  pathname: string
-  exportName: string
+  pathname: string;
+  exportName: string;
 }
 // New messages reusing inner message of another type
 const REUSED_MESSAGES: Record<string, string> = {
-  DEVICE_INFO_UPDATE_MESSAGE: 'DEVICE_INFO_MESSAGE',
-}
+  DEVICE_INFO_UPDATE_MESSAGE: "DEVICE_INFO_MESSAGE",
+};
 // Messages where the extension should NOT be set (type-only messages with string extensions)
 // These messages only need the ProtocolMessage.type set, not the extension field
-const SKIP_EXTENSION_MESSAGES = new Set([
-  'GET_KEYBOARD_SESSION_MESSAGE',
-])
+const SKIP_EXTENSION_MESSAGES = new Set(["GET_KEYBOARD_SESSION_MESSAGE"]);
 
-type MessageTypeMap = Record<string, MessageTypeMapEntry>
+type MessageTypeMap = Record<string, MessageTypeMapEntry>;
 
 function convertEnumNameToFileName(enumName: string): string {
-  const adjustedEnumName = REUSED_MESSAGES[enumName] || enumName
+  const adjustedEnumName = REUSED_MESSAGES[enumName] || enumName;
 
   // Remove _MESSAGE suffix if present
-  const withoutSuffix = adjustedEnumName.replace(/_MESSAGE$/, '')
+  const withoutSuffix = adjustedEnumName.replace(/_MESSAGE$/, "");
 
   // Split by underscore and convert to PascalCase
-  const words = withoutSuffix.split('_')
+  const words = withoutSuffix.split("_");
   const pascalCase = words
-    .map(word => {
-      if (word === 'HID') {
-        return 'HID'
+    .map((word) => {
+      if (word === "HID") {
+        return "HID";
       }
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     })
-    .join('')
+    .join("");
 
-  return `${pascalCase}Message`
+  return `${pascalCase}Message`;
 }
 
 function convertEnumNameToExportName(enumName: string): string {
-  const adjustedEnumName = REUSED_MESSAGES[enumName] || enumName
+  const adjustedEnumName = REUSED_MESSAGES[enumName] || enumName;
 
   // Remove _MESSAGE suffix if present
-  const withoutSuffix = adjustedEnumName.replace(/_MESSAGE$/, '')
+  const withoutSuffix = adjustedEnumName.replace(/_MESSAGE$/, "");
 
   // Split by underscore and convert to camelCase
-  const words = withoutSuffix.split('_')
+  const words = withoutSuffix.split("_");
   const camelCase = words
     .map((word, index) => {
       if (index === 0) {
-        return word.toLowerCase()
+        return word.toLowerCase();
       }
-      if (word === 'HID') {
-        return 'HID'
+      if (word === "HID") {
+        return "HID";
       }
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     })
-    .join('')
+    .join("");
 
-  return `${camelCase}Message`
+  return `${camelCase}Message`;
 }
 
 async function main() {
   const project = new Project({
-    tsConfigFilePath: join(import.meta.dirname, '../tsconfig.json'),
-  })
+    tsConfigFilePath: join(import.meta.dirname, "../tsconfig.json"),
+  });
 
   // Get the ProtocolMessage.ts file
   const protocolMessageFile = project.getSourceFileOrThrow(
-    'src/protocols/mrp/generated/ProtocolMessage.ts'
-  )
+    "src/protocols/mrp/generated/ProtocolMessage.ts"
+  );
 
   // Find the ProtocolMessage_Type enum
-  const protocolMessageTypeEnum = protocolMessageFile.getEnumOrThrow('ProtocolMessage_Type')
+  const protocolMessageTypeEnum = protocolMessageFile.getEnumOrThrow(
+    "ProtocolMessage_Type"
+  );
 
   // Get all enum members
-  const enumMembers = protocolMessageTypeEnum.getMembers()
+  const enumMembers = protocolMessageTypeEnum.getMembers();
 
-  const messageTypeMap: MessageTypeMap = {}
-  const generatedDir = 'src/protocols/mrp/generated'
+  const messageTypeMap: MessageTypeMap = {};
+  const generatedDir = "src/protocols/mrp/generated";
 
-  console.log('Processing enum members...\n')
+  console.log("Processing enum members...\n");
 
   for (const member of enumMembers) {
-    const enumName = member.getName()
-    const enumValue = member.getValue()
+    const enumName = member.getName();
+    const enumValue = member.getValue();
 
     // Skip UNKNOWN_MESSAGE, UNRECOGNIZED, and other special cases
-    if (enumName === 'UNKNOWN_MESSAGE' || enumName === 'UNRECOGNIZED') {
-      console.log(`⏭️  Skipping ${enumName}`)
-      continue
+    if (enumName === "UNKNOWN_MESSAGE" || enumName === "UNRECOGNIZED") {
+      console.log(`⏭️  Skipping ${enumName}`);
+      continue;
     }
 
     // Generate expected filename and export name
-    const expectedFileName = convertEnumNameToFileName(enumName)
-    const expectedExportName = convertEnumNameToExportName(enumName)
-    const expectedFilePath = join(generatedDir, `${expectedFileName}.ts`)
+    const expectedFileName = convertEnumNameToFileName(enumName);
+    const expectedExportName = convertEnumNameToExportName(enumName);
+    const expectedFilePath = join(generatedDir, `${expectedFileName}.ts`);
 
     // Try to find the file
-    const sourceFile = project.getSourceFile(expectedFilePath)
+    const sourceFile = project.getSourceFile(expectedFilePath);
 
     if (sourceFile) {
       // Verify the export exists
       const exportDeclarations = sourceFile
         .getVariableDeclarations()
-        .filter(decl => decl.isExported())
+        .filter((decl) => decl.isExported());
 
-      const matchingExport = exportDeclarations.find(decl => decl.getName() === expectedExportName)
+      const matchingExport = exportDeclarations.find(
+        (decl) => decl.getName() === expectedExportName
+      );
 
       if (matchingExport) {
-        console.log(`✅ ${enumName} (${enumValue})`)
-        console.log(`   -> ${expectedFilePath}`)
-        console.log(`   -> export: ${expectedExportName}\n`)
+        console.log(`✅ ${enumName} (${enumValue})`);
+        console.log(`   -> ${expectedFilePath}`);
+        console.log(`   -> export: ${expectedExportName}\n`);
 
         messageTypeMap[`ProtocolMessage_Type.${enumName}`] = {
           pathname: expectedFilePath,
           exportName: expectedExportName,
-        }
+        };
       } else {
         console.log(
           `⚠️  ${enumName} (${enumValue}): File found but export "${expectedExportName}" not found`
-        )
+        );
         console.log(
-          `   Available exports: ${exportDeclarations.map(d => d.getName()).join(', ')}\n`
-        )
+          `   Available exports: ${exportDeclarations.map((d) => d.getName()).join(", ")}\n`
+        );
       }
     } else {
-      console.log(`❌ ${enumName} (${enumValue}): File not found at ${expectedFilePath}\n`)
+      console.log(
+        `❌ ${enumName} (${enumValue}): File not found at ${expectedFilePath}\n`
+      );
     }
   }
 
-  const upperFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
+  const upperFirstLetter = (str: string) =>
+    str.charAt(0).toUpperCase() + str.slice(1);
   // Generate the output file
-  const outputPath = join(process.cwd(), 'src/protocols/mrp/generated/ProtocolMessageResolver.ts')
+  const outputPath = join(
+    process.cwd(),
+    "src/protocols/mrp/generated/ProtocolMessageResolver.ts"
+  );
   const createImportStatement = (entry: MessageTypeMapEntry) =>
-    `import { ${entry.exportName}, type ${upperFirstLetter(entry.exportName)} } from "./${basename(entry.pathname)}"`
+    `import { ${entry.exportName}, type ${upperFirstLetter(entry.exportName)} } from "./${basename(entry.pathname)}"`;
 
-  const createExtensionMapEntry = ([enumKey, entry]: [string, MessageTypeMapEntry]) =>
-    `  [${enumKey}]: ${entry.exportName},`
+  const createExtensionMapEntry = ([enumKey, entry]: [
+    string,
+    MessageTypeMapEntry,
+  ]) => `  [${enumKey}]: ${entry.exportName},`;
 
   const fileHeader = `// Auto-generated by generate-message-type-map.ts
 // DO NOT EDIT MANUALLY
 
-  import { ProtocolMessage_Type, ProtocolMessage, type Extension  } from "./ProtocolMessage";`
+  import { ProtocolMessage_Type, ProtocolMessage, type Extension  } from "./ProtocolMessage";`;
 
   const importStatements = Object.values(messageTypeMap)
     .map(createImportStatement)
     .reduce((acc, curr) => {
       if (!acc.includes(curr)) {
-        acc.push(curr)
+        acc.push(curr);
       }
-      return acc
+      return acc;
     }, [] as string[])
-    .join('\n')
+    .join("\n");
 
   const protocolMessagePayload = `export type ProtocolMessagePayload = ${Object.entries(
     messageTypeMap
@@ -171,11 +181,11 @@ async function main() {
       ([enumKey, entry]) =>
         `| { extensionType: ${enumKey}; message: ${upperFirstLetter(entry.exportName)} }`
     )
-    .join('\n  ')}`
+    .join("\n  ")}`;
 
   const mapEntries = `const  ExtensionMap: Record<number,Extension<any>> = {
-  ${Object.entries(messageTypeMap).map(createExtensionMapEntry).join('\n')}
-  }`
+  ${Object.entries(messageTypeMap).map(createExtensionMapEntry).join("\n")}
+  }`;
 
   const protocolMessageResultTypeExport = `export type ProtocolMessageResult =
      | { extensionType: undefined; message: ProtocolMessage; innerMessage: undefined }
@@ -186,24 +196,26 @@ async function main() {
           entry.exportName
         )} }`
     )
-    .join('\n  ')}`
+    .join("\n  ")}`;
 
   const extensionTypeDisplayName = `export const ProtocolMessageExtensionDisplayNameMap = {
   ${Object.entries(messageTypeMap)
     .map(
       ([enumKey, entry]) =>
-        `  [${enumKey}]: "${enumKey.replace('ProtocolMessage_Type.',"")}",`
+        `  [${enumKey}]: "${enumKey.replace("ProtocolMessage_Type.", "")}",`
     )
-    .join('\n  ')}
-}`
+    .join("\n  ")}
+}`;
 
   // Build the skip extension set for runtime
-  const skipExtensionEnumKeys = Object.keys(messageTypeMap)
-    .filter(key => SKIP_EXTENSION_MESSAGES.has(key.replace('ProtocolMessage_Type.', '')))
+  const skipExtensionEnumKeys = Object.keys(messageTypeMap).filter((key) =>
+    SKIP_EXTENSION_MESSAGES.has(key.replace("ProtocolMessage_Type.", ""))
+  );
 
-  const skipExtensionSetCode = skipExtensionEnumKeys.length > 0
-    ? `const SKIP_EXTENSION_TYPES = new Set([${skipExtensionEnumKeys.join(', ')}])`
-    : `const SKIP_EXTENSION_TYPES = new Set<number>()`
+  const skipExtensionSetCode =
+    skipExtensionEnumKeys.length > 0
+      ? `const SKIP_EXTENSION_TYPES = new Set([${skipExtensionEnumKeys.join(", ")}])`
+      : `const SKIP_EXTENSION_TYPES = new Set<number>()`;
 
   const protocolMessageResolver = `
   ${skipExtensionSetCode}
@@ -222,8 +234,8 @@ async function main() {
   ProtocolMessage.setExtension(message, ext, payload.message)
   return message
   }
-  
-  
+
+
   export const resolveProtocolMessage = (data: Buffer): ProtocolMessageResult => {
          const message = ProtocolMessage.decode(data)
          const extensionType = message.type
@@ -237,7 +249,7 @@ async function main() {
          const innerMessage =   ProtocolMessage.getExtension(message, extension)
          return { extensionType, message, innerMessage } as ProtocolMessageResult
   }
-`
+`;
   const fileContent = [
     fileHeader,
     importStatements,
@@ -246,11 +258,14 @@ async function main() {
     extensionTypeDisplayName,
     mapEntries,
     protocolMessageResolver,
-  ].join('\n\n')
+  ].join("\n\n");
 
-  const opts = await resolveConfig(import.meta.path)
-  const formatted = await format(fileContent, { ...opts, parser: 'typescript' })
-  await Bun.write(outputPath, formatted)
+  const opts = await resolveConfig(import.meta.path);
+  const formatted = await format(fileContent, {
+    ...opts,
+    parser: "typescript",
+  });
+  await Bun.write(outputPath, formatted);
 }
 
-await main()
+await main();

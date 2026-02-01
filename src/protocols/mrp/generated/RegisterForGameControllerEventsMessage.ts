@@ -5,13 +5,15 @@
 // source: RegisterForGameControllerEventsMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface RegisterForGameControllerEventsMessage {
-  inputModeFlags?: RegisterForGameControllerEventsMessage_InputModeFlags | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  inputModeFlags?:
+    | RegisterForGameControllerEventsMessage_InputModeFlags
+    | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum RegisterForGameControllerEventsMessage_InputModeFlags {
@@ -27,21 +29,21 @@ export function registerForGameControllerEventsMessage_InputModeFlagsFromJSON(
 ): RegisterForGameControllerEventsMessage_InputModeFlags {
   switch (object) {
     case 0:
-    case 'None':
-      return RegisterForGameControllerEventsMessage_InputModeFlags.None
+    case "None":
+      return RegisterForGameControllerEventsMessage_InputModeFlags.None;
     case 1:
-    case 'Motion':
-      return RegisterForGameControllerEventsMessage_InputModeFlags.Motion
+    case "Motion":
+      return RegisterForGameControllerEventsMessage_InputModeFlags.Motion;
     case 2:
-    case 'Buttons':
-      return RegisterForGameControllerEventsMessage_InputModeFlags.Buttons
+    case "Buttons":
+      return RegisterForGameControllerEventsMessage_InputModeFlags.Buttons;
     case 3:
-    case 'Digitizer':
-      return RegisterForGameControllerEventsMessage_InputModeFlags.Digitizer
+    case "Digitizer":
+      return RegisterForGameControllerEventsMessage_InputModeFlags.Digitizer;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return RegisterForGameControllerEventsMessage_InputModeFlags.UNRECOGNIZED
+      return RegisterForGameControllerEventsMessage_InputModeFlags.UNRECOGNIZED;
   }
 }
 
@@ -50,21 +52,21 @@ export function registerForGameControllerEventsMessage_InputModeFlagsToJSON(
 ): string {
   switch (object) {
     case RegisterForGameControllerEventsMessage_InputModeFlags.None:
-      return 'None'
+      return "None";
     case RegisterForGameControllerEventsMessage_InputModeFlags.Motion:
-      return 'Motion'
+      return "Motion";
     case RegisterForGameControllerEventsMessage_InputModeFlags.Buttons:
-      return 'Buttons'
+      return "Buttons";
     case RegisterForGameControllerEventsMessage_InputModeFlags.Digitizer:
-      return 'Digitizer'
+      return "Digitizer";
     case RegisterForGameControllerEventsMessage_InputModeFlags.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 function createBaseRegisterForGameControllerEventsMessage(): RegisterForGameControllerEventsMessage {
-  return { inputModeFlags: 0, _unknownFields: {} }
+  return { inputModeFlags: 0, _unknownFields: {} };
 }
 
 export const RegisterForGameControllerEventsMessage: MessageFns<RegisterForGameControllerEventsMessage> =
@@ -73,86 +75,100 @@ export const RegisterForGameControllerEventsMessage: MessageFns<RegisterForGameC
       message: RegisterForGameControllerEventsMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.inputModeFlags !== undefined && message.inputModeFlags !== 0) {
-        writer.uint32(8).int32(message.inputModeFlags)
+      if (
+        message.inputModeFlags !== undefined &&
+        message.inputModeFlags !== 0
+      ) {
+        writer.uint32(8).int32(message.inputModeFlags);
       }
       if (message._unknownFields !== undefined) {
-        for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-          const tag = parseInt(key, 10)
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
           for (const value of values) {
-            writer.uint32(tag).raw(value)
+            writer.uint32(tag).raw(value);
           }
         }
       }
-      return writer
+      return writer;
     },
 
     decode(
       input: BinaryReader | Uint8Array,
       length?: number
     ): RegisterForGameControllerEventsMessage {
-      const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-      const end = length === undefined ? reader.len : reader.pos + length
-      const message = createBaseRegisterForGameControllerEventsMessage()
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseRegisterForGameControllerEventsMessage();
       while (reader.pos < end) {
-        const tag = reader.uint32()
+        const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1: {
             if (tag !== 8) {
-              break
+              break;
             }
 
-            message.inputModeFlags = reader.int32() as any
-            continue
+            message.inputModeFlags = reader.int32() as any;
+            continue;
           }
         }
         if ((tag & 7) === 4 || tag === 0) {
-          break
+          break;
         }
-        const buf = reader.skip(tag & 7)
+        const buf = reader.skip(tag & 7);
 
-        const list = message._unknownFields![tag]
+        const list = message._unknownFields![tag];
 
         if (list === undefined) {
-          message._unknownFields![tag] = [buf]
+          message._unknownFields![tag] = [buf];
         } else {
-          list.push(buf)
+          list.push(buf);
         }
       }
-      return message
+      return message;
     },
 
     fromJSON(object: any): RegisterForGameControllerEventsMessage {
       return {
         inputModeFlags: isSet(object.inputModeFlags)
-          ? registerForGameControllerEventsMessage_InputModeFlagsFromJSON(object.inputModeFlags)
+          ? registerForGameControllerEventsMessage_InputModeFlagsFromJSON(
+              object.inputModeFlags
+            )
           : 0,
-      }
+      };
     },
 
     toJSON(message: RegisterForGameControllerEventsMessage): unknown {
-      const obj: any = {}
-      if (message.inputModeFlags !== undefined && message.inputModeFlags !== 0) {
-        obj.inputModeFlags = registerForGameControllerEventsMessage_InputModeFlagsToJSON(
-          message.inputModeFlags
-        )
+      const obj: any = {};
+      if (
+        message.inputModeFlags !== undefined &&
+        message.inputModeFlags !== 0
+      ) {
+        obj.inputModeFlags =
+          registerForGameControllerEventsMessage_InputModeFlagsToJSON(
+            message.inputModeFlags
+          );
       }
-      return obj
+      return obj;
     },
 
-    create<I extends Exact<DeepPartial<RegisterForGameControllerEventsMessage>, I>>(
-      base?: I
-    ): RegisterForGameControllerEventsMessage {
-      return RegisterForGameControllerEventsMessage.fromPartial(base ?? ({} as any))
+    create<
+      I extends Exact<DeepPartial<RegisterForGameControllerEventsMessage>, I>,
+    >(base?: I): RegisterForGameControllerEventsMessage {
+      return RegisterForGameControllerEventsMessage.fromPartial(
+        base ?? ({} as any)
+      );
     },
-    fromPartial<I extends Exact<DeepPartial<RegisterForGameControllerEventsMessage>, I>>(
-      object: I
-    ): RegisterForGameControllerEventsMessage {
-      const message = createBaseRegisterForGameControllerEventsMessage()
-      message.inputModeFlags = object.inputModeFlags ?? 0
-      return message
+    fromPartial<
+      I extends Exact<DeepPartial<RegisterForGameControllerEventsMessage>, I>,
+    >(object: I): RegisterForGameControllerEventsMessage {
+      const message = createBaseRegisterForGameControllerEventsMessage();
+      message.inputModeFlags = object.inputModeFlags ?? 0;
+      return message;
     },
-  }
+  };
 
 export const registerForGameControllerEventsMessage: Extension<
   RegisterForGameControllerEventsMessage | undefined
@@ -161,23 +177,35 @@ export const registerForGameControllerEventsMessage: Extension<
   tag: 218,
   repeated: false,
   packed: false,
-  encode: (value: RegisterForGameControllerEventsMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    RegisterForGameControllerEventsMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+  encode: (
+    value: RegisterForGameControllerEventsMessage | undefined
+  ): Uint8Array[] => {
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    RegisterForGameControllerEventsMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
   decode: (
     tag: number,
     input: Uint8Array[]
   ): RegisterForGameControllerEventsMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return RegisterForGameControllerEventsMessage.decode(reader, reader.uint32())
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return RegisterForGameControllerEventsMessage.decode(
+      reader,
+      reader.uint32()
+    );
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -187,37 +215,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

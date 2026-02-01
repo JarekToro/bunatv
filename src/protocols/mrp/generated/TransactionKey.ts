@@ -5,119 +5,138 @@
 // source: TransactionKey.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface TransactionKey {
-  identifier?: string | undefined
-  userData?: Buffer | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  identifier?: string | undefined;
+  userData?: Buffer | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseTransactionKey(): TransactionKey {
-  return { identifier: '', userData: Buffer.alloc(0), _unknownFields: {} }
+  return { identifier: "", userData: Buffer.alloc(0), _unknownFields: {} };
 }
 
 export const TransactionKey: MessageFns<TransactionKey> = {
-  encode(message: TransactionKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== '') {
-      writer.uint32(10).string(message.identifier)
+  encode(
+    message: TransactionKey,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (message.identifier !== undefined && message.identifier !== "") {
+      writer.uint32(10).string(message.identifier);
     }
     if (message.userData !== undefined && message.userData.length !== 0) {
-      writer.uint32(18).bytes(message.userData)
+      writer.uint32(18).bytes(message.userData);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TransactionKey {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseTransactionKey()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTransactionKey();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.identifier = reader.string()
-          continue
+          message.identifier = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.userData = Buffer.from(reader.bytes())
-          continue
+          message.userData = Buffer.from(reader.bytes());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): TransactionKey {
     return {
-      identifier: isSet(object.identifier) ? globalThis.String(object.identifier) : '',
+      identifier: isSet(object.identifier)
+        ? globalThis.String(object.identifier)
+        : "",
       userData: isSet(object.userData)
         ? Buffer.from(bytesFromBase64(object.userData))
         : Buffer.alloc(0),
-    }
+    };
   },
 
   toJSON(message: TransactionKey): unknown {
-    const obj: any = {}
-    if (message.identifier !== undefined && message.identifier !== '') {
-      obj.identifier = message.identifier
+    const obj: any = {};
+    if (message.identifier !== undefined && message.identifier !== "") {
+      obj.identifier = message.identifier;
     }
     if (message.userData !== undefined && message.userData.length !== 0) {
-      obj.userData = base64FromBytes(message.userData)
+      obj.userData = base64FromBytes(message.userData);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<TransactionKey>, I>>(base?: I): TransactionKey {
-    return TransactionKey.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<TransactionKey>, I>>(
+    base?: I
+  ): TransactionKey {
+    return TransactionKey.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TransactionKey>, I>>(object: I): TransactionKey {
-    const message = createBaseTransactionKey()
-    message.identifier = object.identifier ?? ''
-    message.userData = object.userData ?? Buffer.alloc(0)
-    return message
+  fromPartial<I extends Exact<DeepPartial<TransactionKey>, I>>(
+    object: I
+  ): TransactionKey {
+    const message = createBaseTransactionKey();
+    message.identifier = object.identifier ?? "";
+    message.userData = object.userData ?? Buffer.alloc(0);
+    return message;
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -127,22 +146,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

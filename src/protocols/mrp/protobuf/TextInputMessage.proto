@@ -12,7 +12,7 @@ message ActionType {
     Insert = 1;
     Set = 2;
     Delete = 3;
-    ClearAction = 4;  // "Clear" clashes with something, making mypy unhappy 
+    ClearAction = 4;  // "Clear" clashes with something, making mypy unhappy
   }
 }
 

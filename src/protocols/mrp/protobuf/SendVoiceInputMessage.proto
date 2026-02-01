@@ -28,7 +28,7 @@ message AudioTime {
 }
 
 message AudioDataBlock {
-  optional AudioBuffer buffer = 1; 
+  optional AudioBuffer buffer = 1;
   optional AudioTime time = 2;
   optional double gain = 3;
 }

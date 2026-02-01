@@ -5,29 +5,33 @@
 // source: SetStateMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { PlaybackState_Enum, playbackState_EnumFromJSON, playbackState_EnumToJSON } from './Common'
-import { NowPlayingInfo } from './NowPlayingInfo'
-import { PlaybackQueue } from './PlaybackQueue'
-import { PlaybackQueueCapabilities } from './PlaybackQueueCapabilities'
-import { PlaybackQueueRequestMessage } from './PlaybackQueueRequestMessage'
-import { PlayerPath } from './PlayerPath'
-import { SupportedCommands } from './SupportedCommands'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import {
+  PlaybackState_Enum,
+  playbackState_EnumFromJSON,
+  playbackState_EnumToJSON,
+} from "./Common";
+import { NowPlayingInfo } from "./NowPlayingInfo";
+import { PlaybackQueue } from "./PlaybackQueue";
+import { PlaybackQueueCapabilities } from "./PlaybackQueueCapabilities";
+import { PlaybackQueueRequestMessage } from "./PlaybackQueueRequestMessage";
+import { PlayerPath } from "./PlayerPath";
+import { SupportedCommands } from "./SupportedCommands";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SetStateMessage {
-  nowPlayingInfo?: NowPlayingInfo | undefined
-  supportedCommands?: SupportedCommands | undefined
-  playbackQueue?: PlaybackQueue | undefined
-  displayID?: string | undefined
-  displayName?: string | undefined
-  playbackState?: PlaybackState_Enum | undefined
-  playbackQueueCapabilities?: PlaybackQueueCapabilities | undefined
-  playerPath?: PlayerPath | undefined
-  request?: PlaybackQueueRequestMessage | undefined
-  playbackStateTimestamp?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  nowPlayingInfo?: NowPlayingInfo | undefined;
+  supportedCommands?: SupportedCommands | undefined;
+  playbackQueue?: PlaybackQueue | undefined;
+  displayID?: string | undefined;
+  displayName?: string | undefined;
+  playbackState?: PlaybackState_Enum | undefined;
+  playbackQueueCapabilities?: PlaybackQueueCapabilities | undefined;
+  playerPath?: PlayerPath | undefined;
+  request?: PlaybackQueueRequestMessage | undefined;
+  playbackStateTimestamp?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSetStateMessage(): SetStateMessage {
@@ -35,168 +39,198 @@ function createBaseSetStateMessage(): SetStateMessage {
     nowPlayingInfo: undefined,
     supportedCommands: undefined,
     playbackQueue: undefined,
-    displayID: '',
-    displayName: '',
+    displayID: "",
+    displayName: "",
     playbackState: 0,
     playbackQueueCapabilities: undefined,
     playerPath: undefined,
     request: undefined,
     playbackStateTimestamp: 0,
     _unknownFields: {},
-  }
+  };
 }
 
 export const SetStateMessage: MessageFns<SetStateMessage> = {
-  encode(message: SetStateMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SetStateMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.nowPlayingInfo !== undefined) {
-      NowPlayingInfo.encode(message.nowPlayingInfo, writer.uint32(10).fork()).join()
+      NowPlayingInfo.encode(
+        message.nowPlayingInfo,
+        writer.uint32(10).fork()
+      ).join();
     }
     if (message.supportedCommands !== undefined) {
-      SupportedCommands.encode(message.supportedCommands, writer.uint32(18).fork()).join()
+      SupportedCommands.encode(
+        message.supportedCommands,
+        writer.uint32(18).fork()
+      ).join();
     }
     if (message.playbackQueue !== undefined) {
-      PlaybackQueue.encode(message.playbackQueue, writer.uint32(26).fork()).join()
+      PlaybackQueue.encode(
+        message.playbackQueue,
+        writer.uint32(26).fork()
+      ).join();
     }
-    if (message.displayID !== undefined && message.displayID !== '') {
-      writer.uint32(34).string(message.displayID)
+    if (message.displayID !== undefined && message.displayID !== "") {
+      writer.uint32(34).string(message.displayID);
     }
-    if (message.displayName !== undefined && message.displayName !== '') {
-      writer.uint32(42).string(message.displayName)
+    if (message.displayName !== undefined && message.displayName !== "") {
+      writer.uint32(42).string(message.displayName);
     }
     if (message.playbackState !== undefined && message.playbackState !== 0) {
-      writer.uint32(48).int32(message.playbackState)
+      writer.uint32(48).int32(message.playbackState);
     }
     if (message.playbackQueueCapabilities !== undefined) {
       PlaybackQueueCapabilities.encode(
         message.playbackQueueCapabilities,
         writer.uint32(66).fork()
-      ).join()
+      ).join();
     }
     if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(74).fork()).join()
+      PlayerPath.encode(message.playerPath, writer.uint32(74).fork()).join();
     }
     if (message.request !== undefined) {
-      PlaybackQueueRequestMessage.encode(message.request, writer.uint32(82).fork()).join()
+      PlaybackQueueRequestMessage.encode(
+        message.request,
+        writer.uint32(82).fork()
+      ).join();
     }
-    if (message.playbackStateTimestamp !== undefined && message.playbackStateTimestamp !== 0) {
-      writer.uint32(89).double(message.playbackStateTimestamp)
+    if (
+      message.playbackStateTimestamp !== undefined &&
+      message.playbackStateTimestamp !== 0
+    ) {
+      writer.uint32(89).double(message.playbackStateTimestamp);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SetStateMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSetStateMessage()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetStateMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.nowPlayingInfo = NowPlayingInfo.decode(reader, reader.uint32())
-          continue
+          message.nowPlayingInfo = NowPlayingInfo.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.supportedCommands = SupportedCommands.decode(reader, reader.uint32())
-          continue
+          message.supportedCommands = SupportedCommands.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.playbackQueue = PlaybackQueue.decode(reader, reader.uint32())
-          continue
+          message.playbackQueue = PlaybackQueue.decode(reader, reader.uint32());
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.displayID = reader.string()
-          continue
+          message.displayID = reader.string();
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.displayName = reader.string()
-          continue
+          message.displayName = reader.string();
+          continue;
         }
         case 6: {
           if (tag !== 48) {
-            break
+            break;
           }
 
-          message.playbackState = reader.int32() as any
-          continue
+          message.playbackState = reader.int32() as any;
+          continue;
         }
         case 8: {
           if (tag !== 66) {
-            break
+            break;
           }
 
           message.playbackQueueCapabilities = PlaybackQueueCapabilities.decode(
             reader,
             reader.uint32()
-          )
-          continue
+          );
+          continue;
         }
         case 9: {
           if (tag !== 74) {
-            break
+            break;
           }
 
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
+          message.playerPath = PlayerPath.decode(reader, reader.uint32());
+          continue;
         }
         case 10: {
           if (tag !== 82) {
-            break
+            break;
           }
 
-          message.request = PlaybackQueueRequestMessage.decode(reader, reader.uint32())
-          continue
+          message.request = PlaybackQueueRequestMessage.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 11: {
           if (tag !== 89) {
-            break
+            break;
           }
 
-          message.playbackStateTimestamp = reader.double()
-          continue
+          message.playbackStateTimestamp = reader.double();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SetStateMessage {
@@ -210,97 +244,116 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
       playbackQueue: isSet(object.playbackQueue)
         ? PlaybackQueue.fromJSON(object.playbackQueue)
         : undefined,
-      displayID: isSet(object.displayID) ? globalThis.String(object.displayID) : '',
-      displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : '',
+      displayID: isSet(object.displayID)
+        ? globalThis.String(object.displayID)
+        : "",
+      displayName: isSet(object.displayName)
+        ? globalThis.String(object.displayName)
+        : "",
       playbackState: isSet(object.playbackState)
         ? playbackState_EnumFromJSON(object.playbackState)
         : 0,
       playbackQueueCapabilities: isSet(object.playbackQueueCapabilities)
         ? PlaybackQueueCapabilities.fromJSON(object.playbackQueueCapabilities)
         : undefined,
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
+      playerPath: isSet(object.playerPath)
+        ? PlayerPath.fromJSON(object.playerPath)
+        : undefined,
       request: isSet(object.request)
         ? PlaybackQueueRequestMessage.fromJSON(object.request)
         : undefined,
       playbackStateTimestamp: isSet(object.playbackStateTimestamp)
         ? globalThis.Number(object.playbackStateTimestamp)
         : 0,
-    }
+    };
   },
 
   toJSON(message: SetStateMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.nowPlayingInfo !== undefined) {
-      obj.nowPlayingInfo = NowPlayingInfo.toJSON(message.nowPlayingInfo)
+      obj.nowPlayingInfo = NowPlayingInfo.toJSON(message.nowPlayingInfo);
     }
     if (message.supportedCommands !== undefined) {
-      obj.supportedCommands = SupportedCommands.toJSON(message.supportedCommands)
+      obj.supportedCommands = SupportedCommands.toJSON(
+        message.supportedCommands
+      );
     }
     if (message.playbackQueue !== undefined) {
-      obj.playbackQueue = PlaybackQueue.toJSON(message.playbackQueue)
+      obj.playbackQueue = PlaybackQueue.toJSON(message.playbackQueue);
     }
-    if (message.displayID !== undefined && message.displayID !== '') {
-      obj.displayID = message.displayID
+    if (message.displayID !== undefined && message.displayID !== "") {
+      obj.displayID = message.displayID;
     }
-    if (message.displayName !== undefined && message.displayName !== '') {
-      obj.displayName = message.displayName
+    if (message.displayName !== undefined && message.displayName !== "") {
+      obj.displayName = message.displayName;
     }
     if (message.playbackState !== undefined && message.playbackState !== 0) {
-      obj.playbackState = playbackState_EnumToJSON(message.playbackState)
+      obj.playbackState = playbackState_EnumToJSON(message.playbackState);
     }
     if (message.playbackQueueCapabilities !== undefined) {
       obj.playbackQueueCapabilities = PlaybackQueueCapabilities.toJSON(
         message.playbackQueueCapabilities
-      )
+      );
     }
     if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
+      obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
     if (message.request !== undefined) {
-      obj.request = PlaybackQueueRequestMessage.toJSON(message.request)
+      obj.request = PlaybackQueueRequestMessage.toJSON(message.request);
     }
-    if (message.playbackStateTimestamp !== undefined && message.playbackStateTimestamp !== 0) {
-      obj.playbackStateTimestamp = message.playbackStateTimestamp
+    if (
+      message.playbackStateTimestamp !== undefined &&
+      message.playbackStateTimestamp !== 0
+    ) {
+      obj.playbackStateTimestamp = message.playbackStateTimestamp;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SetStateMessage>, I>>(base?: I): SetStateMessage {
-    return SetStateMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SetStateMessage>, I>>(
+    base?: I
+  ): SetStateMessage {
+    return SetStateMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SetStateMessage>, I>>(object: I): SetStateMessage {
-    const message = createBaseSetStateMessage()
+  fromPartial<I extends Exact<DeepPartial<SetStateMessage>, I>>(
+    object: I
+  ): SetStateMessage {
+    const message = createBaseSetStateMessage();
     message.nowPlayingInfo =
       object.nowPlayingInfo !== undefined && object.nowPlayingInfo !== null
         ? NowPlayingInfo.fromPartial(object.nowPlayingInfo)
-        : undefined
+        : undefined;
     message.supportedCommands =
-      object.supportedCommands !== undefined && object.supportedCommands !== null
+      object.supportedCommands !== undefined &&
+      object.supportedCommands !== null
         ? SupportedCommands.fromPartial(object.supportedCommands)
-        : undefined
+        : undefined;
     message.playbackQueue =
       object.playbackQueue !== undefined && object.playbackQueue !== null
         ? PlaybackQueue.fromPartial(object.playbackQueue)
-        : undefined
-    message.displayID = object.displayID ?? ''
-    message.displayName = object.displayName ?? ''
-    message.playbackState = object.playbackState ?? 0
+        : undefined;
+    message.displayID = object.displayID ?? "";
+    message.displayName = object.displayName ?? "";
+    message.playbackState = object.playbackState ?? 0;
     message.playbackQueueCapabilities =
-      object.playbackQueueCapabilities !== undefined && object.playbackQueueCapabilities !== null
-        ? PlaybackQueueCapabilities.fromPartial(object.playbackQueueCapabilities)
-        : undefined
+      object.playbackQueueCapabilities !== undefined &&
+      object.playbackQueueCapabilities !== null
+        ? PlaybackQueueCapabilities.fromPartial(
+            object.playbackQueueCapabilities
+          )
+        : undefined;
     message.playerPath =
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
+        : undefined;
     message.request =
       object.request !== undefined && object.request !== null
         ? PlaybackQueueRequestMessage.fromPartial(object.request)
-        : undefined
-    message.playbackStateTimestamp = object.playbackStateTimestamp ?? 0
-    return message
+        : undefined;
+    message.playbackStateTimestamp = object.playbackStateTimestamp ?? 0;
+    return message;
   },
-}
+};
 
 export const setStateMessage: Extension<SetStateMessage | undefined> = {
   number: 9,
@@ -308,19 +361,26 @@ export const setStateMessage: Extension<SetStateMessage | undefined> = {
   repeated: false,
   packed: false,
   encode: (value: SetStateMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SetStateMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SetStateMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
   decode: (tag: number, input: Uint8Array[]): SetStateMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SetStateMessage.decode(reader, reader.uint32())
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SetStateMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -330,37 +390,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

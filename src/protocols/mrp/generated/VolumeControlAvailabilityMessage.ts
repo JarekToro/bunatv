@@ -5,12 +5,12 @@
 // source: VolumeControlAvailabilityMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface VolumeCapabilities {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 /**
@@ -25,210 +25,252 @@ export enum VolumeCapabilities_Enum {
   UNRECOGNIZED = -1,
 }
 
-export function volumeCapabilities_EnumFromJSON(object: any): VolumeCapabilities_Enum {
+export function volumeCapabilities_EnumFromJSON(
+  object: any
+): VolumeCapabilities_Enum {
   switch (object) {
     case 0:
-    case 'None':
-      return VolumeCapabilities_Enum.None
+    case "None":
+      return VolumeCapabilities_Enum.None;
     case 1:
-    case 'Relative':
-      return VolumeCapabilities_Enum.Relative
+    case "Relative":
+      return VolumeCapabilities_Enum.Relative;
     case 2:
-    case 'Absolute':
-      return VolumeCapabilities_Enum.Absolute
+    case "Absolute":
+      return VolumeCapabilities_Enum.Absolute;
     case 3:
-    case 'Both':
-      return VolumeCapabilities_Enum.Both
+    case "Both":
+      return VolumeCapabilities_Enum.Both;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return VolumeCapabilities_Enum.UNRECOGNIZED
+      return VolumeCapabilities_Enum.UNRECOGNIZED;
   }
 }
 
-export function volumeCapabilities_EnumToJSON(object: VolumeCapabilities_Enum): string {
+export function volumeCapabilities_EnumToJSON(
+  object: VolumeCapabilities_Enum
+): string {
   switch (object) {
     case VolumeCapabilities_Enum.None:
-      return 'None'
+      return "None";
     case VolumeCapabilities_Enum.Relative:
-      return 'Relative'
+      return "Relative";
     case VolumeCapabilities_Enum.Absolute:
-      return 'Absolute'
+      return "Absolute";
     case VolumeCapabilities_Enum.Both:
-      return 'Both'
+      return "Both";
     case VolumeCapabilities_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface VolumeControlAvailabilityMessage {
-  volumeControlAvailable?: boolean | undefined
-  volumeCapabilities?: VolumeCapabilities_Enum | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  volumeControlAvailable?: boolean | undefined;
+  volumeCapabilities?: VolumeCapabilities_Enum | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseVolumeCapabilities(): VolumeCapabilities {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const VolumeCapabilities: MessageFns<VolumeCapabilities> = {
-  encode(message: VolumeCapabilities, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: VolumeCapabilities,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): VolumeCapabilities {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseVolumeCapabilities()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): VolumeCapabilities {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVolumeCapabilities();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): VolumeCapabilities {
-    return {}
+    return {};
   },
 
   toJSON(_: VolumeCapabilities): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<VolumeCapabilities>, I>>(base?: I): VolumeCapabilities {
-    return VolumeCapabilities.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<VolumeCapabilities>, I>>(
+    base?: I
+  ): VolumeCapabilities {
+    return VolumeCapabilities.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<VolumeCapabilities>, I>>(_: I): VolumeCapabilities {
-    const message = createBaseVolumeCapabilities()
-    return message
+  fromPartial<I extends Exact<DeepPartial<VolumeCapabilities>, I>>(
+    _: I
+  ): VolumeCapabilities {
+    const message = createBaseVolumeCapabilities();
+    return message;
   },
-}
+};
 
 function createBaseVolumeControlAvailabilityMessage(): VolumeControlAvailabilityMessage {
-  return { volumeControlAvailable: false, volumeCapabilities: 0, _unknownFields: {} }
+  return {
+    volumeControlAvailable: false,
+    volumeCapabilities: 0,
+    _unknownFields: {},
+  };
 }
 
-export const VolumeControlAvailabilityMessage: MessageFns<VolumeControlAvailabilityMessage> = {
-  encode(
-    message: VolumeControlAvailabilityMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.volumeControlAvailable !== undefined && message.volumeControlAvailable !== false) {
-      writer.uint32(8).bool(message.volumeControlAvailable)
-    }
-    if (message.volumeCapabilities !== undefined && message.volumeCapabilities !== 0) {
-      writer.uint32(16).int32(message.volumeCapabilities)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const VolumeControlAvailabilityMessage: MessageFns<VolumeControlAvailabilityMessage> =
+  {
+    encode(
+      message: VolumeControlAvailabilityMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (
+        message.volumeControlAvailable !== undefined &&
+        message.volumeControlAvailable !== false
+      ) {
+        writer.uint32(8).bool(message.volumeControlAvailable);
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): VolumeControlAvailabilityMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseVolumeControlAvailabilityMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break
+      if (
+        message.volumeCapabilities !== undefined &&
+        message.volumeCapabilities !== 0
+      ) {
+        writer.uint32(16).int32(message.volumeCapabilities);
+      }
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.volumeControlAvailable = reader.bool()
-          continue
         }
-        case 2: {
-          if (tag !== 16) {
-            break
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): VolumeControlAvailabilityMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseVolumeControlAvailabilityMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.volumeControlAvailable = reader.bool();
+            continue;
           }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-          message.volumeCapabilities = reader.int32() as any
-          continue
+            message.volumeCapabilities = reader.int32() as any;
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return message;
+    },
+
+    fromJSON(object: any): VolumeControlAvailabilityMessage {
+      return {
+        volumeControlAvailable: isSet(object.volumeControlAvailable)
+          ? globalThis.Boolean(object.volumeControlAvailable)
+          : false,
+        volumeCapabilities: isSet(object.volumeCapabilities)
+          ? volumeCapabilities_EnumFromJSON(object.volumeCapabilities)
+          : 0,
+      };
+    },
+
+    toJSON(message: VolumeControlAvailabilityMessage): unknown {
+      const obj: any = {};
+      if (
+        message.volumeControlAvailable !== undefined &&
+        message.volumeControlAvailable !== false
+      ) {
+        obj.volumeControlAvailable = message.volumeControlAvailable;
       }
-      const buf = reader.skip(tag & 7)
-
-      const list = message._unknownFields![tag]
-
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+      if (
+        message.volumeCapabilities !== undefined &&
+        message.volumeCapabilities !== 0
+      ) {
+        obj.volumeCapabilities = volumeCapabilities_EnumToJSON(
+          message.volumeCapabilities
+        );
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): VolumeControlAvailabilityMessage {
-    return {
-      volumeControlAvailable: isSet(object.volumeControlAvailable)
-        ? globalThis.Boolean(object.volumeControlAvailable)
-        : false,
-      volumeCapabilities: isSet(object.volumeCapabilities)
-        ? volumeCapabilities_EnumFromJSON(object.volumeCapabilities)
-        : 0,
-    }
-  },
-
-  toJSON(message: VolumeControlAvailabilityMessage): unknown {
-    const obj: any = {}
-    if (message.volumeControlAvailable !== undefined && message.volumeControlAvailable !== false) {
-      obj.volumeControlAvailable = message.volumeControlAvailable
-    }
-    if (message.volumeCapabilities !== undefined && message.volumeCapabilities !== 0) {
-      obj.volumeCapabilities = volumeCapabilities_EnumToJSON(message.volumeCapabilities)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<VolumeControlAvailabilityMessage>, I>>(
-    base?: I
-  ): VolumeControlAvailabilityMessage {
-    return VolumeControlAvailabilityMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<VolumeControlAvailabilityMessage>, I>>(
-    object: I
-  ): VolumeControlAvailabilityMessage {
-    const message = createBaseVolumeControlAvailabilityMessage()
-    message.volumeControlAvailable = object.volumeControlAvailable ?? false
-    message.volumeCapabilities = object.volumeCapabilities ?? 0
-    return message
-  },
-}
+    create<I extends Exact<DeepPartial<VolumeControlAvailabilityMessage>, I>>(
+      base?: I
+    ): VolumeControlAvailabilityMessage {
+      return VolumeControlAvailabilityMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<VolumeControlAvailabilityMessage>, I>,
+    >(object: I): VolumeControlAvailabilityMessage {
+      const message = createBaseVolumeControlAvailabilityMessage();
+      message.volumeControlAvailable = object.volumeControlAvailable ?? false;
+      message.volumeCapabilities = object.volumeCapabilities ?? 0;
+      return message;
+    },
+  };
 
 export const volumeControlAvailabilityMessage: Extension<
   VolumeControlAvailabilityMessage | undefined
@@ -237,20 +279,32 @@ export const volumeControlAvailabilityMessage: Extension<
   tag: 178,
   repeated: false,
   packed: false,
-  encode: (value: VolumeControlAvailabilityMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    VolumeControlAvailabilityMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+  encode: (
+    value: VolumeControlAvailabilityMessage | undefined
+  ): Uint8Array[] => {
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    VolumeControlAvailabilityMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): VolumeControlAvailabilityMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return VolumeControlAvailabilityMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): VolumeControlAvailabilityMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return VolumeControlAvailabilityMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -260,37 +314,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

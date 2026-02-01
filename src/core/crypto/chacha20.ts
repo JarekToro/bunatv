@@ -5,9 +5,9 @@
  * for secure communication in established HAP sessions.
  */
 
-import { chacha20poly1305 } from '@noble/ciphers/chacha'
-import { createLogger } from '../../logging/logging'
-import { CryptoError } from './errors'
+import { chacha20poly1305 } from "@noble/ciphers/chacha";
+import { createLogger } from "../../logging/logging";
+import { CryptoError } from "./errors";
 
 const logger = createLogger("bunatv:crypto:chacha20");
 
@@ -33,21 +33,24 @@ export class ChaCha20Utils {
   ): Promise<Uint8Array> {
     try {
       if (key.length !== 32) {
-        throw new Error('Key must be 32 bytes')
+        throw new Error("Key must be 32 bytes");
       }
       if (nonce.length !== 12) {
-        throw new Error('Nonce must be 12 bytes')
+        throw new Error("Nonce must be 12 bytes");
       }
 
       // Use @noble/ciphers/chacha (Bun WebCrypto doesn't support ChaCha20-Poly1305)
-      const cipher = chacha20poly1305(key, nonce, additionalData)
-      const sealed = cipher.encrypt(data)
+      const cipher = chacha20poly1305(key, nonce, additionalData);
+      const sealed = cipher.encrypt(data);
 
-      logger.debug(`encrypt: ${data.length}B → ${sealed.length}B`)
+      logger.debug(`encrypt: ${data.length}B → ${sealed.length}B`);
 
-      return new Uint8Array(sealed)
+      return new Uint8Array(sealed);
     } catch (error) {
-      throw new CryptoError('Failed to encrypt with ChaCha20-Poly1305', error as Error)
+      throw new CryptoError(
+        "Failed to encrypt with ChaCha20-Poly1305",
+        error as Error
+      );
     }
   }
 
@@ -68,21 +71,24 @@ export class ChaCha20Utils {
   ): Promise<Uint8Array> {
     try {
       if (key.length !== 32) {
-        throw new Error('Key must be 32 bytes')
+        throw new Error("Key must be 32 bytes");
       }
       if (nonce.length !== 12) {
-        throw new Error('Nonce must be 12 bytes')
+        throw new Error("Nonce must be 12 bytes");
       }
 
       // Use @noble/ciphers/chacha (Bun WebCrypto doesn't support ChaCha20-Poly1305)
-      const cipher = chacha20poly1305(key, nonce, additionalData)
+      const cipher = chacha20poly1305(key, nonce, additionalData);
 
-      const opened = cipher.decrypt(encryptedData)
+      const opened = cipher.decrypt(encryptedData);
 
-      logger.debug(`decrypt: ${encryptedData.length}B → ${opened.length}B`)
-      return new Uint8Array(opened)
+      logger.debug(`decrypt: ${encryptedData.length}B → ${opened.length}B`);
+      return new Uint8Array(opened);
     } catch (error) {
-      throw new CryptoError('Failed to decrypt with ChaCha20-Poly1305', error as Error)
+      throw new CryptoError(
+        "Failed to decrypt with ChaCha20-Poly1305",
+        error as Error
+      );
     }
   }
 
@@ -93,9 +99,9 @@ export class ChaCha20Utils {
    * @returns 12-byte random nonce
    */
   static generateNonce(): Uint8Array {
-    const nonce = new Uint8Array(12)
-    crypto.getRandomValues(nonce)
-    return nonce
+    const nonce = new Uint8Array(12);
+    crypto.getRandomValues(nonce);
+    return nonce;
   }
 
   /**
@@ -110,10 +116,13 @@ export class ChaCha20Utils {
   ): Uint8Array {
     try {
       // Use @noble/ciphers for sync operations since WebCrypto ChaCha20-Poly1305 is async-only
-      const cipher = chacha20poly1305(key, nonce, additionalData)
-      return cipher.encrypt(data)
+      const cipher = chacha20poly1305(key, nonce, additionalData);
+      return cipher.encrypt(data);
     } catch (error) {
-      throw new CryptoError('ChaCha20-Poly1305 sync encryption failed', error as Error)
+      throw new CryptoError(
+        "ChaCha20-Poly1305 sync encryption failed",
+        error as Error
+      );
     }
   }
 
@@ -129,14 +138,17 @@ export class ChaCha20Utils {
   ): Uint8Array {
     try {
       // Use @noble/ciphers for sync operations since WebCrypto ChaCha20-Poly1305 is async-only
-      const cipher = chacha20poly1305(key, nonce, additionalData)
-      const decrypted = cipher.decrypt(encryptedData)
-      return decrypted
+      const cipher = chacha20poly1305(key, nonce, additionalData);
+      const decrypted = cipher.decrypt(encryptedData);
+      return decrypted;
     } catch (error) {
       if (error instanceof CryptoError) {
-        throw error
+        throw error;
       }
-      throw new CryptoError('ChaCha20-Poly1305 sync decryption failed', error as Error)
+      throw new CryptoError(
+        "ChaCha20-Poly1305 sync decryption failed",
+        error as Error
+      );
     }
   }
 }

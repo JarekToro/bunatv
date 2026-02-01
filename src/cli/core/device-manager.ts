@@ -1,28 +1,31 @@
-import { AppleTVDiscoveryService } from '@/core/discovery/apple-device-discovery.ts'
-import type { DiscoveredDevice, AppleDevice } from '@/core/discovery/discovery-types.ts'
-import { existsSync } from 'node:fs'
-import { readFile, writeFile, mkdir } from 'node:fs/promises'
-import { join, dirname } from 'node:path'
+import { AppleTVDiscoveryService } from "@/core/discovery/apple-device-discovery.ts";
+import type {
+  DiscoveredDevice,
+  AppleDevice,
+} from "@/core/discovery/discovery-types.ts";
+import { existsSync } from "node:fs";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { join, dirname } from "node:path";
 
 export class DeviceNotFoundError extends Error {
   constructor(identifier: string) {
-    super(`Device not found: ${identifier}`)
-    this.name = 'DeviceNotFoundError'
+    super(`Device not found: ${identifier}`);
+    this.name = "DeviceNotFoundError";
   }
 }
 
 export class NoDevicesFoundError extends Error {
   constructor() {
-    super('No Apple TV devices found on network')
-    this.name = 'NoDevicesFoundError'
+    super("No Apple TV devices found on network");
+    this.name = "NoDevicesFoundError";
   }
 }
 
 export class DeviceManager {
-  private discovery: AppleTVDiscoveryService
+  private discovery: AppleTVDiscoveryService;
 
   constructor() {
-    this.discovery = new AppleTVDiscoveryService()
+    this.discovery = new AppleTVDiscoveryService();
   }
 
   /**
@@ -32,12 +35,12 @@ export class DeviceManager {
     try {
       // Use AppleTVDiscoveryService to discover devices
       // It handles caching and network discovery automatically
-      const appleDevices = await this.discovery.discover(timeoutSeconds * 1000)
+      const appleDevices = await this.discovery.discover(timeoutSeconds * 1000);
 
       // Map to DiscoveredDevice format
-      return appleDevices.map(device => this.mapToDiscoveredDevice(device))
+      return appleDevices.map((device) => this.mapToDiscoveredDevice(device));
     } catch (error) {
-      throw new Error(`Discovery failed: ${(error as Error).message}`)
+      throw new Error(`Discovery failed: ${(error as Error).message}`);
     }
   }
 
@@ -46,29 +49,30 @@ export class DeviceManager {
    */
   async findDevice(identifier: string): Promise<DiscoveredDevice> {
     // Try to find by name first
-    let device = await this.discovery.getAppleDevice(identifier)
+    let device = await this.discovery.getAppleDevice(identifier);
 
     // If not found, try by hostname
     if (!device) {
-      device = await this.discovery.getAppleDeviceByHostname(identifier)
+      device = await this.discovery.getAppleDeviceByHostname(identifier);
     }
 
     // If still not found, search all devices for matching IP or ID
     if (!device) {
-      const allDevices = await this.discovery.getAllAppleDevices()
+      const allDevices = await this.discovery.getAllAppleDevices();
       device =
-        allDevices.find(d => {
-          const ipMatch = d.ipv4.includes(identifier) || d.ipv6.includes(identifier)
-          const idMatch = d.services.airPlay?.txt.deviceid === identifier
-          return ipMatch || idMatch
-        }) || null
+        allDevices.find((d) => {
+          const ipMatch =
+            d.ipv4.includes(identifier) || d.ipv6.includes(identifier);
+          const idMatch = d.services.airPlay?.txt.deviceid === identifier;
+          return ipMatch || idMatch;
+        }) || null;
     }
 
     if (!device) {
-      throw new DeviceNotFoundError(identifier)
+      throw new DeviceNotFoundError(identifier);
     }
 
-    return this.mapToDiscoveredDevice(device)
+    return this.mapToDiscoveredDevice(device);
   }
 
   /**
@@ -76,50 +80,53 @@ export class DeviceManager {
    */
   filterByProtocol(
     devices: DiscoveredDevice[],
-    protocol: 'airplay' | 'companion' | 'raop'
+    protocol: "airplay" | "companion" | "raop"
   ): DiscoveredDevice[] {
-    return devices.filter(device => device.protocols.includes(protocol))
+    return devices.filter((device) => device.protocols.includes(protocol));
   }
 
   /**
    * Check if a device supports a specific protocol
    */
-  supportsProtocol(device: DiscoveredDevice, protocol: 'airplay' | 'companion' | 'raop'): boolean {
-    return device.protocols.includes(protocol)
+  supportsProtocol(
+    device: DiscoveredDevice,
+    protocol: "airplay" | "companion" | "raop"
+  ): boolean {
+    return device.protocols.includes(protocol);
   }
 
   /**
    * Map AppleDevice to DiscoveredDevice
    */
   private mapToDiscoveredDevice(device: AppleDevice): DiscoveredDevice {
-    const airplay = device.services.airPlay
-    const companion = device.services.companionLink
-    const raop = device.services.raop
+    const airplay = device.services.airPlay;
+    const companion = device.services.companionLink;
+    const raop = device.services.raop;
 
-    const protocols: string[] = []
-    if (airplay) protocols.push('airplay')
-    if (companion) protocols.push('companion')
-    if (raop) protocols.push('raop')
+    const protocols: string[] = [];
+    if (airplay) protocols.push("airplay");
+    if (companion) protocols.push("companion");
+    if (raop) protocols.push("raop");
 
-    const deviceId = airplay?.txt.deviceid || 'unknown'
+    const deviceId = airplay?.txt.deviceid || "unknown";
 
     return {
       name: device.name,
       identifier: deviceId,
       macAddress: deviceId,
       deviceId: deviceId,
-      address: device.ipv4[0] || device.ipv6[0] || 'unknown',
+      address: device.ipv4[0] || device.ipv6[0] || "unknown",
       port: airplay?.port || 7000,
       protocols: protocols as any[],
       model: device.model,
       osVersion: airplay?.txt.osvers,
-      manufacturer: 'Apple',
+      manufacturer: "Apple",
       services: {
         airPlay: airplay ? { port: airplay.port } : undefined,
         raop: raop ? { port: raop.port } : undefined,
         companionLink: companion ? { port: companion.port } : undefined,
       },
       records: [], // Not used in new implementation
-    }
+    };
   }
 }

@@ -5,7 +5,7 @@
 // source: NowPlayingInfo.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import {
   RepeatMode_Enum,
   repeatMode_EnumFromJSON,
@@ -13,423 +13,496 @@ import {
   ShuffleMode_Enum,
   shuffleMode_EnumFromJSON,
   shuffleMode_EnumToJSON,
-} from './Common'
+} from "./Common";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface NowPlayingInfo {
-  album?: string | undefined
-  artist?: string | undefined
-  duration?: number | undefined
-  elapsedTime?: number | undefined
-  playbackRate?: number | undefined
-  repeatMode?: RepeatMode_Enum | undefined
-  shuffleMode?: ShuffleMode_Enum | undefined
-  timestamp?: number | undefined
-  title?: string | undefined
-  uniqueIdentifier?: number | undefined
-  isExplicitTrack?: boolean | undefined
-  isMusicApp?: boolean | undefined
-  radioStationIdentifier?: number | undefined
-  radioStationHash?: string | undefined
-  radioStationName?: string | undefined
-  artworkDataDigest?: Buffer | undefined
-  isAlwaysLive?: boolean | undefined
-  isAdvertisement?: boolean | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  album?: string | undefined;
+  artist?: string | undefined;
+  duration?: number | undefined;
+  elapsedTime?: number | undefined;
+  playbackRate?: number | undefined;
+  repeatMode?: RepeatMode_Enum | undefined;
+  shuffleMode?: ShuffleMode_Enum | undefined;
+  timestamp?: number | undefined;
+  title?: string | undefined;
+  uniqueIdentifier?: number | undefined;
+  isExplicitTrack?: boolean | undefined;
+  isMusicApp?: boolean | undefined;
+  radioStationIdentifier?: number | undefined;
+  radioStationHash?: string | undefined;
+  radioStationName?: string | undefined;
+  artworkDataDigest?: Buffer | undefined;
+  isAlwaysLive?: boolean | undefined;
+  isAdvertisement?: boolean | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseNowPlayingInfo(): NowPlayingInfo {
   return {
-    album: '',
-    artist: '',
+    album: "",
+    artist: "",
     duration: 0,
     elapsedTime: 0,
     playbackRate: 0,
     repeatMode: 0,
     shuffleMode: 0,
     timestamp: 0,
-    title: '',
+    title: "",
     uniqueIdentifier: 0,
     isExplicitTrack: false,
     isMusicApp: false,
     radioStationIdentifier: 0,
-    radioStationHash: '',
-    radioStationName: '',
+    radioStationHash: "",
+    radioStationName: "",
     artworkDataDigest: Buffer.alloc(0),
     isAlwaysLive: false,
     isAdvertisement: false,
     _unknownFields: {},
-  }
+  };
 }
 
 export const NowPlayingInfo: MessageFns<NowPlayingInfo> = {
-  encode(message: NowPlayingInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.album !== undefined && message.album !== '') {
-      writer.uint32(10).string(message.album)
+  encode(
+    message: NowPlayingInfo,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (message.album !== undefined && message.album !== "") {
+      writer.uint32(10).string(message.album);
     }
-    if (message.artist !== undefined && message.artist !== '') {
-      writer.uint32(18).string(message.artist)
+    if (message.artist !== undefined && message.artist !== "") {
+      writer.uint32(18).string(message.artist);
     }
     if (message.duration !== undefined && message.duration !== 0) {
-      writer.uint32(25).double(message.duration)
+      writer.uint32(25).double(message.duration);
     }
     if (message.elapsedTime !== undefined && message.elapsedTime !== 0) {
-      writer.uint32(33).double(message.elapsedTime)
+      writer.uint32(33).double(message.elapsedTime);
     }
     if (message.playbackRate !== undefined && message.playbackRate !== 0) {
-      writer.uint32(45).float(message.playbackRate)
+      writer.uint32(45).float(message.playbackRate);
     }
     if (message.repeatMode !== undefined && message.repeatMode !== 0) {
-      writer.uint32(48).int32(message.repeatMode)
+      writer.uint32(48).int32(message.repeatMode);
     }
     if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
-      writer.uint32(56).int32(message.shuffleMode)
+      writer.uint32(56).int32(message.shuffleMode);
     }
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      writer.uint32(65).double(message.timestamp)
+      writer.uint32(65).double(message.timestamp);
     }
-    if (message.title !== undefined && message.title !== '') {
-      writer.uint32(74).string(message.title)
+    if (message.title !== undefined && message.title !== "") {
+      writer.uint32(74).string(message.title);
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== 0) {
-      writer.uint32(80).uint64(message.uniqueIdentifier)
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== 0
+    ) {
+      writer.uint32(80).uint64(message.uniqueIdentifier);
     }
-    if (message.isExplicitTrack !== undefined && message.isExplicitTrack !== false) {
-      writer.uint32(88).bool(message.isExplicitTrack)
+    if (
+      message.isExplicitTrack !== undefined &&
+      message.isExplicitTrack !== false
+    ) {
+      writer.uint32(88).bool(message.isExplicitTrack);
     }
     if (message.isMusicApp !== undefined && message.isMusicApp !== false) {
-      writer.uint32(96).bool(message.isMusicApp)
+      writer.uint32(96).bool(message.isMusicApp);
     }
-    if (message.radioStationIdentifier !== undefined && message.radioStationIdentifier !== 0) {
-      writer.uint32(104).int64(message.radioStationIdentifier)
+    if (
+      message.radioStationIdentifier !== undefined &&
+      message.radioStationIdentifier !== 0
+    ) {
+      writer.uint32(104).int64(message.radioStationIdentifier);
     }
-    if (message.radioStationHash !== undefined && message.radioStationHash !== '') {
-      writer.uint32(114).string(message.radioStationHash)
+    if (
+      message.radioStationHash !== undefined &&
+      message.radioStationHash !== ""
+    ) {
+      writer.uint32(114).string(message.radioStationHash);
     }
-    if (message.radioStationName !== undefined && message.radioStationName !== '') {
-      writer.uint32(122).string(message.radioStationName)
+    if (
+      message.radioStationName !== undefined &&
+      message.radioStationName !== ""
+    ) {
+      writer.uint32(122).string(message.radioStationName);
     }
-    if (message.artworkDataDigest !== undefined && message.artworkDataDigest.length !== 0) {
-      writer.uint32(130).bytes(message.artworkDataDigest)
+    if (
+      message.artworkDataDigest !== undefined &&
+      message.artworkDataDigest.length !== 0
+    ) {
+      writer.uint32(130).bytes(message.artworkDataDigest);
     }
     if (message.isAlwaysLive !== undefined && message.isAlwaysLive !== false) {
-      writer.uint32(136).bool(message.isAlwaysLive)
+      writer.uint32(136).bool(message.isAlwaysLive);
     }
-    if (message.isAdvertisement !== undefined && message.isAdvertisement !== false) {
-      writer.uint32(144).bool(message.isAdvertisement)
+    if (
+      message.isAdvertisement !== undefined &&
+      message.isAdvertisement !== false
+    ) {
+      writer.uint32(144).bool(message.isAdvertisement);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): NowPlayingInfo {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseNowPlayingInfo()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNowPlayingInfo();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.album = reader.string()
-          continue
+          message.album = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.artist = reader.string()
-          continue
+          message.artist = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 25) {
-            break
+            break;
           }
 
-          message.duration = reader.double()
-          continue
+          message.duration = reader.double();
+          continue;
         }
         case 4: {
           if (tag !== 33) {
-            break
+            break;
           }
 
-          message.elapsedTime = reader.double()
-          continue
+          message.elapsedTime = reader.double();
+          continue;
         }
         case 5: {
           if (tag !== 45) {
-            break
+            break;
           }
 
-          message.playbackRate = reader.float()
-          continue
+          message.playbackRate = reader.float();
+          continue;
         }
         case 6: {
           if (tag !== 48) {
-            break
+            break;
           }
 
-          message.repeatMode = reader.int32() as any
-          continue
+          message.repeatMode = reader.int32() as any;
+          continue;
         }
         case 7: {
           if (tag !== 56) {
-            break
+            break;
           }
 
-          message.shuffleMode = reader.int32() as any
-          continue
+          message.shuffleMode = reader.int32() as any;
+          continue;
         }
         case 8: {
           if (tag !== 65) {
-            break
+            break;
           }
 
-          message.timestamp = reader.double()
-          continue
+          message.timestamp = reader.double();
+          continue;
         }
         case 9: {
           if (tag !== 74) {
-            break
+            break;
           }
 
-          message.title = reader.string()
-          continue
+          message.title = reader.string();
+          continue;
         }
         case 10: {
           if (tag !== 80) {
-            break
+            break;
           }
 
-          message.uniqueIdentifier = longToNumber(reader.uint64())
-          continue
+          message.uniqueIdentifier = longToNumber(reader.uint64());
+          continue;
         }
         case 11: {
           if (tag !== 88) {
-            break
+            break;
           }
 
-          message.isExplicitTrack = reader.bool()
-          continue
+          message.isExplicitTrack = reader.bool();
+          continue;
         }
         case 12: {
           if (tag !== 96) {
-            break
+            break;
           }
 
-          message.isMusicApp = reader.bool()
-          continue
+          message.isMusicApp = reader.bool();
+          continue;
         }
         case 13: {
           if (tag !== 104) {
-            break
+            break;
           }
 
-          message.radioStationIdentifier = longToNumber(reader.int64())
-          continue
+          message.radioStationIdentifier = longToNumber(reader.int64());
+          continue;
         }
         case 14: {
           if (tag !== 114) {
-            break
+            break;
           }
 
-          message.radioStationHash = reader.string()
-          continue
+          message.radioStationHash = reader.string();
+          continue;
         }
         case 15: {
           if (tag !== 122) {
-            break
+            break;
           }
 
-          message.radioStationName = reader.string()
-          continue
+          message.radioStationName = reader.string();
+          continue;
         }
         case 16: {
           if (tag !== 130) {
-            break
+            break;
           }
 
-          message.artworkDataDigest = Buffer.from(reader.bytes())
-          continue
+          message.artworkDataDigest = Buffer.from(reader.bytes());
+          continue;
         }
         case 17: {
           if (tag !== 136) {
-            break
+            break;
           }
 
-          message.isAlwaysLive = reader.bool()
-          continue
+          message.isAlwaysLive = reader.bool();
+          continue;
         }
         case 18: {
           if (tag !== 144) {
-            break
+            break;
           }
 
-          message.isAdvertisement = reader.bool()
-          continue
+          message.isAdvertisement = reader.bool();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): NowPlayingInfo {
     return {
-      album: isSet(object.album) ? globalThis.String(object.album) : '',
-      artist: isSet(object.artist) ? globalThis.String(object.artist) : '',
+      album: isSet(object.album) ? globalThis.String(object.album) : "",
+      artist: isSet(object.artist) ? globalThis.String(object.artist) : "",
       duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
-      elapsedTime: isSet(object.elapsedTime) ? globalThis.Number(object.elapsedTime) : 0,
-      playbackRate: isSet(object.playbackRate) ? globalThis.Number(object.playbackRate) : 0,
-      repeatMode: isSet(object.repeatMode) ? repeatMode_EnumFromJSON(object.repeatMode) : 0,
-      shuffleMode: isSet(object.shuffleMode) ? shuffleMode_EnumFromJSON(object.shuffleMode) : 0,
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      title: isSet(object.title) ? globalThis.String(object.title) : '',
+      elapsedTime: isSet(object.elapsedTime)
+        ? globalThis.Number(object.elapsedTime)
+        : 0,
+      playbackRate: isSet(object.playbackRate)
+        ? globalThis.Number(object.playbackRate)
+        : 0,
+      repeatMode: isSet(object.repeatMode)
+        ? repeatMode_EnumFromJSON(object.repeatMode)
+        : 0,
+      shuffleMode: isSet(object.shuffleMode)
+        ? shuffleMode_EnumFromJSON(object.shuffleMode)
+        : 0,
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.Number(object.uniqueIdentifier)
         : 0,
       isExplicitTrack: isSet(object.isExplicitTrack)
         ? globalThis.Boolean(object.isExplicitTrack)
         : false,
-      isMusicApp: isSet(object.isMusicApp) ? globalThis.Boolean(object.isMusicApp) : false,
+      isMusicApp: isSet(object.isMusicApp)
+        ? globalThis.Boolean(object.isMusicApp)
+        : false,
       radioStationIdentifier: isSet(object.radioStationIdentifier)
         ? globalThis.Number(object.radioStationIdentifier)
         : 0,
       radioStationHash: isSet(object.radioStationHash)
         ? globalThis.String(object.radioStationHash)
-        : '',
+        : "",
       radioStationName: isSet(object.radioStationName)
         ? globalThis.String(object.radioStationName)
-        : '',
+        : "",
       artworkDataDigest: isSet(object.artworkDataDigest)
         ? Buffer.from(bytesFromBase64(object.artworkDataDigest))
         : Buffer.alloc(0),
-      isAlwaysLive: isSet(object.isAlwaysLive) ? globalThis.Boolean(object.isAlwaysLive) : false,
+      isAlwaysLive: isSet(object.isAlwaysLive)
+        ? globalThis.Boolean(object.isAlwaysLive)
+        : false,
       isAdvertisement: isSet(object.isAdvertisement)
         ? globalThis.Boolean(object.isAdvertisement)
         : false,
-    }
+    };
   },
 
   toJSON(message: NowPlayingInfo): unknown {
-    const obj: any = {}
-    if (message.album !== undefined && message.album !== '') {
-      obj.album = message.album
+    const obj: any = {};
+    if (message.album !== undefined && message.album !== "") {
+      obj.album = message.album;
     }
-    if (message.artist !== undefined && message.artist !== '') {
-      obj.artist = message.artist
+    if (message.artist !== undefined && message.artist !== "") {
+      obj.artist = message.artist;
     }
     if (message.duration !== undefined && message.duration !== 0) {
-      obj.duration = message.duration
+      obj.duration = message.duration;
     }
     if (message.elapsedTime !== undefined && message.elapsedTime !== 0) {
-      obj.elapsedTime = message.elapsedTime
+      obj.elapsedTime = message.elapsedTime;
     }
     if (message.playbackRate !== undefined && message.playbackRate !== 0) {
-      obj.playbackRate = message.playbackRate
+      obj.playbackRate = message.playbackRate;
     }
     if (message.repeatMode !== undefined && message.repeatMode !== 0) {
-      obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode)
+      obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode);
     }
     if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
-      obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode)
+      obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode);
     }
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      obj.timestamp = message.timestamp
+      obj.timestamp = message.timestamp;
     }
-    if (message.title !== undefined && message.title !== '') {
-      obj.title = message.title
+    if (message.title !== undefined && message.title !== "") {
+      obj.title = message.title;
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== 0) {
-      obj.uniqueIdentifier = Math.round(message.uniqueIdentifier)
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== 0
+    ) {
+      obj.uniqueIdentifier = Math.round(message.uniqueIdentifier);
     }
-    if (message.isExplicitTrack !== undefined && message.isExplicitTrack !== false) {
-      obj.isExplicitTrack = message.isExplicitTrack
+    if (
+      message.isExplicitTrack !== undefined &&
+      message.isExplicitTrack !== false
+    ) {
+      obj.isExplicitTrack = message.isExplicitTrack;
     }
     if (message.isMusicApp !== undefined && message.isMusicApp !== false) {
-      obj.isMusicApp = message.isMusicApp
+      obj.isMusicApp = message.isMusicApp;
     }
-    if (message.radioStationIdentifier !== undefined && message.radioStationIdentifier !== 0) {
-      obj.radioStationIdentifier = Math.round(message.radioStationIdentifier)
+    if (
+      message.radioStationIdentifier !== undefined &&
+      message.radioStationIdentifier !== 0
+    ) {
+      obj.radioStationIdentifier = Math.round(message.radioStationIdentifier);
     }
-    if (message.radioStationHash !== undefined && message.radioStationHash !== '') {
-      obj.radioStationHash = message.radioStationHash
+    if (
+      message.radioStationHash !== undefined &&
+      message.radioStationHash !== ""
+    ) {
+      obj.radioStationHash = message.radioStationHash;
     }
-    if (message.radioStationName !== undefined && message.radioStationName !== '') {
-      obj.radioStationName = message.radioStationName
+    if (
+      message.radioStationName !== undefined &&
+      message.radioStationName !== ""
+    ) {
+      obj.radioStationName = message.radioStationName;
     }
-    if (message.artworkDataDigest !== undefined && message.artworkDataDigest.length !== 0) {
-      obj.artworkDataDigest = base64FromBytes(message.artworkDataDigest)
+    if (
+      message.artworkDataDigest !== undefined &&
+      message.artworkDataDigest.length !== 0
+    ) {
+      obj.artworkDataDigest = base64FromBytes(message.artworkDataDigest);
     }
     if (message.isAlwaysLive !== undefined && message.isAlwaysLive !== false) {
-      obj.isAlwaysLive = message.isAlwaysLive
+      obj.isAlwaysLive = message.isAlwaysLive;
     }
-    if (message.isAdvertisement !== undefined && message.isAdvertisement !== false) {
-      obj.isAdvertisement = message.isAdvertisement
+    if (
+      message.isAdvertisement !== undefined &&
+      message.isAdvertisement !== false
+    ) {
+      obj.isAdvertisement = message.isAdvertisement;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<NowPlayingInfo>, I>>(base?: I): NowPlayingInfo {
-    return NowPlayingInfo.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<NowPlayingInfo>, I>>(
+    base?: I
+  ): NowPlayingInfo {
+    return NowPlayingInfo.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<NowPlayingInfo>, I>>(object: I): NowPlayingInfo {
-    const message = createBaseNowPlayingInfo()
-    message.album = object.album ?? ''
-    message.artist = object.artist ?? ''
-    message.duration = object.duration ?? 0
-    message.elapsedTime = object.elapsedTime ?? 0
-    message.playbackRate = object.playbackRate ?? 0
-    message.repeatMode = object.repeatMode ?? 0
-    message.shuffleMode = object.shuffleMode ?? 0
-    message.timestamp = object.timestamp ?? 0
-    message.title = object.title ?? ''
-    message.uniqueIdentifier = object.uniqueIdentifier ?? 0
-    message.isExplicitTrack = object.isExplicitTrack ?? false
-    message.isMusicApp = object.isMusicApp ?? false
-    message.radioStationIdentifier = object.radioStationIdentifier ?? 0
-    message.radioStationHash = object.radioStationHash ?? ''
-    message.radioStationName = object.radioStationName ?? ''
-    message.artworkDataDigest = object.artworkDataDigest ?? Buffer.alloc(0)
-    message.isAlwaysLive = object.isAlwaysLive ?? false
-    message.isAdvertisement = object.isAdvertisement ?? false
-    return message
+  fromPartial<I extends Exact<DeepPartial<NowPlayingInfo>, I>>(
+    object: I
+  ): NowPlayingInfo {
+    const message = createBaseNowPlayingInfo();
+    message.album = object.album ?? "";
+    message.artist = object.artist ?? "";
+    message.duration = object.duration ?? 0;
+    message.elapsedTime = object.elapsedTime ?? 0;
+    message.playbackRate = object.playbackRate ?? 0;
+    message.repeatMode = object.repeatMode ?? 0;
+    message.shuffleMode = object.shuffleMode ?? 0;
+    message.timestamp = object.timestamp ?? 0;
+    message.title = object.title ?? "";
+    message.uniqueIdentifier = object.uniqueIdentifier ?? 0;
+    message.isExplicitTrack = object.isExplicitTrack ?? false;
+    message.isMusicApp = object.isMusicApp ?? false;
+    message.radioStationIdentifier = object.radioStationIdentifier ?? 0;
+    message.radioStationHash = object.radioStationHash ?? "";
+    message.radioStationName = object.radioStationName ?? "";
+    message.artworkDataDigest = object.artworkDataDigest ?? Buffer.alloc(0);
+    message.isAlwaysLive = object.isAlwaysLive ?? false;
+    message.isAdvertisement = object.isAdvertisement ?? false;
+    return message;
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -439,33 +512,35 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString())
+  const num = globalThis.Number(int64.toString());
   if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
   if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is smaller than Number.MIN_SAFE_INTEGER')
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
   }
-  return num
+  return num;
 }
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

@@ -5,133 +5,155 @@
 // source: SendCommandMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { Command, commandFromJSON, commandToJSON } from './CommandInfo'
-import { CommandOptions } from './CommandOptions'
-import { PlayerPath } from './PlayerPath'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { Command, commandFromJSON, commandToJSON } from "./CommandInfo";
+import { CommandOptions } from "./CommandOptions";
+import { PlayerPath } from "./PlayerPath";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SendCommandMessage {
-  command?: Command | undefined
-  options?: CommandOptions | undefined
-  playerPath?: PlayerPath | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  command?: Command | undefined;
+  options?: CommandOptions | undefined;
+  playerPath?: PlayerPath | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSendCommandMessage(): SendCommandMessage {
-  return { command: 0, options: undefined, playerPath: undefined, _unknownFields: {} }
+  return {
+    command: 0,
+    options: undefined,
+    playerPath: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const SendCommandMessage: MessageFns<SendCommandMessage> = {
-  encode(message: SendCommandMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendCommandMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.command !== undefined && message.command !== 0) {
-      writer.uint32(8).int32(message.command)
+      writer.uint32(8).int32(message.command);
     }
     if (message.options !== undefined) {
-      CommandOptions.encode(message.options, writer.uint32(18).fork()).join()
+      CommandOptions.encode(message.options, writer.uint32(18).fork()).join();
     }
     if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(26).fork()).join()
+      PlayerPath.encode(message.playerPath, writer.uint32(26).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendCommandMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendCommandMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendCommandMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendCommandMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.command = reader.int32() as any
-          continue
+          message.command = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.options = CommandOptions.decode(reader, reader.uint32())
-          continue
+          message.options = CommandOptions.decode(reader, reader.uint32());
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
+          message.playerPath = PlayerPath.decode(reader, reader.uint32());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SendCommandMessage {
     return {
       command: isSet(object.command) ? commandFromJSON(object.command) : 0,
-      options: isSet(object.options) ? CommandOptions.fromJSON(object.options) : undefined,
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
-    }
+      options: isSet(object.options)
+        ? CommandOptions.fromJSON(object.options)
+        : undefined,
+      playerPath: isSet(object.playerPath)
+        ? PlayerPath.fromJSON(object.playerPath)
+        : undefined,
+    };
   },
 
   toJSON(message: SendCommandMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.command !== undefined && message.command !== 0) {
-      obj.command = commandToJSON(message.command)
+      obj.command = commandToJSON(message.command);
     }
     if (message.options !== undefined) {
-      obj.options = CommandOptions.toJSON(message.options)
+      obj.options = CommandOptions.toJSON(message.options);
     }
     if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
+      obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SendCommandMessage>, I>>(base?: I): SendCommandMessage {
-    return SendCommandMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SendCommandMessage>, I>>(
+    base?: I
+  ): SendCommandMessage {
+    return SendCommandMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SendCommandMessage>, I>>(object: I): SendCommandMessage {
-    const message = createBaseSendCommandMessage()
-    message.command = object.command ?? 0
+  fromPartial<I extends Exact<DeepPartial<SendCommandMessage>, I>>(
+    object: I
+  ): SendCommandMessage {
+    const message = createBaseSendCommandMessage();
+    message.command = object.command ?? 0;
     message.options =
       object.options !== undefined && object.options !== null
         ? CommandOptions.fromPartial(object.options)
-        : undefined
+        : undefined;
     message.playerPath =
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
-    return message
+        : undefined;
+    return message;
   },
-}
+};
 
 export const sendCommandMessage: Extension<SendCommandMessage | undefined> = {
   number: 6,
@@ -139,19 +161,29 @@ export const sendCommandMessage: Extension<SendCommandMessage | undefined> = {
   repeated: false,
   packed: false,
   encode: (value: SendCommandMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SendCommandMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SendCommandMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SendCommandMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SendCommandMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SendCommandMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SendCommandMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -161,37 +193,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

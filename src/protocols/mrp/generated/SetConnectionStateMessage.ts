@@ -5,13 +5,13 @@
 // source: SetConnectionStateMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SetConnectionStateMessage {
-  state?: SetConnectionStateMessage_ConnectionState | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  state?: SetConnectionStateMessage_ConnectionState | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum SetConnectionStateMessage_ConnectionState {
@@ -27,21 +27,21 @@ export function setConnectionStateMessage_ConnectionStateFromJSON(
 ): SetConnectionStateMessage_ConnectionState {
   switch (object) {
     case 0:
-    case 'None':
-      return SetConnectionStateMessage_ConnectionState.None
+    case "None":
+      return SetConnectionStateMessage_ConnectionState.None;
     case 1:
-    case 'Connecting':
-      return SetConnectionStateMessage_ConnectionState.Connecting
+    case "Connecting":
+      return SetConnectionStateMessage_ConnectionState.Connecting;
     case 2:
-    case 'Connected':
-      return SetConnectionStateMessage_ConnectionState.Connected
+    case "Connected":
+      return SetConnectionStateMessage_ConnectionState.Connected;
     case 3:
-    case 'Disconnected':
-      return SetConnectionStateMessage_ConnectionState.Disconnected
+    case "Disconnected":
+      return SetConnectionStateMessage_ConnectionState.Disconnected;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return SetConnectionStateMessage_ConnectionState.UNRECOGNIZED
+      return SetConnectionStateMessage_ConnectionState.UNRECOGNIZED;
   }
 }
 
@@ -50,123 +50,144 @@ export function setConnectionStateMessage_ConnectionStateToJSON(
 ): string {
   switch (object) {
     case SetConnectionStateMessage_ConnectionState.None:
-      return 'None'
+      return "None";
     case SetConnectionStateMessage_ConnectionState.Connecting:
-      return 'Connecting'
+      return "Connecting";
     case SetConnectionStateMessage_ConnectionState.Connected:
-      return 'Connected'
+      return "Connected";
     case SetConnectionStateMessage_ConnectionState.Disconnected:
-      return 'Disconnected'
+      return "Disconnected";
     case SetConnectionStateMessage_ConnectionState.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 function createBaseSetConnectionStateMessage(): SetConnectionStateMessage {
-  return { state: 0, _unknownFields: {} }
+  return { state: 0, _unknownFields: {} };
 }
 
-export const SetConnectionStateMessage: MessageFns<SetConnectionStateMessage> = {
-  encode(
-    message: SetConnectionStateMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.state !== undefined && message.state !== 0) {
-      writer.uint32(8).int32(message.state)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const SetConnectionStateMessage: MessageFns<SetConnectionStateMessage> =
+  {
+    encode(
+      message: SetConnectionStateMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.state !== undefined && message.state !== 0) {
+        writer.uint32(8).int32(message.state);
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SetConnectionStateMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSetConnectionStateMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.state = reader.int32() as any
-          continue
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): SetConnectionStateMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSetConnectionStateMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.state = reader.int32() as any;
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
+        }
       }
-      const buf = reader.skip(tag & 7)
+      return message;
+    },
 
-      const list = message._unknownFields![tag]
+    fromJSON(object: any): SetConnectionStateMessage {
+      return {
+        state: isSet(object.state)
+          ? setConnectionStateMessage_ConnectionStateFromJSON(object.state)
+          : 0,
+      };
+    },
 
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+    toJSON(message: SetConnectionStateMessage): unknown {
+      const obj: any = {};
+      if (message.state !== undefined && message.state !== 0) {
+        obj.state = setConnectionStateMessage_ConnectionStateToJSON(
+          message.state
+        );
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): SetConnectionStateMessage {
-    return {
-      state: isSet(object.state)
-        ? setConnectionStateMessage_ConnectionStateFromJSON(object.state)
-        : 0,
-    }
-  },
+    create<I extends Exact<DeepPartial<SetConnectionStateMessage>, I>>(
+      base?: I
+    ): SetConnectionStateMessage {
+      return SetConnectionStateMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SetConnectionStateMessage>, I>>(
+      object: I
+    ): SetConnectionStateMessage {
+      const message = createBaseSetConnectionStateMessage();
+      message.state = object.state ?? 0;
+      return message;
+    },
+  };
 
-  toJSON(message: SetConnectionStateMessage): unknown {
-    const obj: any = {}
-    if (message.state !== undefined && message.state !== 0) {
-      obj.state = setConnectionStateMessage_ConnectionStateToJSON(message.state)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<SetConnectionStateMessage>, I>>(
-    base?: I
-  ): SetConnectionStateMessage {
-    return SetConnectionStateMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<SetConnectionStateMessage>, I>>(
-    object: I
-  ): SetConnectionStateMessage {
-    const message = createBaseSetConnectionStateMessage()
-    message.state = object.state ?? 0
-    return message
-  },
-}
-
-export const setConnectionStateMessage: Extension<SetConnectionStateMessage | undefined> = {
+export const setConnectionStateMessage: Extension<
+  SetConnectionStateMessage | undefined
+> = {
   number: 42,
   tag: 338,
   repeated: false,
   packed: false,
   encode: (value: SetConnectionStateMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SetConnectionStateMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SetConnectionStateMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SetConnectionStateMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SetConnectionStateMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SetConnectionStateMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SetConnectionStateMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -176,37 +197,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

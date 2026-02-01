@@ -3,7 +3,7 @@ import {
   type CompanionRequestOpackMessage,
   type CompanionResponseOpackMessage,
   createCompanionCommand,
-} from '@/protocols/companion/messages/CompanionOpackMessage.ts'
+} from "@/protocols/companion/messages/CompanionOpackMessage.ts";
 
 export enum HidCommandType {
   Up = 1,
@@ -33,30 +33,32 @@ export enum HidCommandModifier {
 }
 
 export interface HidCommandRequestContent {
-  _hBtS: HidCommandModifier
-  _hidC: HidCommandType
+  _hBtS: HidCommandModifier;
+  _hidC: HidCommandType;
 }
 
 export interface HidCommandRequest extends CompanionRequestOpackMessage {
-  _i: '_hidC'
-  _c: HidCommandRequestContent
+  _i: "_hidC";
+  _c: HidCommandRequestContent;
 }
 
 export interface HidCommandResponse extends CompanionResponseOpackMessage {
-  _i: '_hidC'
-  _c: {}
+  _i: "_hidC";
+  _c: {};
 }
 
 export interface ParsedHidCommandResponse {
-  type: 'hid-command-response'
-  raw: HidCommandResponse
+  type: "hid-command-response";
+  raw: HidCommandResponse;
 }
 
-export function parseHidCommandResponse(message: HidCommandResponse): ParsedHidCommandResponse {
+export function parseHidCommandResponse(
+  message: HidCommandResponse
+): ParsedHidCommandResponse {
   return {
-    type: 'hid-command-response',
+    type: "hid-command-response",
     raw: message,
-  }
+  };
 }
 
 export function createHidCommand(
@@ -64,12 +66,12 @@ export function createHidCommand(
   modifier: HidCommandModifier
 ): CompanionCommand<HidCommandRequest, HidCommandResponse, void> {
   return createCompanionCommand({
-    identifier: '_hidC',
+    identifier: "_hidC",
     name: `HidCommand:${HidCommandType[commandType]}`,
     buildContent: () => ({
       _hBtS: modifier,
       _hidC: commandType,
     }),
     parse: () => undefined,
-  })
+  });
 }

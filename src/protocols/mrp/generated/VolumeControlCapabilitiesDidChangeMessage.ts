@@ -5,20 +5,25 @@
 // source: VolumeControlCapabilitiesDidChangeMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { VolumeControlAvailabilityMessage } from './VolumeControlAvailabilityMessage'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { VolumeControlAvailabilityMessage } from "./VolumeControlAvailabilityMessage";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface VolumeControlCapabilitiesDidChangeMessage {
-  capabilities?: VolumeControlAvailabilityMessage | undefined
-  endpointUID?: string | undefined
-  outputDeviceUID?: string | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  capabilities?: VolumeControlAvailabilityMessage | undefined;
+  endpointUID?: string | undefined;
+  outputDeviceUID?: string | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseVolumeControlCapabilitiesDidChangeMessage(): VolumeControlCapabilitiesDidChangeMessage {
-  return { capabilities: undefined, endpointUID: '', outputDeviceUID: '', _unknownFields: {} }
+  return {
+    capabilities: undefined,
+    endpointUID: "",
+    outputDeviceUID: "",
+    _unknownFields: {},
+  };
 }
 
 export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControlCapabilitiesDidChangeMessage> =
@@ -31,74 +36,83 @@ export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControl
         VolumeControlAvailabilityMessage.encode(
           message.capabilities,
           writer.uint32(10).fork()
-        ).join()
+        ).join();
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== '') {
-        writer.uint32(26).string(message.endpointUID)
+      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+        writer.uint32(26).string(message.endpointUID);
       }
-      if (message.outputDeviceUID !== undefined && message.outputDeviceUID !== '') {
-        writer.uint32(34).string(message.outputDeviceUID)
+      if (
+        message.outputDeviceUID !== undefined &&
+        message.outputDeviceUID !== ""
+      ) {
+        writer.uint32(34).string(message.outputDeviceUID);
       }
       if (message._unknownFields !== undefined) {
-        for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-          const tag = parseInt(key, 10)
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
           for (const value of values) {
-            writer.uint32(tag).raw(value)
+            writer.uint32(tag).raw(value);
           }
         }
       }
-      return writer
+      return writer;
     },
 
     decode(
       input: BinaryReader | Uint8Array,
       length?: number
     ): VolumeControlCapabilitiesDidChangeMessage {
-      const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-      const end = length === undefined ? reader.len : reader.pos + length
-      const message = createBaseVolumeControlCapabilitiesDidChangeMessage()
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseVolumeControlCapabilitiesDidChangeMessage();
       while (reader.pos < end) {
-        const tag = reader.uint32()
+        const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1: {
             if (tag !== 10) {
-              break
+              break;
             }
 
-            message.capabilities = VolumeControlAvailabilityMessage.decode(reader, reader.uint32())
-            continue
+            message.capabilities = VolumeControlAvailabilityMessage.decode(
+              reader,
+              reader.uint32()
+            );
+            continue;
           }
           case 3: {
             if (tag !== 26) {
-              break
+              break;
             }
 
-            message.endpointUID = reader.string()
-            continue
+            message.endpointUID = reader.string();
+            continue;
           }
           case 4: {
             if (tag !== 34) {
-              break
+              break;
             }
 
-            message.outputDeviceUID = reader.string()
-            continue
+            message.outputDeviceUID = reader.string();
+            continue;
           }
         }
         if ((tag & 7) === 4 || tag === 0) {
-          break
+          break;
         }
-        const buf = reader.skip(tag & 7)
+        const buf = reader.skip(tag & 7);
 
-        const list = message._unknownFields![tag]
+        const list = message._unknownFields![tag];
 
         if (list === undefined) {
-          message._unknownFields![tag] = [buf]
+          message._unknownFields![tag] = [buf];
         } else {
-          list.push(buf)
+          list.push(buf);
         }
       }
-      return message
+      return message;
     },
 
     fromJSON(object: any): VolumeControlCapabilitiesDidChangeMessage {
@@ -106,45 +120,60 @@ export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControl
         capabilities: isSet(object.capabilities)
           ? VolumeControlAvailabilityMessage.fromJSON(object.capabilities)
           : undefined,
-        endpointUID: isSet(object.endpointUID) ? globalThis.String(object.endpointUID) : '',
+        endpointUID: isSet(object.endpointUID)
+          ? globalThis.String(object.endpointUID)
+          : "",
         outputDeviceUID: isSet(object.outputDeviceUID)
           ? globalThis.String(object.outputDeviceUID)
-          : '',
-      }
+          : "",
+      };
     },
 
     toJSON(message: VolumeControlCapabilitiesDidChangeMessage): unknown {
-      const obj: any = {}
+      const obj: any = {};
       if (message.capabilities !== undefined) {
-        obj.capabilities = VolumeControlAvailabilityMessage.toJSON(message.capabilities)
+        obj.capabilities = VolumeControlAvailabilityMessage.toJSON(
+          message.capabilities
+        );
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== '') {
-        obj.endpointUID = message.endpointUID
+      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+        obj.endpointUID = message.endpointUID;
       }
-      if (message.outputDeviceUID !== undefined && message.outputDeviceUID !== '') {
-        obj.outputDeviceUID = message.outputDeviceUID
+      if (
+        message.outputDeviceUID !== undefined &&
+        message.outputDeviceUID !== ""
+      ) {
+        obj.outputDeviceUID = message.outputDeviceUID;
       }
-      return obj
+      return obj;
     },
 
-    create<I extends Exact<DeepPartial<VolumeControlCapabilitiesDidChangeMessage>, I>>(
-      base?: I
-    ): VolumeControlCapabilitiesDidChangeMessage {
-      return VolumeControlCapabilitiesDidChangeMessage.fromPartial(base ?? ({} as any))
+    create<
+      I extends Exact<
+        DeepPartial<VolumeControlCapabilitiesDidChangeMessage>,
+        I
+      >,
+    >(base?: I): VolumeControlCapabilitiesDidChangeMessage {
+      return VolumeControlCapabilitiesDidChangeMessage.fromPartial(
+        base ?? ({} as any)
+      );
     },
-    fromPartial<I extends Exact<DeepPartial<VolumeControlCapabilitiesDidChangeMessage>, I>>(
-      object: I
-    ): VolumeControlCapabilitiesDidChangeMessage {
-      const message = createBaseVolumeControlCapabilitiesDidChangeMessage()
+    fromPartial<
+      I extends Exact<
+        DeepPartial<VolumeControlCapabilitiesDidChangeMessage>,
+        I
+      >,
+    >(object: I): VolumeControlCapabilitiesDidChangeMessage {
+      const message = createBaseVolumeControlCapabilitiesDidChangeMessage();
       message.capabilities =
         object.capabilities !== undefined && object.capabilities !== null
           ? VolumeControlAvailabilityMessage.fromPartial(object.capabilities)
-          : undefined
-      message.endpointUID = object.endpointUID ?? ''
-      message.outputDeviceUID = object.outputDeviceUID ?? ''
-      return message
+          : undefined;
+      message.endpointUID = object.endpointUID ?? "";
+      message.outputDeviceUID = object.outputDeviceUID ?? "";
+      return message;
     },
-  }
+  };
 
 export const volumeControlCapabilitiesDidChangeMessage: Extension<
   VolumeControlCapabilitiesDidChangeMessage | undefined
@@ -153,23 +182,38 @@ export const volumeControlCapabilitiesDidChangeMessage: Extension<
   tag: 546,
   repeated: false,
   packed: false,
-  encode: (value: VolumeControlCapabilitiesDidChangeMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    VolumeControlCapabilitiesDidChangeMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+  encode: (
+    value: VolumeControlCapabilitiesDidChangeMessage | undefined
+  ): Uint8Array[] => {
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    VolumeControlCapabilitiesDidChangeMessage.encode(
+      value,
+      writer.fork()
+    ).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
   decode: (
     tag: number,
     input: Uint8Array[]
   ): VolumeControlCapabilitiesDidChangeMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return VolumeControlCapabilitiesDidChangeMessage.decode(reader, reader.uint32())
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return VolumeControlCapabilitiesDidChangeMessage.decode(
+      reader,
+      reader.uint32()
+    );
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -179,37 +223,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

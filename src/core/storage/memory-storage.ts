@@ -8,14 +8,17 @@ import {
   type StorageData,
   type StoredCredentials,
   type StoredDevice,
-} from '@/core/storage/types.ts'
-import type { BaseCredentials, CredentialStore } from '@/protocols/types/BaseProtocol.ts'
-import type { Storage } from '@/core/storage/types'
-import type { ClientDeviceInfo } from '@/core/client-identity.ts'
+} from "@/core/storage/types.ts";
+import type {
+  BaseCredentials,
+  CredentialStore,
+} from "@/protocols/types/BaseProtocol.ts";
+import type { Storage } from "@/core/storage/types";
+import type { ClientDeviceInfo } from "@/core/client-identity.ts";
 
 export class MemoryStorage implements Storage {
-  private data: StorageData
-  private snapshots: Map<string, StorageData> = new Map()
+  private data: StorageData;
+  private snapshots: Map<string, StorageData> = new Map();
 
   constructor(initialData?: StorageData) {
     this.data = initialData || {
@@ -23,10 +26,10 @@ export class MemoryStorage implements Storage {
       devices: {},
       credentials: {},
       settings: {},
-    }
+    };
 
     // Ensure client device info exists
-    this.ensureClientDeviceInfoExists()
+    this.ensureClientDeviceInfoExists();
   }
 
   /**
@@ -34,49 +37,49 @@ export class MemoryStorage implements Storage {
    */
   private ensureClientDeviceInfoExists(): void {
     if (this.data.settings?.clientDeviceInfo) {
-      return
+      return;
     }
 
     // Generate synchronously for memory storage
-    const { generateClientDeviceInfo } = require('@/core/client-identity.ts')
-    const info = generateClientDeviceInfo()
+    const { generateClientDeviceInfo } = require("@/core/client-identity.ts");
+    const info = generateClientDeviceInfo();
 
     if (!this.data.settings) {
-      this.data.settings = {}
+      this.data.settings = {};
     }
-    this.data.settings.clientDeviceInfo = info
+    this.data.settings.clientDeviceInfo = info;
   }
 
   private credentialKey(deviceId: string, protocol: ProtocolType): string {
-    return `${deviceId}:${protocol}`
+    return `${deviceId}:${protocol}`;
   }
 
   private cloneData(): StorageData {
-    return JSON.parse(JSON.stringify(this.data))
+    return JSON.parse(JSON.stringify(this.data));
   }
 
   // Device operations
   async getDevice(identifier: string): Promise<StoredDevice | null> {
-    return this.data.devices[identifier] || null
+    return this.data.devices[identifier] || null;
   }
 
   async saveDevice(device: StoredDevice): Promise<void> {
-    this.data.devices[device.identifier] = device
+    this.data.devices[device.identifier] = device;
   }
 
   async removeDevice(identifier: string): Promise<void> {
-    delete this.data.devices[identifier]
+    delete this.data.devices[identifier];
 
     // Remove all credentials for this device
-    Object.keys(this.data.credentials).forEach(key => {
+    Object.keys(this.data.credentials).forEach((key) => {
       if (key.startsWith(`${identifier}:`)) {
-        delete this.data.credentials[key]
+        delete this.data.credentials[key];
       }
-    })
+    });
   }
 
   async listDevices(): Promise<StoredDevice[]> {
-    return Object.values(this.data.devices)
+    return Object.values(this.data.devices);
   }
 
   // Credential operations
@@ -84,8 +87,8 @@ export class MemoryStorage implements Storage {
     deviceId: string,
     protocol: ProtocolType
   ): Promise<StoredCredentials<T> | null> {
-    const key = this.credentialKey(deviceId, protocol)
-    return (this.data.credentials[key] as StoredCredentials<T>) || null
+    const key = this.credentialKey(deviceId, protocol);
+    return (this.data.credentials[key] as StoredCredentials<T>) || null;
   }
 
   async saveCredentials<T extends BaseCredentials>(
@@ -93,34 +96,40 @@ export class MemoryStorage implements Storage {
     protocol: ProtocolType,
     credentials: StoredCredentials<T>
   ): Promise<void> {
-    const key = this.credentialKey(deviceId, protocol)
-    this.data.credentials[key] = credentials as StoredCredentials
+    const key = this.credentialKey(deviceId, protocol);
+    this.data.credentials[key] = credentials as StoredCredentials;
   }
 
-  async removeCredentials(deviceId: string, protocol: ProtocolType): Promise<void> {
-    const key = this.credentialKey(deviceId, protocol)
-    delete this.data.credentials[key]
+  async removeCredentials(
+    deviceId: string,
+    protocol: ProtocolType
+  ): Promise<void> {
+    const key = this.credentialKey(deviceId, protocol);
+    delete this.data.credentials[key];
   }
 
   async listCredentials(deviceId: string): Promise<StoredCredentials[]> {
-    const credentials: StoredCredentials[] = []
-    const prefix = `${deviceId}:`
+    const credentials: StoredCredentials[] = [];
+    const prefix = `${deviceId}:`;
 
     Object.entries(this.data.credentials).forEach(([key, cred]) => {
       if (key.startsWith(prefix)) {
-        credentials.push(cred)
+        credentials.push(cred);
       }
-    })
+    });
 
-    return credentials
+    return credentials;
   }
 
-  async updateLastUsed(deviceId: string, protocol: ProtocolType): Promise<void> {
-    const key = this.credentialKey(deviceId, protocol)
-    const cred = this.data.credentials[key]
+  async updateLastUsed(
+    deviceId: string,
+    protocol: ProtocolType
+  ): Promise<void> {
+    const key = this.credentialKey(deviceId, protocol);
+    const cred = this.data.credentials[key];
 
     if (cred) {
-      cred.lastUsed = new Date()
+      cred.lastUsed = new Date();
     }
   }
 
@@ -129,23 +138,25 @@ export class MemoryStorage implements Storage {
     deviceId: string,
     protocol: ProtocolType
   ): CredentialStore<T> {
-    return new ScopedCredentialStore<T>(this, deviceId, protocol)
+    return new ScopedCredentialStore<T>(this, deviceId, protocol);
   }
 
   // Client device identity methods
   async getClientDeviceInfo(): Promise<ClientDeviceInfo> {
-    const info = this.data.settings?.clientDeviceInfo
+    const info = this.data.settings?.clientDeviceInfo;
     if (!info) {
-      throw new Error('Client device info not initialized - this should never happen')
+      throw new Error(
+        "Client device info not initialized - this should never happen"
+      );
     }
-    return info
+    return info;
   }
 
   async saveClientDeviceInfo(info: ClientDeviceInfo): Promise<void> {
     if (!this.data.settings) {
-      this.data.settings = {}
+      this.data.settings = {};
     }
-    this.data.settings.clientDeviceInfo = info
+    this.data.settings.clientDeviceInfo = info;
   }
 
   // Data operations
@@ -155,15 +166,15 @@ export class MemoryStorage implements Storage {
       devices: {},
       credentials: {},
       settings: {},
-    }
+    };
   }
 
   async export(): Promise<StorageData> {
-    return this.cloneData()
+    return this.cloneData();
   }
 
   async import(data: StorageData): Promise<void> {
-    this.data = { ...data }
+    this.data = { ...data };
   }
 
   async flush(): Promise<void> {

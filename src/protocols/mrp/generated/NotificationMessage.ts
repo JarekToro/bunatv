@@ -5,77 +5,86 @@
 // source: NotificationMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface NotificationMessage {
-  notification: string[]
-  userInfo: Buffer[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  notification: string[];
+  userInfo: Buffer[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseNotificationMessage(): NotificationMessage {
-  return { notification: [], userInfo: [], _unknownFields: {} }
+  return { notification: [], userInfo: [], _unknownFields: {} };
 }
 
 export const NotificationMessage: MessageFns<NotificationMessage> = {
-  encode(message: NotificationMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: NotificationMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.notification) {
-      writer.uint32(10).string(v!)
+      writer.uint32(10).string(v!);
     }
     for (const v of message.userInfo) {
-      writer.uint32(18).bytes(v!)
+      writer.uint32(18).bytes(v!);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): NotificationMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseNotificationMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): NotificationMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNotificationMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.notification.push(reader.string())
-          continue
+          message.notification.push(reader.string());
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.userInfo.push(Buffer.from(reader.bytes()))
-          continue
+          message.userInfo.push(Buffer.from(reader.bytes()));
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): NotificationMessage {
@@ -86,32 +95,34 @@ export const NotificationMessage: MessageFns<NotificationMessage> = {
       userInfo: globalThis.Array.isArray(object?.userInfo)
         ? object.userInfo.map((e: any) => Buffer.from(bytesFromBase64(e)))
         : [],
-    }
+    };
   },
 
   toJSON(message: NotificationMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.notification?.length) {
-      obj.notification = message.notification
+      obj.notification = message.notification;
     }
     if (message.userInfo?.length) {
-      obj.userInfo = message.userInfo.map(e => base64FromBytes(e))
+      obj.userInfo = message.userInfo.map((e) => base64FromBytes(e));
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<NotificationMessage>, I>>(base?: I): NotificationMessage {
-    return NotificationMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<NotificationMessage>, I>>(
+    base?: I
+  ): NotificationMessage {
+    return NotificationMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<NotificationMessage>, I>>(
     object: I
   ): NotificationMessage {
-    const message = createBaseNotificationMessage()
-    message.notification = object.notification?.map(e => e) || []
-    message.userInfo = object.userInfo?.map(e => e) || []
-    return message
+    const message = createBaseNotificationMessage();
+    message.notification = object.notification?.map((e) => e) || [];
+    message.userInfo = object.userInfo?.map((e) => e) || [];
+    return message;
   },
-}
+};
 
 export const notificationMessage: Extension<NotificationMessage | undefined> = {
   number: 16,
@@ -119,27 +130,37 @@ export const notificationMessage: Extension<NotificationMessage | undefined> = {
   repeated: false,
   packed: false,
   encode: (value: NotificationMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    NotificationMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    NotificationMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): NotificationMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return NotificationMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): NotificationMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return NotificationMessage.decode(reader, reader.uint32());
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -149,33 +170,35 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

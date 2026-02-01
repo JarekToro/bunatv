@@ -1,6 +1,6 @@
-import type { Command } from '@/protocols/types/BaseProtocol.ts'
+import type { Command } from "@/protocols/types/BaseProtocol.ts";
 
-export type PlistBuffer = Uint8Array
+export type PlistBuffer = Uint8Array;
 
 // Message type constants from pyatv's MessageType enum
 export enum MessageType {
@@ -21,19 +21,19 @@ export enum InputAction {
  */
 export interface CompanionOpackMessage {
   /** Message identifier */
-  _i: string
+  _i: string;
   /** Message type (2=request, 3=response) */
-  _t: MessageType
+  _t: MessageType;
   /** Command content */
-  _c: Record<string, any>
+  _c: Record<string, any>;
   /** Transaction ID */
-  _x?: number
+  _x?: number;
   /** Error message (if applicable) */
-  _em?: string
+  _em?: string;
   /** Error code (if applicable) */
-  _ec?: number
+  _ec?: number;
   /** Error domain (if applicable) */
-  _ed?: string
+  _ed?: string;
 }
 
 /**
@@ -41,35 +41,40 @@ export interface CompanionOpackMessage {
  * Note: Does not extend BaseMessage due to different property names
  */
 export interface CompanionRequestOpackMessage extends CompanionOpackMessage {
-  _t: MessageType.Request
+  _t: MessageType.Request;
 }
 export interface CompanionResponseOpackMessage extends CompanionOpackMessage {
-  _t: MessageType.Response
+  _t: MessageType.Response;
 }
 export interface CompanionEventOpackMessage extends CompanionOpackMessage {
-  _t: MessageType.Event
+  _t: MessageType.Event;
 }
 
-export type TrackableCompanionOpackMessage = Omit<CompanionOpackMessage, '_x'> & { _x: number }
+export type TrackableCompanionOpackMessage = Omit<
+  CompanionOpackMessage,
+  "_x"
+> & { _x: number };
 
-export interface EmptyRequest<T extends string> extends CompanionRequestOpackMessage {
-  _i: T
+export interface EmptyRequest<T extends string>
+  extends CompanionRequestOpackMessage {
+  _i: T;
 }
-export interface EmptyResponse<T extends string> extends CompanionResponseOpackMessage {
-  _i: T
+export interface EmptyResponse<T extends string>
+  extends CompanionResponseOpackMessage {
+  _i: T;
 }
 
 export type SimpleCompanionCommand<T extends string> = CompanionCommand<
   EmptyRequest<T>,
   EmptyResponse<T>,
   void
->
+>;
 
 export type CompanionCommand<
   Req extends CompanionRequestOpackMessage = CompanionRequestOpackMessage,
   Res extends CompanionResponseOpackMessage = CompanionResponseOpackMessage,
   O = unknown,
-> = Command<Req, Res, O>
+> = Command<Req, Res, O>;
 
 /**
  * Factory function for creating CompanionCommand instances with minimal boilerplate
@@ -80,13 +85,13 @@ export function createCompanionCommand<
   O = unknown,
 >(config: {
   /** Command identifier (maps to _i field) */
-  identifier: string
+  identifier: string;
   /** Human-readable name for the command */
-  name: string
+  name: string;
   /** Build the command content (_c field) */
-  buildContent: () => Req['_c']
+  buildContent: () => Req["_c"];
   /** Parse the response */
-  parse: (response: Res) => O
+  parse: (response: Res) => O;
 }): CompanionCommand<Req, Res, O> {
   return {
     name: config.name,
@@ -97,7 +102,7 @@ export function createCompanionCommand<
         _c: config.buildContent(),
       }) as Req,
     parse: config.parse,
-  }
+  };
 }
 
 /**
@@ -112,7 +117,7 @@ export function createSimpleCompanionCommand<T extends string>(
     name: name ?? identifier,
     buildContent: () => ({}),
     parse: () => undefined,
-  })
+  });
 }
 
 /**
@@ -121,20 +126,22 @@ export function createSimpleCompanionCommand<T extends string>(
 export interface CompanionEvent<
   TMessage extends CompanionEventOpackMessage = CompanionEventOpackMessage,
 > {
-  readonly name: string
-  build(): TMessage
+  readonly name: string;
+  build(): TMessage;
 }
 
 /**
  * Factory function for creating CompanionEvent instances
  */
-export function createCompanionEvent<T extends CompanionEventOpackMessage>(config: {
+export function createCompanionEvent<
+  T extends CompanionEventOpackMessage,
+>(config: {
   /** Event identifier (maps to _i field) */
-  identifier: string
+  identifier: string;
   /** Human-readable name for the event */
-  name: string
+  name: string;
   /** Build the event content (_c field) */
-  buildContent: () => T['_c']
+  buildContent: () => T["_c"];
 }): CompanionEvent<T> {
   return {
     name: config.name,
@@ -144,5 +151,5 @@ export function createCompanionEvent<T extends CompanionEventOpackMessage>(confi
         _i: config.identifier,
         _c: config.buildContent(),
       }) as T,
-  }
+  };
 }

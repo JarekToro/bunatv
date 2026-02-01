@@ -5,19 +5,19 @@
 // source: CryptoPairingMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface CryptoPairingMessage {
   /** Example: <00010006 0101> */
-  pairingData?: Buffer | undefined
+  pairingData?: Buffer | undefined;
   /** Example: 0 */
-  status?: number | undefined
-  isRetrying?: boolean | undefined
-  isUsingSystemPairing?: boolean | undefined
-  state?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  status?: number | undefined;
+  isRetrying?: boolean | undefined;
+  isUsingSystemPairing?: boolean | undefined;
+  state?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseCryptoPairingMessage(): CryptoPairingMessage {
@@ -28,99 +28,111 @@ function createBaseCryptoPairingMessage(): CryptoPairingMessage {
     isUsingSystemPairing: false,
     state: 0,
     _unknownFields: {},
-  }
+  };
 }
 
 export const CryptoPairingMessage: MessageFns<CryptoPairingMessage> = {
-  encode(message: CryptoPairingMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CryptoPairingMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.pairingData !== undefined && message.pairingData.length !== 0) {
-      writer.uint32(10).bytes(message.pairingData)
+      writer.uint32(10).bytes(message.pairingData);
     }
     if (message.status !== undefined && message.status !== 0) {
-      writer.uint32(16).int32(message.status)
+      writer.uint32(16).int32(message.status);
     }
     if (message.isRetrying !== undefined && message.isRetrying !== false) {
-      writer.uint32(24).bool(message.isRetrying)
+      writer.uint32(24).bool(message.isRetrying);
     }
-    if (message.isUsingSystemPairing !== undefined && message.isUsingSystemPairing !== false) {
-      writer.uint32(32).bool(message.isUsingSystemPairing)
+    if (
+      message.isUsingSystemPairing !== undefined &&
+      message.isUsingSystemPairing !== false
+    ) {
+      writer.uint32(32).bool(message.isUsingSystemPairing);
     }
     if (message.state !== undefined && message.state !== 0) {
-      writer.uint32(40).int32(message.state)
+      writer.uint32(40).int32(message.state);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): CryptoPairingMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseCryptoPairingMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): CryptoPairingMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCryptoPairingMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.pairingData = Buffer.from(reader.bytes())
-          continue
+          message.pairingData = Buffer.from(reader.bytes());
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.status = reader.int32()
-          continue
+          message.status = reader.int32();
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.isRetrying = reader.bool()
-          continue
+          message.isRetrying = reader.bool();
+          continue;
         }
         case 4: {
           if (tag !== 32) {
-            break
+            break;
           }
 
-          message.isUsingSystemPairing = reader.bool()
-          continue
+          message.isUsingSystemPairing = reader.bool();
+          continue;
         }
         case 5: {
           if (tag !== 40) {
-            break
+            break;
           }
 
-          message.state = reader.int32()
-          continue
+          message.state = reader.int32();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): CryptoPairingMessage {
@@ -129,77 +141,95 @@ export const CryptoPairingMessage: MessageFns<CryptoPairingMessage> = {
         ? Buffer.from(bytesFromBase64(object.pairingData))
         : Buffer.alloc(0),
       status: isSet(object.status) ? globalThis.Number(object.status) : 0,
-      isRetrying: isSet(object.isRetrying) ? globalThis.Boolean(object.isRetrying) : false,
+      isRetrying: isSet(object.isRetrying)
+        ? globalThis.Boolean(object.isRetrying)
+        : false,
       isUsingSystemPairing: isSet(object.isUsingSystemPairing)
         ? globalThis.Boolean(object.isUsingSystemPairing)
         : false,
       state: isSet(object.state) ? globalThis.Number(object.state) : 0,
-    }
+    };
   },
 
   toJSON(message: CryptoPairingMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.pairingData !== undefined && message.pairingData.length !== 0) {
-      obj.pairingData = base64FromBytes(message.pairingData)
+      obj.pairingData = base64FromBytes(message.pairingData);
     }
     if (message.status !== undefined && message.status !== 0) {
-      obj.status = Math.round(message.status)
+      obj.status = Math.round(message.status);
     }
     if (message.isRetrying !== undefined && message.isRetrying !== false) {
-      obj.isRetrying = message.isRetrying
+      obj.isRetrying = message.isRetrying;
     }
-    if (message.isUsingSystemPairing !== undefined && message.isUsingSystemPairing !== false) {
-      obj.isUsingSystemPairing = message.isUsingSystemPairing
+    if (
+      message.isUsingSystemPairing !== undefined &&
+      message.isUsingSystemPairing !== false
+    ) {
+      obj.isUsingSystemPairing = message.isUsingSystemPairing;
     }
     if (message.state !== undefined && message.state !== 0) {
-      obj.state = Math.round(message.state)
+      obj.state = Math.round(message.state);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<CryptoPairingMessage>, I>>(base?: I): CryptoPairingMessage {
-    return CryptoPairingMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<CryptoPairingMessage>, I>>(
+    base?: I
+  ): CryptoPairingMessage {
+    return CryptoPairingMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<CryptoPairingMessage>, I>>(
     object: I
   ): CryptoPairingMessage {
-    const message = createBaseCryptoPairingMessage()
-    message.pairingData = object.pairingData ?? Buffer.alloc(0)
-    message.status = object.status ?? 0
-    message.isRetrying = object.isRetrying ?? false
-    message.isUsingSystemPairing = object.isUsingSystemPairing ?? false
-    message.state = object.state ?? 0
-    return message
+    const message = createBaseCryptoPairingMessage();
+    message.pairingData = object.pairingData ?? Buffer.alloc(0);
+    message.status = object.status ?? 0;
+    message.isRetrying = object.isRetrying ?? false;
+    message.isUsingSystemPairing = object.isUsingSystemPairing ?? false;
+    message.state = object.state ?? 0;
+    return message;
   },
-}
+};
 
-export const cryptoPairingMessage: Extension<CryptoPairingMessage | undefined> = {
-  number: 39,
-  tag: 314,
-  repeated: false,
-  packed: false,
-  encode: (value: CryptoPairingMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    CryptoPairingMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
-  },
-  decode: (tag: number, input: Uint8Array[]): CryptoPairingMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return CryptoPairingMessage.decode(reader, reader.uint32())
-  },
-}
+export const cryptoPairingMessage: Extension<CryptoPairingMessage | undefined> =
+  {
+    number: 39,
+    tag: 314,
+    repeated: false,
+    packed: false,
+    encode: (value: CryptoPairingMessage | undefined): Uint8Array[] => {
+      const encoded: Uint8Array[] = [];
+      const writer = new BinaryWriter();
+      CryptoPairingMessage.encode(value, writer.fork()).join();
+      encoded.push(writer.finish());
+      return encoded;
+    },
+    decode: (
+      tag: number,
+      input: Uint8Array[]
+    ): CryptoPairingMessage | undefined => {
+      const reader = new BinaryReader(input[input.length - 1] ?? fail());
+      return CryptoPairingMessage.decode(reader, reader.uint32());
+    },
+  };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -209,37 +239,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

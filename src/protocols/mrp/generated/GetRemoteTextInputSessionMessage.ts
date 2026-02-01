@@ -5,79 +5,86 @@
 // source: GetRemoteTextInputSessionMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface GetRemoteTextInputSessionMessage {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseGetRemoteTextInputSessionMessage(): GetRemoteTextInputSessionMessage {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
-export const GetRemoteTextInputSessionMessage: MessageFns<GetRemoteTextInputSessionMessage> = {
-  encode(
-    message: GetRemoteTextInputSessionMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
+export const GetRemoteTextInputSessionMessage: MessageFns<GetRemoteTextInputSessionMessage> =
+  {
+    encode(
+      message: GetRemoteTextInputSessionMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
+          }
         }
       }
-    }
-    return writer
-  },
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetRemoteTextInputSessionMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseGetRemoteTextInputSessionMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): GetRemoteTextInputSessionMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseGetRemoteTextInputSessionMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
+        }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
-      }
-      const buf = reader.skip(tag & 7)
+      return message;
+    },
 
-      const list = message._unknownFields![tag]
+    fromJSON(_: any): GetRemoteTextInputSessionMessage {
+      return {};
+    },
 
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
-      }
-    }
-    return message
-  },
+    toJSON(_: GetRemoteTextInputSessionMessage): unknown {
+      const obj: any = {};
+      return obj;
+    },
 
-  fromJSON(_: any): GetRemoteTextInputSessionMessage {
-    return {}
-  },
-
-  toJSON(_: GetRemoteTextInputSessionMessage): unknown {
-    const obj: any = {}
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<GetRemoteTextInputSessionMessage>, I>>(
-    base?: I
-  ): GetRemoteTextInputSessionMessage {
-    return GetRemoteTextInputSessionMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<GetRemoteTextInputSessionMessage>, I>>(
-    _: I
-  ): GetRemoteTextInputSessionMessage {
-    const message = createBaseGetRemoteTextInputSessionMessage()
-    return message
-  },
-}
+    create<I extends Exact<DeepPartial<GetRemoteTextInputSessionMessage>, I>>(
+      base?: I
+    ): GetRemoteTextInputSessionMessage {
+      return GetRemoteTextInputSessionMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<GetRemoteTextInputSessionMessage>, I>,
+    >(_: I): GetRemoteTextInputSessionMessage {
+      const message = createBaseGetRemoteTextInputSessionMessage();
+      return message;
+    },
+  };
 
 export const getRemoteTextInputSessionMessage: Extension<
   GetRemoteTextInputSessionMessage | undefined
@@ -86,20 +93,32 @@ export const getRemoteTextInputSessionMessage: Extension<
   tag: 578,
   repeated: false,
   packed: false,
-  encode: (value: GetRemoteTextInputSessionMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    GetRemoteTextInputSessionMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+  encode: (
+    value: GetRemoteTextInputSessionMessage | undefined
+  ): Uint8Array[] => {
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    GetRemoteTextInputSessionMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): GetRemoteTextInputSessionMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return GetRemoteTextInputSessionMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): GetRemoteTextInputSessionMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return GetRemoteTextInputSessionMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -109,33 +128,35 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

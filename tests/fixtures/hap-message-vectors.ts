@@ -13,25 +13,25 @@ import {
   TlvBuilder,
   type TlvData,
   TlvValue,
-} from '@/core/encoding/tlv8.ts'
-import { SRP_TEST_VECTORS, X25519_TEST_VECTORS } from './crypto-test-vectors'
+} from "@/core/encoding/tlv8.ts";
+import { SRP_TEST_VECTORS, X25519_TEST_VECTORS } from "./crypto-test-vectors";
 
 /**
  * HAP Message Nonces for ChaCha20-Poly1305 encryption
  */
 export const HAP_NONCES = {
   /** M5 message encryption nonce */
-  PS_MSG05: Buffer.from('PS-Msg05', 'utf8'),
+  PS_MSG05: Buffer.from("PS-Msg05", "utf8"),
 
   /** M6 message decryption nonce */
-  PS_MSG06: Buffer.from('PS-Msg06', 'utf8'),
+  PS_MSG06: Buffer.from("PS-Msg06", "utf8"),
 
   /** Pair-Verify M2 encryption nonce */
-  PV_MSG02: Buffer.from('PV-Msg02', 'utf8'),
+  PV_MSG02: Buffer.from("PV-Msg02", "utf8"),
 
   /** Pair-Verify M3 decryption nonce */
-  PV_MSG03: Buffer.from('PV-Msg03', 'utf8'),
-} as const
+  PV_MSG03: Buffer.from("PV-Msg03", "utf8"),
+} as const;
 
 /**
  * M1 Message Test Vectors - Initial Pairing Request (Client → Server)
@@ -47,7 +47,7 @@ export const M1_MESSAGE_VECTORS = {
       method: Method.PairSetup,
       seqNo: State.M1,
     },
-    description: 'Valid M1 pair-setup initiation message',
+    description: "Valid M1 pair-setup initiation message",
   },
 
   /** M1 with pair-setup with auth */
@@ -60,7 +60,7 @@ export const M1_MESSAGE_VECTORS = {
       method: Method.PairSetupWithAuth,
       seqNo: State.M1,
     },
-    description: 'Valid M1 pair-setup with auth message',
+    description: "Valid M1 pair-setup with auth message",
   },
 
   /** M1 for pair-verify */
@@ -68,14 +68,16 @@ export const M1_MESSAGE_VECTORS = {
     tlvData: {
       [TlvValue.Method]: Buffer.from([Method.PairVerify]),
       [TlvValue.SeqNo]: Buffer.from([State.M1]),
-      [TlvValue.PublicKey]: Buffer.from(X25519_TEST_VECTORS.clientKeyPair.publicKey),
+      [TlvValue.PublicKey]: Buffer.from(
+        X25519_TEST_VECTORS.clientKeyPair.publicKey
+      ),
     },
     expectedStructure: {
       method: Method.PairVerify,
       seqNo: State.M1,
       publicKey: Buffer.from(X25519_TEST_VECTORS.clientKeyPair.publicKey),
     },
-    description: 'Valid M1 pair-verify initiation message',
+    description: "Valid M1 pair-verify initiation message",
   },
 
   /** Invalid M1 messages for error testing */
@@ -84,30 +86,30 @@ export const M1_MESSAGE_VECTORS = {
       tlvData: {
         [TlvValue.SeqNo]: Buffer.from([State.M1]),
       },
-      description: 'M1 message missing required Method field',
+      description: "M1 message missing required Method field",
     },
     missingSeqNo: {
       tlvData: {
         [TlvValue.Method]: Buffer.from([Method.PairSetup]),
       },
-      description: 'M1 message missing required SeqNo field',
+      description: "M1 message missing required SeqNo field",
     },
     wrongSeqNo: {
       tlvData: {
         [TlvValue.Method]: Buffer.from([Method.PairSetup]),
         [TlvValue.SeqNo]: Buffer.from([State.M2]), // Wrong sequence number
       },
-      description: 'M1 message with incorrect sequence number',
+      description: "M1 message with incorrect sequence number",
     },
     invalidMethod: {
       tlvData: {
         [TlvValue.Method]: Buffer.from([0xff]), // Invalid method
         [TlvValue.SeqNo]: Buffer.from([State.M1]),
       },
-      description: 'M1 message with invalid method value',
+      description: "M1 message with invalid method value",
     },
   },
-} as const
+} as const;
 
 /**
  * M2 Message Test Vectors - Server Challenge Response (Server → Client)
@@ -127,7 +129,7 @@ export const M2_MESSAGE_VECTORS = {
       salt: SRP_TEST_VECTORS.salt,
       publicKey: Buffer.from(SRP_TEST_VECTORS.serverPublicKey),
     },
-    description: 'Valid M2 pair-setup server challenge',
+    description: "Valid M2 pair-setup server challenge",
   },
 
   /** Valid M2 message for pair-verify */
@@ -135,7 +137,9 @@ export const M2_MESSAGE_VECTORS = {
     tlvData: {
       [TlvValue.Method]: Buffer.from([Method.PairVerify]),
       [TlvValue.SeqNo]: Buffer.from([State.M2]),
-      [TlvValue.PublicKey]: Buffer.from(X25519_TEST_VECTORS.serverKeyPair.publicKey),
+      [TlvValue.PublicKey]: Buffer.from(
+        X25519_TEST_VECTORS.serverKeyPair.publicKey
+      ),
       [TlvValue.EncryptedData]: Buffer.from(Array(64).fill(0xaa)), // Mock encrypted data
     },
     expectedStructure: {
@@ -144,7 +148,7 @@ export const M2_MESSAGE_VECTORS = {
       publicKey: Buffer.from(X25519_TEST_VECTORS.serverKeyPair.publicKey),
       encryptedData: Buffer.from(Array(64).fill(0xaa)),
     },
-    description: 'Valid M2 pair-verify server response',
+    description: "Valid M2 pair-verify server response",
   },
 
   /** M2 error response */
@@ -159,7 +163,7 @@ export const M2_MESSAGE_VECTORS = {
       seqNo: State.M2,
       error: ErrorCode.Authentication,
     },
-    description: 'M2 error response for authentication failure',
+    description: "M2 error response for authentication failure",
   },
 
   /** Invalid M2 messages */
@@ -170,7 +174,7 @@ export const M2_MESSAGE_VECTORS = {
         [TlvValue.SeqNo]: Buffer.from([State.M2]),
         // Missing Salt and PublicKey for pair-setup
       },
-      description: 'M2 pair-setup missing required Salt and PublicKey',
+      description: "M2 pair-setup missing required Salt and PublicKey",
     },
     invalidSaltSize: {
       tlvData: {
@@ -179,10 +183,10 @@ export const M2_MESSAGE_VECTORS = {
         [TlvValue.Salt]: Buffer.from([0x01, 0x02]), // Too short - should be 16 bytes
         [TlvValue.PublicKey]: Buffer.from(SRP_TEST_VECTORS.serverPublicKey),
       },
-      description: 'M2 with invalid salt size',
+      description: "M2 with invalid salt size",
     },
   },
-} as const
+} as const;
 
 /**
  * M3 Message Test Vectors - Client Proof (Client → Server)
@@ -202,7 +206,7 @@ export const M3_MESSAGE_VECTORS = {
       publicKey: Buffer.from(SRP_TEST_VECTORS.clientPublicKey),
       proof: Buffer.from(SRP_TEST_VECTORS.clientProof),
     },
-    description: 'Valid M3 pair-setup client proof',
+    description: "Valid M3 pair-setup client proof",
   },
 
   /** Valid M3 message for pair-verify */
@@ -217,7 +221,7 @@ export const M3_MESSAGE_VECTORS = {
       seqNo: State.M3,
       encryptedData: Buffer.from(Array(64).fill(0xbb)),
     },
-    description: 'Valid M3 pair-verify client signature',
+    description: "Valid M3 pair-verify client signature",
   },
 
   /** Invalid M3 messages */
@@ -229,7 +233,7 @@ export const M3_MESSAGE_VECTORS = {
         [TlvValue.PublicKey]: Buffer.from(SRP_TEST_VECTORS.clientPublicKey),
         // Missing Proof
       },
-      description: 'M3 pair-setup missing required Proof',
+      description: "M3 pair-setup missing required Proof",
     },
     invalidProofSize: {
       tlvData: {
@@ -238,10 +242,10 @@ export const M3_MESSAGE_VECTORS = {
         [TlvValue.PublicKey]: Buffer.from(SRP_TEST_VECTORS.clientPublicKey),
         [TlvValue.Proof]: Buffer.from([0x01, 0x02]), // Too short
       },
-      description: 'M3 with invalid proof size',
+      description: "M3 with invalid proof size",
     },
   },
-} as const
+} as const;
 
 /**
  * M4 Message Test Vectors - Server Proof (Server → Client)
@@ -259,7 +263,7 @@ export const M4_MESSAGE_VECTORS = {
       seqNo: State.M4,
       proof: Buffer.from(SRP_TEST_VECTORS.serverProof),
     },
-    description: 'Valid M4 pair-setup server proof',
+    description: "Valid M4 pair-setup server proof",
   },
 
   /** Valid M4 message for pair-verify */
@@ -274,7 +278,7 @@ export const M4_MESSAGE_VECTORS = {
       seqNo: State.M4,
       encryptedData: Buffer.from(Array(64).fill(0xcc)),
     },
-    description: 'Valid M4 pair-verify server signature',
+    description: "Valid M4 pair-verify server signature",
   },
 
   /** M4 error response */
@@ -289,7 +293,7 @@ export const M4_MESSAGE_VECTORS = {
       seqNo: State.M4,
       error: ErrorCode.Authentication,
     },
-    description: 'M4 error response for invalid client proof',
+    description: "M4 error response for invalid client proof",
   },
 
   /** Invalid M4 messages */
@@ -300,10 +304,10 @@ export const M4_MESSAGE_VECTORS = {
         [TlvValue.SeqNo]: Buffer.from([State.M4]),
         // Missing Proof
       },
-      description: 'M4 pair-setup missing required Proof',
+      description: "M4 pair-setup missing required Proof",
     },
   },
-} as const
+} as const;
 
 /**
  * M5 Message Test Vectors - Client Encrypted Data (Client → Server)
@@ -321,7 +325,7 @@ export const M5_MESSAGE_VECTORS = {
       seqNo: State.M5,
       encryptedData: Buffer.from(Array(80).fill(0xdd)),
     },
-    description: 'Valid M5 pair-setup client encrypted identity',
+    description: "Valid M5 pair-setup client encrypted identity",
   },
 
   /** Invalid M5 messages */
@@ -332,7 +336,7 @@ export const M5_MESSAGE_VECTORS = {
         [TlvValue.SeqNo]: Buffer.from([State.M5]),
         // Missing EncryptedData
       },
-      description: 'M5 missing required EncryptedData',
+      description: "M5 missing required EncryptedData",
     },
     emptyEncryptedData: {
       tlvData: {
@@ -340,10 +344,10 @@ export const M5_MESSAGE_VECTORS = {
         [TlvValue.SeqNo]: Buffer.from([State.M5]),
         [TlvValue.EncryptedData]: Buffer.alloc(0), // Empty encrypted data
       },
-      description: 'M5 with empty EncryptedData',
+      description: "M5 with empty EncryptedData",
     },
   },
-} as const
+} as const;
 
 /**
  * M6 Message Test Vectors - Server Encrypted Response (Server → Client)
@@ -361,7 +365,7 @@ export const M6_MESSAGE_VECTORS = {
       seqNo: State.M6,
       encryptedData: Buffer.from(Array(80).fill(0xee)),
     },
-    description: 'Valid M6 pair-setup server encrypted identity',
+    description: "Valid M6 pair-setup server encrypted identity",
   },
 
   /** M6 error response */
@@ -376,7 +380,7 @@ export const M6_MESSAGE_VECTORS = {
       seqNo: State.M6,
       error: ErrorCode.Authentication,
     },
-    description: 'M6 error response for invalid client identity',
+    description: "M6 error response for invalid client identity",
   },
 
   /** Invalid M6 messages */
@@ -387,10 +391,10 @@ export const M6_MESSAGE_VECTORS = {
         [TlvValue.SeqNo]: Buffer.from([State.M6]),
         // Missing EncryptedData
       },
-      description: 'M6 missing required EncryptedData',
+      description: "M6 missing required EncryptedData",
     },
   },
-} as const
+} as const;
 
 /**
  * Complete HAP Message Flow Test Vectors
@@ -415,7 +419,10 @@ export const HAP_FLOW_VECTORS = {
   ],
 
   /** Authentication failure at M2 */
-  authFailureM2: [M1_MESSAGE_VECTORS.validMessage, M2_MESSAGE_VECTORS.errorResponse],
+  authFailureM2: [
+    M1_MESSAGE_VECTORS.validMessage,
+    M2_MESSAGE_VECTORS.errorResponse,
+  ],
 
   /** Authentication failure at M4 */
   authFailureM4: [
@@ -434,7 +441,7 @@ export const HAP_FLOW_VECTORS = {
     M5_MESSAGE_VECTORS.valid,
     M6_MESSAGE_VECTORS.errorResponse,
   ],
-} as const
+} as const;
 
 /**
  * TLV8 Error Test Vectors for malformed messages
@@ -482,12 +489,12 @@ export const TLV8_ERROR_VECTORS = {
     /** Fragmented entry */
     fragmented: Buffer.concat([
       Buffer.from([TlvValue.Identifier, 0x05]),
-      Buffer.from('Hello', 'utf8'),
+      Buffer.from("Hello", "utf8"),
       Buffer.from([TlvValue.Identifier, 0x06]),
-      Buffer.from(' World', 'utf8'),
+      Buffer.from(" World", "utf8"),
     ]), // Should result in "Hello World"
   },
-} as const
+} as const;
 
 /**
  * Helper functions for building test messages
@@ -496,15 +503,18 @@ export const HapMessageUtils = {
   /**
    * Build a TLV message from test vector
    */
-  buildMessage(messageVector: { tlvData: TlvData; description: string }): Buffer {
-    return TLV8.encodeObject(messageVector.tlvData)
+  buildMessage(messageVector: {
+    tlvData: TlvData;
+    description: string;
+  }): Buffer {
+    return TLV8.encodeObject(messageVector.tlvData);
   },
 
   /**
    * Build a complete M1 message
    */
   buildM1(method: Method = Method.PairSetup): Buffer {
-    return new TlvBuilder().method(method).seqNo(State.M1).build()
+    return new TlvBuilder().method(method).seqNo(State.M1).build();
   },
 
   /**
@@ -515,8 +525,10 @@ export const HapMessageUtils = {
       .method(Method.PairSetup)
       .seqNo(State.M2)
       .salt(salt || SRP_TEST_VECTORS.salt)
-      .publicKey(serverPublicKey || Buffer.from(SRP_TEST_VECTORS.serverPublicKey))
-      .build()
+      .publicKey(
+        serverPublicKey || Buffer.from(SRP_TEST_VECTORS.serverPublicKey)
+      )
+      .build();
   },
 
   /**
@@ -526,9 +538,11 @@ export const HapMessageUtils = {
     return new TlvBuilder()
       .method(Method.PairSetup)
       .seqNo(State.M3)
-      .publicKey(clientPublicKey || Buffer.from(SRP_TEST_VECTORS.clientPublicKey))
+      .publicKey(
+        clientPublicKey || Buffer.from(SRP_TEST_VECTORS.clientPublicKey)
+      )
       .proof(clientProof || Buffer.from(SRP_TEST_VECTORS.clientProof))
-      .build()
+      .build();
   },
 
   /**
@@ -539,7 +553,7 @@ export const HapMessageUtils = {
       .method(Method.PairSetup)
       .seqNo(State.M4)
       .proof(serverProof || Buffer.from(SRP_TEST_VECTORS.serverProof))
-      .build()
+      .build();
   },
 
   /**
@@ -550,7 +564,7 @@ export const HapMessageUtils = {
       .method(Method.PairSetup)
       .seqNo(State.M5)
       .encryptedData(encryptedData || Buffer.from(Array(80).fill(0xdd)))
-      .build()
+      .build();
   },
 
   /**
@@ -561,14 +575,18 @@ export const HapMessageUtils = {
       .method(Method.PairSetup)
       .seqNo(State.M6)
       .encryptedData(encryptedData || Buffer.from(Array(80).fill(0xee)))
-      .build()
+      .build();
   },
 
   /**
    * Build an error message
    */
   buildError(method: Method, seqNo: State, errorCode: ErrorCode): Buffer {
-    return new TlvBuilder().method(method).seqNo(seqNo).error(errorCode).build()
+    return new TlvBuilder()
+      .method(method)
+      .seqNo(seqNo)
+      .error(errorCode)
+      .build();
   },
 
   /**
@@ -576,22 +594,22 @@ export const HapMessageUtils = {
    */
   validateMessage(tlvData: TlvData, expected: any): boolean {
     for (const [key, expectedValue] of Object.entries(expected)) {
-      const tlvKey = this.getTlvKeyForProperty(key)
+      const tlvKey = this.getTlvKeyForProperty(key);
       if (!tlvData[tlvKey]) {
-        return false
+        return false;
       }
 
-      if (typeof expectedValue === 'number') {
+      if (typeof expectedValue === "number") {
         if (tlvData[tlvKey].readUInt8(0) !== expectedValue) {
-          return false
+          return false;
         }
       } else if (Buffer.isBuffer(expectedValue)) {
         if (!tlvData[tlvKey].equals(expectedValue)) {
-          return false
+          return false;
         }
       }
     }
-    return true
+    return true;
   },
 
   /**
@@ -610,7 +628,7 @@ export const HapMessageUtils = {
       signature: TlvValue.Signature,
       certificate: TlvValue.Certificate,
       permissions: TlvValue.Permissions,
-    }
-    return mapping[property] || 0
+    };
+    return mapping[property] || 0;
   },
-} as const
+} as const;

@@ -5,119 +5,145 @@
 // source: SetNowPlayingClientMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { NowPlayingClient } from './NowPlayingClient'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { NowPlayingClient } from "./NowPlayingClient";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SetNowPlayingClientMessage {
-  client?: NowPlayingClient | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  client?: NowPlayingClient | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSetNowPlayingClientMessage(): SetNowPlayingClientMessage {
-  return { client: undefined, _unknownFields: {} }
+  return { client: undefined, _unknownFields: {} };
 }
 
-export const SetNowPlayingClientMessage: MessageFns<SetNowPlayingClientMessage> = {
-  encode(
-    message: SetNowPlayingClientMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.client !== undefined) {
-      NowPlayingClient.encode(message.client, writer.uint32(10).fork()).join()
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const SetNowPlayingClientMessage: MessageFns<SetNowPlayingClientMessage> =
+  {
+    encode(
+      message: SetNowPlayingClientMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.client !== undefined) {
+        NowPlayingClient.encode(
+          message.client,
+          writer.uint32(10).fork()
+        ).join();
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SetNowPlayingClientMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSetNowPlayingClientMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.client = NowPlayingClient.decode(reader, reader.uint32())
-          continue
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): SetNowPlayingClientMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSetNowPlayingClientMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.client = NowPlayingClient.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
+        }
       }
-      const buf = reader.skip(tag & 7)
+      return message;
+    },
 
-      const list = message._unknownFields![tag]
+    fromJSON(object: any): SetNowPlayingClientMessage {
+      return {
+        client: isSet(object.client)
+          ? NowPlayingClient.fromJSON(object.client)
+          : undefined,
+      };
+    },
 
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+    toJSON(message: SetNowPlayingClientMessage): unknown {
+      const obj: any = {};
+      if (message.client !== undefined) {
+        obj.client = NowPlayingClient.toJSON(message.client);
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): SetNowPlayingClientMessage {
-    return { client: isSet(object.client) ? NowPlayingClient.fromJSON(object.client) : undefined }
-  },
+    create<I extends Exact<DeepPartial<SetNowPlayingClientMessage>, I>>(
+      base?: I
+    ): SetNowPlayingClientMessage {
+      return SetNowPlayingClientMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<SetNowPlayingClientMessage>, I>>(
+      object: I
+    ): SetNowPlayingClientMessage {
+      const message = createBaseSetNowPlayingClientMessage();
+      message.client =
+        object.client !== undefined && object.client !== null
+          ? NowPlayingClient.fromPartial(object.client)
+          : undefined;
+      return message;
+    },
+  };
 
-  toJSON(message: SetNowPlayingClientMessage): unknown {
-    const obj: any = {}
-    if (message.client !== undefined) {
-      obj.client = NowPlayingClient.toJSON(message.client)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<SetNowPlayingClientMessage>, I>>(
-    base?: I
-  ): SetNowPlayingClientMessage {
-    return SetNowPlayingClientMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<SetNowPlayingClientMessage>, I>>(
-    object: I
-  ): SetNowPlayingClientMessage {
-    const message = createBaseSetNowPlayingClientMessage()
-    message.client =
-      object.client !== undefined && object.client !== null
-        ? NowPlayingClient.fromPartial(object.client)
-        : undefined
-    return message
-  },
-}
-
-export const setNowPlayingClientMessage: Extension<SetNowPlayingClientMessage | undefined> = {
+export const setNowPlayingClientMessage: Extension<
+  SetNowPlayingClientMessage | undefined
+> = {
   number: 50,
   tag: 402,
   repeated: false,
   packed: false,
   encode: (value: SetNowPlayingClientMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SetNowPlayingClientMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SetNowPlayingClientMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SetNowPlayingClientMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SetNowPlayingClientMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SetNowPlayingClientMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SetNowPlayingClientMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -127,37 +153,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

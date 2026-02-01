@@ -1,9 +1,9 @@
-import mdns from 'multicast-dns'
-import type { Answer } from 'dns-packet'
+import mdns from "multicast-dns";
+import type { Answer } from "dns-packet";
 
 export interface MDNSResponse {
-  answers: Answer[]
-  additionals: Answer[]
+  answers: Answer[];
+  additionals: Answer[];
 }
 
 /**
@@ -11,45 +11,45 @@ export interface MDNSResponse {
  * Sends queries and listens for responses on the network
  */
 export class MDNSNetworkDiscovery {
-  private mdns: any
-  private onResponse: (response: MDNSResponse) => void
-  private isRunning = false
+  private mdns: any;
+  private onResponse: (response: MDNSResponse) => void;
+  private isRunning = false;
 
   constructor(onResponse: (response: MDNSResponse) => void) {
-    this.onResponse = onResponse
+    this.onResponse = onResponse;
   }
 
   /**
    * Start listening for mDNS responses
    */
   start(): void {
-    if (this.isRunning) return
+    if (this.isRunning) return;
 
-    this.mdns = mdns()
-    this.isRunning = true
+    this.mdns = mdns();
+    this.isRunning = true;
 
     // Listen for responses
-    this.mdns.on('response', (packet: any) => {
+    this.mdns.on("response", (packet: any) => {
       this.onResponse({
         answers: packet.answers || [],
         additionals: packet.additionals || [],
-      })
-    })
+      });
+    });
 
-    this.mdns.on('error', (err: Error) => {
-      console.error('mDNS error:', err)
-    })
+    this.mdns.on("error", (err: Error) => {
+      console.error("mDNS error:", err);
+    });
   }
 
   /**
    * Stop listening and cleanup
    */
   stop(): void {
-    if (!this.isRunning) return
+    if (!this.isRunning) return;
 
-    this.mdns?.destroy()
-    this.mdns = null
-    this.isRunning = false
+    this.mdns?.destroy();
+    this.mdns = null;
+    this.isRunning = false;
   }
 
   /**
@@ -58,7 +58,7 @@ export class MDNSNetworkDiscovery {
    */
   query(serviceTypes: string[], port?: number, address?: string): void {
     if (!this.isRunning) {
-      throw new Error('MDNSNetworkDiscovery not started')
+      throw new Error("MDNSNetworkDiscovery not started");
     }
 
     for (const serviceType of serviceTypes) {
@@ -66,15 +66,15 @@ export class MDNSNetworkDiscovery {
         questions: [
           {
             name: serviceType,
-            type: 'PTR',
+            type: "PTR",
           },
         ],
-      }
+      };
 
       if (port && address) {
-        this.mdns.query(packet, { port, address })
+        this.mdns.query(packet, { port, address });
       } else {
-        this.mdns.query(packet)
+        this.mdns.query(packet);
       }
     }
   }
@@ -83,6 +83,6 @@ export class MDNSNetworkDiscovery {
    * Check if discovery is running
    */
   get running(): boolean {
-    return this.isRunning
+    return this.isRunning;
   }
 }

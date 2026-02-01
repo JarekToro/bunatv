@@ -3,17 +3,17 @@
  * Handles formatted output for the CLI with proper stderr/stdout separation
  */
 
-import { colors } from '@cliffy/ansi/colors'
-import { Table } from '@cliffy/table'
-import { Spinner } from 'picospinner'
-import type { OutputFormat } from '../cli'
-import { createLogger } from '@/logging/logging.ts'
+import { colors } from "@cliffy/ansi/colors";
+import { Table } from "@cliffy/table";
+import { Spinner } from "picospinner";
+import type { OutputFormat } from "../cli";
+import { createLogger } from "@/logging/logging.ts";
 
 export interface OutputOptions {
-  format: OutputFormat
-  verbose: boolean
-  quiet: boolean
-  noColor: boolean
+  format: OutputFormat;
+  verbose: boolean;
+  quiet: boolean;
+  noColor: boolean;
 }
 
 const logger = createLogger("bunatv:cli:output");
@@ -24,21 +24,21 @@ const logger = createLogger("bunatv:cli:output");
  * - Only final results go to stdout via result()
  */
 export class CliOutput {
-  private options: OutputOptions
-  private spinner?: Spinner
+  private options: OutputOptions;
+  private spinner?: Spinner;
 
   constructor(options: Partial<OutputOptions> = {}) {
     this.options = {
-      format: options.format || 'text',
+      format: options.format || "text",
       verbose: options.verbose || false,
       quiet: options.quiet || false,
       noColor: options.noColor || false,
-    }
+    };
 
     // Disable colors if requested
     if (this.options.noColor) {
       // @cliffy/ansi respects NO_COLOR env variable
-      process.env.NO_COLOR = '1'
+      process.env.NO_COLOR = "1";
     }
   }
 
@@ -47,9 +47,9 @@ export class CliOutput {
    */
   info(message: string): void {
     if (!this.options.quiet) {
-      console.error(message)
+      console.error(message);
     }
-    logger.info(message)
+    logger.info(message);
   }
 
   /**
@@ -57,20 +57,24 @@ export class CliOutput {
    */
   success(message: string): void {
     if (!this.options.quiet) {
-      const formatted = this.options.noColor ? `✅ ${message}` : colors.green(`✅ ${message}`)
-      console.error(formatted)
+      const formatted = this.options.noColor
+        ? `✅ ${message}`
+        : colors.green(`✅ ${message}`);
+      console.error(formatted);
     }
-    logger.info(message)
+    logger.info(message);
   }
 
   /**
    * Log an error message to stderr
    */
   error(message: string | Error): void {
-    const text = message instanceof Error ? message.message : message
-    const formatted = this.options.noColor ? `❌ ${text}` : colors.red(`❌ ${text}`)
-    console.error(formatted)
-    logger.error(text)
+    const text = message instanceof Error ? message.message : message;
+    const formatted = this.options.noColor
+      ? `❌ ${text}`
+      : colors.red(`❌ ${text}`);
+    console.error(formatted);
+    logger.error(text);
   }
 
   /**
@@ -78,10 +82,12 @@ export class CliOutput {
    */
   warn(message: string): void {
     if (!this.options.quiet) {
-      const formatted = this.options.noColor ? `⚠️  ${message}` : colors.yellow(`⚠️  ${message}`)
-      console.error(formatted)
+      const formatted = this.options.noColor
+        ? `⚠️  ${message}`
+        : colors.yellow(`⚠️  ${message}`);
+      console.error(formatted);
     }
-    logger.warn(message)
+    logger.warn(message);
   }
 
   /**
@@ -91,10 +97,10 @@ export class CliOutput {
     if (this.options.verbose && !this.options.quiet) {
       const formatted = this.options.noColor
         ? `[DEBUG] ${message}`
-        : colors.gray(`[DEBUG] ${message}`)
-      console.error(formatted)
+        : colors.gray(`[DEBUG] ${message}`);
+      console.error(formatted);
     }
-    logger.debug(message)
+    logger.debug(message);
   }
 
   /**
@@ -102,31 +108,33 @@ export class CliOutput {
    */
   status(emoji: string, message: string, detail?: string): void {
     if (!this.options.quiet) {
-      let formatted = `${emoji} ${message}`
+      let formatted = `${emoji} ${message}`;
       if (detail && this.options.verbose) {
-        formatted += this.options.noColor ? ` - ${detail}` : colors.gray(` - ${detail}`)
+        formatted += this.options.noColor
+          ? ` - ${detail}`
+          : colors.gray(` - ${detail}`);
       }
-      console.error(formatted)
+      console.error(formatted);
     }
-    logger.info(message)
+    logger.info(message);
   }
 
   newLine(): void {
     if (!this.options.quiet) {
-      console.error('')
+      console.error("");
     }
   }
   /**
    * Start a loading spinner
    */
   startSpinner(message: string): void {
-    if (!this.options.quiet && this.options.format !== 'json') {
-      this.newLine()
-      this.stopSpinner() // Stop any existing spinner
-      this.spinner = new Spinner(message, { disableNewLineEnding: true })
-      this.spinner.start()
+    if (!this.options.quiet && this.options.format !== "json") {
+      this.newLine();
+      this.stopSpinner(); // Stop any existing spinner
+      this.spinner = new Spinner(message, { disableNewLineEnding: true });
+      this.spinner.start();
     }
-    logger.info({ spinner: 'start' }, message)
+    logger.info({ spinner: "start" }, message);
   }
 
   /**
@@ -134,11 +142,11 @@ export class CliOutput {
    */
   stopSpinner(): void {
     if (this.spinner) {
-      this.newLine()
-      this.spinner.stop()
-      this.spinner = undefined
+      this.newLine();
+      this.spinner.stop();
+      this.spinner = undefined;
     }
-    logger.info({ spinner: 'stop' }, this.spinner)
+    logger.info({ spinner: "stop" }, this.spinner);
   }
 
   /**
@@ -146,12 +154,12 @@ export class CliOutput {
    */
   succeedSpinner(message?: string): void {
     if (this.spinner) {
-      this.newLine()
-      this.spinner.succeed(message)
-      this.spinner = undefined
-      logger.info({ spinner: 'succeed' }, message || '')
+      this.newLine();
+      this.spinner.succeed(message);
+      this.spinner = undefined;
+      logger.info({ spinner: "succeed" }, message || "");
     } else if (message) {
-      this.success(message)
+      this.success(message);
     }
   }
 
@@ -160,11 +168,11 @@ export class CliOutput {
    */
   failSpinner(message?: string): void {
     if (this.spinner) {
-      this.spinner.fail(message)
-      this.spinner = undefined
-      logger.info({ spinner: 'fail' }, message || '')
+      this.spinner.fail(message);
+      this.spinner = undefined;
+      logger.info({ spinner: "fail" }, message || "");
     } else if (message) {
-      this.error(message)
+      this.error(message);
     }
   }
 
@@ -173,19 +181,19 @@ export class CliOutput {
    * Format is determined by the global --output option
    */
   result(data: unknown): void {
-    logger.info({ outputFormat: this.options.format }, 'Outputting result')
+    logger.info({ outputFormat: this.options.format }, "Outputting result");
     switch (this.options.format) {
-      case 'json':
-        this.outputJson(data)
-        break
+      case "json":
+        this.outputJson(data);
+        break;
 
-      case 'table':
-        this.outputTable(data)
-        break
+      case "table":
+        this.outputTable(data);
+        break;
 
       default: // text
-        this.outputText(data)
-        break
+        this.outputText(data);
+        break;
     }
   }
 
@@ -193,8 +201,8 @@ export class CliOutput {
    * Output as JSON to stdout
    */
   private outputJson(data: unknown): void {
-    console.log(JSON.stringify(data, null, 2))
-    logger.info(data, 'Outputted JSON result')
+    console.log(JSON.stringify(data, null, 2));
+    logger.info(data, "Outputted JSON result");
   }
 
   /**
@@ -203,53 +211,53 @@ export class CliOutput {
   private outputTable(data: unknown): void {
     if (!Array.isArray(data)) {
       // For non-array data, create a key-value table
-      if (typeof data === 'object' && data !== null) {
-        const table = new Table()
+      if (typeof data === "object" && data !== null) {
+        const table = new Table();
         Object.entries(data).forEach(([key, value]) => {
           table.push([
             this.options.noColor ? key : colors.bold(key),
-            typeof value === 'object' ? JSON.stringify(value) : String(value),
-          ])
-        })
-        console.log(table.toString())
-        logger.info(data, 'Outputted key-value table result')
+            typeof value === "object" ? JSON.stringify(value) : String(value),
+          ]);
+        });
+        console.log(table.toString());
+        logger.info(data, "Outputted key-value table result");
       } else {
-        console.log(String(data))
-        logger.info(data, 'Outputted single value result')
+        console.log(String(data));
+        logger.info(data, "Outputted single value result");
       }
-      return
+      return;
     }
 
     if (data.length === 0) {
-      console.log('No data to display')
-      logger.info('Outputted empty table result')
-      return
+      console.log("No data to display");
+      logger.info("Outputted empty table result");
+      return;
     }
 
     // For array data, create a standard table
-    const firstItem = data[0]
-    if (typeof firstItem === 'object' && firstItem !== null) {
-      const headers = Object.keys(firstItem)
+    const firstItem = data[0];
+    if (typeof firstItem === "object" && firstItem !== null) {
+      const headers = Object.keys(firstItem);
       const table = new Table()
-        .header(headers.map(h => (this.options.noColor ? h : colors.bold(h))))
+        .header(headers.map((h) => (this.options.noColor ? h : colors.bold(h))))
         .body(
-          data.map(item =>
-            headers.map(h => {
-              const value = (item as any)[h]
+          data.map((item) =>
+            headers.map((h) => {
+              const value = (item as any)[h];
               return value === null || value === undefined
-                ? ''
-                : typeof value === 'object'
+                ? ""
+                : typeof value === "object"
                   ? JSON.stringify(value)
-                  : String(value)
+                  : String(value);
             })
           )
-        )
-      console.log(table.toString())
-      logger.info(data, 'Outputted array table result')
+        );
+      console.log(table.toString());
+      logger.info(data, "Outputted array table result");
     } else {
       // Simple array of primitives
-      data.forEach(item => console.log(String(item)))
-      logger.info(data, 'Outputted array of primitives result')
+      data.forEach((item) => console.log(String(item)));
+      logger.info(data, "Outputted array of primitives result");
     }
   }
 
@@ -258,19 +266,19 @@ export class CliOutput {
    */
   private outputText(data: unknown): void {
     if (data === null || data === undefined) {
-      return
+      return;
     }
 
-    if (typeof data === 'string') {
-      console.log(data)
-      logger.info({ data }, 'Outputted string result')
+    if (typeof data === "string") {
+      console.log(data);
+      logger.info({ data }, "Outputted string result");
     } else if (Array.isArray(data)) {
       data.forEach((item, index) => {
-        if (index > 0) console.log('') // Empty line between items
-        this.outputTextItem(item)
-      })
+        if (index > 0) console.log(""); // Empty line between items
+        this.outputTextItem(item);
+      });
     } else {
-      this.outputTextItem(data)
+      this.outputTextItem(data);
     }
   }
 
@@ -278,28 +286,34 @@ export class CliOutput {
    * Format and output a single item as text
    */
   private outputTextItem(item: unknown): void {
-    if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
-      console.log(String(item))
-      logger.info({ item }, 'Outputted primitive result')
-    } else if (typeof item === 'object' && item !== null) {
+    if (
+      typeof item === "string" ||
+      typeof item === "number" ||
+      typeof item === "boolean"
+    ) {
+      console.log(String(item));
+      logger.info({ item }, "Outputted primitive result");
+    } else if (typeof item === "object" && item !== null) {
       // Format object as indented key-value pairs
       Object.entries(item).forEach(([key, value]) => {
-        const formattedKey = this.options.noColor ? `${key}:` : colors.bold(`${key}:`)
+        const formattedKey = this.options.noColor
+          ? `${key}:`
+          : colors.bold(`${key}:`);
 
         const formattedValue =
-          typeof value === 'object'
+          typeof value === "object"
             ? JSON.stringify(value, null, 2)
-                .split('\n')
+                .split("\n")
                 .map((line, i) => (i === 0 ? line : `  ${line}`))
-                .join('\n')
-            : String(value)
+                .join("\n")
+            : String(value);
 
-        console.log(`  ${formattedKey} ${formattedValue}`)
-        logger.info({ [key]: value }, 'Outputted object key-value pair')
-      })
+        console.log(`  ${formattedKey} ${formattedValue}`);
+        logger.info({ [key]: value }, "Outputted object key-value pair");
+      });
     } else {
-      console.log(String(item))
-      logger.info({ item }, 'Outputted unknown type result')
+      console.log(String(item));
+      logger.info({ item }, "Outputted unknown type result");
     }
   }
 
@@ -308,12 +322,12 @@ export class CliOutput {
    */
   section(title: string): void {
     if (!this.options.quiet) {
-      const separator = '='.repeat(title.length)
+      const separator = "=".repeat(title.length);
       const formatted = this.options.noColor
         ? `\n${title}\n${separator}`
-        : `\n${colors.bold.underline(title)}`
-      console.error(formatted)
-      logger.info({ section: title }, 'Outputted section header')
+        : `\n${colors.bold.underline(title)}`;
+      console.error(formatted);
+      logger.info({ section: title }, "Outputted section header");
     }
   }
 
@@ -322,9 +336,9 @@ export class CliOutput {
    */
   listItem(text: string, level: number = 1): void {
     if (!this.options.quiet) {
-      const indent = '  '.repeat(level)
-      console.error(`${indent}• ${text}`)
-      logger.info({ listItem: text, level }, 'Outputted list item')
+      const indent = "  ".repeat(level);
+      console.error(`${indent}• ${text}`);
+      logger.info({ listItem: text, level }, "Outputted list item");
     }
   }
 
@@ -332,21 +346,21 @@ export class CliOutput {
    * Highlight important text
    */
   highlight(text: string): string {
-    return this.options.noColor ? text : colors.bold.cyan(text)
+    return this.options.noColor ? text : colors.bold.cyan(text);
   }
 
   /**
    * Dim less important text
    */
   dim(text: string): string {
-    return this.options.noColor ? text : colors.gray(text)
+    return this.options.noColor ? text : colors.gray(text);
   }
 
   /**
    * Check if verbose mode is enabled
    */
   isVerbose(): boolean {
-    return this.options.verbose
+    return this.options.verbose;
   }
 }
 
@@ -354,5 +368,5 @@ export class CliOutput {
  * Create an output handler with the given options
  */
 export function createOutput(options: Partial<OutputOptions> = {}): CliOutput {
-  return new CliOutput(options)
+  return new CliOutput(options);
 }

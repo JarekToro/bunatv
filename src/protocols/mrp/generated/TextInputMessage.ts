@@ -5,12 +5,12 @@
 // source: TextInputMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface ActionType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum ActionType_Enum {
@@ -26,218 +26,238 @@ export enum ActionType_Enum {
 export function actionType_EnumFromJSON(object: any): ActionType_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return ActionType_Enum.Unknown
+    case "Unknown":
+      return ActionType_Enum.Unknown;
     case 1:
-    case 'Insert':
-      return ActionType_Enum.Insert
+    case "Insert":
+      return ActionType_Enum.Insert;
     case 2:
-    case 'Set':
-      return ActionType_Enum.Set
+    case "Set":
+      return ActionType_Enum.Set;
     case 3:
-    case 'Delete':
-      return ActionType_Enum.Delete
+    case "Delete":
+      return ActionType_Enum.Delete;
     case 4:
-    case 'ClearAction':
-      return ActionType_Enum.ClearAction
+    case "ClearAction":
+      return ActionType_Enum.ClearAction;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return ActionType_Enum.UNRECOGNIZED
+      return ActionType_Enum.UNRECOGNIZED;
   }
 }
 
 export function actionType_EnumToJSON(object: ActionType_Enum): string {
   switch (object) {
     case ActionType_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case ActionType_Enum.Insert:
-      return 'Insert'
+      return "Insert";
     case ActionType_Enum.Set:
-      return 'Set'
+      return "Set";
     case ActionType_Enum.Delete:
-      return 'Delete'
+      return "Delete";
     case ActionType_Enum.ClearAction:
-      return 'ClearAction'
+      return "ClearAction";
     case ActionType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface TextInputMessage {
-  timestamp?: number | undefined
-  text?: string | undefined
-  actionType?: ActionType_Enum | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  timestamp?: number | undefined;
+  text?: string | undefined;
+  actionType?: ActionType_Enum | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseActionType(): ActionType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const ActionType: MessageFns<ActionType> = {
-  encode(message: ActionType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ActionType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ActionType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseActionType()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseActionType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): ActionType {
-    return {}
+    return {};
   },
 
   toJSON(_: ActionType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<ActionType>, I>>(base?: I): ActionType {
-    return ActionType.fromPartial(base ?? ({} as any))
+    return ActionType.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<ActionType>, I>>(_: I): ActionType {
-    const message = createBaseActionType()
-    return message
+    const message = createBaseActionType();
+    return message;
   },
-}
+};
 
 function createBaseTextInputMessage(): TextInputMessage {
-  return { timestamp: 0, text: '', actionType: 0, _unknownFields: {} }
+  return { timestamp: 0, text: "", actionType: 0, _unknownFields: {} };
 }
 
 export const TextInputMessage: MessageFns<TextInputMessage> = {
-  encode(message: TextInputMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TextInputMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      writer.uint32(9).double(message.timestamp)
+      writer.uint32(9).double(message.timestamp);
     }
-    if (message.text !== undefined && message.text !== '') {
-      writer.uint32(18).string(message.text)
+    if (message.text !== undefined && message.text !== "") {
+      writer.uint32(18).string(message.text);
     }
     if (message.actionType !== undefined && message.actionType !== 0) {
-      writer.uint32(24).int32(message.actionType)
+      writer.uint32(24).int32(message.actionType);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TextInputMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseTextInputMessage()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTextInputMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 9) {
-            break
+            break;
           }
 
-          message.timestamp = reader.double()
-          continue
+          message.timestamp = reader.double();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.text = reader.string()
-          continue
+          message.text = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.actionType = reader.int32() as any
-          continue
+          message.actionType = reader.int32() as any;
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): TextInputMessage {
     return {
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      text: isSet(object.text) ? globalThis.String(object.text) : '',
-      actionType: isSet(object.actionType) ? actionType_EnumFromJSON(object.actionType) : 0,
-    }
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
+      text: isSet(object.text) ? globalThis.String(object.text) : "",
+      actionType: isSet(object.actionType)
+        ? actionType_EnumFromJSON(object.actionType)
+        : 0,
+    };
   },
 
   toJSON(message: TextInputMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      obj.timestamp = message.timestamp
+      obj.timestamp = message.timestamp;
     }
-    if (message.text !== undefined && message.text !== '') {
-      obj.text = message.text
+    if (message.text !== undefined && message.text !== "") {
+      obj.text = message.text;
     }
     if (message.actionType !== undefined && message.actionType !== 0) {
-      obj.actionType = actionType_EnumToJSON(message.actionType)
+      obj.actionType = actionType_EnumToJSON(message.actionType);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<TextInputMessage>, I>>(base?: I): TextInputMessage {
-    return TextInputMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<TextInputMessage>, I>>(
+    base?: I
+  ): TextInputMessage {
+    return TextInputMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TextInputMessage>, I>>(object: I): TextInputMessage {
-    const message = createBaseTextInputMessage()
-    message.timestamp = object.timestamp ?? 0
-    message.text = object.text ?? ''
-    message.actionType = object.actionType ?? 0
-    return message
+  fromPartial<I extends Exact<DeepPartial<TextInputMessage>, I>>(
+    object: I
+  ): TextInputMessage {
+    const message = createBaseTextInputMessage();
+    message.timestamp = object.timestamp ?? 0;
+    message.text = object.text ?? "";
+    message.actionType = object.actionType ?? 0;
+    return message;
   },
-}
+};
 
 export const textInputMessage: Extension<TextInputMessage | undefined> = {
   number: 30,
@@ -245,19 +265,26 @@ export const textInputMessage: Extension<TextInputMessage | undefined> = {
   repeated: false,
   packed: false,
   encode: (value: TextInputMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    TextInputMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    TextInputMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
   decode: (tag: number, input: Uint8Array[]): TextInputMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return TextInputMessage.decode(reader, reader.uint32())
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return TextInputMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -267,37 +294,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

@@ -4,21 +4,21 @@ import {
   type CompanionRequestOpackMessage,
   type CompanionResponseOpackMessage,
   createCompanionCommand,
-} from '@/protocols/companion/messages/CompanionOpackMessage.ts'
+} from "@/protocols/companion/messages/CompanionOpackMessage.ts";
 
 export interface SessionStopRequestContent {
-  _srvT: string
-  _sid: bigint // Combined 64-bit session ID
+  _srvT: string;
+  _sid: bigint; // Combined 64-bit session ID
 }
 
 export interface SessionStopRequest extends CompanionRequestOpackMessage {
-  _i: '_sessionStop'
-  _c: SessionStopRequestContent
+  _i: "_sessionStop";
+  _c: SessionStopRequestContent;
 }
 
 export interface SessionStopResponse extends CompanionResponseOpackMessage {
-  _i: '_sessionStop'
-  _c: {}
+  _i: "_sessionStop";
+  _c: {};
 }
 
 /**
@@ -29,12 +29,12 @@ export function createSessionStopCommand(
   sessionId: bigint
 ): CompanionCommand<SessionStopRequest, SessionStopResponse, void> {
   return createCompanionCommand({
-    identifier: '_sessionStop',
+    identifier: "_sessionStop",
     name: `SessionStop:${serviceType}:${sessionId}`,
     buildContent: () => ({
       _srvT: serviceType,
       _sid: sessionId,
     }),
     parse: () => undefined,
-  })
+  });
 }

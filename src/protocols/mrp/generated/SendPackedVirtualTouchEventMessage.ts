@@ -5,9 +5,9 @@
 // source: SendPackedVirtualTouchEventMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SendPackedVirtualTouchEventMessage {
   /**
@@ -15,8 +15,8 @@ export interface SendPackedVirtualTouchEventMessage {
    * and finger stored as a byte array. Each value is written as 16bit little
    * endian integers.
    */
-  data?: Buffer | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  data?: Buffer | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 /** Corresponds to "phase" in data */
@@ -34,24 +34,24 @@ export function sendPackedVirtualTouchEventMessage_PhaseFromJSON(
 ): SendPackedVirtualTouchEventMessage_Phase {
   switch (object) {
     case 1:
-    case 'Began':
-      return SendPackedVirtualTouchEventMessage_Phase.Began
+    case "Began":
+      return SendPackedVirtualTouchEventMessage_Phase.Began;
     case 2:
-    case 'Moved':
-      return SendPackedVirtualTouchEventMessage_Phase.Moved
+    case "Moved":
+      return SendPackedVirtualTouchEventMessage_Phase.Moved;
     case 3:
-    case 'Stationary':
-      return SendPackedVirtualTouchEventMessage_Phase.Stationary
+    case "Stationary":
+      return SendPackedVirtualTouchEventMessage_Phase.Stationary;
     case 4:
-    case 'Ended':
-      return SendPackedVirtualTouchEventMessage_Phase.Ended
+    case "Ended":
+      return SendPackedVirtualTouchEventMessage_Phase.Ended;
     case 5:
-    case 'Cancelled':
-      return SendPackedVirtualTouchEventMessage_Phase.Cancelled
+    case "Cancelled":
+      return SendPackedVirtualTouchEventMessage_Phase.Cancelled;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return SendPackedVirtualTouchEventMessage_Phase.UNRECOGNIZED
+      return SendPackedVirtualTouchEventMessage_Phase.UNRECOGNIZED;
   }
 }
 
@@ -60,103 +60,114 @@ export function sendPackedVirtualTouchEventMessage_PhaseToJSON(
 ): string {
   switch (object) {
     case SendPackedVirtualTouchEventMessage_Phase.Began:
-      return 'Began'
+      return "Began";
     case SendPackedVirtualTouchEventMessage_Phase.Moved:
-      return 'Moved'
+      return "Moved";
     case SendPackedVirtualTouchEventMessage_Phase.Stationary:
-      return 'Stationary'
+      return "Stationary";
     case SendPackedVirtualTouchEventMessage_Phase.Ended:
-      return 'Ended'
+      return "Ended";
     case SendPackedVirtualTouchEventMessage_Phase.Cancelled:
-      return 'Cancelled'
+      return "Cancelled";
     case SendPackedVirtualTouchEventMessage_Phase.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 function createBaseSendPackedVirtualTouchEventMessage(): SendPackedVirtualTouchEventMessage {
-  return { data: Buffer.alloc(0), _unknownFields: {} }
+  return { data: Buffer.alloc(0), _unknownFields: {} };
 }
 
-export const SendPackedVirtualTouchEventMessage: MessageFns<SendPackedVirtualTouchEventMessage> = {
-  encode(
-    message: SendPackedVirtualTouchEventMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.data !== undefined && message.data.length !== 0) {
-      writer.uint32(10).bytes(message.data)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const SendPackedVirtualTouchEventMessage: MessageFns<SendPackedVirtualTouchEventMessage> =
+  {
+    encode(
+      message: SendPackedVirtualTouchEventMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.data !== undefined && message.data.length !== 0) {
+        writer.uint32(10).bytes(message.data);
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): SendPackedVirtualTouchEventMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendPackedVirtualTouchEventMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.data = Buffer.from(reader.bytes())
-          continue
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): SendPackedVirtualTouchEventMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseSendPackedVirtualTouchEventMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.data = Buffer.from(reader.bytes());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
+        }
       }
-      const buf = reader.skip(tag & 7)
+      return message;
+    },
 
-      const list = message._unknownFields![tag]
+    fromJSON(object: any): SendPackedVirtualTouchEventMessage {
+      return {
+        data: isSet(object.data)
+          ? Buffer.from(bytesFromBase64(object.data))
+          : Buffer.alloc(0),
+      };
+    },
 
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+    toJSON(message: SendPackedVirtualTouchEventMessage): unknown {
+      const obj: any = {};
+      if (message.data !== undefined && message.data.length !== 0) {
+        obj.data = base64FromBytes(message.data);
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): SendPackedVirtualTouchEventMessage {
-    return {
-      data: isSet(object.data) ? Buffer.from(bytesFromBase64(object.data)) : Buffer.alloc(0),
-    }
-  },
-
-  toJSON(message: SendPackedVirtualTouchEventMessage): unknown {
-    const obj: any = {}
-    if (message.data !== undefined && message.data.length !== 0) {
-      obj.data = base64FromBytes(message.data)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<SendPackedVirtualTouchEventMessage>, I>>(
-    base?: I
-  ): SendPackedVirtualTouchEventMessage {
-    return SendPackedVirtualTouchEventMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<SendPackedVirtualTouchEventMessage>, I>>(
-    object: I
-  ): SendPackedVirtualTouchEventMessage {
-    const message = createBaseSendPackedVirtualTouchEventMessage()
-    message.data = object.data ?? Buffer.alloc(0)
-    return message
-  },
-}
+    create<I extends Exact<DeepPartial<SendPackedVirtualTouchEventMessage>, I>>(
+      base?: I
+    ): SendPackedVirtualTouchEventMessage {
+      return SendPackedVirtualTouchEventMessage.fromPartial(
+        base ?? ({} as any)
+      );
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<SendPackedVirtualTouchEventMessage>, I>,
+    >(object: I): SendPackedVirtualTouchEventMessage {
+      const message = createBaseSendPackedVirtualTouchEventMessage();
+      message.data = object.data ?? Buffer.alloc(0);
+      return message;
+    },
+  };
 
 export const sendPackedVirtualTouchEventMessage: Extension<
   SendPackedVirtualTouchEventMessage | undefined
@@ -165,28 +176,40 @@ export const sendPackedVirtualTouchEventMessage: Extension<
   tag: 378,
   repeated: false,
   packed: false,
-  encode: (value: SendPackedVirtualTouchEventMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SendPackedVirtualTouchEventMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+  encode: (
+    value: SendPackedVirtualTouchEventMessage | undefined
+  ): Uint8Array[] => {
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SendPackedVirtualTouchEventMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SendPackedVirtualTouchEventMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SendPackedVirtualTouchEventMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SendPackedVirtualTouchEventMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SendPackedVirtualTouchEventMessage.decode(reader, reader.uint32());
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -196,37 +219,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

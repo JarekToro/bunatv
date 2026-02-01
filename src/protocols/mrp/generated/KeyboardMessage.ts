@@ -5,12 +5,12 @@
 // source: KeyboardMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface KeyboardState {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum KeyboardState_Enum {
@@ -27,57 +27,57 @@ export enum KeyboardState_Enum {
 export function keyboardState_EnumFromJSON(object: any): KeyboardState_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return KeyboardState_Enum.Unknown
+    case "Unknown":
+      return KeyboardState_Enum.Unknown;
     case 1:
-    case 'NotEditing':
-      return KeyboardState_Enum.NotEditing
+    case "NotEditing":
+      return KeyboardState_Enum.NotEditing;
     case 2:
-    case 'DidBeginEditing':
-      return KeyboardState_Enum.DidBeginEditing
+    case "DidBeginEditing":
+      return KeyboardState_Enum.DidBeginEditing;
     case 3:
-    case 'Editing':
-      return KeyboardState_Enum.Editing
+    case "Editing":
+      return KeyboardState_Enum.Editing;
     case 4:
-    case 'TextDidChange':
-      return KeyboardState_Enum.TextDidChange
+    case "TextDidChange":
+      return KeyboardState_Enum.TextDidChange;
     case 5:
-    case 'DidEndEditing':
-      return KeyboardState_Enum.DidEndEditing
+    case "DidEndEditing":
+      return KeyboardState_Enum.DidEndEditing;
     case 6:
-    case 'Response':
-      return KeyboardState_Enum.Response
+    case "Response":
+      return KeyboardState_Enum.Response;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return KeyboardState_Enum.UNRECOGNIZED
+      return KeyboardState_Enum.UNRECOGNIZED;
   }
 }
 
 export function keyboardState_EnumToJSON(object: KeyboardState_Enum): string {
   switch (object) {
     case KeyboardState_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case KeyboardState_Enum.NotEditing:
-      return 'NotEditing'
+      return "NotEditing";
     case KeyboardState_Enum.DidBeginEditing:
-      return 'DidBeginEditing'
+      return "DidBeginEditing";
     case KeyboardState_Enum.Editing:
-      return 'Editing'
+      return "Editing";
     case KeyboardState_Enum.TextDidChange:
-      return 'TextDidChange'
+      return "TextDidChange";
     case KeyboardState_Enum.DidEndEditing:
-      return 'DidEndEditing'
+      return "DidEndEditing";
     case KeyboardState_Enum.Response:
-      return 'Response'
+      return "Response";
     case KeyboardState_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface AutocapitalizationType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum AutocapitalizationType_Enum {
@@ -88,45 +88,49 @@ export enum AutocapitalizationType_Enum {
   UNRECOGNIZED = -1,
 }
 
-export function autocapitalizationType_EnumFromJSON(object: any): AutocapitalizationType_Enum {
+export function autocapitalizationType_EnumFromJSON(
+  object: any
+): AutocapitalizationType_Enum {
   switch (object) {
     case 0:
-    case 'None':
-      return AutocapitalizationType_Enum.None
+    case "None":
+      return AutocapitalizationType_Enum.None;
     case 1:
-    case 'Words':
-      return AutocapitalizationType_Enum.Words
+    case "Words":
+      return AutocapitalizationType_Enum.Words;
     case 2:
-    case 'Sentences':
-      return AutocapitalizationType_Enum.Sentences
+    case "Sentences":
+      return AutocapitalizationType_Enum.Sentences;
     case 3:
-    case 'AllCharacters':
-      return AutocapitalizationType_Enum.AllCharacters
+    case "AllCharacters":
+      return AutocapitalizationType_Enum.AllCharacters;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return AutocapitalizationType_Enum.UNRECOGNIZED
+      return AutocapitalizationType_Enum.UNRECOGNIZED;
   }
 }
 
-export function autocapitalizationType_EnumToJSON(object: AutocapitalizationType_Enum): string {
+export function autocapitalizationType_EnumToJSON(
+  object: AutocapitalizationType_Enum
+): string {
   switch (object) {
     case AutocapitalizationType_Enum.None:
-      return 'None'
+      return "None";
     case AutocapitalizationType_Enum.Words:
-      return 'Words'
+      return "Words";
     case AutocapitalizationType_Enum.Sentences:
-      return 'Sentences'
+      return "Sentences";
     case AutocapitalizationType_Enum.AllCharacters:
-      return 'AllCharacters'
+      return "AllCharacters";
     case AutocapitalizationType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface KeyboardType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum KeyboardType_Enum {
@@ -149,87 +153,87 @@ export enum KeyboardType_Enum {
 export function keyboardType_EnumFromJSON(object: any): KeyboardType_Enum {
   switch (object) {
     case 0:
-    case 'Default':
-      return KeyboardType_Enum.Default
+    case "Default":
+      return KeyboardType_Enum.Default;
     case 1:
-    case 'ASCII_Capable':
-      return KeyboardType_Enum.ASCII_Capable
+    case "ASCII_Capable":
+      return KeyboardType_Enum.ASCII_Capable;
     case 2:
-    case 'NumbersAndPunctuation':
-      return KeyboardType_Enum.NumbersAndPunctuation
+    case "NumbersAndPunctuation":
+      return KeyboardType_Enum.NumbersAndPunctuation;
     case 3:
-    case 'URL':
-      return KeyboardType_Enum.URL
+    case "URL":
+      return KeyboardType_Enum.URL;
     case 4:
-    case 'NumberPad':
-      return KeyboardType_Enum.NumberPad
+    case "NumberPad":
+      return KeyboardType_Enum.NumberPad;
     case 5:
-    case 'PhonePad':
-      return KeyboardType_Enum.PhonePad
+    case "PhonePad":
+      return KeyboardType_Enum.PhonePad;
     case 6:
-    case 'NamePhonePad':
-      return KeyboardType_Enum.NamePhonePad
+    case "NamePhonePad":
+      return KeyboardType_Enum.NamePhonePad;
     case 7:
-    case 'EmailAddress':
-      return KeyboardType_Enum.EmailAddress
+    case "EmailAddress":
+      return KeyboardType_Enum.EmailAddress;
     case 8:
-    case 'DecimalPad':
-      return KeyboardType_Enum.DecimalPad
+    case "DecimalPad":
+      return KeyboardType_Enum.DecimalPad;
     case 9:
-    case 'Twitter':
-      return KeyboardType_Enum.Twitter
+    case "Twitter":
+      return KeyboardType_Enum.Twitter;
     case 10:
-    case 'WebSearch':
-      return KeyboardType_Enum.WebSearch
+    case "WebSearch":
+      return KeyboardType_Enum.WebSearch;
     case 11:
-    case 'Alphanet':
-      return KeyboardType_Enum.Alphanet
+    case "Alphanet":
+      return KeyboardType_Enum.Alphanet;
     case 12:
-    case 'PasscodePad':
-      return KeyboardType_Enum.PasscodePad
+    case "PasscodePad":
+      return KeyboardType_Enum.PasscodePad;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return KeyboardType_Enum.UNRECOGNIZED
+      return KeyboardType_Enum.UNRECOGNIZED;
   }
 }
 
 export function keyboardType_EnumToJSON(object: KeyboardType_Enum): string {
   switch (object) {
     case KeyboardType_Enum.Default:
-      return 'Default'
+      return "Default";
     case KeyboardType_Enum.ASCII_Capable:
-      return 'ASCII_Capable'
+      return "ASCII_Capable";
     case KeyboardType_Enum.NumbersAndPunctuation:
-      return 'NumbersAndPunctuation'
+      return "NumbersAndPunctuation";
     case KeyboardType_Enum.URL:
-      return 'URL'
+      return "URL";
     case KeyboardType_Enum.NumberPad:
-      return 'NumberPad'
+      return "NumberPad";
     case KeyboardType_Enum.PhonePad:
-      return 'PhonePad'
+      return "PhonePad";
     case KeyboardType_Enum.NamePhonePad:
-      return 'NamePhonePad'
+      return "NamePhonePad";
     case KeyboardType_Enum.EmailAddress:
-      return 'EmailAddress'
+      return "EmailAddress";
     case KeyboardType_Enum.DecimalPad:
-      return 'DecimalPad'
+      return "DecimalPad";
     case KeyboardType_Enum.Twitter:
-      return 'Twitter'
+      return "Twitter";
     case KeyboardType_Enum.WebSearch:
-      return 'WebSearch'
+      return "WebSearch";
     case KeyboardType_Enum.Alphanet:
-      return 'Alphanet'
+      return "Alphanet";
     case KeyboardType_Enum.PasscodePad:
-      return 'PasscodePad'
+      return "PasscodePad";
     case KeyboardType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface ReturnKeyType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum ReturnKeyType_Enum {
@@ -251,347 +255,386 @@ export enum ReturnKeyType_Enum {
 export function returnKeyType_EnumFromJSON(object: any): ReturnKeyType_Enum {
   switch (object) {
     case 0:
-    case 'Default':
-      return ReturnKeyType_Enum.Default
+    case "Default":
+      return ReturnKeyType_Enum.Default;
     case 1:
-    case 'Go':
-      return ReturnKeyType_Enum.Go
+    case "Go":
+      return ReturnKeyType_Enum.Go;
     case 2:
-    case 'Google':
-      return ReturnKeyType_Enum.Google
+    case "Google":
+      return ReturnKeyType_Enum.Google;
     case 3:
-    case 'Join':
-      return ReturnKeyType_Enum.Join
+    case "Join":
+      return ReturnKeyType_Enum.Join;
     case 4:
-    case 'Next':
-      return ReturnKeyType_Enum.Next
+    case "Next":
+      return ReturnKeyType_Enum.Next;
     case 5:
-    case 'Route':
-      return ReturnKeyType_Enum.Route
+    case "Route":
+      return ReturnKeyType_Enum.Route;
     case 6:
-    case 'Search':
-      return ReturnKeyType_Enum.Search
+    case "Search":
+      return ReturnKeyType_Enum.Search;
     case 7:
-    case 'Send':
-      return ReturnKeyType_Enum.Send
+    case "Send":
+      return ReturnKeyType_Enum.Send;
     case 8:
-    case 'Yahoo':
-      return ReturnKeyType_Enum.Yahoo
+    case "Yahoo":
+      return ReturnKeyType_Enum.Yahoo;
     case 9:
-    case 'Done':
-      return ReturnKeyType_Enum.Done
+    case "Done":
+      return ReturnKeyType_Enum.Done;
     case 10:
-    case 'EmergencyCall':
-      return ReturnKeyType_Enum.EmergencyCall
+    case "EmergencyCall":
+      return ReturnKeyType_Enum.EmergencyCall;
     case 11:
-    case 'Continue':
-      return ReturnKeyType_Enum.Continue
+    case "Continue":
+      return ReturnKeyType_Enum.Continue;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return ReturnKeyType_Enum.UNRECOGNIZED
+      return ReturnKeyType_Enum.UNRECOGNIZED;
   }
 }
 
 export function returnKeyType_EnumToJSON(object: ReturnKeyType_Enum): string {
   switch (object) {
     case ReturnKeyType_Enum.Default:
-      return 'Default'
+      return "Default";
     case ReturnKeyType_Enum.Go:
-      return 'Go'
+      return "Go";
     case ReturnKeyType_Enum.Google:
-      return 'Google'
+      return "Google";
     case ReturnKeyType_Enum.Join:
-      return 'Join'
+      return "Join";
     case ReturnKeyType_Enum.Next:
-      return 'Next'
+      return "Next";
     case ReturnKeyType_Enum.Route:
-      return 'Route'
+      return "Route";
     case ReturnKeyType_Enum.Search:
-      return 'Search'
+      return "Search";
     case ReturnKeyType_Enum.Send:
-      return 'Send'
+      return "Send";
     case ReturnKeyType_Enum.Yahoo:
-      return 'Yahoo'
+      return "Yahoo";
     case ReturnKeyType_Enum.Done:
-      return 'Done'
+      return "Done";
     case ReturnKeyType_Enum.EmergencyCall:
-      return 'EmergencyCall'
+      return "EmergencyCall";
     case ReturnKeyType_Enum.Continue:
-      return 'Continue'
+      return "Continue";
     case ReturnKeyType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface TextInputTraits {
-  autocapitalizationType?: AutocapitalizationType_Enum | undefined
-  keyboardType?: KeyboardType_Enum | undefined
-  returnKeyType?: ReturnKeyType_Enum | undefined
-  autocorrection?: boolean | undefined
-  spellchecking?: boolean | undefined
-  enablesReturnKeyAutomatically?: boolean | undefined
-  secureTextEntry?: boolean | undefined
-  validTextRangeLocation?: number | undefined
-  validTextRangeLength?: number | undefined
-  pINEntrySeparatorIndexes: number[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  autocapitalizationType?: AutocapitalizationType_Enum | undefined;
+  keyboardType?: KeyboardType_Enum | undefined;
+  returnKeyType?: ReturnKeyType_Enum | undefined;
+  autocorrection?: boolean | undefined;
+  spellchecking?: boolean | undefined;
+  enablesReturnKeyAutomatically?: boolean | undefined;
+  secureTextEntry?: boolean | undefined;
+  validTextRangeLocation?: number | undefined;
+  validTextRangeLength?: number | undefined;
+  pINEntrySeparatorIndexes: number[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface TextEditingAttributes {
-  title?: string | undefined
-  prompt?: string | undefined
-  inputTraits?: TextInputTraits | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  title?: string | undefined;
+  prompt?: string | undefined;
+  inputTraits?: TextInputTraits | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface KeyboardMessage {
-  state?: KeyboardState_Enum | undefined
-  attributes?: TextEditingAttributes | undefined
-  encryptedTextCyphertext?: Buffer | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  state?: KeyboardState_Enum | undefined;
+  attributes?: TextEditingAttributes | undefined;
+  encryptedTextCyphertext?: Buffer | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseKeyboardState(): KeyboardState {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const KeyboardState: MessageFns<KeyboardState> = {
-  encode(message: KeyboardState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: KeyboardState,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): KeyboardState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseKeyboardState()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyboardState();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): KeyboardState {
-    return {}
+    return {};
   },
 
   toJSON(_: KeyboardState): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<KeyboardState>, I>>(base?: I): KeyboardState {
-    return KeyboardState.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<KeyboardState>, I>>(
+    base?: I
+  ): KeyboardState {
+    return KeyboardState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<KeyboardState>, I>>(_: I): KeyboardState {
-    const message = createBaseKeyboardState()
-    return message
+  fromPartial<I extends Exact<DeepPartial<KeyboardState>, I>>(
+    _: I
+  ): KeyboardState {
+    const message = createBaseKeyboardState();
+    return message;
   },
-}
+};
 
 function createBaseAutocapitalizationType(): AutocapitalizationType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const AutocapitalizationType: MessageFns<AutocapitalizationType> = {
-  encode(message: AutocapitalizationType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AutocapitalizationType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AutocapitalizationType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAutocapitalizationType()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AutocapitalizationType {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAutocapitalizationType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): AutocapitalizationType {
-    return {}
+    return {};
   },
 
   toJSON(_: AutocapitalizationType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<AutocapitalizationType>, I>>(
     base?: I
   ): AutocapitalizationType {
-    return AutocapitalizationType.fromPartial(base ?? ({} as any))
+    return AutocapitalizationType.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<AutocapitalizationType>, I>>(
     _: I
   ): AutocapitalizationType {
-    const message = createBaseAutocapitalizationType()
-    return message
+    const message = createBaseAutocapitalizationType();
+    return message;
   },
-}
+};
 
 function createBaseKeyboardType(): KeyboardType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const KeyboardType: MessageFns<KeyboardType> = {
-  encode(message: KeyboardType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: KeyboardType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): KeyboardType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseKeyboardType()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyboardType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): KeyboardType {
-    return {}
+    return {};
   },
 
   toJSON(_: KeyboardType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<KeyboardType>, I>>(base?: I): KeyboardType {
-    return KeyboardType.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<KeyboardType>, I>>(
+    base?: I
+  ): KeyboardType {
+    return KeyboardType.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<KeyboardType>, I>>(_: I): KeyboardType {
-    const message = createBaseKeyboardType()
-    return message
+  fromPartial<I extends Exact<DeepPartial<KeyboardType>, I>>(
+    _: I
+  ): KeyboardType {
+    const message = createBaseKeyboardType();
+    return message;
   },
-}
+};
 
 function createBaseReturnKeyType(): ReturnKeyType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const ReturnKeyType: MessageFns<ReturnKeyType> = {
-  encode(message: ReturnKeyType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ReturnKeyType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ReturnKeyType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseReturnKeyType()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseReturnKeyType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): ReturnKeyType {
-    return {}
+    return {};
   },
 
   toJSON(_: ReturnKeyType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<ReturnKeyType>, I>>(base?: I): ReturnKeyType {
-    return ReturnKeyType.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<ReturnKeyType>, I>>(
+    base?: I
+  ): ReturnKeyType {
+    return ReturnKeyType.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<ReturnKeyType>, I>>(_: I): ReturnKeyType {
-    const message = createBaseReturnKeyType()
-    return message
+  fromPartial<I extends Exact<DeepPartial<ReturnKeyType>, I>>(
+    _: I
+  ): ReturnKeyType {
+    const message = createBaseReturnKeyType();
+    return message;
   },
-}
+};
 
 function createBaseTextInputTraits(): TextInputTraits {
   return {
@@ -606,167 +649,195 @@ function createBaseTextInputTraits(): TextInputTraits {
     validTextRangeLength: 0,
     pINEntrySeparatorIndexes: [],
     _unknownFields: {},
-  }
+  };
 }
 
 export const TextInputTraits: MessageFns<TextInputTraits> = {
-  encode(message: TextInputTraits, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.autocapitalizationType !== undefined && message.autocapitalizationType !== 0) {
-      writer.uint32(8).int32(message.autocapitalizationType)
+  encode(
+    message: TextInputTraits,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (
+      message.autocapitalizationType !== undefined &&
+      message.autocapitalizationType !== 0
+    ) {
+      writer.uint32(8).int32(message.autocapitalizationType);
     }
     if (message.keyboardType !== undefined && message.keyboardType !== 0) {
-      writer.uint32(16).int32(message.keyboardType)
+      writer.uint32(16).int32(message.keyboardType);
     }
     if (message.returnKeyType !== undefined && message.returnKeyType !== 0) {
-      writer.uint32(24).int32(message.returnKeyType)
+      writer.uint32(24).int32(message.returnKeyType);
     }
-    if (message.autocorrection !== undefined && message.autocorrection !== false) {
-      writer.uint32(32).bool(message.autocorrection)
+    if (
+      message.autocorrection !== undefined &&
+      message.autocorrection !== false
+    ) {
+      writer.uint32(32).bool(message.autocorrection);
     }
-    if (message.spellchecking !== undefined && message.spellchecking !== false) {
-      writer.uint32(40).bool(message.spellchecking)
+    if (
+      message.spellchecking !== undefined &&
+      message.spellchecking !== false
+    ) {
+      writer.uint32(40).bool(message.spellchecking);
     }
     if (
       message.enablesReturnKeyAutomatically !== undefined &&
       message.enablesReturnKeyAutomatically !== false
     ) {
-      writer.uint32(48).bool(message.enablesReturnKeyAutomatically)
+      writer.uint32(48).bool(message.enablesReturnKeyAutomatically);
     }
-    if (message.secureTextEntry !== undefined && message.secureTextEntry !== false) {
-      writer.uint32(56).bool(message.secureTextEntry)
+    if (
+      message.secureTextEntry !== undefined &&
+      message.secureTextEntry !== false
+    ) {
+      writer.uint32(56).bool(message.secureTextEntry);
     }
-    if (message.validTextRangeLocation !== undefined && message.validTextRangeLocation !== 0) {
-      writer.uint32(64).uint64(message.validTextRangeLocation)
+    if (
+      message.validTextRangeLocation !== undefined &&
+      message.validTextRangeLocation !== 0
+    ) {
+      writer.uint32(64).uint64(message.validTextRangeLocation);
     }
-    if (message.validTextRangeLength !== undefined && message.validTextRangeLength !== 0) {
-      writer.uint32(72).uint64(message.validTextRangeLength)
+    if (
+      message.validTextRangeLength !== undefined &&
+      message.validTextRangeLength !== 0
+    ) {
+      writer.uint32(72).uint64(message.validTextRangeLength);
     }
     for (const v of message.pINEntrySeparatorIndexes) {
-      writer.uint32(80).uint64(v!)
+      writer.uint32(80).uint64(v!);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TextInputTraits {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseTextInputTraits()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTextInputTraits();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.autocapitalizationType = reader.int32() as any
-          continue
+          message.autocapitalizationType = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.keyboardType = reader.int32() as any
-          continue
+          message.keyboardType = reader.int32() as any;
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.returnKeyType = reader.int32() as any
-          continue
+          message.returnKeyType = reader.int32() as any;
+          continue;
         }
         case 4: {
           if (tag !== 32) {
-            break
+            break;
           }
 
-          message.autocorrection = reader.bool()
-          continue
+          message.autocorrection = reader.bool();
+          continue;
         }
         case 5: {
           if (tag !== 40) {
-            break
+            break;
           }
 
-          message.spellchecking = reader.bool()
-          continue
+          message.spellchecking = reader.bool();
+          continue;
         }
         case 6: {
           if (tag !== 48) {
-            break
+            break;
           }
 
-          message.enablesReturnKeyAutomatically = reader.bool()
-          continue
+          message.enablesReturnKeyAutomatically = reader.bool();
+          continue;
         }
         case 7: {
           if (tag !== 56) {
-            break
+            break;
           }
 
-          message.secureTextEntry = reader.bool()
-          continue
+          message.secureTextEntry = reader.bool();
+          continue;
         }
         case 8: {
           if (tag !== 64) {
-            break
+            break;
           }
 
-          message.validTextRangeLocation = longToNumber(reader.uint64())
-          continue
+          message.validTextRangeLocation = longToNumber(reader.uint64());
+          continue;
         }
         case 9: {
           if (tag !== 72) {
-            break
+            break;
           }
 
-          message.validTextRangeLength = longToNumber(reader.uint64())
-          continue
+          message.validTextRangeLength = longToNumber(reader.uint64());
+          continue;
         }
         case 10: {
           if (tag === 80) {
-            message.pINEntrySeparatorIndexes.push(longToNumber(reader.uint64()))
+            message.pINEntrySeparatorIndexes.push(
+              longToNumber(reader.uint64())
+            );
 
-            continue
+            continue;
           }
 
           if (tag === 82) {
-            const end2 = reader.uint32() + reader.pos
+            const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.pINEntrySeparatorIndexes.push(longToNumber(reader.uint64()))
+              message.pINEntrySeparatorIndexes.push(
+                longToNumber(reader.uint64())
+              );
             }
 
-            continue
+            continue;
           }
 
-          break
+          break;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): TextInputTraits {
@@ -774,14 +845,18 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
       autocapitalizationType: isSet(object.autocapitalizationType)
         ? autocapitalizationType_EnumFromJSON(object.autocapitalizationType)
         : 0,
-      keyboardType: isSet(object.keyboardType) ? keyboardType_EnumFromJSON(object.keyboardType) : 0,
+      keyboardType: isSet(object.keyboardType)
+        ? keyboardType_EnumFromJSON(object.keyboardType)
+        : 0,
       returnKeyType: isSet(object.returnKeyType)
         ? returnKeyType_EnumFromJSON(object.returnKeyType)
         : 0,
       autocorrection: isSet(object.autocorrection)
         ? globalThis.Boolean(object.autocorrection)
         : false,
-      spellchecking: isSet(object.spellchecking) ? globalThis.Boolean(object.spellchecking) : false,
+      spellchecking: isSet(object.spellchecking)
+        ? globalThis.Boolean(object.spellchecking)
+        : false,
       enablesReturnKeyAutomatically: isSet(object.enablesReturnKeyAutomatically)
         ? globalThis.Boolean(object.enablesReturnKeyAutomatically)
         : false,
@@ -794,183 +869,227 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
       validTextRangeLength: isSet(object.validTextRangeLength)
         ? globalThis.Number(object.validTextRangeLength)
         : 0,
-      pINEntrySeparatorIndexes: globalThis.Array.isArray(object?.pINEntrySeparatorIndexes)
+      pINEntrySeparatorIndexes: globalThis.Array.isArray(
+        object?.pINEntrySeparatorIndexes
+      )
         ? object.pINEntrySeparatorIndexes.map((e: any) => globalThis.Number(e))
         : [],
-    }
+    };
   },
 
   toJSON(message: TextInputTraits): unknown {
-    const obj: any = {}
-    if (message.autocapitalizationType !== undefined && message.autocapitalizationType !== 0) {
-      obj.autocapitalizationType = autocapitalizationType_EnumToJSON(message.autocapitalizationType)
+    const obj: any = {};
+    if (
+      message.autocapitalizationType !== undefined &&
+      message.autocapitalizationType !== 0
+    ) {
+      obj.autocapitalizationType = autocapitalizationType_EnumToJSON(
+        message.autocapitalizationType
+      );
     }
     if (message.keyboardType !== undefined && message.keyboardType !== 0) {
-      obj.keyboardType = keyboardType_EnumToJSON(message.keyboardType)
+      obj.keyboardType = keyboardType_EnumToJSON(message.keyboardType);
     }
     if (message.returnKeyType !== undefined && message.returnKeyType !== 0) {
-      obj.returnKeyType = returnKeyType_EnumToJSON(message.returnKeyType)
+      obj.returnKeyType = returnKeyType_EnumToJSON(message.returnKeyType);
     }
-    if (message.autocorrection !== undefined && message.autocorrection !== false) {
-      obj.autocorrection = message.autocorrection
+    if (
+      message.autocorrection !== undefined &&
+      message.autocorrection !== false
+    ) {
+      obj.autocorrection = message.autocorrection;
     }
-    if (message.spellchecking !== undefined && message.spellchecking !== false) {
-      obj.spellchecking = message.spellchecking
+    if (
+      message.spellchecking !== undefined &&
+      message.spellchecking !== false
+    ) {
+      obj.spellchecking = message.spellchecking;
     }
     if (
       message.enablesReturnKeyAutomatically !== undefined &&
       message.enablesReturnKeyAutomatically !== false
     ) {
-      obj.enablesReturnKeyAutomatically = message.enablesReturnKeyAutomatically
+      obj.enablesReturnKeyAutomatically = message.enablesReturnKeyAutomatically;
     }
-    if (message.secureTextEntry !== undefined && message.secureTextEntry !== false) {
-      obj.secureTextEntry = message.secureTextEntry
+    if (
+      message.secureTextEntry !== undefined &&
+      message.secureTextEntry !== false
+    ) {
+      obj.secureTextEntry = message.secureTextEntry;
     }
-    if (message.validTextRangeLocation !== undefined && message.validTextRangeLocation !== 0) {
-      obj.validTextRangeLocation = Math.round(message.validTextRangeLocation)
+    if (
+      message.validTextRangeLocation !== undefined &&
+      message.validTextRangeLocation !== 0
+    ) {
+      obj.validTextRangeLocation = Math.round(message.validTextRangeLocation);
     }
-    if (message.validTextRangeLength !== undefined && message.validTextRangeLength !== 0) {
-      obj.validTextRangeLength = Math.round(message.validTextRangeLength)
+    if (
+      message.validTextRangeLength !== undefined &&
+      message.validTextRangeLength !== 0
+    ) {
+      obj.validTextRangeLength = Math.round(message.validTextRangeLength);
     }
     if (message.pINEntrySeparatorIndexes?.length) {
-      obj.pINEntrySeparatorIndexes = message.pINEntrySeparatorIndexes.map(e => Math.round(e))
+      obj.pINEntrySeparatorIndexes = message.pINEntrySeparatorIndexes.map((e) =>
+        Math.round(e)
+      );
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<TextInputTraits>, I>>(base?: I): TextInputTraits {
-    return TextInputTraits.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<TextInputTraits>, I>>(
+    base?: I
+  ): TextInputTraits {
+    return TextInputTraits.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TextInputTraits>, I>>(object: I): TextInputTraits {
-    const message = createBaseTextInputTraits()
-    message.autocapitalizationType = object.autocapitalizationType ?? 0
-    message.keyboardType = object.keyboardType ?? 0
-    message.returnKeyType = object.returnKeyType ?? 0
-    message.autocorrection = object.autocorrection ?? false
-    message.spellchecking = object.spellchecking ?? false
-    message.enablesReturnKeyAutomatically = object.enablesReturnKeyAutomatically ?? false
-    message.secureTextEntry = object.secureTextEntry ?? false
-    message.validTextRangeLocation = object.validTextRangeLocation ?? 0
-    message.validTextRangeLength = object.validTextRangeLength ?? 0
-    message.pINEntrySeparatorIndexes = object.pINEntrySeparatorIndexes?.map(e => e) || []
-    return message
+  fromPartial<I extends Exact<DeepPartial<TextInputTraits>, I>>(
+    object: I
+  ): TextInputTraits {
+    const message = createBaseTextInputTraits();
+    message.autocapitalizationType = object.autocapitalizationType ?? 0;
+    message.keyboardType = object.keyboardType ?? 0;
+    message.returnKeyType = object.returnKeyType ?? 0;
+    message.autocorrection = object.autocorrection ?? false;
+    message.spellchecking = object.spellchecking ?? false;
+    message.enablesReturnKeyAutomatically =
+      object.enablesReturnKeyAutomatically ?? false;
+    message.secureTextEntry = object.secureTextEntry ?? false;
+    message.validTextRangeLocation = object.validTextRangeLocation ?? 0;
+    message.validTextRangeLength = object.validTextRangeLength ?? 0;
+    message.pINEntrySeparatorIndexes =
+      object.pINEntrySeparatorIndexes?.map((e) => e) || [];
+    return message;
   },
-}
+};
 
 function createBaseTextEditingAttributes(): TextEditingAttributes {
-  return { title: '', prompt: '', inputTraits: undefined, _unknownFields: {} }
+  return { title: "", prompt: "", inputTraits: undefined, _unknownFields: {} };
 }
 
 export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
-  encode(message: TextEditingAttributes, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.title !== undefined && message.title !== '') {
-      writer.uint32(10).string(message.title)
+  encode(
+    message: TextEditingAttributes,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (message.title !== undefined && message.title !== "") {
+      writer.uint32(10).string(message.title);
     }
-    if (message.prompt !== undefined && message.prompt !== '') {
-      writer.uint32(18).string(message.prompt)
+    if (message.prompt !== undefined && message.prompt !== "") {
+      writer.uint32(18).string(message.prompt);
     }
     if (message.inputTraits !== undefined) {
-      TextInputTraits.encode(message.inputTraits, writer.uint32(26).fork()).join()
+      TextInputTraits.encode(
+        message.inputTraits,
+        writer.uint32(26).fork()
+      ).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TextEditingAttributes {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseTextEditingAttributes()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): TextEditingAttributes {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTextEditingAttributes();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.title = reader.string()
-          continue
+          message.title = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.prompt = reader.string()
-          continue
+          message.prompt = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.inputTraits = TextInputTraits.decode(reader, reader.uint32())
-          continue
+          message.inputTraits = TextInputTraits.decode(reader, reader.uint32());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): TextEditingAttributes {
     return {
-      title: isSet(object.title) ? globalThis.String(object.title) : '',
-      prompt: isSet(object.prompt) ? globalThis.String(object.prompt) : '',
+      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      prompt: isSet(object.prompt) ? globalThis.String(object.prompt) : "",
       inputTraits: isSet(object.inputTraits)
         ? TextInputTraits.fromJSON(object.inputTraits)
         : undefined,
-    }
+    };
   },
 
   toJSON(message: TextEditingAttributes): unknown {
-    const obj: any = {}
-    if (message.title !== undefined && message.title !== '') {
-      obj.title = message.title
+    const obj: any = {};
+    if (message.title !== undefined && message.title !== "") {
+      obj.title = message.title;
     }
-    if (message.prompt !== undefined && message.prompt !== '') {
-      obj.prompt = message.prompt
+    if (message.prompt !== undefined && message.prompt !== "") {
+      obj.prompt = message.prompt;
     }
     if (message.inputTraits !== undefined) {
-      obj.inputTraits = TextInputTraits.toJSON(message.inputTraits)
+      obj.inputTraits = TextInputTraits.toJSON(message.inputTraits);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<TextEditingAttributes>, I>>(base?: I): TextEditingAttributes {
-    return TextEditingAttributes.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<TextEditingAttributes>, I>>(
+    base?: I
+  ): TextEditingAttributes {
+    return TextEditingAttributes.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<TextEditingAttributes>, I>>(
     object: I
   ): TextEditingAttributes {
-    const message = createBaseTextEditingAttributes()
-    message.title = object.title ?? ''
-    message.prompt = object.prompt ?? ''
+    const message = createBaseTextEditingAttributes();
+    message.title = object.title ?? "";
+    message.prompt = object.prompt ?? "";
     message.inputTraits =
       object.inputTraits !== undefined && object.inputTraits !== null
         ? TextInputTraits.fromPartial(object.inputTraits)
-        : undefined
-    return message
+        : undefined;
+    return message;
   },
-}
+};
 
 function createBaseKeyboardMessage(): KeyboardMessage {
   return {
@@ -978,80 +1097,92 @@ function createBaseKeyboardMessage(): KeyboardMessage {
     attributes: undefined,
     encryptedTextCyphertext: Buffer.alloc(0),
     _unknownFields: {},
-  }
+  };
 }
 
 export const KeyboardMessage: MessageFns<KeyboardMessage> = {
-  encode(message: KeyboardMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: KeyboardMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.state !== undefined && message.state !== 0) {
-      writer.uint32(8).int32(message.state)
+      writer.uint32(8).int32(message.state);
     }
     if (message.attributes !== undefined) {
-      TextEditingAttributes.encode(message.attributes, writer.uint32(26).fork()).join()
+      TextEditingAttributes.encode(
+        message.attributes,
+        writer.uint32(26).fork()
+      ).join();
     }
     if (
       message.encryptedTextCyphertext !== undefined &&
       message.encryptedTextCyphertext.length !== 0
     ) {
-      writer.uint32(34).bytes(message.encryptedTextCyphertext)
+      writer.uint32(34).bytes(message.encryptedTextCyphertext);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): KeyboardMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseKeyboardMessage()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyboardMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.state = reader.int32() as any
-          continue
+          message.state = reader.int32() as any;
+          continue;
         }
         case 3: {
           if (tag !== 26) {
-            break
+            break;
           }
 
-          message.attributes = TextEditingAttributes.decode(reader, reader.uint32())
-          continue
+          message.attributes = TextEditingAttributes.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.encryptedTextCyphertext = Buffer.from(reader.bytes())
-          continue
+          message.encryptedTextCyphertext = Buffer.from(reader.bytes());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): KeyboardMessage {
@@ -1063,40 +1194,47 @@ export const KeyboardMessage: MessageFns<KeyboardMessage> = {
       encryptedTextCyphertext: isSet(object.encryptedTextCyphertext)
         ? Buffer.from(bytesFromBase64(object.encryptedTextCyphertext))
         : Buffer.alloc(0),
-    }
+    };
   },
 
   toJSON(message: KeyboardMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.state !== undefined && message.state !== 0) {
-      obj.state = keyboardState_EnumToJSON(message.state)
+      obj.state = keyboardState_EnumToJSON(message.state);
     }
     if (message.attributes !== undefined) {
-      obj.attributes = TextEditingAttributes.toJSON(message.attributes)
+      obj.attributes = TextEditingAttributes.toJSON(message.attributes);
     }
     if (
       message.encryptedTextCyphertext !== undefined &&
       message.encryptedTextCyphertext.length !== 0
     ) {
-      obj.encryptedTextCyphertext = base64FromBytes(message.encryptedTextCyphertext)
+      obj.encryptedTextCyphertext = base64FromBytes(
+        message.encryptedTextCyphertext
+      );
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<KeyboardMessage>, I>>(base?: I): KeyboardMessage {
-    return KeyboardMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<KeyboardMessage>, I>>(
+    base?: I
+  ): KeyboardMessage {
+    return KeyboardMessage.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<KeyboardMessage>, I>>(object: I): KeyboardMessage {
-    const message = createBaseKeyboardMessage()
-    message.state = object.state ?? 0
+  fromPartial<I extends Exact<DeepPartial<KeyboardMessage>, I>>(
+    object: I
+  ): KeyboardMessage {
+    const message = createBaseKeyboardMessage();
+    message.state = object.state ?? 0;
     message.attributes =
       object.attributes !== undefined && object.attributes !== null
         ? TextEditingAttributes.fromPartial(object.attributes)
-        : undefined
-    message.encryptedTextCyphertext = object.encryptedTextCyphertext ?? Buffer.alloc(0)
-    return message
+        : undefined;
+    message.encryptedTextCyphertext =
+      object.encryptedTextCyphertext ?? Buffer.alloc(0);
+    return message;
   },
-}
+};
 
 export const keyboardMessage: Extension<KeyboardMessage | undefined> = {
   number: 28,
@@ -1104,27 +1242,34 @@ export const keyboardMessage: Extension<KeyboardMessage | undefined> = {
   repeated: false,
   packed: false,
   encode: (value: KeyboardMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    KeyboardMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    KeyboardMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
   decode: (tag: number, input: Uint8Array[]): KeyboardMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return KeyboardMessage.decode(reader, reader.uint32())
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return KeyboardMessage.decode(reader, reader.uint32());
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -1134,48 +1279,50 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString())
+  const num = globalThis.Number(int64.toString());
   if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
   if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is smaller than Number.MIN_SAFE_INTEGER')
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
   }
-  return num
+  return num;
 }
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

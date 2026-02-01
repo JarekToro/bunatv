@@ -1,7 +1,7 @@
-version: v2          # Buf config version (v1 or v2)
+version: v2 # Buf config version (v1 or v2)
 lint:
   use:
-    - STANDARD       # Linting ruleset (MINIMAL, BASIC, STANDARD, etc.)
+    - STANDARD # Linting ruleset (MINIMAL, BASIC, STANDARD, etc.)
 breaking:
   use:
-    - FILE           # Breaking change detection ruleset
+    - FILE # Breaking change detection ruleset

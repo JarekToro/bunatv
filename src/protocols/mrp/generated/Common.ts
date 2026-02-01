@@ -5,12 +5,12 @@
 // source: Common.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface RepeatMode {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum RepeatMode_Enum {
@@ -24,42 +24,42 @@ export enum RepeatMode_Enum {
 export function repeatMode_EnumFromJSON(object: any): RepeatMode_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return RepeatMode_Enum.Unknown
+    case "Unknown":
+      return RepeatMode_Enum.Unknown;
     case 1:
-    case 'Off':
-      return RepeatMode_Enum.Off
+    case "Off":
+      return RepeatMode_Enum.Off;
     case 2:
-    case 'One':
-      return RepeatMode_Enum.One
+    case "One":
+      return RepeatMode_Enum.One;
     case 3:
-    case 'All':
-      return RepeatMode_Enum.All
+    case "All":
+      return RepeatMode_Enum.All;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return RepeatMode_Enum.UNRECOGNIZED
+      return RepeatMode_Enum.UNRECOGNIZED;
   }
 }
 
 export function repeatMode_EnumToJSON(object: RepeatMode_Enum): string {
   switch (object) {
     case RepeatMode_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case RepeatMode_Enum.Off:
-      return 'Off'
+      return "Off";
     case RepeatMode_Enum.One:
-      return 'One'
+      return "One";
     case RepeatMode_Enum.All:
-      return 'All'
+      return "All";
     case RepeatMode_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface ShuffleMode {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum ShuffleMode_Enum {
@@ -73,42 +73,42 @@ export enum ShuffleMode_Enum {
 export function shuffleMode_EnumFromJSON(object: any): ShuffleMode_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return ShuffleMode_Enum.Unknown
+    case "Unknown":
+      return ShuffleMode_Enum.Unknown;
     case 1:
-    case 'Off':
-      return ShuffleMode_Enum.Off
+    case "Off":
+      return ShuffleMode_Enum.Off;
     case 2:
-    case 'Albums':
-      return ShuffleMode_Enum.Albums
+    case "Albums":
+      return ShuffleMode_Enum.Albums;
     case 3:
-    case 'Songs':
-      return ShuffleMode_Enum.Songs
+    case "Songs":
+      return ShuffleMode_Enum.Songs;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return ShuffleMode_Enum.UNRECOGNIZED
+      return ShuffleMode_Enum.UNRECOGNIZED;
   }
 }
 
 export function shuffleMode_EnumToJSON(object: ShuffleMode_Enum): string {
   switch (object) {
     case ShuffleMode_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case ShuffleMode_Enum.Off:
-      return 'Off'
+      return "Off";
     case ShuffleMode_Enum.Albums:
-      return 'Albums'
+      return "Albums";
     case ShuffleMode_Enum.Songs:
-      return 'Songs'
+      return "Songs";
     case ShuffleMode_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface DeviceClass {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum DeviceClass_Enum {
@@ -128,72 +128,72 @@ export enum DeviceClass_Enum {
 export function deviceClass_EnumFromJSON(object: any): DeviceClass_Enum {
   switch (object) {
     case 0:
-    case 'Invalid':
-      return DeviceClass_Enum.Invalid
+    case "Invalid":
+      return DeviceClass_Enum.Invalid;
     case 1:
-    case 'iPhone':
-      return DeviceClass_Enum.iPhone
+    case "iPhone":
+      return DeviceClass_Enum.iPhone;
     case 2:
-    case 'iPod':
-      return DeviceClass_Enum.iPod
+    case "iPod":
+      return DeviceClass_Enum.iPod;
     case 3:
-    case 'iPad':
-      return DeviceClass_Enum.iPad
+    case "iPad":
+      return DeviceClass_Enum.iPad;
     case 4:
-    case 'AppleTV':
-      return DeviceClass_Enum.AppleTV
+    case "AppleTV":
+      return DeviceClass_Enum.AppleTV;
     case 5:
-    case 'iFPGA':
-      return DeviceClass_Enum.iFPGA
+    case "iFPGA":
+      return DeviceClass_Enum.iFPGA;
     case 6:
-    case 'Watch':
-      return DeviceClass_Enum.Watch
+    case "Watch":
+      return DeviceClass_Enum.Watch;
     case 7:
-    case 'Accessory':
-      return DeviceClass_Enum.Accessory
+    case "Accessory":
+      return DeviceClass_Enum.Accessory;
     case 8:
-    case 'Bridge':
-      return DeviceClass_Enum.Bridge
+    case "Bridge":
+      return DeviceClass_Enum.Bridge;
     case 9:
-    case 'Mac':
-      return DeviceClass_Enum.Mac
+    case "Mac":
+      return DeviceClass_Enum.Mac;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return DeviceClass_Enum.UNRECOGNIZED
+      return DeviceClass_Enum.UNRECOGNIZED;
   }
 }
 
 export function deviceClass_EnumToJSON(object: DeviceClass_Enum): string {
   switch (object) {
     case DeviceClass_Enum.Invalid:
-      return 'Invalid'
+      return "Invalid";
     case DeviceClass_Enum.iPhone:
-      return 'iPhone'
+      return "iPhone";
     case DeviceClass_Enum.iPod:
-      return 'iPod'
+      return "iPod";
     case DeviceClass_Enum.iPad:
-      return 'iPad'
+      return "iPad";
     case DeviceClass_Enum.AppleTV:
-      return 'AppleTV'
+      return "AppleTV";
     case DeviceClass_Enum.iFPGA:
-      return 'iFPGA'
+      return "iFPGA";
     case DeviceClass_Enum.Watch:
-      return 'Watch'
+      return "Watch";
     case DeviceClass_Enum.Accessory:
-      return 'Accessory'
+      return "Accessory";
     case DeviceClass_Enum.Bridge:
-      return 'Bridge'
+      return "Bridge";
     case DeviceClass_Enum.Mac:
-      return 'Mac'
+      return "Mac";
     case DeviceClass_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface DeviceType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum DeviceType_Enum {
@@ -209,52 +209,52 @@ export enum DeviceType_Enum {
 export function deviceType_EnumFromJSON(object: any): DeviceType_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return DeviceType_Enum.Unknown
+    case "Unknown":
+      return DeviceType_Enum.Unknown;
     case 1:
-    case 'AirPlay':
-      return DeviceType_Enum.AirPlay
+    case "AirPlay":
+      return DeviceType_Enum.AirPlay;
     case 2:
-    case 'Bluetooth':
-      return DeviceType_Enum.Bluetooth
+    case "Bluetooth":
+      return DeviceType_Enum.Bluetooth;
     case 3:
-    case 'CarPlay':
-      return DeviceType_Enum.CarPlay
+    case "CarPlay":
+      return DeviceType_Enum.CarPlay;
     case 4:
-    case 'BuiltIn':
-      return DeviceType_Enum.BuiltIn
+    case "BuiltIn":
+      return DeviceType_Enum.BuiltIn;
     case 5:
-    case 'Wired':
-      return DeviceType_Enum.Wired
+    case "Wired":
+      return DeviceType_Enum.Wired;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return DeviceType_Enum.UNRECOGNIZED
+      return DeviceType_Enum.UNRECOGNIZED;
   }
 }
 
 export function deviceType_EnumToJSON(object: DeviceType_Enum): string {
   switch (object) {
     case DeviceType_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case DeviceType_Enum.AirPlay:
-      return 'AirPlay'
+      return "AirPlay";
     case DeviceType_Enum.Bluetooth:
-      return 'Bluetooth'
+      return "Bluetooth";
     case DeviceType_Enum.CarPlay:
-      return 'CarPlay'
+      return "CarPlay";
     case DeviceType_Enum.BuiltIn:
-      return 'BuiltIn'
+      return "BuiltIn";
     case DeviceType_Enum.Wired:
-      return 'Wired'
+      return "Wired";
     case DeviceType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface DeviceSubType {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum DeviceSubType_Enum {
@@ -282,112 +282,112 @@ export enum DeviceSubType_Enum {
 export function deviceSubType_EnumFromJSON(object: any): DeviceSubType_Enum {
   switch (object) {
     case 0:
-    case 'Default':
-      return DeviceSubType_Enum.Default
+    case "Default":
+      return DeviceSubType_Enum.Default;
     case 1:
-    case 'Speaker':
-      return DeviceSubType_Enum.Speaker
+    case "Speaker":
+      return DeviceSubType_Enum.Speaker;
     case 2:
-    case 'Headphones':
-      return DeviceSubType_Enum.Headphones
+    case "Headphones":
+      return DeviceSubType_Enum.Headphones;
     case 3:
-    case 'Headset':
-      return DeviceSubType_Enum.Headset
+    case "Headset":
+      return DeviceSubType_Enum.Headset;
     case 4:
-    case 'Receiver':
-      return DeviceSubType_Enum.Receiver
+    case "Receiver":
+      return DeviceSubType_Enum.Receiver;
     case 5:
-    case 'LineOut':
-      return DeviceSubType_Enum.LineOut
+    case "LineOut":
+      return DeviceSubType_Enum.LineOut;
     case 6:
-    case 'USB':
-      return DeviceSubType_Enum.USB
+    case "USB":
+      return DeviceSubType_Enum.USB;
     case 7:
-    case 'DisplayPort':
-      return DeviceSubType_Enum.DisplayPort
+    case "DisplayPort":
+      return DeviceSubType_Enum.DisplayPort;
     case 8:
-    case 'HDMI':
-      return DeviceSubType_Enum.HDMI
+    case "HDMI":
+      return DeviceSubType_Enum.HDMI;
     case 9:
-    case 'LowEnergy':
-      return DeviceSubType_Enum.LowEnergy
+    case "LowEnergy":
+      return DeviceSubType_Enum.LowEnergy;
     case 10:
-    case 'SPDIF':
-      return DeviceSubType_Enum.SPDIF
+    case "SPDIF":
+      return DeviceSubType_Enum.SPDIF;
     case 11:
-    case 'TV':
-      return DeviceSubType_Enum.TV
+    case "TV":
+      return DeviceSubType_Enum.TV;
     case 12:
-    case 'HomePod':
-      return DeviceSubType_Enum.HomePod
+    case "HomePod":
+      return DeviceSubType_Enum.HomePod;
     case 13:
-    case 'AppleTV':
-      return DeviceSubType_Enum.AppleTV
+    case "AppleTV":
+      return DeviceSubType_Enum.AppleTV;
     case 14:
-    case 'Vehicle':
-      return DeviceSubType_Enum.Vehicle
+    case "Vehicle":
+      return DeviceSubType_Enum.Vehicle;
     case 15:
-    case 'Cluster':
-      return DeviceSubType_Enum.Cluster
+    case "Cluster":
+      return DeviceSubType_Enum.Cluster;
     case 16:
-    case 'SetTopBox':
-      return DeviceSubType_Enum.SetTopBox
+    case "SetTopBox":
+      return DeviceSubType_Enum.SetTopBox;
     case 17:
-    case 'TVStick':
-      return DeviceSubType_Enum.TVStick
+    case "TVStick":
+      return DeviceSubType_Enum.TVStick;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return DeviceSubType_Enum.UNRECOGNIZED
+      return DeviceSubType_Enum.UNRECOGNIZED;
   }
 }
 
 export function deviceSubType_EnumToJSON(object: DeviceSubType_Enum): string {
   switch (object) {
     case DeviceSubType_Enum.Default:
-      return 'Default'
+      return "Default";
     case DeviceSubType_Enum.Speaker:
-      return 'Speaker'
+      return "Speaker";
     case DeviceSubType_Enum.Headphones:
-      return 'Headphones'
+      return "Headphones";
     case DeviceSubType_Enum.Headset:
-      return 'Headset'
+      return "Headset";
     case DeviceSubType_Enum.Receiver:
-      return 'Receiver'
+      return "Receiver";
     case DeviceSubType_Enum.LineOut:
-      return 'LineOut'
+      return "LineOut";
     case DeviceSubType_Enum.USB:
-      return 'USB'
+      return "USB";
     case DeviceSubType_Enum.DisplayPort:
-      return 'DisplayPort'
+      return "DisplayPort";
     case DeviceSubType_Enum.HDMI:
-      return 'HDMI'
+      return "HDMI";
     case DeviceSubType_Enum.LowEnergy:
-      return 'LowEnergy'
+      return "LowEnergy";
     case DeviceSubType_Enum.SPDIF:
-      return 'SPDIF'
+      return "SPDIF";
     case DeviceSubType_Enum.TV:
-      return 'TV'
+      return "TV";
     case DeviceSubType_Enum.HomePod:
-      return 'HomePod'
+      return "HomePod";
     case DeviceSubType_Enum.AppleTV:
-      return 'AppleTV'
+      return "AppleTV";
     case DeviceSubType_Enum.Vehicle:
-      return 'Vehicle'
+      return "Vehicle";
     case DeviceSubType_Enum.Cluster:
-      return 'Cluster'
+      return "Cluster";
     case DeviceSubType_Enum.SetTopBox:
-      return 'SetTopBox'
+      return "SetTopBox";
     case DeviceSubType_Enum.TVStick:
-      return 'TVStick'
+      return "TVStick";
     case DeviceSubType_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 export interface PlaybackState {
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum PlaybackState_Enum {
@@ -403,405 +403,456 @@ export enum PlaybackState_Enum {
 export function playbackState_EnumFromJSON(object: any): PlaybackState_Enum {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return PlaybackState_Enum.Unknown
+    case "Unknown":
+      return PlaybackState_Enum.Unknown;
     case 1:
-    case 'Playing':
-      return PlaybackState_Enum.Playing
+    case "Playing":
+      return PlaybackState_Enum.Playing;
     case 2:
-    case 'Paused':
-      return PlaybackState_Enum.Paused
+    case "Paused":
+      return PlaybackState_Enum.Paused;
     case 3:
-    case 'Stopped':
-      return PlaybackState_Enum.Stopped
+    case "Stopped":
+      return PlaybackState_Enum.Stopped;
     case 4:
-    case 'Interrupted':
-      return PlaybackState_Enum.Interrupted
+    case "Interrupted":
+      return PlaybackState_Enum.Interrupted;
     case 5:
-    case 'Seeking':
-      return PlaybackState_Enum.Seeking
+    case "Seeking":
+      return PlaybackState_Enum.Seeking;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return PlaybackState_Enum.UNRECOGNIZED
+      return PlaybackState_Enum.UNRECOGNIZED;
   }
 }
 
 export function playbackState_EnumToJSON(object: PlaybackState_Enum): string {
   switch (object) {
     case PlaybackState_Enum.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case PlaybackState_Enum.Playing:
-      return 'Playing'
+      return "Playing";
     case PlaybackState_Enum.Paused:
-      return 'Paused'
+      return "Paused";
     case PlaybackState_Enum.Stopped:
-      return 'Stopped'
+      return "Stopped";
     case PlaybackState_Enum.Interrupted:
-      return 'Interrupted'
+      return "Interrupted";
     case PlaybackState_Enum.Seeking:
-      return 'Seeking'
+      return "Seeking";
     case PlaybackState_Enum.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 function createBaseRepeatMode(): RepeatMode {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const RepeatMode: MessageFns<RepeatMode> = {
-  encode(message: RepeatMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: RepeatMode,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): RepeatMode {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseRepeatMode()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRepeatMode();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): RepeatMode {
-    return {}
+    return {};
   },
 
   toJSON(_: RepeatMode): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<RepeatMode>, I>>(base?: I): RepeatMode {
-    return RepeatMode.fromPartial(base ?? ({} as any))
+    return RepeatMode.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<RepeatMode>, I>>(_: I): RepeatMode {
-    const message = createBaseRepeatMode()
-    return message
+    const message = createBaseRepeatMode();
+    return message;
   },
-}
+};
 
 function createBaseShuffleMode(): ShuffleMode {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const ShuffleMode: MessageFns<ShuffleMode> = {
-  encode(message: ShuffleMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ShuffleMode,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ShuffleMode {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseShuffleMode()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseShuffleMode();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): ShuffleMode {
-    return {}
+    return {};
   },
 
   toJSON(_: ShuffleMode): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<ShuffleMode>, I>>(base?: I): ShuffleMode {
-    return ShuffleMode.fromPartial(base ?? ({} as any))
+    return ShuffleMode.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<ShuffleMode>, I>>(_: I): ShuffleMode {
-    const message = createBaseShuffleMode()
-    return message
+    const message = createBaseShuffleMode();
+    return message;
   },
-}
+};
 
 function createBaseDeviceClass(): DeviceClass {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const DeviceClass: MessageFns<DeviceClass> = {
-  encode(message: DeviceClass, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DeviceClass,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DeviceClass {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseDeviceClass()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeviceClass();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): DeviceClass {
-    return {}
+    return {};
   },
 
   toJSON(_: DeviceClass): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<DeviceClass>, I>>(base?: I): DeviceClass {
-    return DeviceClass.fromPartial(base ?? ({} as any))
+    return DeviceClass.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<DeviceClass>, I>>(_: I): DeviceClass {
-    const message = createBaseDeviceClass()
-    return message
+    const message = createBaseDeviceClass();
+    return message;
   },
-}
+};
 
 function createBaseDeviceType(): DeviceType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const DeviceType: MessageFns<DeviceType> = {
-  encode(message: DeviceType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DeviceType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DeviceType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseDeviceType()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeviceType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): DeviceType {
-    return {}
+    return {};
   },
 
   toJSON(_: DeviceType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<DeviceType>, I>>(base?: I): DeviceType {
-    return DeviceType.fromPartial(base ?? ({} as any))
+    return DeviceType.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<DeviceType>, I>>(_: I): DeviceType {
-    const message = createBaseDeviceType()
-    return message
+    const message = createBaseDeviceType();
+    return message;
   },
-}
+};
 
 function createBaseDeviceSubType(): DeviceSubType {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const DeviceSubType: MessageFns<DeviceSubType> = {
-  encode(message: DeviceSubType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DeviceSubType,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DeviceSubType {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseDeviceSubType()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeviceSubType();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): DeviceSubType {
-    return {}
+    return {};
   },
 
   toJSON(_: DeviceSubType): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<DeviceSubType>, I>>(base?: I): DeviceSubType {
-    return DeviceSubType.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<DeviceSubType>, I>>(
+    base?: I
+  ): DeviceSubType {
+    return DeviceSubType.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DeviceSubType>, I>>(_: I): DeviceSubType {
-    const message = createBaseDeviceSubType()
-    return message
+  fromPartial<I extends Exact<DeepPartial<DeviceSubType>, I>>(
+    _: I
+  ): DeviceSubType {
+    const message = createBaseDeviceSubType();
+    return message;
   },
-}
+};
 
 function createBasePlaybackState(): PlaybackState {
-  return { _unknownFields: {} }
+  return { _unknownFields: {} };
 }
 
 export const PlaybackState: MessageFns<PlaybackState> = {
-  encode(message: PlaybackState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PlaybackState,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PlaybackState {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBasePlaybackState()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePlaybackState();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(_: any): PlaybackState {
-    return {}
+    return {};
   },
 
   toJSON(_: PlaybackState): unknown {
-    const obj: any = {}
-    return obj
+    const obj: any = {};
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<PlaybackState>, I>>(base?: I): PlaybackState {
-    return PlaybackState.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<PlaybackState>, I>>(
+    base?: I
+  ): PlaybackState {
+    return PlaybackState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<PlaybackState>, I>>(_: I): PlaybackState {
-    const message = createBasePlaybackState()
-    return message
+  fromPartial<I extends Exact<DeepPartial<PlaybackState>, I>>(
+    _: I
+  ): PlaybackState {
+    const message = createBasePlaybackState();
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -811,18 +862,20 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

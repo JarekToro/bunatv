@@ -18,7 +18,7 @@ message AudioRouteType {
 message AudioRoute {
   optional AudioRouteType type = 1;
   optional string name = 2;
-  optional bool supportsSpatialization = 3; 
+  optional bool supportsSpatialization = 3;
 }
 
 message AudioTier {

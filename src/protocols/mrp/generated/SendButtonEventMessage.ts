@@ -5,148 +5,173 @@
 // source: SendButtonEventMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SendButtonEventMessage {
-  usagePage?: number | undefined
-  usage?: number | undefined
-  buttonDown?: boolean | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  usagePage?: number | undefined;
+  usage?: number | undefined;
+  buttonDown?: boolean | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSendButtonEventMessage(): SendButtonEventMessage {
-  return { usagePage: 0, usage: 0, buttonDown: false, _unknownFields: {} }
+  return { usagePage: 0, usage: 0, buttonDown: false, _unknownFields: {} };
 }
 
 export const SendButtonEventMessage: MessageFns<SendButtonEventMessage> = {
-  encode(message: SendButtonEventMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendButtonEventMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.usagePage !== undefined && message.usagePage !== 0) {
-      writer.uint32(8).uint32(message.usagePage)
+      writer.uint32(8).uint32(message.usagePage);
     }
     if (message.usage !== undefined && message.usage !== 0) {
-      writer.uint32(16).uint32(message.usage)
+      writer.uint32(16).uint32(message.usage);
     }
     if (message.buttonDown !== undefined && message.buttonDown !== false) {
-      writer.uint32(24).bool(message.buttonDown)
+      writer.uint32(24).bool(message.buttonDown);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendButtonEventMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendButtonEventMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendButtonEventMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendButtonEventMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.usagePage = reader.uint32()
-          continue
+          message.usagePage = reader.uint32();
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.usage = reader.uint32()
-          continue
+          message.usage = reader.uint32();
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.buttonDown = reader.bool()
-          continue
+          message.buttonDown = reader.bool();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SendButtonEventMessage {
     return {
-      usagePage: isSet(object.usagePage) ? globalThis.Number(object.usagePage) : 0,
+      usagePage: isSet(object.usagePage)
+        ? globalThis.Number(object.usagePage)
+        : 0,
       usage: isSet(object.usage) ? globalThis.Number(object.usage) : 0,
-      buttonDown: isSet(object.buttonDown) ? globalThis.Boolean(object.buttonDown) : false,
-    }
+      buttonDown: isSet(object.buttonDown)
+        ? globalThis.Boolean(object.buttonDown)
+        : false,
+    };
   },
 
   toJSON(message: SendButtonEventMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.usagePage !== undefined && message.usagePage !== 0) {
-      obj.usagePage = Math.round(message.usagePage)
+      obj.usagePage = Math.round(message.usagePage);
     }
     if (message.usage !== undefined && message.usage !== 0) {
-      obj.usage = Math.round(message.usage)
+      obj.usage = Math.round(message.usage);
     }
     if (message.buttonDown !== undefined && message.buttonDown !== false) {
-      obj.buttonDown = message.buttonDown
+      obj.buttonDown = message.buttonDown;
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<SendButtonEventMessage>, I>>(
     base?: I
   ): SendButtonEventMessage {
-    return SendButtonEventMessage.fromPartial(base ?? ({} as any))
+    return SendButtonEventMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<SendButtonEventMessage>, I>>(
     object: I
   ): SendButtonEventMessage {
-    const message = createBaseSendButtonEventMessage()
-    message.usagePage = object.usagePage ?? 0
-    message.usage = object.usage ?? 0
-    message.buttonDown = object.buttonDown ?? false
-    return message
+    const message = createBaseSendButtonEventMessage();
+    message.usagePage = object.usagePage ?? 0;
+    message.usage = object.usage ?? 0;
+    message.buttonDown = object.buttonDown ?? false;
+    return message;
   },
-}
+};
 
-export const sendButtonEventMessage: Extension<SendButtonEventMessage | undefined> = {
+export const sendButtonEventMessage: Extension<
+  SendButtonEventMessage | undefined
+> = {
   number: 43,
   tag: 346,
   repeated: false,
   packed: false,
   encode: (value: SendButtonEventMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SendButtonEventMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SendButtonEventMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SendButtonEventMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SendButtonEventMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SendButtonEventMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SendButtonEventMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -156,37 +181,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

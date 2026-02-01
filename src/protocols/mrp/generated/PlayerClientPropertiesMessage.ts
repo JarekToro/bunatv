@@ -5,140 +5,167 @@
 // source: PlayerClientPropertiesMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { PlayerPath } from './PlayerPath'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { PlayerPath } from "./PlayerPath";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface PlayerClientPropertiesMessage {
-  playerPath?: PlayerPath | undefined
-  lastPlayingTimestamp?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  playerPath?: PlayerPath | undefined;
+  lastPlayingTimestamp?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBasePlayerClientPropertiesMessage(): PlayerClientPropertiesMessage {
-  return { playerPath: undefined, lastPlayingTimestamp: 0, _unknownFields: {} }
+  return { playerPath: undefined, lastPlayingTimestamp: 0, _unknownFields: {} };
 }
 
-export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMessage> = {
-  encode(
-    message: PlayerClientPropertiesMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join()
-    }
-    if (message.lastPlayingTimestamp !== undefined && message.lastPlayingTimestamp !== 0) {
-      writer.uint32(17).double(message.lastPlayingTimestamp)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMessage> =
+  {
+    encode(
+      message: PlayerClientPropertiesMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.playerPath !== undefined) {
+        PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join();
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): PlayerClientPropertiesMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBasePlayerClientPropertiesMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break
+      if (
+        message.lastPlayingTimestamp !== undefined &&
+        message.lastPlayingTimestamp !== 0
+      ) {
+        writer.uint32(17).double(message.lastPlayingTimestamp);
+      }
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
         }
-        case 2: {
-          if (tag !== 17) {
-            break
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): PlayerClientPropertiesMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBasePlayerClientPropertiesMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.playerPath = PlayerPath.decode(reader, reader.uint32());
+            continue;
           }
+          case 2: {
+            if (tag !== 17) {
+              break;
+            }
 
-          message.lastPlayingTimestamp = reader.double()
-          continue
+            message.lastPlayingTimestamp = reader.double();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return message;
+    },
+
+    fromJSON(object: any): PlayerClientPropertiesMessage {
+      return {
+        playerPath: isSet(object.playerPath)
+          ? PlayerPath.fromJSON(object.playerPath)
+          : undefined,
+        lastPlayingTimestamp: isSet(object.lastPlayingTimestamp)
+          ? globalThis.Number(object.lastPlayingTimestamp)
+          : 0,
+      };
+    },
+
+    toJSON(message: PlayerClientPropertiesMessage): unknown {
+      const obj: any = {};
+      if (message.playerPath !== undefined) {
+        obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-      const buf = reader.skip(tag & 7)
-
-      const list = message._unknownFields![tag]
-
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+      if (
+        message.lastPlayingTimestamp !== undefined &&
+        message.lastPlayingTimestamp !== 0
+      ) {
+        obj.lastPlayingTimestamp = message.lastPlayingTimestamp;
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): PlayerClientPropertiesMessage {
-    return {
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
-      lastPlayingTimestamp: isSet(object.lastPlayingTimestamp)
-        ? globalThis.Number(object.lastPlayingTimestamp)
-        : 0,
-    }
-  },
+    create<I extends Exact<DeepPartial<PlayerClientPropertiesMessage>, I>>(
+      base?: I
+    ): PlayerClientPropertiesMessage {
+      return PlayerClientPropertiesMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<PlayerClientPropertiesMessage>, I>>(
+      object: I
+    ): PlayerClientPropertiesMessage {
+      const message = createBasePlayerClientPropertiesMessage();
+      message.playerPath =
+        object.playerPath !== undefined && object.playerPath !== null
+          ? PlayerPath.fromPartial(object.playerPath)
+          : undefined;
+      message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? 0;
+      return message;
+    },
+  };
 
-  toJSON(message: PlayerClientPropertiesMessage): unknown {
-    const obj: any = {}
-    if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
-    }
-    if (message.lastPlayingTimestamp !== undefined && message.lastPlayingTimestamp !== 0) {
-      obj.lastPlayingTimestamp = message.lastPlayingTimestamp
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<PlayerClientPropertiesMessage>, I>>(
-    base?: I
-  ): PlayerClientPropertiesMessage {
-    return PlayerClientPropertiesMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<PlayerClientPropertiesMessage>, I>>(
-    object: I
-  ): PlayerClientPropertiesMessage {
-    const message = createBasePlayerClientPropertiesMessage()
-    message.playerPath =
-      object.playerPath !== undefined && object.playerPath !== null
-        ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
-    message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? 0
-    return message
-  },
-}
-
-export const playerClientPropertiesMessage: Extension<PlayerClientPropertiesMessage | undefined> = {
+export const playerClientPropertiesMessage: Extension<
+  PlayerClientPropertiesMessage | undefined
+> = {
   number: 86,
   tag: 690,
   repeated: false,
   packed: false,
   encode: (value: PlayerClientPropertiesMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    PlayerClientPropertiesMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    PlayerClientPropertiesMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): PlayerClientPropertiesMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return PlayerClientPropertiesMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): PlayerClientPropertiesMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return PlayerClientPropertiesMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -148,37 +175,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

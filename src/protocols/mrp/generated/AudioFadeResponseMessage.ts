@@ -5,17 +5,17 @@
 // source: AudioFadeResponseMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface AudioFadeResponseMessage {
-  fadeDuration?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  fadeDuration?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseAudioFadeResponseMessage(): AudioFadeResponseMessage {
-  return { fadeDuration: 0, _unknownFields: {} }
+  return { fadeDuration: 0, _unknownFields: {} };
 }
 
 export const AudioFadeResponseMessage: MessageFns<AudioFadeResponseMessage> = {
@@ -24,96 +24,118 @@ export const AudioFadeResponseMessage: MessageFns<AudioFadeResponseMessage> = {
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
     if (message.fadeDuration !== undefined && message.fadeDuration !== 0) {
-      writer.uint32(8).int64(message.fadeDuration)
+      writer.uint32(8).int64(message.fadeDuration);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AudioFadeResponseMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioFadeResponseMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AudioFadeResponseMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudioFadeResponseMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.fadeDuration = longToNumber(reader.int64())
-          continue
+          message.fadeDuration = longToNumber(reader.int64());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AudioFadeResponseMessage {
-    return { fadeDuration: isSet(object.fadeDuration) ? globalThis.Number(object.fadeDuration) : 0 }
+    return {
+      fadeDuration: isSet(object.fadeDuration)
+        ? globalThis.Number(object.fadeDuration)
+        : 0,
+    };
   },
 
   toJSON(message: AudioFadeResponseMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.fadeDuration !== undefined && message.fadeDuration !== 0) {
-      obj.fadeDuration = Math.round(message.fadeDuration)
+      obj.fadeDuration = Math.round(message.fadeDuration);
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<AudioFadeResponseMessage>, I>>(
     base?: I
   ): AudioFadeResponseMessage {
-    return AudioFadeResponseMessage.fromPartial(base ?? ({} as any))
+    return AudioFadeResponseMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<AudioFadeResponseMessage>, I>>(
     object: I
   ): AudioFadeResponseMessage {
-    const message = createBaseAudioFadeResponseMessage()
-    message.fadeDuration = object.fadeDuration ?? 0
-    return message
+    const message = createBaseAudioFadeResponseMessage();
+    message.fadeDuration = object.fadeDuration ?? 0;
+    return message;
   },
-}
+};
 
-export const audioFadeResponseMessage: Extension<AudioFadeResponseMessage | undefined> = {
+export const audioFadeResponseMessage: Extension<
+  AudioFadeResponseMessage | undefined
+> = {
   number: 89,
   tag: 714,
   repeated: false,
   packed: false,
   encode: (value: AudioFadeResponseMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    AudioFadeResponseMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    AudioFadeResponseMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): AudioFadeResponseMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return AudioFadeResponseMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): AudioFadeResponseMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return AudioFadeResponseMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -123,48 +145,50 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString())
+  const num = globalThis.Number(int64.toString());
   if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
   if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is smaller than Number.MIN_SAFE_INTEGER')
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
   }
-  return num
+  return num;
 }
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

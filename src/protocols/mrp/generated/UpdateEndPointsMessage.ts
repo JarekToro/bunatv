@@ -5,292 +5,347 @@
 // source: UpdateEndPointsMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface AVEndpointDescriptor {
-  name?: string | undefined
-  uniqueIdentifier?: string | undefined
+  name?: string | undefined;
+  uniqueIdentifier?: string | undefined;
   /**
    * repeated ... outputDevices = 3;
    * optional ... designatedGroupLeader = 4;
    */
-  isLocalEndpoint?: boolean | undefined
-  instanceIdentifier?: string | undefined
-  isProxyGroupPlayer?: boolean | undefined
-  connectionType?: number | undefined
+  isLocalEndpoint?: boolean | undefined;
+  instanceIdentifier?: string | undefined;
+  isProxyGroupPlayer?: boolean | undefined;
+  connectionType?: number | undefined;
   /** repeated ... _personalOutputDevices = 10; */
-  canModifyGroupMembership?: boolean | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  canModifyGroupMembership?: boolean | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface UpdateEndPointsMessage {
-  endpoints?: AVEndpointDescriptor | undefined
-  endpointFeatures?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  endpoints?: AVEndpointDescriptor | undefined;
+  endpointFeatures?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseAVEndpointDescriptor(): AVEndpointDescriptor {
   return {
-    name: '',
-    uniqueIdentifier: '',
+    name: "",
+    uniqueIdentifier: "",
     isLocalEndpoint: false,
-    instanceIdentifier: '',
+    instanceIdentifier: "",
     isProxyGroupPlayer: false,
     connectionType: 0,
     canModifyGroupMembership: false,
     _unknownFields: {},
-  }
+  };
 }
 
 export const AVEndpointDescriptor: MessageFns<AVEndpointDescriptor> = {
-  encode(message: AVEndpointDescriptor, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.name !== undefined && message.name !== '') {
-      writer.uint32(10).string(message.name)
+  encode(
+    message: AVEndpointDescriptor,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
+    if (message.name !== undefined && message.name !== "") {
+      writer.uint32(10).string(message.name);
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== '') {
-      writer.uint32(18).string(message.uniqueIdentifier)
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== ""
+    ) {
+      writer.uint32(18).string(message.uniqueIdentifier);
     }
-    if (message.isLocalEndpoint !== undefined && message.isLocalEndpoint !== false) {
-      writer.uint32(40).bool(message.isLocalEndpoint)
+    if (
+      message.isLocalEndpoint !== undefined &&
+      message.isLocalEndpoint !== false
+    ) {
+      writer.uint32(40).bool(message.isLocalEndpoint);
     }
-    if (message.instanceIdentifier !== undefined && message.instanceIdentifier !== '') {
-      writer.uint32(50).string(message.instanceIdentifier)
+    if (
+      message.instanceIdentifier !== undefined &&
+      message.instanceIdentifier !== ""
+    ) {
+      writer.uint32(50).string(message.instanceIdentifier);
     }
-    if (message.isProxyGroupPlayer !== undefined && message.isProxyGroupPlayer !== false) {
-      writer.uint32(56).bool(message.isProxyGroupPlayer)
+    if (
+      message.isProxyGroupPlayer !== undefined &&
+      message.isProxyGroupPlayer !== false
+    ) {
+      writer.uint32(56).bool(message.isProxyGroupPlayer);
     }
     if (message.connectionType !== undefined && message.connectionType !== 0) {
-      writer.uint32(64).int32(message.connectionType)
+      writer.uint32(64).int32(message.connectionType);
     }
     if (
       message.canModifyGroupMembership !== undefined &&
       message.canModifyGroupMembership !== false
     ) {
-      writer.uint32(72).bool(message.canModifyGroupMembership)
+      writer.uint32(72).bool(message.canModifyGroupMembership);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AVEndpointDescriptor {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAVEndpointDescriptor()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AVEndpointDescriptor {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAVEndpointDescriptor();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.name = reader.string()
-          continue
+          message.name = reader.string();
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.uniqueIdentifier = reader.string()
-          continue
+          message.uniqueIdentifier = reader.string();
+          continue;
         }
         case 5: {
           if (tag !== 40) {
-            break
+            break;
           }
 
-          message.isLocalEndpoint = reader.bool()
-          continue
+          message.isLocalEndpoint = reader.bool();
+          continue;
         }
         case 6: {
           if (tag !== 50) {
-            break
+            break;
           }
 
-          message.instanceIdentifier = reader.string()
-          continue
+          message.instanceIdentifier = reader.string();
+          continue;
         }
         case 7: {
           if (tag !== 56) {
-            break
+            break;
           }
 
-          message.isProxyGroupPlayer = reader.bool()
-          continue
+          message.isProxyGroupPlayer = reader.bool();
+          continue;
         }
         case 8: {
           if (tag !== 64) {
-            break
+            break;
           }
 
-          message.connectionType = reader.int32()
-          continue
+          message.connectionType = reader.int32();
+          continue;
         }
         case 9: {
           if (tag !== 72) {
-            break
+            break;
           }
 
-          message.canModifyGroupMembership = reader.bool()
-          continue
+          message.canModifyGroupMembership = reader.bool();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AVEndpointDescriptor {
     return {
-      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.String(object.uniqueIdentifier)
-        : '',
+        : "",
       isLocalEndpoint: isSet(object.isLocalEndpoint)
         ? globalThis.Boolean(object.isLocalEndpoint)
         : false,
       instanceIdentifier: isSet(object.instanceIdentifier)
         ? globalThis.String(object.instanceIdentifier)
-        : '',
+        : "",
       isProxyGroupPlayer: isSet(object.isProxyGroupPlayer)
         ? globalThis.Boolean(object.isProxyGroupPlayer)
         : false,
-      connectionType: isSet(object.connectionType) ? globalThis.Number(object.connectionType) : 0,
+      connectionType: isSet(object.connectionType)
+        ? globalThis.Number(object.connectionType)
+        : 0,
       canModifyGroupMembership: isSet(object.canModifyGroupMembership)
         ? globalThis.Boolean(object.canModifyGroupMembership)
         : false,
-    }
+    };
   },
 
   toJSON(message: AVEndpointDescriptor): unknown {
-    const obj: any = {}
-    if (message.name !== undefined && message.name !== '') {
-      obj.name = message.name
+    const obj: any = {};
+    if (message.name !== undefined && message.name !== "") {
+      obj.name = message.name;
     }
-    if (message.uniqueIdentifier !== undefined && message.uniqueIdentifier !== '') {
-      obj.uniqueIdentifier = message.uniqueIdentifier
+    if (
+      message.uniqueIdentifier !== undefined &&
+      message.uniqueIdentifier !== ""
+    ) {
+      obj.uniqueIdentifier = message.uniqueIdentifier;
     }
-    if (message.isLocalEndpoint !== undefined && message.isLocalEndpoint !== false) {
-      obj.isLocalEndpoint = message.isLocalEndpoint
+    if (
+      message.isLocalEndpoint !== undefined &&
+      message.isLocalEndpoint !== false
+    ) {
+      obj.isLocalEndpoint = message.isLocalEndpoint;
     }
-    if (message.instanceIdentifier !== undefined && message.instanceIdentifier !== '') {
-      obj.instanceIdentifier = message.instanceIdentifier
+    if (
+      message.instanceIdentifier !== undefined &&
+      message.instanceIdentifier !== ""
+    ) {
+      obj.instanceIdentifier = message.instanceIdentifier;
     }
-    if (message.isProxyGroupPlayer !== undefined && message.isProxyGroupPlayer !== false) {
-      obj.isProxyGroupPlayer = message.isProxyGroupPlayer
+    if (
+      message.isProxyGroupPlayer !== undefined &&
+      message.isProxyGroupPlayer !== false
+    ) {
+      obj.isProxyGroupPlayer = message.isProxyGroupPlayer;
     }
     if (message.connectionType !== undefined && message.connectionType !== 0) {
-      obj.connectionType = Math.round(message.connectionType)
+      obj.connectionType = Math.round(message.connectionType);
     }
     if (
       message.canModifyGroupMembership !== undefined &&
       message.canModifyGroupMembership !== false
     ) {
-      obj.canModifyGroupMembership = message.canModifyGroupMembership
+      obj.canModifyGroupMembership = message.canModifyGroupMembership;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<AVEndpointDescriptor>, I>>(base?: I): AVEndpointDescriptor {
-    return AVEndpointDescriptor.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<AVEndpointDescriptor>, I>>(
+    base?: I
+  ): AVEndpointDescriptor {
+    return AVEndpointDescriptor.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<AVEndpointDescriptor>, I>>(
     object: I
   ): AVEndpointDescriptor {
-    const message = createBaseAVEndpointDescriptor()
-    message.name = object.name ?? ''
-    message.uniqueIdentifier = object.uniqueIdentifier ?? ''
-    message.isLocalEndpoint = object.isLocalEndpoint ?? false
-    message.instanceIdentifier = object.instanceIdentifier ?? ''
-    message.isProxyGroupPlayer = object.isProxyGroupPlayer ?? false
-    message.connectionType = object.connectionType ?? 0
-    message.canModifyGroupMembership = object.canModifyGroupMembership ?? false
-    return message
+    const message = createBaseAVEndpointDescriptor();
+    message.name = object.name ?? "";
+    message.uniqueIdentifier = object.uniqueIdentifier ?? "";
+    message.isLocalEndpoint = object.isLocalEndpoint ?? false;
+    message.instanceIdentifier = object.instanceIdentifier ?? "";
+    message.isProxyGroupPlayer = object.isProxyGroupPlayer ?? false;
+    message.connectionType = object.connectionType ?? 0;
+    message.canModifyGroupMembership = object.canModifyGroupMembership ?? false;
+    return message;
   },
-}
+};
 
 function createBaseUpdateEndPointsMessage(): UpdateEndPointsMessage {
-  return { endpoints: undefined, endpointFeatures: 0, _unknownFields: {} }
+  return { endpoints: undefined, endpointFeatures: 0, _unknownFields: {} };
 }
 
 export const UpdateEndPointsMessage: MessageFns<UpdateEndPointsMessage> = {
-  encode(message: UpdateEndPointsMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: UpdateEndPointsMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.endpoints !== undefined) {
-      AVEndpointDescriptor.encode(message.endpoints, writer.uint32(10).fork()).join()
+      AVEndpointDescriptor.encode(
+        message.endpoints,
+        writer.uint32(10).fork()
+      ).join();
     }
-    if (message.endpointFeatures !== undefined && message.endpointFeatures !== 0) {
-      writer.uint32(16).int32(message.endpointFeatures)
+    if (
+      message.endpointFeatures !== undefined &&
+      message.endpointFeatures !== 0
+    ) {
+      writer.uint32(16).int32(message.endpointFeatures);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateEndPointsMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseUpdateEndPointsMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): UpdateEndPointsMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdateEndPointsMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.endpoints = AVEndpointDescriptor.decode(reader, reader.uint32())
-          continue
+          message.endpoints = AVEndpointDescriptor.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.endpointFeatures = reader.int32()
-          continue
+          message.endpointFeatures = reader.int32();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): UpdateEndPointsMessage {
@@ -301,57 +356,72 @@ export const UpdateEndPointsMessage: MessageFns<UpdateEndPointsMessage> = {
       endpointFeatures: isSet(object.endpointFeatures)
         ? globalThis.Number(object.endpointFeatures)
         : 0,
-    }
+    };
   },
 
   toJSON(message: UpdateEndPointsMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.endpoints !== undefined) {
-      obj.endpoints = AVEndpointDescriptor.toJSON(message.endpoints)
+      obj.endpoints = AVEndpointDescriptor.toJSON(message.endpoints);
     }
-    if (message.endpointFeatures !== undefined && message.endpointFeatures !== 0) {
-      obj.endpointFeatures = Math.round(message.endpointFeatures)
+    if (
+      message.endpointFeatures !== undefined &&
+      message.endpointFeatures !== 0
+    ) {
+      obj.endpointFeatures = Math.round(message.endpointFeatures);
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<UpdateEndPointsMessage>, I>>(
     base?: I
   ): UpdateEndPointsMessage {
-    return UpdateEndPointsMessage.fromPartial(base ?? ({} as any))
+    return UpdateEndPointsMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<UpdateEndPointsMessage>, I>>(
     object: I
   ): UpdateEndPointsMessage {
-    const message = createBaseUpdateEndPointsMessage()
+    const message = createBaseUpdateEndPointsMessage();
     message.endpoints =
       object.endpoints !== undefined && object.endpoints !== null
         ? AVEndpointDescriptor.fromPartial(object.endpoints)
-        : undefined
-    message.endpointFeatures = object.endpointFeatures ?? 0
-    return message
+        : undefined;
+    message.endpointFeatures = object.endpointFeatures ?? 0;
+    return message;
   },
-}
+};
 
-export const updateEndPointsMessage: Extension<UpdateEndPointsMessage | undefined> = {
+export const updateEndPointsMessage: Extension<
+  UpdateEndPointsMessage | undefined
+> = {
   number: 83,
   tag: 666,
   repeated: false,
   packed: false,
   encode: (value: UpdateEndPointsMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    UpdateEndPointsMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    UpdateEndPointsMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): UpdateEndPointsMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return UpdateEndPointsMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): UpdateEndPointsMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return UpdateEndPointsMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -361,37 +431,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

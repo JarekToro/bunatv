@@ -5,18 +5,18 @@
 // source: Origin.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { DeviceInfoMessage } from './DeviceInfoMessage'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { DeviceInfoMessage } from "./DeviceInfoMessage";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface Origin {
-  type?: Origin_Type | undefined
-  displayName?: string | undefined
-  identifier?: number | undefined
-  deviceInfo?: DeviceInfoMessage | undefined
-  isLocallyHosted?: boolean | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  type?: Origin_Type | undefined;
+  displayName?: string | undefined;
+  identifier?: number | undefined;
+  deviceInfo?: DeviceInfoMessage | undefined;
+  isLocallyHosted?: boolean | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export enum Origin_Type {
@@ -29,190 +29,219 @@ export enum Origin_Type {
 export function origin_TypeFromJSON(object: any): Origin_Type {
   switch (object) {
     case 0:
-    case 'Unknown':
-      return Origin_Type.Unknown
+    case "Unknown":
+      return Origin_Type.Unknown;
     case 1:
-    case 'Local':
-      return Origin_Type.Local
+    case "Local":
+      return Origin_Type.Local;
     case 2:
-    case 'Custom':
-      return Origin_Type.Custom
+    case "Custom":
+      return Origin_Type.Custom;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
-      return Origin_Type.UNRECOGNIZED
+      return Origin_Type.UNRECOGNIZED;
   }
 }
 
 export function origin_TypeToJSON(object: Origin_Type): string {
   switch (object) {
     case Origin_Type.Unknown:
-      return 'Unknown'
+      return "Unknown";
     case Origin_Type.Local:
-      return 'Local'
+      return "Local";
     case Origin_Type.Custom:
-      return 'Custom'
+      return "Custom";
     case Origin_Type.UNRECOGNIZED:
     default:
-      return 'UNRECOGNIZED'
+      return "UNRECOGNIZED";
   }
 }
 
 function createBaseOrigin(): Origin {
   return {
     type: 0,
-    displayName: '',
+    displayName: "",
     identifier: 0,
     deviceInfo: undefined,
     isLocallyHosted: false,
     _unknownFields: {},
-  }
+  };
 }
 
 export const Origin: MessageFns<Origin> = {
-  encode(message: Origin, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Origin,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.type !== undefined && message.type !== 0) {
-      writer.uint32(8).int32(message.type)
+      writer.uint32(8).int32(message.type);
     }
-    if (message.displayName !== undefined && message.displayName !== '') {
-      writer.uint32(18).string(message.displayName)
+    if (message.displayName !== undefined && message.displayName !== "") {
+      writer.uint32(18).string(message.displayName);
     }
     if (message.identifier !== undefined && message.identifier !== 0) {
-      writer.uint32(24).int32(message.identifier)
+      writer.uint32(24).int32(message.identifier);
     }
     if (message.deviceInfo !== undefined) {
-      DeviceInfoMessage.encode(message.deviceInfo, writer.uint32(34).fork()).join()
+      DeviceInfoMessage.encode(
+        message.deviceInfo,
+        writer.uint32(34).fork()
+      ).join();
     }
-    if (message.isLocallyHosted !== undefined && message.isLocallyHosted !== false) {
-      writer.uint32(40).bool(message.isLocallyHosted)
+    if (
+      message.isLocallyHosted !== undefined &&
+      message.isLocallyHosted !== false
+    ) {
+      writer.uint32(40).bool(message.isLocallyHosted);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Origin {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseOrigin()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseOrigin();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 8) {
-            break
+            break;
           }
 
-          message.type = reader.int32() as any
-          continue
+          message.type = reader.int32() as any;
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.displayName = reader.string()
-          continue
+          message.displayName = reader.string();
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.identifier = reader.int32()
-          continue
+          message.identifier = reader.int32();
+          continue;
         }
         case 4: {
           if (tag !== 34) {
-            break
+            break;
           }
 
-          message.deviceInfo = DeviceInfoMessage.decode(reader, reader.uint32())
-          continue
+          message.deviceInfo = DeviceInfoMessage.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 5: {
           if (tag !== 40) {
-            break
+            break;
           }
 
-          message.isLocallyHosted = reader.bool()
-          continue
+          message.isLocallyHosted = reader.bool();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): Origin {
     return {
       type: isSet(object.type) ? origin_TypeFromJSON(object.type) : 0,
-      displayName: isSet(object.displayName) ? globalThis.String(object.displayName) : '',
-      identifier: isSet(object.identifier) ? globalThis.Number(object.identifier) : 0,
+      displayName: isSet(object.displayName)
+        ? globalThis.String(object.displayName)
+        : "",
+      identifier: isSet(object.identifier)
+        ? globalThis.Number(object.identifier)
+        : 0,
       deviceInfo: isSet(object.deviceInfo)
         ? DeviceInfoMessage.fromJSON(object.deviceInfo)
         : undefined,
       isLocallyHosted: isSet(object.isLocallyHosted)
         ? globalThis.Boolean(object.isLocallyHosted)
         : false,
-    }
+    };
   },
 
   toJSON(message: Origin): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.type !== undefined && message.type !== 0) {
-      obj.type = origin_TypeToJSON(message.type)
+      obj.type = origin_TypeToJSON(message.type);
     }
-    if (message.displayName !== undefined && message.displayName !== '') {
-      obj.displayName = message.displayName
+    if (message.displayName !== undefined && message.displayName !== "") {
+      obj.displayName = message.displayName;
     }
     if (message.identifier !== undefined && message.identifier !== 0) {
-      obj.identifier = Math.round(message.identifier)
+      obj.identifier = Math.round(message.identifier);
     }
     if (message.deviceInfo !== undefined) {
-      obj.deviceInfo = DeviceInfoMessage.toJSON(message.deviceInfo)
+      obj.deviceInfo = DeviceInfoMessage.toJSON(message.deviceInfo);
     }
-    if (message.isLocallyHosted !== undefined && message.isLocallyHosted !== false) {
-      obj.isLocallyHosted = message.isLocallyHosted
+    if (
+      message.isLocallyHosted !== undefined &&
+      message.isLocallyHosted !== false
+    ) {
+      obj.isLocallyHosted = message.isLocallyHosted;
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<Origin>, I>>(base?: I): Origin {
-    return Origin.fromPartial(base ?? ({} as any))
+    return Origin.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<Origin>, I>>(object: I): Origin {
-    const message = createBaseOrigin()
-    message.type = object.type ?? 0
-    message.displayName = object.displayName ?? ''
-    message.identifier = object.identifier ?? 0
+    const message = createBaseOrigin();
+    message.type = object.type ?? 0;
+    message.displayName = object.displayName ?? "";
+    message.identifier = object.identifier ?? 0;
     message.deviceInfo =
       object.deviceInfo !== undefined && object.deviceInfo !== null
         ? DeviceInfoMessage.fromPartial(object.deviceInfo)
-        : undefined
-    message.isLocallyHosted = object.isLocallyHosted ?? false
-    return message
+        : undefined;
+    message.isLocallyHosted = object.isLocallyHosted ?? false;
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -222,22 +251,24 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

@@ -5,121 +5,135 @@
 // source: UpdateContentItemArtworkMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { ContentItem } from './ContentItem'
-import { PlayerPath } from './PlayerPath'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { ContentItem } from "./ContentItem";
+import { PlayerPath } from "./PlayerPath";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface UpdateContentItemArtworkMessage {
-  contentItems: ContentItem[]
-  playerPath?: PlayerPath | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  contentItems: ContentItem[];
+  playerPath?: PlayerPath | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseUpdateContentItemArtworkMessage(): UpdateContentItemArtworkMessage {
-  return { contentItems: [], playerPath: undefined, _unknownFields: {} }
+  return { contentItems: [], playerPath: undefined, _unknownFields: {} };
 }
 
-export const UpdateContentItemArtworkMessage: MessageFns<UpdateContentItemArtworkMessage> = {
-  encode(
-    message: UpdateContentItemArtworkMessage,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    for (const v of message.contentItems) {
-      ContentItem.encode(v!, writer.uint32(10).fork()).join()
-    }
-    if (message.playerPath !== undefined) {
-      PlayerPath.encode(message.playerPath, writer.uint32(18).fork()).join()
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const UpdateContentItemArtworkMessage: MessageFns<UpdateContentItemArtworkMessage> =
+  {
+    encode(
+      message: UpdateContentItemArtworkMessage,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      for (const v of message.contentItems) {
+        ContentItem.encode(v!, writer.uint32(10).fork()).join();
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateContentItemArtworkMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseUpdateContentItemArtworkMessage()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break
+      if (message.playerPath !== undefined) {
+        PlayerPath.encode(message.playerPath, writer.uint32(18).fork()).join();
+      }
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.contentItems.push(ContentItem.decode(reader, reader.uint32()))
-          continue
         }
-        case 2: {
-          if (tag !== 18) {
-            break
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): UpdateContentItemArtworkMessage {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseUpdateContentItemArtworkMessage();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.contentItems.push(
+              ContentItem.decode(reader, reader.uint32())
+            );
+            continue;
           }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-          message.playerPath = PlayerPath.decode(reader, reader.uint32())
-          continue
+            message.playerPath = PlayerPath.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return message;
+    },
+
+    fromJSON(object: any): UpdateContentItemArtworkMessage {
+      return {
+        contentItems: globalThis.Array.isArray(object?.contentItems)
+          ? object.contentItems.map((e: any) => ContentItem.fromJSON(e))
+          : [],
+        playerPath: isSet(object.playerPath)
+          ? PlayerPath.fromJSON(object.playerPath)
+          : undefined,
+      };
+    },
+
+    toJSON(message: UpdateContentItemArtworkMessage): unknown {
+      const obj: any = {};
+      if (message.contentItems?.length) {
+        obj.contentItems = message.contentItems.map((e) =>
+          ContentItem.toJSON(e)
+        );
       }
-      const buf = reader.skip(tag & 7)
-
-      const list = message._unknownFields![tag]
-
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+      if (message.playerPath !== undefined) {
+        obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-    }
-    return message
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): UpdateContentItemArtworkMessage {
-    return {
-      contentItems: globalThis.Array.isArray(object?.contentItems)
-        ? object.contentItems.map((e: any) => ContentItem.fromJSON(e))
-        : [],
-      playerPath: isSet(object.playerPath) ? PlayerPath.fromJSON(object.playerPath) : undefined,
-    }
-  },
-
-  toJSON(message: UpdateContentItemArtworkMessage): unknown {
-    const obj: any = {}
-    if (message.contentItems?.length) {
-      obj.contentItems = message.contentItems.map(e => ContentItem.toJSON(e))
-    }
-    if (message.playerPath !== undefined) {
-      obj.playerPath = PlayerPath.toJSON(message.playerPath)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<UpdateContentItemArtworkMessage>, I>>(
-    base?: I
-  ): UpdateContentItemArtworkMessage {
-    return UpdateContentItemArtworkMessage.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<UpdateContentItemArtworkMessage>, I>>(
-    object: I
-  ): UpdateContentItemArtworkMessage {
-    const message = createBaseUpdateContentItemArtworkMessage()
-    message.contentItems = object.contentItems?.map(e => ContentItem.fromPartial(e)) || []
-    message.playerPath =
-      object.playerPath !== undefined && object.playerPath !== null
-        ? PlayerPath.fromPartial(object.playerPath)
-        : undefined
-    return message
-  },
-}
+    create<I extends Exact<DeepPartial<UpdateContentItemArtworkMessage>, I>>(
+      base?: I
+    ): UpdateContentItemArtworkMessage {
+      return UpdateContentItemArtworkMessage.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<
+      I extends Exact<DeepPartial<UpdateContentItemArtworkMessage>, I>,
+    >(object: I): UpdateContentItemArtworkMessage {
+      const message = createBaseUpdateContentItemArtworkMessage();
+      message.contentItems =
+        object.contentItems?.map((e) => ContentItem.fromPartial(e)) || [];
+      message.playerPath =
+        object.playerPath !== undefined && object.playerPath !== null
+          ? PlayerPath.fromPartial(object.playerPath)
+          : undefined;
+      return message;
+    },
+  };
 
 export const updateContentItemArtworkMessage: Extension<
   UpdateContentItemArtworkMessage | undefined
@@ -128,20 +142,32 @@ export const updateContentItemArtworkMessage: Extension<
   tag: 490,
   repeated: false,
   packed: false,
-  encode: (value: UpdateContentItemArtworkMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    UpdateContentItemArtworkMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+  encode: (
+    value: UpdateContentItemArtworkMessage | undefined
+  ): Uint8Array[] => {
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    UpdateContentItemArtworkMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): UpdateContentItemArtworkMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return UpdateContentItemArtworkMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): UpdateContentItemArtworkMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return UpdateContentItemArtworkMessage.decode(reader, reader.uint32());
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -151,37 +177,39 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

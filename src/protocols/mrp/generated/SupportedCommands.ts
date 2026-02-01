@@ -5,66 +5,74 @@
 // source: SupportedCommands.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { CommandInfo } from './CommandInfo'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { CommandInfo } from "./CommandInfo";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface SupportedCommands {
-  supportedCommands: CommandInfo[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  supportedCommands: CommandInfo[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSupportedCommands(): SupportedCommands {
-  return { supportedCommands: [], _unknownFields: {} }
+  return { supportedCommands: [], _unknownFields: {} };
 }
 
 export const SupportedCommands: MessageFns<SupportedCommands> = {
-  encode(message: SupportedCommands, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SupportedCommands,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.supportedCommands) {
-      CommandInfo.encode(v!, writer.uint32(10).fork()).join()
+      CommandInfo.encode(v!, writer.uint32(10).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SupportedCommands {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSupportedCommands()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSupportedCommands();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.supportedCommands.push(CommandInfo.decode(reader, reader.uint32()))
-          continue
+          message.supportedCommands.push(
+            CommandInfo.decode(reader, reader.uint32())
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SupportedCommands {
@@ -72,28 +80,42 @@ export const SupportedCommands: MessageFns<SupportedCommands> = {
       supportedCommands: globalThis.Array.isArray(object?.supportedCommands)
         ? object.supportedCommands.map((e: any) => CommandInfo.fromJSON(e))
         : [],
-    }
+    };
   },
 
   toJSON(message: SupportedCommands): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.supportedCommands?.length) {
-      obj.supportedCommands = message.supportedCommands.map(e => CommandInfo.toJSON(e))
+      obj.supportedCommands = message.supportedCommands.map((e) =>
+        CommandInfo.toJSON(e)
+      );
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SupportedCommands>, I>>(base?: I): SupportedCommands {
-    return SupportedCommands.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SupportedCommands>, I>>(
+    base?: I
+  ): SupportedCommands {
+    return SupportedCommands.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SupportedCommands>, I>>(object: I): SupportedCommands {
-    const message = createBaseSupportedCommands()
-    message.supportedCommands = object.supportedCommands?.map(e => CommandInfo.fromPartial(e)) || []
-    return message
+  fromPartial<I extends Exact<DeepPartial<SupportedCommands>, I>>(
+    object: I
+  ): SupportedCommands {
+    const message = createBaseSupportedCommands();
+    message.supportedCommands =
+      object.supportedCommands?.map((e) => CommandInfo.fromPartial(e)) || [];
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -103,18 +125,20 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

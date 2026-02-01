@@ -5,162 +5,184 @@
 // source: SendVoiceInputMessage.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { AudioFormatSettings } from './AudioFormatSettingsMessage'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { AudioFormatSettings } from "./AudioFormatSettingsMessage";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface AudioStreamPacketDescription {
-  startOffset?: number | undefined
-  variableFramesInPacket?: number | undefined
-  dataByteSize?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  startOffset?: number | undefined;
+  variableFramesInPacket?: number | undefined;
+  dataByteSize?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface AudioBuffer {
-  formatSettings?: AudioFormatSettings | undefined
-  packetCapacity?: number | undefined
-  maximumPacketSize?: number | undefined
-  packetCount?: number | undefined
-  contents?: Buffer | undefined
-  packetDescriptions: AudioStreamPacketDescription[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  formatSettings?: AudioFormatSettings | undefined;
+  packetCapacity?: number | undefined;
+  maximumPacketSize?: number | undefined;
+  packetCount?: number | undefined;
+  contents?: Buffer | undefined;
+  packetDescriptions: AudioStreamPacketDescription[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface AudioTime {
-  timestamp?: number | undefined
-  sampleRate?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  timestamp?: number | undefined;
+  sampleRate?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface AudioDataBlock {
-  buffer?: AudioBuffer | undefined
-  time?: AudioTime | undefined
-  gain?: number | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  buffer?: AudioBuffer | undefined;
+  time?: AudioTime | undefined;
+  gain?: number | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 export interface SendVoiceInputMessage {
-  dataBlock?: AudioDataBlock | undefined
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  dataBlock?: AudioDataBlock | undefined;
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseAudioStreamPacketDescription(): AudioStreamPacketDescription {
-  return { startOffset: 0, variableFramesInPacket: 0, dataByteSize: 0, _unknownFields: {} }
+  return {
+    startOffset: 0,
+    variableFramesInPacket: 0,
+    dataByteSize: 0,
+    _unknownFields: {},
+  };
 }
 
-export const AudioStreamPacketDescription: MessageFns<AudioStreamPacketDescription> = {
-  encode(
-    message: AudioStreamPacketDescription,
-    writer: BinaryWriter = new BinaryWriter()
-  ): BinaryWriter {
-    if (message.startOffset !== undefined && message.startOffset !== 0) {
-      writer.uint32(8).int64(message.startOffset)
-    }
-    if (message.variableFramesInPacket !== undefined && message.variableFramesInPacket !== 0) {
-      writer.uint32(16).uint32(message.variableFramesInPacket)
-    }
-    if (message.dataByteSize !== undefined && message.dataByteSize !== 0) {
-      writer.uint32(24).uint32(message.dataByteSize)
-    }
-    if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
-        for (const value of values) {
-          writer.uint32(tag).raw(value)
-        }
+export const AudioStreamPacketDescription: MessageFns<AudioStreamPacketDescription> =
+  {
+    encode(
+      message: AudioStreamPacketDescription,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.startOffset !== undefined && message.startOffset !== 0) {
+        writer.uint32(8).int64(message.startOffset);
       }
-    }
-    return writer
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): AudioStreamPacketDescription {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioStreamPacketDescription()
-    while (reader.pos < end) {
-      const tag = reader.uint32()
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 8) {
-            break
+      if (
+        message.variableFramesInPacket !== undefined &&
+        message.variableFramesInPacket !== 0
+      ) {
+        writer.uint32(16).uint32(message.variableFramesInPacket);
+      }
+      if (message.dataByteSize !== undefined && message.dataByteSize !== 0) {
+        writer.uint32(24).uint32(message.dataByteSize);
+      }
+      if (message._unknownFields !== undefined) {
+        for (const [key, values] of globalThis.Object.entries(
+          message._unknownFields
+        )) {
+          const tag = parseInt(key, 10);
+          for (const value of values) {
+            writer.uint32(tag).raw(value);
           }
-
-          message.startOffset = longToNumber(reader.int64())
-          continue
         }
-        case 2: {
-          if (tag !== 16) {
-            break
+      }
+      return writer;
+    },
+
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): AudioStreamPacketDescription {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseAudioStreamPacketDescription();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 8) {
+              break;
+            }
+
+            message.startOffset = longToNumber(reader.int64());
+            continue;
           }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-          message.variableFramesInPacket = reader.uint32()
-          continue
-        }
-        case 3: {
-          if (tag !== 24) {
-            break
+            message.variableFramesInPacket = reader.uint32();
+            continue;
           }
+          case 3: {
+            if (tag !== 24) {
+              break;
+            }
 
-          message.dataByteSize = reader.uint32()
-          continue
+            message.dataByteSize = reader.uint32();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        const buf = reader.skip(tag & 7);
+
+        const list = message._unknownFields![tag];
+
+        if (list === undefined) {
+          message._unknownFields![tag] = [buf];
+        } else {
+          list.push(buf);
         }
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break
+      return message;
+    },
+
+    fromJSON(object: any): AudioStreamPacketDescription {
+      return {
+        startOffset: isSet(object.startOffset)
+          ? globalThis.Number(object.startOffset)
+          : 0,
+        variableFramesInPacket: isSet(object.variableFramesInPacket)
+          ? globalThis.Number(object.variableFramesInPacket)
+          : 0,
+        dataByteSize: isSet(object.dataByteSize)
+          ? globalThis.Number(object.dataByteSize)
+          : 0,
+      };
+    },
+
+    toJSON(message: AudioStreamPacketDescription): unknown {
+      const obj: any = {};
+      if (message.startOffset !== undefined && message.startOffset !== 0) {
+        obj.startOffset = Math.round(message.startOffset);
       }
-      const buf = reader.skip(tag & 7)
-
-      const list = message._unknownFields![tag]
-
-      if (list === undefined) {
-        message._unknownFields![tag] = [buf]
-      } else {
-        list.push(buf)
+      if (
+        message.variableFramesInPacket !== undefined &&
+        message.variableFramesInPacket !== 0
+      ) {
+        obj.variableFramesInPacket = Math.round(message.variableFramesInPacket);
       }
-    }
-    return message
-  },
+      if (message.dataByteSize !== undefined && message.dataByteSize !== 0) {
+        obj.dataByteSize = Math.round(message.dataByteSize);
+      }
+      return obj;
+    },
 
-  fromJSON(object: any): AudioStreamPacketDescription {
-    return {
-      startOffset: isSet(object.startOffset) ? globalThis.Number(object.startOffset) : 0,
-      variableFramesInPacket: isSet(object.variableFramesInPacket)
-        ? globalThis.Number(object.variableFramesInPacket)
-        : 0,
-      dataByteSize: isSet(object.dataByteSize) ? globalThis.Number(object.dataByteSize) : 0,
-    }
-  },
-
-  toJSON(message: AudioStreamPacketDescription): unknown {
-    const obj: any = {}
-    if (message.startOffset !== undefined && message.startOffset !== 0) {
-      obj.startOffset = Math.round(message.startOffset)
-    }
-    if (message.variableFramesInPacket !== undefined && message.variableFramesInPacket !== 0) {
-      obj.variableFramesInPacket = Math.round(message.variableFramesInPacket)
-    }
-    if (message.dataByteSize !== undefined && message.dataByteSize !== 0) {
-      obj.dataByteSize = Math.round(message.dataByteSize)
-    }
-    return obj
-  },
-
-  create<I extends Exact<DeepPartial<AudioStreamPacketDescription>, I>>(
-    base?: I
-  ): AudioStreamPacketDescription {
-    return AudioStreamPacketDescription.fromPartial(base ?? ({} as any))
-  },
-  fromPartial<I extends Exact<DeepPartial<AudioStreamPacketDescription>, I>>(
-    object: I
-  ): AudioStreamPacketDescription {
-    const message = createBaseAudioStreamPacketDescription()
-    message.startOffset = object.startOffset ?? 0
-    message.variableFramesInPacket = object.variableFramesInPacket ?? 0
-    message.dataByteSize = object.dataByteSize ?? 0
-    return message
-  },
-}
+    create<I extends Exact<DeepPartial<AudioStreamPacketDescription>, I>>(
+      base?: I
+    ): AudioStreamPacketDescription {
+      return AudioStreamPacketDescription.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<AudioStreamPacketDescription>, I>>(
+      object: I
+    ): AudioStreamPacketDescription {
+      const message = createBaseAudioStreamPacketDescription();
+      message.startOffset = object.startOffset ?? 0;
+      message.variableFramesInPacket = object.variableFramesInPacket ?? 0;
+      message.dataByteSize = object.dataByteSize ?? 0;
+      return message;
+    },
+  };
 
 function createBaseAudioBuffer(): AudioBuffer {
   return {
@@ -171,112 +193,127 @@ function createBaseAudioBuffer(): AudioBuffer {
     contents: Buffer.alloc(0),
     packetDescriptions: [],
     _unknownFields: {},
-  }
+  };
 }
 
 export const AudioBuffer: MessageFns<AudioBuffer> = {
-  encode(message: AudioBuffer, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AudioBuffer,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.formatSettings !== undefined) {
-      AudioFormatSettings.encode(message.formatSettings, writer.uint32(10).fork()).join()
+      AudioFormatSettings.encode(
+        message.formatSettings,
+        writer.uint32(10).fork()
+      ).join();
     }
     if (message.packetCapacity !== undefined && message.packetCapacity !== 0) {
-      writer.uint32(16).int64(message.packetCapacity)
+      writer.uint32(16).int64(message.packetCapacity);
     }
-    if (message.maximumPacketSize !== undefined && message.maximumPacketSize !== 0) {
-      writer.uint32(24).int64(message.maximumPacketSize)
+    if (
+      message.maximumPacketSize !== undefined &&
+      message.maximumPacketSize !== 0
+    ) {
+      writer.uint32(24).int64(message.maximumPacketSize);
     }
     if (message.packetCount !== undefined && message.packetCount !== 0) {
-      writer.uint32(32).int64(message.packetCount)
+      writer.uint32(32).int64(message.packetCount);
     }
     if (message.contents !== undefined && message.contents.length !== 0) {
-      writer.uint32(42).bytes(message.contents)
+      writer.uint32(42).bytes(message.contents);
     }
     for (const v of message.packetDescriptions) {
-      AudioStreamPacketDescription.encode(v!, writer.uint32(50).fork()).join()
+      AudioStreamPacketDescription.encode(v!, writer.uint32(50).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AudioBuffer {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioBuffer()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudioBuffer();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.formatSettings = AudioFormatSettings.decode(reader, reader.uint32())
-          continue
+          message.formatSettings = AudioFormatSettings.decode(
+            reader,
+            reader.uint32()
+          );
+          continue;
         }
         case 2: {
           if (tag !== 16) {
-            break
+            break;
           }
 
-          message.packetCapacity = longToNumber(reader.int64())
-          continue
+          message.packetCapacity = longToNumber(reader.int64());
+          continue;
         }
         case 3: {
           if (tag !== 24) {
-            break
+            break;
           }
 
-          message.maximumPacketSize = longToNumber(reader.int64())
-          continue
+          message.maximumPacketSize = longToNumber(reader.int64());
+          continue;
         }
         case 4: {
           if (tag !== 32) {
-            break
+            break;
           }
 
-          message.packetCount = longToNumber(reader.int64())
-          continue
+          message.packetCount = longToNumber(reader.int64());
+          continue;
         }
         case 5: {
           if (tag !== 42) {
-            break
+            break;
           }
 
-          message.contents = Buffer.from(reader.bytes())
-          continue
+          message.contents = Buffer.from(reader.bytes());
+          continue;
         }
         case 6: {
           if (tag !== 50) {
-            break
+            break;
           }
 
           message.packetDescriptions.push(
             AudioStreamPacketDescription.decode(reader, reader.uint32())
-          )
-          continue
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AudioBuffer {
@@ -284,378 +321,440 @@ export const AudioBuffer: MessageFns<AudioBuffer> = {
       formatSettings: isSet(object.formatSettings)
         ? AudioFormatSettings.fromJSON(object.formatSettings)
         : undefined,
-      packetCapacity: isSet(object.packetCapacity) ? globalThis.Number(object.packetCapacity) : 0,
+      packetCapacity: isSet(object.packetCapacity)
+        ? globalThis.Number(object.packetCapacity)
+        : 0,
       maximumPacketSize: isSet(object.maximumPacketSize)
         ? globalThis.Number(object.maximumPacketSize)
         : 0,
-      packetCount: isSet(object.packetCount) ? globalThis.Number(object.packetCount) : 0,
+      packetCount: isSet(object.packetCount)
+        ? globalThis.Number(object.packetCount)
+        : 0,
       contents: isSet(object.contents)
         ? Buffer.from(bytesFromBase64(object.contents))
         : Buffer.alloc(0),
       packetDescriptions: globalThis.Array.isArray(object?.packetDescriptions)
-        ? object.packetDescriptions.map((e: any) => AudioStreamPacketDescription.fromJSON(e))
+        ? object.packetDescriptions.map((e: any) =>
+            AudioStreamPacketDescription.fromJSON(e)
+          )
         : [],
-    }
+    };
   },
 
   toJSON(message: AudioBuffer): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.formatSettings !== undefined) {
-      obj.formatSettings = AudioFormatSettings.toJSON(message.formatSettings)
+      obj.formatSettings = AudioFormatSettings.toJSON(message.formatSettings);
     }
     if (message.packetCapacity !== undefined && message.packetCapacity !== 0) {
-      obj.packetCapacity = Math.round(message.packetCapacity)
+      obj.packetCapacity = Math.round(message.packetCapacity);
     }
-    if (message.maximumPacketSize !== undefined && message.maximumPacketSize !== 0) {
-      obj.maximumPacketSize = Math.round(message.maximumPacketSize)
+    if (
+      message.maximumPacketSize !== undefined &&
+      message.maximumPacketSize !== 0
+    ) {
+      obj.maximumPacketSize = Math.round(message.maximumPacketSize);
     }
     if (message.packetCount !== undefined && message.packetCount !== 0) {
-      obj.packetCount = Math.round(message.packetCount)
+      obj.packetCount = Math.round(message.packetCount);
     }
     if (message.contents !== undefined && message.contents.length !== 0) {
-      obj.contents = base64FromBytes(message.contents)
+      obj.contents = base64FromBytes(message.contents);
     }
     if (message.packetDescriptions?.length) {
-      obj.packetDescriptions = message.packetDescriptions.map(e =>
+      obj.packetDescriptions = message.packetDescriptions.map((e) =>
         AudioStreamPacketDescription.toJSON(e)
-      )
+      );
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<AudioBuffer>, I>>(base?: I): AudioBuffer {
-    return AudioBuffer.fromPartial(base ?? ({} as any))
+    return AudioBuffer.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AudioBuffer>, I>>(object: I): AudioBuffer {
-    const message = createBaseAudioBuffer()
+  fromPartial<I extends Exact<DeepPartial<AudioBuffer>, I>>(
+    object: I
+  ): AudioBuffer {
+    const message = createBaseAudioBuffer();
     message.formatSettings =
       object.formatSettings !== undefined && object.formatSettings !== null
         ? AudioFormatSettings.fromPartial(object.formatSettings)
-        : undefined
-    message.packetCapacity = object.packetCapacity ?? 0
-    message.maximumPacketSize = object.maximumPacketSize ?? 0
-    message.packetCount = object.packetCount ?? 0
-    message.contents = object.contents ?? Buffer.alloc(0)
+        : undefined;
+    message.packetCapacity = object.packetCapacity ?? 0;
+    message.maximumPacketSize = object.maximumPacketSize ?? 0;
+    message.packetCount = object.packetCount ?? 0;
+    message.contents = object.contents ?? Buffer.alloc(0);
     message.packetDescriptions =
-      object.packetDescriptions?.map(e => AudioStreamPacketDescription.fromPartial(e)) || []
-    return message
+      object.packetDescriptions?.map((e) =>
+        AudioStreamPacketDescription.fromPartial(e)
+      ) || [];
+    return message;
   },
-}
+};
 
 function createBaseAudioTime(): AudioTime {
-  return { timestamp: 0, sampleRate: 0, _unknownFields: {} }
+  return { timestamp: 0, sampleRate: 0, _unknownFields: {} };
 }
 
 export const AudioTime: MessageFns<AudioTime> = {
-  encode(message: AudioTime, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AudioTime,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      writer.uint32(9).double(message.timestamp)
+      writer.uint32(9).double(message.timestamp);
     }
     if (message.sampleRate !== undefined && message.sampleRate !== 0) {
-      writer.uint32(17).double(message.sampleRate)
+      writer.uint32(17).double(message.sampleRate);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AudioTime {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioTime()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudioTime();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 9) {
-            break
+            break;
           }
 
-          message.timestamp = reader.double()
-          continue
+          message.timestamp = reader.double();
+          continue;
         }
         case 2: {
           if (tag !== 17) {
-            break
+            break;
           }
 
-          message.sampleRate = reader.double()
-          continue
+          message.sampleRate = reader.double();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AudioTime {
     return {
-      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
-      sampleRate: isSet(object.sampleRate) ? globalThis.Number(object.sampleRate) : 0,
-    }
+      timestamp: isSet(object.timestamp)
+        ? globalThis.Number(object.timestamp)
+        : 0,
+      sampleRate: isSet(object.sampleRate)
+        ? globalThis.Number(object.sampleRate)
+        : 0,
+    };
   },
 
   toJSON(message: AudioTime): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.timestamp !== undefined && message.timestamp !== 0) {
-      obj.timestamp = message.timestamp
+      obj.timestamp = message.timestamp;
     }
     if (message.sampleRate !== undefined && message.sampleRate !== 0) {
-      obj.sampleRate = message.sampleRate
+      obj.sampleRate = message.sampleRate;
     }
-    return obj
+    return obj;
   },
 
   create<I extends Exact<DeepPartial<AudioTime>, I>>(base?: I): AudioTime {
-    return AudioTime.fromPartial(base ?? ({} as any))
+    return AudioTime.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AudioTime>, I>>(object: I): AudioTime {
-    const message = createBaseAudioTime()
-    message.timestamp = object.timestamp ?? 0
-    message.sampleRate = object.sampleRate ?? 0
-    return message
+  fromPartial<I extends Exact<DeepPartial<AudioTime>, I>>(
+    object: I
+  ): AudioTime {
+    const message = createBaseAudioTime();
+    message.timestamp = object.timestamp ?? 0;
+    message.sampleRate = object.sampleRate ?? 0;
+    return message;
   },
-}
+};
 
 function createBaseAudioDataBlock(): AudioDataBlock {
-  return { buffer: undefined, time: undefined, gain: 0, _unknownFields: {} }
+  return { buffer: undefined, time: undefined, gain: 0, _unknownFields: {} };
 }
 
 export const AudioDataBlock: MessageFns<AudioDataBlock> = {
-  encode(message: AudioDataBlock, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AudioDataBlock,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.buffer !== undefined) {
-      AudioBuffer.encode(message.buffer, writer.uint32(10).fork()).join()
+      AudioBuffer.encode(message.buffer, writer.uint32(10).fork()).join();
     }
     if (message.time !== undefined) {
-      AudioTime.encode(message.time, writer.uint32(18).fork()).join()
+      AudioTime.encode(message.time, writer.uint32(18).fork()).join();
     }
     if (message.gain !== undefined && message.gain !== 0) {
-      writer.uint32(25).double(message.gain)
+      writer.uint32(25).double(message.gain);
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): AudioDataBlock {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseAudioDataBlock()
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudioDataBlock();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.buffer = AudioBuffer.decode(reader, reader.uint32())
-          continue
+          message.buffer = AudioBuffer.decode(reader, reader.uint32());
+          continue;
         }
         case 2: {
           if (tag !== 18) {
-            break
+            break;
           }
 
-          message.time = AudioTime.decode(reader, reader.uint32())
-          continue
+          message.time = AudioTime.decode(reader, reader.uint32());
+          continue;
         }
         case 3: {
           if (tag !== 25) {
-            break
+            break;
           }
 
-          message.gain = reader.double()
-          continue
+          message.gain = reader.double();
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): AudioDataBlock {
     return {
-      buffer: isSet(object.buffer) ? AudioBuffer.fromJSON(object.buffer) : undefined,
+      buffer: isSet(object.buffer)
+        ? AudioBuffer.fromJSON(object.buffer)
+        : undefined,
       time: isSet(object.time) ? AudioTime.fromJSON(object.time) : undefined,
       gain: isSet(object.gain) ? globalThis.Number(object.gain) : 0,
-    }
+    };
   },
 
   toJSON(message: AudioDataBlock): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.buffer !== undefined) {
-      obj.buffer = AudioBuffer.toJSON(message.buffer)
+      obj.buffer = AudioBuffer.toJSON(message.buffer);
     }
     if (message.time !== undefined) {
-      obj.time = AudioTime.toJSON(message.time)
+      obj.time = AudioTime.toJSON(message.time);
     }
     if (message.gain !== undefined && message.gain !== 0) {
-      obj.gain = message.gain
+      obj.gain = message.gain;
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<AudioDataBlock>, I>>(base?: I): AudioDataBlock {
-    return AudioDataBlock.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<AudioDataBlock>, I>>(
+    base?: I
+  ): AudioDataBlock {
+    return AudioDataBlock.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AudioDataBlock>, I>>(object: I): AudioDataBlock {
-    const message = createBaseAudioDataBlock()
+  fromPartial<I extends Exact<DeepPartial<AudioDataBlock>, I>>(
+    object: I
+  ): AudioDataBlock {
+    const message = createBaseAudioDataBlock();
     message.buffer =
       object.buffer !== undefined && object.buffer !== null
         ? AudioBuffer.fromPartial(object.buffer)
-        : undefined
+        : undefined;
     message.time =
       object.time !== undefined && object.time !== null
         ? AudioTime.fromPartial(object.time)
-        : undefined
-    message.gain = object.gain ?? 0
-    return message
+        : undefined;
+    message.gain = object.gain ?? 0;
+    return message;
   },
-}
+};
 
 function createBaseSendVoiceInputMessage(): SendVoiceInputMessage {
-  return { dataBlock: undefined, _unknownFields: {} }
+  return { dataBlock: undefined, _unknownFields: {} };
 }
 
 export const SendVoiceInputMessage: MessageFns<SendVoiceInputMessage> = {
-  encode(message: SendVoiceInputMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SendVoiceInputMessage,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.dataBlock !== undefined) {
-      AudioDataBlock.encode(message.dataBlock, writer.uint32(10).fork()).join()
+      AudioDataBlock.encode(message.dataBlock, writer.uint32(10).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SendVoiceInputMessage {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseSendVoiceInputMessage()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SendVoiceInputMessage {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSendVoiceInputMessage();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.dataBlock = AudioDataBlock.decode(reader, reader.uint32())
-          continue
+          message.dataBlock = AudioDataBlock.decode(reader, reader.uint32());
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): SendVoiceInputMessage {
     return {
-      dataBlock: isSet(object.dataBlock) ? AudioDataBlock.fromJSON(object.dataBlock) : undefined,
-    }
+      dataBlock: isSet(object.dataBlock)
+        ? AudioDataBlock.fromJSON(object.dataBlock)
+        : undefined,
+    };
   },
 
   toJSON(message: SendVoiceInputMessage): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.dataBlock !== undefined) {
-      obj.dataBlock = AudioDataBlock.toJSON(message.dataBlock)
+      obj.dataBlock = AudioDataBlock.toJSON(message.dataBlock);
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<SendVoiceInputMessage>, I>>(base?: I): SendVoiceInputMessage {
-    return SendVoiceInputMessage.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<SendVoiceInputMessage>, I>>(
+    base?: I
+  ): SendVoiceInputMessage {
+    return SendVoiceInputMessage.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<SendVoiceInputMessage>, I>>(
     object: I
   ): SendVoiceInputMessage {
-    const message = createBaseSendVoiceInputMessage()
+    const message = createBaseSendVoiceInputMessage();
     message.dataBlock =
       object.dataBlock !== undefined && object.dataBlock !== null
         ? AudioDataBlock.fromPartial(object.dataBlock)
-        : undefined
-    return message
+        : undefined;
+    return message;
   },
-}
+};
 
-export const sendVoiceInputMessage: Extension<SendVoiceInputMessage | undefined> = {
+export const sendVoiceInputMessage: Extension<
+  SendVoiceInputMessage | undefined
+> = {
   number: 36,
   tag: 290,
   repeated: false,
   packed: false,
   encode: (value: SendVoiceInputMessage | undefined): Uint8Array[] => {
-    const encoded: Uint8Array[] = []
-    const writer = new BinaryWriter()
-    SendVoiceInputMessage.encode(value, writer.fork()).join()
-    encoded.push(writer.finish())
-    return encoded
+    const encoded: Uint8Array[] = [];
+    const writer = new BinaryWriter();
+    SendVoiceInputMessage.encode(value, writer.fork()).join();
+    encoded.push(writer.finish());
+    return encoded;
   },
-  decode: (tag: number, input: Uint8Array[]): SendVoiceInputMessage | undefined => {
-    const reader = new BinaryReader(input[input.length - 1] ?? fail())
-    return SendVoiceInputMessage.decode(reader, reader.uint32())
+  decode: (
+    tag: number,
+    input: Uint8Array[]
+  ): SendVoiceInputMessage | undefined => {
+    const reader = new BinaryReader(input[input.length - 1] ?? fail());
+    return SendVoiceInputMessage.decode(reader, reader.uint32());
   },
-}
+};
 
 function bytesFromBase64(b64: string): Uint8Array {
-  return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'))
+  return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  return globalThis.Buffer.from(arr).toString('base64')
+  return globalThis.Buffer.from(arr).toString("base64");
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -665,48 +764,50 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString())
+  const num = globalThis.Number(int64.toString());
   if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER')
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
   }
   if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error('Value is smaller than Number.MIN_SAFE_INTEGER')
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
   }
-  return num
+  return num;
 }
 
 function isSet(value: any): boolean {
-  return value !== null && value !== undefined
+  return value !== null && value !== undefined;
 }
 
 export interface Extension<T> {
-  number: number
-  tag: number
-  singularTag?: number
-  packedTag?: number
-  encode?: (message: T) => Uint8Array[]
-  decode?: (tag: number, input: Uint8Array[]) => T
-  repeated: boolean
-  packed: boolean
+  number: number;
+  tag: number;
+  singularTag?: number;
+  packedTag?: number;
+  encode?: (message: T) => Uint8Array[];
+  decode?: (tag: number, input: Uint8Array[]) => T;
+  repeated: boolean;
+  packed: boolean;
 }
 
 function fail(message?: string): never {
-  throw new globalThis.Error(message ?? 'Failed')
+  throw new globalThis.Error(message ?? "Failed");
 }
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }

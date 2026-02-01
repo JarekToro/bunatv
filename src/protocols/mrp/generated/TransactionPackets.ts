@@ -5,66 +5,77 @@
 // source: TransactionPackets.proto
 
 /* eslint-disable */
-import { BinaryReader, BinaryWriter } from '@bufbuild/protobuf/wire'
-import { TransactionPacket } from './TransactionPacket'
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { TransactionPacket } from "./TransactionPacket";
 
-export const protobufPackage = ''
+export const protobufPackage = "";
 
 export interface TransactionPackets {
-  packets: TransactionPacket[]
-  _unknownFields?: { [key: number]: Uint8Array[] } | undefined
+  packets: TransactionPacket[];
+  _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseTransactionPackets(): TransactionPackets {
-  return { packets: [], _unknownFields: {} }
+  return { packets: [], _unknownFields: {} };
 }
 
 export const TransactionPackets: MessageFns<TransactionPackets> = {
-  encode(message: TransactionPackets, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TransactionPackets,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.packets) {
-      TransactionPacket.encode(v!, writer.uint32(10).fork()).join()
+      TransactionPacket.encode(v!, writer.uint32(10).fork()).join();
     }
     if (message._unknownFields !== undefined) {
-      for (const [key, values] of globalThis.Object.entries(message._unknownFields)) {
-        const tag = parseInt(key, 10)
+      for (const [key, values] of globalThis.Object.entries(
+        message._unknownFields
+      )) {
+        const tag = parseInt(key, 10);
         for (const value of values) {
-          writer.uint32(tag).raw(value)
+          writer.uint32(tag).raw(value);
         }
       }
     }
-    return writer
+    return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TransactionPackets {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input)
-    const end = length === undefined ? reader.len : reader.pos + length
-    const message = createBaseTransactionPackets()
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): TransactionPackets {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTransactionPackets();
     while (reader.pos < end) {
-      const tag = reader.uint32()
+      const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
           if (tag !== 10) {
-            break
+            break;
           }
 
-          message.packets.push(TransactionPacket.decode(reader, reader.uint32()))
-          continue
+          message.packets.push(
+            TransactionPacket.decode(reader, reader.uint32())
+          );
+          continue;
         }
       }
       if ((tag & 7) === 4 || tag === 0) {
-        break
+        break;
       }
-      const buf = reader.skip(tag & 7)
+      const buf = reader.skip(tag & 7);
 
-      const list = message._unknownFields![tag]
+      const list = message._unknownFields![tag];
 
       if (list === undefined) {
-        message._unknownFields![tag] = [buf]
+        message._unknownFields![tag] = [buf];
       } else {
-        list.push(buf)
+        list.push(buf);
       }
     }
-    return message
+    return message;
   },
 
   fromJSON(object: any): TransactionPackets {
@@ -72,28 +83,40 @@ export const TransactionPackets: MessageFns<TransactionPackets> = {
       packets: globalThis.Array.isArray(object?.packets)
         ? object.packets.map((e: any) => TransactionPacket.fromJSON(e))
         : [],
-    }
+    };
   },
 
   toJSON(message: TransactionPackets): unknown {
-    const obj: any = {}
+    const obj: any = {};
     if (message.packets?.length) {
-      obj.packets = message.packets.map(e => TransactionPacket.toJSON(e))
+      obj.packets = message.packets.map((e) => TransactionPacket.toJSON(e));
     }
-    return obj
+    return obj;
   },
 
-  create<I extends Exact<DeepPartial<TransactionPackets>, I>>(base?: I): TransactionPackets {
-    return TransactionPackets.fromPartial(base ?? ({} as any))
+  create<I extends Exact<DeepPartial<TransactionPackets>, I>>(
+    base?: I
+  ): TransactionPackets {
+    return TransactionPackets.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TransactionPackets>, I>>(object: I): TransactionPackets {
-    const message = createBaseTransactionPackets()
-    message.packets = object.packets?.map(e => TransactionPacket.fromPartial(e)) || []
-    return message
+  fromPartial<I extends Exact<DeepPartial<TransactionPackets>, I>>(
+    object: I
+  ): TransactionPackets {
+    const message = createBaseTransactionPackets();
+    message.packets =
+      object.packets?.map((e) => TransactionPacket.fromPartial(e)) || [];
+    return message;
   },
-}
+};
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
 export type DeepPartial<T> = T extends Builtin
   ? T
@@ -103,18 +126,20 @@ export type DeepPartial<T> = T extends Builtin
       ? ReadonlyArray<DeepPartial<U>>
       : T extends {}
         ? { [K in keyof T]?: DeepPartial<T[K]> }
-        : Partial<T>
+        : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never
+type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never }
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 export interface MessageFns<T> {
-  encode(message: T, writer?: BinaryWriter): BinaryWriter
-  decode(input: BinaryReader | Uint8Array, length?: number): T
-  fromJSON(object: any): T
-  toJSON(message: T): unknown
-  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T
-  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }
