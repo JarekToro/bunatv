@@ -53,6 +53,7 @@
   "patchedDependencies": {
     "@plist/binary.parse@1.1.0": "patches/@plist%2Fbinary.parse@1.1.0.patch",
     "@jsr/cliffy__internal@1.0.0-rc.8": "patches/@jsr%2Fcliffy__internal@1.0.0-rc.8.patch",
+    "ts-proto@2.11.1": "patches/ts-proto@2.11.1.patch",
   },
   "packages": {
     "@babel/helper-string-parser": ["@babel/helper-string-parser@7.27.1", "", {}, "sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA=="],

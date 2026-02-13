@@ -91,6 +91,7 @@
   "private": false,
   "patchedDependencies": {
     "@jsr/cliffy__internal@1.0.0-rc.8": "patches/@jsr%2Fcliffy__internal@1.0.0-rc.8.patch",
-    "@plist/binary.parse@1.1.0": "patches/@plist%2Fbinary.parse@1.1.0.patch"
+    "@plist/binary.parse@1.1.0": "patches/@plist%2Fbinary.parse@1.1.0.patch",
+    "ts-proto@2.11.1": "patches/ts-proto@2.11.1.patch"
   }
 }
