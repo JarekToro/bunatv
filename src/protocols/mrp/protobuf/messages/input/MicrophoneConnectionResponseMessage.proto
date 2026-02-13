@@ -3,7 +3,7 @@ syntax = "proto2";
 import "protocol/ProtocolMessage.proto";
 
 extend ProtocolMessage {
-  optional MicrophoneConnectionResponseMessage microphoneConnectionRequestMessage = 109;
+  optional MicrophoneConnectionResponseMessage microphoneConnectionResponseMessage = 109;
 }
 
 message MicrophoneConnectionResponseMessage {

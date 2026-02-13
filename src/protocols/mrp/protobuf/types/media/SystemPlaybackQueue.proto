@@ -3,7 +3,7 @@ syntax = "proto2";
 
 
 import "types/media/SystemPlaybackCustomDataQueue.proto";
-import "SystemPlaybackGenericTracklistQueue.proto";
+import "types/media/SystemPlaybackGenericTrackListQueue.proto";
 import "foundation/Common.proto";
 
 
