@@ -3,7 +3,7 @@ syntax = "proto2";
 import "protocol/ProtocolMessage.proto";
 
 extend ProtocolMessage {
-  optional SetReadyStateMessage readyStateMessage = 41;
+  optional SetReadyStateMessage setReadyStateMessage = 41;
 }
 
 message SetReadyStateMessage {

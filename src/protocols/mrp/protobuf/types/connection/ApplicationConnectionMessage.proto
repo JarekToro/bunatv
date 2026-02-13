@@ -1,9 +1,6 @@
 syntax = "proto2";
 import "protocol/ProtocolMessage.proto";
 
-extend ProtocolMessage {
-  optional ApplicationConnectionMessage applicationConnectionMessage = 106;
-}
 
 // not fully implemented yet?
 message ApplicationConnectionMessage {

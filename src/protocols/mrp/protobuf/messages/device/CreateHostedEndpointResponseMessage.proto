@@ -3,7 +3,7 @@ syntax = "proto2";
 import "protocol/ProtocolMessage.proto";
 
 extend ProtocolMessage {
-  optional CreateHostedEndpointResponseMessage createHostedEndpointResponse = 96;
+  optional CreateHostedEndpointResponseMessage createHostedEndpointResponseMessage = 96;
 }
 
 // Response after creating a hosted endpoint
