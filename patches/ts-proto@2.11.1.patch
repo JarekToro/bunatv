@@ -1,0 +1,14 @@
+diff --git a/build/src/main.js b/build/src/main.js
+index aafd86f8abbe9ef8f366d3bbab94de779b6f47d1..958fa4c958cdd777e25794fb56282835d3fba6c1 100644
+--- a/build/src/main.js
++++ b/build/src/main.js
+@@ -1635,6 +1635,9 @@ function generateExtension(ctx, message, extension) {
+         chunks.push((0, ts_poet_1.code) `
+       encode: (value: ${type}): Uint8Array[] => {
+         const encoded: Uint8Array[] = [];
++        if (value === undefined) {
++          return encoded;
++        }
+     `);
+         function getEncodeSnippet(ctx, field) {
+             const { options, utils } = ctx;
