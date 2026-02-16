@@ -13,12 +13,10 @@ export enum CompanionEventTypes {
   TextInputStart = "_tiStart",
   Interest = "_interest",
 }
-
 interface InterestEventContent {
   _regEvents?: CompanionEventTypes[];
   _deregEvents?: CompanionEventTypes[];
 }
-
 interface InterestEventMessage extends CompanionEventOpackMessage {
   _i: "_interest";
   _c: InterestEventContent;

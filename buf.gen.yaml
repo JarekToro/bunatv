@@ -10,6 +10,7 @@ plugins:
       - unknownFields=true
       - outputExtensions=true
       - env=node
+      - noDefaultsForOptionals=true
 
 inputs:
   - directory: src/protocols/mrp/protobuf # Where to find .proto files

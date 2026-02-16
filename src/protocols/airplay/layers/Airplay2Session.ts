@@ -1,4 +1,3 @@
-import { EventEmitter } from "eventemitter3";
 import {
   type CredentialStore,
   type Protocol,
@@ -27,8 +26,6 @@ import { DataStreamChannel } from "@/protocols/airplay/layers/DataStreamChannel.
 import { HkdfUtils } from "@/core/crypto/hkdf.ts";
 import { NonceFormat } from "@/core/encoding/buffer-utils.ts";
 import { EventStreamChannel } from "@/protocols/airplay/layers/EventStreamChannel.ts";
-import { ProtocolMessage } from "@/protocols/mrp/generated/ProtocolMessage.ts";
-import { deviceInfoMessage } from "@/protocols/mrp/generated/DeviceInfoMessage.ts";
 import { EmitterEx } from "@/core/eventing/EmitterEx.ts";
 
 const logger = createLogger("bunatv:airplay:session");
@@ -157,16 +154,6 @@ export class Airplay2Session
 
     this.dataChannel.on("protobuf", (data) => {
       logger.trace({ length: data.length }, "Data channel data received");
-      const message = ProtocolMessage.decode(data);
-      const deviceInfo = ProtocolMessage.getExtension(
-        message,
-        deviceInfoMessage
-      );
-
-      logger.trace(
-        { message, deviceInfo },
-        "Decoded ProtocolMessage from data channel"
-      );
       this.emit("data-received", data);
     });
   }

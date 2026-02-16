@@ -1,5 +1,5 @@
 import { EventEmitter } from "eventemitter3";
-import type { Airplay2Session } from "@/protocols/airplay/layers/AIrplay2Session.ts";
+import type { Airplay2Session } from "@/protocols/airplay/layers/Airplay2Session.ts";
 import {
   buildProtocolMessageForPayload,
   ProtocolMessageExtensionDisplayNameMap,
@@ -11,18 +11,18 @@ import {
   ErrorCode_Enum,
   ProtocolMessage,
   ProtocolMessage_Type,
-} from "@/protocols/mrp/generated/ProtocolMessage.ts";
+} from "@/protocols/mrp/generated/protocol/ProtocolMessage.ts";
 import { createLogger } from "@/logging/logging.ts";
-import { GenericMessage } from "@/protocols/mrp/generated/GenericMessage.ts";
-import { DeviceInfoMessage } from "@/protocols/mrp/generated/DeviceInfoMessage.ts";
 import type { ClientDeviceInfo } from "@/core/client-identity.ts";
+
+import { MRPCapture } from "@/logging/MRPCapture.ts";
+import { DeviceInfoMessage } from "@/protocols/mrp/generated/messages/device/DeviceInfoMessage.ts";
 import {
   SetConnectionStateMessage,
   SetConnectionStateMessage_ConnectionState,
-} from "@/protocols/mrp/generated/SetConnectionStateMessage.ts";
-import { ClientUpdatesConfigMessage } from "@/protocols/mrp/generated/ClientUpdatesConfigMessage.ts";
-import { GetKeyboardSessionMessage } from "@/protocols/mrp/generated/GetKeyboardSessionMessage.ts";
-import { MRPCapture } from "@/logging/MRPCapture.ts";
+} from "@/protocols/mrp/generated/messages/device/SetConnectionStateMessage.ts";
+import { ClientUpdatesConfigMessage } from "@/protocols/mrp/generated/messages/client/ClientUpdatesConfigMessage.ts";
+import { GetKeyboardSessionMessage } from "@/protocols/mrp/generated/messages/input/GetKeyboardSessionMessage.ts";
 
 const logger = createLogger("bunatv:mrp:protocol");
 
@@ -31,7 +31,7 @@ const logger = createLogger("bunatv:mrp:protocol");
 // ============================================================================
 
 export type MRPProtocolEvents = {
-  message: (message: ProtocolMessageResult) => void;
+  message: (message: Exclude<ProtocolMessageResult, undefined>) => void;
 } & {
   [K in keyof typeof ProtocolMessageExtensionDisplayNameMap as `message:${(typeof ProtocolMessageExtensionDisplayNameMap)[K]}`]: (
     message: ProtocolMessageResult & { extensionType: K }
@@ -157,7 +157,8 @@ export class MRPProtocol extends EventEmitter<MRPProtocolEvents> {
     const clientUpdatesConfigProto = ClientUpdatesConfigMessage.create({
       artworkUpdates: true,
       keyboardUpdates: true,
-      nowPlayingUpdates: false,
+      nowPlayingUpdates: true,
+      systemEndpointUpdates: false,
       volumeUpdates: true,
       outputDeviceUpdates: true,
     });
