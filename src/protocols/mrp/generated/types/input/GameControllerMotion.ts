@@ -27,7 +27,14 @@ export interface GameControllerMotion {
 }
 
 function createBaseGameControllerAcceleration(): GameControllerAcceleration {
-  return { data: Buffer.alloc(0), x: 0, y: 0, z: 0, w: 0, _unknownFields: {} };
+  return {
+    data: undefined,
+    x: undefined,
+    y: undefined,
+    z: undefined,
+    w: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const GameControllerAcceleration: MessageFns<GameControllerAcceleration> =
@@ -36,19 +43,19 @@ export const GameControllerAcceleration: MessageFns<GameControllerAcceleration> 
       message: GameControllerAcceleration,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.data !== undefined && message.data.length !== 0) {
+      if (message.data !== undefined) {
         writer.uint32(10).bytes(message.data);
       }
-      if (message.x !== undefined && message.x !== 0) {
+      if (message.x !== undefined) {
         writer.uint32(21).float(message.x);
       }
-      if (message.y !== undefined && message.y !== 0) {
+      if (message.y !== undefined) {
         writer.uint32(29).float(message.y);
       }
-      if (message.z !== undefined && message.z !== 0) {
+      if (message.z !== undefined) {
         writer.uint32(37).float(message.z);
       }
-      if (message.w !== undefined && message.w !== 0) {
+      if (message.w !== undefined) {
         writer.uint32(45).float(message.w);
       }
       if (message._unknownFields !== undefined) {
@@ -136,29 +143,29 @@ export const GameControllerAcceleration: MessageFns<GameControllerAcceleration> 
       return {
         data: isSet(object.data)
           ? Buffer.from(bytesFromBase64(object.data))
-          : Buffer.alloc(0),
-        x: isSet(object.x) ? globalThis.Number(object.x) : 0,
-        y: isSet(object.y) ? globalThis.Number(object.y) : 0,
-        z: isSet(object.z) ? globalThis.Number(object.z) : 0,
-        w: isSet(object.w) ? globalThis.Number(object.w) : 0,
+          : undefined,
+        x: isSet(object.x) ? globalThis.Number(object.x) : undefined,
+        y: isSet(object.y) ? globalThis.Number(object.y) : undefined,
+        z: isSet(object.z) ? globalThis.Number(object.z) : undefined,
+        w: isSet(object.w) ? globalThis.Number(object.w) : undefined,
       };
     },
 
     toJSON(message: GameControllerAcceleration): unknown {
       const obj: any = {};
-      if (message.data !== undefined && message.data.length !== 0) {
+      if (message.data !== undefined) {
         obj.data = base64FromBytes(message.data);
       }
-      if (message.x !== undefined && message.x !== 0) {
+      if (message.x !== undefined) {
         obj.x = message.x;
       }
-      if (message.y !== undefined && message.y !== 0) {
+      if (message.y !== undefined) {
         obj.y = message.y;
       }
-      if (message.z !== undefined && message.z !== 0) {
+      if (message.z !== undefined) {
         obj.z = message.z;
       }
-      if (message.w !== undefined && message.w !== 0) {
+      if (message.w !== undefined) {
         obj.w = message.w;
       }
       return obj;
@@ -173,11 +180,11 @@ export const GameControllerAcceleration: MessageFns<GameControllerAcceleration> 
       object: I
     ): GameControllerAcceleration {
       const message = createBaseGameControllerAcceleration();
-      message.data = object.data ?? Buffer.alloc(0);
-      message.x = object.x ?? 0;
-      message.y = object.y ?? 0;
-      message.z = object.z ?? 0;
-      message.w = object.w ?? 0;
+      message.data = object.data ?? undefined;
+      message.x = object.x ?? undefined;
+      message.y = object.y ?? undefined;
+      message.z = object.z ?? undefined;
+      message.w = object.w ?? undefined;
       return message;
     },
   };

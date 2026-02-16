@@ -24,14 +24,14 @@ export interface DiscoverySessionConfiguration {
 
 function createBaseDiscoverySessionConfiguration(): DiscoverySessionConfiguration {
   return {
-    features: 0,
-    routingContextUid: "",
-    enableThrottling: false,
-    alwaysAllowUpdates: false,
-    populatesExternalDevice: false,
-    outputDeviceUid: "",
-    targetSessionId: 0,
-    cachedDiscoveryEnabled: false,
+    features: undefined,
+    routingContextUid: undefined,
+    enableThrottling: undefined,
+    alwaysAllowUpdates: undefined,
+    populatesExternalDevice: undefined,
+    outputDeviceUid: undefined,
+    targetSessionId: undefined,
+    cachedDiscoveryEnabled: undefined,
     _unknownFields: {},
   };
 }
@@ -42,49 +42,28 @@ export const DiscoverySessionConfiguration: MessageFns<DiscoverySessionConfigura
       message: DiscoverySessionConfiguration,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.features !== undefined && message.features !== 0) {
+      if (message.features !== undefined) {
         writer.uint32(8).int32(message.features);
       }
-      if (
-        message.routingContextUid !== undefined &&
-        message.routingContextUid !== ""
-      ) {
+      if (message.routingContextUid !== undefined) {
         writer.uint32(18).string(message.routingContextUid);
       }
-      if (
-        message.enableThrottling !== undefined &&
-        message.enableThrottling !== false
-      ) {
+      if (message.enableThrottling !== undefined) {
         writer.uint32(24).bool(message.enableThrottling);
       }
-      if (
-        message.alwaysAllowUpdates !== undefined &&
-        message.alwaysAllowUpdates !== false
-      ) {
+      if (message.alwaysAllowUpdates !== undefined) {
         writer.uint32(32).bool(message.alwaysAllowUpdates);
       }
-      if (
-        message.populatesExternalDevice !== undefined &&
-        message.populatesExternalDevice !== false
-      ) {
+      if (message.populatesExternalDevice !== undefined) {
         writer.uint32(40).bool(message.populatesExternalDevice);
       }
-      if (
-        message.outputDeviceUid !== undefined &&
-        message.outputDeviceUid !== ""
-      ) {
+      if (message.outputDeviceUid !== undefined) {
         writer.uint32(50).string(message.outputDeviceUid);
       }
-      if (
-        message.targetSessionId !== undefined &&
-        message.targetSessionId !== 0
-      ) {
+      if (message.targetSessionId !== undefined) {
         writer.uint32(56).uint32(message.targetSessionId);
       }
-      if (
-        message.cachedDiscoveryEnabled !== undefined &&
-        message.cachedDiscoveryEnabled !== false
-      ) {
+      if (message.cachedDiscoveryEnabled !== undefined) {
         writer.uint32(64).bool(message.cachedDiscoveryEnabled);
       }
       if (message._unknownFields !== undefined) {
@@ -196,90 +175,69 @@ export const DiscoverySessionConfiguration: MessageFns<DiscoverySessionConfigura
       return {
         features: isSet(object.features)
           ? globalThis.Number(object.features)
-          : 0,
+          : undefined,
         routingContextUid: isSet(object.routingContextUid)
           ? globalThis.String(object.routingContextUid)
           : isSet(object.routing_context_uid)
             ? globalThis.String(object.routing_context_uid)
-            : "",
+            : undefined,
         enableThrottling: isSet(object.enableThrottling)
           ? globalThis.Boolean(object.enableThrottling)
           : isSet(object.enable_throttling)
             ? globalThis.Boolean(object.enable_throttling)
-            : false,
+            : undefined,
         alwaysAllowUpdates: isSet(object.alwaysAllowUpdates)
           ? globalThis.Boolean(object.alwaysAllowUpdates)
           : isSet(object.always_allow_updates)
             ? globalThis.Boolean(object.always_allow_updates)
-            : false,
+            : undefined,
         populatesExternalDevice: isSet(object.populatesExternalDevice)
           ? globalThis.Boolean(object.populatesExternalDevice)
           : isSet(object.populates_external_device)
             ? globalThis.Boolean(object.populates_external_device)
-            : false,
+            : undefined,
         outputDeviceUid: isSet(object.outputDeviceUid)
           ? globalThis.String(object.outputDeviceUid)
           : isSet(object.output_device_uid)
             ? globalThis.String(object.output_device_uid)
-            : "",
+            : undefined,
         targetSessionId: isSet(object.targetSessionId)
           ? globalThis.Number(object.targetSessionId)
           : isSet(object.target_session_id)
             ? globalThis.Number(object.target_session_id)
-            : 0,
+            : undefined,
         cachedDiscoveryEnabled: isSet(object.cachedDiscoveryEnabled)
           ? globalThis.Boolean(object.cachedDiscoveryEnabled)
           : isSet(object.cached_discovery_enabled)
             ? globalThis.Boolean(object.cached_discovery_enabled)
-            : false,
+            : undefined,
       };
     },
 
     toJSON(message: DiscoverySessionConfiguration): unknown {
       const obj: any = {};
-      if (message.features !== undefined && message.features !== 0) {
+      if (message.features !== undefined) {
         obj.features = Math.round(message.features);
       }
-      if (
-        message.routingContextUid !== undefined &&
-        message.routingContextUid !== ""
-      ) {
+      if (message.routingContextUid !== undefined) {
         obj.routingContextUid = message.routingContextUid;
       }
-      if (
-        message.enableThrottling !== undefined &&
-        message.enableThrottling !== false
-      ) {
+      if (message.enableThrottling !== undefined) {
         obj.enableThrottling = message.enableThrottling;
       }
-      if (
-        message.alwaysAllowUpdates !== undefined &&
-        message.alwaysAllowUpdates !== false
-      ) {
+      if (message.alwaysAllowUpdates !== undefined) {
         obj.alwaysAllowUpdates = message.alwaysAllowUpdates;
       }
-      if (
-        message.populatesExternalDevice !== undefined &&
-        message.populatesExternalDevice !== false
-      ) {
+      if (message.populatesExternalDevice !== undefined) {
         obj.populatesExternalDevice = message.populatesExternalDevice;
       }
-      if (
-        message.outputDeviceUid !== undefined &&
-        message.outputDeviceUid !== ""
-      ) {
+      if (message.outputDeviceUid !== undefined) {
         obj.outputDeviceUid = message.outputDeviceUid;
       }
-      if (
-        message.targetSessionId !== undefined &&
-        message.targetSessionId !== 0
-      ) {
+      if (message.targetSessionId !== undefined) {
         obj.targetSessionId = Math.round(message.targetSessionId);
       }
-      if (
-        message.cachedDiscoveryEnabled !== undefined &&
-        message.cachedDiscoveryEnabled !== false
-      ) {
+      if (message.cachedDiscoveryEnabled !== undefined) {
         obj.cachedDiscoveryEnabled = message.cachedDiscoveryEnabled;
       }
       return obj;
@@ -294,14 +252,16 @@ export const DiscoverySessionConfiguration: MessageFns<DiscoverySessionConfigura
       object: I
     ): DiscoverySessionConfiguration {
       const message = createBaseDiscoverySessionConfiguration();
-      message.features = object.features ?? 0;
-      message.routingContextUid = object.routingContextUid ?? "";
-      message.enableThrottling = object.enableThrottling ?? false;
-      message.alwaysAllowUpdates = object.alwaysAllowUpdates ?? false;
-      message.populatesExternalDevice = object.populatesExternalDevice ?? false;
-      message.outputDeviceUid = object.outputDeviceUid ?? "";
-      message.targetSessionId = object.targetSessionId ?? 0;
-      message.cachedDiscoveryEnabled = object.cachedDiscoveryEnabled ?? false;
+      message.features = object.features ?? undefined;
+      message.routingContextUid = object.routingContextUid ?? undefined;
+      message.enableThrottling = object.enableThrottling ?? undefined;
+      message.alwaysAllowUpdates = object.alwaysAllowUpdates ?? undefined;
+      message.populatesExternalDevice =
+        object.populatesExternalDevice ?? undefined;
+      message.outputDeviceUid = object.outputDeviceUid ?? undefined;
+      message.targetSessionId = object.targetSessionId ?? undefined;
+      message.cachedDiscoveryEnabled =
+        object.cachedDiscoveryEnabled ?? undefined;
       return message;
     },
   };

@@ -93,15 +93,15 @@ export function mRAVEndpointDescriptor_ConnectionTypeToJSON(
 
 function createBaseMRAVEndpointDescriptor(): MRAVEndpointDescriptor {
   return {
-    name: "",
-    uniqueIdentifier: "",
+    name: undefined,
+    uniqueIdentifier: undefined,
     outputDevices: [],
     designatedGroupLeader: undefined,
-    isLocalEndpoint: false,
-    instanceIdentifier: "",
-    isProxyGroupPlayer: false,
-    connectionType: 0,
-    canModifyGroupMembership: false,
+    isLocalEndpoint: undefined,
+    instanceIdentifier: undefined,
+    isProxyGroupPlayer: undefined,
+    connectionType: undefined,
+    canModifyGroupMembership: undefined,
     personalOutputDevices: [],
     _unknownFields: {},
   };
@@ -112,13 +112,10 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
     message: MRAVEndpointDescriptor,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.name !== undefined && message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (
-      message.uniqueIdentifier !== undefined &&
-      message.uniqueIdentifier !== ""
-    ) {
+    if (message.uniqueIdentifier !== undefined) {
       writer.uint32(18).string(message.uniqueIdentifier);
     }
     for (const v of message.outputDevices) {
@@ -130,31 +127,19 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
         writer.uint32(34).fork()
       ).join();
     }
-    if (
-      message.isLocalEndpoint !== undefined &&
-      message.isLocalEndpoint !== false
-    ) {
+    if (message.isLocalEndpoint !== undefined) {
       writer.uint32(40).bool(message.isLocalEndpoint);
     }
-    if (
-      message.instanceIdentifier !== undefined &&
-      message.instanceIdentifier !== ""
-    ) {
+    if (message.instanceIdentifier !== undefined) {
       writer.uint32(50).string(message.instanceIdentifier);
     }
-    if (
-      message.isProxyGroupPlayer !== undefined &&
-      message.isProxyGroupPlayer !== false
-    ) {
+    if (message.isProxyGroupPlayer !== undefined) {
       writer.uint32(56).bool(message.isProxyGroupPlayer);
     }
-    if (message.connectionType !== undefined && message.connectionType !== 0) {
+    if (message.connectionType !== undefined) {
       writer.uint32(64).int32(message.connectionType);
     }
-    if (
-      message.canModifyGroupMembership !== undefined &&
-      message.canModifyGroupMembership !== false
-    ) {
+    if (message.canModifyGroupMembership !== undefined) {
       writer.uint32(72).bool(message.canModifyGroupMembership);
     }
     for (const v of message.personalOutputDevices) {
@@ -290,10 +275,10 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
 
   fromJSON(object: any): MRAVEndpointDescriptor {
     return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : undefined,
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.String(object.uniqueIdentifier)
-        : "",
+        : undefined,
       outputDevices: globalThis.Array.isArray(object?.outputDevices)
         ? object.outputDevices.map((e: any) =>
             AVOutputDeviceDescriptor.fromJSON(e)
@@ -304,19 +289,19 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
         : undefined,
       isLocalEndpoint: isSet(object.isLocalEndpoint)
         ? globalThis.Boolean(object.isLocalEndpoint)
-        : false,
+        : undefined,
       instanceIdentifier: isSet(object.instanceIdentifier)
         ? globalThis.String(object.instanceIdentifier)
-        : "",
+        : undefined,
       isProxyGroupPlayer: isSet(object.isProxyGroupPlayer)
         ? globalThis.Boolean(object.isProxyGroupPlayer)
-        : false,
+        : undefined,
       connectionType: isSet(object.connectionType)
         ? mRAVEndpointDescriptor_ConnectionTypeFromJSON(object.connectionType)
-        : 0,
+        : undefined,
       canModifyGroupMembership: isSet(object.canModifyGroupMembership)
         ? globalThis.Boolean(object.canModifyGroupMembership)
-        : false,
+        : undefined,
       personalOutputDevices: globalThis.Array.isArray(
         object?.personalOutputDevices
       )
@@ -329,13 +314,10 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
 
   toJSON(message: MRAVEndpointDescriptor): unknown {
     const obj: any = {};
-    if (message.name !== undefined && message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (
-      message.uniqueIdentifier !== undefined &&
-      message.uniqueIdentifier !== ""
-    ) {
+    if (message.uniqueIdentifier !== undefined) {
       obj.uniqueIdentifier = message.uniqueIdentifier;
     }
     if (message.outputDevices?.length) {
@@ -348,33 +330,21 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
         message.designatedGroupLeader
       );
     }
-    if (
-      message.isLocalEndpoint !== undefined &&
-      message.isLocalEndpoint !== false
-    ) {
+    if (message.isLocalEndpoint !== undefined) {
       obj.isLocalEndpoint = message.isLocalEndpoint;
     }
-    if (
-      message.instanceIdentifier !== undefined &&
-      message.instanceIdentifier !== ""
-    ) {
+    if (message.instanceIdentifier !== undefined) {
       obj.instanceIdentifier = message.instanceIdentifier;
     }
-    if (
-      message.isProxyGroupPlayer !== undefined &&
-      message.isProxyGroupPlayer !== false
-    ) {
+    if (message.isProxyGroupPlayer !== undefined) {
       obj.isProxyGroupPlayer = message.isProxyGroupPlayer;
     }
-    if (message.connectionType !== undefined && message.connectionType !== 0) {
+    if (message.connectionType !== undefined) {
       obj.connectionType = mRAVEndpointDescriptor_ConnectionTypeToJSON(
         message.connectionType
       );
     }
-    if (
-      message.canModifyGroupMembership !== undefined &&
-      message.canModifyGroupMembership !== false
-    ) {
+    if (message.canModifyGroupMembership !== undefined) {
       obj.canModifyGroupMembership = message.canModifyGroupMembership;
     }
     if (message.personalOutputDevices?.length) {
@@ -394,8 +364,8 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
     object: I
   ): MRAVEndpointDescriptor {
     const message = createBaseMRAVEndpointDescriptor();
-    message.name = object.name ?? "";
-    message.uniqueIdentifier = object.uniqueIdentifier ?? "";
+    message.name = object.name ?? undefined;
+    message.uniqueIdentifier = object.uniqueIdentifier ?? undefined;
     message.outputDevices =
       object.outputDevices?.map((e) =>
         AVOutputDeviceDescriptor.fromPartial(e)
@@ -405,11 +375,12 @@ export const MRAVEndpointDescriptor: MessageFns<MRAVEndpointDescriptor> = {
       object.designatedGroupLeader !== null
         ? AVOutputDeviceDescriptor.fromPartial(object.designatedGroupLeader)
         : undefined;
-    message.isLocalEndpoint = object.isLocalEndpoint ?? false;
-    message.instanceIdentifier = object.instanceIdentifier ?? "";
-    message.isProxyGroupPlayer = object.isProxyGroupPlayer ?? false;
-    message.connectionType = object.connectionType ?? 0;
-    message.canModifyGroupMembership = object.canModifyGroupMembership ?? false;
+    message.isLocalEndpoint = object.isLocalEndpoint ?? undefined;
+    message.instanceIdentifier = object.instanceIdentifier ?? undefined;
+    message.isProxyGroupPlayer = object.isProxyGroupPlayer ?? undefined;
+    message.connectionType = object.connectionType ?? undefined;
+    message.canModifyGroupMembership =
+      object.canModifyGroupMembership ?? undefined;
     message.personalOutputDevices =
       object.personalOutputDevices?.map((e) =>
         AVOutputDeviceDescriptor.fromPartial(e)

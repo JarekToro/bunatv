@@ -138,7 +138,12 @@ export const ActionType: MessageFns<ActionType> = {
 };
 
 function createBaseTextInputMessage(): TextInputMessage {
-  return { timestamp: 0, text: "", actionType: 0, _unknownFields: {} };
+  return {
+    timestamp: undefined,
+    text: undefined,
+    actionType: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const TextInputMessage: MessageFns<TextInputMessage> = {
@@ -146,13 +151,13 @@ export const TextInputMessage: MessageFns<TextInputMessage> = {
     message: TextInputMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       writer.uint32(9).double(message.timestamp);
     }
-    if (message.text !== undefined && message.text !== "") {
+    if (message.text !== undefined) {
       writer.uint32(18).string(message.text);
     }
-    if (message.actionType !== undefined && message.actionType !== 0) {
+    if (message.actionType !== undefined) {
       writer.uint32(24).int32(message.actionType);
     }
     if (message._unknownFields !== undefined) {
@@ -221,23 +226,23 @@ export const TextInputMessage: MessageFns<TextInputMessage> = {
     return {
       timestamp: isSet(object.timestamp)
         ? globalThis.Number(object.timestamp)
-        : 0,
-      text: isSet(object.text) ? globalThis.String(object.text) : "",
+        : undefined,
+      text: isSet(object.text) ? globalThis.String(object.text) : undefined,
       actionType: isSet(object.actionType)
         ? actionType_EnumFromJSON(object.actionType)
-        : 0,
+        : undefined,
     };
   },
 
   toJSON(message: TextInputMessage): unknown {
     const obj: any = {};
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
-    if (message.text !== undefined && message.text !== "") {
+    if (message.text !== undefined) {
       obj.text = message.text;
     }
-    if (message.actionType !== undefined && message.actionType !== 0) {
+    if (message.actionType !== undefined) {
       obj.actionType = actionType_EnumToJSON(message.actionType);
     }
     return obj;
@@ -252,9 +257,9 @@ export const TextInputMessage: MessageFns<TextInputMessage> = {
     object: I
   ): TextInputMessage {
     const message = createBaseTextInputMessage();
-    message.timestamp = object.timestamp ?? 0;
-    message.text = object.text ?? "";
-    message.actionType = object.actionType ?? 0;
+    message.timestamp = object.timestamp ?? undefined;
+    message.text = object.text ?? undefined;
+    message.actionType = object.actionType ?? undefined;
     return message;
   },
 };

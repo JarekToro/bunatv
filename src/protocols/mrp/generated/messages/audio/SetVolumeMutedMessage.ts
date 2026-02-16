@@ -20,8 +20,8 @@ export interface SetVolumeMutedMessage {
 
 function createBaseSetVolumeMutedMessage(): SetVolumeMutedMessage {
   return {
-    isMuted: false,
-    outputDeviceUID: "",
+    isMuted: undefined,
+    outputDeviceUID: undefined,
     details: undefined,
     _unknownFields: {},
   };
@@ -32,13 +32,10 @@ export const SetVolumeMutedMessage: MessageFns<SetVolumeMutedMessage> = {
     message: SetVolumeMutedMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.isMuted !== undefined && message.isMuted !== false) {
+    if (message.isMuted !== undefined) {
       writer.uint32(8).bool(message.isMuted);
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       writer.uint32(18).string(message.outputDeviceUID);
     }
     if (message.details !== undefined) {
@@ -113,10 +110,10 @@ export const SetVolumeMutedMessage: MessageFns<SetVolumeMutedMessage> = {
     return {
       isMuted: isSet(object.isMuted)
         ? globalThis.Boolean(object.isMuted)
-        : false,
+        : undefined,
       outputDeviceUID: isSet(object.outputDeviceUID)
         ? globalThis.String(object.outputDeviceUID)
-        : "",
+        : undefined,
       details: isSet(object.details)
         ? RequestDetails.fromJSON(object.details)
         : undefined,
@@ -125,13 +122,10 @@ export const SetVolumeMutedMessage: MessageFns<SetVolumeMutedMessage> = {
 
   toJSON(message: SetVolumeMutedMessage): unknown {
     const obj: any = {};
-    if (message.isMuted !== undefined && message.isMuted !== false) {
+    if (message.isMuted !== undefined) {
       obj.isMuted = message.isMuted;
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       obj.outputDeviceUID = message.outputDeviceUID;
     }
     if (message.details !== undefined) {
@@ -149,8 +143,8 @@ export const SetVolumeMutedMessage: MessageFns<SetVolumeMutedMessage> = {
     object: I
   ): SetVolumeMutedMessage {
     const message = createBaseSetVolumeMutedMessage();
-    message.isMuted = object.isMuted ?? false;
-    message.outputDeviceUID = object.outputDeviceUID ?? "";
+    message.isMuted = object.isMuted ?? undefined;
+    message.outputDeviceUID = object.outputDeviceUID ?? undefined;
     message.details =
       object.details !== undefined && object.details !== null
         ? RequestDetails.fromPartial(object.details)

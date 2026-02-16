@@ -47,7 +47,7 @@ export interface SendHIDEventMessage {
 }
 
 function createBaseSendHIDEventMessage(): SendHIDEventMessage {
-  return { hidEventData: Buffer.alloc(0), _unknownFields: {} };
+  return { hidEventData: undefined, _unknownFields: {} };
 }
 
 export const SendHIDEventMessage: MessageFns<SendHIDEventMessage> = {
@@ -55,10 +55,7 @@ export const SendHIDEventMessage: MessageFns<SendHIDEventMessage> = {
     message: SendHIDEventMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.hidEventData !== undefined &&
-      message.hidEventData.length !== 0
-    ) {
+    if (message.hidEventData !== undefined) {
       writer.uint32(10).bytes(message.hidEventData);
     }
     if (message._unknownFields !== undefined) {
@@ -114,16 +111,13 @@ export const SendHIDEventMessage: MessageFns<SendHIDEventMessage> = {
     return {
       hidEventData: isSet(object.hidEventData)
         ? Buffer.from(bytesFromBase64(object.hidEventData))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: SendHIDEventMessage): unknown {
     const obj: any = {};
-    if (
-      message.hidEventData !== undefined &&
-      message.hidEventData.length !== 0
-    ) {
+    if (message.hidEventData !== undefined) {
       obj.hidEventData = base64FromBytes(message.hidEventData);
     }
     return obj;
@@ -138,7 +132,7 @@ export const SendHIDEventMessage: MessageFns<SendHIDEventMessage> = {
     object: I
   ): SendHIDEventMessage {
     const message = createBaseSendHIDEventMessage();
-    message.hidEventData = object.hidEventData ?? Buffer.alloc(0);
+    message.hidEventData = object.hidEventData ?? undefined;
     return message;
   },
 };

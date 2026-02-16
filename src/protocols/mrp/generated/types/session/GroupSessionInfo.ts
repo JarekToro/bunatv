@@ -17,7 +17,7 @@ export const protobufPackage = "";
 /** GroupSessionInfo.proto */
 
 export interface GroupSessionInfo {
-  identifier: string;
+  identifier?: string | undefined;
   /** NOTE: In the provided writeTo, fields 3 and 4 are only written if hostDisplayName is non-null. */
   hostDisplayName?: string | undefined;
   routeType?: GroupSessionRouteType_Enum | undefined;
@@ -29,12 +29,12 @@ export interface GroupSessionInfo {
 
 function createBaseGroupSessionInfo(): GroupSessionInfo {
   return {
-    identifier: "",
-    hostDisplayName: "",
-    routeType: 0,
-    hosted: false,
-    equivalentMediaIdentifier: "",
-    placeholder: false,
+    identifier: undefined,
+    hostDisplayName: undefined,
+    routeType: undefined,
+    hosted: undefined,
+    equivalentMediaIdentifier: undefined,
+    placeholder: undefined,
     _unknownFields: {},
   };
 }
@@ -44,28 +44,22 @@ export const GroupSessionInfo: MessageFns<GroupSessionInfo> = {
     message: GroupSessionInfo,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
-    if (
-      message.hostDisplayName !== undefined &&
-      message.hostDisplayName !== ""
-    ) {
+    if (message.hostDisplayName !== undefined) {
       writer.uint32(18).string(message.hostDisplayName);
     }
-    if (message.routeType !== undefined && message.routeType !== 0) {
+    if (message.routeType !== undefined) {
       writer.uint32(24).int32(message.routeType);
     }
-    if (message.hosted !== undefined && message.hosted !== false) {
+    if (message.hosted !== undefined) {
       writer.uint32(32).bool(message.hosted);
     }
-    if (
-      message.equivalentMediaIdentifier !== undefined &&
-      message.equivalentMediaIdentifier !== ""
-    ) {
+    if (message.equivalentMediaIdentifier !== undefined) {
       writer.uint32(42).string(message.equivalentMediaIdentifier);
     }
-    if (message.placeholder !== undefined && message.placeholder !== false) {
+    if (message.placeholder !== undefined) {
       writer.uint32(48).bool(message.placeholder);
     }
     if (message._unknownFields !== undefined) {
@@ -158,47 +152,43 @@ export const GroupSessionInfo: MessageFns<GroupSessionInfo> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       hostDisplayName: isSet(object.hostDisplayName)
         ? globalThis.String(object.hostDisplayName)
-        : "",
+        : undefined,
       routeType: isSet(object.routeType)
         ? groupSessionRouteType_EnumFromJSON(object.routeType)
-        : 0,
-      hosted: isSet(object.hosted) ? globalThis.Boolean(object.hosted) : false,
+        : undefined,
+      hosted: isSet(object.hosted)
+        ? globalThis.Boolean(object.hosted)
+        : undefined,
       equivalentMediaIdentifier: isSet(object.equivalentMediaIdentifier)
         ? globalThis.String(object.equivalentMediaIdentifier)
-        : "",
+        : undefined,
       placeholder: isSet(object.placeholder)
         ? globalThis.Boolean(object.placeholder)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: GroupSessionInfo): unknown {
     const obj: any = {};
-    if (message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (
-      message.hostDisplayName !== undefined &&
-      message.hostDisplayName !== ""
-    ) {
+    if (message.hostDisplayName !== undefined) {
       obj.hostDisplayName = message.hostDisplayName;
     }
-    if (message.routeType !== undefined && message.routeType !== 0) {
+    if (message.routeType !== undefined) {
       obj.routeType = groupSessionRouteType_EnumToJSON(message.routeType);
     }
-    if (message.hosted !== undefined && message.hosted !== false) {
+    if (message.hosted !== undefined) {
       obj.hosted = message.hosted;
     }
-    if (
-      message.equivalentMediaIdentifier !== undefined &&
-      message.equivalentMediaIdentifier !== ""
-    ) {
+    if (message.equivalentMediaIdentifier !== undefined) {
       obj.equivalentMediaIdentifier = message.equivalentMediaIdentifier;
     }
-    if (message.placeholder !== undefined && message.placeholder !== false) {
+    if (message.placeholder !== undefined) {
       obj.placeholder = message.placeholder;
     }
     return obj;
@@ -213,12 +203,13 @@ export const GroupSessionInfo: MessageFns<GroupSessionInfo> = {
     object: I
   ): GroupSessionInfo {
     const message = createBaseGroupSessionInfo();
-    message.identifier = object.identifier ?? "";
-    message.hostDisplayName = object.hostDisplayName ?? "";
-    message.routeType = object.routeType ?? 0;
-    message.hosted = object.hosted ?? false;
-    message.equivalentMediaIdentifier = object.equivalentMediaIdentifier ?? "";
-    message.placeholder = object.placeholder ?? false;
+    message.identifier = object.identifier ?? undefined;
+    message.hostDisplayName = object.hostDisplayName ?? undefined;
+    message.routeType = object.routeType ?? undefined;
+    message.hosted = object.hosted ?? undefined;
+    message.equivalentMediaIdentifier =
+      object.equivalentMediaIdentifier ?? undefined;
+    message.placeholder = object.placeholder ?? undefined;
     return message;
   },
 };

@@ -17,7 +17,11 @@ export interface PlayerClientPropertiesMessage {
 }
 
 function createBasePlayerClientPropertiesMessage(): PlayerClientPropertiesMessage {
-  return { playerPath: undefined, lastPlayingTimestamp: 0, _unknownFields: {} };
+  return {
+    playerPath: undefined,
+    lastPlayingTimestamp: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMessage> =
@@ -29,10 +33,7 @@ export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMes
       if (message.playerPath !== undefined) {
         PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join();
       }
-      if (
-        message.lastPlayingTimestamp !== undefined &&
-        message.lastPlayingTimestamp !== 0
-      ) {
+      if (message.lastPlayingTimestamp !== undefined) {
         writer.uint32(17).double(message.lastPlayingTimestamp);
       }
       if (message._unknownFields !== undefined) {
@@ -99,7 +100,7 @@ export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMes
           : undefined,
         lastPlayingTimestamp: isSet(object.lastPlayingTimestamp)
           ? globalThis.Number(object.lastPlayingTimestamp)
-          : 0,
+          : undefined,
       };
     },
 
@@ -108,10 +109,7 @@ export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMes
       if (message.playerPath !== undefined) {
         obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-      if (
-        message.lastPlayingTimestamp !== undefined &&
-        message.lastPlayingTimestamp !== 0
-      ) {
+      if (message.lastPlayingTimestamp !== undefined) {
         obj.lastPlayingTimestamp = message.lastPlayingTimestamp;
       }
       return obj;
@@ -130,7 +128,7 @@ export const PlayerClientPropertiesMessage: MessageFns<PlayerClientPropertiesMes
         object.playerPath !== undefined && object.playerPath !== null
           ? PlayerPath.fromPartial(object.playerPath)
           : undefined;
-      message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? 0;
+      message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? undefined;
       return message;
     },
   };

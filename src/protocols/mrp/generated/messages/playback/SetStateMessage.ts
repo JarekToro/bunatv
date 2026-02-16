@@ -40,13 +40,13 @@ function createBaseSetStateMessage(): SetStateMessage {
     nowPlayingInfo: undefined,
     supportedCommands: undefined,
     playbackQueue: undefined,
-    displayID: "",
-    displayName: "",
-    playbackState: 0,
+    displayID: undefined,
+    displayName: undefined,
+    playbackState: undefined,
     playbackQueueCapabilities: undefined,
     playerPath: undefined,
     request: undefined,
-    playbackStateTimestamp: 0,
+    playbackStateTimestamp: undefined,
     _unknownFields: {},
   };
 }
@@ -74,13 +74,13 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
         writer.uint32(26).fork()
       ).join();
     }
-    if (message.displayID !== undefined && message.displayID !== "") {
+    if (message.displayID !== undefined) {
       writer.uint32(34).string(message.displayID);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(42).string(message.displayName);
     }
-    if (message.playbackState !== undefined && message.playbackState !== 0) {
+    if (message.playbackState !== undefined) {
       writer.uint32(48).int32(message.playbackState);
     }
     if (message.playbackQueueCapabilities !== undefined) {
@@ -98,10 +98,7 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
         writer.uint32(82).fork()
       ).join();
     }
-    if (
-      message.playbackStateTimestamp !== undefined &&
-      message.playbackStateTimestamp !== 0
-    ) {
+    if (message.playbackStateTimestamp !== undefined) {
       writer.uint32(89).double(message.playbackStateTimestamp);
     }
     if (message._unknownFields !== undefined) {
@@ -247,13 +244,13 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
         : undefined,
       displayID: isSet(object.displayID)
         ? globalThis.String(object.displayID)
-        : "",
+        : undefined,
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
+        : undefined,
       playbackState: isSet(object.playbackState)
         ? playbackState_EnumFromJSON(object.playbackState)
-        : 0,
+        : undefined,
       playbackQueueCapabilities: isSet(object.playbackQueueCapabilities)
         ? PlaybackQueueCapabilities.fromJSON(object.playbackQueueCapabilities)
         : undefined,
@@ -265,7 +262,7 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
         : undefined,
       playbackStateTimestamp: isSet(object.playbackStateTimestamp)
         ? globalThis.Number(object.playbackStateTimestamp)
-        : 0,
+        : undefined,
     };
   },
 
@@ -282,13 +279,13 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
     if (message.playbackQueue !== undefined) {
       obj.playbackQueue = PlaybackQueue.toJSON(message.playbackQueue);
     }
-    if (message.displayID !== undefined && message.displayID !== "") {
+    if (message.displayID !== undefined) {
       obj.displayID = message.displayID;
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
-    if (message.playbackState !== undefined && message.playbackState !== 0) {
+    if (message.playbackState !== undefined) {
       obj.playbackState = playbackState_EnumToJSON(message.playbackState);
     }
     if (message.playbackQueueCapabilities !== undefined) {
@@ -302,10 +299,7 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
     if (message.request !== undefined) {
       obj.request = PlaybackQueueRequestMessage.toJSON(message.request);
     }
-    if (
-      message.playbackStateTimestamp !== undefined &&
-      message.playbackStateTimestamp !== 0
-    ) {
+    if (message.playbackStateTimestamp !== undefined) {
       obj.playbackStateTimestamp = message.playbackStateTimestamp;
     }
     return obj;
@@ -333,9 +327,9 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
       object.playbackQueue !== undefined && object.playbackQueue !== null
         ? PlaybackQueue.fromPartial(object.playbackQueue)
         : undefined;
-    message.displayID = object.displayID ?? "";
-    message.displayName = object.displayName ?? "";
-    message.playbackState = object.playbackState ?? 0;
+    message.displayID = object.displayID ?? undefined;
+    message.displayName = object.displayName ?? undefined;
+    message.playbackState = object.playbackState ?? undefined;
     message.playbackQueueCapabilities =
       object.playbackQueueCapabilities !== undefined &&
       object.playbackQueueCapabilities !== null
@@ -351,7 +345,7 @@ export const SetStateMessage: MessageFns<SetStateMessage> = {
       object.request !== undefined && object.request !== null
         ? PlaybackQueueRequestMessage.fromPartial(object.request)
         : undefined;
-    message.playbackStateTimestamp = object.playbackStateTimestamp ?? 0;
+    message.playbackStateTimestamp = object.playbackStateTimestamp ?? undefined;
     return message;
   },
 };

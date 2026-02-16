@@ -28,14 +28,14 @@ export interface UpdateActiveSystemEndpointRequest {
 
 function createBaseUpdateActiveSystemEndpointRequest(): UpdateActiveSystemEndpointRequest {
   return {
-    outputDeviceUid: "",
-    changeType: 0,
-    reason: "",
-    pairedDeviceSync: false,
-    type: 0,
-    disableDuration: 0,
-    demoteWhenSyncingToCompanion: false,
-    previousOutputDeviceUid: "",
+    outputDeviceUid: undefined,
+    changeType: undefined,
+    reason: undefined,
+    pairedDeviceSync: undefined,
+    type: undefined,
+    disableDuration: undefined,
+    demoteWhenSyncingToCompanion: undefined,
+    previousOutputDeviceUid: undefined,
     _unknownFields: {},
   };
 }
@@ -46,43 +46,28 @@ export const UpdateActiveSystemEndpointRequest: MessageFns<UpdateActiveSystemEnd
       message: UpdateActiveSystemEndpointRequest,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.outputDeviceUid !== undefined &&
-        message.outputDeviceUid !== ""
-      ) {
+      if (message.outputDeviceUid !== undefined) {
         writer.uint32(10).string(message.outputDeviceUid);
       }
-      if (message.changeType !== undefined && message.changeType !== 0) {
+      if (message.changeType !== undefined) {
         writer.uint32(16).int32(message.changeType);
       }
-      if (message.reason !== undefined && message.reason !== "") {
+      if (message.reason !== undefined) {
         writer.uint32(26).string(message.reason);
       }
-      if (
-        message.pairedDeviceSync !== undefined &&
-        message.pairedDeviceSync !== false
-      ) {
+      if (message.pairedDeviceSync !== undefined) {
         writer.uint32(32).bool(message.pairedDeviceSync);
       }
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         writer.uint32(40).uint64(message.type);
       }
-      if (
-        message.disableDuration !== undefined &&
-        message.disableDuration !== 0
-      ) {
+      if (message.disableDuration !== undefined) {
         writer.uint32(49).double(message.disableDuration);
       }
-      if (
-        message.demoteWhenSyncingToCompanion !== undefined &&
-        message.demoteWhenSyncingToCompanion !== false
-      ) {
+      if (message.demoteWhenSyncingToCompanion !== undefined) {
         writer.uint32(56).bool(message.demoteWhenSyncingToCompanion);
       }
-      if (
-        message.previousOutputDeviceUid !== undefined &&
-        message.previousOutputDeviceUid !== ""
-      ) {
+      if (message.previousOutputDeviceUid !== undefined) {
         writer.uint32(66).string(message.previousOutputDeviceUid);
       }
       if (message._unknownFields !== undefined) {
@@ -194,66 +179,53 @@ export const UpdateActiveSystemEndpointRequest: MessageFns<UpdateActiveSystemEnd
       return {
         outputDeviceUid: isSet(object.outputDeviceUid)
           ? globalThis.String(object.outputDeviceUid)
-          : "",
+          : undefined,
         changeType: isSet(object.changeType)
           ? changeType_EnumFromJSON(object.changeType)
-          : 0,
-        reason: isSet(object.reason) ? globalThis.String(object.reason) : "",
+          : undefined,
+        reason: isSet(object.reason)
+          ? globalThis.String(object.reason)
+          : undefined,
         pairedDeviceSync: isSet(object.pairedDeviceSync)
           ? globalThis.Boolean(object.pairedDeviceSync)
-          : false,
-        type: isSet(object.type) ? globalThis.Number(object.type) : 0,
+          : undefined,
+        type: isSet(object.type) ? globalThis.Number(object.type) : undefined,
         disableDuration: isSet(object.disableDuration)
           ? globalThis.Number(object.disableDuration)
-          : 0,
+          : undefined,
         demoteWhenSyncingToCompanion: isSet(object.demoteWhenSyncingToCompanion)
           ? globalThis.Boolean(object.demoteWhenSyncingToCompanion)
-          : false,
+          : undefined,
         previousOutputDeviceUid: isSet(object.previousOutputDeviceUid)
           ? globalThis.String(object.previousOutputDeviceUid)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: UpdateActiveSystemEndpointRequest): unknown {
       const obj: any = {};
-      if (
-        message.outputDeviceUid !== undefined &&
-        message.outputDeviceUid !== ""
-      ) {
+      if (message.outputDeviceUid !== undefined) {
         obj.outputDeviceUid = message.outputDeviceUid;
       }
-      if (message.changeType !== undefined && message.changeType !== 0) {
+      if (message.changeType !== undefined) {
         obj.changeType = changeType_EnumToJSON(message.changeType);
       }
-      if (message.reason !== undefined && message.reason !== "") {
+      if (message.reason !== undefined) {
         obj.reason = message.reason;
       }
-      if (
-        message.pairedDeviceSync !== undefined &&
-        message.pairedDeviceSync !== false
-      ) {
+      if (message.pairedDeviceSync !== undefined) {
         obj.pairedDeviceSync = message.pairedDeviceSync;
       }
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         obj.type = Math.round(message.type);
       }
-      if (
-        message.disableDuration !== undefined &&
-        message.disableDuration !== 0
-      ) {
+      if (message.disableDuration !== undefined) {
         obj.disableDuration = message.disableDuration;
       }
-      if (
-        message.demoteWhenSyncingToCompanion !== undefined &&
-        message.demoteWhenSyncingToCompanion !== false
-      ) {
+      if (message.demoteWhenSyncingToCompanion !== undefined) {
         obj.demoteWhenSyncingToCompanion = message.demoteWhenSyncingToCompanion;
       }
-      if (
-        message.previousOutputDeviceUid !== undefined &&
-        message.previousOutputDeviceUid !== ""
-      ) {
+      if (message.previousOutputDeviceUid !== undefined) {
         obj.previousOutputDeviceUid = message.previousOutputDeviceUid;
       }
       return obj;
@@ -268,15 +240,16 @@ export const UpdateActiveSystemEndpointRequest: MessageFns<UpdateActiveSystemEnd
       I extends Exact<DeepPartial<UpdateActiveSystemEndpointRequest>, I>,
     >(object: I): UpdateActiveSystemEndpointRequest {
       const message = createBaseUpdateActiveSystemEndpointRequest();
-      message.outputDeviceUid = object.outputDeviceUid ?? "";
-      message.changeType = object.changeType ?? 0;
-      message.reason = object.reason ?? "";
-      message.pairedDeviceSync = object.pairedDeviceSync ?? false;
-      message.type = object.type ?? 0;
-      message.disableDuration = object.disableDuration ?? 0;
+      message.outputDeviceUid = object.outputDeviceUid ?? undefined;
+      message.changeType = object.changeType ?? undefined;
+      message.reason = object.reason ?? undefined;
+      message.pairedDeviceSync = object.pairedDeviceSync ?? undefined;
+      message.type = object.type ?? undefined;
+      message.disableDuration = object.disableDuration ?? undefined;
       message.demoteWhenSyncingToCompanion =
-        object.demoteWhenSyncingToCompanion ?? false;
-      message.previousOutputDeviceUid = object.previousOutputDeviceUid ?? "";
+        object.demoteWhenSyncingToCompanion ?? undefined;
+      message.previousOutputDeviceUid =
+        object.previousOutputDeviceUid ?? undefined;
       return message;
     },
   };

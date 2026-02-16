@@ -23,7 +23,13 @@ export interface VirtualTouchEvent {
 }
 
 function createBaseVirtualTouchEvent(): VirtualTouchEvent {
-  return { x: 0, y: 0, phase: 0, finger: 0, _unknownFields: {} };
+  return {
+    x: undefined,
+    y: undefined,
+    phase: undefined,
+    finger: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const VirtualTouchEvent: MessageFns<VirtualTouchEvent> = {
@@ -31,16 +37,16 @@ export const VirtualTouchEvent: MessageFns<VirtualTouchEvent> = {
     message: VirtualTouchEvent,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.x !== undefined && message.x !== 0) {
+    if (message.x !== undefined) {
       writer.uint32(9).double(message.x);
     }
-    if (message.y !== undefined && message.y !== 0) {
+    if (message.y !== undefined) {
       writer.uint32(17).double(message.y);
     }
-    if (message.phase !== undefined && message.phase !== 0) {
+    if (message.phase !== undefined) {
       writer.uint32(24).int32(message.phase);
     }
-    if (message.finger !== undefined && message.finger !== 0) {
+    if (message.finger !== undefined) {
       writer.uint32(32).int32(message.finger);
     }
     if (message._unknownFields !== undefined) {
@@ -115,27 +121,29 @@ export const VirtualTouchEvent: MessageFns<VirtualTouchEvent> = {
 
   fromJSON(object: any): VirtualTouchEvent {
     return {
-      x: isSet(object.x) ? globalThis.Number(object.x) : 0,
-      y: isSet(object.y) ? globalThis.Number(object.y) : 0,
+      x: isSet(object.x) ? globalThis.Number(object.x) : undefined,
+      y: isSet(object.y) ? globalThis.Number(object.y) : undefined,
       phase: isSet(object.phase)
         ? virtualTouchPhase_EnumFromJSON(object.phase)
-        : 0,
-      finger: isSet(object.finger) ? globalThis.Number(object.finger) : 0,
+        : undefined,
+      finger: isSet(object.finger)
+        ? globalThis.Number(object.finger)
+        : undefined,
     };
   },
 
   toJSON(message: VirtualTouchEvent): unknown {
     const obj: any = {};
-    if (message.x !== undefined && message.x !== 0) {
+    if (message.x !== undefined) {
       obj.x = message.x;
     }
-    if (message.y !== undefined && message.y !== 0) {
+    if (message.y !== undefined) {
       obj.y = message.y;
     }
-    if (message.phase !== undefined && message.phase !== 0) {
+    if (message.phase !== undefined) {
       obj.phase = virtualTouchPhase_EnumToJSON(message.phase);
     }
-    if (message.finger !== undefined && message.finger !== 0) {
+    if (message.finger !== undefined) {
       obj.finger = Math.round(message.finger);
     }
     return obj;
@@ -150,10 +158,10 @@ export const VirtualTouchEvent: MessageFns<VirtualTouchEvent> = {
     object: I
   ): VirtualTouchEvent {
     const message = createBaseVirtualTouchEvent();
-    message.x = object.x ?? 0;
-    message.y = object.y ?? 0;
-    message.phase = object.phase ?? 0;
-    message.finger = object.finger ?? 0;
+    message.x = object.x ?? undefined;
+    message.y = object.y ?? undefined;
+    message.phase = object.phase ?? undefined;
+    message.finger = object.finger ?? undefined;
     return message;
   },
 };

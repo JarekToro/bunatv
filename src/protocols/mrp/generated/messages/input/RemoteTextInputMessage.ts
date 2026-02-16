@@ -18,9 +18,9 @@ export interface RemoteTextInputMessage {
 
 function createBaseRemoteTextInputMessage(): RemoteTextInputMessage {
   return {
-    timestamp: 0,
-    version: 0,
-    data: Buffer.alloc(0),
+    timestamp: undefined,
+    version: undefined,
+    data: undefined,
     _unknownFields: {},
   };
 }
@@ -30,13 +30,13 @@ export const RemoteTextInputMessage: MessageFns<RemoteTextInputMessage> = {
     message: RemoteTextInputMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       writer.uint32(9).double(message.timestamp);
     }
-    if (message.version !== undefined && message.version !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(16).uint64(message.version);
     }
-    if (message.data !== undefined && message.data.length !== 0) {
+    if (message.data !== undefined) {
       writer.uint32(26).bytes(message.data);
     }
     if (message._unknownFields !== undefined) {
@@ -108,23 +108,25 @@ export const RemoteTextInputMessage: MessageFns<RemoteTextInputMessage> = {
     return {
       timestamp: isSet(object.timestamp)
         ? globalThis.Number(object.timestamp)
-        : 0,
-      version: isSet(object.version) ? globalThis.Number(object.version) : 0,
+        : undefined,
+      version: isSet(object.version)
+        ? globalThis.Number(object.version)
+        : undefined,
       data: isSet(object.data)
         ? Buffer.from(bytesFromBase64(object.data))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: RemoteTextInputMessage): unknown {
     const obj: any = {};
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
-    if (message.version !== undefined && message.version !== 0) {
+    if (message.version !== undefined) {
       obj.version = Math.round(message.version);
     }
-    if (message.data !== undefined && message.data.length !== 0) {
+    if (message.data !== undefined) {
       obj.data = base64FromBytes(message.data);
     }
     return obj;
@@ -139,9 +141,9 @@ export const RemoteTextInputMessage: MessageFns<RemoteTextInputMessage> = {
     object: I
   ): RemoteTextInputMessage {
     const message = createBaseRemoteTextInputMessage();
-    message.timestamp = object.timestamp ?? 0;
-    message.version = object.version ?? 0;
-    message.data = object.data ?? Buffer.alloc(0);
+    message.timestamp = object.timestamp ?? undefined;
+    message.version = object.version ?? undefined;
+    message.data = object.data ?? undefined;
     return message;
   },
 };

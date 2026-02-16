@@ -16,7 +16,11 @@ export interface SetListeningModeMessage {
 }
 
 function createBaseSetListeningModeMessage(): SetListeningModeMessage {
-  return { listeningMode: "", outputDeviceUID: "", _unknownFields: {} };
+  return {
+    listeningMode: undefined,
+    outputDeviceUID: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const SetListeningModeMessage: MessageFns<SetListeningModeMessage> = {
@@ -24,13 +28,10 @@ export const SetListeningModeMessage: MessageFns<SetListeningModeMessage> = {
     message: SetListeningModeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.listeningMode !== undefined && message.listeningMode !== "") {
+    if (message.listeningMode !== undefined) {
       writer.uint32(10).string(message.listeningMode);
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       writer.uint32(18).string(message.outputDeviceUID);
     }
     if (message._unknownFields !== undefined) {
@@ -94,22 +95,19 @@ export const SetListeningModeMessage: MessageFns<SetListeningModeMessage> = {
     return {
       listeningMode: isSet(object.listeningMode)
         ? globalThis.String(object.listeningMode)
-        : "",
+        : undefined,
       outputDeviceUID: isSet(object.outputDeviceUID)
         ? globalThis.String(object.outputDeviceUID)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: SetListeningModeMessage): unknown {
     const obj: any = {};
-    if (message.listeningMode !== undefined && message.listeningMode !== "") {
+    if (message.listeningMode !== undefined) {
       obj.listeningMode = message.listeningMode;
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       obj.outputDeviceUID = message.outputDeviceUID;
     }
     return obj;
@@ -124,8 +122,8 @@ export const SetListeningModeMessage: MessageFns<SetListeningModeMessage> = {
     object: I
   ): SetListeningModeMessage {
     const message = createBaseSetListeningModeMessage();
-    message.listeningMode = object.listeningMode ?? "";
-    message.outputDeviceUID = object.outputDeviceUID ?? "";
+    message.listeningMode = object.listeningMode ?? undefined;
+    message.outputDeviceUID = object.outputDeviceUID ?? undefined;
     return message;
   },
 };

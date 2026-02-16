@@ -20,11 +20,11 @@ export interface ConfigureConnectionMessage {
 
 function createBaseConfigureConnectionMessage(): ConfigureConnectionMessage {
   return {
-    groupID: "",
-    serviceName: "",
-    sourceOutputDeviceUID: "",
-    sourceOutputDeviceName: "",
-    destinationOutputDeviceUid: "",
+    groupID: undefined,
+    serviceName: undefined,
+    sourceOutputDeviceUID: undefined,
+    sourceOutputDeviceName: undefined,
+    destinationOutputDeviceUid: undefined,
     _unknownFields: {},
   };
 }
@@ -35,28 +35,19 @@ export const ConfigureConnectionMessage: MessageFns<ConfigureConnectionMessage> 
       message: ConfigureConnectionMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.groupID !== undefined && message.groupID !== "") {
+      if (message.groupID !== undefined) {
         writer.uint32(10).string(message.groupID);
       }
-      if (message.serviceName !== undefined && message.serviceName !== "") {
+      if (message.serviceName !== undefined) {
         writer.uint32(18).string(message.serviceName);
       }
-      if (
-        message.sourceOutputDeviceUID !== undefined &&
-        message.sourceOutputDeviceUID !== ""
-      ) {
+      if (message.sourceOutputDeviceUID !== undefined) {
         writer.uint32(26).string(message.sourceOutputDeviceUID);
       }
-      if (
-        message.sourceOutputDeviceName !== undefined &&
-        message.sourceOutputDeviceName !== ""
-      ) {
+      if (message.sourceOutputDeviceName !== undefined) {
         writer.uint32(34).string(message.sourceOutputDeviceName);
       }
-      if (
-        message.destinationOutputDeviceUid !== undefined &&
-        message.destinationOutputDeviceUid !== ""
-      ) {
+      if (message.destinationOutputDeviceUid !== undefined) {
         writer.uint32(42).string(message.destinationOutputDeviceUid);
       }
       if (message._unknownFields !== undefined) {
@@ -142,46 +133,39 @@ export const ConfigureConnectionMessage: MessageFns<ConfigureConnectionMessage> 
 
     fromJSON(object: any): ConfigureConnectionMessage {
       return {
-        groupID: isSet(object.groupID) ? globalThis.String(object.groupID) : "",
+        groupID: isSet(object.groupID)
+          ? globalThis.String(object.groupID)
+          : undefined,
         serviceName: isSet(object.serviceName)
           ? globalThis.String(object.serviceName)
-          : "",
+          : undefined,
         sourceOutputDeviceUID: isSet(object.sourceOutputDeviceUID)
           ? globalThis.String(object.sourceOutputDeviceUID)
-          : "",
+          : undefined,
         sourceOutputDeviceName: isSet(object.sourceOutputDeviceName)
           ? globalThis.String(object.sourceOutputDeviceName)
-          : "",
+          : undefined,
         destinationOutputDeviceUid: isSet(object.destinationOutputDeviceUid)
           ? globalThis.String(object.destinationOutputDeviceUid)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: ConfigureConnectionMessage): unknown {
       const obj: any = {};
-      if (message.groupID !== undefined && message.groupID !== "") {
+      if (message.groupID !== undefined) {
         obj.groupID = message.groupID;
       }
-      if (message.serviceName !== undefined && message.serviceName !== "") {
+      if (message.serviceName !== undefined) {
         obj.serviceName = message.serviceName;
       }
-      if (
-        message.sourceOutputDeviceUID !== undefined &&
-        message.sourceOutputDeviceUID !== ""
-      ) {
+      if (message.sourceOutputDeviceUID !== undefined) {
         obj.sourceOutputDeviceUID = message.sourceOutputDeviceUID;
       }
-      if (
-        message.sourceOutputDeviceName !== undefined &&
-        message.sourceOutputDeviceName !== ""
-      ) {
+      if (message.sourceOutputDeviceName !== undefined) {
         obj.sourceOutputDeviceName = message.sourceOutputDeviceName;
       }
-      if (
-        message.destinationOutputDeviceUid !== undefined &&
-        message.destinationOutputDeviceUid !== ""
-      ) {
+      if (message.destinationOutputDeviceUid !== undefined) {
         obj.destinationOutputDeviceUid = message.destinationOutputDeviceUid;
       }
       return obj;
@@ -196,12 +180,13 @@ export const ConfigureConnectionMessage: MessageFns<ConfigureConnectionMessage> 
       object: I
     ): ConfigureConnectionMessage {
       const message = createBaseConfigureConnectionMessage();
-      message.groupID = object.groupID ?? "";
-      message.serviceName = object.serviceName ?? "";
-      message.sourceOutputDeviceUID = object.sourceOutputDeviceUID ?? "";
-      message.sourceOutputDeviceName = object.sourceOutputDeviceName ?? "";
+      message.groupID = object.groupID ?? undefined;
+      message.serviceName = object.serviceName ?? undefined;
+      message.sourceOutputDeviceUID = object.sourceOutputDeviceUID ?? undefined;
+      message.sourceOutputDeviceName =
+        object.sourceOutputDeviceName ?? undefined;
       message.destinationOutputDeviceUid =
-        object.destinationOutputDeviceUid ?? "";
+        object.destinationOutputDeviceUid ?? undefined;
       return message;
     },
   };

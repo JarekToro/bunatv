@@ -73,7 +73,7 @@ export function languageOption_TypeToJSON(object: LanguageOption_Type): string {
 
 function createBaseLanguageOptionGroup(): LanguageOptionGroup {
   return {
-    allowEmptySelection: false,
+    allowEmptySelection: undefined,
     defaultLanguageOption: undefined,
     languageOptions: [],
     _unknownFields: {},
@@ -85,10 +85,7 @@ export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
     message: LanguageOptionGroup,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.allowEmptySelection !== undefined &&
-      message.allowEmptySelection !== false
-    ) {
+    if (message.allowEmptySelection !== undefined) {
       writer.uint32(8).bool(message.allowEmptySelection);
     }
     if (message.defaultLanguageOption !== undefined) {
@@ -174,7 +171,7 @@ export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
     return {
       allowEmptySelection: isSet(object.allowEmptySelection)
         ? globalThis.Boolean(object.allowEmptySelection)
-        : false,
+        : undefined,
       defaultLanguageOption: isSet(object.defaultLanguageOption)
         ? LanguageOption.fromJSON(object.defaultLanguageOption)
         : undefined,
@@ -186,10 +183,7 @@ export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
 
   toJSON(message: LanguageOptionGroup): unknown {
     const obj: any = {};
-    if (
-      message.allowEmptySelection !== undefined &&
-      message.allowEmptySelection !== false
-    ) {
+    if (message.allowEmptySelection !== undefined) {
       obj.allowEmptySelection = message.allowEmptySelection;
     }
     if (message.defaultLanguageOption !== undefined) {
@@ -214,7 +208,7 @@ export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
     object: I
   ): LanguageOptionGroup {
     const message = createBaseLanguageOptionGroup();
-    message.allowEmptySelection = object.allowEmptySelection ?? false;
+    message.allowEmptySelection = object.allowEmptySelection ?? undefined;
     message.defaultLanguageOption =
       object.defaultLanguageOption !== undefined &&
       object.defaultLanguageOption !== null
@@ -228,11 +222,11 @@ export const LanguageOptionGroup: MessageFns<LanguageOptionGroup> = {
 
 function createBaseLanguageOption(): LanguageOption {
   return {
-    type: 0,
-    languageTag: "",
+    type: undefined,
+    languageTag: undefined,
     characteristics: [],
-    displayName: "",
-    identifier: "",
+    displayName: undefined,
+    identifier: undefined,
     _unknownFields: {},
   };
 }
@@ -242,19 +236,19 @@ export const LanguageOption: MessageFns<LanguageOption> = {
     message: LanguageOption,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.languageTag !== undefined && message.languageTag !== "") {
+    if (message.languageTag !== undefined) {
       writer.uint32(18).string(message.languageTag);
     }
     for (const v of message.characteristics) {
       writer.uint32(26).string(v!);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(34).string(message.displayName);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(42).string(message.identifier);
     }
     if (message._unknownFields !== undefined) {
@@ -337,37 +331,39 @@ export const LanguageOption: MessageFns<LanguageOption> = {
 
   fromJSON(object: any): LanguageOption {
     return {
-      type: isSet(object.type) ? languageOption_TypeFromJSON(object.type) : 0,
+      type: isSet(object.type)
+        ? languageOption_TypeFromJSON(object.type)
+        : undefined,
       languageTag: isSet(object.languageTag)
         ? globalThis.String(object.languageTag)
-        : "",
+        : undefined,
       characteristics: globalThis.Array.isArray(object?.characteristics)
         ? object.characteristics.map((e: any) => globalThis.String(e))
         : [],
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
+        : undefined,
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: LanguageOption): unknown {
     const obj: any = {};
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = languageOption_TypeToJSON(message.type);
     }
-    if (message.languageTag !== undefined && message.languageTag !== "") {
+    if (message.languageTag !== undefined) {
       obj.languageTag = message.languageTag;
     }
     if (message.characteristics?.length) {
       obj.characteristics = message.characteristics;
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
     return obj;
@@ -382,11 +378,11 @@ export const LanguageOption: MessageFns<LanguageOption> = {
     object: I
   ): LanguageOption {
     const message = createBaseLanguageOption();
-    message.type = object.type ?? 0;
-    message.languageTag = object.languageTag ?? "";
+    message.type = object.type ?? undefined;
+    message.languageTag = object.languageTag ?? undefined;
     message.characteristics = object.characteristics?.map((e) => e) || [];
-    message.displayName = object.displayName ?? "";
-    message.identifier = object.identifier ?? "";
+    message.displayName = object.displayName ?? undefined;
+    message.identifier = object.identifier ?? undefined;
     return message;
   },
 };

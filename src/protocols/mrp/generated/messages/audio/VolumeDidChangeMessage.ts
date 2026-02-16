@@ -18,9 +18,9 @@ export interface VolumeDidChangeMessage {
 
 function createBaseVolumeDidChangeMessage(): VolumeDidChangeMessage {
   return {
-    volume: 0,
-    endpointUID: "",
-    outputDeviceUID: "",
+    volume: undefined,
+    endpointUID: undefined,
+    outputDeviceUID: undefined,
     _unknownFields: {},
   };
 }
@@ -30,16 +30,13 @@ export const VolumeDidChangeMessage: MessageFns<VolumeDidChangeMessage> = {
     message: VolumeDidChangeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.volume !== undefined && message.volume !== 0) {
+    if (message.volume !== undefined) {
       writer.uint32(13).float(message.volume);
     }
-    if (message.endpointUID !== undefined && message.endpointUID !== "") {
+    if (message.endpointUID !== undefined) {
       writer.uint32(18).string(message.endpointUID);
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       writer.uint32(26).string(message.outputDeviceUID);
     }
     if (message._unknownFields !== undefined) {
@@ -109,28 +106,27 @@ export const VolumeDidChangeMessage: MessageFns<VolumeDidChangeMessage> = {
 
   fromJSON(object: any): VolumeDidChangeMessage {
     return {
-      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
+      volume: isSet(object.volume)
+        ? globalThis.Number(object.volume)
+        : undefined,
       endpointUID: isSet(object.endpointUID)
         ? globalThis.String(object.endpointUID)
-        : "",
+        : undefined,
       outputDeviceUID: isSet(object.outputDeviceUID)
         ? globalThis.String(object.outputDeviceUID)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: VolumeDidChangeMessage): unknown {
     const obj: any = {};
-    if (message.volume !== undefined && message.volume !== 0) {
+    if (message.volume !== undefined) {
       obj.volume = message.volume;
     }
-    if (message.endpointUID !== undefined && message.endpointUID !== "") {
+    if (message.endpointUID !== undefined) {
       obj.endpointUID = message.endpointUID;
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       obj.outputDeviceUID = message.outputDeviceUID;
     }
     return obj;
@@ -145,9 +141,9 @@ export const VolumeDidChangeMessage: MessageFns<VolumeDidChangeMessage> = {
     object: I
   ): VolumeDidChangeMessage {
     const message = createBaseVolumeDidChangeMessage();
-    message.volume = object.volume ?? 0;
-    message.endpointUID = object.endpointUID ?? "";
-    message.outputDeviceUID = object.outputDeviceUID ?? "";
+    message.volume = object.volume ?? undefined;
+    message.endpointUID = object.endpointUID ?? undefined;
+    message.outputDeviceUID = object.outputDeviceUID ?? undefined;
     return message;
   },
 };

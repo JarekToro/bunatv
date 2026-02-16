@@ -16,7 +16,7 @@ export interface TransactionKey {
 }
 
 function createBaseTransactionKey(): TransactionKey {
-  return { identifier: "", userData: Buffer.alloc(0), _unknownFields: {} };
+  return { identifier: undefined, userData: undefined, _unknownFields: {} };
 }
 
 export const TransactionKey: MessageFns<TransactionKey> = {
@@ -24,10 +24,10 @@ export const TransactionKey: MessageFns<TransactionKey> = {
     message: TransactionKey,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
-    if (message.userData !== undefined && message.userData.length !== 0) {
+    if (message.userData !== undefined) {
       writer.uint32(18).bytes(message.userData);
     }
     if (message._unknownFields !== undefined) {
@@ -88,19 +88,19 @@ export const TransactionKey: MessageFns<TransactionKey> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       userData: isSet(object.userData)
         ? Buffer.from(bytesFromBase64(object.userData))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: TransactionKey): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.userData !== undefined && message.userData.length !== 0) {
+    if (message.userData !== undefined) {
       obj.userData = base64FromBytes(message.userData);
     }
     return obj;
@@ -115,8 +115,8 @@ export const TransactionKey: MessageFns<TransactionKey> = {
     object: I
   ): TransactionKey {
     const message = createBaseTransactionKey();
-    message.identifier = object.identifier ?? "";
-    message.userData = object.userData ?? Buffer.alloc(0);
+    message.identifier = object.identifier ?? undefined;
+    message.userData = object.userData ?? undefined;
     return message;
   },
 };

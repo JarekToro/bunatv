@@ -15,7 +15,7 @@ export interface PromptForRouteAuthorizationResponseMessage {
 }
 
 function createBasePromptForRouteAuthorizationResponseMessage(): PromptForRouteAuthorizationResponseMessage {
-  return { response: "", _unknownFields: {} };
+  return { response: undefined, _unknownFields: {} };
 }
 
 export const PromptForRouteAuthorizationResponseMessage: MessageFns<PromptForRouteAuthorizationResponseMessage> =
@@ -24,7 +24,7 @@ export const PromptForRouteAuthorizationResponseMessage: MessageFns<PromptForRou
       message: PromptForRouteAuthorizationResponseMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.response !== undefined && message.response !== "") {
+      if (message.response !== undefined) {
         writer.uint32(10).string(message.response);
       }
       if (message._unknownFields !== undefined) {
@@ -80,13 +80,13 @@ export const PromptForRouteAuthorizationResponseMessage: MessageFns<PromptForRou
       return {
         response: isSet(object.response)
           ? globalThis.String(object.response)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: PromptForRouteAuthorizationResponseMessage): unknown {
       const obj: any = {};
-      if (message.response !== undefined && message.response !== "") {
+      if (message.response !== undefined) {
         obj.response = message.response;
       }
       return obj;
@@ -109,7 +109,7 @@ export const PromptForRouteAuthorizationResponseMessage: MessageFns<PromptForRou
       >,
     >(object: I): PromptForRouteAuthorizationResponseMessage {
       const message = createBasePromptForRouteAuthorizationResponseMessage();
-      message.response = object.response ?? "";
+      message.response = object.response ?? undefined;
       return message;
     },
   };

@@ -88,8 +88,8 @@ export function adjustVolumeMessage_AdjustmentToJSON(
 
 function createBaseAdjustVolumeMessage(): AdjustVolumeMessage {
   return {
-    adjustment: 1,
-    outputDeviceUID: "",
+    adjustment: undefined,
+    outputDeviceUID: undefined,
     details: undefined,
     _unknownFields: {},
   };
@@ -100,13 +100,10 @@ export const AdjustVolumeMessage: MessageFns<AdjustVolumeMessage> = {
     message: AdjustVolumeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.adjustment !== undefined && message.adjustment !== 1) {
+    if (message.adjustment !== undefined) {
       writer.uint32(8).int32(message.adjustment);
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       writer.uint32(18).string(message.outputDeviceUID);
     }
     if (message.details !== undefined) {
@@ -181,10 +178,10 @@ export const AdjustVolumeMessage: MessageFns<AdjustVolumeMessage> = {
     return {
       adjustment: isSet(object.adjustment)
         ? adjustVolumeMessage_AdjustmentFromJSON(object.adjustment)
-        : 1,
+        : undefined,
       outputDeviceUID: isSet(object.outputDeviceUID)
         ? globalThis.String(object.outputDeviceUID)
-        : "",
+        : undefined,
       details: isSet(object.details)
         ? RequestDetails.fromJSON(object.details)
         : undefined,
@@ -193,13 +190,10 @@ export const AdjustVolumeMessage: MessageFns<AdjustVolumeMessage> = {
 
   toJSON(message: AdjustVolumeMessage): unknown {
     const obj: any = {};
-    if (message.adjustment !== undefined && message.adjustment !== 1) {
+    if (message.adjustment !== undefined) {
       obj.adjustment = adjustVolumeMessage_AdjustmentToJSON(message.adjustment);
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       obj.outputDeviceUID = message.outputDeviceUID;
     }
     if (message.details !== undefined) {
@@ -217,8 +211,8 @@ export const AdjustVolumeMessage: MessageFns<AdjustVolumeMessage> = {
     object: I
   ): AdjustVolumeMessage {
     const message = createBaseAdjustVolumeMessage();
-    message.adjustment = object.adjustment ?? 1;
-    message.outputDeviceUID = object.outputDeviceUID ?? "";
+    message.adjustment = object.adjustment ?? undefined;
+    message.outputDeviceUID = object.outputDeviceUID ?? undefined;
     message.details =
       object.details !== undefined && object.details !== null
         ? RequestDetails.fromPartial(object.details)

@@ -17,7 +17,7 @@ export interface PlaybackQueueParticipant {
 }
 
 function createBasePlaybackQueueParticipant(): PlaybackQueueParticipant {
-  return { identifier: "", identity: undefined, _unknownFields: {} };
+  return { identifier: undefined, identity: undefined, _unknownFields: {} };
 }
 
 export const PlaybackQueueParticipant: MessageFns<PlaybackQueueParticipant> = {
@@ -25,7 +25,7 @@ export const PlaybackQueueParticipant: MessageFns<PlaybackQueueParticipant> = {
     message: PlaybackQueueParticipant,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
     if (message.identity !== undefined) {
@@ -92,7 +92,7 @@ export const PlaybackQueueParticipant: MessageFns<PlaybackQueueParticipant> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       identity: isSet(object.identity)
         ? UserIdentity.fromJSON(object.identity)
         : undefined,
@@ -101,7 +101,7 @@ export const PlaybackQueueParticipant: MessageFns<PlaybackQueueParticipant> = {
 
   toJSON(message: PlaybackQueueParticipant): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
     if (message.identity !== undefined) {
@@ -119,7 +119,7 @@ export const PlaybackQueueParticipant: MessageFns<PlaybackQueueParticipant> = {
     object: I
   ): PlaybackQueueParticipant {
     const message = createBasePlaybackQueueParticipant();
-    message.identifier = object.identifier ?? "";
+    message.identifier = object.identifier ?? undefined;
     message.identity =
       object.identity !== undefined && object.identity !== null
         ? UserIdentity.fromPartial(object.identity)

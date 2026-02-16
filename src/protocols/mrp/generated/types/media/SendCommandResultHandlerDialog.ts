@@ -19,7 +19,7 @@ export interface SendCommandResultHandlerDialog {
 
 export interface SendCommandResultHandlerDialogAction {
   type?: number | undefined;
-  title: string;
+  title?: string | undefined;
   event?: SendCommandMessage | undefined;
   _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
@@ -27,8 +27,8 @@ export interface SendCommandResultHandlerDialogAction {
 function createBaseSendCommandResultHandlerDialog(): SendCommandResultHandlerDialog {
   return {
     actions: [],
-    localizedTitle: "",
-    localizedMessage: "",
+    localizedTitle: undefined,
+    localizedMessage: undefined,
     _unknownFields: {},
   };
 }
@@ -45,16 +45,10 @@ export const SendCommandResultHandlerDialog: MessageFns<SendCommandResultHandler
           writer.uint32(10).fork()
         ).join();
       }
-      if (
-        message.localizedTitle !== undefined &&
-        message.localizedTitle !== ""
-      ) {
+      if (message.localizedTitle !== undefined) {
         writer.uint32(18).string(message.localizedTitle);
       }
-      if (
-        message.localizedMessage !== undefined &&
-        message.localizedMessage !== ""
-      ) {
+      if (message.localizedMessage !== undefined) {
         writer.uint32(26).string(message.localizedMessage);
       }
       if (message._unknownFields !== undefined) {
@@ -136,10 +130,10 @@ export const SendCommandResultHandlerDialog: MessageFns<SendCommandResultHandler
           : [],
         localizedTitle: isSet(object.localizedTitle)
           ? globalThis.String(object.localizedTitle)
-          : "",
+          : undefined,
         localizedMessage: isSet(object.localizedMessage)
           ? globalThis.String(object.localizedMessage)
-          : "",
+          : undefined,
       };
     },
 
@@ -150,16 +144,10 @@ export const SendCommandResultHandlerDialog: MessageFns<SendCommandResultHandler
           SendCommandResultHandlerDialogAction.toJSON(e)
         );
       }
-      if (
-        message.localizedTitle !== undefined &&
-        message.localizedTitle !== ""
-      ) {
+      if (message.localizedTitle !== undefined) {
         obj.localizedTitle = message.localizedTitle;
       }
-      if (
-        message.localizedMessage !== undefined &&
-        message.localizedMessage !== ""
-      ) {
+      if (message.localizedMessage !== undefined) {
         obj.localizedMessage = message.localizedMessage;
       }
       return obj;
@@ -178,14 +166,19 @@ export const SendCommandResultHandlerDialog: MessageFns<SendCommandResultHandler
         object.actions?.map((e) =>
           SendCommandResultHandlerDialogAction.fromPartial(e)
         ) || [];
-      message.localizedTitle = object.localizedTitle ?? "";
-      message.localizedMessage = object.localizedMessage ?? "";
+      message.localizedTitle = object.localizedTitle ?? undefined;
+      message.localizedMessage = object.localizedMessage ?? undefined;
       return message;
     },
   };
 
 function createBaseSendCommandResultHandlerDialogAction(): SendCommandResultHandlerDialogAction {
-  return { type: 0, title: "", event: undefined, _unknownFields: {} };
+  return {
+    type: undefined,
+    title: undefined,
+    event: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const SendCommandResultHandlerDialogAction: MessageFns<SendCommandResultHandlerDialogAction> =
@@ -194,10 +187,10 @@ export const SendCommandResultHandlerDialogAction: MessageFns<SendCommandResultH
       message: SendCommandResultHandlerDialogAction,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         writer.uint32(8).int32(message.type);
       }
-      if (message.title !== "") {
+      if (message.title !== undefined) {
         writer.uint32(18).string(message.title);
       }
       if (message.event !== undefined) {
@@ -273,8 +266,10 @@ export const SendCommandResultHandlerDialogAction: MessageFns<SendCommandResultH
 
     fromJSON(object: any): SendCommandResultHandlerDialogAction {
       return {
-        type: isSet(object.type) ? globalThis.Number(object.type) : 0,
-        title: isSet(object.title) ? globalThis.String(object.title) : "",
+        type: isSet(object.type) ? globalThis.Number(object.type) : undefined,
+        title: isSet(object.title)
+          ? globalThis.String(object.title)
+          : undefined,
         event: isSet(object.event)
           ? SendCommandMessage.fromJSON(object.event)
           : undefined,
@@ -283,10 +278,10 @@ export const SendCommandResultHandlerDialogAction: MessageFns<SendCommandResultH
 
     toJSON(message: SendCommandResultHandlerDialogAction): unknown {
       const obj: any = {};
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         obj.type = Math.round(message.type);
       }
-      if (message.title !== "") {
+      if (message.title !== undefined) {
         obj.title = message.title;
       }
       if (message.event !== undefined) {
@@ -306,8 +301,8 @@ export const SendCommandResultHandlerDialogAction: MessageFns<SendCommandResultH
       I extends Exact<DeepPartial<SendCommandResultHandlerDialogAction>, I>,
     >(object: I): SendCommandResultHandlerDialogAction {
       const message = createBaseSendCommandResultHandlerDialogAction();
-      message.type = object.type ?? 0;
-      message.title = object.title ?? "";
+      message.type = object.type ?? undefined;
+      message.title = object.title ?? undefined;
       message.event =
         object.event !== undefined && object.event !== null
           ? SendCommandMessage.fromPartial(object.event)

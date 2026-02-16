@@ -33,14 +33,14 @@ export interface SystemPlaybackQueue {
 
 function createBaseSystemPlaybackQueue(): SystemPlaybackQueue {
   return {
-    type: 1,
-    replaceIntent: 1,
-    isRequestingImmediatePlayback: false,
-    featureName: "",
+    type: undefined,
+    replaceIntent: undefined,
+    isRequestingImmediatePlayback: undefined,
+    featureName: undefined,
     customData: undefined,
     tracklist: undefined,
-    userInfo: Buffer.alloc(0),
-    metrics: Buffer.alloc(0),
+    userInfo: undefined,
+    metrics: undefined,
     _unknownFields: {},
   };
 }
@@ -50,19 +50,16 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
     message: SystemPlaybackQueue,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.type !== undefined && message.type !== 1) {
+    if (message.type !== undefined) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.replaceIntent !== undefined && message.replaceIntent !== 1) {
+    if (message.replaceIntent !== undefined) {
       writer.uint32(16).int32(message.replaceIntent);
     }
-    if (
-      message.isRequestingImmediatePlayback !== undefined &&
-      message.isRequestingImmediatePlayback !== false
-    ) {
+    if (message.isRequestingImmediatePlayback !== undefined) {
       writer.uint32(24).bool(message.isRequestingImmediatePlayback);
     }
-    if (message.featureName !== undefined && message.featureName !== "") {
+    if (message.featureName !== undefined) {
       writer.uint32(34).string(message.featureName);
     }
     if (message.customData !== undefined) {
@@ -77,10 +74,10 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
         writer.uint32(58).fork()
       ).join();
     }
-    if (message.userInfo !== undefined && message.userInfo.length !== 0) {
+    if (message.userInfo !== undefined) {
       writer.uint32(66).bytes(message.userInfo);
     }
-    if (message.metrics !== undefined && message.metrics.length !== 0) {
+    if (message.metrics !== undefined) {
       writer.uint32(74).bytes(message.metrics);
     }
     if (message._unknownFields !== undefined) {
@@ -198,16 +195,16 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
     return {
       type: isSet(object.type)
         ? playbackQueueType_EnumFromJSON(object.type)
-        : 1,
+        : undefined,
       replaceIntent: isSet(object.replaceIntent)
         ? replaceIntent_EnumFromJSON(object.replaceIntent)
-        : 1,
+        : undefined,
       isRequestingImmediatePlayback: isSet(object.isRequestingImmediatePlayback)
         ? globalThis.Boolean(object.isRequestingImmediatePlayback)
-        : false,
+        : undefined,
       featureName: isSet(object.featureName)
         ? globalThis.String(object.featureName)
-        : "",
+        : undefined,
       customData: isSet(object.customData)
         ? SystemPlaybackCustomDataQueue.fromJSON(object.customData)
         : undefined,
@@ -216,28 +213,25 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
         : undefined,
       userInfo: isSet(object.userInfo)
         ? Buffer.from(bytesFromBase64(object.userInfo))
-        : Buffer.alloc(0),
+        : undefined,
       metrics: isSet(object.metrics)
         ? Buffer.from(bytesFromBase64(object.metrics))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: SystemPlaybackQueue): unknown {
     const obj: any = {};
-    if (message.type !== undefined && message.type !== 1) {
+    if (message.type !== undefined) {
       obj.type = playbackQueueType_EnumToJSON(message.type);
     }
-    if (message.replaceIntent !== undefined && message.replaceIntent !== 1) {
+    if (message.replaceIntent !== undefined) {
       obj.replaceIntent = replaceIntent_EnumToJSON(message.replaceIntent);
     }
-    if (
-      message.isRequestingImmediatePlayback !== undefined &&
-      message.isRequestingImmediatePlayback !== false
-    ) {
+    if (message.isRequestingImmediatePlayback !== undefined) {
       obj.isRequestingImmediatePlayback = message.isRequestingImmediatePlayback;
     }
-    if (message.featureName !== undefined && message.featureName !== "") {
+    if (message.featureName !== undefined) {
       obj.featureName = message.featureName;
     }
     if (message.customData !== undefined) {
@@ -248,10 +242,10 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
         message.tracklist
       );
     }
-    if (message.userInfo !== undefined && message.userInfo.length !== 0) {
+    if (message.userInfo !== undefined) {
       obj.userInfo = base64FromBytes(message.userInfo);
     }
-    if (message.metrics !== undefined && message.metrics.length !== 0) {
+    if (message.metrics !== undefined) {
       obj.metrics = base64FromBytes(message.metrics);
     }
     return obj;
@@ -266,11 +260,11 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
     object: I
   ): SystemPlaybackQueue {
     const message = createBaseSystemPlaybackQueue();
-    message.type = object.type ?? 1;
-    message.replaceIntent = object.replaceIntent ?? 1;
+    message.type = object.type ?? undefined;
+    message.replaceIntent = object.replaceIntent ?? undefined;
     message.isRequestingImmediatePlayback =
-      object.isRequestingImmediatePlayback ?? false;
-    message.featureName = object.featureName ?? "";
+      object.isRequestingImmediatePlayback ?? undefined;
+    message.featureName = object.featureName ?? undefined;
     message.customData =
       object.customData !== undefined && object.customData !== null
         ? SystemPlaybackCustomDataQueue.fromPartial(object.customData)
@@ -279,8 +273,8 @@ export const SystemPlaybackQueue: MessageFns<SystemPlaybackQueue> = {
       object.tracklist !== undefined && object.tracklist !== null
         ? SystemPlaybackGenericTracklistQueue.fromPartial(object.tracklist)
         : undefined;
-    message.userInfo = object.userInfo ?? Buffer.alloc(0);
-    message.metrics = object.metrics ?? Buffer.alloc(0);
+    message.userInfo = object.userInfo ?? undefined;
+    message.metrics = object.metrics ?? undefined;
     return message;
   },
 };

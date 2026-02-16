@@ -1129,13 +1129,13 @@ export const ErrorCode: MessageFns<ErrorCode> = {
 
 function createBaseProtocolMessage(): ProtocolMessage {
   return {
-    type: 0,
-    identifier: "",
-    authenticationToken: "",
-    errorCode: 0,
-    timestamp: 0,
-    errorDescription: "",
-    uniqueIdentifier: "",
+    type: undefined,
+    identifier: undefined,
+    authenticationToken: undefined,
+    errorCode: undefined,
+    timestamp: undefined,
+    errorDescription: undefined,
+    uniqueIdentifier: undefined,
     _unknownFields: {},
   };
 }
@@ -1146,34 +1146,25 @@ export const ProtocolMessage: MessageFns<ProtocolMessage> &
     message: ProtocolMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(18).string(message.identifier);
     }
-    if (
-      message.authenticationToken !== undefined &&
-      message.authenticationToken !== ""
-    ) {
+    if (message.authenticationToken !== undefined) {
       writer.uint32(26).string(message.authenticationToken);
     }
-    if (message.errorCode !== undefined && message.errorCode !== 0) {
+    if (message.errorCode !== undefined) {
       writer.uint32(32).int32(message.errorCode);
     }
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       writer.uint32(40).uint64(message.timestamp);
     }
-    if (
-      message.errorDescription !== undefined &&
-      message.errorDescription !== ""
-    ) {
+    if (message.errorDescription !== undefined) {
       writer.uint32(626).string(message.errorDescription);
     }
-    if (
-      message.uniqueIdentifier !== undefined &&
-      message.uniqueIdentifier !== ""
-    ) {
+    if (message.uniqueIdentifier !== undefined) {
       writer.uint32(682).string(message.uniqueIdentifier);
     }
     if (message._unknownFields !== undefined) {
@@ -1341,58 +1332,51 @@ export const ProtocolMessage: MessageFns<ProtocolMessage> &
 
   fromJSON(object: any): ProtocolMessage {
     return {
-      type: isSet(object.type) ? protocolMessage_TypeFromJSON(object.type) : 0,
+      type: isSet(object.type)
+        ? protocolMessage_TypeFromJSON(object.type)
+        : undefined,
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       authenticationToken: isSet(object.authenticationToken)
         ? globalThis.String(object.authenticationToken)
-        : "",
+        : undefined,
       errorCode: isSet(object.errorCode)
         ? errorCode_EnumFromJSON(object.errorCode)
-        : 0,
+        : undefined,
       timestamp: isSet(object.timestamp)
         ? globalThis.Number(object.timestamp)
-        : 0,
+        : undefined,
       errorDescription: isSet(object.errorDescription)
         ? globalThis.String(object.errorDescription)
-        : "",
+        : undefined,
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.String(object.uniqueIdentifier)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: ProtocolMessage): unknown {
     const obj: any = {};
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = protocolMessage_TypeToJSON(message.type);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (
-      message.authenticationToken !== undefined &&
-      message.authenticationToken !== ""
-    ) {
+    if (message.authenticationToken !== undefined) {
       obj.authenticationToken = message.authenticationToken;
     }
-    if (message.errorCode !== undefined && message.errorCode !== 0) {
+    if (message.errorCode !== undefined) {
       obj.errorCode = errorCode_EnumToJSON(message.errorCode);
     }
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       obj.timestamp = Math.round(message.timestamp);
     }
-    if (
-      message.errorDescription !== undefined &&
-      message.errorDescription !== ""
-    ) {
+    if (message.errorDescription !== undefined) {
       obj.errorDescription = message.errorDescription;
     }
-    if (
-      message.uniqueIdentifier !== undefined &&
-      message.uniqueIdentifier !== ""
-    ) {
+    if (message.uniqueIdentifier !== undefined) {
       obj.uniqueIdentifier = message.uniqueIdentifier;
     }
     return obj;
@@ -1407,13 +1391,13 @@ export const ProtocolMessage: MessageFns<ProtocolMessage> &
     object: I
   ): ProtocolMessage {
     const message = createBaseProtocolMessage();
-    message.type = object.type ?? 0;
-    message.identifier = object.identifier ?? "";
-    message.authenticationToken = object.authenticationToken ?? "";
-    message.errorCode = object.errorCode ?? 0;
-    message.timestamp = object.timestamp ?? 0;
-    message.errorDescription = object.errorDescription ?? "";
-    message.uniqueIdentifier = object.uniqueIdentifier ?? "";
+    message.type = object.type ?? undefined;
+    message.identifier = object.identifier ?? undefined;
+    message.authenticationToken = object.authenticationToken ?? undefined;
+    message.errorCode = object.errorCode ?? undefined;
+    message.timestamp = object.timestamp ?? undefined;
+    message.errorDescription = object.errorDescription ?? undefined;
+    message.uniqueIdentifier = object.uniqueIdentifier ?? undefined;
     return message;
   },
 };

@@ -20,11 +20,11 @@ export interface PlaybackSession {
 
 function createBasePlaybackSession(): PlaybackSession {
   return {
-    playbackSessionData: Buffer.alloc(0),
-    identifier: "",
-    type: "",
-    revision: "",
-    metadata: Buffer.alloc(0),
+    playbackSessionData: undefined,
+    identifier: undefined,
+    type: undefined,
+    revision: undefined,
+    metadata: undefined,
     _unknownFields: {},
   };
 }
@@ -34,22 +34,19 @@ export const PlaybackSession: MessageFns<PlaybackSession> = {
     message: PlaybackSession,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.playbackSessionData !== undefined &&
-      message.playbackSessionData.length !== 0
-    ) {
+    if (message.playbackSessionData !== undefined) {
       writer.uint32(10).bytes(message.playbackSessionData);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(18).string(message.identifier);
     }
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(26).string(message.type);
     }
-    if (message.revision !== undefined && message.revision !== "") {
+    if (message.revision !== undefined) {
       writer.uint32(34).string(message.revision);
     }
-    if (message.metadata !== undefined && message.metadata.length !== 0) {
+    if (message.metadata !== undefined) {
       writer.uint32(42).bytes(message.metadata);
     }
     if (message._unknownFields !== undefined) {
@@ -134,38 +131,35 @@ export const PlaybackSession: MessageFns<PlaybackSession> = {
     return {
       playbackSessionData: isSet(object.playbackSessionData)
         ? Buffer.from(bytesFromBase64(object.playbackSessionData))
-        : Buffer.alloc(0),
+        : undefined,
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+        : undefined,
+      type: isSet(object.type) ? globalThis.String(object.type) : undefined,
       revision: isSet(object.revision)
         ? globalThis.String(object.revision)
-        : "",
+        : undefined,
       metadata: isSet(object.metadata)
         ? Buffer.from(bytesFromBase64(object.metadata))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: PlaybackSession): unknown {
     const obj: any = {};
-    if (
-      message.playbackSessionData !== undefined &&
-      message.playbackSessionData.length !== 0
-    ) {
+    if (message.playbackSessionData !== undefined) {
       obj.playbackSessionData = base64FromBytes(message.playbackSessionData);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       obj.type = message.type;
     }
-    if (message.revision !== undefined && message.revision !== "") {
+    if (message.revision !== undefined) {
       obj.revision = message.revision;
     }
-    if (message.metadata !== undefined && message.metadata.length !== 0) {
+    if (message.metadata !== undefined) {
       obj.metadata = base64FromBytes(message.metadata);
     }
     return obj;
@@ -180,11 +174,11 @@ export const PlaybackSession: MessageFns<PlaybackSession> = {
     object: I
   ): PlaybackSession {
     const message = createBasePlaybackSession();
-    message.playbackSessionData = object.playbackSessionData ?? Buffer.alloc(0);
-    message.identifier = object.identifier ?? "";
-    message.type = object.type ?? "";
-    message.revision = object.revision ?? "";
-    message.metadata = object.metadata ?? Buffer.alloc(0);
+    message.playbackSessionData = object.playbackSessionData ?? undefined;
+    message.identifier = object.identifier ?? undefined;
+    message.type = object.type ?? undefined;
+    message.revision = object.revision ?? undefined;
+    message.metadata = object.metadata ?? undefined;
     return message;
   },
 };

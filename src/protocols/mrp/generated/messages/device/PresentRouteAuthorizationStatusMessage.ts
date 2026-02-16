@@ -104,7 +104,7 @@ export function presentRouteAuthorizationStatusMessage_PresentRouteAuthorization
 }
 
 function createBasePresentRouteAuthorizationStatusMessage(): PresentRouteAuthorizationStatusMessage {
-  return { route: undefined, status: 0, _unknownFields: {} };
+  return { route: undefined, status: undefined, _unknownFields: {} };
 }
 
 export const PresentRouteAuthorizationStatusMessage: MessageFns<PresentRouteAuthorizationStatusMessage> =
@@ -119,7 +119,7 @@ export const PresentRouteAuthorizationStatusMessage: MessageFns<PresentRouteAuth
           writer.uint32(10).fork()
         ).join();
       }
-      if (message.status !== undefined && message.status !== 0) {
+      if (message.status !== undefined) {
         writer.uint32(16).int32(message.status);
       }
       if (message._unknownFields !== undefined) {
@@ -191,7 +191,7 @@ export const PresentRouteAuthorizationStatusMessage: MessageFns<PresentRouteAuth
           ? presentRouteAuthorizationStatusMessage_PresentRouteAuthorizationStatusFromJSON(
               object.status
             )
-          : 0,
+          : undefined,
       };
     },
 
@@ -200,7 +200,7 @@ export const PresentRouteAuthorizationStatusMessage: MessageFns<PresentRouteAuth
       if (message.route !== undefined) {
         obj.route = AVOutputDeviceDescriptor.toJSON(message.route);
       }
-      if (message.status !== undefined && message.status !== 0) {
+      if (message.status !== undefined) {
         obj.status =
           presentRouteAuthorizationStatusMessage_PresentRouteAuthorizationStatusToJSON(
             message.status
@@ -224,7 +224,7 @@ export const PresentRouteAuthorizationStatusMessage: MessageFns<PresentRouteAuth
         object.route !== undefined && object.route !== null
           ? AVOutputDeviceDescriptor.fromPartial(object.route)
           : undefined;
-      message.status = object.status ?? 0;
+      message.status = object.status ?? undefined;
       return message;
     },
   };

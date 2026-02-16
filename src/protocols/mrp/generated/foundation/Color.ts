@@ -18,7 +18,13 @@ export interface Color {
 }
 
 function createBaseColor(): Color {
-  return { red: 0, green: 0, blue: 0, alpha: 0, _unknownFields: {} };
+  return {
+    red: undefined,
+    green: undefined,
+    blue: undefined,
+    alpha: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const Color: MessageFns<Color> = {
@@ -26,16 +32,16 @@ export const Color: MessageFns<Color> = {
     message: Color,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.red !== undefined && message.red !== 0) {
+    if (message.red !== undefined) {
       writer.uint32(13).float(message.red);
     }
-    if (message.green !== undefined && message.green !== 0) {
+    if (message.green !== undefined) {
       writer.uint32(21).float(message.green);
     }
-    if (message.blue !== undefined && message.blue !== 0) {
+    if (message.blue !== undefined) {
       writer.uint32(29).float(message.blue);
     }
-    if (message.alpha !== undefined && message.alpha !== 0) {
+    if (message.alpha !== undefined) {
       writer.uint32(37).float(message.alpha);
     }
     if (message._unknownFields !== undefined) {
@@ -110,25 +116,25 @@ export const Color: MessageFns<Color> = {
 
   fromJSON(object: any): Color {
     return {
-      red: isSet(object.red) ? globalThis.Number(object.red) : 0,
-      green: isSet(object.green) ? globalThis.Number(object.green) : 0,
-      blue: isSet(object.blue) ? globalThis.Number(object.blue) : 0,
-      alpha: isSet(object.alpha) ? globalThis.Number(object.alpha) : 0,
+      red: isSet(object.red) ? globalThis.Number(object.red) : undefined,
+      green: isSet(object.green) ? globalThis.Number(object.green) : undefined,
+      blue: isSet(object.blue) ? globalThis.Number(object.blue) : undefined,
+      alpha: isSet(object.alpha) ? globalThis.Number(object.alpha) : undefined,
     };
   },
 
   toJSON(message: Color): unknown {
     const obj: any = {};
-    if (message.red !== undefined && message.red !== 0) {
+    if (message.red !== undefined) {
       obj.red = message.red;
     }
-    if (message.green !== undefined && message.green !== 0) {
+    if (message.green !== undefined) {
       obj.green = message.green;
     }
-    if (message.blue !== undefined && message.blue !== 0) {
+    if (message.blue !== undefined) {
       obj.blue = message.blue;
     }
-    if (message.alpha !== undefined && message.alpha !== 0) {
+    if (message.alpha !== undefined) {
       obj.alpha = message.alpha;
     }
     return obj;
@@ -139,10 +145,10 @@ export const Color: MessageFns<Color> = {
   },
   fromPartial<I extends Exact<DeepPartial<Color>, I>>(object: I): Color {
     const message = createBaseColor();
-    message.red = object.red ?? 0;
-    message.green = object.green ?? 0;
-    message.blue = object.blue ?? 0;
-    message.alpha = object.alpha ?? 0;
+    message.red = object.red ?? undefined;
+    message.green = object.green ?? undefined;
+    message.blue = object.blue ?? undefined;
+    message.alpha = object.alpha ?? undefined;
     return message;
   },
 };

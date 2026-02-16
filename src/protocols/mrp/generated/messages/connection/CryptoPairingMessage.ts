@@ -20,11 +20,11 @@ export interface CryptoPairingMessage {
 
 function createBaseCryptoPairingMessage(): CryptoPairingMessage {
   return {
-    pairingData: Buffer.alloc(0),
-    status: 0,
-    isRetrying: false,
-    isUsingSystemPairing: false,
-    state: 0,
+    pairingData: undefined,
+    status: undefined,
+    isRetrying: undefined,
+    isUsingSystemPairing: undefined,
+    state: undefined,
     _unknownFields: {},
   };
 }
@@ -34,22 +34,19 @@ export const CryptoPairingMessage: MessageFns<CryptoPairingMessage> = {
     message: CryptoPairingMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.pairingData !== undefined && message.pairingData.length !== 0) {
+    if (message.pairingData !== undefined) {
       writer.uint32(10).bytes(message.pairingData);
     }
-    if (message.status !== undefined && message.status !== 0) {
+    if (message.status !== undefined) {
       writer.uint32(16).int32(message.status);
     }
-    if (message.isRetrying !== undefined && message.isRetrying !== false) {
+    if (message.isRetrying !== undefined) {
       writer.uint32(24).bool(message.isRetrying);
     }
-    if (
-      message.isUsingSystemPairing !== undefined &&
-      message.isUsingSystemPairing !== false
-    ) {
+    if (message.isUsingSystemPairing !== undefined) {
       writer.uint32(32).bool(message.isUsingSystemPairing);
     }
-    if (message.state !== undefined && message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(40).int32(message.state);
     }
     if (message._unknownFields !== undefined) {
@@ -137,36 +134,35 @@ export const CryptoPairingMessage: MessageFns<CryptoPairingMessage> = {
     return {
       pairingData: isSet(object.pairingData)
         ? Buffer.from(bytesFromBase64(object.pairingData))
-        : Buffer.alloc(0),
-      status: isSet(object.status) ? globalThis.Number(object.status) : 0,
+        : undefined,
+      status: isSet(object.status)
+        ? globalThis.Number(object.status)
+        : undefined,
       isRetrying: isSet(object.isRetrying)
         ? globalThis.Boolean(object.isRetrying)
-        : false,
+        : undefined,
       isUsingSystemPairing: isSet(object.isUsingSystemPairing)
         ? globalThis.Boolean(object.isUsingSystemPairing)
-        : false,
-      state: isSet(object.state) ? globalThis.Number(object.state) : 0,
+        : undefined,
+      state: isSet(object.state) ? globalThis.Number(object.state) : undefined,
     };
   },
 
   toJSON(message: CryptoPairingMessage): unknown {
     const obj: any = {};
-    if (message.pairingData !== undefined && message.pairingData.length !== 0) {
+    if (message.pairingData !== undefined) {
       obj.pairingData = base64FromBytes(message.pairingData);
     }
-    if (message.status !== undefined && message.status !== 0) {
+    if (message.status !== undefined) {
       obj.status = Math.round(message.status);
     }
-    if (message.isRetrying !== undefined && message.isRetrying !== false) {
+    if (message.isRetrying !== undefined) {
       obj.isRetrying = message.isRetrying;
     }
-    if (
-      message.isUsingSystemPairing !== undefined &&
-      message.isUsingSystemPairing !== false
-    ) {
+    if (message.isUsingSystemPairing !== undefined) {
       obj.isUsingSystemPairing = message.isUsingSystemPairing;
     }
-    if (message.state !== undefined && message.state !== 0) {
+    if (message.state !== undefined) {
       obj.state = Math.round(message.state);
     }
     return obj;
@@ -181,11 +177,11 @@ export const CryptoPairingMessage: MessageFns<CryptoPairingMessage> = {
     object: I
   ): CryptoPairingMessage {
     const message = createBaseCryptoPairingMessage();
-    message.pairingData = object.pairingData ?? Buffer.alloc(0);
-    message.status = object.status ?? 0;
-    message.isRetrying = object.isRetrying ?? false;
-    message.isUsingSystemPairing = object.isUsingSystemPairing ?? false;
-    message.state = object.state ?? 0;
+    message.pairingData = object.pairingData ?? undefined;
+    message.status = object.status ?? undefined;
+    message.isRetrying = object.isRetrying ?? undefined;
+    message.isUsingSystemPairing = object.isUsingSystemPairing ?? undefined;
+    message.state = object.state ?? undefined;
     return message;
   },
 };

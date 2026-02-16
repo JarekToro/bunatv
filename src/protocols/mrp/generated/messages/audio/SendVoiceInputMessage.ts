@@ -47,9 +47,9 @@ export interface SendVoiceInputMessage {
 
 function createBaseAudioStreamPacketDescription(): AudioStreamPacketDescription {
   return {
-    startOffset: 0,
-    variableFramesInPacket: 0,
-    dataByteSize: 0,
+    startOffset: undefined,
+    variableFramesInPacket: undefined,
+    dataByteSize: undefined,
     _unknownFields: {},
   };
 }
@@ -60,16 +60,13 @@ export const AudioStreamPacketDescription: MessageFns<AudioStreamPacketDescripti
       message: AudioStreamPacketDescription,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.startOffset !== undefined && message.startOffset !== 0) {
+      if (message.startOffset !== undefined) {
         writer.uint32(8).int64(message.startOffset);
       }
-      if (
-        message.variableFramesInPacket !== undefined &&
-        message.variableFramesInPacket !== 0
-      ) {
+      if (message.variableFramesInPacket !== undefined) {
         writer.uint32(16).uint32(message.variableFramesInPacket);
       }
-      if (message.dataByteSize !== undefined && message.dataByteSize !== 0) {
+      if (message.dataByteSize !== undefined) {
         writer.uint32(24).uint32(message.dataByteSize);
       }
       if (message._unknownFields !== undefined) {
@@ -141,28 +138,25 @@ export const AudioStreamPacketDescription: MessageFns<AudioStreamPacketDescripti
       return {
         startOffset: isSet(object.startOffset)
           ? globalThis.Number(object.startOffset)
-          : 0,
+          : undefined,
         variableFramesInPacket: isSet(object.variableFramesInPacket)
           ? globalThis.Number(object.variableFramesInPacket)
-          : 0,
+          : undefined,
         dataByteSize: isSet(object.dataByteSize)
           ? globalThis.Number(object.dataByteSize)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: AudioStreamPacketDescription): unknown {
       const obj: any = {};
-      if (message.startOffset !== undefined && message.startOffset !== 0) {
+      if (message.startOffset !== undefined) {
         obj.startOffset = Math.round(message.startOffset);
       }
-      if (
-        message.variableFramesInPacket !== undefined &&
-        message.variableFramesInPacket !== 0
-      ) {
+      if (message.variableFramesInPacket !== undefined) {
         obj.variableFramesInPacket = Math.round(message.variableFramesInPacket);
       }
-      if (message.dataByteSize !== undefined && message.dataByteSize !== 0) {
+      if (message.dataByteSize !== undefined) {
         obj.dataByteSize = Math.round(message.dataByteSize);
       }
       return obj;
@@ -177,9 +171,10 @@ export const AudioStreamPacketDescription: MessageFns<AudioStreamPacketDescripti
       object: I
     ): AudioStreamPacketDescription {
       const message = createBaseAudioStreamPacketDescription();
-      message.startOffset = object.startOffset ?? 0;
-      message.variableFramesInPacket = object.variableFramesInPacket ?? 0;
-      message.dataByteSize = object.dataByteSize ?? 0;
+      message.startOffset = object.startOffset ?? undefined;
+      message.variableFramesInPacket =
+        object.variableFramesInPacket ?? undefined;
+      message.dataByteSize = object.dataByteSize ?? undefined;
       return message;
     },
   };
@@ -187,10 +182,10 @@ export const AudioStreamPacketDescription: MessageFns<AudioStreamPacketDescripti
 function createBaseAudioBuffer(): AudioBuffer {
   return {
     formatSettings: undefined,
-    packetCapacity: 0,
-    maximumPacketSize: 0,
-    packetCount: 0,
-    contents: Buffer.alloc(0),
+    packetCapacity: undefined,
+    maximumPacketSize: undefined,
+    packetCount: undefined,
+    contents: undefined,
     packetDescriptions: [],
     _unknownFields: {},
   };
@@ -207,19 +202,16 @@ export const AudioBuffer: MessageFns<AudioBuffer> = {
         writer.uint32(10).fork()
       ).join();
     }
-    if (message.packetCapacity !== undefined && message.packetCapacity !== 0) {
+    if (message.packetCapacity !== undefined) {
       writer.uint32(16).int64(message.packetCapacity);
     }
-    if (
-      message.maximumPacketSize !== undefined &&
-      message.maximumPacketSize !== 0
-    ) {
+    if (message.maximumPacketSize !== undefined) {
       writer.uint32(24).int64(message.maximumPacketSize);
     }
-    if (message.packetCount !== undefined && message.packetCount !== 0) {
+    if (message.packetCount !== undefined) {
       writer.uint32(32).int64(message.packetCount);
     }
-    if (message.contents !== undefined && message.contents.length !== 0) {
+    if (message.contents !== undefined) {
       writer.uint32(42).bytes(message.contents);
     }
     for (const v of message.packetDescriptions) {
@@ -323,16 +315,16 @@ export const AudioBuffer: MessageFns<AudioBuffer> = {
         : undefined,
       packetCapacity: isSet(object.packetCapacity)
         ? globalThis.Number(object.packetCapacity)
-        : 0,
+        : undefined,
       maximumPacketSize: isSet(object.maximumPacketSize)
         ? globalThis.Number(object.maximumPacketSize)
-        : 0,
+        : undefined,
       packetCount: isSet(object.packetCount)
         ? globalThis.Number(object.packetCount)
-        : 0,
+        : undefined,
       contents: isSet(object.contents)
         ? Buffer.from(bytesFromBase64(object.contents))
-        : Buffer.alloc(0),
+        : undefined,
       packetDescriptions: globalThis.Array.isArray(object?.packetDescriptions)
         ? object.packetDescriptions.map((e: any) =>
             AudioStreamPacketDescription.fromJSON(e)
@@ -346,19 +338,16 @@ export const AudioBuffer: MessageFns<AudioBuffer> = {
     if (message.formatSettings !== undefined) {
       obj.formatSettings = AudioFormatSettings.toJSON(message.formatSettings);
     }
-    if (message.packetCapacity !== undefined && message.packetCapacity !== 0) {
+    if (message.packetCapacity !== undefined) {
       obj.packetCapacity = Math.round(message.packetCapacity);
     }
-    if (
-      message.maximumPacketSize !== undefined &&
-      message.maximumPacketSize !== 0
-    ) {
+    if (message.maximumPacketSize !== undefined) {
       obj.maximumPacketSize = Math.round(message.maximumPacketSize);
     }
-    if (message.packetCount !== undefined && message.packetCount !== 0) {
+    if (message.packetCount !== undefined) {
       obj.packetCount = Math.round(message.packetCount);
     }
-    if (message.contents !== undefined && message.contents.length !== 0) {
+    if (message.contents !== undefined) {
       obj.contents = base64FromBytes(message.contents);
     }
     if (message.packetDescriptions?.length) {
@@ -380,10 +369,10 @@ export const AudioBuffer: MessageFns<AudioBuffer> = {
       object.formatSettings !== undefined && object.formatSettings !== null
         ? AudioFormatSettings.fromPartial(object.formatSettings)
         : undefined;
-    message.packetCapacity = object.packetCapacity ?? 0;
-    message.maximumPacketSize = object.maximumPacketSize ?? 0;
-    message.packetCount = object.packetCount ?? 0;
-    message.contents = object.contents ?? Buffer.alloc(0);
+    message.packetCapacity = object.packetCapacity ?? undefined;
+    message.maximumPacketSize = object.maximumPacketSize ?? undefined;
+    message.packetCount = object.packetCount ?? undefined;
+    message.contents = object.contents ?? undefined;
     message.packetDescriptions =
       object.packetDescriptions?.map((e) =>
         AudioStreamPacketDescription.fromPartial(e)
@@ -393,7 +382,7 @@ export const AudioBuffer: MessageFns<AudioBuffer> = {
 };
 
 function createBaseAudioTime(): AudioTime {
-  return { timestamp: 0, sampleRate: 0, _unknownFields: {} };
+  return { timestamp: undefined, sampleRate: undefined, _unknownFields: {} };
 }
 
 export const AudioTime: MessageFns<AudioTime> = {
@@ -401,10 +390,10 @@ export const AudioTime: MessageFns<AudioTime> = {
     message: AudioTime,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       writer.uint32(9).double(message.timestamp);
     }
-    if (message.sampleRate !== undefined && message.sampleRate !== 0) {
+    if (message.sampleRate !== undefined) {
       writer.uint32(17).double(message.sampleRate);
     }
     if (message._unknownFields !== undefined) {
@@ -465,19 +454,19 @@ export const AudioTime: MessageFns<AudioTime> = {
     return {
       timestamp: isSet(object.timestamp)
         ? globalThis.Number(object.timestamp)
-        : 0,
+        : undefined,
       sampleRate: isSet(object.sampleRate)
         ? globalThis.Number(object.sampleRate)
-        : 0,
+        : undefined,
     };
   },
 
   toJSON(message: AudioTime): unknown {
     const obj: any = {};
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
-    if (message.sampleRate !== undefined && message.sampleRate !== 0) {
+    if (message.sampleRate !== undefined) {
       obj.sampleRate = message.sampleRate;
     }
     return obj;
@@ -490,14 +479,19 @@ export const AudioTime: MessageFns<AudioTime> = {
     object: I
   ): AudioTime {
     const message = createBaseAudioTime();
-    message.timestamp = object.timestamp ?? 0;
-    message.sampleRate = object.sampleRate ?? 0;
+    message.timestamp = object.timestamp ?? undefined;
+    message.sampleRate = object.sampleRate ?? undefined;
     return message;
   },
 };
 
 function createBaseAudioDataBlock(): AudioDataBlock {
-  return { buffer: undefined, time: undefined, gain: 0, _unknownFields: {} };
+  return {
+    buffer: undefined,
+    time: undefined,
+    gain: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const AudioDataBlock: MessageFns<AudioDataBlock> = {
@@ -511,7 +505,7 @@ export const AudioDataBlock: MessageFns<AudioDataBlock> = {
     if (message.time !== undefined) {
       AudioTime.encode(message.time, writer.uint32(18).fork()).join();
     }
-    if (message.gain !== undefined && message.gain !== 0) {
+    if (message.gain !== undefined) {
       writer.uint32(25).double(message.gain);
     }
     if (message._unknownFields !== undefined) {
@@ -582,7 +576,7 @@ export const AudioDataBlock: MessageFns<AudioDataBlock> = {
         ? AudioBuffer.fromJSON(object.buffer)
         : undefined,
       time: isSet(object.time) ? AudioTime.fromJSON(object.time) : undefined,
-      gain: isSet(object.gain) ? globalThis.Number(object.gain) : 0,
+      gain: isSet(object.gain) ? globalThis.Number(object.gain) : undefined,
     };
   },
 
@@ -594,7 +588,7 @@ export const AudioDataBlock: MessageFns<AudioDataBlock> = {
     if (message.time !== undefined) {
       obj.time = AudioTime.toJSON(message.time);
     }
-    if (message.gain !== undefined && message.gain !== 0) {
+    if (message.gain !== undefined) {
       obj.gain = message.gain;
     }
     return obj;
@@ -617,7 +611,7 @@ export const AudioDataBlock: MessageFns<AudioDataBlock> = {
       object.time !== undefined && object.time !== null
         ? AudioTime.fromPartial(object.time)
         : undefined;
-    message.gain = object.gain ?? 0;
+    message.gain = object.gain ?? undefined;
     return message;
   },
 };

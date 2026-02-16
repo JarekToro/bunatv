@@ -688,9 +688,9 @@ export const DisableReason: MessageFns<DisableReason> = {
 
 function createBasePreloadedPlaybackSessionInfo(): PreloadedPlaybackSessionInfo {
   return {
-    playbackSessionIdentifier: "",
-    playbackSessionRevision: "",
-    playbackSessionPriority: 0,
+    playbackSessionIdentifier: undefined,
+    playbackSessionRevision: undefined,
+    playbackSessionPriority: undefined,
     _unknownFields: {},
   };
 }
@@ -701,22 +701,13 @@ export const PreloadedPlaybackSessionInfo: MessageFns<PreloadedPlaybackSessionIn
       message: PreloadedPlaybackSessionInfo,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.playbackSessionIdentifier !== undefined &&
-        message.playbackSessionIdentifier !== ""
-      ) {
+      if (message.playbackSessionIdentifier !== undefined) {
         writer.uint32(10).string(message.playbackSessionIdentifier);
       }
-      if (
-        message.playbackSessionRevision !== undefined &&
-        message.playbackSessionRevision !== ""
-      ) {
+      if (message.playbackSessionRevision !== undefined) {
         writer.uint32(18).string(message.playbackSessionRevision);
       }
-      if (
-        message.playbackSessionPriority !== undefined &&
-        message.playbackSessionPriority !== 0
-      ) {
+      if (message.playbackSessionPriority !== undefined) {
         writer.uint32(24).int32(message.playbackSessionPriority);
       }
       if (message._unknownFields !== undefined) {
@@ -788,34 +779,25 @@ export const PreloadedPlaybackSessionInfo: MessageFns<PreloadedPlaybackSessionIn
       return {
         playbackSessionIdentifier: isSet(object.playbackSessionIdentifier)
           ? globalThis.String(object.playbackSessionIdentifier)
-          : "",
+          : undefined,
         playbackSessionRevision: isSet(object.playbackSessionRevision)
           ? globalThis.String(object.playbackSessionRevision)
-          : "",
+          : undefined,
         playbackSessionPriority: isSet(object.playbackSessionPriority)
           ? globalThis.Number(object.playbackSessionPriority)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: PreloadedPlaybackSessionInfo): unknown {
       const obj: any = {};
-      if (
-        message.playbackSessionIdentifier !== undefined &&
-        message.playbackSessionIdentifier !== ""
-      ) {
+      if (message.playbackSessionIdentifier !== undefined) {
         obj.playbackSessionIdentifier = message.playbackSessionIdentifier;
       }
-      if (
-        message.playbackSessionRevision !== undefined &&
-        message.playbackSessionRevision !== ""
-      ) {
+      if (message.playbackSessionRevision !== undefined) {
         obj.playbackSessionRevision = message.playbackSessionRevision;
       }
-      if (
-        message.playbackSessionPriority !== undefined &&
-        message.playbackSessionPriority !== 0
-      ) {
+      if (message.playbackSessionPriority !== undefined) {
         obj.playbackSessionPriority = Math.round(
           message.playbackSessionPriority
         );
@@ -833,57 +815,59 @@ export const PreloadedPlaybackSessionInfo: MessageFns<PreloadedPlaybackSessionIn
     ): PreloadedPlaybackSessionInfo {
       const message = createBasePreloadedPlaybackSessionInfo();
       message.playbackSessionIdentifier =
-        object.playbackSessionIdentifier ?? "";
-      message.playbackSessionRevision = object.playbackSessionRevision ?? "";
-      message.playbackSessionPriority = object.playbackSessionPriority ?? 0;
+        object.playbackSessionIdentifier ?? undefined;
+      message.playbackSessionRevision =
+        object.playbackSessionRevision ?? undefined;
+      message.playbackSessionPriority =
+        object.playbackSessionPriority ?? undefined;
       return message;
     },
   };
 
 function createBaseCommandInfo(): CommandInfo {
   return {
-    command: 0,
-    enabled: false,
-    active: false,
+    command: undefined,
+    enabled: undefined,
+    active: undefined,
     preferredIntervals: [],
-    localizedTitle: "",
-    localizedShortTitle: "",
-    minimumRating: 0,
-    maximumRating: 0,
+    localizedTitle: undefined,
+    localizedShortTitle: undefined,
+    minimumRating: undefined,
+    maximumRating: undefined,
     supportedRates: [],
     extendedSupportedRates: [],
-    repeatMode: 0,
-    shuffleMode: 0,
-    presentationStyle: 0,
-    transitionStyle: 0,
-    skipInterval: 0,
-    numAvailableSkips: 0,
-    skipFrequency: 0,
-    canScrub: false,
+    repeatMode: undefined,
+    shuffleMode: undefined,
+    presentationStyle: undefined,
+    transitionStyle: undefined,
+    skipInterval: undefined,
+    numAvailableSkips: undefined,
+    skipFrequency: undefined,
+    canScrub: undefined,
     supportedPlaybackQueueTypes: [],
     supportedCustomQueueIdentifiers: [],
     supportedInsertionPositions: [],
-    upNextItemCount: 0,
-    preferredPlaybackRate: 0,
+    upNextItemCount: undefined,
+    preferredPlaybackRate: undefined,
     supportedPlaybackSessionTypes: [],
     currentPlaybackSessionTypes: [],
-    playbackSessionIdentifier: "",
-    currentQueueEndAction: 0,
+    playbackSessionIdentifier: undefined,
+    currentQueueEndAction: undefined,
     supportedQueueEndActions: [],
-    disabledReason: 0,
+    disabledReason: undefined,
     supportedPlaybackSessionIdentifiers: [],
     proactiveCommandOptions: undefined,
-    vocalsControlActive: false,
-    vocalsControlLevel: 0,
-    vocalsControlMaxLevel: 0,
-    vocalsControlMinLevel: 0,
-    vocalsControlContinuous: false,
-    sleepTimerTime: 0,
-    sleepTimerStopMode: 0,
-    sleepTimerFireDate: 0,
+    vocalsControlActive: undefined,
+    vocalsControlLevel: undefined,
+    vocalsControlMaxLevel: undefined,
+    vocalsControlMinLevel: undefined,
+    vocalsControlContinuous: undefined,
+    sleepTimerTime: undefined,
+    sleepTimerStopMode: undefined,
+    sleepTimerFireDate: undefined,
     dialogOptions: undefined,
-    lastSectionContentItemID: "",
-    supportsReferencePosition: false,
+    lastSectionContentItemID: undefined,
+    supportsReferencePosition: undefined,
     playbackSessionRequirements: undefined,
     _unknownFields: {},
   };
@@ -894,13 +878,13 @@ export const CommandInfo: MessageFns<CommandInfo> = {
     message: CommandInfo,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.command !== undefined && message.command !== 0) {
+    if (message.command !== undefined) {
       writer.uint32(8).int32(message.command);
     }
-    if (message.enabled !== undefined && message.enabled !== false) {
+    if (message.enabled !== undefined) {
       writer.uint32(16).bool(message.enabled);
     }
-    if (message.active !== undefined && message.active !== false) {
+    if (message.active !== undefined) {
       writer.uint32(24).bool(message.active);
     }
     writer.uint32(34).fork();
@@ -908,19 +892,16 @@ export const CommandInfo: MessageFns<CommandInfo> = {
       writer.double(v);
     }
     writer.join();
-    if (message.localizedTitle !== undefined && message.localizedTitle !== "") {
+    if (message.localizedTitle !== undefined) {
       writer.uint32(42).string(message.localizedTitle);
     }
-    if (
-      message.localizedShortTitle !== undefined &&
-      message.localizedShortTitle !== ""
-    ) {
+    if (message.localizedShortTitle !== undefined) {
       writer.uint32(74).string(message.localizedShortTitle);
     }
-    if (message.minimumRating !== undefined && message.minimumRating !== 0) {
+    if (message.minimumRating !== undefined) {
       writer.uint32(53).float(message.minimumRating);
     }
-    if (message.maximumRating !== undefined && message.maximumRating !== 0) {
+    if (message.maximumRating !== undefined) {
       writer.uint32(61).float(message.maximumRating);
     }
     writer.uint32(66).fork();
@@ -933,37 +914,28 @@ export const CommandInfo: MessageFns<CommandInfo> = {
       writer.float(v);
     }
     writer.join();
-    if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+    if (message.repeatMode !== undefined) {
       writer.uint32(80).int32(message.repeatMode);
     }
-    if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+    if (message.shuffleMode !== undefined) {
       writer.uint32(88).int32(message.shuffleMode);
     }
-    if (
-      message.presentationStyle !== undefined &&
-      message.presentationStyle !== 0
-    ) {
+    if (message.presentationStyle !== undefined) {
       writer.uint32(96).int32(message.presentationStyle);
     }
-    if (
-      message.transitionStyle !== undefined &&
-      message.transitionStyle !== 0
-    ) {
+    if (message.transitionStyle !== undefined) {
       writer.uint32(384).int32(message.transitionStyle);
     }
-    if (message.skipInterval !== undefined && message.skipInterval !== 0) {
+    if (message.skipInterval !== undefined) {
       writer.uint32(104).int32(message.skipInterval);
     }
-    if (
-      message.numAvailableSkips !== undefined &&
-      message.numAvailableSkips !== 0
-    ) {
+    if (message.numAvailableSkips !== undefined) {
       writer.uint32(112).int32(message.numAvailableSkips);
     }
-    if (message.skipFrequency !== undefined && message.skipFrequency !== 0) {
+    if (message.skipFrequency !== undefined) {
       writer.uint32(120).int32(message.skipFrequency);
     }
-    if (message.canScrub !== undefined && message.canScrub !== false) {
+    if (message.canScrub !== undefined) {
       writer.uint32(128).bool(message.canScrub);
     }
     writer.uint32(138).fork();
@@ -979,16 +951,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
       writer.int32(v);
     }
     writer.join();
-    if (
-      message.upNextItemCount !== undefined &&
-      message.upNextItemCount !== 0
-    ) {
+    if (message.upNextItemCount !== undefined) {
       writer.uint32(168).int32(message.upNextItemCount);
     }
-    if (
-      message.preferredPlaybackRate !== undefined &&
-      message.preferredPlaybackRate !== 0
-    ) {
+    if (message.preferredPlaybackRate !== undefined) {
       writer.uint32(181).float(message.preferredPlaybackRate);
     }
     for (const v of message.supportedPlaybackSessionTypes) {
@@ -997,16 +963,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
     for (const v of message.currentPlaybackSessionTypes) {
       writer.uint32(194).string(v!);
     }
-    if (
-      message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ""
-    ) {
+    if (message.playbackSessionIdentifier !== undefined) {
       writer.uint32(202).string(message.playbackSessionIdentifier);
     }
-    if (
-      message.currentQueueEndAction !== undefined &&
-      message.currentQueueEndAction !== 0
-    ) {
+    if (message.currentQueueEndAction !== undefined) {
       writer.uint32(208).int32(message.currentQueueEndAction);
     }
     writer.uint32(218).fork();
@@ -1014,7 +974,7 @@ export const CommandInfo: MessageFns<CommandInfo> = {
       writer.int32(v);
     }
     writer.join();
-    if (message.disabledReason !== undefined && message.disabledReason !== 0) {
+    if (message.disabledReason !== undefined) {
       writer.uint32(224).int32(message.disabledReason);
     }
     for (const v of message.supportedPlaybackSessionIdentifiers) {
@@ -1026,49 +986,28 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         writer.uint32(242).fork()
       ).join();
     }
-    if (
-      message.vocalsControlActive !== undefined &&
-      message.vocalsControlActive !== false
-    ) {
+    if (message.vocalsControlActive !== undefined) {
       writer.uint32(248).bool(message.vocalsControlActive);
     }
-    if (
-      message.vocalsControlLevel !== undefined &&
-      message.vocalsControlLevel !== 0
-    ) {
+    if (message.vocalsControlLevel !== undefined) {
       writer.uint32(261).float(message.vocalsControlLevel);
     }
-    if (
-      message.vocalsControlMaxLevel !== undefined &&
-      message.vocalsControlMaxLevel !== 0
-    ) {
+    if (message.vocalsControlMaxLevel !== undefined) {
       writer.uint32(269).float(message.vocalsControlMaxLevel);
     }
-    if (
-      message.vocalsControlMinLevel !== undefined &&
-      message.vocalsControlMinLevel !== 0
-    ) {
+    if (message.vocalsControlMinLevel !== undefined) {
       writer.uint32(277).float(message.vocalsControlMinLevel);
     }
-    if (
-      message.vocalsControlContinuous !== undefined &&
-      message.vocalsControlContinuous !== false
-    ) {
+    if (message.vocalsControlContinuous !== undefined) {
       writer.uint32(280).bool(message.vocalsControlContinuous);
     }
-    if (message.sleepTimerTime !== undefined && message.sleepTimerTime !== 0) {
+    if (message.sleepTimerTime !== undefined) {
       writer.uint32(289).double(message.sleepTimerTime);
     }
-    if (
-      message.sleepTimerStopMode !== undefined &&
-      message.sleepTimerStopMode !== 0
-    ) {
+    if (message.sleepTimerStopMode !== undefined) {
       writer.uint32(304).int32(message.sleepTimerStopMode);
     }
-    if (
-      message.sleepTimerFireDate !== undefined &&
-      message.sleepTimerFireDate !== 0
-    ) {
+    if (message.sleepTimerFireDate !== undefined) {
       writer.uint32(313).double(message.sleepTimerFireDate);
     }
     if (message.dialogOptions !== undefined) {
@@ -1077,16 +1016,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         writer.uint32(330).fork()
       ).join();
     }
-    if (
-      message.lastSectionContentItemID !== undefined &&
-      message.lastSectionContentItemID !== ""
-    ) {
+    if (message.lastSectionContentItemID !== undefined) {
       writer.uint32(338).string(message.lastSectionContentItemID);
     }
-    if (
-      message.supportsReferencePosition !== undefined &&
-      message.supportsReferencePosition !== false
-    ) {
+    if (message.supportsReferencePosition !== undefined) {
       writer.uint32(344).bool(message.supportsReferencePosition);
     }
     if (message.playbackSessionRequirements !== undefined) {
@@ -1547,26 +1480,30 @@ export const CommandInfo: MessageFns<CommandInfo> = {
 
   fromJSON(object: any): CommandInfo {
     return {
-      command: isSet(object.command) ? commandFromJSON(object.command) : 0,
+      command: isSet(object.command)
+        ? commandFromJSON(object.command)
+        : undefined,
       enabled: isSet(object.enabled)
         ? globalThis.Boolean(object.enabled)
-        : false,
-      active: isSet(object.active) ? globalThis.Boolean(object.active) : false,
+        : undefined,
+      active: isSet(object.active)
+        ? globalThis.Boolean(object.active)
+        : undefined,
       preferredIntervals: globalThis.Array.isArray(object?.preferredIntervals)
         ? object.preferredIntervals.map((e: any) => globalThis.Number(e))
         : [],
       localizedTitle: isSet(object.localizedTitle)
         ? globalThis.String(object.localizedTitle)
-        : "",
+        : undefined,
       localizedShortTitle: isSet(object.localizedShortTitle)
         ? globalThis.String(object.localizedShortTitle)
-        : "",
+        : undefined,
       minimumRating: isSet(object.minimumRating)
         ? globalThis.Number(object.minimumRating)
-        : 0,
+        : undefined,
       maximumRating: isSet(object.maximumRating)
         ? globalThis.Number(object.maximumRating)
-        : 0,
+        : undefined,
       supportedRates: globalThis.Array.isArray(object?.supportedRates)
         ? object.supportedRates.map((e: any) => globalThis.Number(e))
         : [],
@@ -1577,28 +1514,28 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         : [],
       repeatMode: isSet(object.repeatMode)
         ? repeatMode_EnumFromJSON(object.repeatMode)
-        : 0,
+        : undefined,
       shuffleMode: isSet(object.shuffleMode)
         ? shuffleMode_EnumFromJSON(object.shuffleMode)
-        : 0,
+        : undefined,
       presentationStyle: isSet(object.presentationStyle)
         ? globalThis.Number(object.presentationStyle)
-        : 0,
+        : undefined,
       transitionStyle: isSet(object.transitionStyle)
         ? globalThis.Number(object.transitionStyle)
-        : 0,
+        : undefined,
       skipInterval: isSet(object.skipInterval)
         ? globalThis.Number(object.skipInterval)
-        : 0,
+        : undefined,
       numAvailableSkips: isSet(object.numAvailableSkips)
         ? globalThis.Number(object.numAvailableSkips)
-        : 0,
+        : undefined,
       skipFrequency: isSet(object.skipFrequency)
         ? globalThis.Number(object.skipFrequency)
-        : 0,
+        : undefined,
       canScrub: isSet(object.canScrub)
         ? globalThis.Boolean(object.canScrub)
-        : false,
+        : undefined,
       supportedPlaybackQueueTypes: globalThis.Array.isArray(
         object?.supportedPlaybackQueueTypes
       )
@@ -1622,10 +1559,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         : [],
       upNextItemCount: isSet(object.upNextItemCount)
         ? globalThis.Number(object.upNextItemCount)
-        : 0,
+        : undefined,
       preferredPlaybackRate: isSet(object.preferredPlaybackRate)
         ? globalThis.Number(object.preferredPlaybackRate)
-        : 0,
+        : undefined,
       supportedPlaybackSessionTypes: globalThis.Array.isArray(
         object?.supportedPlaybackSessionTypes
       )
@@ -1642,10 +1579,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         : [],
       playbackSessionIdentifier: isSet(object.playbackSessionIdentifier)
         ? globalThis.String(object.playbackSessionIdentifier)
-        : "",
+        : undefined,
       currentQueueEndAction: isSet(object.currentQueueEndAction)
         ? queueEndAction_EnumFromJSON(object.currentQueueEndAction)
-        : 0,
+        : undefined,
       supportedQueueEndActions: globalThis.Array.isArray(
         object?.supportedQueueEndActions
       )
@@ -1655,7 +1592,7 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         : [],
       disabledReason: isSet(object.disabledReason)
         ? disableReason_EnumFromJSON(object.disabledReason)
-        : 0,
+        : undefined,
       supportedPlaybackSessionIdentifiers: globalThis.Array.isArray(
         object?.supportedPlaybackSessionIdentifiers
       )
@@ -1668,37 +1605,37 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         : undefined,
       vocalsControlActive: isSet(object.vocalsControlActive)
         ? globalThis.Boolean(object.vocalsControlActive)
-        : false,
+        : undefined,
       vocalsControlLevel: isSet(object.vocalsControlLevel)
         ? globalThis.Number(object.vocalsControlLevel)
-        : 0,
+        : undefined,
       vocalsControlMaxLevel: isSet(object.vocalsControlMaxLevel)
         ? globalThis.Number(object.vocalsControlMaxLevel)
-        : 0,
+        : undefined,
       vocalsControlMinLevel: isSet(object.vocalsControlMinLevel)
         ? globalThis.Number(object.vocalsControlMinLevel)
-        : 0,
+        : undefined,
       vocalsControlContinuous: isSet(object.vocalsControlContinuous)
         ? globalThis.Boolean(object.vocalsControlContinuous)
-        : false,
+        : undefined,
       sleepTimerTime: isSet(object.sleepTimerTime)
         ? globalThis.Number(object.sleepTimerTime)
-        : 0,
+        : undefined,
       sleepTimerStopMode: isSet(object.sleepTimerStopMode)
         ? globalThis.Number(object.sleepTimerStopMode)
-        : 0,
+        : undefined,
       sleepTimerFireDate: isSet(object.sleepTimerFireDate)
         ? globalThis.Number(object.sleepTimerFireDate)
-        : 0,
+        : undefined,
       dialogOptions: isSet(object.dialogOptions)
         ? Dictionary.fromJSON(object.dialogOptions)
         : undefined,
       lastSectionContentItemID: isSet(object.lastSectionContentItemID)
         ? globalThis.String(object.lastSectionContentItemID)
-        : "",
+        : undefined,
       supportsReferencePosition: isSet(object.supportsReferencePosition)
         ? globalThis.Boolean(object.supportsReferencePosition)
-        : false,
+        : undefined,
       playbackSessionRequirements: isSet(object.playbackSessionRequirements)
         ? Dictionary.fromJSON(object.playbackSessionRequirements)
         : undefined,
@@ -1707,31 +1644,28 @@ export const CommandInfo: MessageFns<CommandInfo> = {
 
   toJSON(message: CommandInfo): unknown {
     const obj: any = {};
-    if (message.command !== undefined && message.command !== 0) {
+    if (message.command !== undefined) {
       obj.command = commandToJSON(message.command);
     }
-    if (message.enabled !== undefined && message.enabled !== false) {
+    if (message.enabled !== undefined) {
       obj.enabled = message.enabled;
     }
-    if (message.active !== undefined && message.active !== false) {
+    if (message.active !== undefined) {
       obj.active = message.active;
     }
     if (message.preferredIntervals?.length) {
       obj.preferredIntervals = message.preferredIntervals;
     }
-    if (message.localizedTitle !== undefined && message.localizedTitle !== "") {
+    if (message.localizedTitle !== undefined) {
       obj.localizedTitle = message.localizedTitle;
     }
-    if (
-      message.localizedShortTitle !== undefined &&
-      message.localizedShortTitle !== ""
-    ) {
+    if (message.localizedShortTitle !== undefined) {
       obj.localizedShortTitle = message.localizedShortTitle;
     }
-    if (message.minimumRating !== undefined && message.minimumRating !== 0) {
+    if (message.minimumRating !== undefined) {
       obj.minimumRating = message.minimumRating;
     }
-    if (message.maximumRating !== undefined && message.maximumRating !== 0) {
+    if (message.maximumRating !== undefined) {
       obj.maximumRating = message.maximumRating;
     }
     if (message.supportedRates?.length) {
@@ -1740,37 +1674,28 @@ export const CommandInfo: MessageFns<CommandInfo> = {
     if (message.extendedSupportedRates?.length) {
       obj.extendedSupportedRates = message.extendedSupportedRates;
     }
-    if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+    if (message.repeatMode !== undefined) {
       obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode);
     }
-    if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+    if (message.shuffleMode !== undefined) {
       obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode);
     }
-    if (
-      message.presentationStyle !== undefined &&
-      message.presentationStyle !== 0
-    ) {
+    if (message.presentationStyle !== undefined) {
       obj.presentationStyle = Math.round(message.presentationStyle);
     }
-    if (
-      message.transitionStyle !== undefined &&
-      message.transitionStyle !== 0
-    ) {
+    if (message.transitionStyle !== undefined) {
       obj.transitionStyle = Math.round(message.transitionStyle);
     }
-    if (message.skipInterval !== undefined && message.skipInterval !== 0) {
+    if (message.skipInterval !== undefined) {
       obj.skipInterval = Math.round(message.skipInterval);
     }
-    if (
-      message.numAvailableSkips !== undefined &&
-      message.numAvailableSkips !== 0
-    ) {
+    if (message.numAvailableSkips !== undefined) {
       obj.numAvailableSkips = Math.round(message.numAvailableSkips);
     }
-    if (message.skipFrequency !== undefined && message.skipFrequency !== 0) {
+    if (message.skipFrequency !== undefined) {
       obj.skipFrequency = Math.round(message.skipFrequency);
     }
-    if (message.canScrub !== undefined && message.canScrub !== false) {
+    if (message.canScrub !== undefined) {
       obj.canScrub = message.canScrub;
     }
     if (message.supportedPlaybackQueueTypes?.length) {
@@ -1787,16 +1712,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         (e) => Math.round(e)
       );
     }
-    if (
-      message.upNextItemCount !== undefined &&
-      message.upNextItemCount !== 0
-    ) {
+    if (message.upNextItemCount !== undefined) {
       obj.upNextItemCount = Math.round(message.upNextItemCount);
     }
-    if (
-      message.preferredPlaybackRate !== undefined &&
-      message.preferredPlaybackRate !== 0
-    ) {
+    if (message.preferredPlaybackRate !== undefined) {
       obj.preferredPlaybackRate = message.preferredPlaybackRate;
     }
     if (message.supportedPlaybackSessionTypes?.length) {
@@ -1805,16 +1724,10 @@ export const CommandInfo: MessageFns<CommandInfo> = {
     if (message.currentPlaybackSessionTypes?.length) {
       obj.currentPlaybackSessionTypes = message.currentPlaybackSessionTypes;
     }
-    if (
-      message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ""
-    ) {
+    if (message.playbackSessionIdentifier !== undefined) {
       obj.playbackSessionIdentifier = message.playbackSessionIdentifier;
     }
-    if (
-      message.currentQueueEndAction !== undefined &&
-      message.currentQueueEndAction !== 0
-    ) {
+    if (message.currentQueueEndAction !== undefined) {
       obj.currentQueueEndAction = queueEndAction_EnumToJSON(
         message.currentQueueEndAction
       );
@@ -1824,7 +1737,7 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         queueEndAction_EnumToJSON(e)
       );
     }
-    if (message.disabledReason !== undefined && message.disabledReason !== 0) {
+    if (message.disabledReason !== undefined) {
       obj.disabledReason = disableReason_EnumToJSON(message.disabledReason);
     }
     if (message.supportedPlaybackSessionIdentifiers?.length) {
@@ -1838,64 +1751,37 @@ export const CommandInfo: MessageFns<CommandInfo> = {
         message.proactiveCommandOptions
       );
     }
-    if (
-      message.vocalsControlActive !== undefined &&
-      message.vocalsControlActive !== false
-    ) {
+    if (message.vocalsControlActive !== undefined) {
       obj.vocalsControlActive = message.vocalsControlActive;
     }
-    if (
-      message.vocalsControlLevel !== undefined &&
-      message.vocalsControlLevel !== 0
-    ) {
+    if (message.vocalsControlLevel !== undefined) {
       obj.vocalsControlLevel = message.vocalsControlLevel;
     }
-    if (
-      message.vocalsControlMaxLevel !== undefined &&
-      message.vocalsControlMaxLevel !== 0
-    ) {
+    if (message.vocalsControlMaxLevel !== undefined) {
       obj.vocalsControlMaxLevel = message.vocalsControlMaxLevel;
     }
-    if (
-      message.vocalsControlMinLevel !== undefined &&
-      message.vocalsControlMinLevel !== 0
-    ) {
+    if (message.vocalsControlMinLevel !== undefined) {
       obj.vocalsControlMinLevel = message.vocalsControlMinLevel;
     }
-    if (
-      message.vocalsControlContinuous !== undefined &&
-      message.vocalsControlContinuous !== false
-    ) {
+    if (message.vocalsControlContinuous !== undefined) {
       obj.vocalsControlContinuous = message.vocalsControlContinuous;
     }
-    if (message.sleepTimerTime !== undefined && message.sleepTimerTime !== 0) {
+    if (message.sleepTimerTime !== undefined) {
       obj.sleepTimerTime = message.sleepTimerTime;
     }
-    if (
-      message.sleepTimerStopMode !== undefined &&
-      message.sleepTimerStopMode !== 0
-    ) {
+    if (message.sleepTimerStopMode !== undefined) {
       obj.sleepTimerStopMode = Math.round(message.sleepTimerStopMode);
     }
-    if (
-      message.sleepTimerFireDate !== undefined &&
-      message.sleepTimerFireDate !== 0
-    ) {
+    if (message.sleepTimerFireDate !== undefined) {
       obj.sleepTimerFireDate = message.sleepTimerFireDate;
     }
     if (message.dialogOptions !== undefined) {
       obj.dialogOptions = Dictionary.toJSON(message.dialogOptions);
     }
-    if (
-      message.lastSectionContentItemID !== undefined &&
-      message.lastSectionContentItemID !== ""
-    ) {
+    if (message.lastSectionContentItemID !== undefined) {
       obj.lastSectionContentItemID = message.lastSectionContentItemID;
     }
-    if (
-      message.supportsReferencePosition !== undefined &&
-      message.supportsReferencePosition !== false
-    ) {
+    if (message.supportsReferencePosition !== undefined) {
       obj.supportsReferencePosition = message.supportsReferencePosition;
     }
     if (message.playbackSessionRequirements !== undefined) {
@@ -1913,42 +1799,43 @@ export const CommandInfo: MessageFns<CommandInfo> = {
     object: I
   ): CommandInfo {
     const message = createBaseCommandInfo();
-    message.command = object.command ?? 0;
-    message.enabled = object.enabled ?? false;
-    message.active = object.active ?? false;
+    message.command = object.command ?? undefined;
+    message.enabled = object.enabled ?? undefined;
+    message.active = object.active ?? undefined;
     message.preferredIntervals = object.preferredIntervals?.map((e) => e) || [];
-    message.localizedTitle = object.localizedTitle ?? "";
-    message.localizedShortTitle = object.localizedShortTitle ?? "";
-    message.minimumRating = object.minimumRating ?? 0;
-    message.maximumRating = object.maximumRating ?? 0;
+    message.localizedTitle = object.localizedTitle ?? undefined;
+    message.localizedShortTitle = object.localizedShortTitle ?? undefined;
+    message.minimumRating = object.minimumRating ?? undefined;
+    message.maximumRating = object.maximumRating ?? undefined;
     message.supportedRates = object.supportedRates?.map((e) => e) || [];
     message.extendedSupportedRates =
       object.extendedSupportedRates?.map((e) => e) || [];
-    message.repeatMode = object.repeatMode ?? 0;
-    message.shuffleMode = object.shuffleMode ?? 0;
-    message.presentationStyle = object.presentationStyle ?? 0;
-    message.transitionStyle = object.transitionStyle ?? 0;
-    message.skipInterval = object.skipInterval ?? 0;
-    message.numAvailableSkips = object.numAvailableSkips ?? 0;
-    message.skipFrequency = object.skipFrequency ?? 0;
-    message.canScrub = object.canScrub ?? false;
+    message.repeatMode = object.repeatMode ?? undefined;
+    message.shuffleMode = object.shuffleMode ?? undefined;
+    message.presentationStyle = object.presentationStyle ?? undefined;
+    message.transitionStyle = object.transitionStyle ?? undefined;
+    message.skipInterval = object.skipInterval ?? undefined;
+    message.numAvailableSkips = object.numAvailableSkips ?? undefined;
+    message.skipFrequency = object.skipFrequency ?? undefined;
+    message.canScrub = object.canScrub ?? undefined;
     message.supportedPlaybackQueueTypes =
       object.supportedPlaybackQueueTypes?.map((e) => e) || [];
     message.supportedCustomQueueIdentifiers =
       object.supportedCustomQueueIdentifiers?.map((e) => e) || [];
     message.supportedInsertionPositions =
       object.supportedInsertionPositions?.map((e) => e) || [];
-    message.upNextItemCount = object.upNextItemCount ?? 0;
-    message.preferredPlaybackRate = object.preferredPlaybackRate ?? 0;
+    message.upNextItemCount = object.upNextItemCount ?? undefined;
+    message.preferredPlaybackRate = object.preferredPlaybackRate ?? undefined;
     message.supportedPlaybackSessionTypes =
       object.supportedPlaybackSessionTypes?.map((e) => e) || [];
     message.currentPlaybackSessionTypes =
       object.currentPlaybackSessionTypes?.map((e) => e) || [];
-    message.playbackSessionIdentifier = object.playbackSessionIdentifier ?? "";
-    message.currentQueueEndAction = object.currentQueueEndAction ?? 0;
+    message.playbackSessionIdentifier =
+      object.playbackSessionIdentifier ?? undefined;
+    message.currentQueueEndAction = object.currentQueueEndAction ?? undefined;
     message.supportedQueueEndActions =
       object.supportedQueueEndActions?.map((e) => e) || [];
-    message.disabledReason = object.disabledReason ?? 0;
+    message.disabledReason = object.disabledReason ?? undefined;
     message.supportedPlaybackSessionIdentifiers =
       object.supportedPlaybackSessionIdentifiers?.map((e) =>
         PreloadedPlaybackSessionInfo.fromPartial(e)
@@ -1958,21 +1845,23 @@ export const CommandInfo: MessageFns<CommandInfo> = {
       object.proactiveCommandOptions !== null
         ? CommandOptions.fromPartial(object.proactiveCommandOptions)
         : undefined;
-    message.vocalsControlActive = object.vocalsControlActive ?? false;
-    message.vocalsControlLevel = object.vocalsControlLevel ?? 0;
-    message.vocalsControlMaxLevel = object.vocalsControlMaxLevel ?? 0;
-    message.vocalsControlMinLevel = object.vocalsControlMinLevel ?? 0;
-    message.vocalsControlContinuous = object.vocalsControlContinuous ?? false;
-    message.sleepTimerTime = object.sleepTimerTime ?? 0;
-    message.sleepTimerStopMode = object.sleepTimerStopMode ?? 0;
-    message.sleepTimerFireDate = object.sleepTimerFireDate ?? 0;
+    message.vocalsControlActive = object.vocalsControlActive ?? undefined;
+    message.vocalsControlLevel = object.vocalsControlLevel ?? undefined;
+    message.vocalsControlMaxLevel = object.vocalsControlMaxLevel ?? undefined;
+    message.vocalsControlMinLevel = object.vocalsControlMinLevel ?? undefined;
+    message.vocalsControlContinuous =
+      object.vocalsControlContinuous ?? undefined;
+    message.sleepTimerTime = object.sleepTimerTime ?? undefined;
+    message.sleepTimerStopMode = object.sleepTimerStopMode ?? undefined;
+    message.sleepTimerFireDate = object.sleepTimerFireDate ?? undefined;
     message.dialogOptions =
       object.dialogOptions !== undefined && object.dialogOptions !== null
         ? Dictionary.fromPartial(object.dialogOptions)
         : undefined;
-    message.lastSectionContentItemID = object.lastSectionContentItemID ?? "";
+    message.lastSectionContentItemID =
+      object.lastSectionContentItemID ?? undefined;
     message.supportsReferencePosition =
-      object.supportsReferencePosition ?? false;
+      object.supportsReferencePosition ?? undefined;
     message.playbackSessionRequirements =
       object.playbackSessionRequirements !== undefined &&
       object.playbackSessionRequirements !== null

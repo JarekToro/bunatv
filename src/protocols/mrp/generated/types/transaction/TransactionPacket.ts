@@ -22,10 +22,10 @@ export interface TransactionPacket {
 function createBaseTransactionPacket(): TransactionPacket {
   return {
     key: undefined,
-    packetData: Buffer.alloc(0),
-    identifier: "",
-    totalLength: 0,
-    totalWritePosition: 0,
+    packetData: undefined,
+    identifier: undefined,
+    totalLength: undefined,
+    totalWritePosition: undefined,
     _unknownFields: {},
   };
 }
@@ -38,19 +38,16 @@ export const TransactionPacket: MessageFns<TransactionPacket> = {
     if (message.key !== undefined) {
       TransactionKey.encode(message.key, writer.uint32(10).fork()).join();
     }
-    if (message.packetData !== undefined && message.packetData.length !== 0) {
+    if (message.packetData !== undefined) {
       writer.uint32(18).bytes(message.packetData);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(26).string(message.identifier);
     }
-    if (message.totalLength !== undefined && message.totalLength !== 0) {
+    if (message.totalLength !== undefined) {
       writer.uint32(32).uint64(message.totalLength);
     }
-    if (
-      message.totalWritePosition !== undefined &&
-      message.totalWritePosition !== 0
-    ) {
+    if (message.totalWritePosition !== undefined) {
       writer.uint32(40).uint64(message.totalWritePosition);
     }
     if (message._unknownFields !== undefined) {
@@ -136,16 +133,16 @@ export const TransactionPacket: MessageFns<TransactionPacket> = {
       key: isSet(object.key) ? TransactionKey.fromJSON(object.key) : undefined,
       packetData: isSet(object.packetData)
         ? Buffer.from(bytesFromBase64(object.packetData))
-        : Buffer.alloc(0),
+        : undefined,
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       totalLength: isSet(object.totalLength)
         ? globalThis.Number(object.totalLength)
-        : 0,
+        : undefined,
       totalWritePosition: isSet(object.totalWritePosition)
         ? globalThis.Number(object.totalWritePosition)
-        : 0,
+        : undefined,
     };
   },
 
@@ -154,19 +151,16 @@ export const TransactionPacket: MessageFns<TransactionPacket> = {
     if (message.key !== undefined) {
       obj.key = TransactionKey.toJSON(message.key);
     }
-    if (message.packetData !== undefined && message.packetData.length !== 0) {
+    if (message.packetData !== undefined) {
       obj.packetData = base64FromBytes(message.packetData);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.totalLength !== undefined && message.totalLength !== 0) {
+    if (message.totalLength !== undefined) {
       obj.totalLength = Math.round(message.totalLength);
     }
-    if (
-      message.totalWritePosition !== undefined &&
-      message.totalWritePosition !== 0
-    ) {
+    if (message.totalWritePosition !== undefined) {
       obj.totalWritePosition = Math.round(message.totalWritePosition);
     }
     return obj;
@@ -185,10 +179,10 @@ export const TransactionPacket: MessageFns<TransactionPacket> = {
       object.key !== undefined && object.key !== null
         ? TransactionKey.fromPartial(object.key)
         : undefined;
-    message.packetData = object.packetData ?? Buffer.alloc(0);
-    message.identifier = object.identifier ?? "";
-    message.totalLength = object.totalLength ?? 0;
-    message.totalWritePosition = object.totalWritePosition ?? 0;
+    message.packetData = object.packetData ?? undefined;
+    message.identifier = object.identifier ?? undefined;
+    message.totalLength = object.totalLength ?? undefined;
+    message.totalWritePosition = object.totalWritePosition ?? undefined;
     return message;
   },
 };

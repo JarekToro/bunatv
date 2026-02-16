@@ -41,28 +41,28 @@ export interface PlaybackQueueRequestMessage {
 
 function createBasePlaybackQueueRequestMessage(): PlaybackQueueRequestMessage {
   return {
-    location: 0,
-    length: 0,
-    includeMetadata: false,
-    artworkWidth: 0,
-    artworkHeight: 0,
-    includeLyrics: false,
-    includeSections: false,
-    includeInfo: false,
-    includeLanguageOptions: false,
+    location: undefined,
+    length: undefined,
+    includeMetadata: undefined,
+    artworkWidth: undefined,
+    artworkHeight: undefined,
+    includeLyrics: undefined,
+    includeSections: undefined,
+    includeInfo: undefined,
+    includeLanguageOptions: undefined,
     context: undefined,
-    requestID: "",
+    requestID: undefined,
     contentItemIdentifiers: [],
-    returnContentItemAssetsInUserCompletion: false,
+    returnContentItemAssetsInUserCompletion: undefined,
     playerPath: undefined,
-    cachingPolicy: 0,
-    label: "",
-    isLegacyNowPlayingInfoRequest: false,
-    includeParticipants: false,
-    includeAvailableArtworkFormats: false,
+    cachingPolicy: undefined,
+    label: undefined,
+    isLegacyNowPlayingInfoRequest: undefined,
+    includeParticipants: undefined,
+    includeAvailableArtworkFormats: undefined,
     requestedArtworkFormats: [],
     requestedRemoteArtworkFormats: [],
-    includeAlignments: false,
+    includeAlignments: undefined,
     requestedAnimatedArtworkPreviewFrameFormats: [],
     requestedAnimatedArtworkAssetUrlFormats: [],
     _unknownFields: {},
@@ -75,43 +75,31 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
       message: PlaybackQueueRequestMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.location !== undefined && message.location !== 0) {
+      if (message.location !== undefined) {
         writer.uint32(8).int32(message.location);
       }
-      if (message.length !== undefined && message.length !== 0) {
+      if (message.length !== undefined) {
         writer.uint32(16).int32(message.length);
       }
-      if (
-        message.includeMetadata !== undefined &&
-        message.includeMetadata !== false
-      ) {
+      if (message.includeMetadata !== undefined) {
         writer.uint32(24).bool(message.includeMetadata);
       }
-      if (message.artworkWidth !== undefined && message.artworkWidth !== 0) {
+      if (message.artworkWidth !== undefined) {
         writer.uint32(33).double(message.artworkWidth);
       }
-      if (message.artworkHeight !== undefined && message.artworkHeight !== 0) {
+      if (message.artworkHeight !== undefined) {
         writer.uint32(41).double(message.artworkHeight);
       }
-      if (
-        message.includeLyrics !== undefined &&
-        message.includeLyrics !== false
-      ) {
+      if (message.includeLyrics !== undefined) {
         writer.uint32(48).bool(message.includeLyrics);
       }
-      if (
-        message.includeSections !== undefined &&
-        message.includeSections !== false
-      ) {
+      if (message.includeSections !== undefined) {
         writer.uint32(56).bool(message.includeSections);
       }
-      if (message.includeInfo !== undefined && message.includeInfo !== false) {
+      if (message.includeInfo !== undefined) {
         writer.uint32(64).bool(message.includeInfo);
       }
-      if (
-        message.includeLanguageOptions !== undefined &&
-        message.includeLanguageOptions !== false
-      ) {
+      if (message.includeLanguageOptions !== undefined) {
         writer.uint32(72).bool(message.includeLanguageOptions);
       }
       if (message.context !== undefined) {
@@ -120,16 +108,13 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
           writer.uint32(82).fork()
         ).join();
       }
-      if (message.requestID !== undefined && message.requestID !== "") {
+      if (message.requestID !== undefined) {
         writer.uint32(90).string(message.requestID);
       }
       for (const v of message.contentItemIdentifiers) {
         writer.uint32(98).string(v!);
       }
-      if (
-        message.returnContentItemAssetsInUserCompletion !== undefined &&
-        message.returnContentItemAssetsInUserCompletion !== false
-      ) {
+      if (message.returnContentItemAssetsInUserCompletion !== undefined) {
         writer
           .uint32(104)
           .bool(message.returnContentItemAssetsInUserCompletion);
@@ -137,28 +122,19 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
       if (message.playerPath !== undefined) {
         PlayerPath.encode(message.playerPath, writer.uint32(114).fork()).join();
       }
-      if (message.cachingPolicy !== undefined && message.cachingPolicy !== 0) {
+      if (message.cachingPolicy !== undefined) {
         writer.uint32(120).int32(message.cachingPolicy);
       }
-      if (message.label !== undefined && message.label !== "") {
+      if (message.label !== undefined) {
         writer.uint32(130).string(message.label);
       }
-      if (
-        message.isLegacyNowPlayingInfoRequest !== undefined &&
-        message.isLegacyNowPlayingInfoRequest !== false
-      ) {
+      if (message.isLegacyNowPlayingInfoRequest !== undefined) {
         writer.uint32(136).bool(message.isLegacyNowPlayingInfoRequest);
       }
-      if (
-        message.includeParticipants !== undefined &&
-        message.includeParticipants !== false
-      ) {
+      if (message.includeParticipants !== undefined) {
         writer.uint32(144).bool(message.includeParticipants);
       }
-      if (
-        message.includeAvailableArtworkFormats !== undefined &&
-        message.includeAvailableArtworkFormats !== false
-      ) {
+      if (message.includeAvailableArtworkFormats !== undefined) {
         writer.uint32(152).bool(message.includeAvailableArtworkFormats);
       }
       for (const v of message.requestedArtworkFormats) {
@@ -167,10 +143,7 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
       for (const v of message.requestedRemoteArtworkFormats) {
         writer.uint32(170).string(v!);
       }
-      if (
-        message.includeAlignments !== undefined &&
-        message.includeAlignments !== false
-      ) {
+      if (message.includeAlignments !== undefined) {
         writer.uint32(176).bool(message.includeAlignments);
       }
       for (const v of message.requestedAnimatedArtworkPreviewFrameFormats) {
@@ -423,35 +396,37 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
       return {
         location: isSet(object.location)
           ? globalThis.Number(object.location)
-          : 0,
-        length: isSet(object.length) ? globalThis.Number(object.length) : 0,
+          : undefined,
+        length: isSet(object.length)
+          ? globalThis.Number(object.length)
+          : undefined,
         includeMetadata: isSet(object.includeMetadata)
           ? globalThis.Boolean(object.includeMetadata)
-          : false,
+          : undefined,
         artworkWidth: isSet(object.artworkWidth)
           ? globalThis.Number(object.artworkWidth)
-          : 0,
+          : undefined,
         artworkHeight: isSet(object.artworkHeight)
           ? globalThis.Number(object.artworkHeight)
-          : 0,
+          : undefined,
         includeLyrics: isSet(object.includeLyrics)
           ? globalThis.Boolean(object.includeLyrics)
-          : false,
+          : undefined,
         includeSections: isSet(object.includeSections)
           ? globalThis.Boolean(object.includeSections)
-          : false,
+          : undefined,
         includeInfo: isSet(object.includeInfo)
           ? globalThis.Boolean(object.includeInfo)
-          : false,
+          : undefined,
         includeLanguageOptions: isSet(object.includeLanguageOptions)
           ? globalThis.Boolean(object.includeLanguageOptions)
-          : false,
+          : undefined,
         context: isSet(object.context)
           ? PlaybackQueueContext.fromJSON(object.context)
           : undefined,
         requestID: isSet(object.requestID)
           ? globalThis.String(object.requestID)
-          : "",
+          : undefined,
         contentItemIdentifiers: globalThis.Array.isArray(
           object?.contentItemIdentifiers
         )
@@ -461,27 +436,29 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
           object.returnContentItemAssetsInUserCompletion
         )
           ? globalThis.Boolean(object.returnContentItemAssetsInUserCompletion)
-          : false,
+          : undefined,
         playerPath: isSet(object.playerPath)
           ? PlayerPath.fromJSON(object.playerPath)
           : undefined,
         cachingPolicy: isSet(object.cachingPolicy)
           ? globalThis.Number(object.cachingPolicy)
-          : 0,
-        label: isSet(object.label) ? globalThis.String(object.label) : "",
+          : undefined,
+        label: isSet(object.label)
+          ? globalThis.String(object.label)
+          : undefined,
         isLegacyNowPlayingInfoRequest: isSet(
           object.isLegacyNowPlayingInfoRequest
         )
           ? globalThis.Boolean(object.isLegacyNowPlayingInfoRequest)
-          : false,
+          : undefined,
         includeParticipants: isSet(object.includeParticipants)
           ? globalThis.Boolean(object.includeParticipants)
-          : false,
+          : undefined,
         includeAvailableArtworkFormats: isSet(
           object.includeAvailableArtworkFormats
         )
           ? globalThis.Boolean(object.includeAvailableArtworkFormats)
-          : false,
+          : undefined,
         requestedArtworkFormats: globalThis.Array.isArray(
           object?.requestedArtworkFormats
         )
@@ -496,7 +473,7 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
           : [],
         includeAlignments: isSet(object.includeAlignments)
           ? globalThis.Boolean(object.includeAlignments)
-          : false,
+          : undefined,
         requestedAnimatedArtworkPreviewFrameFormats: globalThis.Array.isArray(
           object?.requestedAnimatedArtworkPreviewFrameFormats
         )
@@ -516,87 +493,63 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
 
     toJSON(message: PlaybackQueueRequestMessage): unknown {
       const obj: any = {};
-      if (message.location !== undefined && message.location !== 0) {
+      if (message.location !== undefined) {
         obj.location = Math.round(message.location);
       }
-      if (message.length !== undefined && message.length !== 0) {
+      if (message.length !== undefined) {
         obj.length = Math.round(message.length);
       }
-      if (
-        message.includeMetadata !== undefined &&
-        message.includeMetadata !== false
-      ) {
+      if (message.includeMetadata !== undefined) {
         obj.includeMetadata = message.includeMetadata;
       }
-      if (message.artworkWidth !== undefined && message.artworkWidth !== 0) {
+      if (message.artworkWidth !== undefined) {
         obj.artworkWidth = message.artworkWidth;
       }
-      if (message.artworkHeight !== undefined && message.artworkHeight !== 0) {
+      if (message.artworkHeight !== undefined) {
         obj.artworkHeight = message.artworkHeight;
       }
-      if (
-        message.includeLyrics !== undefined &&
-        message.includeLyrics !== false
-      ) {
+      if (message.includeLyrics !== undefined) {
         obj.includeLyrics = message.includeLyrics;
       }
-      if (
-        message.includeSections !== undefined &&
-        message.includeSections !== false
-      ) {
+      if (message.includeSections !== undefined) {
         obj.includeSections = message.includeSections;
       }
-      if (message.includeInfo !== undefined && message.includeInfo !== false) {
+      if (message.includeInfo !== undefined) {
         obj.includeInfo = message.includeInfo;
       }
-      if (
-        message.includeLanguageOptions !== undefined &&
-        message.includeLanguageOptions !== false
-      ) {
+      if (message.includeLanguageOptions !== undefined) {
         obj.includeLanguageOptions = message.includeLanguageOptions;
       }
       if (message.context !== undefined) {
         obj.context = PlaybackQueueContext.toJSON(message.context);
       }
-      if (message.requestID !== undefined && message.requestID !== "") {
+      if (message.requestID !== undefined) {
         obj.requestID = message.requestID;
       }
       if (message.contentItemIdentifiers?.length) {
         obj.contentItemIdentifiers = message.contentItemIdentifiers;
       }
-      if (
-        message.returnContentItemAssetsInUserCompletion !== undefined &&
-        message.returnContentItemAssetsInUserCompletion !== false
-      ) {
+      if (message.returnContentItemAssetsInUserCompletion !== undefined) {
         obj.returnContentItemAssetsInUserCompletion =
           message.returnContentItemAssetsInUserCompletion;
       }
       if (message.playerPath !== undefined) {
         obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-      if (message.cachingPolicy !== undefined && message.cachingPolicy !== 0) {
+      if (message.cachingPolicy !== undefined) {
         obj.cachingPolicy = Math.round(message.cachingPolicy);
       }
-      if (message.label !== undefined && message.label !== "") {
+      if (message.label !== undefined) {
         obj.label = message.label;
       }
-      if (
-        message.isLegacyNowPlayingInfoRequest !== undefined &&
-        message.isLegacyNowPlayingInfoRequest !== false
-      ) {
+      if (message.isLegacyNowPlayingInfoRequest !== undefined) {
         obj.isLegacyNowPlayingInfoRequest =
           message.isLegacyNowPlayingInfoRequest;
       }
-      if (
-        message.includeParticipants !== undefined &&
-        message.includeParticipants !== false
-      ) {
+      if (message.includeParticipants !== undefined) {
         obj.includeParticipants = message.includeParticipants;
       }
-      if (
-        message.includeAvailableArtworkFormats !== undefined &&
-        message.includeAvailableArtworkFormats !== false
-      ) {
+      if (message.includeAvailableArtworkFormats !== undefined) {
         obj.includeAvailableArtworkFormats =
           message.includeAvailableArtworkFormats;
       }
@@ -607,10 +560,7 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
         obj.requestedRemoteArtworkFormats =
           message.requestedRemoteArtworkFormats;
       }
-      if (
-        message.includeAlignments !== undefined &&
-        message.includeAlignments !== false
-      ) {
+      if (message.includeAlignments !== undefined) {
         obj.includeAlignments = message.includeAlignments;
       }
       if (message.requestedAnimatedArtworkPreviewFrameFormats?.length) {
@@ -633,40 +583,41 @@ export const PlaybackQueueRequestMessage: MessageFns<PlaybackQueueRequestMessage
       object: I
     ): PlaybackQueueRequestMessage {
       const message = createBasePlaybackQueueRequestMessage();
-      message.location = object.location ?? 0;
-      message.length = object.length ?? 0;
-      message.includeMetadata = object.includeMetadata ?? false;
-      message.artworkWidth = object.artworkWidth ?? 0;
-      message.artworkHeight = object.artworkHeight ?? 0;
-      message.includeLyrics = object.includeLyrics ?? false;
-      message.includeSections = object.includeSections ?? false;
-      message.includeInfo = object.includeInfo ?? false;
-      message.includeLanguageOptions = object.includeLanguageOptions ?? false;
+      message.location = object.location ?? undefined;
+      message.length = object.length ?? undefined;
+      message.includeMetadata = object.includeMetadata ?? undefined;
+      message.artworkWidth = object.artworkWidth ?? undefined;
+      message.artworkHeight = object.artworkHeight ?? undefined;
+      message.includeLyrics = object.includeLyrics ?? undefined;
+      message.includeSections = object.includeSections ?? undefined;
+      message.includeInfo = object.includeInfo ?? undefined;
+      message.includeLanguageOptions =
+        object.includeLanguageOptions ?? undefined;
       message.context =
         object.context !== undefined && object.context !== null
           ? PlaybackQueueContext.fromPartial(object.context)
           : undefined;
-      message.requestID = object.requestID ?? "";
+      message.requestID = object.requestID ?? undefined;
       message.contentItemIdentifiers =
         object.contentItemIdentifiers?.map((e) => e) || [];
       message.returnContentItemAssetsInUserCompletion =
-        object.returnContentItemAssetsInUserCompletion ?? false;
+        object.returnContentItemAssetsInUserCompletion ?? undefined;
       message.playerPath =
         object.playerPath !== undefined && object.playerPath !== null
           ? PlayerPath.fromPartial(object.playerPath)
           : undefined;
-      message.cachingPolicy = object.cachingPolicy ?? 0;
-      message.label = object.label ?? "";
+      message.cachingPolicy = object.cachingPolicy ?? undefined;
+      message.label = object.label ?? undefined;
       message.isLegacyNowPlayingInfoRequest =
-        object.isLegacyNowPlayingInfoRequest ?? false;
-      message.includeParticipants = object.includeParticipants ?? false;
+        object.isLegacyNowPlayingInfoRequest ?? undefined;
+      message.includeParticipants = object.includeParticipants ?? undefined;
       message.includeAvailableArtworkFormats =
-        object.includeAvailableArtworkFormats ?? false;
+        object.includeAvailableArtworkFormats ?? undefined;
       message.requestedArtworkFormats =
         object.requestedArtworkFormats?.map((e) => e) || [];
       message.requestedRemoteArtworkFormats =
         object.requestedRemoteArtworkFormats?.map((e) => e) || [];
-      message.includeAlignments = object.includeAlignments ?? false;
+      message.includeAlignments = object.includeAlignments ?? undefined;
       message.requestedAnimatedArtworkPreviewFrameFormats =
         object.requestedAnimatedArtworkPreviewFrameFormats?.map((e) => e) || [];
       message.requestedAnimatedArtworkAssetUrlFormats =

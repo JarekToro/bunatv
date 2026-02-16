@@ -15,7 +15,7 @@ export interface GetVolumeMessage {
 }
 
 function createBaseGetVolumeMessage(): GetVolumeMessage {
-  return { outputDeviceUID: "", _unknownFields: {} };
+  return { outputDeviceUID: undefined, _unknownFields: {} };
 }
 
 export const GetVolumeMessage: MessageFns<GetVolumeMessage> = {
@@ -23,10 +23,7 @@ export const GetVolumeMessage: MessageFns<GetVolumeMessage> = {
     message: GetVolumeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       writer.uint32(10).string(message.outputDeviceUID);
     }
     if (message._unknownFields !== undefined) {
@@ -79,16 +76,13 @@ export const GetVolumeMessage: MessageFns<GetVolumeMessage> = {
     return {
       outputDeviceUID: isSet(object.outputDeviceUID)
         ? globalThis.String(object.outputDeviceUID)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: GetVolumeMessage): unknown {
     const obj: any = {};
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       obj.outputDeviceUID = message.outputDeviceUID;
     }
     return obj;
@@ -103,7 +97,7 @@ export const GetVolumeMessage: MessageFns<GetVolumeMessage> = {
     object: I
   ): GetVolumeMessage {
     const message = createBaseGetVolumeMessage();
-    message.outputDeviceUID = object.outputDeviceUID ?? "";
+    message.outputDeviceUID = object.outputDeviceUID ?? undefined;
     return message;
   },
 };

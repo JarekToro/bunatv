@@ -19,8 +19,8 @@ export interface LyricsItem {
 
 function createBaseLyricsItem(): LyricsItem {
   return {
-    lyrics: "",
-    userProvided: false,
+    lyrics: undefined,
+    userProvided: undefined,
     token: undefined,
     _unknownFields: {},
   };
@@ -31,10 +31,10 @@ export const LyricsItem: MessageFns<LyricsItem> = {
     message: LyricsItem,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.lyrics !== undefined && message.lyrics !== "") {
+    if (message.lyrics !== undefined) {
       writer.uint32(10).string(message.lyrics);
     }
-    if (message.userProvided !== undefined && message.userProvided !== false) {
+    if (message.userProvided !== undefined) {
       writer.uint32(16).bool(message.userProvided);
     }
     if (message.token !== undefined) {
@@ -104,10 +104,12 @@ export const LyricsItem: MessageFns<LyricsItem> = {
 
   fromJSON(object: any): LyricsItem {
     return {
-      lyrics: isSet(object.lyrics) ? globalThis.String(object.lyrics) : "",
+      lyrics: isSet(object.lyrics)
+        ? globalThis.String(object.lyrics)
+        : undefined,
       userProvided: isSet(object.userProvided)
         ? globalThis.Boolean(object.userProvided)
-        : false,
+        : undefined,
       token: isSet(object.token)
         ? LyricsToken.fromJSON(object.token)
         : undefined,
@@ -116,10 +118,10 @@ export const LyricsItem: MessageFns<LyricsItem> = {
 
   toJSON(message: LyricsItem): unknown {
     const obj: any = {};
-    if (message.lyrics !== undefined && message.lyrics !== "") {
+    if (message.lyrics !== undefined) {
       obj.lyrics = message.lyrics;
     }
-    if (message.userProvided !== undefined && message.userProvided !== false) {
+    if (message.userProvided !== undefined) {
       obj.userProvided = message.userProvided;
     }
     if (message.token !== undefined) {
@@ -135,8 +137,8 @@ export const LyricsItem: MessageFns<LyricsItem> = {
     object: I
   ): LyricsItem {
     const message = createBaseLyricsItem();
-    message.lyrics = object.lyrics ?? "";
-    message.userProvided = object.userProvided ?? false;
+    message.lyrics = object.lyrics ?? undefined;
+    message.userProvided = object.userProvided ?? undefined;
     message.token =
       object.token !== undefined && object.token !== null
         ? LyricsToken.fromPartial(object.token)

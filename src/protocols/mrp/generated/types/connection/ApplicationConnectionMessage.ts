@@ -18,8 +18,8 @@ export interface ApplicationConnectionMessage {
 
 function createBaseApplicationConnectionMessage(): ApplicationConnectionMessage {
   return {
-    header: Buffer.alloc(0),
-    underlyingMessage: Buffer.alloc(0),
+    header: undefined,
+    underlyingMessage: undefined,
     _unknownFields: {},
   };
 }
@@ -30,13 +30,10 @@ export const ApplicationConnectionMessage: MessageFns<ApplicationConnectionMessa
       message: ApplicationConnectionMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.header !== undefined && message.header.length !== 0) {
+      if (message.header !== undefined) {
         writer.uint32(10).bytes(message.header);
       }
-      if (
-        message.underlyingMessage !== undefined &&
-        message.underlyingMessage.length !== 0
-      ) {
+      if (message.underlyingMessage !== undefined) {
         writer.uint32(18).bytes(message.underlyingMessage);
       }
       if (message._unknownFields !== undefined) {
@@ -100,22 +97,19 @@ export const ApplicationConnectionMessage: MessageFns<ApplicationConnectionMessa
       return {
         header: isSet(object.header)
           ? Buffer.from(bytesFromBase64(object.header))
-          : Buffer.alloc(0),
+          : undefined,
         underlyingMessage: isSet(object.underlyingMessage)
           ? Buffer.from(bytesFromBase64(object.underlyingMessage))
-          : Buffer.alloc(0),
+          : undefined,
       };
     },
 
     toJSON(message: ApplicationConnectionMessage): unknown {
       const obj: any = {};
-      if (message.header !== undefined && message.header.length !== 0) {
+      if (message.header !== undefined) {
         obj.header = base64FromBytes(message.header);
       }
-      if (
-        message.underlyingMessage !== undefined &&
-        message.underlyingMessage.length !== 0
-      ) {
+      if (message.underlyingMessage !== undefined) {
         obj.underlyingMessage = base64FromBytes(message.underlyingMessage);
       }
       return obj;
@@ -130,8 +124,8 @@ export const ApplicationConnectionMessage: MessageFns<ApplicationConnectionMessa
       object: I
     ): ApplicationConnectionMessage {
       const message = createBaseApplicationConnectionMessage();
-      message.header = object.header ?? Buffer.alloc(0);
-      message.underlyingMessage = object.underlyingMessage ?? Buffer.alloc(0);
+      message.header = object.header ?? undefined;
+      message.underlyingMessage = object.underlyingMessage ?? undefined;
       return message;
     },
   };

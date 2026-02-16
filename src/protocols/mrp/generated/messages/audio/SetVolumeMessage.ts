@@ -19,8 +19,8 @@ export interface SetVolumeMessage {
 
 function createBaseSetVolumeMessage(): SetVolumeMessage {
   return {
-    volume: 0,
-    outputDeviceUID: "",
+    volume: undefined,
+    outputDeviceUID: undefined,
     details: undefined,
     _unknownFields: {},
   };
@@ -31,13 +31,10 @@ export const SetVolumeMessage: MessageFns<SetVolumeMessage> = {
     message: SetVolumeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.volume !== undefined && message.volume !== 0) {
+    if (message.volume !== undefined) {
       writer.uint32(13).float(message.volume);
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       writer.uint32(18).string(message.outputDeviceUID);
     }
     if (message.details !== undefined) {
@@ -107,10 +104,12 @@ export const SetVolumeMessage: MessageFns<SetVolumeMessage> = {
 
   fromJSON(object: any): SetVolumeMessage {
     return {
-      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
+      volume: isSet(object.volume)
+        ? globalThis.Number(object.volume)
+        : undefined,
       outputDeviceUID: isSet(object.outputDeviceUID)
         ? globalThis.String(object.outputDeviceUID)
-        : "",
+        : undefined,
       details: isSet(object.details)
         ? RequestDetails.fromJSON(object.details)
         : undefined,
@@ -119,13 +118,10 @@ export const SetVolumeMessage: MessageFns<SetVolumeMessage> = {
 
   toJSON(message: SetVolumeMessage): unknown {
     const obj: any = {};
-    if (message.volume !== undefined && message.volume !== 0) {
+    if (message.volume !== undefined) {
       obj.volume = message.volume;
     }
-    if (
-      message.outputDeviceUID !== undefined &&
-      message.outputDeviceUID !== ""
-    ) {
+    if (message.outputDeviceUID !== undefined) {
       obj.outputDeviceUID = message.outputDeviceUID;
     }
     if (message.details !== undefined) {
@@ -143,8 +139,8 @@ export const SetVolumeMessage: MessageFns<SetVolumeMessage> = {
     object: I
   ): SetVolumeMessage {
     const message = createBaseSetVolumeMessage();
-    message.volume = object.volume ?? 0;
-    message.outputDeviceUID = object.outputDeviceUID ?? "";
+    message.volume = object.volume ?? undefined;
+    message.outputDeviceUID = object.outputDeviceUID ?? undefined;
     message.details =
       object.details !== undefined && object.details !== null
         ? RequestDetails.fromPartial(object.details)

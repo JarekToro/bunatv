@@ -17,7 +17,11 @@ export interface MicrophoneConnectionRequestMessage {
 }
 
 function createBaseMicrophoneConnectionRequestMessage(): MicrophoneConnectionRequestMessage {
-  return { details: undefined, rapportIdentifier: "", _unknownFields: {} };
+  return {
+    details: undefined,
+    rapportIdentifier: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const MicrophoneConnectionRequestMessage: MessageFns<MicrophoneConnectionRequestMessage> =
@@ -29,10 +33,7 @@ export const MicrophoneConnectionRequestMessage: MessageFns<MicrophoneConnection
       if (message.details !== undefined) {
         RequestDetails.encode(message.details, writer.uint32(10).fork()).join();
       }
-      if (
-        message.rapportIdentifier !== undefined &&
-        message.rapportIdentifier !== ""
-      ) {
+      if (message.rapportIdentifier !== undefined) {
         writer.uint32(18).string(message.rapportIdentifier);
       }
       if (message._unknownFields !== undefined) {
@@ -99,7 +100,7 @@ export const MicrophoneConnectionRequestMessage: MessageFns<MicrophoneConnection
           : undefined,
         rapportIdentifier: isSet(object.rapportIdentifier)
           ? globalThis.String(object.rapportIdentifier)
-          : "",
+          : undefined,
       };
     },
 
@@ -108,10 +109,7 @@ export const MicrophoneConnectionRequestMessage: MessageFns<MicrophoneConnection
       if (message.details !== undefined) {
         obj.details = RequestDetails.toJSON(message.details);
       }
-      if (
-        message.rapportIdentifier !== undefined &&
-        message.rapportIdentifier !== ""
-      ) {
+      if (message.rapportIdentifier !== undefined) {
         obj.rapportIdentifier = message.rapportIdentifier;
       }
       return obj;
@@ -132,7 +130,7 @@ export const MicrophoneConnectionRequestMessage: MessageFns<MicrophoneConnection
         object.details !== undefined && object.details !== null
           ? RequestDetails.fromPartial(object.details)
           : undefined;
-      message.rapportIdentifier = object.rapportIdentifier ?? "";
+      message.rapportIdentifier = object.rapportIdentifier ?? undefined;
       return message;
     },
   };

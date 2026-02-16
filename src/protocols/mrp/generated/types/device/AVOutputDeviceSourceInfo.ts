@@ -17,8 +17,8 @@ export interface AVOutputDeviceSourceInfo {
 
 function createBaseAVOutputDeviceSourceInfo(): AVOutputDeviceSourceInfo {
   return {
-    routingContextUID: "",
-    multipleBuiltInDevices: false,
+    routingContextUID: undefined,
+    multipleBuiltInDevices: undefined,
     _unknownFields: {},
   };
 }
@@ -28,16 +28,10 @@ export const AVOutputDeviceSourceInfo: MessageFns<AVOutputDeviceSourceInfo> = {
     message: AVOutputDeviceSourceInfo,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.routingContextUID !== undefined &&
-      message.routingContextUID !== ""
-    ) {
+    if (message.routingContextUID !== undefined) {
       writer.uint32(10).string(message.routingContextUID);
     }
-    if (
-      message.multipleBuiltInDevices !== undefined &&
-      message.multipleBuiltInDevices !== false
-    ) {
+    if (message.multipleBuiltInDevices !== undefined) {
       writer.uint32(16).bool(message.multipleBuiltInDevices);
     }
     if (message._unknownFields !== undefined) {
@@ -101,25 +95,19 @@ export const AVOutputDeviceSourceInfo: MessageFns<AVOutputDeviceSourceInfo> = {
     return {
       routingContextUID: isSet(object.routingContextUID)
         ? globalThis.String(object.routingContextUID)
-        : "",
+        : undefined,
       multipleBuiltInDevices: isSet(object.multipleBuiltInDevices)
         ? globalThis.Boolean(object.multipleBuiltInDevices)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: AVOutputDeviceSourceInfo): unknown {
     const obj: any = {};
-    if (
-      message.routingContextUID !== undefined &&
-      message.routingContextUID !== ""
-    ) {
+    if (message.routingContextUID !== undefined) {
       obj.routingContextUID = message.routingContextUID;
     }
-    if (
-      message.multipleBuiltInDevices !== undefined &&
-      message.multipleBuiltInDevices !== false
-    ) {
+    if (message.multipleBuiltInDevices !== undefined) {
       obj.multipleBuiltInDevices = message.multipleBuiltInDevices;
     }
     return obj;
@@ -134,8 +122,8 @@ export const AVOutputDeviceSourceInfo: MessageFns<AVOutputDeviceSourceInfo> = {
     object: I
   ): AVOutputDeviceSourceInfo {
     const message = createBaseAVOutputDeviceSourceInfo();
-    message.routingContextUID = object.routingContextUID ?? "";
-    message.multipleBuiltInDevices = object.multipleBuiltInDevices ?? false;
+    message.routingContextUID = object.routingContextUID ?? undefined;
+    message.multipleBuiltInDevices = object.multipleBuiltInDevices ?? undefined;
     return message;
   },
 };

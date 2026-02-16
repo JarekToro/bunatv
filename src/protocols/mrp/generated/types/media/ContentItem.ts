@@ -45,21 +45,21 @@ export interface ContentItem {
 
 function createBaseContentItem(): ContentItem {
   return {
-    identifier: "",
+    identifier: undefined,
     metadata: undefined,
-    artworkData: Buffer.alloc(0),
-    info: "",
+    artworkData: undefined,
+    info: undefined,
     availableLanguageOptions: [],
     currentLanguageOptions: [],
     lyrics: undefined,
     sections: [],
-    parentIdentifier: "",
-    ancestorIdentifier: "",
-    queueIdentifier: "",
-    requestIdentifier: "",
-    artworkDataWidth: 0,
-    artworkDataHeight: 0,
-    associatedParticipantIdentifier: "",
+    parentIdentifier: undefined,
+    ancestorIdentifier: undefined,
+    queueIdentifier: undefined,
+    requestIdentifier: undefined,
+    artworkDataWidth: undefined,
+    artworkDataHeight: undefined,
+    associatedParticipantIdentifier: undefined,
     availableArtworkFormats: [],
     availableRemoteArtworkFormats: [],
     dataArtworks: [],
@@ -77,7 +77,7 @@ export const ContentItem: MessageFns<ContentItem> = {
     message: ContentItem,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
     if (message.metadata !== undefined) {
@@ -86,10 +86,10 @@ export const ContentItem: MessageFns<ContentItem> = {
         writer.uint32(18).fork()
       ).join();
     }
-    if (message.artworkData !== undefined && message.artworkData.length !== 0) {
+    if (message.artworkData !== undefined) {
       writer.uint32(26).bytes(message.artworkData);
     }
-    if (message.info !== undefined && message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
     for (const v of message.availableLanguageOptions) {
@@ -104,46 +104,25 @@ export const ContentItem: MessageFns<ContentItem> = {
     for (const v of message.sections) {
       ContentItem.encode(v!, writer.uint32(66).fork()).join();
     }
-    if (
-      message.parentIdentifier !== undefined &&
-      message.parentIdentifier !== ""
-    ) {
+    if (message.parentIdentifier !== undefined) {
       writer.uint32(74).string(message.parentIdentifier);
     }
-    if (
-      message.ancestorIdentifier !== undefined &&
-      message.ancestorIdentifier !== ""
-    ) {
+    if (message.ancestorIdentifier !== undefined) {
       writer.uint32(82).string(message.ancestorIdentifier);
     }
-    if (
-      message.queueIdentifier !== undefined &&
-      message.queueIdentifier !== ""
-    ) {
+    if (message.queueIdentifier !== undefined) {
       writer.uint32(90).string(message.queueIdentifier);
     }
-    if (
-      message.requestIdentifier !== undefined &&
-      message.requestIdentifier !== ""
-    ) {
+    if (message.requestIdentifier !== undefined) {
       writer.uint32(98).string(message.requestIdentifier);
     }
-    if (
-      message.artworkDataWidth !== undefined &&
-      message.artworkDataWidth !== 0
-    ) {
+    if (message.artworkDataWidth !== undefined) {
       writer.uint32(104).int32(message.artworkDataWidth);
     }
-    if (
-      message.artworkDataHeight !== undefined &&
-      message.artworkDataHeight !== 0
-    ) {
+    if (message.artworkDataHeight !== undefined) {
       writer.uint32(112).int32(message.artworkDataHeight);
     }
-    if (
-      message.associatedParticipantIdentifier !== undefined &&
-      message.associatedParticipantIdentifier !== ""
-    ) {
+    if (message.associatedParticipantIdentifier !== undefined) {
       writer.uint32(122).string(message.associatedParticipantIdentifier);
     }
     for (const v of message.availableArtworkFormats) {
@@ -413,14 +392,14 @@ export const ContentItem: MessageFns<ContentItem> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       metadata: isSet(object.metadata)
         ? ContentItemMetadata.fromJSON(object.metadata)
         : undefined,
       artworkData: isSet(object.artworkData)
         ? Buffer.from(bytesFromBase64(object.artworkData))
-        : Buffer.alloc(0),
-      info: isSet(object.info) ? globalThis.String(object.info) : "",
+        : undefined,
+      info: isSet(object.info) ? globalThis.String(object.info) : undefined,
       availableLanguageOptions: globalThis.Array.isArray(
         object?.availableLanguageOptions
       )
@@ -443,27 +422,27 @@ export const ContentItem: MessageFns<ContentItem> = {
         : [],
       parentIdentifier: isSet(object.parentIdentifier)
         ? globalThis.String(object.parentIdentifier)
-        : "",
+        : undefined,
       ancestorIdentifier: isSet(object.ancestorIdentifier)
         ? globalThis.String(object.ancestorIdentifier)
-        : "",
+        : undefined,
       queueIdentifier: isSet(object.queueIdentifier)
         ? globalThis.String(object.queueIdentifier)
-        : "",
+        : undefined,
       requestIdentifier: isSet(object.requestIdentifier)
         ? globalThis.String(object.requestIdentifier)
-        : "",
+        : undefined,
       artworkDataWidth: isSet(object.artworkDataWidth)
         ? globalThis.Number(object.artworkDataWidth)
-        : 0,
+        : undefined,
       artworkDataHeight: isSet(object.artworkDataHeight)
         ? globalThis.Number(object.artworkDataHeight)
-        : 0,
+        : undefined,
       associatedParticipantIdentifier: isSet(
         object.associatedParticipantIdentifier
       )
         ? globalThis.String(object.associatedParticipantIdentifier)
-        : "",
+        : undefined,
       availableArtworkFormats: globalThis.Array.isArray(
         object?.availableArtworkFormats
       )
@@ -511,16 +490,16 @@ export const ContentItem: MessageFns<ContentItem> = {
 
   toJSON(message: ContentItem): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
     if (message.metadata !== undefined) {
       obj.metadata = ContentItemMetadata.toJSON(message.metadata);
     }
-    if (message.artworkData !== undefined && message.artworkData.length !== 0) {
+    if (message.artworkData !== undefined) {
       obj.artworkData = base64FromBytes(message.artworkData);
     }
-    if (message.info !== undefined && message.info !== "") {
+    if (message.info !== undefined) {
       obj.info = message.info;
     }
     if (message.availableLanguageOptions?.length) {
@@ -539,46 +518,25 @@ export const ContentItem: MessageFns<ContentItem> = {
     if (message.sections?.length) {
       obj.sections = message.sections.map((e) => ContentItem.toJSON(e));
     }
-    if (
-      message.parentIdentifier !== undefined &&
-      message.parentIdentifier !== ""
-    ) {
+    if (message.parentIdentifier !== undefined) {
       obj.parentIdentifier = message.parentIdentifier;
     }
-    if (
-      message.ancestorIdentifier !== undefined &&
-      message.ancestorIdentifier !== ""
-    ) {
+    if (message.ancestorIdentifier !== undefined) {
       obj.ancestorIdentifier = message.ancestorIdentifier;
     }
-    if (
-      message.queueIdentifier !== undefined &&
-      message.queueIdentifier !== ""
-    ) {
+    if (message.queueIdentifier !== undefined) {
       obj.queueIdentifier = message.queueIdentifier;
     }
-    if (
-      message.requestIdentifier !== undefined &&
-      message.requestIdentifier !== ""
-    ) {
+    if (message.requestIdentifier !== undefined) {
       obj.requestIdentifier = message.requestIdentifier;
     }
-    if (
-      message.artworkDataWidth !== undefined &&
-      message.artworkDataWidth !== 0
-    ) {
+    if (message.artworkDataWidth !== undefined) {
       obj.artworkDataWidth = Math.round(message.artworkDataWidth);
     }
-    if (
-      message.artworkDataHeight !== undefined &&
-      message.artworkDataHeight !== 0
-    ) {
+    if (message.artworkDataHeight !== undefined) {
       obj.artworkDataHeight = Math.round(message.artworkDataHeight);
     }
-    if (
-      message.associatedParticipantIdentifier !== undefined &&
-      message.associatedParticipantIdentifier !== ""
-    ) {
+    if (message.associatedParticipantIdentifier !== undefined) {
       obj.associatedParticipantIdentifier =
         message.associatedParticipantIdentifier;
     }
@@ -624,13 +582,13 @@ export const ContentItem: MessageFns<ContentItem> = {
     object: I
   ): ContentItem {
     const message = createBaseContentItem();
-    message.identifier = object.identifier ?? "";
+    message.identifier = object.identifier ?? undefined;
     message.metadata =
       object.metadata !== undefined && object.metadata !== null
         ? ContentItemMetadata.fromPartial(object.metadata)
         : undefined;
-    message.artworkData = object.artworkData ?? Buffer.alloc(0);
-    message.info = object.info ?? "";
+    message.artworkData = object.artworkData ?? undefined;
+    message.info = object.info ?? undefined;
     message.availableLanguageOptions =
       object.availableLanguageOptions?.map((e) =>
         LanguageOptionGroup.fromPartial(e)
@@ -645,14 +603,14 @@ export const ContentItem: MessageFns<ContentItem> = {
         : undefined;
     message.sections =
       object.sections?.map((e) => ContentItem.fromPartial(e)) || [];
-    message.parentIdentifier = object.parentIdentifier ?? "";
-    message.ancestorIdentifier = object.ancestorIdentifier ?? "";
-    message.queueIdentifier = object.queueIdentifier ?? "";
-    message.requestIdentifier = object.requestIdentifier ?? "";
-    message.artworkDataWidth = object.artworkDataWidth ?? 0;
-    message.artworkDataHeight = object.artworkDataHeight ?? 0;
+    message.parentIdentifier = object.parentIdentifier ?? undefined;
+    message.ancestorIdentifier = object.ancestorIdentifier ?? undefined;
+    message.queueIdentifier = object.queueIdentifier ?? undefined;
+    message.requestIdentifier = object.requestIdentifier ?? undefined;
+    message.artworkDataWidth = object.artworkDataWidth ?? undefined;
+    message.artworkDataHeight = object.artworkDataHeight ?? undefined;
     message.associatedParticipantIdentifier =
-      object.associatedParticipantIdentifier ?? "";
+      object.associatedParticipantIdentifier ?? undefined;
     message.availableArtworkFormats =
       object.availableArtworkFormats?.map((e) => e) || [];
     message.availableRemoteArtworkFormats =

@@ -17,7 +17,7 @@ export interface SetConversationDetectionEnabledMessage {
 }
 
 function createBaseSetConversationDetectionEnabledMessage(): SetConversationDetectionEnabledMessage {
-  return { enabled: false, outputDeviceUID: "", _unknownFields: {} };
+  return { enabled: undefined, outputDeviceUID: undefined, _unknownFields: {} };
 }
 
 export const SetConversationDetectionEnabledMessage: MessageFns<SetConversationDetectionEnabledMessage> =
@@ -26,13 +26,10 @@ export const SetConversationDetectionEnabledMessage: MessageFns<SetConversationD
       message: SetConversationDetectionEnabledMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.enabled !== undefined && message.enabled !== false) {
+      if (message.enabled !== undefined) {
         writer.uint32(8).bool(message.enabled);
       }
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         writer.uint32(18).string(message.outputDeviceUID);
       }
       if (message._unknownFields !== undefined) {
@@ -96,22 +93,19 @@ export const SetConversationDetectionEnabledMessage: MessageFns<SetConversationD
       return {
         enabled: isSet(object.enabled)
           ? globalThis.Boolean(object.enabled)
-          : false,
+          : undefined,
         outputDeviceUID: isSet(object.outputDeviceUID)
           ? globalThis.String(object.outputDeviceUID)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: SetConversationDetectionEnabledMessage): unknown {
       const obj: any = {};
-      if (message.enabled !== undefined && message.enabled !== false) {
+      if (message.enabled !== undefined) {
         obj.enabled = message.enabled;
       }
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         obj.outputDeviceUID = message.outputDeviceUID;
       }
       return obj;
@@ -128,8 +122,8 @@ export const SetConversationDetectionEnabledMessage: MessageFns<SetConversationD
       I extends Exact<DeepPartial<SetConversationDetectionEnabledMessage>, I>,
     >(object: I): SetConversationDetectionEnabledMessage {
       const message = createBaseSetConversationDetectionEnabledMessage();
-      message.enabled = object.enabled ?? false;
-      message.outputDeviceUID = object.outputDeviceUID ?? "";
+      message.enabled = object.enabled ?? undefined;
+      message.outputDeviceUID = object.outputDeviceUID ?? undefined;
       return message;
     },
   };

@@ -18,9 +18,9 @@ export interface MicrophoneConnectionResponseMessage {
 
 function createBaseMicrophoneConnectionResponseMessage(): MicrophoneConnectionResponseMessage {
   return {
-    result: 0,
-    rapportIdentifier: "",
-    pairingData: Buffer.alloc(0),
+    result: undefined,
+    rapportIdentifier: undefined,
+    pairingData: undefined,
     _unknownFields: {},
   };
 }
@@ -31,19 +31,13 @@ export const MicrophoneConnectionResponseMessage: MessageFns<MicrophoneConnectio
       message: MicrophoneConnectionResponseMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.result !== undefined && message.result !== 0) {
+      if (message.result !== undefined) {
         writer.uint32(8).uint32(message.result);
       }
-      if (
-        message.rapportIdentifier !== undefined &&
-        message.rapportIdentifier !== ""
-      ) {
+      if (message.rapportIdentifier !== undefined) {
         writer.uint32(18).string(message.rapportIdentifier);
       }
-      if (
-        message.pairingData !== undefined &&
-        message.pairingData.length !== 0
-      ) {
+      if (message.pairingData !== undefined) {
         writer.uint32(26).bytes(message.pairingData);
       }
       if (message._unknownFields !== undefined) {
@@ -113,31 +107,27 @@ export const MicrophoneConnectionResponseMessage: MessageFns<MicrophoneConnectio
 
     fromJSON(object: any): MicrophoneConnectionResponseMessage {
       return {
-        result: isSet(object.result) ? globalThis.Number(object.result) : 0,
+        result: isSet(object.result)
+          ? globalThis.Number(object.result)
+          : undefined,
         rapportIdentifier: isSet(object.rapportIdentifier)
           ? globalThis.String(object.rapportIdentifier)
-          : "",
+          : undefined,
         pairingData: isSet(object.pairingData)
           ? Buffer.from(bytesFromBase64(object.pairingData))
-          : Buffer.alloc(0),
+          : undefined,
       };
     },
 
     toJSON(message: MicrophoneConnectionResponseMessage): unknown {
       const obj: any = {};
-      if (message.result !== undefined && message.result !== 0) {
+      if (message.result !== undefined) {
         obj.result = Math.round(message.result);
       }
-      if (
-        message.rapportIdentifier !== undefined &&
-        message.rapportIdentifier !== ""
-      ) {
+      if (message.rapportIdentifier !== undefined) {
         obj.rapportIdentifier = message.rapportIdentifier;
       }
-      if (
-        message.pairingData !== undefined &&
-        message.pairingData.length !== 0
-      ) {
+      if (message.pairingData !== undefined) {
         obj.pairingData = base64FromBytes(message.pairingData);
       }
       return obj;
@@ -154,9 +144,9 @@ export const MicrophoneConnectionResponseMessage: MessageFns<MicrophoneConnectio
       I extends Exact<DeepPartial<MicrophoneConnectionResponseMessage>, I>,
     >(object: I): MicrophoneConnectionResponseMessage {
       const message = createBaseMicrophoneConnectionResponseMessage();
-      message.result = object.result ?? 0;
-      message.rapportIdentifier = object.rapportIdentifier ?? "";
-      message.pairingData = object.pairingData ?? Buffer.alloc(0);
+      message.result = object.result ?? undefined;
+      message.rapportIdentifier = object.rapportIdentifier ?? undefined;
+      message.pairingData = object.pairingData ?? undefined;
       return message;
     },
   };

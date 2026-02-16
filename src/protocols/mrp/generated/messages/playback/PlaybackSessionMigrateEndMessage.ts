@@ -27,8 +27,8 @@ function createBasePlaybackSessionMigrateEndMessage(): PlaybackSessionMigrateEnd
   return {
     request: undefined,
     playerPath: undefined,
-    errorCode: 0,
-    errorDescription: "",
+    errorCode: undefined,
+    errorDescription: undefined,
     error: undefined,
     setPlaybackSessionCommandStatus: undefined,
     _unknownFields: {},
@@ -50,13 +50,10 @@ export const PlaybackSessionMigrateEndMessage: MessageFns<PlaybackSessionMigrate
       if (message.playerPath !== undefined) {
         PlayerPath.encode(message.playerPath, writer.uint32(18).fork()).join();
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         writer.uint32(24).int64(message.errorCode);
       }
-      if (
-        message.errorDescription !== undefined &&
-        message.errorDescription !== ""
-      ) {
+      if (message.errorDescription !== undefined) {
         writer.uint32(34).string(message.errorDescription);
       }
       if (message.error !== undefined) {
@@ -171,10 +168,10 @@ export const PlaybackSessionMigrateEndMessage: MessageFns<PlaybackSessionMigrate
           : undefined,
         errorCode: isSet(object.errorCode)
           ? globalThis.Number(object.errorCode)
-          : 0,
+          : undefined,
         errorDescription: isSet(object.errorDescription)
           ? globalThis.String(object.errorDescription)
-          : "",
+          : undefined,
         error: isSet(object.error) ? Error.fromJSON(object.error) : undefined,
         setPlaybackSessionCommandStatus: isSet(
           object.setPlaybackSessionCommandStatus
@@ -194,13 +191,10 @@ export const PlaybackSessionMigrateEndMessage: MessageFns<PlaybackSessionMigrate
       if (message.playerPath !== undefined) {
         obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         obj.errorCode = Math.round(message.errorCode);
       }
-      if (
-        message.errorDescription !== undefined &&
-        message.errorDescription !== ""
-      ) {
+      if (message.errorDescription !== undefined) {
         obj.errorDescription = message.errorDescription;
       }
       if (message.error !== undefined) {
@@ -231,8 +225,8 @@ export const PlaybackSessionMigrateEndMessage: MessageFns<PlaybackSessionMigrate
         object.playerPath !== undefined && object.playerPath !== null
           ? PlayerPath.fromPartial(object.playerPath)
           : undefined;
-      message.errorCode = object.errorCode ?? 0;
-      message.errorDescription = object.errorDescription ?? "";
+      message.errorCode = object.errorCode ?? undefined;
+      message.errorDescription = object.errorDescription ?? undefined;
       message.error =
         object.error !== undefined && object.error !== null
           ? Error.fromPartial(object.error)

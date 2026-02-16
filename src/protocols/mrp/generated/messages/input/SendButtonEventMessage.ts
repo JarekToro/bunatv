@@ -17,7 +17,12 @@ export interface SendButtonEventMessage {
 }
 
 function createBaseSendButtonEventMessage(): SendButtonEventMessage {
-  return { usagePage: 0, usage: 0, buttonDown: false, _unknownFields: {} };
+  return {
+    usagePage: undefined,
+    usage: undefined,
+    buttonDown: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const SendButtonEventMessage: MessageFns<SendButtonEventMessage> = {
@@ -25,13 +30,13 @@ export const SendButtonEventMessage: MessageFns<SendButtonEventMessage> = {
     message: SendButtonEventMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.usagePage !== undefined && message.usagePage !== 0) {
+    if (message.usagePage !== undefined) {
       writer.uint32(8).uint32(message.usagePage);
     }
-    if (message.usage !== undefined && message.usage !== 0) {
+    if (message.usage !== undefined) {
       writer.uint32(16).uint32(message.usage);
     }
-    if (message.buttonDown !== undefined && message.buttonDown !== false) {
+    if (message.buttonDown !== undefined) {
       writer.uint32(24).bool(message.buttonDown);
     }
     if (message._unknownFields !== undefined) {
@@ -103,23 +108,23 @@ export const SendButtonEventMessage: MessageFns<SendButtonEventMessage> = {
     return {
       usagePage: isSet(object.usagePage)
         ? globalThis.Number(object.usagePage)
-        : 0,
-      usage: isSet(object.usage) ? globalThis.Number(object.usage) : 0,
+        : undefined,
+      usage: isSet(object.usage) ? globalThis.Number(object.usage) : undefined,
       buttonDown: isSet(object.buttonDown)
         ? globalThis.Boolean(object.buttonDown)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: SendButtonEventMessage): unknown {
     const obj: any = {};
-    if (message.usagePage !== undefined && message.usagePage !== 0) {
+    if (message.usagePage !== undefined) {
       obj.usagePage = Math.round(message.usagePage);
     }
-    if (message.usage !== undefined && message.usage !== 0) {
+    if (message.usage !== undefined) {
       obj.usage = Math.round(message.usage);
     }
-    if (message.buttonDown !== undefined && message.buttonDown !== false) {
+    if (message.buttonDown !== undefined) {
       obj.buttonDown = message.buttonDown;
     }
     return obj;
@@ -134,9 +139,9 @@ export const SendButtonEventMessage: MessageFns<SendButtonEventMessage> = {
     object: I
   ): SendButtonEventMessage {
     const message = createBaseSendButtonEventMessage();
-    message.usagePage = object.usagePage ?? 0;
-    message.usage = object.usage ?? 0;
-    message.buttonDown = object.buttonDown ?? false;
+    message.usagePage = object.usagePage ?? undefined;
+    message.usage = object.usage ?? undefined;
+    message.buttonDown = object.buttonDown ?? undefined;
     return message;
   },
 };

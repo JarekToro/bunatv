@@ -18,9 +18,9 @@ export interface PlaybackQueueCapabilities {
 
 function createBasePlaybackQueueCapabilities(): PlaybackQueueCapabilities {
   return {
-    requestByRange: false,
-    requestByIdentifiers: false,
-    requestByRequest: false,
+    requestByRange: undefined,
+    requestByIdentifiers: undefined,
+    requestByRequest: undefined,
     _unknownFields: {},
   };
 }
@@ -31,22 +31,13 @@ export const PlaybackQueueCapabilities: MessageFns<PlaybackQueueCapabilities> =
       message: PlaybackQueueCapabilities,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.requestByRange !== undefined &&
-        message.requestByRange !== false
-      ) {
+      if (message.requestByRange !== undefined) {
         writer.uint32(8).bool(message.requestByRange);
       }
-      if (
-        message.requestByIdentifiers !== undefined &&
-        message.requestByIdentifiers !== false
-      ) {
+      if (message.requestByIdentifiers !== undefined) {
         writer.uint32(16).bool(message.requestByIdentifiers);
       }
-      if (
-        message.requestByRequest !== undefined &&
-        message.requestByRequest !== false
-      ) {
+      if (message.requestByRequest !== undefined) {
         writer.uint32(24).bool(message.requestByRequest);
       }
       if (message._unknownFields !== undefined) {
@@ -118,34 +109,25 @@ export const PlaybackQueueCapabilities: MessageFns<PlaybackQueueCapabilities> =
       return {
         requestByRange: isSet(object.requestByRange)
           ? globalThis.Boolean(object.requestByRange)
-          : false,
+          : undefined,
         requestByIdentifiers: isSet(object.requestByIdentifiers)
           ? globalThis.Boolean(object.requestByIdentifiers)
-          : false,
+          : undefined,
         requestByRequest: isSet(object.requestByRequest)
           ? globalThis.Boolean(object.requestByRequest)
-          : false,
+          : undefined,
       };
     },
 
     toJSON(message: PlaybackQueueCapabilities): unknown {
       const obj: any = {};
-      if (
-        message.requestByRange !== undefined &&
-        message.requestByRange !== false
-      ) {
+      if (message.requestByRange !== undefined) {
         obj.requestByRange = message.requestByRange;
       }
-      if (
-        message.requestByIdentifiers !== undefined &&
-        message.requestByIdentifiers !== false
-      ) {
+      if (message.requestByIdentifiers !== undefined) {
         obj.requestByIdentifiers = message.requestByIdentifiers;
       }
-      if (
-        message.requestByRequest !== undefined &&
-        message.requestByRequest !== false
-      ) {
+      if (message.requestByRequest !== undefined) {
         obj.requestByRequest = message.requestByRequest;
       }
       return obj;
@@ -160,9 +142,9 @@ export const PlaybackQueueCapabilities: MessageFns<PlaybackQueueCapabilities> =
       object: I
     ): PlaybackQueueCapabilities {
       const message = createBasePlaybackQueueCapabilities();
-      message.requestByRange = object.requestByRange ?? false;
-      message.requestByIdentifiers = object.requestByIdentifiers ?? false;
-      message.requestByRequest = object.requestByRequest ?? false;
+      message.requestByRange = object.requestByRange ?? undefined;
+      message.requestByIdentifiers = object.requestByIdentifiers ?? undefined;
+      message.requestByRequest = object.requestByRequest ?? undefined;
       return message;
     },
   };

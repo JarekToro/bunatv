@@ -16,7 +16,7 @@ export interface GetVoiceInputDevicesResponseMessage {
 }
 
 function createBaseGetVoiceInputDevicesResponseMessage(): GetVoiceInputDevicesResponseMessage {
-  return { deviceIDs: [], errorCode: 0, _unknownFields: {} };
+  return { deviceIDs: [], errorCode: undefined, _unknownFields: {} };
 }
 
 export const GetVoiceInputDevicesResponseMessage: MessageFns<GetVoiceInputDevicesResponseMessage> =
@@ -28,7 +28,7 @@ export const GetVoiceInputDevicesResponseMessage: MessageFns<GetVoiceInputDevice
       for (const v of message.deviceIDs) {
         writer.uint32(8).uint32(v!);
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         writer.uint32(16).uint32(message.errorCode);
       }
       if (message._unknownFields !== undefined) {
@@ -105,7 +105,7 @@ export const GetVoiceInputDevicesResponseMessage: MessageFns<GetVoiceInputDevice
           : [],
         errorCode: isSet(object.errorCode)
           ? globalThis.Number(object.errorCode)
-          : 0,
+          : undefined,
       };
     },
 
@@ -114,7 +114,7 @@ export const GetVoiceInputDevicesResponseMessage: MessageFns<GetVoiceInputDevice
       if (message.deviceIDs?.length) {
         obj.deviceIDs = message.deviceIDs.map((e) => Math.round(e));
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         obj.errorCode = Math.round(message.errorCode);
       }
       return obj;
@@ -132,7 +132,7 @@ export const GetVoiceInputDevicesResponseMessage: MessageFns<GetVoiceInputDevice
     >(object: I): GetVoiceInputDevicesResponseMessage {
       const message = createBaseGetVoiceInputDevicesResponseMessage();
       message.deviceIDs = object.deviceIDs?.map((e) => e) || [];
-      message.errorCode = object.errorCode ?? 0;
+      message.errorCode = object.errorCode ?? undefined;
       return message;
     },
   };

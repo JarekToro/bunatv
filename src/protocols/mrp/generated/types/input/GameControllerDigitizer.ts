@@ -18,7 +18,13 @@ export interface GameControllerDigitizer {
 }
 
 function createBaseGameControllerDigitizer(): GameControllerDigitizer {
-  return { x: 0, y: 0, touchDown: false, timestamp: 0, _unknownFields: {} };
+  return {
+    x: undefined,
+    y: undefined,
+    touchDown: undefined,
+    timestamp: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const GameControllerDigitizer: MessageFns<GameControllerDigitizer> = {
@@ -26,16 +32,16 @@ export const GameControllerDigitizer: MessageFns<GameControllerDigitizer> = {
     message: GameControllerDigitizer,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.x !== undefined && message.x !== 0) {
+    if (message.x !== undefined) {
       writer.uint32(9).double(message.x);
     }
-    if (message.y !== undefined && message.y !== 0) {
+    if (message.y !== undefined) {
       writer.uint32(17).double(message.y);
     }
-    if (message.touchDown !== undefined && message.touchDown !== false) {
+    if (message.touchDown !== undefined) {
       writer.uint32(24).bool(message.touchDown);
     }
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       writer.uint32(32).uint64(message.timestamp);
     }
     if (message._unknownFields !== undefined) {
@@ -113,29 +119,29 @@ export const GameControllerDigitizer: MessageFns<GameControllerDigitizer> = {
 
   fromJSON(object: any): GameControllerDigitizer {
     return {
-      x: isSet(object.x) ? globalThis.Number(object.x) : 0,
-      y: isSet(object.y) ? globalThis.Number(object.y) : 0,
+      x: isSet(object.x) ? globalThis.Number(object.x) : undefined,
+      y: isSet(object.y) ? globalThis.Number(object.y) : undefined,
       touchDown: isSet(object.touchDown)
         ? globalThis.Boolean(object.touchDown)
-        : false,
+        : undefined,
       timestamp: isSet(object.timestamp)
         ? globalThis.Number(object.timestamp)
-        : 0,
+        : undefined,
     };
   },
 
   toJSON(message: GameControllerDigitizer): unknown {
     const obj: any = {};
-    if (message.x !== undefined && message.x !== 0) {
+    if (message.x !== undefined) {
       obj.x = message.x;
     }
-    if (message.y !== undefined && message.y !== 0) {
+    if (message.y !== undefined) {
       obj.y = message.y;
     }
-    if (message.touchDown !== undefined && message.touchDown !== false) {
+    if (message.touchDown !== undefined) {
       obj.touchDown = message.touchDown;
     }
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       obj.timestamp = Math.round(message.timestamp);
     }
     return obj;
@@ -150,10 +156,10 @@ export const GameControllerDigitizer: MessageFns<GameControllerDigitizer> = {
     object: I
   ): GameControllerDigitizer {
     const message = createBaseGameControllerDigitizer();
-    message.x = object.x ?? 0;
-    message.y = object.y ?? 0;
-    message.touchDown = object.touchDown ?? false;
-    message.timestamp = object.timestamp ?? 0;
+    message.x = object.x ?? undefined;
+    message.y = object.y ?? undefined;
+    message.touchDown = object.touchDown ?? undefined;
+    message.timestamp = object.timestamp ?? undefined;
     return message;
   },
 };

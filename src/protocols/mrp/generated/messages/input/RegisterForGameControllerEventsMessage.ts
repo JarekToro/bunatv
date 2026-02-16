@@ -66,7 +66,7 @@ export function registerForGameControllerEventsMessage_InputModeFlagsToJSON(
 }
 
 function createBaseRegisterForGameControllerEventsMessage(): RegisterForGameControllerEventsMessage {
-  return { inputModeFlags: 0, _unknownFields: {} };
+  return { inputModeFlags: undefined, _unknownFields: {} };
 }
 
 export const RegisterForGameControllerEventsMessage: MessageFns<RegisterForGameControllerEventsMessage> =
@@ -75,10 +75,7 @@ export const RegisterForGameControllerEventsMessage: MessageFns<RegisterForGameC
       message: RegisterForGameControllerEventsMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.inputModeFlags !== undefined &&
-        message.inputModeFlags !== 0
-      ) {
+      if (message.inputModeFlags !== undefined) {
         writer.uint32(8).int32(message.inputModeFlags);
       }
       if (message._unknownFields !== undefined) {
@@ -136,16 +133,13 @@ export const RegisterForGameControllerEventsMessage: MessageFns<RegisterForGameC
           ? registerForGameControllerEventsMessage_InputModeFlagsFromJSON(
               object.inputModeFlags
             )
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: RegisterForGameControllerEventsMessage): unknown {
       const obj: any = {};
-      if (
-        message.inputModeFlags !== undefined &&
-        message.inputModeFlags !== 0
-      ) {
+      if (message.inputModeFlags !== undefined) {
         obj.inputModeFlags =
           registerForGameControllerEventsMessage_InputModeFlagsToJSON(
             message.inputModeFlags
@@ -165,7 +159,7 @@ export const RegisterForGameControllerEventsMessage: MessageFns<RegisterForGameC
       I extends Exact<DeepPartial<RegisterForGameControllerEventsMessage>, I>,
     >(object: I): RegisterForGameControllerEventsMessage {
       const message = createBaseRegisterForGameControllerEventsMessage();
-      message.inputModeFlags = object.inputModeFlags ?? 0;
+      message.inputModeFlags = object.inputModeFlags ?? undefined;
       return message;
     },
   };

@@ -20,7 +20,7 @@ export interface UpdateOutputDeviceMessage {
 function createBaseUpdateOutputDeviceMessage(): UpdateOutputDeviceMessage {
   return {
     outputDevices: [],
-    endpointUID: "",
+    endpointUID: undefined,
     clusterAwareOutputDevices: [],
     _unknownFields: {},
   };
@@ -35,7 +35,7 @@ export const UpdateOutputDeviceMessage: MessageFns<UpdateOutputDeviceMessage> =
       for (const v of message.outputDevices) {
         AVOutputDeviceDescriptor.encode(v!, writer.uint32(10).fork()).join();
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+      if (message.endpointUID !== undefined) {
         writer.uint32(18).string(message.endpointUID);
       }
       for (const v of message.clusterAwareOutputDevices) {
@@ -119,7 +119,7 @@ export const UpdateOutputDeviceMessage: MessageFns<UpdateOutputDeviceMessage> =
           : [],
         endpointUID: isSet(object.endpointUID)
           ? globalThis.String(object.endpointUID)
-          : "",
+          : undefined,
         clusterAwareOutputDevices: globalThis.Array.isArray(
           object?.clusterAwareOutputDevices
         )
@@ -137,7 +137,7 @@ export const UpdateOutputDeviceMessage: MessageFns<UpdateOutputDeviceMessage> =
           AVOutputDeviceDescriptor.toJSON(e)
         );
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+      if (message.endpointUID !== undefined) {
         obj.endpointUID = message.endpointUID;
       }
       if (message.clusterAwareOutputDevices?.length) {
@@ -161,7 +161,7 @@ export const UpdateOutputDeviceMessage: MessageFns<UpdateOutputDeviceMessage> =
         object.outputDevices?.map((e) =>
           AVOutputDeviceDescriptor.fromPartial(e)
         ) || [];
-      message.endpointUID = object.endpointUID ?? "";
+      message.endpointUID = object.endpointUID ?? undefined;
       message.clusterAwareOutputDevices =
         object.clusterAwareOutputDevices?.map((e) =>
           AVOutputDeviceDescriptor.fromPartial(e)

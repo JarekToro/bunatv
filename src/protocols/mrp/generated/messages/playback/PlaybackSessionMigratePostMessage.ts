@@ -26,7 +26,7 @@ function createBasePlaybackSessionMigratePostMessage(): PlaybackSessionMigratePo
   return {
     request: undefined,
     playerPath: undefined,
-    setPlaybackSessionCommandId: "",
+    setPlaybackSessionCommandId: undefined,
     metrics: undefined,
     error: undefined,
     _unknownFields: {},
@@ -48,10 +48,7 @@ export const PlaybackSessionMigratePostMessage: MessageFns<PlaybackSessionMigrat
       if (message.playerPath !== undefined) {
         PlayerPath.encode(message.playerPath, writer.uint32(18).fork()).join();
       }
-      if (
-        message.setPlaybackSessionCommandId !== undefined &&
-        message.setPlaybackSessionCommandId !== ""
-      ) {
+      if (message.setPlaybackSessionCommandId !== undefined) {
         writer.uint32(26).string(message.setPlaybackSessionCommandId);
       }
       if (message.metrics !== undefined) {
@@ -154,7 +151,7 @@ export const PlaybackSessionMigratePostMessage: MessageFns<PlaybackSessionMigrat
           : undefined,
         setPlaybackSessionCommandId: isSet(object.setPlaybackSessionCommandId)
           ? globalThis.String(object.setPlaybackSessionCommandId)
-          : "",
+          : undefined,
         metrics: isSet(object.metrics)
           ? Dictionary.fromJSON(object.metrics)
           : undefined,
@@ -170,10 +167,7 @@ export const PlaybackSessionMigratePostMessage: MessageFns<PlaybackSessionMigrat
       if (message.playerPath !== undefined) {
         obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-      if (
-        message.setPlaybackSessionCommandId !== undefined &&
-        message.setPlaybackSessionCommandId !== ""
-      ) {
+      if (message.setPlaybackSessionCommandId !== undefined) {
         obj.setPlaybackSessionCommandId = message.setPlaybackSessionCommandId;
       }
       if (message.metrics !== undefined) {
@@ -203,7 +197,7 @@ export const PlaybackSessionMigratePostMessage: MessageFns<PlaybackSessionMigrat
           ? PlayerPath.fromPartial(object.playerPath)
           : undefined;
       message.setPlaybackSessionCommandId =
-        object.setPlaybackSessionCommandId ?? "";
+        object.setPlaybackSessionCommandId ?? undefined;
       message.metrics =
         object.metrics !== undefined && object.metrics !== null
           ? Dictionary.fromPartial(object.metrics)

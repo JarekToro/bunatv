@@ -26,16 +26,16 @@ export interface NowPlayingClient {
 
 function createBaseNowPlayingClient(): NowPlayingClient {
   return {
-    processIdentifier: 0,
-    bundleIdentifier: "",
-    parentApplicationBundleIdentifier: "",
-    processUserIdentifier: 0,
-    nowPlayingVisibility: 0,
+    processIdentifier: undefined,
+    bundleIdentifier: undefined,
+    parentApplicationBundleIdentifier: undefined,
+    processUserIdentifier: undefined,
+    nowPlayingVisibility: undefined,
     tintColor: undefined,
-    displayName: "",
+    displayName: undefined,
     extendedBundleIdentifierHierarchys: [],
-    isEmptyDeprecated: false,
-    iconUrl: "",
+    isEmptyDeprecated: undefined,
+    iconUrl: undefined,
     _unknownFields: {},
   };
 }
@@ -45,52 +45,34 @@ export const NowPlayingClient: MessageFns<NowPlayingClient> = {
     message: NowPlayingClient,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.processIdentifier !== undefined &&
-      message.processIdentifier !== 0
-    ) {
+    if (message.processIdentifier !== undefined) {
       writer.uint32(8).int32(message.processIdentifier);
     }
-    if (
-      message.bundleIdentifier !== undefined &&
-      message.bundleIdentifier !== ""
-    ) {
+    if (message.bundleIdentifier !== undefined) {
       writer.uint32(18).string(message.bundleIdentifier);
     }
-    if (
-      message.parentApplicationBundleIdentifier !== undefined &&
-      message.parentApplicationBundleIdentifier !== ""
-    ) {
+    if (message.parentApplicationBundleIdentifier !== undefined) {
       writer.uint32(26).string(message.parentApplicationBundleIdentifier);
     }
-    if (
-      message.processUserIdentifier !== undefined &&
-      message.processUserIdentifier !== 0
-    ) {
+    if (message.processUserIdentifier !== undefined) {
       writer.uint32(32).int32(message.processUserIdentifier);
     }
-    if (
-      message.nowPlayingVisibility !== undefined &&
-      message.nowPlayingVisibility !== 0
-    ) {
+    if (message.nowPlayingVisibility !== undefined) {
       writer.uint32(40).int32(message.nowPlayingVisibility);
     }
     if (message.tintColor !== undefined) {
       Color.encode(message.tintColor, writer.uint32(50).fork()).join();
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(58).string(message.displayName);
     }
     for (const v of message.extendedBundleIdentifierHierarchys) {
       writer.uint32(66).string(v!);
     }
-    if (
-      message.isEmptyDeprecated !== undefined &&
-      message.isEmptyDeprecated !== false
-    ) {
+    if (message.isEmptyDeprecated !== undefined) {
       writer.uint32(72).bool(message.isEmptyDeprecated);
     }
-    if (message.iconUrl !== undefined && message.iconUrl !== "") {
+    if (message.iconUrl !== undefined) {
       writer.uint32(82).string(message.iconUrl);
     }
     if (message._unknownFields !== undefined) {
@@ -215,27 +197,27 @@ export const NowPlayingClient: MessageFns<NowPlayingClient> = {
     return {
       processIdentifier: isSet(object.processIdentifier)
         ? globalThis.Number(object.processIdentifier)
-        : 0,
+        : undefined,
       bundleIdentifier: isSet(object.bundleIdentifier)
         ? globalThis.String(object.bundleIdentifier)
-        : "",
+        : undefined,
       parentApplicationBundleIdentifier: isSet(
         object.parentApplicationBundleIdentifier
       )
         ? globalThis.String(object.parentApplicationBundleIdentifier)
-        : "",
+        : undefined,
       processUserIdentifier: isSet(object.processUserIdentifier)
         ? globalThis.Number(object.processUserIdentifier)
-        : 0,
+        : undefined,
       nowPlayingVisibility: isSet(object.nowPlayingVisibility)
         ? globalThis.Number(object.nowPlayingVisibility)
-        : 0,
+        : undefined,
       tintColor: isSet(object.tintColor)
         ? Color.fromJSON(object.tintColor)
         : undefined,
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
+        : undefined,
       extendedBundleIdentifierHierarchys: globalThis.Array.isArray(
         object?.extendedBundleIdentifierHierarchys
       )
@@ -245,61 +227,45 @@ export const NowPlayingClient: MessageFns<NowPlayingClient> = {
         : [],
       isEmptyDeprecated: isSet(object.isEmptyDeprecated)
         ? globalThis.Boolean(object.isEmptyDeprecated)
-        : false,
-      iconUrl: isSet(object.iconUrl) ? globalThis.String(object.iconUrl) : "",
+        : undefined,
+      iconUrl: isSet(object.iconUrl)
+        ? globalThis.String(object.iconUrl)
+        : undefined,
     };
   },
 
   toJSON(message: NowPlayingClient): unknown {
     const obj: any = {};
-    if (
-      message.processIdentifier !== undefined &&
-      message.processIdentifier !== 0
-    ) {
+    if (message.processIdentifier !== undefined) {
       obj.processIdentifier = Math.round(message.processIdentifier);
     }
-    if (
-      message.bundleIdentifier !== undefined &&
-      message.bundleIdentifier !== ""
-    ) {
+    if (message.bundleIdentifier !== undefined) {
       obj.bundleIdentifier = message.bundleIdentifier;
     }
-    if (
-      message.parentApplicationBundleIdentifier !== undefined &&
-      message.parentApplicationBundleIdentifier !== ""
-    ) {
+    if (message.parentApplicationBundleIdentifier !== undefined) {
       obj.parentApplicationBundleIdentifier =
         message.parentApplicationBundleIdentifier;
     }
-    if (
-      message.processUserIdentifier !== undefined &&
-      message.processUserIdentifier !== 0
-    ) {
+    if (message.processUserIdentifier !== undefined) {
       obj.processUserIdentifier = Math.round(message.processUserIdentifier);
     }
-    if (
-      message.nowPlayingVisibility !== undefined &&
-      message.nowPlayingVisibility !== 0
-    ) {
+    if (message.nowPlayingVisibility !== undefined) {
       obj.nowPlayingVisibility = Math.round(message.nowPlayingVisibility);
     }
     if (message.tintColor !== undefined) {
       obj.tintColor = Color.toJSON(message.tintColor);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
     if (message.extendedBundleIdentifierHierarchys?.length) {
       obj.extendedBundleIdentifierHierarchys =
         message.extendedBundleIdentifierHierarchys;
     }
-    if (
-      message.isEmptyDeprecated !== undefined &&
-      message.isEmptyDeprecated !== false
-    ) {
+    if (message.isEmptyDeprecated !== undefined) {
       obj.isEmptyDeprecated = message.isEmptyDeprecated;
     }
-    if (message.iconUrl !== undefined && message.iconUrl !== "") {
+    if (message.iconUrl !== undefined) {
       obj.iconUrl = message.iconUrl;
     }
     return obj;
@@ -314,21 +280,21 @@ export const NowPlayingClient: MessageFns<NowPlayingClient> = {
     object: I
   ): NowPlayingClient {
     const message = createBaseNowPlayingClient();
-    message.processIdentifier = object.processIdentifier ?? 0;
-    message.bundleIdentifier = object.bundleIdentifier ?? "";
+    message.processIdentifier = object.processIdentifier ?? undefined;
+    message.bundleIdentifier = object.bundleIdentifier ?? undefined;
     message.parentApplicationBundleIdentifier =
-      object.parentApplicationBundleIdentifier ?? "";
-    message.processUserIdentifier = object.processUserIdentifier ?? 0;
-    message.nowPlayingVisibility = object.nowPlayingVisibility ?? 0;
+      object.parentApplicationBundleIdentifier ?? undefined;
+    message.processUserIdentifier = object.processUserIdentifier ?? undefined;
+    message.nowPlayingVisibility = object.nowPlayingVisibility ?? undefined;
     message.tintColor =
       object.tintColor !== undefined && object.tintColor !== null
         ? Color.fromPartial(object.tintColor)
         : undefined;
-    message.displayName = object.displayName ?? "";
+    message.displayName = object.displayName ?? undefined;
     message.extendedBundleIdentifierHierarchys =
       object.extendedBundleIdentifierHierarchys?.map((e) => e) || [];
-    message.isEmptyDeprecated = object.isEmptyDeprecated ?? false;
-    message.iconUrl = object.iconUrl ?? "";
+    message.isEmptyDeprecated = object.isEmptyDeprecated ?? undefined;
+    message.iconUrl = object.iconUrl ?? undefined;
     return message;
   },
 };

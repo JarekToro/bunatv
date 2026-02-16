@@ -15,7 +15,7 @@ export interface AudioFormatSettings {
 }
 
 function createBaseAudioFormatSettings(): AudioFormatSettings {
-  return { formatSettingsPlistData: Buffer.alloc(0), _unknownFields: {} };
+  return { formatSettingsPlistData: undefined, _unknownFields: {} };
 }
 
 export const AudioFormatSettings: MessageFns<AudioFormatSettings> = {
@@ -23,10 +23,7 @@ export const AudioFormatSettings: MessageFns<AudioFormatSettings> = {
     message: AudioFormatSettings,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.formatSettingsPlistData !== undefined &&
-      message.formatSettingsPlistData.length !== 0
-    ) {
+    if (message.formatSettingsPlistData !== undefined) {
       writer.uint32(10).bytes(message.formatSettingsPlistData);
     }
     if (message._unknownFields !== undefined) {
@@ -82,16 +79,13 @@ export const AudioFormatSettings: MessageFns<AudioFormatSettings> = {
     return {
       formatSettingsPlistData: isSet(object.formatSettingsPlistData)
         ? Buffer.from(bytesFromBase64(object.formatSettingsPlistData))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: AudioFormatSettings): unknown {
     const obj: any = {};
-    if (
-      message.formatSettingsPlistData !== undefined &&
-      message.formatSettingsPlistData.length !== 0
-    ) {
+    if (message.formatSettingsPlistData !== undefined) {
       obj.formatSettingsPlistData = base64FromBytes(
         message.formatSettingsPlistData
       );
@@ -109,7 +103,7 @@ export const AudioFormatSettings: MessageFns<AudioFormatSettings> = {
   ): AudioFormatSettings {
     const message = createBaseAudioFormatSettings();
     message.formatSettingsPlistData =
-      object.formatSettingsPlistData ?? Buffer.alloc(0);
+      object.formatSettingsPlistData ?? undefined;
     return message;
   },
 };

@@ -31,13 +31,13 @@ export interface PlaybackQueue {
 
 function createBasePlaybackQueue(): PlaybackQueue {
   return {
-    location: 0,
+    location: undefined,
     contentItems: [],
     context: undefined,
-    requestId: "",
+    requestId: undefined,
     resolvedPlayerPath: undefined,
-    sendingPlaybackQueueTransaction: false,
-    queueIdentifier: "",
+    sendingPlaybackQueueTransaction: undefined,
+    queueIdentifier: undefined,
     participants: [],
     homeUserIdentifiers: [],
     properties: undefined,
@@ -51,7 +51,7 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
     message: PlaybackQueue,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.location !== undefined && message.location !== 0) {
+    if (message.location !== undefined) {
       writer.uint32(8).int32(message.location);
     }
     for (const v of message.contentItems) {
@@ -63,7 +63,7 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
         writer.uint32(26).fork()
       ).join();
     }
-    if (message.requestId !== undefined && message.requestId !== "") {
+    if (message.requestId !== undefined) {
       writer.uint32(34).string(message.requestId);
     }
     if (message.resolvedPlayerPath !== undefined) {
@@ -72,16 +72,10 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
         writer.uint32(42).fork()
       ).join();
     }
-    if (
-      message.sendingPlaybackQueueTransaction !== undefined &&
-      message.sendingPlaybackQueueTransaction !== false
-    ) {
+    if (message.sendingPlaybackQueueTransaction !== undefined) {
       writer.uint32(48).bool(message.sendingPlaybackQueueTransaction);
     }
-    if (
-      message.queueIdentifier !== undefined &&
-      message.queueIdentifier !== ""
-    ) {
+    if (message.queueIdentifier !== undefined) {
       writer.uint32(58).string(message.queueIdentifier);
     }
     for (const v of message.participants) {
@@ -240,7 +234,9 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
 
   fromJSON(object: any): PlaybackQueue {
     return {
-      location: isSet(object.location) ? globalThis.Number(object.location) : 0,
+      location: isSet(object.location)
+        ? globalThis.Number(object.location)
+        : undefined,
       contentItems: globalThis.Array.isArray(object?.contentItems)
         ? object.contentItems.map((e: any) => ContentItem.fromJSON(e))
         : [],
@@ -249,7 +245,7 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
         : undefined,
       requestId: isSet(object.requestId)
         ? globalThis.String(object.requestId)
-        : "",
+        : undefined,
       resolvedPlayerPath: isSet(object.resolvedPlayerPath)
         ? PlayerPath.fromJSON(object.resolvedPlayerPath)
         : undefined,
@@ -257,10 +253,10 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
         object.sendingPlaybackQueueTransaction
       )
         ? globalThis.Boolean(object.sendingPlaybackQueueTransaction)
-        : false,
+        : undefined,
       queueIdentifier: isSet(object.queueIdentifier)
         ? globalThis.String(object.queueIdentifier)
-        : "",
+        : undefined,
       participants: globalThis.Array.isArray(object?.participants)
         ? object.participants.map((e: any) =>
             PlaybackQueueParticipant.fromJSON(e)
@@ -280,7 +276,7 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
 
   toJSON(message: PlaybackQueue): unknown {
     const obj: any = {};
-    if (message.location !== undefined && message.location !== 0) {
+    if (message.location !== undefined) {
       obj.location = Math.round(message.location);
     }
     if (message.contentItems?.length) {
@@ -289,23 +285,17 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
     if (message.context !== undefined) {
       obj.context = PlaybackQueueContext.toJSON(message.context);
     }
-    if (message.requestId !== undefined && message.requestId !== "") {
+    if (message.requestId !== undefined) {
       obj.requestId = message.requestId;
     }
     if (message.resolvedPlayerPath !== undefined) {
       obj.resolvedPlayerPath = PlayerPath.toJSON(message.resolvedPlayerPath);
     }
-    if (
-      message.sendingPlaybackQueueTransaction !== undefined &&
-      message.sendingPlaybackQueueTransaction !== false
-    ) {
+    if (message.sendingPlaybackQueueTransaction !== undefined) {
       obj.sendingPlaybackQueueTransaction =
         message.sendingPlaybackQueueTransaction;
     }
-    if (
-      message.queueIdentifier !== undefined &&
-      message.queueIdentifier !== ""
-    ) {
+    if (message.queueIdentifier !== undefined) {
       obj.queueIdentifier = message.queueIdentifier;
     }
     if (message.participants?.length) {
@@ -336,22 +326,22 @@ export const PlaybackQueue: MessageFns<PlaybackQueue> = {
     object: I
   ): PlaybackQueue {
     const message = createBasePlaybackQueue();
-    message.location = object.location ?? 0;
+    message.location = object.location ?? undefined;
     message.contentItems =
       object.contentItems?.map((e) => ContentItem.fromPartial(e)) || [];
     message.context =
       object.context !== undefined && object.context !== null
         ? PlaybackQueueContext.fromPartial(object.context)
         : undefined;
-    message.requestId = object.requestId ?? "";
+    message.requestId = object.requestId ?? undefined;
     message.resolvedPlayerPath =
       object.resolvedPlayerPath !== undefined &&
       object.resolvedPlayerPath !== null
         ? PlayerPath.fromPartial(object.resolvedPlayerPath)
         : undefined;
     message.sendingPlaybackQueueTransaction =
-      object.sendingPlaybackQueueTransaction ?? false;
-    message.queueIdentifier = object.queueIdentifier ?? "";
+      object.sendingPlaybackQueueTransaction ?? undefined;
+    message.queueIdentifier = object.queueIdentifier ?? undefined;
     message.participants =
       object.participants?.map((e) =>
         PlaybackQueueParticipant.fromPartial(e)

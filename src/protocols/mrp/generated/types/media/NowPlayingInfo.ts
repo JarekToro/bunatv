@@ -42,25 +42,25 @@ export interface NowPlayingInfo {
 
 function createBaseNowPlayingInfo(): NowPlayingInfo {
   return {
-    album: "",
-    artist: "",
-    duration: 0,
-    elapsedTime: 0,
-    playbackRate: 0,
-    repeatMode: 0,
-    shuffleMode: 0,
-    timestamp: 0,
-    title: "",
-    uniqueIdentifier: 0,
-    isExplicitTrack: false,
-    isMusicApp: false,
-    radioStationIdentifier: 0,
-    radioStationHash: "",
-    radioStationName: "",
-    artworkDataDigest: Buffer.alloc(0),
-    isAlwaysLive: false,
-    isAdvertisement: false,
-    isInTransition: false,
+    album: undefined,
+    artist: undefined,
+    duration: undefined,
+    elapsedTime: undefined,
+    playbackRate: undefined,
+    repeatMode: undefined,
+    shuffleMode: undefined,
+    timestamp: undefined,
+    title: undefined,
+    uniqueIdentifier: undefined,
+    isExplicitTrack: undefined,
+    isMusicApp: undefined,
+    radioStationIdentifier: undefined,
+    radioStationHash: undefined,
+    radioStationName: undefined,
+    artworkDataDigest: undefined,
+    isAlwaysLive: undefined,
+    isAdvertisement: undefined,
+    isInTransition: undefined,
     _unknownFields: {},
   };
 }
@@ -70,85 +70,61 @@ export const NowPlayingInfo: MessageFns<NowPlayingInfo> = {
     message: NowPlayingInfo,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.album !== undefined && message.album !== "") {
+    if (message.album !== undefined) {
       writer.uint32(10).string(message.album);
     }
-    if (message.artist !== undefined && message.artist !== "") {
+    if (message.artist !== undefined) {
       writer.uint32(18).string(message.artist);
     }
-    if (message.duration !== undefined && message.duration !== 0) {
+    if (message.duration !== undefined) {
       writer.uint32(25).double(message.duration);
     }
-    if (message.elapsedTime !== undefined && message.elapsedTime !== 0) {
+    if (message.elapsedTime !== undefined) {
       writer.uint32(33).double(message.elapsedTime);
     }
-    if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+    if (message.playbackRate !== undefined) {
       writer.uint32(45).float(message.playbackRate);
     }
-    if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+    if (message.repeatMode !== undefined) {
       writer.uint32(48).int32(message.repeatMode);
     }
-    if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+    if (message.shuffleMode !== undefined) {
       writer.uint32(56).int32(message.shuffleMode);
     }
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       writer.uint32(65).double(message.timestamp);
     }
-    if (message.title !== undefined && message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(74).string(message.title);
     }
-    if (
-      message.uniqueIdentifier !== undefined &&
-      message.uniqueIdentifier !== 0
-    ) {
+    if (message.uniqueIdentifier !== undefined) {
       writer.uint32(80).uint64(message.uniqueIdentifier);
     }
-    if (
-      message.isExplicitTrack !== undefined &&
-      message.isExplicitTrack !== false
-    ) {
+    if (message.isExplicitTrack !== undefined) {
       writer.uint32(88).bool(message.isExplicitTrack);
     }
-    if (message.isMusicApp !== undefined && message.isMusicApp !== false) {
+    if (message.isMusicApp !== undefined) {
       writer.uint32(96).bool(message.isMusicApp);
     }
-    if (
-      message.radioStationIdentifier !== undefined &&
-      message.radioStationIdentifier !== 0
-    ) {
+    if (message.radioStationIdentifier !== undefined) {
       writer.uint32(104).int64(message.radioStationIdentifier);
     }
-    if (
-      message.radioStationHash !== undefined &&
-      message.radioStationHash !== ""
-    ) {
+    if (message.radioStationHash !== undefined) {
       writer.uint32(114).string(message.radioStationHash);
     }
-    if (
-      message.radioStationName !== undefined &&
-      message.radioStationName !== ""
-    ) {
+    if (message.radioStationName !== undefined) {
       writer.uint32(122).string(message.radioStationName);
     }
-    if (
-      message.artworkDataDigest !== undefined &&
-      message.artworkDataDigest.length !== 0
-    ) {
+    if (message.artworkDataDigest !== undefined) {
       writer.uint32(130).bytes(message.artworkDataDigest);
     }
-    if (message.isAlwaysLive !== undefined && message.isAlwaysLive !== false) {
+    if (message.isAlwaysLive !== undefined) {
       writer.uint32(136).bool(message.isAlwaysLive);
     }
-    if (
-      message.isAdvertisement !== undefined &&
-      message.isAdvertisement !== false
-    ) {
+    if (message.isAdvertisement !== undefined) {
       writer.uint32(144).bool(message.isAdvertisement);
     }
-    if (
-      message.isInTransition !== undefined &&
-      message.isInTransition !== false
-    ) {
+    if (message.isInTransition !== undefined) {
       writer.uint32(152).bool(message.isInTransition);
     }
     if (message._unknownFields !== undefined) {
@@ -343,139 +319,119 @@ export const NowPlayingInfo: MessageFns<NowPlayingInfo> = {
 
   fromJSON(object: any): NowPlayingInfo {
     return {
-      album: isSet(object.album) ? globalThis.String(object.album) : "",
-      artist: isSet(object.artist) ? globalThis.String(object.artist) : "",
-      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
+      album: isSet(object.album) ? globalThis.String(object.album) : undefined,
+      artist: isSet(object.artist)
+        ? globalThis.String(object.artist)
+        : undefined,
+      duration: isSet(object.duration)
+        ? globalThis.Number(object.duration)
+        : undefined,
       elapsedTime: isSet(object.elapsedTime)
         ? globalThis.Number(object.elapsedTime)
-        : 0,
+        : undefined,
       playbackRate: isSet(object.playbackRate)
         ? globalThis.Number(object.playbackRate)
-        : 0,
+        : undefined,
       repeatMode: isSet(object.repeatMode)
         ? repeatMode_EnumFromJSON(object.repeatMode)
-        : 0,
+        : undefined,
       shuffleMode: isSet(object.shuffleMode)
         ? shuffleMode_EnumFromJSON(object.shuffleMode)
-        : 0,
+        : undefined,
       timestamp: isSet(object.timestamp)
         ? globalThis.Number(object.timestamp)
-        : 0,
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
+        : undefined,
+      title: isSet(object.title) ? globalThis.String(object.title) : undefined,
       uniqueIdentifier: isSet(object.uniqueIdentifier)
         ? globalThis.Number(object.uniqueIdentifier)
-        : 0,
+        : undefined,
       isExplicitTrack: isSet(object.isExplicitTrack)
         ? globalThis.Boolean(object.isExplicitTrack)
-        : false,
+        : undefined,
       isMusicApp: isSet(object.isMusicApp)
         ? globalThis.Boolean(object.isMusicApp)
-        : false,
+        : undefined,
       radioStationIdentifier: isSet(object.radioStationIdentifier)
         ? globalThis.Number(object.radioStationIdentifier)
-        : 0,
+        : undefined,
       radioStationHash: isSet(object.radioStationHash)
         ? globalThis.String(object.radioStationHash)
-        : "",
+        : undefined,
       radioStationName: isSet(object.radioStationName)
         ? globalThis.String(object.radioStationName)
-        : "",
+        : undefined,
       artworkDataDigest: isSet(object.artworkDataDigest)
         ? Buffer.from(bytesFromBase64(object.artworkDataDigest))
-        : Buffer.alloc(0),
+        : undefined,
       isAlwaysLive: isSet(object.isAlwaysLive)
         ? globalThis.Boolean(object.isAlwaysLive)
-        : false,
+        : undefined,
       isAdvertisement: isSet(object.isAdvertisement)
         ? globalThis.Boolean(object.isAdvertisement)
-        : false,
+        : undefined,
       isInTransition: isSet(object.isInTransition)
         ? globalThis.Boolean(object.isInTransition)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: NowPlayingInfo): unknown {
     const obj: any = {};
-    if (message.album !== undefined && message.album !== "") {
+    if (message.album !== undefined) {
       obj.album = message.album;
     }
-    if (message.artist !== undefined && message.artist !== "") {
+    if (message.artist !== undefined) {
       obj.artist = message.artist;
     }
-    if (message.duration !== undefined && message.duration !== 0) {
+    if (message.duration !== undefined) {
       obj.duration = message.duration;
     }
-    if (message.elapsedTime !== undefined && message.elapsedTime !== 0) {
+    if (message.elapsedTime !== undefined) {
       obj.elapsedTime = message.elapsedTime;
     }
-    if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+    if (message.playbackRate !== undefined) {
       obj.playbackRate = message.playbackRate;
     }
-    if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+    if (message.repeatMode !== undefined) {
       obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode);
     }
-    if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+    if (message.shuffleMode !== undefined) {
       obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode);
     }
-    if (message.timestamp !== undefined && message.timestamp !== 0) {
+    if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp;
     }
-    if (message.title !== undefined && message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (
-      message.uniqueIdentifier !== undefined &&
-      message.uniqueIdentifier !== 0
-    ) {
+    if (message.uniqueIdentifier !== undefined) {
       obj.uniqueIdentifier = Math.round(message.uniqueIdentifier);
     }
-    if (
-      message.isExplicitTrack !== undefined &&
-      message.isExplicitTrack !== false
-    ) {
+    if (message.isExplicitTrack !== undefined) {
       obj.isExplicitTrack = message.isExplicitTrack;
     }
-    if (message.isMusicApp !== undefined && message.isMusicApp !== false) {
+    if (message.isMusicApp !== undefined) {
       obj.isMusicApp = message.isMusicApp;
     }
-    if (
-      message.radioStationIdentifier !== undefined &&
-      message.radioStationIdentifier !== 0
-    ) {
+    if (message.radioStationIdentifier !== undefined) {
       obj.radioStationIdentifier = Math.round(message.radioStationIdentifier);
     }
-    if (
-      message.radioStationHash !== undefined &&
-      message.radioStationHash !== ""
-    ) {
+    if (message.radioStationHash !== undefined) {
       obj.radioStationHash = message.radioStationHash;
     }
-    if (
-      message.radioStationName !== undefined &&
-      message.radioStationName !== ""
-    ) {
+    if (message.radioStationName !== undefined) {
       obj.radioStationName = message.radioStationName;
     }
-    if (
-      message.artworkDataDigest !== undefined &&
-      message.artworkDataDigest.length !== 0
-    ) {
+    if (message.artworkDataDigest !== undefined) {
       obj.artworkDataDigest = base64FromBytes(message.artworkDataDigest);
     }
-    if (message.isAlwaysLive !== undefined && message.isAlwaysLive !== false) {
+    if (message.isAlwaysLive !== undefined) {
       obj.isAlwaysLive = message.isAlwaysLive;
     }
-    if (
-      message.isAdvertisement !== undefined &&
-      message.isAdvertisement !== false
-    ) {
+    if (message.isAdvertisement !== undefined) {
       obj.isAdvertisement = message.isAdvertisement;
     }
-    if (
-      message.isInTransition !== undefined &&
-      message.isInTransition !== false
-    ) {
+    if (message.isInTransition !== undefined) {
       obj.isInTransition = message.isInTransition;
     }
     return obj;
@@ -490,25 +446,25 @@ export const NowPlayingInfo: MessageFns<NowPlayingInfo> = {
     object: I
   ): NowPlayingInfo {
     const message = createBaseNowPlayingInfo();
-    message.album = object.album ?? "";
-    message.artist = object.artist ?? "";
-    message.duration = object.duration ?? 0;
-    message.elapsedTime = object.elapsedTime ?? 0;
-    message.playbackRate = object.playbackRate ?? 0;
-    message.repeatMode = object.repeatMode ?? 0;
-    message.shuffleMode = object.shuffleMode ?? 0;
-    message.timestamp = object.timestamp ?? 0;
-    message.title = object.title ?? "";
-    message.uniqueIdentifier = object.uniqueIdentifier ?? 0;
-    message.isExplicitTrack = object.isExplicitTrack ?? false;
-    message.isMusicApp = object.isMusicApp ?? false;
-    message.radioStationIdentifier = object.radioStationIdentifier ?? 0;
-    message.radioStationHash = object.radioStationHash ?? "";
-    message.radioStationName = object.radioStationName ?? "";
-    message.artworkDataDigest = object.artworkDataDigest ?? Buffer.alloc(0);
-    message.isAlwaysLive = object.isAlwaysLive ?? false;
-    message.isAdvertisement = object.isAdvertisement ?? false;
-    message.isInTransition = object.isInTransition ?? false;
+    message.album = object.album ?? undefined;
+    message.artist = object.artist ?? undefined;
+    message.duration = object.duration ?? undefined;
+    message.elapsedTime = object.elapsedTime ?? undefined;
+    message.playbackRate = object.playbackRate ?? undefined;
+    message.repeatMode = object.repeatMode ?? undefined;
+    message.shuffleMode = object.shuffleMode ?? undefined;
+    message.timestamp = object.timestamp ?? undefined;
+    message.title = object.title ?? undefined;
+    message.uniqueIdentifier = object.uniqueIdentifier ?? undefined;
+    message.isExplicitTrack = object.isExplicitTrack ?? undefined;
+    message.isMusicApp = object.isMusicApp ?? undefined;
+    message.radioStationIdentifier = object.radioStationIdentifier ?? undefined;
+    message.radioStationHash = object.radioStationHash ?? undefined;
+    message.radioStationName = object.radioStationName ?? undefined;
+    message.artworkDataDigest = object.artworkDataDigest ?? undefined;
+    message.isAlwaysLive = object.isAlwaysLive ?? undefined;
+    message.isAdvertisement = object.isAdvertisement ?? undefined;
+    message.isInTransition = object.isInTransition ?? undefined;
     return message;
   },
 };

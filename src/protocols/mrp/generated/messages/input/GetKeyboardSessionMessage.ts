@@ -96,7 +96,7 @@ export const getKeyboardSessionMessage: Extension<string> = {
     if (value === undefined) {
       return encoded;
     }
-    if (value !== undefined && value !== "") {
+    if (value !== undefined) {
       const writer = new BinaryWriter();
       writer.string(value);
       encoded.push(writer.finish());

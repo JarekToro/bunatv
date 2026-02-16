@@ -10,8 +10,8 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "";
 
 export interface GroupSessionToken {
-  invitationData: Buffer;
-  routeType: number;
+  invitationData?: Buffer | undefined;
+  routeType?: number | undefined;
   displayName?: string | undefined;
   sessionIdentifier?: string | undefined;
   sharedSecret?: string | undefined;
@@ -22,13 +22,13 @@ export interface GroupSessionToken {
 
 function createBaseGroupSessionToken(): GroupSessionToken {
   return {
-    invitationData: Buffer.alloc(0),
-    routeType: 0,
-    displayName: "",
-    sessionIdentifier: "",
-    sharedSecret: "",
-    equivalentMediaIdentifier: "",
-    version: 0,
+    invitationData: undefined,
+    routeType: undefined,
+    displayName: undefined,
+    sessionIdentifier: undefined,
+    sharedSecret: undefined,
+    equivalentMediaIdentifier: undefined,
+    version: undefined,
     _unknownFields: {},
   };
 }
@@ -38,31 +38,25 @@ export const GroupSessionToken: MessageFns<GroupSessionToken> = {
     message: GroupSessionToken,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.invitationData.length !== 0) {
+    if (message.invitationData !== undefined) {
       writer.uint32(10).bytes(message.invitationData);
     }
-    if (message.routeType !== 0) {
+    if (message.routeType !== undefined) {
       writer.uint32(16).int32(message.routeType);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(26).string(message.displayName);
     }
-    if (
-      message.sessionIdentifier !== undefined &&
-      message.sessionIdentifier !== ""
-    ) {
+    if (message.sessionIdentifier !== undefined) {
       writer.uint32(34).string(message.sessionIdentifier);
     }
-    if (message.sharedSecret !== undefined && message.sharedSecret !== "") {
+    if (message.sharedSecret !== undefined) {
       writer.uint32(42).string(message.sharedSecret);
     }
-    if (
-      message.equivalentMediaIdentifier !== undefined &&
-      message.equivalentMediaIdentifier !== ""
-    ) {
+    if (message.equivalentMediaIdentifier !== undefined) {
       writer.uint32(50).string(message.equivalentMediaIdentifier);
     }
-    if (message.version !== undefined && message.version !== 0) {
+    if (message.version !== undefined) {
       writer.uint32(56).uint32(message.version);
     }
     if (message._unknownFields !== undefined) {
@@ -163,53 +157,49 @@ export const GroupSessionToken: MessageFns<GroupSessionToken> = {
     return {
       invitationData: isSet(object.invitationData)
         ? Buffer.from(bytesFromBase64(object.invitationData))
-        : Buffer.alloc(0),
+        : undefined,
       routeType: isSet(object.routeType)
         ? globalThis.Number(object.routeType)
-        : 0,
+        : undefined,
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
+        : undefined,
       sessionIdentifier: isSet(object.sessionIdentifier)
         ? globalThis.String(object.sessionIdentifier)
-        : "",
+        : undefined,
       sharedSecret: isSet(object.sharedSecret)
         ? globalThis.String(object.sharedSecret)
-        : "",
+        : undefined,
       equivalentMediaIdentifier: isSet(object.equivalentMediaIdentifier)
         ? globalThis.String(object.equivalentMediaIdentifier)
-        : "",
-      version: isSet(object.version) ? globalThis.Number(object.version) : 0,
+        : undefined,
+      version: isSet(object.version)
+        ? globalThis.Number(object.version)
+        : undefined,
     };
   },
 
   toJSON(message: GroupSessionToken): unknown {
     const obj: any = {};
-    if (message.invitationData.length !== 0) {
+    if (message.invitationData !== undefined) {
       obj.invitationData = base64FromBytes(message.invitationData);
     }
-    if (message.routeType !== 0) {
+    if (message.routeType !== undefined) {
       obj.routeType = Math.round(message.routeType);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
-    if (
-      message.sessionIdentifier !== undefined &&
-      message.sessionIdentifier !== ""
-    ) {
+    if (message.sessionIdentifier !== undefined) {
       obj.sessionIdentifier = message.sessionIdentifier;
     }
-    if (message.sharedSecret !== undefined && message.sharedSecret !== "") {
+    if (message.sharedSecret !== undefined) {
       obj.sharedSecret = message.sharedSecret;
     }
-    if (
-      message.equivalentMediaIdentifier !== undefined &&
-      message.equivalentMediaIdentifier !== ""
-    ) {
+    if (message.equivalentMediaIdentifier !== undefined) {
       obj.equivalentMediaIdentifier = message.equivalentMediaIdentifier;
     }
-    if (message.version !== undefined && message.version !== 0) {
+    if (message.version !== undefined) {
       obj.version = Math.round(message.version);
     }
     return obj;
@@ -224,13 +214,14 @@ export const GroupSessionToken: MessageFns<GroupSessionToken> = {
     object: I
   ): GroupSessionToken {
     const message = createBaseGroupSessionToken();
-    message.invitationData = object.invitationData ?? Buffer.alloc(0);
-    message.routeType = object.routeType ?? 0;
-    message.displayName = object.displayName ?? "";
-    message.sessionIdentifier = object.sessionIdentifier ?? "";
-    message.sharedSecret = object.sharedSecret ?? "";
-    message.equivalentMediaIdentifier = object.equivalentMediaIdentifier ?? "";
-    message.version = object.version ?? 0;
+    message.invitationData = object.invitationData ?? undefined;
+    message.routeType = object.routeType ?? undefined;
+    message.displayName = object.displayName ?? undefined;
+    message.sessionIdentifier = object.sessionIdentifier ?? undefined;
+    message.sharedSecret = object.sharedSecret ?? undefined;
+    message.equivalentMediaIdentifier =
+      object.equivalentMediaIdentifier ?? undefined;
+    message.version = object.version ?? undefined;
     return message;
   },
 };

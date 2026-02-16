@@ -19,8 +19,8 @@ export interface ApplicationConnectionContext {
 
 function createBaseApplicationConnectionContext(): ApplicationConnectionContext {
   return {
-    identifier: "",
-    serviceName: "",
+    identifier: undefined,
+    serviceName: undefined,
     destinationPlayerPath: undefined,
     _unknownFields: {},
   };
@@ -32,10 +32,10 @@ export const ApplicationConnectionContext: MessageFns<ApplicationConnectionConte
       message: ApplicationConnectionContext,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.identifier !== undefined && message.identifier !== "") {
+      if (message.identifier !== undefined) {
         writer.uint32(10).string(message.identifier);
       }
-      if (message.serviceName !== undefined && message.serviceName !== "") {
+      if (message.serviceName !== undefined) {
         writer.uint32(18).string(message.serviceName);
       }
       if (message.destinationPlayerPath !== undefined) {
@@ -116,12 +116,12 @@ export const ApplicationConnectionContext: MessageFns<ApplicationConnectionConte
       return {
         identifier: isSet(object.identifier)
           ? globalThis.String(object.identifier)
-          : "",
+          : undefined,
         serviceName: isSet(object.serviceName)
           ? globalThis.String(object.serviceName)
           : isSet(object.service_name)
             ? globalThis.String(object.service_name)
-            : "",
+            : undefined,
         destinationPlayerPath: isSet(object.destinationPlayerPath)
           ? PlayerPath.fromJSON(object.destinationPlayerPath)
           : isSet(object.destination_player_path)
@@ -132,10 +132,10 @@ export const ApplicationConnectionContext: MessageFns<ApplicationConnectionConte
 
     toJSON(message: ApplicationConnectionContext): unknown {
       const obj: any = {};
-      if (message.identifier !== undefined && message.identifier !== "") {
+      if (message.identifier !== undefined) {
         obj.identifier = message.identifier;
       }
-      if (message.serviceName !== undefined && message.serviceName !== "") {
+      if (message.serviceName !== undefined) {
         obj.serviceName = message.serviceName;
       }
       if (message.destinationPlayerPath !== undefined) {
@@ -155,8 +155,8 @@ export const ApplicationConnectionContext: MessageFns<ApplicationConnectionConte
       object: I
     ): ApplicationConnectionContext {
       const message = createBaseApplicationConnectionContext();
-      message.identifier = object.identifier ?? "";
-      message.serviceName = object.serviceName ?? "";
+      message.identifier = object.identifier ?? undefined;
+      message.serviceName = object.serviceName ?? undefined;
       message.destinationPlayerPath =
         object.destinationPlayerPath !== undefined &&
         object.destinationPlayerPath !== null

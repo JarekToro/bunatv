@@ -30,21 +30,21 @@ export interface GameControllerButtons {
 
 function createBaseGameControllerButtons(): GameControllerButtons {
   return {
-    dPadX: 0,
-    dPadY: 0,
-    a: 0,
-    b: 0,
-    x: 0,
-    y: 0,
-    leftShoulder: 0,
-    rightShoulder: 0,
-    leftThumbstickX: 0,
-    leftThumbstickY: 0,
-    rightThumbstickX: 0,
-    rightThumbstickY: 0,
-    leftTrigger: 0,
-    rightTrigger: 0,
-    pause: 0,
+    dPadX: undefined,
+    dPadY: undefined,
+    a: undefined,
+    b: undefined,
+    x: undefined,
+    y: undefined,
+    leftShoulder: undefined,
+    rightShoulder: undefined,
+    leftThumbstickX: undefined,
+    leftThumbstickY: undefined,
+    rightThumbstickX: undefined,
+    rightThumbstickY: undefined,
+    leftTrigger: undefined,
+    rightTrigger: undefined,
+    pause: undefined,
     _unknownFields: {},
   };
 }
@@ -54,61 +54,49 @@ export const GameControllerButtons: MessageFns<GameControllerButtons> = {
     message: GameControllerButtons,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.dPadX !== undefined && message.dPadX !== 0) {
+    if (message.dPadX !== undefined) {
       writer.uint32(13).float(message.dPadX);
     }
-    if (message.dPadY !== undefined && message.dPadY !== 0) {
+    if (message.dPadY !== undefined) {
       writer.uint32(21).float(message.dPadY);
     }
-    if (message.a !== undefined && message.a !== 0) {
+    if (message.a !== undefined) {
       writer.uint32(29).float(message.a);
     }
-    if (message.b !== undefined && message.b !== 0) {
+    if (message.b !== undefined) {
       writer.uint32(37).float(message.b);
     }
-    if (message.x !== undefined && message.x !== 0) {
+    if (message.x !== undefined) {
       writer.uint32(45).float(message.x);
     }
-    if (message.y !== undefined && message.y !== 0) {
+    if (message.y !== undefined) {
       writer.uint32(53).float(message.y);
     }
-    if (message.leftShoulder !== undefined && message.leftShoulder !== 0) {
+    if (message.leftShoulder !== undefined) {
       writer.uint32(61).float(message.leftShoulder);
     }
-    if (message.rightShoulder !== undefined && message.rightShoulder !== 0) {
+    if (message.rightShoulder !== undefined) {
       writer.uint32(69).float(message.rightShoulder);
     }
-    if (
-      message.leftThumbstickX !== undefined &&
-      message.leftThumbstickX !== 0
-    ) {
+    if (message.leftThumbstickX !== undefined) {
       writer.uint32(77).float(message.leftThumbstickX);
     }
-    if (
-      message.leftThumbstickY !== undefined &&
-      message.leftThumbstickY !== 0
-    ) {
+    if (message.leftThumbstickY !== undefined) {
       writer.uint32(85).float(message.leftThumbstickY);
     }
-    if (
-      message.rightThumbstickX !== undefined &&
-      message.rightThumbstickX !== 0
-    ) {
+    if (message.rightThumbstickX !== undefined) {
       writer.uint32(93).float(message.rightThumbstickX);
     }
-    if (
-      message.rightThumbstickY !== undefined &&
-      message.rightThumbstickY !== 0
-    ) {
+    if (message.rightThumbstickY !== undefined) {
       writer.uint32(101).float(message.rightThumbstickY);
     }
-    if (message.leftTrigger !== undefined && message.leftTrigger !== 0) {
+    if (message.leftTrigger !== undefined) {
       writer.uint32(109).float(message.leftTrigger);
     }
-    if (message.rightTrigger !== undefined && message.rightTrigger !== 0) {
+    if (message.rightTrigger !== undefined) {
       writer.uint32(117).float(message.rightTrigger);
     }
-    if (message.pause !== undefined && message.pause !== 0) {
+    if (message.pause !== undefined) {
       writer.uint32(125).float(message.pause);
     }
     if (message._unknownFields !== undefined) {
@@ -274,97 +262,85 @@ export const GameControllerButtons: MessageFns<GameControllerButtons> = {
 
   fromJSON(object: any): GameControllerButtons {
     return {
-      dPadX: isSet(object.dPadX) ? globalThis.Number(object.dPadX) : 0,
-      dPadY: isSet(object.dPadY) ? globalThis.Number(object.dPadY) : 0,
-      a: isSet(object.a) ? globalThis.Number(object.a) : 0,
-      b: isSet(object.b) ? globalThis.Number(object.b) : 0,
-      x: isSet(object.x) ? globalThis.Number(object.x) : 0,
-      y: isSet(object.y) ? globalThis.Number(object.y) : 0,
+      dPadX: isSet(object.dPadX) ? globalThis.Number(object.dPadX) : undefined,
+      dPadY: isSet(object.dPadY) ? globalThis.Number(object.dPadY) : undefined,
+      a: isSet(object.a) ? globalThis.Number(object.a) : undefined,
+      b: isSet(object.b) ? globalThis.Number(object.b) : undefined,
+      x: isSet(object.x) ? globalThis.Number(object.x) : undefined,
+      y: isSet(object.y) ? globalThis.Number(object.y) : undefined,
       leftShoulder: isSet(object.leftShoulder)
         ? globalThis.Number(object.leftShoulder)
-        : 0,
+        : undefined,
       rightShoulder: isSet(object.rightShoulder)
         ? globalThis.Number(object.rightShoulder)
-        : 0,
+        : undefined,
       leftThumbstickX: isSet(object.leftThumbstickX)
         ? globalThis.Number(object.leftThumbstickX)
-        : 0,
+        : undefined,
       leftThumbstickY: isSet(object.leftThumbstickY)
         ? globalThis.Number(object.leftThumbstickY)
-        : 0,
+        : undefined,
       rightThumbstickX: isSet(object.rightThumbstickX)
         ? globalThis.Number(object.rightThumbstickX)
-        : 0,
+        : undefined,
       rightThumbstickY: isSet(object.rightThumbstickY)
         ? globalThis.Number(object.rightThumbstickY)
-        : 0,
+        : undefined,
       leftTrigger: isSet(object.leftTrigger)
         ? globalThis.Number(object.leftTrigger)
-        : 0,
+        : undefined,
       rightTrigger: isSet(object.rightTrigger)
         ? globalThis.Number(object.rightTrigger)
-        : 0,
-      pause: isSet(object.pause) ? globalThis.Number(object.pause) : 0,
+        : undefined,
+      pause: isSet(object.pause) ? globalThis.Number(object.pause) : undefined,
     };
   },
 
   toJSON(message: GameControllerButtons): unknown {
     const obj: any = {};
-    if (message.dPadX !== undefined && message.dPadX !== 0) {
+    if (message.dPadX !== undefined) {
       obj.dPadX = message.dPadX;
     }
-    if (message.dPadY !== undefined && message.dPadY !== 0) {
+    if (message.dPadY !== undefined) {
       obj.dPadY = message.dPadY;
     }
-    if (message.a !== undefined && message.a !== 0) {
+    if (message.a !== undefined) {
       obj.a = message.a;
     }
-    if (message.b !== undefined && message.b !== 0) {
+    if (message.b !== undefined) {
       obj.b = message.b;
     }
-    if (message.x !== undefined && message.x !== 0) {
+    if (message.x !== undefined) {
       obj.x = message.x;
     }
-    if (message.y !== undefined && message.y !== 0) {
+    if (message.y !== undefined) {
       obj.y = message.y;
     }
-    if (message.leftShoulder !== undefined && message.leftShoulder !== 0) {
+    if (message.leftShoulder !== undefined) {
       obj.leftShoulder = message.leftShoulder;
     }
-    if (message.rightShoulder !== undefined && message.rightShoulder !== 0) {
+    if (message.rightShoulder !== undefined) {
       obj.rightShoulder = message.rightShoulder;
     }
-    if (
-      message.leftThumbstickX !== undefined &&
-      message.leftThumbstickX !== 0
-    ) {
+    if (message.leftThumbstickX !== undefined) {
       obj.leftThumbstickX = message.leftThumbstickX;
     }
-    if (
-      message.leftThumbstickY !== undefined &&
-      message.leftThumbstickY !== 0
-    ) {
+    if (message.leftThumbstickY !== undefined) {
       obj.leftThumbstickY = message.leftThumbstickY;
     }
-    if (
-      message.rightThumbstickX !== undefined &&
-      message.rightThumbstickX !== 0
-    ) {
+    if (message.rightThumbstickX !== undefined) {
       obj.rightThumbstickX = message.rightThumbstickX;
     }
-    if (
-      message.rightThumbstickY !== undefined &&
-      message.rightThumbstickY !== 0
-    ) {
+    if (message.rightThumbstickY !== undefined) {
       obj.rightThumbstickY = message.rightThumbstickY;
     }
-    if (message.leftTrigger !== undefined && message.leftTrigger !== 0) {
+    if (message.leftTrigger !== undefined) {
       obj.leftTrigger = message.leftTrigger;
     }
-    if (message.rightTrigger !== undefined && message.rightTrigger !== 0) {
+    if (message.rightTrigger !== undefined) {
       obj.rightTrigger = message.rightTrigger;
     }
-    if (message.pause !== undefined && message.pause !== 0) {
+    if (message.pause !== undefined) {
       obj.pause = message.pause;
     }
     return obj;
@@ -379,21 +355,21 @@ export const GameControllerButtons: MessageFns<GameControllerButtons> = {
     object: I
   ): GameControllerButtons {
     const message = createBaseGameControllerButtons();
-    message.dPadX = object.dPadX ?? 0;
-    message.dPadY = object.dPadY ?? 0;
-    message.a = object.a ?? 0;
-    message.b = object.b ?? 0;
-    message.x = object.x ?? 0;
-    message.y = object.y ?? 0;
-    message.leftShoulder = object.leftShoulder ?? 0;
-    message.rightShoulder = object.rightShoulder ?? 0;
-    message.leftThumbstickX = object.leftThumbstickX ?? 0;
-    message.leftThumbstickY = object.leftThumbstickY ?? 0;
-    message.rightThumbstickX = object.rightThumbstickX ?? 0;
-    message.rightThumbstickY = object.rightThumbstickY ?? 0;
-    message.leftTrigger = object.leftTrigger ?? 0;
-    message.rightTrigger = object.rightTrigger ?? 0;
-    message.pause = object.pause ?? 0;
+    message.dPadX = object.dPadX ?? undefined;
+    message.dPadY = object.dPadY ?? undefined;
+    message.a = object.a ?? undefined;
+    message.b = object.b ?? undefined;
+    message.x = object.x ?? undefined;
+    message.y = object.y ?? undefined;
+    message.leftShoulder = object.leftShoulder ?? undefined;
+    message.rightShoulder = object.rightShoulder ?? undefined;
+    message.leftThumbstickX = object.leftThumbstickX ?? undefined;
+    message.leftThumbstickY = object.leftThumbstickY ?? undefined;
+    message.rightThumbstickX = object.rightThumbstickX ?? undefined;
+    message.rightThumbstickY = object.rightThumbstickY ?? undefined;
+    message.leftTrigger = object.leftTrigger ?? undefined;
+    message.rightTrigger = object.rightTrigger ?? undefined;
+    message.pause = object.pause ?? undefined;
     return message;
   },
 };

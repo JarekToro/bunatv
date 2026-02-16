@@ -16,7 +16,7 @@ export interface RegisterVoiceInputDeviceResponseMessage {
 }
 
 function createBaseRegisterVoiceInputDeviceResponseMessage(): RegisterVoiceInputDeviceResponseMessage {
-  return { deviceID: 0, errorCode: 0, _unknownFields: {} };
+  return { deviceID: undefined, errorCode: undefined, _unknownFields: {} };
 }
 
 export const RegisterVoiceInputDeviceResponseMessage: MessageFns<RegisterVoiceInputDeviceResponseMessage> =
@@ -25,10 +25,10 @@ export const RegisterVoiceInputDeviceResponseMessage: MessageFns<RegisterVoiceIn
       message: RegisterVoiceInputDeviceResponseMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.deviceID !== undefined && message.deviceID !== 0) {
+      if (message.deviceID !== undefined) {
         writer.uint32(8).int32(message.deviceID);
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         writer.uint32(16).int32(message.errorCode);
       }
       if (message._unknownFields !== undefined) {
@@ -92,19 +92,19 @@ export const RegisterVoiceInputDeviceResponseMessage: MessageFns<RegisterVoiceIn
       return {
         deviceID: isSet(object.deviceID)
           ? globalThis.Number(object.deviceID)
-          : 0,
+          : undefined,
         errorCode: isSet(object.errorCode)
           ? globalThis.Number(object.errorCode)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: RegisterVoiceInputDeviceResponseMessage): unknown {
       const obj: any = {};
-      if (message.deviceID !== undefined && message.deviceID !== 0) {
+      if (message.deviceID !== undefined) {
         obj.deviceID = Math.round(message.deviceID);
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         obj.errorCode = Math.round(message.errorCode);
       }
       return obj;
@@ -121,8 +121,8 @@ export const RegisterVoiceInputDeviceResponseMessage: MessageFns<RegisterVoiceIn
       I extends Exact<DeepPartial<RegisterVoiceInputDeviceResponseMessage>, I>,
     >(object: I): RegisterVoiceInputDeviceResponseMessage {
       const message = createBaseRegisterVoiceInputDeviceResponseMessage();
-      message.deviceID = object.deviceID ?? 0;
-      message.errorCode = object.errorCode ?? 0;
+      message.deviceID = object.deviceID ?? undefined;
+      message.errorCode = object.errorCode ?? undefined;
       return message;
     },
   };

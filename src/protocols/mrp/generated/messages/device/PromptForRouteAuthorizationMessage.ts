@@ -66,7 +66,7 @@ export function promptForRouteAuthorizationMessage_InputTypeToJSON(
 }
 
 function createBasePromptForRouteAuthorizationMessage(): PromptForRouteAuthorizationMessage {
-  return { route: undefined, inputType: 0, _unknownFields: {} };
+  return { route: undefined, inputType: undefined, _unknownFields: {} };
 }
 
 export const PromptForRouteAuthorizationMessage: MessageFns<PromptForRouteAuthorizationMessage> =
@@ -81,7 +81,7 @@ export const PromptForRouteAuthorizationMessage: MessageFns<PromptForRouteAuthor
           writer.uint32(10).fork()
         ).join();
       }
-      if (message.inputType !== undefined && message.inputType !== 0) {
+      if (message.inputType !== undefined) {
         writer.uint32(16).int32(message.inputType);
       }
       if (message._unknownFields !== undefined) {
@@ -153,7 +153,7 @@ export const PromptForRouteAuthorizationMessage: MessageFns<PromptForRouteAuthor
           ? promptForRouteAuthorizationMessage_InputTypeFromJSON(
               object.inputType
             )
-          : 0,
+          : undefined,
       };
     },
 
@@ -162,7 +162,7 @@ export const PromptForRouteAuthorizationMessage: MessageFns<PromptForRouteAuthor
       if (message.route !== undefined) {
         obj.route = AVOutputDeviceDescriptor.toJSON(message.route);
       }
-      if (message.inputType !== undefined && message.inputType !== 0) {
+      if (message.inputType !== undefined) {
         obj.inputType = promptForRouteAuthorizationMessage_InputTypeToJSON(
           message.inputType
         );
@@ -185,7 +185,7 @@ export const PromptForRouteAuthorizationMessage: MessageFns<PromptForRouteAuthor
         object.route !== undefined && object.route !== null
           ? AVOutputDeviceDescriptor.fromPartial(object.route)
           : undefined;
-      message.inputType = object.inputType ?? 0;
+      message.inputType = object.inputType ?? undefined;
       return message;
     },
   };

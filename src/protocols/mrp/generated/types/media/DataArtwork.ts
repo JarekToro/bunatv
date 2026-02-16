@@ -16,7 +16,7 @@ export interface DataArtwork {
 }
 
 function createBaseDataArtwork(): DataArtwork {
-  return { type: "", imageData: Buffer.alloc(0), _unknownFields: {} };
+  return { type: undefined, imageData: undefined, _unknownFields: {} };
 }
 
 export const DataArtwork: MessageFns<DataArtwork> = {
@@ -24,10 +24,10 @@ export const DataArtwork: MessageFns<DataArtwork> = {
     message: DataArtwork,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.imageData !== undefined && message.imageData.length !== 0) {
+    if (message.imageData !== undefined) {
       writer.uint32(18).bytes(message.imageData);
     }
     if (message._unknownFields !== undefined) {
@@ -86,21 +86,21 @@ export const DataArtwork: MessageFns<DataArtwork> = {
 
   fromJSON(object: any): DataArtwork {
     return {
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      type: isSet(object.type) ? globalThis.String(object.type) : undefined,
       imageData: isSet(object.imageData)
         ? Buffer.from(bytesFromBase64(object.imageData))
         : isSet(object.image_data)
           ? Buffer.from(bytesFromBase64(object.image_data))
-          : Buffer.alloc(0),
+          : undefined,
     };
   },
 
   toJSON(message: DataArtwork): unknown {
     const obj: any = {};
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       obj.type = message.type;
     }
-    if (message.imageData !== undefined && message.imageData.length !== 0) {
+    if (message.imageData !== undefined) {
       obj.imageData = base64FromBytes(message.imageData);
     }
     return obj;
@@ -113,8 +113,8 @@ export const DataArtwork: MessageFns<DataArtwork> = {
     object: I
   ): DataArtwork {
     const message = createBaseDataArtwork();
-    message.type = object.type ?? "";
-    message.imageData = object.imageData ?? Buffer.alloc(0);
+    message.type = object.type ?? undefined;
+    message.imageData = object.imageData ?? undefined;
     return message;
   },
 };

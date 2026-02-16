@@ -49,23 +49,23 @@ export interface PlaybackSessionMigrateRequest {
 
 function createBasePlaybackSessionMigrateRequest(): PlaybackSessionMigrateRequest {
   return {
-    requestId: "",
-    playerOptions: 0,
-    endpointOptions: 0,
+    requestId: undefined,
+    playerOptions: undefined,
+    endpointOptions: undefined,
     events: [],
-    playbackPosition: 0,
+    playbackPosition: undefined,
     contentItem: undefined,
     playerPath: undefined,
-    playbackState: 0,
-    playbackRate: 0,
+    playbackState: undefined,
+    playbackRate: undefined,
     playbackSessionRequest: undefined,
-    allowFadeTransition: false,
-    originatorType: 0,
-    destinationTypes: 0,
-    initiator: "",
+    allowFadeTransition: undefined,
+    originatorType: undefined,
+    destinationTypes: undefined,
+    initiator: undefined,
     resolvedPlayerPath: undefined,
     setPlaybackSessionCommandStatus: undefined,
-    recipeType: 0,
+    recipeType: undefined,
     _unknownFields: {},
   };
 }
@@ -76,16 +76,13 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
       message: PlaybackSessionMigrateRequest,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.requestId !== undefined && message.requestId !== "") {
+      if (message.requestId !== undefined) {
         writer.uint32(10).string(message.requestId);
       }
-      if (message.playerOptions !== undefined && message.playerOptions !== 0) {
+      if (message.playerOptions !== undefined) {
         writer.uint32(16).int32(message.playerOptions);
       }
-      if (
-        message.endpointOptions !== undefined &&
-        message.endpointOptions !== 0
-      ) {
+      if (message.endpointOptions !== undefined) {
         writer.uint32(24).int32(message.endpointOptions);
       }
       for (const v of message.events) {
@@ -94,10 +91,7 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           writer.uint32(34).fork()
         ).join();
       }
-      if (
-        message.playbackPosition !== undefined &&
-        message.playbackPosition !== 0
-      ) {
+      if (message.playbackPosition !== undefined) {
         writer.uint32(41).double(message.playbackPosition);
       }
       if (message.contentItem !== undefined) {
@@ -109,10 +103,10 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
       if (message.playerPath !== undefined) {
         PlayerPath.encode(message.playerPath, writer.uint32(58).fork()).join();
       }
-      if (message.playbackState !== undefined && message.playbackState !== 0) {
+      if (message.playbackState !== undefined) {
         writer.uint32(64).int32(message.playbackState);
       }
-      if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+      if (message.playbackRate !== undefined) {
         writer.uint32(73).double(message.playbackRate);
       }
       if (message.playbackSessionRequest !== undefined) {
@@ -121,25 +115,16 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           writer.uint32(82).fork()
         ).join();
       }
-      if (
-        message.allowFadeTransition !== undefined &&
-        message.allowFadeTransition !== false
-      ) {
+      if (message.allowFadeTransition !== undefined) {
         writer.uint32(88).bool(message.allowFadeTransition);
       }
-      if (
-        message.originatorType !== undefined &&
-        message.originatorType !== 0
-      ) {
+      if (message.originatorType !== undefined) {
         writer.uint32(96).uint32(message.originatorType);
       }
-      if (
-        message.destinationTypes !== undefined &&
-        message.destinationTypes !== 0
-      ) {
+      if (message.destinationTypes !== undefined) {
         writer.uint32(104).uint32(message.destinationTypes);
       }
-      if (message.initiator !== undefined && message.initiator !== "") {
+      if (message.initiator !== undefined) {
         writer.uint32(114).string(message.initiator);
       }
       if (message.resolvedPlayerPath !== undefined) {
@@ -154,7 +139,7 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           writer.uint32(130).fork()
         ).join();
       }
-      if (message.recipeType !== undefined && message.recipeType !== 0) {
+      if (message.recipeType !== undefined) {
         writer.uint32(136).int32(message.recipeType);
       }
       if (message._unknownFields !== undefined) {
@@ -347,13 +332,13 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
       return {
         requestId: isSet(object.requestId)
           ? globalThis.String(object.requestId)
-          : "",
+          : undefined,
         playerOptions: isSet(object.playerOptions)
           ? globalThis.Number(object.playerOptions)
-          : 0,
+          : undefined,
         endpointOptions: isSet(object.endpointOptions)
           ? endpointOptions_EnumFromJSON(object.endpointOptions)
-          : 0,
+          : undefined,
         events: globalThis.Array.isArray(object?.events)
           ? object.events.map((e: any) =>
               PlaybackSessionMigrateRequestEvent.fromJSON(e)
@@ -361,7 +346,7 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           : [],
         playbackPosition: isSet(object.playbackPosition)
           ? globalThis.Number(object.playbackPosition)
-          : 0,
+          : undefined,
         contentItem: isSet(object.contentItem)
           ? ContentItem.fromJSON(object.contentItem)
           : undefined,
@@ -370,25 +355,25 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           : undefined,
         playbackState: isSet(object.playbackState)
           ? playbackState_EnumFromJSON(object.playbackState)
-          : 0,
+          : undefined,
         playbackRate: isSet(object.playbackRate)
           ? globalThis.Number(object.playbackRate)
-          : 0,
+          : undefined,
         playbackSessionRequest: isSet(object.playbackSessionRequest)
           ? PlaybackSessionRequest.fromJSON(object.playbackSessionRequest)
           : undefined,
         allowFadeTransition: isSet(object.allowFadeTransition)
           ? globalThis.Boolean(object.allowFadeTransition)
-          : false,
+          : undefined,
         originatorType: isSet(object.originatorType)
           ? globalThis.Number(object.originatorType)
-          : 0,
+          : undefined,
         destinationTypes: isSet(object.destinationTypes)
           ? globalThis.Number(object.destinationTypes)
-          : 0,
+          : undefined,
         initiator: isSet(object.initiator)
           ? globalThis.String(object.initiator)
-          : "",
+          : undefined,
         resolvedPlayerPath: isSet(object.resolvedPlayerPath)
           ? PlayerPath.fromJSON(object.resolvedPlayerPath)
           : undefined,
@@ -401,22 +386,19 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           : undefined,
         recipeType: isSet(object.recipeType)
           ? recipeType_EnumFromJSON(object.recipeType)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: PlaybackSessionMigrateRequest): unknown {
       const obj: any = {};
-      if (message.requestId !== undefined && message.requestId !== "") {
+      if (message.requestId !== undefined) {
         obj.requestId = message.requestId;
       }
-      if (message.playerOptions !== undefined && message.playerOptions !== 0) {
+      if (message.playerOptions !== undefined) {
         obj.playerOptions = Math.round(message.playerOptions);
       }
-      if (
-        message.endpointOptions !== undefined &&
-        message.endpointOptions !== 0
-      ) {
+      if (message.endpointOptions !== undefined) {
         obj.endpointOptions = endpointOptions_EnumToJSON(
           message.endpointOptions
         );
@@ -426,10 +408,7 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           PlaybackSessionMigrateRequestEvent.toJSON(e)
         );
       }
-      if (
-        message.playbackPosition !== undefined &&
-        message.playbackPosition !== 0
-      ) {
+      if (message.playbackPosition !== undefined) {
         obj.playbackPosition = message.playbackPosition;
       }
       if (message.contentItem !== undefined) {
@@ -438,10 +417,10 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
       if (message.playerPath !== undefined) {
         obj.playerPath = PlayerPath.toJSON(message.playerPath);
       }
-      if (message.playbackState !== undefined && message.playbackState !== 0) {
+      if (message.playbackState !== undefined) {
         obj.playbackState = playbackState_EnumToJSON(message.playbackState);
       }
-      if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+      if (message.playbackRate !== undefined) {
         obj.playbackRate = message.playbackRate;
       }
       if (message.playbackSessionRequest !== undefined) {
@@ -449,25 +428,16 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           message.playbackSessionRequest
         );
       }
-      if (
-        message.allowFadeTransition !== undefined &&
-        message.allowFadeTransition !== false
-      ) {
+      if (message.allowFadeTransition !== undefined) {
         obj.allowFadeTransition = message.allowFadeTransition;
       }
-      if (
-        message.originatorType !== undefined &&
-        message.originatorType !== 0
-      ) {
+      if (message.originatorType !== undefined) {
         obj.originatorType = Math.round(message.originatorType);
       }
-      if (
-        message.destinationTypes !== undefined &&
-        message.destinationTypes !== 0
-      ) {
+      if (message.destinationTypes !== undefined) {
         obj.destinationTypes = Math.round(message.destinationTypes);
       }
-      if (message.initiator !== undefined && message.initiator !== "") {
+      if (message.initiator !== undefined) {
         obj.initiator = message.initiator;
       }
       if (message.resolvedPlayerPath !== undefined) {
@@ -478,7 +448,7 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
           message.setPlaybackSessionCommandStatus
         );
       }
-      if (message.recipeType !== undefined && message.recipeType !== 0) {
+      if (message.recipeType !== undefined) {
         obj.recipeType = recipeType_EnumToJSON(message.recipeType);
       }
       return obj;
@@ -493,14 +463,14 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
       object: I
     ): PlaybackSessionMigrateRequest {
       const message = createBasePlaybackSessionMigrateRequest();
-      message.requestId = object.requestId ?? "";
-      message.playerOptions = object.playerOptions ?? 0;
-      message.endpointOptions = object.endpointOptions ?? 0;
+      message.requestId = object.requestId ?? undefined;
+      message.playerOptions = object.playerOptions ?? undefined;
+      message.endpointOptions = object.endpointOptions ?? undefined;
       message.events =
         object.events?.map((e) =>
           PlaybackSessionMigrateRequestEvent.fromPartial(e)
         ) || [];
-      message.playbackPosition = object.playbackPosition ?? 0;
+      message.playbackPosition = object.playbackPosition ?? undefined;
       message.contentItem =
         object.contentItem !== undefined && object.contentItem !== null
           ? ContentItem.fromPartial(object.contentItem)
@@ -509,17 +479,17 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
         object.playerPath !== undefined && object.playerPath !== null
           ? PlayerPath.fromPartial(object.playerPath)
           : undefined;
-      message.playbackState = object.playbackState ?? 0;
-      message.playbackRate = object.playbackRate ?? 0;
+      message.playbackState = object.playbackState ?? undefined;
+      message.playbackRate = object.playbackRate ?? undefined;
       message.playbackSessionRequest =
         object.playbackSessionRequest !== undefined &&
         object.playbackSessionRequest !== null
           ? PlaybackSessionRequest.fromPartial(object.playbackSessionRequest)
           : undefined;
-      message.allowFadeTransition = object.allowFadeTransition ?? false;
-      message.originatorType = object.originatorType ?? 0;
-      message.destinationTypes = object.destinationTypes ?? 0;
-      message.initiator = object.initiator ?? "";
+      message.allowFadeTransition = object.allowFadeTransition ?? undefined;
+      message.originatorType = object.originatorType ?? undefined;
+      message.destinationTypes = object.destinationTypes ?? undefined;
+      message.initiator = object.initiator ?? undefined;
       message.resolvedPlayerPath =
         object.resolvedPlayerPath !== undefined &&
         object.resolvedPlayerPath !== null
@@ -532,7 +502,7 @@ export const PlaybackSessionMigrateRequest: MessageFns<PlaybackSessionMigrateReq
               object.setPlaybackSessionCommandStatus
             )
           : undefined;
-      message.recipeType = object.recipeType ?? 0;
+      message.recipeType = object.recipeType ?? undefined;
       return message;
     },
   };

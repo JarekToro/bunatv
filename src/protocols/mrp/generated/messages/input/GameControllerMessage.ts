@@ -22,7 +22,7 @@ export interface GameControllerMessage {
 
 function createBaseGameControllerMessage(): GameControllerMessage {
   return {
-    controllerID: 0,
+    controllerID: undefined,
     motion: undefined,
     buttons: undefined,
     digitizer: undefined,
@@ -35,7 +35,7 @@ export const GameControllerMessage: MessageFns<GameControllerMessage> = {
     message: GameControllerMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.controllerID !== undefined && message.controllerID !== 0) {
+    if (message.controllerID !== undefined) {
       writer.uint32(8).uint64(message.controllerID);
     }
     if (message.motion !== undefined) {
@@ -139,7 +139,7 @@ export const GameControllerMessage: MessageFns<GameControllerMessage> = {
     return {
       controllerID: isSet(object.controllerID)
         ? globalThis.Number(object.controllerID)
-        : 0,
+        : undefined,
       motion: isSet(object.motion)
         ? GameControllerMotion.fromJSON(object.motion)
         : undefined,
@@ -154,7 +154,7 @@ export const GameControllerMessage: MessageFns<GameControllerMessage> = {
 
   toJSON(message: GameControllerMessage): unknown {
     const obj: any = {};
-    if (message.controllerID !== undefined && message.controllerID !== 0) {
+    if (message.controllerID !== undefined) {
       obj.controllerID = Math.round(message.controllerID);
     }
     if (message.motion !== undefined) {
@@ -178,7 +178,7 @@ export const GameControllerMessage: MessageFns<GameControllerMessage> = {
     object: I
   ): GameControllerMessage {
     const message = createBaseGameControllerMessage();
-    message.controllerID = object.controllerID ?? 0;
+    message.controllerID = object.controllerID ?? undefined;
     message.motion =
       object.motion !== undefined && object.motion !== null
         ? GameControllerMotion.fromPartial(object.motion)

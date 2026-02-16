@@ -58,7 +58,7 @@ export function setRecordingStateMessage_RecordingStateToJSON(
 }
 
 function createBaseSetRecordingStateMessage(): SetRecordingStateMessage {
-  return { state: 0, _unknownFields: {} };
+  return { state: undefined, _unknownFields: {} };
 }
 
 export const SetRecordingStateMessage: MessageFns<SetRecordingStateMessage> = {
@@ -66,7 +66,7 @@ export const SetRecordingStateMessage: MessageFns<SetRecordingStateMessage> = {
     message: SetRecordingStateMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.state !== undefined && message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(8).int32(message.state);
     }
     if (message._unknownFields !== undefined) {
@@ -122,13 +122,13 @@ export const SetRecordingStateMessage: MessageFns<SetRecordingStateMessage> = {
     return {
       state: isSet(object.state)
         ? setRecordingStateMessage_RecordingStateFromJSON(object.state)
-        : 0,
+        : undefined,
     };
   },
 
   toJSON(message: SetRecordingStateMessage): unknown {
     const obj: any = {};
-    if (message.state !== undefined && message.state !== 0) {
+    if (message.state !== undefined) {
       obj.state = setRecordingStateMessage_RecordingStateToJSON(message.state);
     }
     return obj;
@@ -143,7 +143,7 @@ export const SetRecordingStateMessage: MessageFns<SetRecordingStateMessage> = {
     object: I
   ): SetRecordingStateMessage {
     const message = createBaseSetRecordingStateMessage();
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     return message;
   },
 };

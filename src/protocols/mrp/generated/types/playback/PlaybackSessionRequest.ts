@@ -23,12 +23,12 @@ export interface PlaybackSessionRequest {
 
 function createBasePlaybackSessionRequest(): PlaybackSessionRequest {
   return {
-    requestID: "",
-    identifier: "",
-    type: "",
+    requestID: undefined,
+    identifier: undefined,
+    type: undefined,
     destinationPlayerPath: undefined,
     destinationCommandInfo: undefined,
-    isPreflight: false,
+    isPreflight: undefined,
     _unknownFields: {},
   };
 }
@@ -38,13 +38,13 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
     message: PlaybackSessionRequest,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.requestID !== undefined && message.requestID !== "") {
+    if (message.requestID !== undefined) {
       writer.uint32(10).string(message.requestID);
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(18).string(message.identifier);
     }
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(42).string(message.type);
     }
     if (message.destinationPlayerPath !== undefined) {
@@ -59,7 +59,7 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
         writer.uint32(58).fork()
       ).join();
     }
-    if (message.isPreflight !== undefined && message.isPreflight !== false) {
+    if (message.isPreflight !== undefined) {
       writer.uint32(64).bool(message.isPreflight);
     }
     if (message._unknownFields !== undefined) {
@@ -161,11 +161,11 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
     return {
       requestID: isSet(object.requestID)
         ? globalThis.String(object.requestID)
-        : "",
+        : undefined,
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+        : undefined,
+      type: isSet(object.type) ? globalThis.String(object.type) : undefined,
       destinationPlayerPath: isSet(object.destinationPlayerPath)
         ? PlayerPath.fromJSON(object.destinationPlayerPath)
         : undefined,
@@ -174,19 +174,19 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
         : undefined,
       isPreflight: isSet(object.isPreflight)
         ? globalThis.Boolean(object.isPreflight)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: PlaybackSessionRequest): unknown {
     const obj: any = {};
-    if (message.requestID !== undefined && message.requestID !== "") {
+    if (message.requestID !== undefined) {
       obj.requestID = message.requestID;
     }
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       obj.type = message.type;
     }
     if (message.destinationPlayerPath !== undefined) {
@@ -199,7 +199,7 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
         message.destinationCommandInfo
       );
     }
-    if (message.isPreflight !== undefined && message.isPreflight !== false) {
+    if (message.isPreflight !== undefined) {
       obj.isPreflight = message.isPreflight;
     }
     return obj;
@@ -214,9 +214,9 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
     object: I
   ): PlaybackSessionRequest {
     const message = createBasePlaybackSessionRequest();
-    message.requestID = object.requestID ?? "";
-    message.identifier = object.identifier ?? "";
-    message.type = object.type ?? "";
+    message.requestID = object.requestID ?? undefined;
+    message.identifier = object.identifier ?? undefined;
+    message.type = object.type ?? undefined;
     message.destinationPlayerPath =
       object.destinationPlayerPath !== undefined &&
       object.destinationPlayerPath !== null
@@ -227,7 +227,7 @@ export const PlaybackSessionRequest: MessageFns<PlaybackSessionRequest> = {
       object.destinationCommandInfo !== null
         ? Dictionary.fromPartial(object.destinationCommandInfo)
         : undefined;
-    message.isPreflight = object.isPreflight ?? false;
+    message.isPreflight = object.isPreflight ?? undefined;
     return message;
   },
 };

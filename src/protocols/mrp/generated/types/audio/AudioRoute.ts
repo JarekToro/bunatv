@@ -23,9 +23,9 @@ export interface AudioRoute {
 
 function createBaseAudioRoute(): AudioRoute {
   return {
-    type: 0,
-    name: "",
-    supportsSpatialization: false,
+    type: undefined,
+    name: undefined,
+    supportsSpatialization: undefined,
     _unknownFields: {},
   };
 }
@@ -35,16 +35,13 @@ export const AudioRoute: MessageFns<AudioRoute> = {
     message: AudioRoute,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.name !== undefined && message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
-    if (
-      message.supportsSpatialization !== undefined &&
-      message.supportsSpatialization !== false
-    ) {
+    if (message.supportsSpatialization !== undefined) {
       writer.uint32(24).bool(message.supportsSpatialization);
     }
     if (message._unknownFields !== undefined) {
@@ -111,26 +108,25 @@ export const AudioRoute: MessageFns<AudioRoute> = {
 
   fromJSON(object: any): AudioRoute {
     return {
-      type: isSet(object.type) ? audioRouteType_EnumFromJSON(object.type) : 0,
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      type: isSet(object.type)
+        ? audioRouteType_EnumFromJSON(object.type)
+        : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : undefined,
       supportsSpatialization: isSet(object.supportsSpatialization)
         ? globalThis.Boolean(object.supportsSpatialization)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: AudioRoute): unknown {
     const obj: any = {};
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = audioRouteType_EnumToJSON(message.type);
     }
-    if (message.name !== undefined && message.name !== "") {
+    if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (
-      message.supportsSpatialization !== undefined &&
-      message.supportsSpatialization !== false
-    ) {
+    if (message.supportsSpatialization !== undefined) {
       obj.supportsSpatialization = message.supportsSpatialization;
     }
     return obj;
@@ -143,9 +139,9 @@ export const AudioRoute: MessageFns<AudioRoute> = {
     object: I
   ): AudioRoute {
     const message = createBaseAudioRoute();
-    message.type = object.type ?? 0;
-    message.name = object.name ?? "";
-    message.supportsSpatialization = object.supportsSpatialization ?? false;
+    message.type = object.type ?? undefined;
+    message.name = object.name ?? undefined;
+    message.supportsSpatialization = object.supportsSpatialization ?? undefined;
     return message;
   },
 };

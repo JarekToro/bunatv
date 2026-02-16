@@ -17,7 +17,7 @@ export interface SendVirtualTouchEventMessage {
 }
 
 function createBaseSendVirtualTouchEventMessage(): SendVirtualTouchEventMessage {
-  return { virtualDeviceID: 0, event: undefined, _unknownFields: {} };
+  return { virtualDeviceID: undefined, event: undefined, _unknownFields: {} };
 }
 
 export const SendVirtualTouchEventMessage: MessageFns<SendVirtualTouchEventMessage> =
@@ -26,10 +26,7 @@ export const SendVirtualTouchEventMessage: MessageFns<SendVirtualTouchEventMessa
       message: SendVirtualTouchEventMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.virtualDeviceID !== undefined &&
-        message.virtualDeviceID !== 0
-      ) {
+      if (message.virtualDeviceID !== undefined) {
         writer.uint32(8).uint64(message.virtualDeviceID);
       }
       if (message.event !== undefined) {
@@ -99,7 +96,7 @@ export const SendVirtualTouchEventMessage: MessageFns<SendVirtualTouchEventMessa
       return {
         virtualDeviceID: isSet(object.virtualDeviceID)
           ? globalThis.Number(object.virtualDeviceID)
-          : 0,
+          : undefined,
         event: isSet(object.event)
           ? VirtualTouchEvent.fromJSON(object.event)
           : undefined,
@@ -108,10 +105,7 @@ export const SendVirtualTouchEventMessage: MessageFns<SendVirtualTouchEventMessa
 
     toJSON(message: SendVirtualTouchEventMessage): unknown {
       const obj: any = {};
-      if (
-        message.virtualDeviceID !== undefined &&
-        message.virtualDeviceID !== 0
-      ) {
+      if (message.virtualDeviceID !== undefined) {
         obj.virtualDeviceID = Math.round(message.virtualDeviceID);
       }
       if (message.event !== undefined) {
@@ -129,7 +123,7 @@ export const SendVirtualTouchEventMessage: MessageFns<SendVirtualTouchEventMessa
       object: I
     ): SendVirtualTouchEventMessage {
       const message = createBaseSendVirtualTouchEventMessage();
-      message.virtualDeviceID = object.virtualDeviceID ?? 0;
+      message.virtualDeviceID = object.virtualDeviceID ?? undefined;
       message.event =
         object.event !== undefined && object.event !== null
           ? VirtualTouchEvent.fromPartial(object.event)

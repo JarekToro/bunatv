@@ -20,7 +20,7 @@ export interface SendPackedVirtualTouchEventMessage {
 }
 
 function createBaseSendPackedVirtualTouchEventMessage(): SendPackedVirtualTouchEventMessage {
-  return { data: Buffer.alloc(0), _unknownFields: {} };
+  return { data: undefined, _unknownFields: {} };
 }
 
 export const SendPackedVirtualTouchEventMessage: MessageFns<SendPackedVirtualTouchEventMessage> =
@@ -29,7 +29,7 @@ export const SendPackedVirtualTouchEventMessage: MessageFns<SendPackedVirtualTou
       message: SendPackedVirtualTouchEventMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.data !== undefined && message.data.length !== 0) {
+      if (message.data !== undefined) {
         writer.uint32(10).bytes(message.data);
       }
       if (message._unknownFields !== undefined) {
@@ -85,13 +85,13 @@ export const SendPackedVirtualTouchEventMessage: MessageFns<SendPackedVirtualTou
       return {
         data: isSet(object.data)
           ? Buffer.from(bytesFromBase64(object.data))
-          : Buffer.alloc(0),
+          : undefined,
       };
     },
 
     toJSON(message: SendPackedVirtualTouchEventMessage): unknown {
       const obj: any = {};
-      if (message.data !== undefined && message.data.length !== 0) {
+      if (message.data !== undefined) {
         obj.data = base64FromBytes(message.data);
       }
       return obj;
@@ -108,7 +108,7 @@ export const SendPackedVirtualTouchEventMessage: MessageFns<SendPackedVirtualTou
       I extends Exact<DeepPartial<SendPackedVirtualTouchEventMessage>, I>,
     >(object: I): SendPackedVirtualTouchEventMessage {
       const message = createBaseSendPackedVirtualTouchEventMessage();
-      message.data = object.data ?? Buffer.alloc(0);
+      message.data = object.data ?? undefined;
       return message;
     },
   };

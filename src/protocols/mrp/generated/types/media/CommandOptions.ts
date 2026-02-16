@@ -111,92 +111,92 @@ export interface CommandOptions {
 
 function createBaseCommandOptions(): CommandOptions {
   return {
-    sourceId: "",
-    mediaType: "",
-    externalPlayerCommand: false,
-    skipInterval: 0,
-    playbackRate: 0,
-    rating: 0,
-    negative: false,
-    playbackPosition: 0,
-    repeatMode: 0,
-    shuffleMode: 0,
-    trackID: 0,
-    radioStationID: 0,
-    radioStationHash: "",
-    systemAppPlaybackQueueData: Buffer.alloc(0),
-    destinationAppDisplayID: "",
-    sendOptions: 0,
-    requestDefermentToPlaybackQueuePosition: false,
-    contextID: "",
-    shouldOverrideManuallyCuratedQueue: false,
-    stationURL: "",
-    shouldBeginRadioPlayback: false,
-    playbackQueueInsertionPosition: 0,
-    contentItemID: "",
-    playbackQueueOffset: 0,
-    playbackQueueDestinationOffset: 0,
-    languageOption: Buffer.alloc(0),
-    playbackQueueContext: Buffer.alloc(0),
-    insertAfterContentItemID: "",
-    nowPlayingContentItemID: "",
-    replaceIntent: 0,
-    commandId: "",
-    senderId: "",
-    remoteControlInterface: "",
-    beginSeek: false,
-    endSeek: false,
-    playbackSession: Buffer.alloc(0),
-    userIdentityData: Buffer.alloc(0),
-    insertBeforeContentItemID: "",
-    queueEndAction: 0,
-    preservesRepeatMode: false,
-    preservesShuffleMode: false,
-    preservesQueueEndAction: false,
-    homeKitUserIdentifier: "",
-    verifySupportedCommands: false,
-    playbackSessionIdentifier: "",
-    playbackSessionPriority: 0,
-    playbackSessionFilePath: "",
-    playbackSessionRevision: "",
-    playbackSessionMetadata: Buffer.alloc(0),
-    playbackSessionType: "",
-    trueCompletion: false,
-    playbackAuthorizationToken: "",
-    eventNoticeType: "",
-    eventNoticeIdentifier: "",
-    sharedPlaybackSessionIdentifier: "",
-    commandTimeout: 0,
-    assistantTtsEndTimestamp: 0,
-    assistantCommandSendTimestamp: 0,
-    originatingDeviceUID: "",
-    destinationDeviceUIDs: Buffer.alloc(0),
-    desiredSessionId: "",
-    alwaysIgnoreDuringCall: false,
-    alwaysIgnoreDuringSharePlay: false,
-    commandSequenceUuid: "",
-    originatedFromRemoteDevice: false,
-    siriTurnIdentifier: "",
-    siriSearchDataSetIdentifier: "",
-    prepareForSetQueueIsProactive: false,
-    prepareForSetQueueProactiveReason: "",
-    prepareForSetQueueProactiveReasonType: 0,
-    applicationUserIdentity: Buffer.alloc(0),
+    sourceId: undefined,
+    mediaType: undefined,
+    externalPlayerCommand: undefined,
+    skipInterval: undefined,
+    playbackRate: undefined,
+    rating: undefined,
+    negative: undefined,
+    playbackPosition: undefined,
+    repeatMode: undefined,
+    shuffleMode: undefined,
+    trackID: undefined,
+    radioStationID: undefined,
+    radioStationHash: undefined,
+    systemAppPlaybackQueueData: undefined,
+    destinationAppDisplayID: undefined,
+    sendOptions: undefined,
+    requestDefermentToPlaybackQueuePosition: undefined,
+    contextID: undefined,
+    shouldOverrideManuallyCuratedQueue: undefined,
+    stationURL: undefined,
+    shouldBeginRadioPlayback: undefined,
+    playbackQueueInsertionPosition: undefined,
+    contentItemID: undefined,
+    playbackQueueOffset: undefined,
+    playbackQueueDestinationOffset: undefined,
+    languageOption: undefined,
+    playbackQueueContext: undefined,
+    insertAfterContentItemID: undefined,
+    nowPlayingContentItemID: undefined,
+    replaceIntent: undefined,
+    commandId: undefined,
+    senderId: undefined,
+    remoteControlInterface: undefined,
+    beginSeek: undefined,
+    endSeek: undefined,
+    playbackSession: undefined,
+    userIdentityData: undefined,
+    insertBeforeContentItemID: undefined,
+    queueEndAction: undefined,
+    preservesRepeatMode: undefined,
+    preservesShuffleMode: undefined,
+    preservesQueueEndAction: undefined,
+    homeKitUserIdentifier: undefined,
+    verifySupportedCommands: undefined,
+    playbackSessionIdentifier: undefined,
+    playbackSessionPriority: undefined,
+    playbackSessionFilePath: undefined,
+    playbackSessionRevision: undefined,
+    playbackSessionMetadata: undefined,
+    playbackSessionType: undefined,
+    trueCompletion: undefined,
+    playbackAuthorizationToken: undefined,
+    eventNoticeType: undefined,
+    eventNoticeIdentifier: undefined,
+    sharedPlaybackSessionIdentifier: undefined,
+    commandTimeout: undefined,
+    assistantTtsEndTimestamp: undefined,
+    assistantCommandSendTimestamp: undefined,
+    originatingDeviceUID: undefined,
+    destinationDeviceUIDs: undefined,
+    desiredSessionId: undefined,
+    alwaysIgnoreDuringCall: undefined,
+    alwaysIgnoreDuringSharePlay: undefined,
+    commandSequenceUuid: undefined,
+    originatedFromRemoteDevice: undefined,
+    siriTurnIdentifier: undefined,
+    siriSearchDataSetIdentifier: undefined,
+    prepareForSetQueueIsProactive: undefined,
+    prepareForSetQueueProactiveReason: undefined,
+    prepareForSetQueueProactiveReasonType: undefined,
+    applicationUserIdentity: undefined,
     systemAppPlaybackQueue: undefined,
-    vocalsControlActive: false,
-    vocalsControlLevel: 0,
-    vocalsControlMinLevel: 0,
-    vocalsControlMaxLevel: 0,
-    vocalsControlContinuous: false,
-    associatedParticipantIdentifier: "",
-    sleepTimerTime: 0,
-    sleepTimerStopMode: 0,
+    vocalsControlActive: undefined,
+    vocalsControlLevel: undefined,
+    vocalsControlMinLevel: undefined,
+    vocalsControlMaxLevel: undefined,
+    vocalsControlContinuous: undefined,
+    associatedParticipantIdentifier: undefined,
+    sleepTimerTime: undefined,
+    sleepTimerStopMode: undefined,
     dialogOptions: undefined,
-    clientPreferredLanguages: "",
-    referencePosition: 0,
-    delegateAccountData: Buffer.alloc(0),
-    delegateAccountDataType: "",
-    enhanceDialogueActive: false,
+    clientPreferredLanguages: undefined,
+    referencePosition: undefined,
+    delegateAccountData: undefined,
+    delegateAccountDataType: undefined,
+    enhanceDialogueActive: undefined,
     _unknownFields: {},
   };
 }
@@ -206,367 +206,217 @@ export const CommandOptions: MessageFns<CommandOptions> = {
     message: CommandOptions,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.sourceId !== undefined && message.sourceId !== "") {
+    if (message.sourceId !== undefined) {
       writer.uint32(18).string(message.sourceId);
     }
-    if (message.mediaType !== undefined && message.mediaType !== "") {
+    if (message.mediaType !== undefined) {
       writer.uint32(26).string(message.mediaType);
     }
-    if (
-      message.externalPlayerCommand !== undefined &&
-      message.externalPlayerCommand !== false
-    ) {
+    if (message.externalPlayerCommand !== undefined) {
       writer.uint32(32).bool(message.externalPlayerCommand);
     }
-    if (message.skipInterval !== undefined && message.skipInterval !== 0) {
+    if (message.skipInterval !== undefined) {
       writer.uint32(45).float(message.skipInterval);
     }
-    if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+    if (message.playbackRate !== undefined) {
       writer.uint32(53).float(message.playbackRate);
     }
-    if (message.rating !== undefined && message.rating !== 0) {
+    if (message.rating !== undefined) {
       writer.uint32(61).float(message.rating);
     }
-    if (message.negative !== undefined && message.negative !== false) {
+    if (message.negative !== undefined) {
       writer.uint32(64).bool(message.negative);
     }
-    if (
-      message.playbackPosition !== undefined &&
-      message.playbackPosition !== 0
-    ) {
+    if (message.playbackPosition !== undefined) {
       writer.uint32(73).double(message.playbackPosition);
     }
-    if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+    if (message.repeatMode !== undefined) {
       writer.uint32(80).int32(message.repeatMode);
     }
-    if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+    if (message.shuffleMode !== undefined) {
       writer.uint32(88).int32(message.shuffleMode);
     }
-    if (message.trackID !== undefined && message.trackID !== 0) {
+    if (message.trackID !== undefined) {
       writer.uint32(96).uint64(message.trackID);
     }
-    if (message.radioStationID !== undefined && message.radioStationID !== 0) {
+    if (message.radioStationID !== undefined) {
       writer.uint32(104).int64(message.radioStationID);
     }
-    if (
-      message.radioStationHash !== undefined &&
-      message.radioStationHash !== ""
-    ) {
+    if (message.radioStationHash !== undefined) {
       writer.uint32(114).string(message.radioStationHash);
     }
-    if (
-      message.systemAppPlaybackQueueData !== undefined &&
-      message.systemAppPlaybackQueueData.length !== 0
-    ) {
+    if (message.systemAppPlaybackQueueData !== undefined) {
       writer.uint32(122).bytes(message.systemAppPlaybackQueueData);
     }
-    if (
-      message.destinationAppDisplayID !== undefined &&
-      message.destinationAppDisplayID !== ""
-    ) {
+    if (message.destinationAppDisplayID !== undefined) {
       writer.uint32(130).string(message.destinationAppDisplayID);
     }
-    if (message.sendOptions !== undefined && message.sendOptions !== 0) {
+    if (message.sendOptions !== undefined) {
       writer.uint32(136).uint32(message.sendOptions);
     }
-    if (
-      message.requestDefermentToPlaybackQueuePosition !== undefined &&
-      message.requestDefermentToPlaybackQueuePosition !== false
-    ) {
+    if (message.requestDefermentToPlaybackQueuePosition !== undefined) {
       writer.uint32(144).bool(message.requestDefermentToPlaybackQueuePosition);
     }
-    if (message.contextID !== undefined && message.contextID !== "") {
+    if (message.contextID !== undefined) {
       writer.uint32(154).string(message.contextID);
     }
-    if (
-      message.shouldOverrideManuallyCuratedQueue !== undefined &&
-      message.shouldOverrideManuallyCuratedQueue !== false
-    ) {
+    if (message.shouldOverrideManuallyCuratedQueue !== undefined) {
       writer.uint32(160).bool(message.shouldOverrideManuallyCuratedQueue);
     }
-    if (message.stationURL !== undefined && message.stationURL !== "") {
+    if (message.stationURL !== undefined) {
       writer.uint32(170).string(message.stationURL);
     }
-    if (
-      message.shouldBeginRadioPlayback !== undefined &&
-      message.shouldBeginRadioPlayback !== false
-    ) {
+    if (message.shouldBeginRadioPlayback !== undefined) {
       writer.uint32(176).bool(message.shouldBeginRadioPlayback);
     }
-    if (
-      message.playbackQueueInsertionPosition !== undefined &&
-      message.playbackQueueInsertionPosition !== 0
-    ) {
+    if (message.playbackQueueInsertionPosition !== undefined) {
       writer.uint32(184).int32(message.playbackQueueInsertionPosition);
     }
-    if (message.contentItemID !== undefined && message.contentItemID !== "") {
+    if (message.contentItemID !== undefined) {
       writer.uint32(194).string(message.contentItemID);
     }
-    if (
-      message.playbackQueueOffset !== undefined &&
-      message.playbackQueueOffset !== 0
-    ) {
+    if (message.playbackQueueOffset !== undefined) {
       writer.uint32(200).int32(message.playbackQueueOffset);
     }
-    if (
-      message.playbackQueueDestinationOffset !== undefined &&
-      message.playbackQueueDestinationOffset !== 0
-    ) {
+    if (message.playbackQueueDestinationOffset !== undefined) {
       writer.uint32(208).int32(message.playbackQueueDestinationOffset);
     }
-    if (
-      message.languageOption !== undefined &&
-      message.languageOption.length !== 0
-    ) {
+    if (message.languageOption !== undefined) {
       writer.uint32(218).bytes(message.languageOption);
     }
-    if (
-      message.playbackQueueContext !== undefined &&
-      message.playbackQueueContext.length !== 0
-    ) {
+    if (message.playbackQueueContext !== undefined) {
       writer.uint32(226).bytes(message.playbackQueueContext);
     }
-    if (
-      message.insertAfterContentItemID !== undefined &&
-      message.insertAfterContentItemID !== ""
-    ) {
+    if (message.insertAfterContentItemID !== undefined) {
       writer.uint32(234).string(message.insertAfterContentItemID);
     }
-    if (
-      message.nowPlayingContentItemID !== undefined &&
-      message.nowPlayingContentItemID !== ""
-    ) {
+    if (message.nowPlayingContentItemID !== undefined) {
       writer.uint32(242).string(message.nowPlayingContentItemID);
     }
-    if (message.replaceIntent !== undefined && message.replaceIntent !== 0) {
+    if (message.replaceIntent !== undefined) {
       writer.uint32(248).int32(message.replaceIntent);
     }
-    if (message.commandId !== undefined && message.commandId !== "") {
+    if (message.commandId !== undefined) {
       writer.uint32(258).string(message.commandId);
     }
-    if (message.senderId !== undefined && message.senderId !== "") {
+    if (message.senderId !== undefined) {
       writer.uint32(266).string(message.senderId);
     }
-    if (
-      message.remoteControlInterface !== undefined &&
-      message.remoteControlInterface !== ""
-    ) {
+    if (message.remoteControlInterface !== undefined) {
       writer.uint32(274).string(message.remoteControlInterface);
     }
-    if (message.beginSeek !== undefined && message.beginSeek !== false) {
+    if (message.beginSeek !== undefined) {
       writer.uint32(320).bool(message.beginSeek);
     }
-    if (message.endSeek !== undefined && message.endSeek !== false) {
+    if (message.endSeek !== undefined) {
       writer.uint32(328).bool(message.endSeek);
     }
-    if (
-      message.playbackSession !== undefined &&
-      message.playbackSession.length !== 0
-    ) {
+    if (message.playbackSession !== undefined) {
       writer.uint32(338).bytes(message.playbackSession);
     }
-    if (
-      message.userIdentityData !== undefined &&
-      message.userIdentityData.length !== 0
-    ) {
+    if (message.userIdentityData !== undefined) {
       writer.uint32(346).bytes(message.userIdentityData);
     }
-    if (
-      message.insertBeforeContentItemID !== undefined &&
-      message.insertBeforeContentItemID !== ""
-    ) {
+    if (message.insertBeforeContentItemID !== undefined) {
       writer.uint32(354).string(message.insertBeforeContentItemID);
     }
-    if (message.queueEndAction !== undefined && message.queueEndAction !== 0) {
+    if (message.queueEndAction !== undefined) {
       writer.uint32(360).int32(message.queueEndAction);
     }
-    if (
-      message.preservesRepeatMode !== undefined &&
-      message.preservesRepeatMode !== false
-    ) {
+    if (message.preservesRepeatMode !== undefined) {
       writer.uint32(368).bool(message.preservesRepeatMode);
     }
-    if (
-      message.preservesShuffleMode !== undefined &&
-      message.preservesShuffleMode !== false
-    ) {
+    if (message.preservesShuffleMode !== undefined) {
       writer.uint32(376).bool(message.preservesShuffleMode);
     }
-    if (
-      message.preservesQueueEndAction !== undefined &&
-      message.preservesQueueEndAction !== false
-    ) {
+    if (message.preservesQueueEndAction !== undefined) {
       writer.uint32(384).bool(message.preservesQueueEndAction);
     }
-    if (
-      message.homeKitUserIdentifier !== undefined &&
-      message.homeKitUserIdentifier !== ""
-    ) {
+    if (message.homeKitUserIdentifier !== undefined) {
       writer.uint32(394).string(message.homeKitUserIdentifier);
     }
-    if (
-      message.verifySupportedCommands !== undefined &&
-      message.verifySupportedCommands !== false
-    ) {
+    if (message.verifySupportedCommands !== undefined) {
       writer.uint32(400).bool(message.verifySupportedCommands);
     }
-    if (
-      message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ""
-    ) {
+    if (message.playbackSessionIdentifier !== undefined) {
       writer.uint32(410).string(message.playbackSessionIdentifier);
     }
-    if (
-      message.playbackSessionPriority !== undefined &&
-      message.playbackSessionPriority !== 0
-    ) {
+    if (message.playbackSessionPriority !== undefined) {
       writer.uint32(416).int32(message.playbackSessionPriority);
     }
-    if (
-      message.playbackSessionFilePath !== undefined &&
-      message.playbackSessionFilePath !== ""
-    ) {
+    if (message.playbackSessionFilePath !== undefined) {
       writer.uint32(426).string(message.playbackSessionFilePath);
     }
-    if (
-      message.playbackSessionRevision !== undefined &&
-      message.playbackSessionRevision !== ""
-    ) {
+    if (message.playbackSessionRevision !== undefined) {
       writer.uint32(434).string(message.playbackSessionRevision);
     }
-    if (
-      message.playbackSessionMetadata !== undefined &&
-      message.playbackSessionMetadata.length !== 0
-    ) {
+    if (message.playbackSessionMetadata !== undefined) {
       writer.uint32(442).bytes(message.playbackSessionMetadata);
     }
-    if (
-      message.playbackSessionType !== undefined &&
-      message.playbackSessionType !== ""
-    ) {
+    if (message.playbackSessionType !== undefined) {
       writer.uint32(450).string(message.playbackSessionType);
     }
-    if (
-      message.trueCompletion !== undefined &&
-      message.trueCompletion !== false
-    ) {
+    if (message.trueCompletion !== undefined) {
       writer.uint32(456).bool(message.trueCompletion);
     }
-    if (
-      message.playbackAuthorizationToken !== undefined &&
-      message.playbackAuthorizationToken !== ""
-    ) {
+    if (message.playbackAuthorizationToken !== undefined) {
       writer.uint32(466).string(message.playbackAuthorizationToken);
     }
-    if (
-      message.eventNoticeType !== undefined &&
-      message.eventNoticeType !== ""
-    ) {
+    if (message.eventNoticeType !== undefined) {
       writer.uint32(474).string(message.eventNoticeType);
     }
-    if (
-      message.eventNoticeIdentifier !== undefined &&
-      message.eventNoticeIdentifier !== ""
-    ) {
+    if (message.eventNoticeIdentifier !== undefined) {
       writer.uint32(482).string(message.eventNoticeIdentifier);
     }
-    if (
-      message.sharedPlaybackSessionIdentifier !== undefined &&
-      message.sharedPlaybackSessionIdentifier !== ""
-    ) {
+    if (message.sharedPlaybackSessionIdentifier !== undefined) {
       writer.uint32(490).string(message.sharedPlaybackSessionIdentifier);
     }
-    if (message.commandTimeout !== undefined && message.commandTimeout !== 0) {
+    if (message.commandTimeout !== undefined) {
       writer.uint32(497).double(message.commandTimeout);
     }
-    if (
-      message.assistantTtsEndTimestamp !== undefined &&
-      message.assistantTtsEndTimestamp !== 0
-    ) {
+    if (message.assistantTtsEndTimestamp !== undefined) {
       writer.uint32(505).double(message.assistantTtsEndTimestamp);
     }
-    if (
-      message.assistantCommandSendTimestamp !== undefined &&
-      message.assistantCommandSendTimestamp !== 0
-    ) {
+    if (message.assistantCommandSendTimestamp !== undefined) {
       writer.uint32(513).double(message.assistantCommandSendTimestamp);
     }
-    if (
-      message.originatingDeviceUID !== undefined &&
-      message.originatingDeviceUID !== ""
-    ) {
+    if (message.originatingDeviceUID !== undefined) {
       writer.uint32(522).string(message.originatingDeviceUID);
     }
-    if (
-      message.destinationDeviceUIDs !== undefined &&
-      message.destinationDeviceUIDs.length !== 0
-    ) {
+    if (message.destinationDeviceUIDs !== undefined) {
       writer.uint32(530).bytes(message.destinationDeviceUIDs);
     }
-    if (
-      message.desiredSessionId !== undefined &&
-      message.desiredSessionId !== ""
-    ) {
+    if (message.desiredSessionId !== undefined) {
       writer.uint32(538).string(message.desiredSessionId);
     }
-    if (
-      message.alwaysIgnoreDuringCall !== undefined &&
-      message.alwaysIgnoreDuringCall !== false
-    ) {
+    if (message.alwaysIgnoreDuringCall !== undefined) {
       writer.uint32(544).bool(message.alwaysIgnoreDuringCall);
     }
-    if (
-      message.alwaysIgnoreDuringSharePlay !== undefined &&
-      message.alwaysIgnoreDuringSharePlay !== false
-    ) {
+    if (message.alwaysIgnoreDuringSharePlay !== undefined) {
       writer.uint32(552).bool(message.alwaysIgnoreDuringSharePlay);
     }
-    if (
-      message.commandSequenceUuid !== undefined &&
-      message.commandSequenceUuid !== ""
-    ) {
+    if (message.commandSequenceUuid !== undefined) {
       writer.uint32(562).string(message.commandSequenceUuid);
     }
-    if (
-      message.originatedFromRemoteDevice !== undefined &&
-      message.originatedFromRemoteDevice !== false
-    ) {
+    if (message.originatedFromRemoteDevice !== undefined) {
       writer.uint32(568).bool(message.originatedFromRemoteDevice);
     }
-    if (
-      message.siriTurnIdentifier !== undefined &&
-      message.siriTurnIdentifier !== ""
-    ) {
+    if (message.siriTurnIdentifier !== undefined) {
       writer.uint32(578).string(message.siriTurnIdentifier);
     }
-    if (
-      message.siriSearchDataSetIdentifier !== undefined &&
-      message.siriSearchDataSetIdentifier !== ""
-    ) {
+    if (message.siriSearchDataSetIdentifier !== undefined) {
       writer.uint32(586).string(message.siriSearchDataSetIdentifier);
     }
-    if (
-      message.prepareForSetQueueIsProactive !== undefined &&
-      message.prepareForSetQueueIsProactive !== false
-    ) {
+    if (message.prepareForSetQueueIsProactive !== undefined) {
       writer.uint32(592).bool(message.prepareForSetQueueIsProactive);
     }
-    if (
-      message.prepareForSetQueueProactiveReason !== undefined &&
-      message.prepareForSetQueueProactiveReason !== ""
-    ) {
+    if (message.prepareForSetQueueProactiveReason !== undefined) {
       writer.uint32(602).string(message.prepareForSetQueueProactiveReason);
     }
-    if (
-      message.prepareForSetQueueProactiveReasonType !== undefined &&
-      message.prepareForSetQueueProactiveReasonType !== 0
-    ) {
+    if (message.prepareForSetQueueProactiveReasonType !== undefined) {
       writer.uint32(608).int32(message.prepareForSetQueueProactiveReasonType);
     }
-    if (
-      message.applicationUserIdentity !== undefined &&
-      message.applicationUserIdentity.length !== 0
-    ) {
+    if (message.applicationUserIdentity !== undefined) {
       writer.uint32(618).bytes(message.applicationUserIdentity);
     }
     if (message.systemAppPlaybackQueue !== undefined) {
@@ -575,49 +425,28 @@ export const CommandOptions: MessageFns<CommandOptions> = {
         writer.uint32(626).fork()
       ).join();
     }
-    if (
-      message.vocalsControlActive !== undefined &&
-      message.vocalsControlActive !== false
-    ) {
+    if (message.vocalsControlActive !== undefined) {
       writer.uint32(632).bool(message.vocalsControlActive);
     }
-    if (
-      message.vocalsControlLevel !== undefined &&
-      message.vocalsControlLevel !== 0
-    ) {
+    if (message.vocalsControlLevel !== undefined) {
       writer.uint32(645).float(message.vocalsControlLevel);
     }
-    if (
-      message.vocalsControlMinLevel !== undefined &&
-      message.vocalsControlMinLevel !== 0
-    ) {
+    if (message.vocalsControlMinLevel !== undefined) {
       writer.uint32(653).float(message.vocalsControlMinLevel);
     }
-    if (
-      message.vocalsControlMaxLevel !== undefined &&
-      message.vocalsControlMaxLevel !== 0
-    ) {
+    if (message.vocalsControlMaxLevel !== undefined) {
       writer.uint32(661).float(message.vocalsControlMaxLevel);
     }
-    if (
-      message.vocalsControlContinuous !== undefined &&
-      message.vocalsControlContinuous !== false
-    ) {
+    if (message.vocalsControlContinuous !== undefined) {
       writer.uint32(664).bool(message.vocalsControlContinuous);
     }
-    if (
-      message.associatedParticipantIdentifier !== undefined &&
-      message.associatedParticipantIdentifier !== ""
-    ) {
+    if (message.associatedParticipantIdentifier !== undefined) {
       writer.uint32(674).string(message.associatedParticipantIdentifier);
     }
-    if (message.sleepTimerTime !== undefined && message.sleepTimerTime !== 0) {
+    if (message.sleepTimerTime !== undefined) {
       writer.uint32(681).double(message.sleepTimerTime);
     }
-    if (
-      message.sleepTimerStopMode !== undefined &&
-      message.sleepTimerStopMode !== 0
-    ) {
+    if (message.sleepTimerStopMode !== undefined) {
       writer.uint32(688).int32(message.sleepTimerStopMode);
     }
     if (message.dialogOptions !== undefined) {
@@ -626,34 +455,19 @@ export const CommandOptions: MessageFns<CommandOptions> = {
         writer.uint32(698).fork()
       ).join();
     }
-    if (
-      message.clientPreferredLanguages !== undefined &&
-      message.clientPreferredLanguages !== ""
-    ) {
+    if (message.clientPreferredLanguages !== undefined) {
       writer.uint32(706).string(message.clientPreferredLanguages);
     }
-    if (
-      message.referencePosition !== undefined &&
-      message.referencePosition !== 0
-    ) {
+    if (message.referencePosition !== undefined) {
       writer.uint32(713).double(message.referencePosition);
     }
-    if (
-      message.delegateAccountData !== undefined &&
-      message.delegateAccountData.length !== 0
-    ) {
+    if (message.delegateAccountData !== undefined) {
       writer.uint32(722).bytes(message.delegateAccountData);
     }
-    if (
-      message.delegateAccountDataType !== undefined &&
-      message.delegateAccountDataType !== ""
-    ) {
+    if (message.delegateAccountDataType !== undefined) {
       writer.uint32(730).string(message.delegateAccountDataType);
     }
-    if (
-      message.enhanceDialogueActive !== undefined &&
-      message.enhanceDialogueActive !== false
-    ) {
+    if (message.enhanceDialogueActive !== undefined) {
       writer.uint32(736).bool(message.enhanceDialogueActive);
     }
     if (message._unknownFields !== undefined) {
@@ -1389,656 +1203,510 @@ export const CommandOptions: MessageFns<CommandOptions> = {
     return {
       sourceId: isSet(object.sourceId)
         ? globalThis.String(object.sourceId)
-        : "",
+        : undefined,
       mediaType: isSet(object.mediaType)
         ? globalThis.String(object.mediaType)
-        : "",
+        : undefined,
       externalPlayerCommand: isSet(object.externalPlayerCommand)
         ? globalThis.Boolean(object.externalPlayerCommand)
-        : false,
+        : undefined,
       skipInterval: isSet(object.skipInterval)
         ? globalThis.Number(object.skipInterval)
-        : 0,
+        : undefined,
       playbackRate: isSet(object.playbackRate)
         ? globalThis.Number(object.playbackRate)
-        : 0,
-      rating: isSet(object.rating) ? globalThis.Number(object.rating) : 0,
+        : undefined,
+      rating: isSet(object.rating)
+        ? globalThis.Number(object.rating)
+        : undefined,
       negative: isSet(object.negative)
         ? globalThis.Boolean(object.negative)
-        : false,
+        : undefined,
       playbackPosition: isSet(object.playbackPosition)
         ? globalThis.Number(object.playbackPosition)
-        : 0,
+        : undefined,
       repeatMode: isSet(object.repeatMode)
         ? repeatMode_EnumFromJSON(object.repeatMode)
-        : 0,
+        : undefined,
       shuffleMode: isSet(object.shuffleMode)
         ? shuffleMode_EnumFromJSON(object.shuffleMode)
-        : 0,
-      trackID: isSet(object.trackID) ? globalThis.Number(object.trackID) : 0,
+        : undefined,
+      trackID: isSet(object.trackID)
+        ? globalThis.Number(object.trackID)
+        : undefined,
       radioStationID: isSet(object.radioStationID)
         ? globalThis.Number(object.radioStationID)
-        : 0,
+        : undefined,
       radioStationHash: isSet(object.radioStationHash)
         ? globalThis.String(object.radioStationHash)
-        : "",
+        : undefined,
       systemAppPlaybackQueueData: isSet(object.systemAppPlaybackQueueData)
         ? Buffer.from(bytesFromBase64(object.systemAppPlaybackQueueData))
-        : Buffer.alloc(0),
+        : undefined,
       destinationAppDisplayID: isSet(object.destinationAppDisplayID)
         ? globalThis.String(object.destinationAppDisplayID)
-        : "",
+        : undefined,
       sendOptions: isSet(object.sendOptions)
         ? globalThis.Number(object.sendOptions)
-        : 0,
+        : undefined,
       requestDefermentToPlaybackQueuePosition: isSet(
         object.requestDefermentToPlaybackQueuePosition
       )
         ? globalThis.Boolean(object.requestDefermentToPlaybackQueuePosition)
-        : false,
+        : undefined,
       contextID: isSet(object.contextID)
         ? globalThis.String(object.contextID)
-        : "",
+        : undefined,
       shouldOverrideManuallyCuratedQueue: isSet(
         object.shouldOverrideManuallyCuratedQueue
       )
         ? globalThis.Boolean(object.shouldOverrideManuallyCuratedQueue)
-        : false,
+        : undefined,
       stationURL: isSet(object.stationURL)
         ? globalThis.String(object.stationURL)
-        : "",
+        : undefined,
       shouldBeginRadioPlayback: isSet(object.shouldBeginRadioPlayback)
         ? globalThis.Boolean(object.shouldBeginRadioPlayback)
-        : false,
+        : undefined,
       playbackQueueInsertionPosition: isSet(
         object.playbackQueueInsertionPosition
       )
         ? globalThis.Number(object.playbackQueueInsertionPosition)
-        : 0,
+        : undefined,
       contentItemID: isSet(object.contentItemID)
         ? globalThis.String(object.contentItemID)
-        : "",
+        : undefined,
       playbackQueueOffset: isSet(object.playbackQueueOffset)
         ? globalThis.Number(object.playbackQueueOffset)
-        : 0,
+        : undefined,
       playbackQueueDestinationOffset: isSet(
         object.playbackQueueDestinationOffset
       )
         ? globalThis.Number(object.playbackQueueDestinationOffset)
-        : 0,
+        : undefined,
       languageOption: isSet(object.languageOption)
         ? Buffer.from(bytesFromBase64(object.languageOption))
-        : Buffer.alloc(0),
+        : undefined,
       playbackQueueContext: isSet(object.playbackQueueContext)
         ? Buffer.from(bytesFromBase64(object.playbackQueueContext))
-        : Buffer.alloc(0),
+        : undefined,
       insertAfterContentItemID: isSet(object.insertAfterContentItemID)
         ? globalThis.String(object.insertAfterContentItemID)
-        : "",
+        : undefined,
       nowPlayingContentItemID: isSet(object.nowPlayingContentItemID)
         ? globalThis.String(object.nowPlayingContentItemID)
-        : "",
+        : undefined,
       replaceIntent: isSet(object.replaceIntent)
         ? globalThis.Number(object.replaceIntent)
-        : 0,
+        : undefined,
       commandId: isSet(object.commandId)
         ? globalThis.String(object.commandId)
-        : "",
+        : undefined,
       senderId: isSet(object.senderId)
         ? globalThis.String(object.senderId)
-        : "",
+        : undefined,
       remoteControlInterface: isSet(object.remoteControlInterface)
         ? globalThis.String(object.remoteControlInterface)
-        : "",
+        : undefined,
       beginSeek: isSet(object.beginSeek)
         ? globalThis.Boolean(object.beginSeek)
-        : false,
+        : undefined,
       endSeek: isSet(object.endSeek)
         ? globalThis.Boolean(object.endSeek)
-        : false,
+        : undefined,
       playbackSession: isSet(object.playbackSession)
         ? Buffer.from(bytesFromBase64(object.playbackSession))
-        : Buffer.alloc(0),
+        : undefined,
       userIdentityData: isSet(object.userIdentityData)
         ? Buffer.from(bytesFromBase64(object.userIdentityData))
-        : Buffer.alloc(0),
+        : undefined,
       insertBeforeContentItemID: isSet(object.insertBeforeContentItemID)
         ? globalThis.String(object.insertBeforeContentItemID)
-        : "",
+        : undefined,
       queueEndAction: isSet(object.queueEndAction)
         ? globalThis.Number(object.queueEndAction)
-        : 0,
+        : undefined,
       preservesRepeatMode: isSet(object.preservesRepeatMode)
         ? globalThis.Boolean(object.preservesRepeatMode)
-        : false,
+        : undefined,
       preservesShuffleMode: isSet(object.preservesShuffleMode)
         ? globalThis.Boolean(object.preservesShuffleMode)
-        : false,
+        : undefined,
       preservesQueueEndAction: isSet(object.preservesQueueEndAction)
         ? globalThis.Boolean(object.preservesQueueEndAction)
-        : false,
+        : undefined,
       homeKitUserIdentifier: isSet(object.homeKitUserIdentifier)
         ? globalThis.String(object.homeKitUserIdentifier)
-        : "",
+        : undefined,
       verifySupportedCommands: isSet(object.verifySupportedCommands)
         ? globalThis.Boolean(object.verifySupportedCommands)
-        : false,
+        : undefined,
       playbackSessionIdentifier: isSet(object.playbackSessionIdentifier)
         ? globalThis.String(object.playbackSessionIdentifier)
-        : "",
+        : undefined,
       playbackSessionPriority: isSet(object.playbackSessionPriority)
         ? globalThis.Number(object.playbackSessionPriority)
-        : 0,
+        : undefined,
       playbackSessionFilePath: isSet(object.playbackSessionFilePath)
         ? globalThis.String(object.playbackSessionFilePath)
-        : "",
+        : undefined,
       playbackSessionRevision: isSet(object.playbackSessionRevision)
         ? globalThis.String(object.playbackSessionRevision)
-        : "",
+        : undefined,
       playbackSessionMetadata: isSet(object.playbackSessionMetadata)
         ? Buffer.from(bytesFromBase64(object.playbackSessionMetadata))
-        : Buffer.alloc(0),
+        : undefined,
       playbackSessionType: isSet(object.playbackSessionType)
         ? globalThis.String(object.playbackSessionType)
-        : "",
+        : undefined,
       trueCompletion: isSet(object.trueCompletion)
         ? globalThis.Boolean(object.trueCompletion)
-        : false,
+        : undefined,
       playbackAuthorizationToken: isSet(object.playbackAuthorizationToken)
         ? globalThis.String(object.playbackAuthorizationToken)
-        : "",
+        : undefined,
       eventNoticeType: isSet(object.eventNoticeType)
         ? globalThis.String(object.eventNoticeType)
-        : "",
+        : undefined,
       eventNoticeIdentifier: isSet(object.eventNoticeIdentifier)
         ? globalThis.String(object.eventNoticeIdentifier)
-        : "",
+        : undefined,
       sharedPlaybackSessionIdentifier: isSet(
         object.sharedPlaybackSessionIdentifier
       )
         ? globalThis.String(object.sharedPlaybackSessionIdentifier)
-        : "",
+        : undefined,
       commandTimeout: isSet(object.commandTimeout)
         ? globalThis.Number(object.commandTimeout)
-        : 0,
+        : undefined,
       assistantTtsEndTimestamp: isSet(object.assistantTtsEndTimestamp)
         ? globalThis.Number(object.assistantTtsEndTimestamp)
-        : 0,
+        : undefined,
       assistantCommandSendTimestamp: isSet(object.assistantCommandSendTimestamp)
         ? globalThis.Number(object.assistantCommandSendTimestamp)
-        : 0,
+        : undefined,
       originatingDeviceUID: isSet(object.originatingDeviceUID)
         ? globalThis.String(object.originatingDeviceUID)
-        : "",
+        : undefined,
       destinationDeviceUIDs: isSet(object.destinationDeviceUIDs)
         ? Buffer.from(bytesFromBase64(object.destinationDeviceUIDs))
-        : Buffer.alloc(0),
+        : undefined,
       desiredSessionId: isSet(object.desiredSessionId)
         ? globalThis.String(object.desiredSessionId)
-        : "",
+        : undefined,
       alwaysIgnoreDuringCall: isSet(object.alwaysIgnoreDuringCall)
         ? globalThis.Boolean(object.alwaysIgnoreDuringCall)
-        : false,
+        : undefined,
       alwaysIgnoreDuringSharePlay: isSet(object.alwaysIgnoreDuringSharePlay)
         ? globalThis.Boolean(object.alwaysIgnoreDuringSharePlay)
-        : false,
+        : undefined,
       commandSequenceUuid: isSet(object.commandSequenceUuid)
         ? globalThis.String(object.commandSequenceUuid)
-        : "",
+        : undefined,
       originatedFromRemoteDevice: isSet(object.originatedFromRemoteDevice)
         ? globalThis.Boolean(object.originatedFromRemoteDevice)
-        : false,
+        : undefined,
       siriTurnIdentifier: isSet(object.siriTurnIdentifier)
         ? globalThis.String(object.siriTurnIdentifier)
-        : "",
+        : undefined,
       siriSearchDataSetIdentifier: isSet(object.siriSearchDataSetIdentifier)
         ? globalThis.String(object.siriSearchDataSetIdentifier)
-        : "",
+        : undefined,
       prepareForSetQueueIsProactive: isSet(object.prepareForSetQueueIsProactive)
         ? globalThis.Boolean(object.prepareForSetQueueIsProactive)
-        : false,
+        : undefined,
       prepareForSetQueueProactiveReason: isSet(
         object.prepareForSetQueueProactiveReason
       )
         ? globalThis.String(object.prepareForSetQueueProactiveReason)
-        : "",
+        : undefined,
       prepareForSetQueueProactiveReasonType: isSet(
         object.prepareForSetQueueProactiveReasonType
       )
         ? globalThis.Number(object.prepareForSetQueueProactiveReasonType)
-        : 0,
+        : undefined,
       applicationUserIdentity: isSet(object.applicationUserIdentity)
         ? Buffer.from(bytesFromBase64(object.applicationUserIdentity))
-        : Buffer.alloc(0),
+        : undefined,
       systemAppPlaybackQueue: isSet(object.systemAppPlaybackQueue)
         ? SystemPlaybackQueue.fromJSON(object.systemAppPlaybackQueue)
         : undefined,
       vocalsControlActive: isSet(object.vocalsControlActive)
         ? globalThis.Boolean(object.vocalsControlActive)
-        : false,
+        : undefined,
       vocalsControlLevel: isSet(object.vocalsControlLevel)
         ? globalThis.Number(object.vocalsControlLevel)
-        : 0,
+        : undefined,
       vocalsControlMinLevel: isSet(object.vocalsControlMinLevel)
         ? globalThis.Number(object.vocalsControlMinLevel)
-        : 0,
+        : undefined,
       vocalsControlMaxLevel: isSet(object.vocalsControlMaxLevel)
         ? globalThis.Number(object.vocalsControlMaxLevel)
-        : 0,
+        : undefined,
       vocalsControlContinuous: isSet(object.vocalsControlContinuous)
         ? globalThis.Boolean(object.vocalsControlContinuous)
-        : false,
+        : undefined,
       associatedParticipantIdentifier: isSet(
         object.associatedParticipantIdentifier
       )
         ? globalThis.String(object.associatedParticipantIdentifier)
-        : "",
+        : undefined,
       sleepTimerTime: isSet(object.sleepTimerTime)
         ? globalThis.Number(object.sleepTimerTime)
-        : 0,
+        : undefined,
       sleepTimerStopMode: isSet(object.sleepTimerStopMode)
         ? globalThis.Number(object.sleepTimerStopMode)
-        : 0,
+        : undefined,
       dialogOptions: isSet(object.dialogOptions)
         ? Dictionary.fromJSON(object.dialogOptions)
         : undefined,
       clientPreferredLanguages: isSet(object.clientPreferredLanguages)
         ? globalThis.String(object.clientPreferredLanguages)
-        : "",
+        : undefined,
       referencePosition: isSet(object.referencePosition)
         ? globalThis.Number(object.referencePosition)
-        : 0,
+        : undefined,
       delegateAccountData: isSet(object.delegateAccountData)
         ? Buffer.from(bytesFromBase64(object.delegateAccountData))
-        : Buffer.alloc(0),
+        : undefined,
       delegateAccountDataType: isSet(object.delegateAccountDataType)
         ? globalThis.String(object.delegateAccountDataType)
-        : "",
+        : undefined,
       enhanceDialogueActive: isSet(object.enhanceDialogueActive)
         ? globalThis.Boolean(object.enhanceDialogueActive)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: CommandOptions): unknown {
     const obj: any = {};
-    if (message.sourceId !== undefined && message.sourceId !== "") {
+    if (message.sourceId !== undefined) {
       obj.sourceId = message.sourceId;
     }
-    if (message.mediaType !== undefined && message.mediaType !== "") {
+    if (message.mediaType !== undefined) {
       obj.mediaType = message.mediaType;
     }
-    if (
-      message.externalPlayerCommand !== undefined &&
-      message.externalPlayerCommand !== false
-    ) {
+    if (message.externalPlayerCommand !== undefined) {
       obj.externalPlayerCommand = message.externalPlayerCommand;
     }
-    if (message.skipInterval !== undefined && message.skipInterval !== 0) {
+    if (message.skipInterval !== undefined) {
       obj.skipInterval = message.skipInterval;
     }
-    if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+    if (message.playbackRate !== undefined) {
       obj.playbackRate = message.playbackRate;
     }
-    if (message.rating !== undefined && message.rating !== 0) {
+    if (message.rating !== undefined) {
       obj.rating = message.rating;
     }
-    if (message.negative !== undefined && message.negative !== false) {
+    if (message.negative !== undefined) {
       obj.negative = message.negative;
     }
-    if (
-      message.playbackPosition !== undefined &&
-      message.playbackPosition !== 0
-    ) {
+    if (message.playbackPosition !== undefined) {
       obj.playbackPosition = message.playbackPosition;
     }
-    if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+    if (message.repeatMode !== undefined) {
       obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode);
     }
-    if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+    if (message.shuffleMode !== undefined) {
       obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode);
     }
-    if (message.trackID !== undefined && message.trackID !== 0) {
+    if (message.trackID !== undefined) {
       obj.trackID = Math.round(message.trackID);
     }
-    if (message.radioStationID !== undefined && message.radioStationID !== 0) {
+    if (message.radioStationID !== undefined) {
       obj.radioStationID = Math.round(message.radioStationID);
     }
-    if (
-      message.radioStationHash !== undefined &&
-      message.radioStationHash !== ""
-    ) {
+    if (message.radioStationHash !== undefined) {
       obj.radioStationHash = message.radioStationHash;
     }
-    if (
-      message.systemAppPlaybackQueueData !== undefined &&
-      message.systemAppPlaybackQueueData.length !== 0
-    ) {
+    if (message.systemAppPlaybackQueueData !== undefined) {
       obj.systemAppPlaybackQueueData = base64FromBytes(
         message.systemAppPlaybackQueueData
       );
     }
-    if (
-      message.destinationAppDisplayID !== undefined &&
-      message.destinationAppDisplayID !== ""
-    ) {
+    if (message.destinationAppDisplayID !== undefined) {
       obj.destinationAppDisplayID = message.destinationAppDisplayID;
     }
-    if (message.sendOptions !== undefined && message.sendOptions !== 0) {
+    if (message.sendOptions !== undefined) {
       obj.sendOptions = Math.round(message.sendOptions);
     }
-    if (
-      message.requestDefermentToPlaybackQueuePosition !== undefined &&
-      message.requestDefermentToPlaybackQueuePosition !== false
-    ) {
+    if (message.requestDefermentToPlaybackQueuePosition !== undefined) {
       obj.requestDefermentToPlaybackQueuePosition =
         message.requestDefermentToPlaybackQueuePosition;
     }
-    if (message.contextID !== undefined && message.contextID !== "") {
+    if (message.contextID !== undefined) {
       obj.contextID = message.contextID;
     }
-    if (
-      message.shouldOverrideManuallyCuratedQueue !== undefined &&
-      message.shouldOverrideManuallyCuratedQueue !== false
-    ) {
+    if (message.shouldOverrideManuallyCuratedQueue !== undefined) {
       obj.shouldOverrideManuallyCuratedQueue =
         message.shouldOverrideManuallyCuratedQueue;
     }
-    if (message.stationURL !== undefined && message.stationURL !== "") {
+    if (message.stationURL !== undefined) {
       obj.stationURL = message.stationURL;
     }
-    if (
-      message.shouldBeginRadioPlayback !== undefined &&
-      message.shouldBeginRadioPlayback !== false
-    ) {
+    if (message.shouldBeginRadioPlayback !== undefined) {
       obj.shouldBeginRadioPlayback = message.shouldBeginRadioPlayback;
     }
-    if (
-      message.playbackQueueInsertionPosition !== undefined &&
-      message.playbackQueueInsertionPosition !== 0
-    ) {
+    if (message.playbackQueueInsertionPosition !== undefined) {
       obj.playbackQueueInsertionPosition = Math.round(
         message.playbackQueueInsertionPosition
       );
     }
-    if (message.contentItemID !== undefined && message.contentItemID !== "") {
+    if (message.contentItemID !== undefined) {
       obj.contentItemID = message.contentItemID;
     }
-    if (
-      message.playbackQueueOffset !== undefined &&
-      message.playbackQueueOffset !== 0
-    ) {
+    if (message.playbackQueueOffset !== undefined) {
       obj.playbackQueueOffset = Math.round(message.playbackQueueOffset);
     }
-    if (
-      message.playbackQueueDestinationOffset !== undefined &&
-      message.playbackQueueDestinationOffset !== 0
-    ) {
+    if (message.playbackQueueDestinationOffset !== undefined) {
       obj.playbackQueueDestinationOffset = Math.round(
         message.playbackQueueDestinationOffset
       );
     }
-    if (
-      message.languageOption !== undefined &&
-      message.languageOption.length !== 0
-    ) {
+    if (message.languageOption !== undefined) {
       obj.languageOption = base64FromBytes(message.languageOption);
     }
-    if (
-      message.playbackQueueContext !== undefined &&
-      message.playbackQueueContext.length !== 0
-    ) {
+    if (message.playbackQueueContext !== undefined) {
       obj.playbackQueueContext = base64FromBytes(message.playbackQueueContext);
     }
-    if (
-      message.insertAfterContentItemID !== undefined &&
-      message.insertAfterContentItemID !== ""
-    ) {
+    if (message.insertAfterContentItemID !== undefined) {
       obj.insertAfterContentItemID = message.insertAfterContentItemID;
     }
-    if (
-      message.nowPlayingContentItemID !== undefined &&
-      message.nowPlayingContentItemID !== ""
-    ) {
+    if (message.nowPlayingContentItemID !== undefined) {
       obj.nowPlayingContentItemID = message.nowPlayingContentItemID;
     }
-    if (message.replaceIntent !== undefined && message.replaceIntent !== 0) {
+    if (message.replaceIntent !== undefined) {
       obj.replaceIntent = Math.round(message.replaceIntent);
     }
-    if (message.commandId !== undefined && message.commandId !== "") {
+    if (message.commandId !== undefined) {
       obj.commandId = message.commandId;
     }
-    if (message.senderId !== undefined && message.senderId !== "") {
+    if (message.senderId !== undefined) {
       obj.senderId = message.senderId;
     }
-    if (
-      message.remoteControlInterface !== undefined &&
-      message.remoteControlInterface !== ""
-    ) {
+    if (message.remoteControlInterface !== undefined) {
       obj.remoteControlInterface = message.remoteControlInterface;
     }
-    if (message.beginSeek !== undefined && message.beginSeek !== false) {
+    if (message.beginSeek !== undefined) {
       obj.beginSeek = message.beginSeek;
     }
-    if (message.endSeek !== undefined && message.endSeek !== false) {
+    if (message.endSeek !== undefined) {
       obj.endSeek = message.endSeek;
     }
-    if (
-      message.playbackSession !== undefined &&
-      message.playbackSession.length !== 0
-    ) {
+    if (message.playbackSession !== undefined) {
       obj.playbackSession = base64FromBytes(message.playbackSession);
     }
-    if (
-      message.userIdentityData !== undefined &&
-      message.userIdentityData.length !== 0
-    ) {
+    if (message.userIdentityData !== undefined) {
       obj.userIdentityData = base64FromBytes(message.userIdentityData);
     }
-    if (
-      message.insertBeforeContentItemID !== undefined &&
-      message.insertBeforeContentItemID !== ""
-    ) {
+    if (message.insertBeforeContentItemID !== undefined) {
       obj.insertBeforeContentItemID = message.insertBeforeContentItemID;
     }
-    if (message.queueEndAction !== undefined && message.queueEndAction !== 0) {
+    if (message.queueEndAction !== undefined) {
       obj.queueEndAction = Math.round(message.queueEndAction);
     }
-    if (
-      message.preservesRepeatMode !== undefined &&
-      message.preservesRepeatMode !== false
-    ) {
+    if (message.preservesRepeatMode !== undefined) {
       obj.preservesRepeatMode = message.preservesRepeatMode;
     }
-    if (
-      message.preservesShuffleMode !== undefined &&
-      message.preservesShuffleMode !== false
-    ) {
+    if (message.preservesShuffleMode !== undefined) {
       obj.preservesShuffleMode = message.preservesShuffleMode;
     }
-    if (
-      message.preservesQueueEndAction !== undefined &&
-      message.preservesQueueEndAction !== false
-    ) {
+    if (message.preservesQueueEndAction !== undefined) {
       obj.preservesQueueEndAction = message.preservesQueueEndAction;
     }
-    if (
-      message.homeKitUserIdentifier !== undefined &&
-      message.homeKitUserIdentifier !== ""
-    ) {
+    if (message.homeKitUserIdentifier !== undefined) {
       obj.homeKitUserIdentifier = message.homeKitUserIdentifier;
     }
-    if (
-      message.verifySupportedCommands !== undefined &&
-      message.verifySupportedCommands !== false
-    ) {
+    if (message.verifySupportedCommands !== undefined) {
       obj.verifySupportedCommands = message.verifySupportedCommands;
     }
-    if (
-      message.playbackSessionIdentifier !== undefined &&
-      message.playbackSessionIdentifier !== ""
-    ) {
+    if (message.playbackSessionIdentifier !== undefined) {
       obj.playbackSessionIdentifier = message.playbackSessionIdentifier;
     }
-    if (
-      message.playbackSessionPriority !== undefined &&
-      message.playbackSessionPriority !== 0
-    ) {
+    if (message.playbackSessionPriority !== undefined) {
       obj.playbackSessionPriority = Math.round(message.playbackSessionPriority);
     }
-    if (
-      message.playbackSessionFilePath !== undefined &&
-      message.playbackSessionFilePath !== ""
-    ) {
+    if (message.playbackSessionFilePath !== undefined) {
       obj.playbackSessionFilePath = message.playbackSessionFilePath;
     }
-    if (
-      message.playbackSessionRevision !== undefined &&
-      message.playbackSessionRevision !== ""
-    ) {
+    if (message.playbackSessionRevision !== undefined) {
       obj.playbackSessionRevision = message.playbackSessionRevision;
     }
-    if (
-      message.playbackSessionMetadata !== undefined &&
-      message.playbackSessionMetadata.length !== 0
-    ) {
+    if (message.playbackSessionMetadata !== undefined) {
       obj.playbackSessionMetadata = base64FromBytes(
         message.playbackSessionMetadata
       );
     }
-    if (
-      message.playbackSessionType !== undefined &&
-      message.playbackSessionType !== ""
-    ) {
+    if (message.playbackSessionType !== undefined) {
       obj.playbackSessionType = message.playbackSessionType;
     }
-    if (
-      message.trueCompletion !== undefined &&
-      message.trueCompletion !== false
-    ) {
+    if (message.trueCompletion !== undefined) {
       obj.trueCompletion = message.trueCompletion;
     }
-    if (
-      message.playbackAuthorizationToken !== undefined &&
-      message.playbackAuthorizationToken !== ""
-    ) {
+    if (message.playbackAuthorizationToken !== undefined) {
       obj.playbackAuthorizationToken = message.playbackAuthorizationToken;
     }
-    if (
-      message.eventNoticeType !== undefined &&
-      message.eventNoticeType !== ""
-    ) {
+    if (message.eventNoticeType !== undefined) {
       obj.eventNoticeType = message.eventNoticeType;
     }
-    if (
-      message.eventNoticeIdentifier !== undefined &&
-      message.eventNoticeIdentifier !== ""
-    ) {
+    if (message.eventNoticeIdentifier !== undefined) {
       obj.eventNoticeIdentifier = message.eventNoticeIdentifier;
     }
-    if (
-      message.sharedPlaybackSessionIdentifier !== undefined &&
-      message.sharedPlaybackSessionIdentifier !== ""
-    ) {
+    if (message.sharedPlaybackSessionIdentifier !== undefined) {
       obj.sharedPlaybackSessionIdentifier =
         message.sharedPlaybackSessionIdentifier;
     }
-    if (message.commandTimeout !== undefined && message.commandTimeout !== 0) {
+    if (message.commandTimeout !== undefined) {
       obj.commandTimeout = message.commandTimeout;
     }
-    if (
-      message.assistantTtsEndTimestamp !== undefined &&
-      message.assistantTtsEndTimestamp !== 0
-    ) {
+    if (message.assistantTtsEndTimestamp !== undefined) {
       obj.assistantTtsEndTimestamp = message.assistantTtsEndTimestamp;
     }
-    if (
-      message.assistantCommandSendTimestamp !== undefined &&
-      message.assistantCommandSendTimestamp !== 0
-    ) {
+    if (message.assistantCommandSendTimestamp !== undefined) {
       obj.assistantCommandSendTimestamp = message.assistantCommandSendTimestamp;
     }
-    if (
-      message.originatingDeviceUID !== undefined &&
-      message.originatingDeviceUID !== ""
-    ) {
+    if (message.originatingDeviceUID !== undefined) {
       obj.originatingDeviceUID = message.originatingDeviceUID;
     }
-    if (
-      message.destinationDeviceUIDs !== undefined &&
-      message.destinationDeviceUIDs.length !== 0
-    ) {
+    if (message.destinationDeviceUIDs !== undefined) {
       obj.destinationDeviceUIDs = base64FromBytes(
         message.destinationDeviceUIDs
       );
     }
-    if (
-      message.desiredSessionId !== undefined &&
-      message.desiredSessionId !== ""
-    ) {
+    if (message.desiredSessionId !== undefined) {
       obj.desiredSessionId = message.desiredSessionId;
     }
-    if (
-      message.alwaysIgnoreDuringCall !== undefined &&
-      message.alwaysIgnoreDuringCall !== false
-    ) {
+    if (message.alwaysIgnoreDuringCall !== undefined) {
       obj.alwaysIgnoreDuringCall = message.alwaysIgnoreDuringCall;
     }
-    if (
-      message.alwaysIgnoreDuringSharePlay !== undefined &&
-      message.alwaysIgnoreDuringSharePlay !== false
-    ) {
+    if (message.alwaysIgnoreDuringSharePlay !== undefined) {
       obj.alwaysIgnoreDuringSharePlay = message.alwaysIgnoreDuringSharePlay;
     }
-    if (
-      message.commandSequenceUuid !== undefined &&
-      message.commandSequenceUuid !== ""
-    ) {
+    if (message.commandSequenceUuid !== undefined) {
       obj.commandSequenceUuid = message.commandSequenceUuid;
     }
-    if (
-      message.originatedFromRemoteDevice !== undefined &&
-      message.originatedFromRemoteDevice !== false
-    ) {
+    if (message.originatedFromRemoteDevice !== undefined) {
       obj.originatedFromRemoteDevice = message.originatedFromRemoteDevice;
     }
-    if (
-      message.siriTurnIdentifier !== undefined &&
-      message.siriTurnIdentifier !== ""
-    ) {
+    if (message.siriTurnIdentifier !== undefined) {
       obj.siriTurnIdentifier = message.siriTurnIdentifier;
     }
-    if (
-      message.siriSearchDataSetIdentifier !== undefined &&
-      message.siriSearchDataSetIdentifier !== ""
-    ) {
+    if (message.siriSearchDataSetIdentifier !== undefined) {
       obj.siriSearchDataSetIdentifier = message.siriSearchDataSetIdentifier;
     }
-    if (
-      message.prepareForSetQueueIsProactive !== undefined &&
-      message.prepareForSetQueueIsProactive !== false
-    ) {
+    if (message.prepareForSetQueueIsProactive !== undefined) {
       obj.prepareForSetQueueIsProactive = message.prepareForSetQueueIsProactive;
     }
-    if (
-      message.prepareForSetQueueProactiveReason !== undefined &&
-      message.prepareForSetQueueProactiveReason !== ""
-    ) {
+    if (message.prepareForSetQueueProactiveReason !== undefined) {
       obj.prepareForSetQueueProactiveReason =
         message.prepareForSetQueueProactiveReason;
     }
-    if (
-      message.prepareForSetQueueProactiveReasonType !== undefined &&
-      message.prepareForSetQueueProactiveReasonType !== 0
-    ) {
+    if (message.prepareForSetQueueProactiveReasonType !== undefined) {
       obj.prepareForSetQueueProactiveReasonType = Math.round(
         message.prepareForSetQueueProactiveReasonType
       );
     }
-    if (
-      message.applicationUserIdentity !== undefined &&
-      message.applicationUserIdentity.length !== 0
-    ) {
+    if (message.applicationUserIdentity !== undefined) {
       obj.applicationUserIdentity = base64FromBytes(
         message.applicationUserIdentity
       );
@@ -2048,83 +1716,47 @@ export const CommandOptions: MessageFns<CommandOptions> = {
         message.systemAppPlaybackQueue
       );
     }
-    if (
-      message.vocalsControlActive !== undefined &&
-      message.vocalsControlActive !== false
-    ) {
+    if (message.vocalsControlActive !== undefined) {
       obj.vocalsControlActive = message.vocalsControlActive;
     }
-    if (
-      message.vocalsControlLevel !== undefined &&
-      message.vocalsControlLevel !== 0
-    ) {
+    if (message.vocalsControlLevel !== undefined) {
       obj.vocalsControlLevel = message.vocalsControlLevel;
     }
-    if (
-      message.vocalsControlMinLevel !== undefined &&
-      message.vocalsControlMinLevel !== 0
-    ) {
+    if (message.vocalsControlMinLevel !== undefined) {
       obj.vocalsControlMinLevel = message.vocalsControlMinLevel;
     }
-    if (
-      message.vocalsControlMaxLevel !== undefined &&
-      message.vocalsControlMaxLevel !== 0
-    ) {
+    if (message.vocalsControlMaxLevel !== undefined) {
       obj.vocalsControlMaxLevel = message.vocalsControlMaxLevel;
     }
-    if (
-      message.vocalsControlContinuous !== undefined &&
-      message.vocalsControlContinuous !== false
-    ) {
+    if (message.vocalsControlContinuous !== undefined) {
       obj.vocalsControlContinuous = message.vocalsControlContinuous;
     }
-    if (
-      message.associatedParticipantIdentifier !== undefined &&
-      message.associatedParticipantIdentifier !== ""
-    ) {
+    if (message.associatedParticipantIdentifier !== undefined) {
       obj.associatedParticipantIdentifier =
         message.associatedParticipantIdentifier;
     }
-    if (message.sleepTimerTime !== undefined && message.sleepTimerTime !== 0) {
+    if (message.sleepTimerTime !== undefined) {
       obj.sleepTimerTime = message.sleepTimerTime;
     }
-    if (
-      message.sleepTimerStopMode !== undefined &&
-      message.sleepTimerStopMode !== 0
-    ) {
+    if (message.sleepTimerStopMode !== undefined) {
       obj.sleepTimerStopMode = Math.round(message.sleepTimerStopMode);
     }
     if (message.dialogOptions !== undefined) {
       obj.dialogOptions = Dictionary.toJSON(message.dialogOptions);
     }
-    if (
-      message.clientPreferredLanguages !== undefined &&
-      message.clientPreferredLanguages !== ""
-    ) {
+    if (message.clientPreferredLanguages !== undefined) {
       obj.clientPreferredLanguages = message.clientPreferredLanguages;
     }
-    if (
-      message.referencePosition !== undefined &&
-      message.referencePosition !== 0
-    ) {
+    if (message.referencePosition !== undefined) {
       obj.referencePosition = message.referencePosition;
     }
-    if (
-      message.delegateAccountData !== undefined &&
-      message.delegateAccountData.length !== 0
-    ) {
+    if (message.delegateAccountData !== undefined) {
       obj.delegateAccountData = base64FromBytes(message.delegateAccountData);
     }
-    if (
-      message.delegateAccountDataType !== undefined &&
-      message.delegateAccountDataType !== ""
-    ) {
+    if (message.delegateAccountDataType !== undefined) {
       obj.delegateAccountDataType = message.delegateAccountDataType;
     }
-    if (
-      message.enhanceDialogueActive !== undefined &&
-      message.enhanceDialogueActive !== false
-    ) {
+    if (message.enhanceDialogueActive !== undefined) {
       obj.enhanceDialogueActive = message.enhanceDialogueActive;
     }
     return obj;
@@ -2139,118 +1771,131 @@ export const CommandOptions: MessageFns<CommandOptions> = {
     object: I
   ): CommandOptions {
     const message = createBaseCommandOptions();
-    message.sourceId = object.sourceId ?? "";
-    message.mediaType = object.mediaType ?? "";
-    message.externalPlayerCommand = object.externalPlayerCommand ?? false;
-    message.skipInterval = object.skipInterval ?? 0;
-    message.playbackRate = object.playbackRate ?? 0;
-    message.rating = object.rating ?? 0;
-    message.negative = object.negative ?? false;
-    message.playbackPosition = object.playbackPosition ?? 0;
-    message.repeatMode = object.repeatMode ?? 0;
-    message.shuffleMode = object.shuffleMode ?? 0;
-    message.trackID = object.trackID ?? 0;
-    message.radioStationID = object.radioStationID ?? 0;
-    message.radioStationHash = object.radioStationHash ?? "";
+    message.sourceId = object.sourceId ?? undefined;
+    message.mediaType = object.mediaType ?? undefined;
+    message.externalPlayerCommand = object.externalPlayerCommand ?? undefined;
+    message.skipInterval = object.skipInterval ?? undefined;
+    message.playbackRate = object.playbackRate ?? undefined;
+    message.rating = object.rating ?? undefined;
+    message.negative = object.negative ?? undefined;
+    message.playbackPosition = object.playbackPosition ?? undefined;
+    message.repeatMode = object.repeatMode ?? undefined;
+    message.shuffleMode = object.shuffleMode ?? undefined;
+    message.trackID = object.trackID ?? undefined;
+    message.radioStationID = object.radioStationID ?? undefined;
+    message.radioStationHash = object.radioStationHash ?? undefined;
     message.systemAppPlaybackQueueData =
-      object.systemAppPlaybackQueueData ?? Buffer.alloc(0);
-    message.destinationAppDisplayID = object.destinationAppDisplayID ?? "";
-    message.sendOptions = object.sendOptions ?? 0;
+      object.systemAppPlaybackQueueData ?? undefined;
+    message.destinationAppDisplayID =
+      object.destinationAppDisplayID ?? undefined;
+    message.sendOptions = object.sendOptions ?? undefined;
     message.requestDefermentToPlaybackQueuePosition =
-      object.requestDefermentToPlaybackQueuePosition ?? false;
-    message.contextID = object.contextID ?? "";
+      object.requestDefermentToPlaybackQueuePosition ?? undefined;
+    message.contextID = object.contextID ?? undefined;
     message.shouldOverrideManuallyCuratedQueue =
-      object.shouldOverrideManuallyCuratedQueue ?? false;
-    message.stationURL = object.stationURL ?? "";
-    message.shouldBeginRadioPlayback = object.shouldBeginRadioPlayback ?? false;
+      object.shouldOverrideManuallyCuratedQueue ?? undefined;
+    message.stationURL = object.stationURL ?? undefined;
+    message.shouldBeginRadioPlayback =
+      object.shouldBeginRadioPlayback ?? undefined;
     message.playbackQueueInsertionPosition =
-      object.playbackQueueInsertionPosition ?? 0;
-    message.contentItemID = object.contentItemID ?? "";
-    message.playbackQueueOffset = object.playbackQueueOffset ?? 0;
+      object.playbackQueueInsertionPosition ?? undefined;
+    message.contentItemID = object.contentItemID ?? undefined;
+    message.playbackQueueOffset = object.playbackQueueOffset ?? undefined;
     message.playbackQueueDestinationOffset =
-      object.playbackQueueDestinationOffset ?? 0;
-    message.languageOption = object.languageOption ?? Buffer.alloc(0);
-    message.playbackQueueContext =
-      object.playbackQueueContext ?? Buffer.alloc(0);
-    message.insertAfterContentItemID = object.insertAfterContentItemID ?? "";
-    message.nowPlayingContentItemID = object.nowPlayingContentItemID ?? "";
-    message.replaceIntent = object.replaceIntent ?? 0;
-    message.commandId = object.commandId ?? "";
-    message.senderId = object.senderId ?? "";
-    message.remoteControlInterface = object.remoteControlInterface ?? "";
-    message.beginSeek = object.beginSeek ?? false;
-    message.endSeek = object.endSeek ?? false;
-    message.playbackSession = object.playbackSession ?? Buffer.alloc(0);
-    message.userIdentityData = object.userIdentityData ?? Buffer.alloc(0);
-    message.insertBeforeContentItemID = object.insertBeforeContentItemID ?? "";
-    message.queueEndAction = object.queueEndAction ?? 0;
-    message.preservesRepeatMode = object.preservesRepeatMode ?? false;
-    message.preservesShuffleMode = object.preservesShuffleMode ?? false;
-    message.preservesQueueEndAction = object.preservesQueueEndAction ?? false;
-    message.homeKitUserIdentifier = object.homeKitUserIdentifier ?? "";
-    message.verifySupportedCommands = object.verifySupportedCommands ?? false;
-    message.playbackSessionIdentifier = object.playbackSessionIdentifier ?? "";
-    message.playbackSessionPriority = object.playbackSessionPriority ?? 0;
-    message.playbackSessionFilePath = object.playbackSessionFilePath ?? "";
-    message.playbackSessionRevision = object.playbackSessionRevision ?? "";
+      object.playbackQueueDestinationOffset ?? undefined;
+    message.languageOption = object.languageOption ?? undefined;
+    message.playbackQueueContext = object.playbackQueueContext ?? undefined;
+    message.insertAfterContentItemID =
+      object.insertAfterContentItemID ?? undefined;
+    message.nowPlayingContentItemID =
+      object.nowPlayingContentItemID ?? undefined;
+    message.replaceIntent = object.replaceIntent ?? undefined;
+    message.commandId = object.commandId ?? undefined;
+    message.senderId = object.senderId ?? undefined;
+    message.remoteControlInterface = object.remoteControlInterface ?? undefined;
+    message.beginSeek = object.beginSeek ?? undefined;
+    message.endSeek = object.endSeek ?? undefined;
+    message.playbackSession = object.playbackSession ?? undefined;
+    message.userIdentityData = object.userIdentityData ?? undefined;
+    message.insertBeforeContentItemID =
+      object.insertBeforeContentItemID ?? undefined;
+    message.queueEndAction = object.queueEndAction ?? undefined;
+    message.preservesRepeatMode = object.preservesRepeatMode ?? undefined;
+    message.preservesShuffleMode = object.preservesShuffleMode ?? undefined;
+    message.preservesQueueEndAction =
+      object.preservesQueueEndAction ?? undefined;
+    message.homeKitUserIdentifier = object.homeKitUserIdentifier ?? undefined;
+    message.verifySupportedCommands =
+      object.verifySupportedCommands ?? undefined;
+    message.playbackSessionIdentifier =
+      object.playbackSessionIdentifier ?? undefined;
+    message.playbackSessionPriority =
+      object.playbackSessionPriority ?? undefined;
+    message.playbackSessionFilePath =
+      object.playbackSessionFilePath ?? undefined;
+    message.playbackSessionRevision =
+      object.playbackSessionRevision ?? undefined;
     message.playbackSessionMetadata =
-      object.playbackSessionMetadata ?? Buffer.alloc(0);
-    message.playbackSessionType = object.playbackSessionType ?? "";
-    message.trueCompletion = object.trueCompletion ?? false;
+      object.playbackSessionMetadata ?? undefined;
+    message.playbackSessionType = object.playbackSessionType ?? undefined;
+    message.trueCompletion = object.trueCompletion ?? undefined;
     message.playbackAuthorizationToken =
-      object.playbackAuthorizationToken ?? "";
-    message.eventNoticeType = object.eventNoticeType ?? "";
-    message.eventNoticeIdentifier = object.eventNoticeIdentifier ?? "";
+      object.playbackAuthorizationToken ?? undefined;
+    message.eventNoticeType = object.eventNoticeType ?? undefined;
+    message.eventNoticeIdentifier = object.eventNoticeIdentifier ?? undefined;
     message.sharedPlaybackSessionIdentifier =
-      object.sharedPlaybackSessionIdentifier ?? "";
-    message.commandTimeout = object.commandTimeout ?? 0;
-    message.assistantTtsEndTimestamp = object.assistantTtsEndTimestamp ?? 0;
+      object.sharedPlaybackSessionIdentifier ?? undefined;
+    message.commandTimeout = object.commandTimeout ?? undefined;
+    message.assistantTtsEndTimestamp =
+      object.assistantTtsEndTimestamp ?? undefined;
     message.assistantCommandSendTimestamp =
-      object.assistantCommandSendTimestamp ?? 0;
-    message.originatingDeviceUID = object.originatingDeviceUID ?? "";
-    message.destinationDeviceUIDs =
-      object.destinationDeviceUIDs ?? Buffer.alloc(0);
-    message.desiredSessionId = object.desiredSessionId ?? "";
-    message.alwaysIgnoreDuringCall = object.alwaysIgnoreDuringCall ?? false;
+      object.assistantCommandSendTimestamp ?? undefined;
+    message.originatingDeviceUID = object.originatingDeviceUID ?? undefined;
+    message.destinationDeviceUIDs = object.destinationDeviceUIDs ?? undefined;
+    message.desiredSessionId = object.desiredSessionId ?? undefined;
+    message.alwaysIgnoreDuringCall = object.alwaysIgnoreDuringCall ?? undefined;
     message.alwaysIgnoreDuringSharePlay =
-      object.alwaysIgnoreDuringSharePlay ?? false;
-    message.commandSequenceUuid = object.commandSequenceUuid ?? "";
+      object.alwaysIgnoreDuringSharePlay ?? undefined;
+    message.commandSequenceUuid = object.commandSequenceUuid ?? undefined;
     message.originatedFromRemoteDevice =
-      object.originatedFromRemoteDevice ?? false;
-    message.siriTurnIdentifier = object.siriTurnIdentifier ?? "";
+      object.originatedFromRemoteDevice ?? undefined;
+    message.siriTurnIdentifier = object.siriTurnIdentifier ?? undefined;
     message.siriSearchDataSetIdentifier =
-      object.siriSearchDataSetIdentifier ?? "";
+      object.siriSearchDataSetIdentifier ?? undefined;
     message.prepareForSetQueueIsProactive =
-      object.prepareForSetQueueIsProactive ?? false;
+      object.prepareForSetQueueIsProactive ?? undefined;
     message.prepareForSetQueueProactiveReason =
-      object.prepareForSetQueueProactiveReason ?? "";
+      object.prepareForSetQueueProactiveReason ?? undefined;
     message.prepareForSetQueueProactiveReasonType =
-      object.prepareForSetQueueProactiveReasonType ?? 0;
+      object.prepareForSetQueueProactiveReasonType ?? undefined;
     message.applicationUserIdentity =
-      object.applicationUserIdentity ?? Buffer.alloc(0);
+      object.applicationUserIdentity ?? undefined;
     message.systemAppPlaybackQueue =
       object.systemAppPlaybackQueue !== undefined &&
       object.systemAppPlaybackQueue !== null
         ? SystemPlaybackQueue.fromPartial(object.systemAppPlaybackQueue)
         : undefined;
-    message.vocalsControlActive = object.vocalsControlActive ?? false;
-    message.vocalsControlLevel = object.vocalsControlLevel ?? 0;
-    message.vocalsControlMinLevel = object.vocalsControlMinLevel ?? 0;
-    message.vocalsControlMaxLevel = object.vocalsControlMaxLevel ?? 0;
-    message.vocalsControlContinuous = object.vocalsControlContinuous ?? false;
+    message.vocalsControlActive = object.vocalsControlActive ?? undefined;
+    message.vocalsControlLevel = object.vocalsControlLevel ?? undefined;
+    message.vocalsControlMinLevel = object.vocalsControlMinLevel ?? undefined;
+    message.vocalsControlMaxLevel = object.vocalsControlMaxLevel ?? undefined;
+    message.vocalsControlContinuous =
+      object.vocalsControlContinuous ?? undefined;
     message.associatedParticipantIdentifier =
-      object.associatedParticipantIdentifier ?? "";
-    message.sleepTimerTime = object.sleepTimerTime ?? 0;
-    message.sleepTimerStopMode = object.sleepTimerStopMode ?? 0;
+      object.associatedParticipantIdentifier ?? undefined;
+    message.sleepTimerTime = object.sleepTimerTime ?? undefined;
+    message.sleepTimerStopMode = object.sleepTimerStopMode ?? undefined;
     message.dialogOptions =
       object.dialogOptions !== undefined && object.dialogOptions !== null
         ? Dictionary.fromPartial(object.dialogOptions)
         : undefined;
-    message.clientPreferredLanguages = object.clientPreferredLanguages ?? "";
-    message.referencePosition = object.referencePosition ?? 0;
-    message.delegateAccountData = object.delegateAccountData ?? Buffer.alloc(0);
-    message.delegateAccountDataType = object.delegateAccountDataType ?? "";
-    message.enhanceDialogueActive = object.enhanceDialogueActive ?? false;
+    message.clientPreferredLanguages =
+      object.clientPreferredLanguages ?? undefined;
+    message.referencePosition = object.referencePosition ?? undefined;
+    message.delegateAccountData = object.delegateAccountData ?? undefined;
+    message.delegateAccountDataType =
+      object.delegateAccountDataType ?? undefined;
+    message.enhanceDialogueActive = object.enhanceDialogueActive ?? undefined;
     return message;
   },
 };

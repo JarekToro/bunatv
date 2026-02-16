@@ -638,15 +638,15 @@ export const ReturnKeyType: MessageFns<ReturnKeyType> = {
 
 function createBaseTextInputTraits(): TextInputTraits {
   return {
-    autocapitalizationType: 0,
-    keyboardType: 0,
-    returnKeyType: 0,
-    autocorrection: false,
-    spellchecking: false,
-    enablesReturnKeyAutomatically: false,
-    secureTextEntry: false,
-    validTextRangeLocation: 0,
-    validTextRangeLength: 0,
+    autocapitalizationType: undefined,
+    keyboardType: undefined,
+    returnKeyType: undefined,
+    autocorrection: undefined,
+    spellchecking: undefined,
+    enablesReturnKeyAutomatically: undefined,
+    secureTextEntry: undefined,
+    validTextRangeLocation: undefined,
+    validTextRangeLength: undefined,
     pINEntrySeparatorIndexes: [],
     _unknownFields: {},
   };
@@ -657,52 +657,31 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
     message: TextInputTraits,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.autocapitalizationType !== undefined &&
-      message.autocapitalizationType !== 0
-    ) {
+    if (message.autocapitalizationType !== undefined) {
       writer.uint32(8).int32(message.autocapitalizationType);
     }
-    if (message.keyboardType !== undefined && message.keyboardType !== 0) {
+    if (message.keyboardType !== undefined) {
       writer.uint32(16).int32(message.keyboardType);
     }
-    if (message.returnKeyType !== undefined && message.returnKeyType !== 0) {
+    if (message.returnKeyType !== undefined) {
       writer.uint32(24).int32(message.returnKeyType);
     }
-    if (
-      message.autocorrection !== undefined &&
-      message.autocorrection !== false
-    ) {
+    if (message.autocorrection !== undefined) {
       writer.uint32(32).bool(message.autocorrection);
     }
-    if (
-      message.spellchecking !== undefined &&
-      message.spellchecking !== false
-    ) {
+    if (message.spellchecking !== undefined) {
       writer.uint32(40).bool(message.spellchecking);
     }
-    if (
-      message.enablesReturnKeyAutomatically !== undefined &&
-      message.enablesReturnKeyAutomatically !== false
-    ) {
+    if (message.enablesReturnKeyAutomatically !== undefined) {
       writer.uint32(48).bool(message.enablesReturnKeyAutomatically);
     }
-    if (
-      message.secureTextEntry !== undefined &&
-      message.secureTextEntry !== false
-    ) {
+    if (message.secureTextEntry !== undefined) {
       writer.uint32(56).bool(message.secureTextEntry);
     }
-    if (
-      message.validTextRangeLocation !== undefined &&
-      message.validTextRangeLocation !== 0
-    ) {
+    if (message.validTextRangeLocation !== undefined) {
       writer.uint32(64).uint64(message.validTextRangeLocation);
     }
-    if (
-      message.validTextRangeLength !== undefined &&
-      message.validTextRangeLength !== 0
-    ) {
+    if (message.validTextRangeLength !== undefined) {
       writer.uint32(72).uint64(message.validTextRangeLength);
     }
     for (const v of message.pINEntrySeparatorIndexes) {
@@ -844,31 +823,31 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
     return {
       autocapitalizationType: isSet(object.autocapitalizationType)
         ? autocapitalizationType_EnumFromJSON(object.autocapitalizationType)
-        : 0,
+        : undefined,
       keyboardType: isSet(object.keyboardType)
         ? keyboardType_EnumFromJSON(object.keyboardType)
-        : 0,
+        : undefined,
       returnKeyType: isSet(object.returnKeyType)
         ? returnKeyType_EnumFromJSON(object.returnKeyType)
-        : 0,
+        : undefined,
       autocorrection: isSet(object.autocorrection)
         ? globalThis.Boolean(object.autocorrection)
-        : false,
+        : undefined,
       spellchecking: isSet(object.spellchecking)
         ? globalThis.Boolean(object.spellchecking)
-        : false,
+        : undefined,
       enablesReturnKeyAutomatically: isSet(object.enablesReturnKeyAutomatically)
         ? globalThis.Boolean(object.enablesReturnKeyAutomatically)
-        : false,
+        : undefined,
       secureTextEntry: isSet(object.secureTextEntry)
         ? globalThis.Boolean(object.secureTextEntry)
-        : false,
+        : undefined,
       validTextRangeLocation: isSet(object.validTextRangeLocation)
         ? globalThis.Number(object.validTextRangeLocation)
-        : 0,
+        : undefined,
       validTextRangeLength: isSet(object.validTextRangeLength)
         ? globalThis.Number(object.validTextRangeLength)
-        : 0,
+        : undefined,
       pINEntrySeparatorIndexes: globalThis.Array.isArray(
         object?.pINEntrySeparatorIndexes
       )
@@ -879,54 +858,33 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
 
   toJSON(message: TextInputTraits): unknown {
     const obj: any = {};
-    if (
-      message.autocapitalizationType !== undefined &&
-      message.autocapitalizationType !== 0
-    ) {
+    if (message.autocapitalizationType !== undefined) {
       obj.autocapitalizationType = autocapitalizationType_EnumToJSON(
         message.autocapitalizationType
       );
     }
-    if (message.keyboardType !== undefined && message.keyboardType !== 0) {
+    if (message.keyboardType !== undefined) {
       obj.keyboardType = keyboardType_EnumToJSON(message.keyboardType);
     }
-    if (message.returnKeyType !== undefined && message.returnKeyType !== 0) {
+    if (message.returnKeyType !== undefined) {
       obj.returnKeyType = returnKeyType_EnumToJSON(message.returnKeyType);
     }
-    if (
-      message.autocorrection !== undefined &&
-      message.autocorrection !== false
-    ) {
+    if (message.autocorrection !== undefined) {
       obj.autocorrection = message.autocorrection;
     }
-    if (
-      message.spellchecking !== undefined &&
-      message.spellchecking !== false
-    ) {
+    if (message.spellchecking !== undefined) {
       obj.spellchecking = message.spellchecking;
     }
-    if (
-      message.enablesReturnKeyAutomatically !== undefined &&
-      message.enablesReturnKeyAutomatically !== false
-    ) {
+    if (message.enablesReturnKeyAutomatically !== undefined) {
       obj.enablesReturnKeyAutomatically = message.enablesReturnKeyAutomatically;
     }
-    if (
-      message.secureTextEntry !== undefined &&
-      message.secureTextEntry !== false
-    ) {
+    if (message.secureTextEntry !== undefined) {
       obj.secureTextEntry = message.secureTextEntry;
     }
-    if (
-      message.validTextRangeLocation !== undefined &&
-      message.validTextRangeLocation !== 0
-    ) {
+    if (message.validTextRangeLocation !== undefined) {
       obj.validTextRangeLocation = Math.round(message.validTextRangeLocation);
     }
-    if (
-      message.validTextRangeLength !== undefined &&
-      message.validTextRangeLength !== 0
-    ) {
+    if (message.validTextRangeLength !== undefined) {
       obj.validTextRangeLength = Math.round(message.validTextRangeLength);
     }
     if (message.pINEntrySeparatorIndexes?.length) {
@@ -946,16 +904,16 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
     object: I
   ): TextInputTraits {
     const message = createBaseTextInputTraits();
-    message.autocapitalizationType = object.autocapitalizationType ?? 0;
-    message.keyboardType = object.keyboardType ?? 0;
-    message.returnKeyType = object.returnKeyType ?? 0;
-    message.autocorrection = object.autocorrection ?? false;
-    message.spellchecking = object.spellchecking ?? false;
+    message.autocapitalizationType = object.autocapitalizationType ?? undefined;
+    message.keyboardType = object.keyboardType ?? undefined;
+    message.returnKeyType = object.returnKeyType ?? undefined;
+    message.autocorrection = object.autocorrection ?? undefined;
+    message.spellchecking = object.spellchecking ?? undefined;
     message.enablesReturnKeyAutomatically =
-      object.enablesReturnKeyAutomatically ?? false;
-    message.secureTextEntry = object.secureTextEntry ?? false;
-    message.validTextRangeLocation = object.validTextRangeLocation ?? 0;
-    message.validTextRangeLength = object.validTextRangeLength ?? 0;
+      object.enablesReturnKeyAutomatically ?? undefined;
+    message.secureTextEntry = object.secureTextEntry ?? undefined;
+    message.validTextRangeLocation = object.validTextRangeLocation ?? undefined;
+    message.validTextRangeLength = object.validTextRangeLength ?? undefined;
     message.pINEntrySeparatorIndexes =
       object.pINEntrySeparatorIndexes?.map((e) => e) || [];
     return message;
@@ -963,7 +921,12 @@ export const TextInputTraits: MessageFns<TextInputTraits> = {
 };
 
 function createBaseTextEditingAttributes(): TextEditingAttributes {
-  return { title: "", prompt: "", inputTraits: undefined, _unknownFields: {} };
+  return {
+    title: undefined,
+    prompt: undefined,
+    inputTraits: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
@@ -971,10 +934,10 @@ export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
     message: TextEditingAttributes,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.title !== undefined && message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.prompt !== undefined && message.prompt !== "") {
+    if (message.prompt !== undefined) {
       writer.uint32(18).string(message.prompt);
     }
     if (message.inputTraits !== undefined) {
@@ -1050,8 +1013,10 @@ export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
 
   fromJSON(object: any): TextEditingAttributes {
     return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
-      prompt: isSet(object.prompt) ? globalThis.String(object.prompt) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : undefined,
+      prompt: isSet(object.prompt)
+        ? globalThis.String(object.prompt)
+        : undefined,
       inputTraits: isSet(object.inputTraits)
         ? TextInputTraits.fromJSON(object.inputTraits)
         : undefined,
@@ -1060,10 +1025,10 @@ export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
 
   toJSON(message: TextEditingAttributes): unknown {
     const obj: any = {};
-    if (message.title !== undefined && message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.prompt !== undefined && message.prompt !== "") {
+    if (message.prompt !== undefined) {
       obj.prompt = message.prompt;
     }
     if (message.inputTraits !== undefined) {
@@ -1081,8 +1046,8 @@ export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
     object: I
   ): TextEditingAttributes {
     const message = createBaseTextEditingAttributes();
-    message.title = object.title ?? "";
-    message.prompt = object.prompt ?? "";
+    message.title = object.title ?? undefined;
+    message.prompt = object.prompt ?? undefined;
     message.inputTraits =
       object.inputTraits !== undefined && object.inputTraits !== null
         ? TextInputTraits.fromPartial(object.inputTraits)
@@ -1093,9 +1058,9 @@ export const TextEditingAttributes: MessageFns<TextEditingAttributes> = {
 
 function createBaseKeyboardMessage(): KeyboardMessage {
   return {
-    state: 0,
+    state: undefined,
     attributes: undefined,
-    encryptedTextCyphertext: Buffer.alloc(0),
+    encryptedTextCyphertext: undefined,
     _unknownFields: {},
   };
 }
@@ -1105,7 +1070,7 @@ export const KeyboardMessage: MessageFns<KeyboardMessage> = {
     message: KeyboardMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.state !== undefined && message.state !== 0) {
+    if (message.state !== undefined) {
       writer.uint32(8).int32(message.state);
     }
     if (message.attributes !== undefined) {
@@ -1114,10 +1079,7 @@ export const KeyboardMessage: MessageFns<KeyboardMessage> = {
         writer.uint32(26).fork()
       ).join();
     }
-    if (
-      message.encryptedTextCyphertext !== undefined &&
-      message.encryptedTextCyphertext.length !== 0
-    ) {
+    if (message.encryptedTextCyphertext !== undefined) {
       writer.uint32(34).bytes(message.encryptedTextCyphertext);
     }
     if (message._unknownFields !== undefined) {
@@ -1187,28 +1149,27 @@ export const KeyboardMessage: MessageFns<KeyboardMessage> = {
 
   fromJSON(object: any): KeyboardMessage {
     return {
-      state: isSet(object.state) ? keyboardState_EnumFromJSON(object.state) : 0,
+      state: isSet(object.state)
+        ? keyboardState_EnumFromJSON(object.state)
+        : undefined,
       attributes: isSet(object.attributes)
         ? TextEditingAttributes.fromJSON(object.attributes)
         : undefined,
       encryptedTextCyphertext: isSet(object.encryptedTextCyphertext)
         ? Buffer.from(bytesFromBase64(object.encryptedTextCyphertext))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: KeyboardMessage): unknown {
     const obj: any = {};
-    if (message.state !== undefined && message.state !== 0) {
+    if (message.state !== undefined) {
       obj.state = keyboardState_EnumToJSON(message.state);
     }
     if (message.attributes !== undefined) {
       obj.attributes = TextEditingAttributes.toJSON(message.attributes);
     }
-    if (
-      message.encryptedTextCyphertext !== undefined &&
-      message.encryptedTextCyphertext.length !== 0
-    ) {
+    if (message.encryptedTextCyphertext !== undefined) {
       obj.encryptedTextCyphertext = base64FromBytes(
         message.encryptedTextCyphertext
       );
@@ -1225,13 +1186,13 @@ export const KeyboardMessage: MessageFns<KeyboardMessage> = {
     object: I
   ): KeyboardMessage {
     const message = createBaseKeyboardMessage();
-    message.state = object.state ?? 0;
+    message.state = object.state ?? undefined;
     message.attributes =
       object.attributes !== undefined && object.attributes !== null
         ? TextEditingAttributes.fromPartial(object.attributes)
         : undefined;
     message.encryptedTextCyphertext =
-      object.encryptedTextCyphertext ?? Buffer.alloc(0);
+      object.encryptedTextCyphertext ?? undefined;
     return message;
   },
 };

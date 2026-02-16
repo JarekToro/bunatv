@@ -16,7 +16,7 @@ export interface CreateHostedEndpointResponseMessage {
 }
 
 function createBaseCreateHostedEndpointResponseMessage(): CreateHostedEndpointResponseMessage {
-  return { groupUID: "", _unknownFields: {} };
+  return { groupUID: undefined, _unknownFields: {} };
 }
 
 export const CreateHostedEndpointResponseMessage: MessageFns<CreateHostedEndpointResponseMessage> =
@@ -25,7 +25,7 @@ export const CreateHostedEndpointResponseMessage: MessageFns<CreateHostedEndpoin
       message: CreateHostedEndpointResponseMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.groupUID !== undefined && message.groupUID !== "") {
+      if (message.groupUID !== undefined) {
         writer.uint32(10).string(message.groupUID);
       }
       if (message._unknownFields !== undefined) {
@@ -81,13 +81,13 @@ export const CreateHostedEndpointResponseMessage: MessageFns<CreateHostedEndpoin
       return {
         groupUID: isSet(object.groupUID)
           ? globalThis.String(object.groupUID)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: CreateHostedEndpointResponseMessage): unknown {
       const obj: any = {};
-      if (message.groupUID !== undefined && message.groupUID !== "") {
+      if (message.groupUID !== undefined) {
         obj.groupUID = message.groupUID;
       }
       return obj;
@@ -104,7 +104,7 @@ export const CreateHostedEndpointResponseMessage: MessageFns<CreateHostedEndpoin
       I extends Exact<DeepPartial<CreateHostedEndpointResponseMessage>, I>,
     >(object: I): CreateHostedEndpointResponseMessage {
       const message = createBaseCreateHostedEndpointResponseMessage();
-      message.groupUID = object.groupUID ?? "";
+      message.groupUID = object.groupUID ?? undefined;
       return message;
     },
   };

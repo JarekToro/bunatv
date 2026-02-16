@@ -15,7 +15,7 @@ export interface GetVolumeControlCapabilitiesMessage {
 }
 
 function createBaseGetVolumeControlCapabilitiesMessage(): GetVolumeControlCapabilitiesMessage {
-  return { outputDeviceUID: "", _unknownFields: {} };
+  return { outputDeviceUID: undefined, _unknownFields: {} };
 }
 
 export const GetVolumeControlCapabilitiesMessage: MessageFns<GetVolumeControlCapabilitiesMessage> =
@@ -24,10 +24,7 @@ export const GetVolumeControlCapabilitiesMessage: MessageFns<GetVolumeControlCap
       message: GetVolumeControlCapabilitiesMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         writer.uint32(10).string(message.outputDeviceUID);
       }
       if (message._unknownFields !== undefined) {
@@ -83,16 +80,13 @@ export const GetVolumeControlCapabilitiesMessage: MessageFns<GetVolumeControlCap
       return {
         outputDeviceUID: isSet(object.outputDeviceUID)
           ? globalThis.String(object.outputDeviceUID)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: GetVolumeControlCapabilitiesMessage): unknown {
       const obj: any = {};
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         obj.outputDeviceUID = message.outputDeviceUID;
       }
       return obj;
@@ -109,7 +103,7 @@ export const GetVolumeControlCapabilitiesMessage: MessageFns<GetVolumeControlCap
       I extends Exact<DeepPartial<GetVolumeControlCapabilitiesMessage>, I>,
     >(object: I): GetVolumeControlCapabilitiesMessage {
       const message = createBaseGetVolumeControlCapabilitiesMessage();
-      message.outputDeviceUID = object.outputDeviceUID ?? "";
+      message.outputDeviceUID = object.outputDeviceUID ?? undefined;
       return message;
     },
   };

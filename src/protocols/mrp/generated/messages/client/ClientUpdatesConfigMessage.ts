@@ -27,12 +27,12 @@ export interface ClientUpdatesConfigMessage {
 
 function createBaseClientUpdatesConfigMessage(): ClientUpdatesConfigMessage {
   return {
-    nowPlayingUpdates: false,
-    artworkUpdates: false,
-    volumeUpdates: false,
-    keyboardUpdates: false,
-    outputDeviceUpdates: false,
-    systemEndpointUpdates: false,
+    nowPlayingUpdates: undefined,
+    artworkUpdates: undefined,
+    volumeUpdates: undefined,
+    keyboardUpdates: undefined,
+    outputDeviceUpdates: undefined,
+    systemEndpointUpdates: undefined,
     subscribedPlayerPaths: [],
     _unknownFields: {},
   };
@@ -44,40 +44,22 @@ export const ClientUpdatesConfigMessage: MessageFns<ClientUpdatesConfigMessage> 
       message: ClientUpdatesConfigMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.nowPlayingUpdates !== undefined &&
-        message.nowPlayingUpdates !== false
-      ) {
+      if (message.nowPlayingUpdates !== undefined) {
         writer.uint32(8).bool(message.nowPlayingUpdates);
       }
-      if (
-        message.artworkUpdates !== undefined &&
-        message.artworkUpdates !== false
-      ) {
+      if (message.artworkUpdates !== undefined) {
         writer.uint32(16).bool(message.artworkUpdates);
       }
-      if (
-        message.volumeUpdates !== undefined &&
-        message.volumeUpdates !== false
-      ) {
+      if (message.volumeUpdates !== undefined) {
         writer.uint32(24).bool(message.volumeUpdates);
       }
-      if (
-        message.keyboardUpdates !== undefined &&
-        message.keyboardUpdates !== false
-      ) {
+      if (message.keyboardUpdates !== undefined) {
         writer.uint32(32).bool(message.keyboardUpdates);
       }
-      if (
-        message.outputDeviceUpdates !== undefined &&
-        message.outputDeviceUpdates !== false
-      ) {
+      if (message.outputDeviceUpdates !== undefined) {
         writer.uint32(40).bool(message.outputDeviceUpdates);
       }
-      if (
-        message.systemEndpointUpdates !== undefined &&
-        message.systemEndpointUpdates !== false
-      ) {
+      if (message.systemEndpointUpdates !== undefined) {
         writer.uint32(48).bool(message.systemEndpointUpdates);
       }
       for (const v of message.subscribedPlayerPaths) {
@@ -186,22 +168,22 @@ export const ClientUpdatesConfigMessage: MessageFns<ClientUpdatesConfigMessage> 
       return {
         nowPlayingUpdates: isSet(object.nowPlayingUpdates)
           ? globalThis.Boolean(object.nowPlayingUpdates)
-          : false,
+          : undefined,
         artworkUpdates: isSet(object.artworkUpdates)
           ? globalThis.Boolean(object.artworkUpdates)
-          : false,
+          : undefined,
         volumeUpdates: isSet(object.volumeUpdates)
           ? globalThis.Boolean(object.volumeUpdates)
-          : false,
+          : undefined,
         keyboardUpdates: isSet(object.keyboardUpdates)
           ? globalThis.Boolean(object.keyboardUpdates)
-          : false,
+          : undefined,
         outputDeviceUpdates: isSet(object.outputDeviceUpdates)
           ? globalThis.Boolean(object.outputDeviceUpdates)
-          : false,
+          : undefined,
         systemEndpointUpdates: isSet(object.systemEndpointUpdates)
           ? globalThis.Boolean(object.systemEndpointUpdates)
-          : false,
+          : undefined,
         subscribedPlayerPaths: globalThis.Array.isArray(
           object?.subscribedPlayerPaths
         )
@@ -212,40 +194,22 @@ export const ClientUpdatesConfigMessage: MessageFns<ClientUpdatesConfigMessage> 
 
     toJSON(message: ClientUpdatesConfigMessage): unknown {
       const obj: any = {};
-      if (
-        message.nowPlayingUpdates !== undefined &&
-        message.nowPlayingUpdates !== false
-      ) {
+      if (message.nowPlayingUpdates !== undefined) {
         obj.nowPlayingUpdates = message.nowPlayingUpdates;
       }
-      if (
-        message.artworkUpdates !== undefined &&
-        message.artworkUpdates !== false
-      ) {
+      if (message.artworkUpdates !== undefined) {
         obj.artworkUpdates = message.artworkUpdates;
       }
-      if (
-        message.volumeUpdates !== undefined &&
-        message.volumeUpdates !== false
-      ) {
+      if (message.volumeUpdates !== undefined) {
         obj.volumeUpdates = message.volumeUpdates;
       }
-      if (
-        message.keyboardUpdates !== undefined &&
-        message.keyboardUpdates !== false
-      ) {
+      if (message.keyboardUpdates !== undefined) {
         obj.keyboardUpdates = message.keyboardUpdates;
       }
-      if (
-        message.outputDeviceUpdates !== undefined &&
-        message.outputDeviceUpdates !== false
-      ) {
+      if (message.outputDeviceUpdates !== undefined) {
         obj.outputDeviceUpdates = message.outputDeviceUpdates;
       }
-      if (
-        message.systemEndpointUpdates !== undefined &&
-        message.systemEndpointUpdates !== false
-      ) {
+      if (message.systemEndpointUpdates !== undefined) {
         obj.systemEndpointUpdates = message.systemEndpointUpdates;
       }
       if (message.subscribedPlayerPaths?.length) {
@@ -265,12 +229,12 @@ export const ClientUpdatesConfigMessage: MessageFns<ClientUpdatesConfigMessage> 
       object: I
     ): ClientUpdatesConfigMessage {
       const message = createBaseClientUpdatesConfigMessage();
-      message.nowPlayingUpdates = object.nowPlayingUpdates ?? false;
-      message.artworkUpdates = object.artworkUpdates ?? false;
-      message.volumeUpdates = object.volumeUpdates ?? false;
-      message.keyboardUpdates = object.keyboardUpdates ?? false;
-      message.outputDeviceUpdates = object.outputDeviceUpdates ?? false;
-      message.systemEndpointUpdates = object.systemEndpointUpdates ?? false;
+      message.nowPlayingUpdates = object.nowPlayingUpdates ?? undefined;
+      message.artworkUpdates = object.artworkUpdates ?? undefined;
+      message.volumeUpdates = object.volumeUpdates ?? undefined;
+      message.keyboardUpdates = object.keyboardUpdates ?? undefined;
+      message.outputDeviceUpdates = object.outputDeviceUpdates ?? undefined;
+      message.systemEndpointUpdates = object.systemEndpointUpdates ?? undefined;
       message.subscribedPlayerPaths =
         object.subscribedPlayerPaths?.map((e) => PlayerPath.fromPartial(e)) ||
         [];

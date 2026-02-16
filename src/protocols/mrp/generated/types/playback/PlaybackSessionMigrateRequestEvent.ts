@@ -33,17 +33,17 @@ export interface PlaybackSessionMigrateRequestEvent {
 
 function createBasePlaybackSessionMigrateRequestEvent(): PlaybackSessionMigrateRequestEvent {
   return {
-    name: "",
-    startTimestamp: 0,
-    endTimestamp: 0,
-    errorCode: 0,
-    errorDescription: "",
+    name: undefined,
+    startTimestamp: undefined,
+    endTimestamp: undefined,
+    errorCode: undefined,
+    errorDescription: undefined,
     error: undefined,
-    role: 0,
+    role: undefined,
     input: undefined,
     output: undefined,
     events: [],
-    identifier: 0,
+    identifier: undefined,
     _unknownFields: {},
   };
 }
@@ -54,31 +54,25 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
       message: PlaybackSessionMigrateRequestEvent,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.name !== undefined && message.name !== "") {
+      if (message.name !== undefined) {
         writer.uint32(10).string(message.name);
       }
-      if (
-        message.startTimestamp !== undefined &&
-        message.startTimestamp !== 0
-      ) {
+      if (message.startTimestamp !== undefined) {
         writer.uint32(17).double(message.startTimestamp);
       }
-      if (message.endTimestamp !== undefined && message.endTimestamp !== 0) {
+      if (message.endTimestamp !== undefined) {
         writer.uint32(25).double(message.endTimestamp);
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         writer.uint32(40).int64(message.errorCode);
       }
-      if (
-        message.errorDescription !== undefined &&
-        message.errorDescription !== ""
-      ) {
+      if (message.errorDescription !== undefined) {
         writer.uint32(50).string(message.errorDescription);
       }
       if (message.error !== undefined) {
         Error.encode(message.error, writer.uint32(58).fork()).join();
       }
-      if (message.role !== undefined && message.role !== 0) {
+      if (message.role !== undefined) {
         writer.uint32(64).int32(message.role);
       }
       if (message.input !== undefined) {
@@ -93,7 +87,7 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
           writer.uint32(90).fork()
         ).join();
       }
-      if (message.identifier !== undefined && message.identifier !== 0) {
+      if (message.identifier !== undefined) {
         writer.uint32(800).uint32(message.identifier);
       }
       if (message._unknownFields !== undefined) {
@@ -229,23 +223,23 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
 
     fromJSON(object: any): PlaybackSessionMigrateRequestEvent {
       return {
-        name: isSet(object.name) ? globalThis.String(object.name) : "",
+        name: isSet(object.name) ? globalThis.String(object.name) : undefined,
         startTimestamp: isSet(object.startTimestamp)
           ? globalThis.Number(object.startTimestamp)
-          : 0,
+          : undefined,
         endTimestamp: isSet(object.endTimestamp)
           ? globalThis.Number(object.endTimestamp)
-          : 0,
+          : undefined,
         errorCode: isSet(object.errorCode)
           ? globalThis.Number(object.errorCode)
-          : 0,
+          : undefined,
         errorDescription: isSet(object.errorDescription)
           ? globalThis.String(object.errorDescription)
-          : "",
+          : undefined,
         error: isSet(object.error) ? Error.fromJSON(object.error) : undefined,
         role: isSet(object.role)
           ? playbackSessionMigrateRequestEventRole_EnumFromJSON(object.role)
-          : 0,
+          : undefined,
         input: isSet(object.input)
           ? Dictionary.fromJSON(object.input)
           : undefined,
@@ -259,37 +253,31 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
           : [],
         identifier: isSet(object.identifier)
           ? globalThis.Number(object.identifier)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: PlaybackSessionMigrateRequestEvent): unknown {
       const obj: any = {};
-      if (message.name !== undefined && message.name !== "") {
+      if (message.name !== undefined) {
         obj.name = message.name;
       }
-      if (
-        message.startTimestamp !== undefined &&
-        message.startTimestamp !== 0
-      ) {
+      if (message.startTimestamp !== undefined) {
         obj.startTimestamp = message.startTimestamp;
       }
-      if (message.endTimestamp !== undefined && message.endTimestamp !== 0) {
+      if (message.endTimestamp !== undefined) {
         obj.endTimestamp = message.endTimestamp;
       }
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         obj.errorCode = Math.round(message.errorCode);
       }
-      if (
-        message.errorDescription !== undefined &&
-        message.errorDescription !== ""
-      ) {
+      if (message.errorDescription !== undefined) {
         obj.errorDescription = message.errorDescription;
       }
       if (message.error !== undefined) {
         obj.error = Error.toJSON(message.error);
       }
-      if (message.role !== undefined && message.role !== 0) {
+      if (message.role !== undefined) {
         obj.role = playbackSessionMigrateRequestEventRole_EnumToJSON(
           message.role
         );
@@ -305,7 +293,7 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
           PlaybackSessionMigrateRequestEvent.toJSON(e)
         );
       }
-      if (message.identifier !== undefined && message.identifier !== 0) {
+      if (message.identifier !== undefined) {
         obj.identifier = Math.round(message.identifier);
       }
       return obj;
@@ -322,16 +310,16 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
       I extends Exact<DeepPartial<PlaybackSessionMigrateRequestEvent>, I>,
     >(object: I): PlaybackSessionMigrateRequestEvent {
       const message = createBasePlaybackSessionMigrateRequestEvent();
-      message.name = object.name ?? "";
-      message.startTimestamp = object.startTimestamp ?? 0;
-      message.endTimestamp = object.endTimestamp ?? 0;
-      message.errorCode = object.errorCode ?? 0;
-      message.errorDescription = object.errorDescription ?? "";
+      message.name = object.name ?? undefined;
+      message.startTimestamp = object.startTimestamp ?? undefined;
+      message.endTimestamp = object.endTimestamp ?? undefined;
+      message.errorCode = object.errorCode ?? undefined;
+      message.errorDescription = object.errorDescription ?? undefined;
       message.error =
         object.error !== undefined && object.error !== null
           ? Error.fromPartial(object.error)
           : undefined;
-      message.role = object.role ?? 0;
+      message.role = object.role ?? undefined;
       message.input =
         object.input !== undefined && object.input !== null
           ? Dictionary.fromPartial(object.input)
@@ -344,7 +332,7 @@ export const PlaybackSessionMigrateRequestEvent: MessageFns<PlaybackSessionMigra
         object.events?.map((e) =>
           PlaybackSessionMigrateRequestEvent.fromPartial(e)
         ) || [];
-      message.identifier = object.identifier ?? 0;
+      message.identifier = object.identifier ?? undefined;
       return message;
     },
   };

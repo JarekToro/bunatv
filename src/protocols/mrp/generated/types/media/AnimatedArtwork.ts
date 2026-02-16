@@ -18,7 +18,12 @@ export interface AnimatedArtwork {
 }
 
 function createBaseAnimatedArtwork(): AnimatedArtwork {
-  return { frames: [], frameDuration: 0, loop: false, _unknownFields: {} };
+  return {
+    frames: [],
+    frameDuration: undefined,
+    loop: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const AnimatedArtwork: MessageFns<AnimatedArtwork> = {
@@ -29,10 +34,10 @@ export const AnimatedArtwork: MessageFns<AnimatedArtwork> = {
     for (const v of message.frames) {
       DataArtwork.encode(v!, writer.uint32(10).fork()).join();
     }
-    if (message.frameDuration !== undefined && message.frameDuration !== 0) {
+    if (message.frameDuration !== undefined) {
       writer.uint32(17).double(message.frameDuration);
     }
-    if (message.loop !== undefined && message.loop !== false) {
+    if (message.loop !== undefined) {
       writer.uint32(24).bool(message.loop);
     }
     if (message._unknownFields !== undefined) {
@@ -106,8 +111,8 @@ export const AnimatedArtwork: MessageFns<AnimatedArtwork> = {
         ? globalThis.Number(object.frameDuration)
         : isSet(object.frame_duration)
           ? globalThis.Number(object.frame_duration)
-          : 0,
-      loop: isSet(object.loop) ? globalThis.Boolean(object.loop) : false,
+          : undefined,
+      loop: isSet(object.loop) ? globalThis.Boolean(object.loop) : undefined,
     };
   },
 
@@ -116,10 +121,10 @@ export const AnimatedArtwork: MessageFns<AnimatedArtwork> = {
     if (message.frames?.length) {
       obj.frames = message.frames.map((e) => DataArtwork.toJSON(e));
     }
-    if (message.frameDuration !== undefined && message.frameDuration !== 0) {
+    if (message.frameDuration !== undefined) {
       obj.frameDuration = message.frameDuration;
     }
-    if (message.loop !== undefined && message.loop !== false) {
+    if (message.loop !== undefined) {
       obj.loop = message.loop;
     }
     return obj;
@@ -136,8 +141,8 @@ export const AnimatedArtwork: MessageFns<AnimatedArtwork> = {
     const message = createBaseAnimatedArtwork();
     message.frames =
       object.frames?.map((e) => DataArtwork.fromPartial(e)) || [];
-    message.frameDuration = object.frameDuration ?? 0;
-    message.loop = object.loop ?? false;
+    message.frameDuration = object.frameDuration ?? undefined;
+    message.loop = object.loop ?? undefined;
     return message;
   },
 };

@@ -89,6 +89,7 @@ export interface ContentItemMetadata {
   seriesName?: string | undefined;
   mediaType?: ContentItemMetadata_MediaType | undefined;
   mediaSubType?: ContentItemMetadata_MediaSubType | undefined;
+  /** binaru Plist */
   nowPlayingInfoData?: Buffer | undefined;
   userInfoData?: Buffer | undefined;
   isSteerable?: boolean | undefined;
@@ -239,113 +240,113 @@ export function contentItemMetadata_MediaSubTypeToJSON(
 
 function createBaseContentItemMetadata(): ContentItemMetadata {
   return {
-    title: "",
-    subtitle: "",
-    isContainer: false,
-    isPlayable: false,
-    playbackProgress: 0,
-    albumName: "",
-    trackArtistName: "",
-    albumArtistName: "",
-    directorName: "",
-    seasonNumber: 0,
-    episodeNumber: 0,
-    releaseDate: 0,
-    playCount: 0,
-    duration: 0,
-    localizedContentRating: "",
-    isExplicitItem: false,
-    playlistType: 0,
-    radioStationType: 0,
-    artworkAvailable: false,
-    infoAvailable: false,
-    languageOptionsAvailable: false,
-    numberOfSections: 0,
-    lyricsAvailable: false,
-    editingStyleFlags: 0,
-    isStreamingContent: false,
-    isCurrentlyPlaying: false,
-    collectionIdentifier: "",
-    profileIdentifier: "",
-    startTime: 0,
-    artworkMIMEType: "",
-    assetURLString: "",
-    composer: "",
-    discNumber: 0,
-    elapsedTime: 0,
-    genre: "",
-    isAlwaysLive: false,
-    playbackRate: 0,
-    chapterCount: 0,
-    totalDiscCount: 0,
-    totalTrackCount: 0,
-    trackNumber: 0,
-    contentIdentifier: "",
-    isSharable: false,
-    isLiked: false,
-    isInWishList: false,
-    radioStationIdentifier: 0,
-    radioStationName: "",
-    radioStationString: "",
-    iTunesStoreIdentifier: 0,
-    iTunesStoreSubscriptionIdentifier: 0,
-    iTunesStoreArtistIdentifier: 0,
-    iTunesStoreAlbumIdentifier: 0,
-    purchaseInfoData: Buffer.alloc(0),
-    defaultPlaybackRate: 0,
-    downloadState: 0,
-    downloadProgress: 0,
-    appMetricsData: Buffer.alloc(0),
-    seriesName: "",
-    mediaType: 0,
-    mediaSubType: 0,
-    nowPlayingInfoData: Buffer.alloc(0),
-    userInfoData: Buffer.alloc(0),
-    isSteerable: false,
-    artworkURL: "",
-    lyricsURL: "",
-    deviceSpecificUserInfoData: Buffer.alloc(0),
-    collectionInfoData: Buffer.alloc(0),
-    elapsedTimeTimestamp: 0,
-    inferredTimestamp: 0,
-    serviceIdentifier: "",
-    artworkDataWidth: 0,
-    artworkDataHeight: 0,
-    currentPlaybackDateData: Buffer.alloc(0),
-    artworkIdentifier: "",
-    isLoading: false,
-    artworkURLTemplatesData: Buffer.alloc(0),
-    legacyUniqueIdentifier: 0,
-    episodeType: 0,
-    artworkFileURL: "",
-    brandIdentifier: "",
-    localizedDurationString: "",
-    albumYear: "",
-    songTraits: 0,
-    albumTraits: 0,
-    playlistTraits: 0,
+    title: undefined,
+    subtitle: undefined,
+    isContainer: undefined,
+    isPlayable: undefined,
+    playbackProgress: undefined,
+    albumName: undefined,
+    trackArtistName: undefined,
+    albumArtistName: undefined,
+    directorName: undefined,
+    seasonNumber: undefined,
+    episodeNumber: undefined,
+    releaseDate: undefined,
+    playCount: undefined,
+    duration: undefined,
+    localizedContentRating: undefined,
+    isExplicitItem: undefined,
+    playlistType: undefined,
+    radioStationType: undefined,
+    artworkAvailable: undefined,
+    infoAvailable: undefined,
+    languageOptionsAvailable: undefined,
+    numberOfSections: undefined,
+    lyricsAvailable: undefined,
+    editingStyleFlags: undefined,
+    isStreamingContent: undefined,
+    isCurrentlyPlaying: undefined,
+    collectionIdentifier: undefined,
+    profileIdentifier: undefined,
+    startTime: undefined,
+    artworkMIMEType: undefined,
+    assetURLString: undefined,
+    composer: undefined,
+    discNumber: undefined,
+    elapsedTime: undefined,
+    genre: undefined,
+    isAlwaysLive: undefined,
+    playbackRate: undefined,
+    chapterCount: undefined,
+    totalDiscCount: undefined,
+    totalTrackCount: undefined,
+    trackNumber: undefined,
+    contentIdentifier: undefined,
+    isSharable: undefined,
+    isLiked: undefined,
+    isInWishList: undefined,
+    radioStationIdentifier: undefined,
+    radioStationName: undefined,
+    radioStationString: undefined,
+    iTunesStoreIdentifier: undefined,
+    iTunesStoreSubscriptionIdentifier: undefined,
+    iTunesStoreArtistIdentifier: undefined,
+    iTunesStoreAlbumIdentifier: undefined,
+    purchaseInfoData: undefined,
+    defaultPlaybackRate: undefined,
+    downloadState: undefined,
+    downloadProgress: undefined,
+    appMetricsData: undefined,
+    seriesName: undefined,
+    mediaType: undefined,
+    mediaSubType: undefined,
+    nowPlayingInfoData: undefined,
+    userInfoData: undefined,
+    isSteerable: undefined,
+    artworkURL: undefined,
+    lyricsURL: undefined,
+    deviceSpecificUserInfoData: undefined,
+    collectionInfoData: undefined,
+    elapsedTimeTimestamp: undefined,
+    inferredTimestamp: undefined,
+    serviceIdentifier: undefined,
+    artworkDataWidth: undefined,
+    artworkDataHeight: undefined,
+    currentPlaybackDateData: undefined,
+    artworkIdentifier: undefined,
+    isLoading: undefined,
+    artworkURLTemplatesData: undefined,
+    legacyUniqueIdentifier: undefined,
+    episodeType: undefined,
+    artworkFileURL: undefined,
+    brandIdentifier: undefined,
+    localizedDurationString: undefined,
+    albumYear: undefined,
+    songTraits: undefined,
+    albumTraits: undefined,
+    playlistTraits: undefined,
     preferredFormat: undefined,
     activeFormat: undefined,
-    activeFormatJustification: 0,
-    formatTierPreference: 1,
+    activeFormatJustification: undefined,
+    formatTierPreference: undefined,
     audioRoute: undefined,
     alternativeFormats: [],
-    isAdvertisement: false,
-    hasAlternativeFormats: false,
-    participantName: "",
-    participantIdentifier: "",
-    classicalWork: "",
-    reportingAdamId: 0,
-    lyricsAdamId: 0,
-    iTunesStoreAlbumArtistIdentifier: 0,
-    durationStringLocalizationKey: "",
-    isResolvableParticipant: false,
-    internationalStandardRecordingCode: "",
-    isInTransition: false,
-    excludeFromSuggestions: false,
-    transcriptAlignmentsAvailable: false,
-    subtitleShort: "",
-    transitionInfoData: Buffer.alloc(0),
+    isAdvertisement: undefined,
+    hasAlternativeFormats: undefined,
+    participantName: undefined,
+    participantIdentifier: undefined,
+    classicalWork: undefined,
+    reportingAdamId: undefined,
+    lyricsAdamId: undefined,
+    iTunesStoreAlbumArtistIdentifier: undefined,
+    durationStringLocalizationKey: undefined,
+    isResolvableParticipant: undefined,
+    internationalStandardRecordingCode: undefined,
+    isInTransition: undefined,
+    excludeFromSuggestions: undefined,
+    transcriptAlignmentsAvailable: undefined,
+    subtitleShort: undefined,
+    transitionInfoData: undefined,
     _unknownFields: {},
   };
 }
@@ -355,394 +356,259 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
     message: ContentItemMetadata,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.title !== undefined && message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.subtitle !== undefined && message.subtitle !== "") {
+    if (message.subtitle !== undefined) {
       writer.uint32(18).string(message.subtitle);
     }
-    if (message.isContainer !== undefined && message.isContainer !== false) {
+    if (message.isContainer !== undefined) {
       writer.uint32(24).bool(message.isContainer);
     }
-    if (message.isPlayable !== undefined && message.isPlayable !== false) {
+    if (message.isPlayable !== undefined) {
       writer.uint32(32).bool(message.isPlayable);
     }
-    if (
-      message.playbackProgress !== undefined &&
-      message.playbackProgress !== 0
-    ) {
+    if (message.playbackProgress !== undefined) {
       writer.uint32(45).float(message.playbackProgress);
     }
-    if (message.albumName !== undefined && message.albumName !== "") {
+    if (message.albumName !== undefined) {
       writer.uint32(50).string(message.albumName);
     }
-    if (
-      message.trackArtistName !== undefined &&
-      message.trackArtistName !== ""
-    ) {
+    if (message.trackArtistName !== undefined) {
       writer.uint32(58).string(message.trackArtistName);
     }
-    if (
-      message.albumArtistName !== undefined &&
-      message.albumArtistName !== ""
-    ) {
+    if (message.albumArtistName !== undefined) {
       writer.uint32(66).string(message.albumArtistName);
     }
-    if (message.directorName !== undefined && message.directorName !== "") {
+    if (message.directorName !== undefined) {
       writer.uint32(74).string(message.directorName);
     }
-    if (message.seasonNumber !== undefined && message.seasonNumber !== 0) {
+    if (message.seasonNumber !== undefined) {
       writer.uint32(80).int32(message.seasonNumber);
     }
-    if (message.episodeNumber !== undefined && message.episodeNumber !== 0) {
+    if (message.episodeNumber !== undefined) {
       writer.uint32(88).int32(message.episodeNumber);
     }
-    if (message.releaseDate !== undefined && message.releaseDate !== 0) {
+    if (message.releaseDate !== undefined) {
       writer.uint32(97).double(message.releaseDate);
     }
-    if (message.playCount !== undefined && message.playCount !== 0) {
+    if (message.playCount !== undefined) {
       writer.uint32(104).int32(message.playCount);
     }
-    if (message.duration !== undefined && message.duration !== 0) {
+    if (message.duration !== undefined) {
       writer.uint32(113).double(message.duration);
     }
-    if (
-      message.localizedContentRating !== undefined &&
-      message.localizedContentRating !== ""
-    ) {
+    if (message.localizedContentRating !== undefined) {
       writer.uint32(122).string(message.localizedContentRating);
     }
-    if (
-      message.isExplicitItem !== undefined &&
-      message.isExplicitItem !== false
-    ) {
+    if (message.isExplicitItem !== undefined) {
       writer.uint32(128).bool(message.isExplicitItem);
     }
-    if (message.playlistType !== undefined && message.playlistType !== 0) {
+    if (message.playlistType !== undefined) {
       writer.uint32(136).int32(message.playlistType);
     }
-    if (
-      message.radioStationType !== undefined &&
-      message.radioStationType !== 0
-    ) {
+    if (message.radioStationType !== undefined) {
       writer.uint32(144).int32(message.radioStationType);
     }
-    if (
-      message.artworkAvailable !== undefined &&
-      message.artworkAvailable !== false
-    ) {
+    if (message.artworkAvailable !== undefined) {
       writer.uint32(152).bool(message.artworkAvailable);
     }
-    if (
-      message.infoAvailable !== undefined &&
-      message.infoAvailable !== false
-    ) {
+    if (message.infoAvailable !== undefined) {
       writer.uint32(168).bool(message.infoAvailable);
     }
-    if (
-      message.languageOptionsAvailable !== undefined &&
-      message.languageOptionsAvailable !== false
-    ) {
+    if (message.languageOptionsAvailable !== undefined) {
       writer.uint32(176).bool(message.languageOptionsAvailable);
     }
-    if (
-      message.numberOfSections !== undefined &&
-      message.numberOfSections !== 0
-    ) {
+    if (message.numberOfSections !== undefined) {
       writer.uint32(184).int32(message.numberOfSections);
     }
-    if (
-      message.lyricsAvailable !== undefined &&
-      message.lyricsAvailable !== false
-    ) {
+    if (message.lyricsAvailable !== undefined) {
       writer.uint32(192).bool(message.lyricsAvailable);
     }
-    if (
-      message.editingStyleFlags !== undefined &&
-      message.editingStyleFlags !== 0
-    ) {
+    if (message.editingStyleFlags !== undefined) {
       writer.uint32(200).int32(message.editingStyleFlags);
     }
-    if (
-      message.isStreamingContent !== undefined &&
-      message.isStreamingContent !== false
-    ) {
+    if (message.isStreamingContent !== undefined) {
       writer.uint32(208).bool(message.isStreamingContent);
     }
-    if (
-      message.isCurrentlyPlaying !== undefined &&
-      message.isCurrentlyPlaying !== false
-    ) {
+    if (message.isCurrentlyPlaying !== undefined) {
       writer.uint32(216).bool(message.isCurrentlyPlaying);
     }
-    if (
-      message.collectionIdentifier !== undefined &&
-      message.collectionIdentifier !== ""
-    ) {
+    if (message.collectionIdentifier !== undefined) {
       writer.uint32(226).string(message.collectionIdentifier);
     }
-    if (
-      message.profileIdentifier !== undefined &&
-      message.profileIdentifier !== ""
-    ) {
+    if (message.profileIdentifier !== undefined) {
       writer.uint32(234).string(message.profileIdentifier);
     }
-    if (message.startTime !== undefined && message.startTime !== 0) {
+    if (message.startTime !== undefined) {
       writer.uint32(241).double(message.startTime);
     }
-    if (
-      message.artworkMIMEType !== undefined &&
-      message.artworkMIMEType !== ""
-    ) {
+    if (message.artworkMIMEType !== undefined) {
       writer.uint32(250).string(message.artworkMIMEType);
     }
-    if (message.assetURLString !== undefined && message.assetURLString !== "") {
+    if (message.assetURLString !== undefined) {
       writer.uint32(258).string(message.assetURLString);
     }
-    if (message.composer !== undefined && message.composer !== "") {
+    if (message.composer !== undefined) {
       writer.uint32(266).string(message.composer);
     }
-    if (message.discNumber !== undefined && message.discNumber !== 0) {
+    if (message.discNumber !== undefined) {
       writer.uint32(272).int32(message.discNumber);
     }
-    if (message.elapsedTime !== undefined && message.elapsedTime !== 0) {
+    if (message.elapsedTime !== undefined) {
       writer.uint32(281).double(message.elapsedTime);
     }
-    if (message.genre !== undefined && message.genre !== "") {
+    if (message.genre !== undefined) {
       writer.uint32(290).string(message.genre);
     }
-    if (message.isAlwaysLive !== undefined && message.isAlwaysLive !== false) {
+    if (message.isAlwaysLive !== undefined) {
       writer.uint32(296).bool(message.isAlwaysLive);
     }
-    if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+    if (message.playbackRate !== undefined) {
       writer.uint32(317).float(message.playbackRate);
     }
-    if (message.chapterCount !== undefined && message.chapterCount !== 0) {
+    if (message.chapterCount !== undefined) {
       writer.uint32(320).int32(message.chapterCount);
     }
-    if (message.totalDiscCount !== undefined && message.totalDiscCount !== 0) {
+    if (message.totalDiscCount !== undefined) {
       writer.uint32(328).int32(message.totalDiscCount);
     }
-    if (
-      message.totalTrackCount !== undefined &&
-      message.totalTrackCount !== 0
-    ) {
+    if (message.totalTrackCount !== undefined) {
       writer.uint32(336).int32(message.totalTrackCount);
     }
-    if (message.trackNumber !== undefined && message.trackNumber !== 0) {
+    if (message.trackNumber !== undefined) {
       writer.uint32(344).int32(message.trackNumber);
     }
-    if (
-      message.contentIdentifier !== undefined &&
-      message.contentIdentifier !== ""
-    ) {
+    if (message.contentIdentifier !== undefined) {
       writer.uint32(354).string(message.contentIdentifier);
     }
-    if (message.isSharable !== undefined && message.isSharable !== false) {
+    if (message.isSharable !== undefined) {
       writer.uint32(368).bool(message.isSharable);
     }
-    if (message.isLiked !== undefined && message.isLiked !== false) {
+    if (message.isLiked !== undefined) {
       writer.uint32(384).bool(message.isLiked);
     }
-    if (message.isInWishList !== undefined && message.isInWishList !== false) {
+    if (message.isInWishList !== undefined) {
       writer.uint32(392).bool(message.isInWishList);
     }
-    if (
-      message.radioStationIdentifier !== undefined &&
-      message.radioStationIdentifier !== 0
-    ) {
+    if (message.radioStationIdentifier !== undefined) {
       writer.uint32(400).int64(message.radioStationIdentifier);
     }
-    if (
-      message.radioStationName !== undefined &&
-      message.radioStationName !== ""
-    ) {
+    if (message.radioStationName !== undefined) {
       writer.uint32(418).string(message.radioStationName);
     }
-    if (
-      message.radioStationString !== undefined &&
-      message.radioStationString !== ""
-    ) {
+    if (message.radioStationString !== undefined) {
       writer.uint32(426).string(message.radioStationString);
     }
-    if (
-      message.iTunesStoreIdentifier !== undefined &&
-      message.iTunesStoreIdentifier !== 0
-    ) {
+    if (message.iTunesStoreIdentifier !== undefined) {
       writer.uint32(432).int64(message.iTunesStoreIdentifier);
     }
-    if (
-      message.iTunesStoreSubscriptionIdentifier !== undefined &&
-      message.iTunesStoreSubscriptionIdentifier !== 0
-    ) {
+    if (message.iTunesStoreSubscriptionIdentifier !== undefined) {
       writer.uint32(440).int64(message.iTunesStoreSubscriptionIdentifier);
     }
-    if (
-      message.iTunesStoreArtistIdentifier !== undefined &&
-      message.iTunesStoreArtistIdentifier !== 0
-    ) {
+    if (message.iTunesStoreArtistIdentifier !== undefined) {
       writer.uint32(448).int64(message.iTunesStoreArtistIdentifier);
     }
-    if (
-      message.iTunesStoreAlbumIdentifier !== undefined &&
-      message.iTunesStoreAlbumIdentifier !== 0
-    ) {
+    if (message.iTunesStoreAlbumIdentifier !== undefined) {
       writer.uint32(456).int64(message.iTunesStoreAlbumIdentifier);
     }
-    if (
-      message.purchaseInfoData !== undefined &&
-      message.purchaseInfoData.length !== 0
-    ) {
+    if (message.purchaseInfoData !== undefined) {
       writer.uint32(466).bytes(message.purchaseInfoData);
     }
-    if (
-      message.defaultPlaybackRate !== undefined &&
-      message.defaultPlaybackRate !== 0
-    ) {
+    if (message.defaultPlaybackRate !== undefined) {
       writer.uint32(477).float(message.defaultPlaybackRate);
     }
-    if (message.downloadState !== undefined && message.downloadState !== 0) {
+    if (message.downloadState !== undefined) {
       writer.uint32(480).int32(message.downloadState);
     }
-    if (
-      message.downloadProgress !== undefined &&
-      message.downloadProgress !== 0
-    ) {
+    if (message.downloadProgress !== undefined) {
       writer.uint32(493).float(message.downloadProgress);
     }
-    if (
-      message.appMetricsData !== undefined &&
-      message.appMetricsData.length !== 0
-    ) {
+    if (message.appMetricsData !== undefined) {
       writer.uint32(498).bytes(message.appMetricsData);
     }
-    if (message.seriesName !== undefined && message.seriesName !== "") {
+    if (message.seriesName !== undefined) {
       writer.uint32(506).string(message.seriesName);
     }
-    if (message.mediaType !== undefined && message.mediaType !== 0) {
+    if (message.mediaType !== undefined) {
       writer.uint32(512).int32(message.mediaType);
     }
-    if (message.mediaSubType !== undefined && message.mediaSubType !== 0) {
+    if (message.mediaSubType !== undefined) {
       writer.uint32(520).int32(message.mediaSubType);
     }
-    if (
-      message.nowPlayingInfoData !== undefined &&
-      message.nowPlayingInfoData.length !== 0
-    ) {
+    if (message.nowPlayingInfoData !== undefined) {
       writer.uint32(538).bytes(message.nowPlayingInfoData);
     }
-    if (
-      message.userInfoData !== undefined &&
-      message.userInfoData.length !== 0
-    ) {
+    if (message.userInfoData !== undefined) {
       writer.uint32(546).bytes(message.userInfoData);
     }
-    if (message.isSteerable !== undefined && message.isSteerable !== false) {
+    if (message.isSteerable !== undefined) {
       writer.uint32(552).bool(message.isSteerable);
     }
-    if (message.artworkURL !== undefined && message.artworkURL !== "") {
+    if (message.artworkURL !== undefined) {
       writer.uint32(562).string(message.artworkURL);
     }
-    if (message.lyricsURL !== undefined && message.lyricsURL !== "") {
+    if (message.lyricsURL !== undefined) {
       writer.uint32(570).string(message.lyricsURL);
     }
-    if (
-      message.deviceSpecificUserInfoData !== undefined &&
-      message.deviceSpecificUserInfoData.length !== 0
-    ) {
+    if (message.deviceSpecificUserInfoData !== undefined) {
       writer.uint32(578).bytes(message.deviceSpecificUserInfoData);
     }
-    if (
-      message.collectionInfoData !== undefined &&
-      message.collectionInfoData.length !== 0
-    ) {
+    if (message.collectionInfoData !== undefined) {
       writer.uint32(586).bytes(message.collectionInfoData);
     }
-    if (
-      message.elapsedTimeTimestamp !== undefined &&
-      message.elapsedTimeTimestamp !== 0
-    ) {
+    if (message.elapsedTimeTimestamp !== undefined) {
       writer.uint32(593).double(message.elapsedTimeTimestamp);
     }
-    if (
-      message.inferredTimestamp !== undefined &&
-      message.inferredTimestamp !== 0
-    ) {
+    if (message.inferredTimestamp !== undefined) {
       writer.uint32(601).double(message.inferredTimestamp);
     }
-    if (
-      message.serviceIdentifier !== undefined &&
-      message.serviceIdentifier !== ""
-    ) {
+    if (message.serviceIdentifier !== undefined) {
       writer.uint32(610).string(message.serviceIdentifier);
     }
-    if (
-      message.artworkDataWidth !== undefined &&
-      message.artworkDataWidth !== 0
-    ) {
+    if (message.artworkDataWidth !== undefined) {
       writer.uint32(616).int32(message.artworkDataWidth);
     }
-    if (
-      message.artworkDataHeight !== undefined &&
-      message.artworkDataHeight !== 0
-    ) {
+    if (message.artworkDataHeight !== undefined) {
       writer.uint32(624).int32(message.artworkDataHeight);
     }
-    if (
-      message.currentPlaybackDateData !== undefined &&
-      message.currentPlaybackDateData.length !== 0
-    ) {
+    if (message.currentPlaybackDateData !== undefined) {
       writer.uint32(634).bytes(message.currentPlaybackDateData);
     }
-    if (
-      message.artworkIdentifier !== undefined &&
-      message.artworkIdentifier !== ""
-    ) {
+    if (message.artworkIdentifier !== undefined) {
       writer.uint32(642).string(message.artworkIdentifier);
     }
-    if (message.isLoading !== undefined && message.isLoading !== false) {
+    if (message.isLoading !== undefined) {
       writer.uint32(648).bool(message.isLoading);
     }
-    if (
-      message.artworkURLTemplatesData !== undefined &&
-      message.artworkURLTemplatesData.length !== 0
-    ) {
+    if (message.artworkURLTemplatesData !== undefined) {
       writer.uint32(658).bytes(message.artworkURLTemplatesData);
     }
-    if (
-      message.legacyUniqueIdentifier !== undefined &&
-      message.legacyUniqueIdentifier !== 0
-    ) {
+    if (message.legacyUniqueIdentifier !== undefined) {
       writer.uint32(664).int64(message.legacyUniqueIdentifier);
     }
-    if (message.episodeType !== undefined && message.episodeType !== 0) {
+    if (message.episodeType !== undefined) {
       writer.uint32(672).int32(message.episodeType);
     }
-    if (message.artworkFileURL !== undefined && message.artworkFileURL !== "") {
+    if (message.artworkFileURL !== undefined) {
       writer.uint32(682).string(message.artworkFileURL);
     }
-    if (
-      message.brandIdentifier !== undefined &&
-      message.brandIdentifier !== ""
-    ) {
+    if (message.brandIdentifier !== undefined) {
       writer.uint32(690).string(message.brandIdentifier);
     }
-    if (
-      message.localizedDurationString !== undefined &&
-      message.localizedDurationString !== ""
-    ) {
+    if (message.localizedDurationString !== undefined) {
       writer.uint32(698).string(message.localizedDurationString);
     }
-    if (message.albumYear !== undefined && message.albumYear !== "") {
+    if (message.albumYear !== undefined) {
       writer.uint32(706).string(message.albumYear);
     }
-    if (message.songTraits !== undefined && message.songTraits !== 0) {
+    if (message.songTraits !== undefined) {
       writer.uint32(712).int32(message.songTraits);
     }
-    if (message.albumTraits !== undefined && message.albumTraits !== 0) {
+    if (message.albumTraits !== undefined) {
       writer.uint32(720).int32(message.albumTraits);
     }
-    if (message.playlistTraits !== undefined && message.playlistTraits !== 0) {
+    if (message.playlistTraits !== undefined) {
       writer.uint32(728).int32(message.playlistTraits);
     }
     if (message.preferredFormat !== undefined) {
@@ -757,16 +623,10 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
         writer.uint32(746).fork()
       ).join();
     }
-    if (
-      message.activeFormatJustification !== undefined &&
-      message.activeFormatJustification !== 0
-    ) {
+    if (message.activeFormatJustification !== undefined) {
       writer.uint32(752).int32(message.activeFormatJustification);
     }
-    if (
-      message.formatTierPreference !== undefined &&
-      message.formatTierPreference !== 1
-    ) {
+    if (message.formatTierPreference !== undefined) {
       writer.uint32(760).int32(message.formatTierPreference);
     }
     if (message.audioRoute !== undefined) {
@@ -775,91 +635,52 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
     for (const v of message.alternativeFormats) {
       AudioFormat.encode(v!, writer.uint32(778).fork()).join();
     }
-    if (
-      message.isAdvertisement !== undefined &&
-      message.isAdvertisement !== false
-    ) {
+    if (message.isAdvertisement !== undefined) {
       writer.uint32(784).bool(message.isAdvertisement);
     }
-    if (
-      message.hasAlternativeFormats !== undefined &&
-      message.hasAlternativeFormats !== false
-    ) {
+    if (message.hasAlternativeFormats !== undefined) {
       writer.uint32(792).bool(message.hasAlternativeFormats);
     }
-    if (
-      message.participantName !== undefined &&
-      message.participantName !== ""
-    ) {
+    if (message.participantName !== undefined) {
       writer.uint32(802).string(message.participantName);
     }
-    if (
-      message.participantIdentifier !== undefined &&
-      message.participantIdentifier !== ""
-    ) {
+    if (message.participantIdentifier !== undefined) {
       writer.uint32(810).string(message.participantIdentifier);
     }
-    if (message.classicalWork !== undefined && message.classicalWork !== "") {
+    if (message.classicalWork !== undefined) {
       writer.uint32(818).string(message.classicalWork);
     }
-    if (
-      message.reportingAdamId !== undefined &&
-      message.reportingAdamId !== 0
-    ) {
+    if (message.reportingAdamId !== undefined) {
       writer.uint32(824).int64(message.reportingAdamId);
     }
-    if (message.lyricsAdamId !== undefined && message.lyricsAdamId !== 0) {
+    if (message.lyricsAdamId !== undefined) {
       writer.uint32(832).int64(message.lyricsAdamId);
     }
-    if (
-      message.iTunesStoreAlbumArtistIdentifier !== undefined &&
-      message.iTunesStoreAlbumArtistIdentifier !== 0
-    ) {
+    if (message.iTunesStoreAlbumArtistIdentifier !== undefined) {
       writer.uint32(840).int64(message.iTunesStoreAlbumArtistIdentifier);
     }
-    if (
-      message.durationStringLocalizationKey !== undefined &&
-      message.durationStringLocalizationKey !== ""
-    ) {
+    if (message.durationStringLocalizationKey !== undefined) {
       writer.uint32(850).string(message.durationStringLocalizationKey);
     }
-    if (
-      message.isResolvableParticipant !== undefined &&
-      message.isResolvableParticipant !== false
-    ) {
+    if (message.isResolvableParticipant !== undefined) {
       writer.uint32(856).bool(message.isResolvableParticipant);
     }
-    if (
-      message.internationalStandardRecordingCode !== undefined &&
-      message.internationalStandardRecordingCode !== ""
-    ) {
+    if (message.internationalStandardRecordingCode !== undefined) {
       writer.uint32(866).string(message.internationalStandardRecordingCode);
     }
-    if (
-      message.isInTransition !== undefined &&
-      message.isInTransition !== false
-    ) {
+    if (message.isInTransition !== undefined) {
       writer.uint32(872).bool(message.isInTransition);
     }
-    if (
-      message.excludeFromSuggestions !== undefined &&
-      message.excludeFromSuggestions !== false
-    ) {
+    if (message.excludeFromSuggestions !== undefined) {
       writer.uint32(880).bool(message.excludeFromSuggestions);
     }
-    if (
-      message.transcriptAlignmentsAvailable !== undefined &&
-      message.transcriptAlignmentsAvailable !== false
-    ) {
+    if (message.transcriptAlignmentsAvailable !== undefined) {
       writer.uint32(888).bool(message.transcriptAlignmentsAvailable);
     }
-    if (message.subtitleShort !== undefined && message.subtitleShort !== "") {
+    if (message.subtitleShort !== undefined) {
       writer.uint32(898).string(message.subtitleShort);
     }
-    if (
-      message.transitionInfoData !== undefined &&
-      message.transitionInfoData.length !== 0
-    ) {
+    if (message.transitionInfoData !== undefined) {
       writer.uint32(906).bytes(message.transitionInfoData);
     }
     if (message._unknownFields !== undefined) {
@@ -1767,257 +1588,259 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
 
   fromJSON(object: any): ContentItemMetadata {
     return {
-      title: isSet(object.title) ? globalThis.String(object.title) : "",
+      title: isSet(object.title) ? globalThis.String(object.title) : undefined,
       subtitle: isSet(object.subtitle)
         ? globalThis.String(object.subtitle)
-        : "",
+        : undefined,
       isContainer: isSet(object.isContainer)
         ? globalThis.Boolean(object.isContainer)
-        : false,
+        : undefined,
       isPlayable: isSet(object.isPlayable)
         ? globalThis.Boolean(object.isPlayable)
-        : false,
+        : undefined,
       playbackProgress: isSet(object.playbackProgress)
         ? globalThis.Number(object.playbackProgress)
-        : 0,
+        : undefined,
       albumName: isSet(object.albumName)
         ? globalThis.String(object.albumName)
-        : "",
+        : undefined,
       trackArtistName: isSet(object.trackArtistName)
         ? globalThis.String(object.trackArtistName)
-        : "",
+        : undefined,
       albumArtistName: isSet(object.albumArtistName)
         ? globalThis.String(object.albumArtistName)
-        : "",
+        : undefined,
       directorName: isSet(object.directorName)
         ? globalThis.String(object.directorName)
-        : "",
+        : undefined,
       seasonNumber: isSet(object.seasonNumber)
         ? globalThis.Number(object.seasonNumber)
-        : 0,
+        : undefined,
       episodeNumber: isSet(object.episodeNumber)
         ? globalThis.Number(object.episodeNumber)
-        : 0,
+        : undefined,
       releaseDate: isSet(object.releaseDate)
         ? globalThis.Number(object.releaseDate)
-        : 0,
+        : undefined,
       playCount: isSet(object.playCount)
         ? globalThis.Number(object.playCount)
-        : 0,
-      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
+        : undefined,
+      duration: isSet(object.duration)
+        ? globalThis.Number(object.duration)
+        : undefined,
       localizedContentRating: isSet(object.localizedContentRating)
         ? globalThis.String(object.localizedContentRating)
-        : "",
+        : undefined,
       isExplicitItem: isSet(object.isExplicitItem)
         ? globalThis.Boolean(object.isExplicitItem)
-        : false,
+        : undefined,
       playlistType: isSet(object.playlistType)
         ? globalThis.Number(object.playlistType)
-        : 0,
+        : undefined,
       radioStationType: isSet(object.radioStationType)
         ? globalThis.Number(object.radioStationType)
-        : 0,
+        : undefined,
       artworkAvailable: isSet(object.artworkAvailable)
         ? globalThis.Boolean(object.artworkAvailable)
-        : false,
+        : undefined,
       infoAvailable: isSet(object.infoAvailable)
         ? globalThis.Boolean(object.infoAvailable)
-        : false,
+        : undefined,
       languageOptionsAvailable: isSet(object.languageOptionsAvailable)
         ? globalThis.Boolean(object.languageOptionsAvailable)
-        : false,
+        : undefined,
       numberOfSections: isSet(object.numberOfSections)
         ? globalThis.Number(object.numberOfSections)
-        : 0,
+        : undefined,
       lyricsAvailable: isSet(object.lyricsAvailable)
         ? globalThis.Boolean(object.lyricsAvailable)
-        : false,
+        : undefined,
       editingStyleFlags: isSet(object.editingStyleFlags)
         ? globalThis.Number(object.editingStyleFlags)
-        : 0,
+        : undefined,
       isStreamingContent: isSet(object.isStreamingContent)
         ? globalThis.Boolean(object.isStreamingContent)
-        : false,
+        : undefined,
       isCurrentlyPlaying: isSet(object.isCurrentlyPlaying)
         ? globalThis.Boolean(object.isCurrentlyPlaying)
-        : false,
+        : undefined,
       collectionIdentifier: isSet(object.collectionIdentifier)
         ? globalThis.String(object.collectionIdentifier)
-        : "",
+        : undefined,
       profileIdentifier: isSet(object.profileIdentifier)
         ? globalThis.String(object.profileIdentifier)
-        : "",
+        : undefined,
       startTime: isSet(object.startTime)
         ? globalThis.Number(object.startTime)
-        : 0,
+        : undefined,
       artworkMIMEType: isSet(object.artworkMIMEType)
         ? globalThis.String(object.artworkMIMEType)
-        : "",
+        : undefined,
       assetURLString: isSet(object.assetURLString)
         ? globalThis.String(object.assetURLString)
-        : "",
+        : undefined,
       composer: isSet(object.composer)
         ? globalThis.String(object.composer)
-        : "",
+        : undefined,
       discNumber: isSet(object.discNumber)
         ? globalThis.Number(object.discNumber)
-        : 0,
+        : undefined,
       elapsedTime: isSet(object.elapsedTime)
         ? globalThis.Number(object.elapsedTime)
-        : 0,
-      genre: isSet(object.genre) ? globalThis.String(object.genre) : "",
+        : undefined,
+      genre: isSet(object.genre) ? globalThis.String(object.genre) : undefined,
       isAlwaysLive: isSet(object.isAlwaysLive)
         ? globalThis.Boolean(object.isAlwaysLive)
-        : false,
+        : undefined,
       playbackRate: isSet(object.playbackRate)
         ? globalThis.Number(object.playbackRate)
-        : 0,
+        : undefined,
       chapterCount: isSet(object.chapterCount)
         ? globalThis.Number(object.chapterCount)
-        : 0,
+        : undefined,
       totalDiscCount: isSet(object.totalDiscCount)
         ? globalThis.Number(object.totalDiscCount)
-        : 0,
+        : undefined,
       totalTrackCount: isSet(object.totalTrackCount)
         ? globalThis.Number(object.totalTrackCount)
-        : 0,
+        : undefined,
       trackNumber: isSet(object.trackNumber)
         ? globalThis.Number(object.trackNumber)
-        : 0,
+        : undefined,
       contentIdentifier: isSet(object.contentIdentifier)
         ? globalThis.String(object.contentIdentifier)
-        : "",
+        : undefined,
       isSharable: isSet(object.isSharable)
         ? globalThis.Boolean(object.isSharable)
-        : false,
+        : undefined,
       isLiked: isSet(object.isLiked)
         ? globalThis.Boolean(object.isLiked)
-        : false,
+        : undefined,
       isInWishList: isSet(object.isInWishList)
         ? globalThis.Boolean(object.isInWishList)
-        : false,
+        : undefined,
       radioStationIdentifier: isSet(object.radioStationIdentifier)
         ? globalThis.Number(object.radioStationIdentifier)
-        : 0,
+        : undefined,
       radioStationName: isSet(object.radioStationName)
         ? globalThis.String(object.radioStationName)
-        : "",
+        : undefined,
       radioStationString: isSet(object.radioStationString)
         ? globalThis.String(object.radioStationString)
-        : "",
+        : undefined,
       iTunesStoreIdentifier: isSet(object.iTunesStoreIdentifier)
         ? globalThis.Number(object.iTunesStoreIdentifier)
-        : 0,
+        : undefined,
       iTunesStoreSubscriptionIdentifier: isSet(
         object.iTunesStoreSubscriptionIdentifier
       )
         ? globalThis.Number(object.iTunesStoreSubscriptionIdentifier)
-        : 0,
+        : undefined,
       iTunesStoreArtistIdentifier: isSet(object.iTunesStoreArtistIdentifier)
         ? globalThis.Number(object.iTunesStoreArtistIdentifier)
-        : 0,
+        : undefined,
       iTunesStoreAlbumIdentifier: isSet(object.iTunesStoreAlbumIdentifier)
         ? globalThis.Number(object.iTunesStoreAlbumIdentifier)
-        : 0,
+        : undefined,
       purchaseInfoData: isSet(object.purchaseInfoData)
         ? Buffer.from(bytesFromBase64(object.purchaseInfoData))
-        : Buffer.alloc(0),
+        : undefined,
       defaultPlaybackRate: isSet(object.defaultPlaybackRate)
         ? globalThis.Number(object.defaultPlaybackRate)
-        : 0,
+        : undefined,
       downloadState: isSet(object.downloadState)
         ? globalThis.Number(object.downloadState)
-        : 0,
+        : undefined,
       downloadProgress: isSet(object.downloadProgress)
         ? globalThis.Number(object.downloadProgress)
-        : 0,
+        : undefined,
       appMetricsData: isSet(object.appMetricsData)
         ? Buffer.from(bytesFromBase64(object.appMetricsData))
-        : Buffer.alloc(0),
+        : undefined,
       seriesName: isSet(object.seriesName)
         ? globalThis.String(object.seriesName)
-        : "",
+        : undefined,
       mediaType: isSet(object.mediaType)
         ? contentItemMetadata_MediaTypeFromJSON(object.mediaType)
-        : 0,
+        : undefined,
       mediaSubType: isSet(object.mediaSubType)
         ? contentItemMetadata_MediaSubTypeFromJSON(object.mediaSubType)
-        : 0,
+        : undefined,
       nowPlayingInfoData: isSet(object.nowPlayingInfoData)
         ? Buffer.from(bytesFromBase64(object.nowPlayingInfoData))
-        : Buffer.alloc(0),
+        : undefined,
       userInfoData: isSet(object.userInfoData)
         ? Buffer.from(bytesFromBase64(object.userInfoData))
-        : Buffer.alloc(0),
+        : undefined,
       isSteerable: isSet(object.isSteerable)
         ? globalThis.Boolean(object.isSteerable)
-        : false,
+        : undefined,
       artworkURL: isSet(object.artworkURL)
         ? globalThis.String(object.artworkURL)
-        : "",
+        : undefined,
       lyricsURL: isSet(object.lyricsURL)
         ? globalThis.String(object.lyricsURL)
-        : "",
+        : undefined,
       deviceSpecificUserInfoData: isSet(object.deviceSpecificUserInfoData)
         ? Buffer.from(bytesFromBase64(object.deviceSpecificUserInfoData))
-        : Buffer.alloc(0),
+        : undefined,
       collectionInfoData: isSet(object.collectionInfoData)
         ? Buffer.from(bytesFromBase64(object.collectionInfoData))
-        : Buffer.alloc(0),
+        : undefined,
       elapsedTimeTimestamp: isSet(object.elapsedTimeTimestamp)
         ? globalThis.Number(object.elapsedTimeTimestamp)
-        : 0,
+        : undefined,
       inferredTimestamp: isSet(object.inferredTimestamp)
         ? globalThis.Number(object.inferredTimestamp)
-        : 0,
+        : undefined,
       serviceIdentifier: isSet(object.serviceIdentifier)
         ? globalThis.String(object.serviceIdentifier)
-        : "",
+        : undefined,
       artworkDataWidth: isSet(object.artworkDataWidth)
         ? globalThis.Number(object.artworkDataWidth)
-        : 0,
+        : undefined,
       artworkDataHeight: isSet(object.artworkDataHeight)
         ? globalThis.Number(object.artworkDataHeight)
-        : 0,
+        : undefined,
       currentPlaybackDateData: isSet(object.currentPlaybackDateData)
         ? Buffer.from(bytesFromBase64(object.currentPlaybackDateData))
-        : Buffer.alloc(0),
+        : undefined,
       artworkIdentifier: isSet(object.artworkIdentifier)
         ? globalThis.String(object.artworkIdentifier)
-        : "",
+        : undefined,
       isLoading: isSet(object.isLoading)
         ? globalThis.Boolean(object.isLoading)
-        : false,
+        : undefined,
       artworkURLTemplatesData: isSet(object.artworkURLTemplatesData)
         ? Buffer.from(bytesFromBase64(object.artworkURLTemplatesData))
-        : Buffer.alloc(0),
+        : undefined,
       legacyUniqueIdentifier: isSet(object.legacyUniqueIdentifier)
         ? globalThis.Number(object.legacyUniqueIdentifier)
-        : 0,
+        : undefined,
       episodeType: isSet(object.episodeType)
         ? globalThis.Number(object.episodeType)
-        : 0,
+        : undefined,
       artworkFileURL: isSet(object.artworkFileURL)
         ? globalThis.String(object.artworkFileURL)
-        : "",
+        : undefined,
       brandIdentifier: isSet(object.brandIdentifier)
         ? globalThis.String(object.brandIdentifier)
-        : "",
+        : undefined,
       localizedDurationString: isSet(object.localizedDurationString)
         ? globalThis.String(object.localizedDurationString)
-        : "",
+        : undefined,
       albumYear: isSet(object.albumYear)
         ? globalThis.String(object.albumYear)
-        : "",
+        : undefined,
       songTraits: isSet(object.songTraits)
         ? songTraits_EnumFromJSON(object.songTraits)
-        : 0,
+        : undefined,
       albumTraits: isSet(object.albumTraits)
         ? albumTraits_EnumFromJSON(object.albumTraits)
-        : 0,
+        : undefined,
       playlistTraits: isSet(object.playlistTraits)
         ? playlistTraits_EnumFromJSON(object.playlistTraits)
-        : 0,
+        : undefined,
       preferredFormat: isSet(object.preferredFormat)
         ? AudioFormat.fromJSON(object.preferredFormat)
         : undefined,
@@ -2028,10 +1851,10 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
         ? activeFormatJustification_EnumFromJSON(
             object.activeFormatJustification
           )
-        : 0,
+        : undefined,
       formatTierPreference: isSet(object.formatTierPreference)
         ? formatTier_EnumFromJSON(object.formatTierPreference)
-        : 1,
+        : undefined,
       audioRoute: isSet(object.audioRoute)
         ? AudioRoute.fromJSON(object.audioRoute)
         : undefined,
@@ -2040,463 +1863,328 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
         : [],
       isAdvertisement: isSet(object.isAdvertisement)
         ? globalThis.Boolean(object.isAdvertisement)
-        : false,
+        : undefined,
       hasAlternativeFormats: isSet(object.hasAlternativeFormats)
         ? globalThis.Boolean(object.hasAlternativeFormats)
-        : false,
+        : undefined,
       participantName: isSet(object.participantName)
         ? globalThis.String(object.participantName)
-        : "",
+        : undefined,
       participantIdentifier: isSet(object.participantIdentifier)
         ? globalThis.String(object.participantIdentifier)
-        : "",
+        : undefined,
       classicalWork: isSet(object.classicalWork)
         ? globalThis.String(object.classicalWork)
-        : "",
+        : undefined,
       reportingAdamId: isSet(object.reportingAdamId)
         ? globalThis.Number(object.reportingAdamId)
-        : 0,
+        : undefined,
       lyricsAdamId: isSet(object.lyricsAdamId)
         ? globalThis.Number(object.lyricsAdamId)
-        : 0,
+        : undefined,
       iTunesStoreAlbumArtistIdentifier: isSet(
         object.iTunesStoreAlbumArtistIdentifier
       )
         ? globalThis.Number(object.iTunesStoreAlbumArtistIdentifier)
-        : 0,
+        : undefined,
       durationStringLocalizationKey: isSet(object.durationStringLocalizationKey)
         ? globalThis.String(object.durationStringLocalizationKey)
-        : "",
+        : undefined,
       isResolvableParticipant: isSet(object.isResolvableParticipant)
         ? globalThis.Boolean(object.isResolvableParticipant)
-        : false,
+        : undefined,
       internationalStandardRecordingCode: isSet(
         object.internationalStandardRecordingCode
       )
         ? globalThis.String(object.internationalStandardRecordingCode)
-        : "",
+        : undefined,
       isInTransition: isSet(object.isInTransition)
         ? globalThis.Boolean(object.isInTransition)
-        : false,
+        : undefined,
       excludeFromSuggestions: isSet(object.excludeFromSuggestions)
         ? globalThis.Boolean(object.excludeFromSuggestions)
-        : false,
+        : undefined,
       transcriptAlignmentsAvailable: isSet(object.transcriptAlignmentsAvailable)
         ? globalThis.Boolean(object.transcriptAlignmentsAvailable)
-        : false,
+        : undefined,
       subtitleShort: isSet(object.subtitleShort)
         ? globalThis.String(object.subtitleShort)
-        : "",
+        : undefined,
       transitionInfoData: isSet(object.transitionInfoData)
         ? Buffer.from(bytesFromBase64(object.transitionInfoData))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: ContentItemMetadata): unknown {
     const obj: any = {};
-    if (message.title !== undefined && message.title !== "") {
+    if (message.title !== undefined) {
       obj.title = message.title;
     }
-    if (message.subtitle !== undefined && message.subtitle !== "") {
+    if (message.subtitle !== undefined) {
       obj.subtitle = message.subtitle;
     }
-    if (message.isContainer !== undefined && message.isContainer !== false) {
+    if (message.isContainer !== undefined) {
       obj.isContainer = message.isContainer;
     }
-    if (message.isPlayable !== undefined && message.isPlayable !== false) {
+    if (message.isPlayable !== undefined) {
       obj.isPlayable = message.isPlayable;
     }
-    if (
-      message.playbackProgress !== undefined &&
-      message.playbackProgress !== 0
-    ) {
+    if (message.playbackProgress !== undefined) {
       obj.playbackProgress = message.playbackProgress;
     }
-    if (message.albumName !== undefined && message.albumName !== "") {
+    if (message.albumName !== undefined) {
       obj.albumName = message.albumName;
     }
-    if (
-      message.trackArtistName !== undefined &&
-      message.trackArtistName !== ""
-    ) {
+    if (message.trackArtistName !== undefined) {
       obj.trackArtistName = message.trackArtistName;
     }
-    if (
-      message.albumArtistName !== undefined &&
-      message.albumArtistName !== ""
-    ) {
+    if (message.albumArtistName !== undefined) {
       obj.albumArtistName = message.albumArtistName;
     }
-    if (message.directorName !== undefined && message.directorName !== "") {
+    if (message.directorName !== undefined) {
       obj.directorName = message.directorName;
     }
-    if (message.seasonNumber !== undefined && message.seasonNumber !== 0) {
+    if (message.seasonNumber !== undefined) {
       obj.seasonNumber = Math.round(message.seasonNumber);
     }
-    if (message.episodeNumber !== undefined && message.episodeNumber !== 0) {
+    if (message.episodeNumber !== undefined) {
       obj.episodeNumber = Math.round(message.episodeNumber);
     }
-    if (message.releaseDate !== undefined && message.releaseDate !== 0) {
+    if (message.releaseDate !== undefined) {
       obj.releaseDate = message.releaseDate;
     }
-    if (message.playCount !== undefined && message.playCount !== 0) {
+    if (message.playCount !== undefined) {
       obj.playCount = Math.round(message.playCount);
     }
-    if (message.duration !== undefined && message.duration !== 0) {
+    if (message.duration !== undefined) {
       obj.duration = message.duration;
     }
-    if (
-      message.localizedContentRating !== undefined &&
-      message.localizedContentRating !== ""
-    ) {
+    if (message.localizedContentRating !== undefined) {
       obj.localizedContentRating = message.localizedContentRating;
     }
-    if (
-      message.isExplicitItem !== undefined &&
-      message.isExplicitItem !== false
-    ) {
+    if (message.isExplicitItem !== undefined) {
       obj.isExplicitItem = message.isExplicitItem;
     }
-    if (message.playlistType !== undefined && message.playlistType !== 0) {
+    if (message.playlistType !== undefined) {
       obj.playlistType = Math.round(message.playlistType);
     }
-    if (
-      message.radioStationType !== undefined &&
-      message.radioStationType !== 0
-    ) {
+    if (message.radioStationType !== undefined) {
       obj.radioStationType = Math.round(message.radioStationType);
     }
-    if (
-      message.artworkAvailable !== undefined &&
-      message.artworkAvailable !== false
-    ) {
+    if (message.artworkAvailable !== undefined) {
       obj.artworkAvailable = message.artworkAvailable;
     }
-    if (
-      message.infoAvailable !== undefined &&
-      message.infoAvailable !== false
-    ) {
+    if (message.infoAvailable !== undefined) {
       obj.infoAvailable = message.infoAvailable;
     }
-    if (
-      message.languageOptionsAvailable !== undefined &&
-      message.languageOptionsAvailable !== false
-    ) {
+    if (message.languageOptionsAvailable !== undefined) {
       obj.languageOptionsAvailable = message.languageOptionsAvailable;
     }
-    if (
-      message.numberOfSections !== undefined &&
-      message.numberOfSections !== 0
-    ) {
+    if (message.numberOfSections !== undefined) {
       obj.numberOfSections = Math.round(message.numberOfSections);
     }
-    if (
-      message.lyricsAvailable !== undefined &&
-      message.lyricsAvailable !== false
-    ) {
+    if (message.lyricsAvailable !== undefined) {
       obj.lyricsAvailable = message.lyricsAvailable;
     }
-    if (
-      message.editingStyleFlags !== undefined &&
-      message.editingStyleFlags !== 0
-    ) {
+    if (message.editingStyleFlags !== undefined) {
       obj.editingStyleFlags = Math.round(message.editingStyleFlags);
     }
-    if (
-      message.isStreamingContent !== undefined &&
-      message.isStreamingContent !== false
-    ) {
+    if (message.isStreamingContent !== undefined) {
       obj.isStreamingContent = message.isStreamingContent;
     }
-    if (
-      message.isCurrentlyPlaying !== undefined &&
-      message.isCurrentlyPlaying !== false
-    ) {
+    if (message.isCurrentlyPlaying !== undefined) {
       obj.isCurrentlyPlaying = message.isCurrentlyPlaying;
     }
-    if (
-      message.collectionIdentifier !== undefined &&
-      message.collectionIdentifier !== ""
-    ) {
+    if (message.collectionIdentifier !== undefined) {
       obj.collectionIdentifier = message.collectionIdentifier;
     }
-    if (
-      message.profileIdentifier !== undefined &&
-      message.profileIdentifier !== ""
-    ) {
+    if (message.profileIdentifier !== undefined) {
       obj.profileIdentifier = message.profileIdentifier;
     }
-    if (message.startTime !== undefined && message.startTime !== 0) {
+    if (message.startTime !== undefined) {
       obj.startTime = message.startTime;
     }
-    if (
-      message.artworkMIMEType !== undefined &&
-      message.artworkMIMEType !== ""
-    ) {
+    if (message.artworkMIMEType !== undefined) {
       obj.artworkMIMEType = message.artworkMIMEType;
     }
-    if (message.assetURLString !== undefined && message.assetURLString !== "") {
+    if (message.assetURLString !== undefined) {
       obj.assetURLString = message.assetURLString;
     }
-    if (message.composer !== undefined && message.composer !== "") {
+    if (message.composer !== undefined) {
       obj.composer = message.composer;
     }
-    if (message.discNumber !== undefined && message.discNumber !== 0) {
+    if (message.discNumber !== undefined) {
       obj.discNumber = Math.round(message.discNumber);
     }
-    if (message.elapsedTime !== undefined && message.elapsedTime !== 0) {
+    if (message.elapsedTime !== undefined) {
       obj.elapsedTime = message.elapsedTime;
     }
-    if (message.genre !== undefined && message.genre !== "") {
+    if (message.genre !== undefined) {
       obj.genre = message.genre;
     }
-    if (message.isAlwaysLive !== undefined && message.isAlwaysLive !== false) {
+    if (message.isAlwaysLive !== undefined) {
       obj.isAlwaysLive = message.isAlwaysLive;
     }
-    if (message.playbackRate !== undefined && message.playbackRate !== 0) {
+    if (message.playbackRate !== undefined) {
       obj.playbackRate = message.playbackRate;
     }
-    if (message.chapterCount !== undefined && message.chapterCount !== 0) {
+    if (message.chapterCount !== undefined) {
       obj.chapterCount = Math.round(message.chapterCount);
     }
-    if (message.totalDiscCount !== undefined && message.totalDiscCount !== 0) {
+    if (message.totalDiscCount !== undefined) {
       obj.totalDiscCount = Math.round(message.totalDiscCount);
     }
-    if (
-      message.totalTrackCount !== undefined &&
-      message.totalTrackCount !== 0
-    ) {
+    if (message.totalTrackCount !== undefined) {
       obj.totalTrackCount = Math.round(message.totalTrackCount);
     }
-    if (message.trackNumber !== undefined && message.trackNumber !== 0) {
+    if (message.trackNumber !== undefined) {
       obj.trackNumber = Math.round(message.trackNumber);
     }
-    if (
-      message.contentIdentifier !== undefined &&
-      message.contentIdentifier !== ""
-    ) {
+    if (message.contentIdentifier !== undefined) {
       obj.contentIdentifier = message.contentIdentifier;
     }
-    if (message.isSharable !== undefined && message.isSharable !== false) {
+    if (message.isSharable !== undefined) {
       obj.isSharable = message.isSharable;
     }
-    if (message.isLiked !== undefined && message.isLiked !== false) {
+    if (message.isLiked !== undefined) {
       obj.isLiked = message.isLiked;
     }
-    if (message.isInWishList !== undefined && message.isInWishList !== false) {
+    if (message.isInWishList !== undefined) {
       obj.isInWishList = message.isInWishList;
     }
-    if (
-      message.radioStationIdentifier !== undefined &&
-      message.radioStationIdentifier !== 0
-    ) {
+    if (message.radioStationIdentifier !== undefined) {
       obj.radioStationIdentifier = Math.round(message.radioStationIdentifier);
     }
-    if (
-      message.radioStationName !== undefined &&
-      message.radioStationName !== ""
-    ) {
+    if (message.radioStationName !== undefined) {
       obj.radioStationName = message.radioStationName;
     }
-    if (
-      message.radioStationString !== undefined &&
-      message.radioStationString !== ""
-    ) {
+    if (message.radioStationString !== undefined) {
       obj.radioStationString = message.radioStationString;
     }
-    if (
-      message.iTunesStoreIdentifier !== undefined &&
-      message.iTunesStoreIdentifier !== 0
-    ) {
+    if (message.iTunesStoreIdentifier !== undefined) {
       obj.iTunesStoreIdentifier = Math.round(message.iTunesStoreIdentifier);
     }
-    if (
-      message.iTunesStoreSubscriptionIdentifier !== undefined &&
-      message.iTunesStoreSubscriptionIdentifier !== 0
-    ) {
+    if (message.iTunesStoreSubscriptionIdentifier !== undefined) {
       obj.iTunesStoreSubscriptionIdentifier = Math.round(
         message.iTunesStoreSubscriptionIdentifier
       );
     }
-    if (
-      message.iTunesStoreArtistIdentifier !== undefined &&
-      message.iTunesStoreArtistIdentifier !== 0
-    ) {
+    if (message.iTunesStoreArtistIdentifier !== undefined) {
       obj.iTunesStoreArtistIdentifier = Math.round(
         message.iTunesStoreArtistIdentifier
       );
     }
-    if (
-      message.iTunesStoreAlbumIdentifier !== undefined &&
-      message.iTunesStoreAlbumIdentifier !== 0
-    ) {
+    if (message.iTunesStoreAlbumIdentifier !== undefined) {
       obj.iTunesStoreAlbumIdentifier = Math.round(
         message.iTunesStoreAlbumIdentifier
       );
     }
-    if (
-      message.purchaseInfoData !== undefined &&
-      message.purchaseInfoData.length !== 0
-    ) {
+    if (message.purchaseInfoData !== undefined) {
       obj.purchaseInfoData = base64FromBytes(message.purchaseInfoData);
     }
-    if (
-      message.defaultPlaybackRate !== undefined &&
-      message.defaultPlaybackRate !== 0
-    ) {
+    if (message.defaultPlaybackRate !== undefined) {
       obj.defaultPlaybackRate = message.defaultPlaybackRate;
     }
-    if (message.downloadState !== undefined && message.downloadState !== 0) {
+    if (message.downloadState !== undefined) {
       obj.downloadState = Math.round(message.downloadState);
     }
-    if (
-      message.downloadProgress !== undefined &&
-      message.downloadProgress !== 0
-    ) {
+    if (message.downloadProgress !== undefined) {
       obj.downloadProgress = message.downloadProgress;
     }
-    if (
-      message.appMetricsData !== undefined &&
-      message.appMetricsData.length !== 0
-    ) {
+    if (message.appMetricsData !== undefined) {
       obj.appMetricsData = base64FromBytes(message.appMetricsData);
     }
-    if (message.seriesName !== undefined && message.seriesName !== "") {
+    if (message.seriesName !== undefined) {
       obj.seriesName = message.seriesName;
     }
-    if (message.mediaType !== undefined && message.mediaType !== 0) {
+    if (message.mediaType !== undefined) {
       obj.mediaType = contentItemMetadata_MediaTypeToJSON(message.mediaType);
     }
-    if (message.mediaSubType !== undefined && message.mediaSubType !== 0) {
+    if (message.mediaSubType !== undefined) {
       obj.mediaSubType = contentItemMetadata_MediaSubTypeToJSON(
         message.mediaSubType
       );
     }
-    if (
-      message.nowPlayingInfoData !== undefined &&
-      message.nowPlayingInfoData.length !== 0
-    ) {
+    if (message.nowPlayingInfoData !== undefined) {
       obj.nowPlayingInfoData = base64FromBytes(message.nowPlayingInfoData);
     }
-    if (
-      message.userInfoData !== undefined &&
-      message.userInfoData.length !== 0
-    ) {
+    if (message.userInfoData !== undefined) {
       obj.userInfoData = base64FromBytes(message.userInfoData);
     }
-    if (message.isSteerable !== undefined && message.isSteerable !== false) {
+    if (message.isSteerable !== undefined) {
       obj.isSteerable = message.isSteerable;
     }
-    if (message.artworkURL !== undefined && message.artworkURL !== "") {
+    if (message.artworkURL !== undefined) {
       obj.artworkURL = message.artworkURL;
     }
-    if (message.lyricsURL !== undefined && message.lyricsURL !== "") {
+    if (message.lyricsURL !== undefined) {
       obj.lyricsURL = message.lyricsURL;
     }
-    if (
-      message.deviceSpecificUserInfoData !== undefined &&
-      message.deviceSpecificUserInfoData.length !== 0
-    ) {
+    if (message.deviceSpecificUserInfoData !== undefined) {
       obj.deviceSpecificUserInfoData = base64FromBytes(
         message.deviceSpecificUserInfoData
       );
     }
-    if (
-      message.collectionInfoData !== undefined &&
-      message.collectionInfoData.length !== 0
-    ) {
+    if (message.collectionInfoData !== undefined) {
       obj.collectionInfoData = base64FromBytes(message.collectionInfoData);
     }
-    if (
-      message.elapsedTimeTimestamp !== undefined &&
-      message.elapsedTimeTimestamp !== 0
-    ) {
+    if (message.elapsedTimeTimestamp !== undefined) {
       obj.elapsedTimeTimestamp = message.elapsedTimeTimestamp;
     }
-    if (
-      message.inferredTimestamp !== undefined &&
-      message.inferredTimestamp !== 0
-    ) {
+    if (message.inferredTimestamp !== undefined) {
       obj.inferredTimestamp = message.inferredTimestamp;
     }
-    if (
-      message.serviceIdentifier !== undefined &&
-      message.serviceIdentifier !== ""
-    ) {
+    if (message.serviceIdentifier !== undefined) {
       obj.serviceIdentifier = message.serviceIdentifier;
     }
-    if (
-      message.artworkDataWidth !== undefined &&
-      message.artworkDataWidth !== 0
-    ) {
+    if (message.artworkDataWidth !== undefined) {
       obj.artworkDataWidth = Math.round(message.artworkDataWidth);
     }
-    if (
-      message.artworkDataHeight !== undefined &&
-      message.artworkDataHeight !== 0
-    ) {
+    if (message.artworkDataHeight !== undefined) {
       obj.artworkDataHeight = Math.round(message.artworkDataHeight);
     }
-    if (
-      message.currentPlaybackDateData !== undefined &&
-      message.currentPlaybackDateData.length !== 0
-    ) {
+    if (message.currentPlaybackDateData !== undefined) {
       obj.currentPlaybackDateData = base64FromBytes(
         message.currentPlaybackDateData
       );
     }
-    if (
-      message.artworkIdentifier !== undefined &&
-      message.artworkIdentifier !== ""
-    ) {
+    if (message.artworkIdentifier !== undefined) {
       obj.artworkIdentifier = message.artworkIdentifier;
     }
-    if (message.isLoading !== undefined && message.isLoading !== false) {
+    if (message.isLoading !== undefined) {
       obj.isLoading = message.isLoading;
     }
-    if (
-      message.artworkURLTemplatesData !== undefined &&
-      message.artworkURLTemplatesData.length !== 0
-    ) {
+    if (message.artworkURLTemplatesData !== undefined) {
       obj.artworkURLTemplatesData = base64FromBytes(
         message.artworkURLTemplatesData
       );
     }
-    if (
-      message.legacyUniqueIdentifier !== undefined &&
-      message.legacyUniqueIdentifier !== 0
-    ) {
+    if (message.legacyUniqueIdentifier !== undefined) {
       obj.legacyUniqueIdentifier = Math.round(message.legacyUniqueIdentifier);
     }
-    if (message.episodeType !== undefined && message.episodeType !== 0) {
+    if (message.episodeType !== undefined) {
       obj.episodeType = Math.round(message.episodeType);
     }
-    if (message.artworkFileURL !== undefined && message.artworkFileURL !== "") {
+    if (message.artworkFileURL !== undefined) {
       obj.artworkFileURL = message.artworkFileURL;
     }
-    if (
-      message.brandIdentifier !== undefined &&
-      message.brandIdentifier !== ""
-    ) {
+    if (message.brandIdentifier !== undefined) {
       obj.brandIdentifier = message.brandIdentifier;
     }
-    if (
-      message.localizedDurationString !== undefined &&
-      message.localizedDurationString !== ""
-    ) {
+    if (message.localizedDurationString !== undefined) {
       obj.localizedDurationString = message.localizedDurationString;
     }
-    if (message.albumYear !== undefined && message.albumYear !== "") {
+    if (message.albumYear !== undefined) {
       obj.albumYear = message.albumYear;
     }
-    if (message.songTraits !== undefined && message.songTraits !== 0) {
+    if (message.songTraits !== undefined) {
       obj.songTraits = songTraits_EnumToJSON(message.songTraits);
     }
-    if (message.albumTraits !== undefined && message.albumTraits !== 0) {
+    if (message.albumTraits !== undefined) {
       obj.albumTraits = albumTraits_EnumToJSON(message.albumTraits);
     }
-    if (message.playlistTraits !== undefined && message.playlistTraits !== 0) {
+    if (message.playlistTraits !== undefined) {
       obj.playlistTraits = playlistTraits_EnumToJSON(message.playlistTraits);
     }
     if (message.preferredFormat !== undefined) {
@@ -2505,18 +2193,12 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
     if (message.activeFormat !== undefined) {
       obj.activeFormat = AudioFormat.toJSON(message.activeFormat);
     }
-    if (
-      message.activeFormatJustification !== undefined &&
-      message.activeFormatJustification !== 0
-    ) {
+    if (message.activeFormatJustification !== undefined) {
       obj.activeFormatJustification = activeFormatJustification_EnumToJSON(
         message.activeFormatJustification
       );
     }
-    if (
-      message.formatTierPreference !== undefined &&
-      message.formatTierPreference !== 1
-    ) {
+    if (message.formatTierPreference !== undefined) {
       obj.formatTierPreference = formatTier_EnumToJSON(
         message.formatTierPreference
       );
@@ -2529,94 +2211,55 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
         AudioFormat.toJSON(e)
       );
     }
-    if (
-      message.isAdvertisement !== undefined &&
-      message.isAdvertisement !== false
-    ) {
+    if (message.isAdvertisement !== undefined) {
       obj.isAdvertisement = message.isAdvertisement;
     }
-    if (
-      message.hasAlternativeFormats !== undefined &&
-      message.hasAlternativeFormats !== false
-    ) {
+    if (message.hasAlternativeFormats !== undefined) {
       obj.hasAlternativeFormats = message.hasAlternativeFormats;
     }
-    if (
-      message.participantName !== undefined &&
-      message.participantName !== ""
-    ) {
+    if (message.participantName !== undefined) {
       obj.participantName = message.participantName;
     }
-    if (
-      message.participantIdentifier !== undefined &&
-      message.participantIdentifier !== ""
-    ) {
+    if (message.participantIdentifier !== undefined) {
       obj.participantIdentifier = message.participantIdentifier;
     }
-    if (message.classicalWork !== undefined && message.classicalWork !== "") {
+    if (message.classicalWork !== undefined) {
       obj.classicalWork = message.classicalWork;
     }
-    if (
-      message.reportingAdamId !== undefined &&
-      message.reportingAdamId !== 0
-    ) {
+    if (message.reportingAdamId !== undefined) {
       obj.reportingAdamId = Math.round(message.reportingAdamId);
     }
-    if (message.lyricsAdamId !== undefined && message.lyricsAdamId !== 0) {
+    if (message.lyricsAdamId !== undefined) {
       obj.lyricsAdamId = Math.round(message.lyricsAdamId);
     }
-    if (
-      message.iTunesStoreAlbumArtistIdentifier !== undefined &&
-      message.iTunesStoreAlbumArtistIdentifier !== 0
-    ) {
+    if (message.iTunesStoreAlbumArtistIdentifier !== undefined) {
       obj.iTunesStoreAlbumArtistIdentifier = Math.round(
         message.iTunesStoreAlbumArtistIdentifier
       );
     }
-    if (
-      message.durationStringLocalizationKey !== undefined &&
-      message.durationStringLocalizationKey !== ""
-    ) {
+    if (message.durationStringLocalizationKey !== undefined) {
       obj.durationStringLocalizationKey = message.durationStringLocalizationKey;
     }
-    if (
-      message.isResolvableParticipant !== undefined &&
-      message.isResolvableParticipant !== false
-    ) {
+    if (message.isResolvableParticipant !== undefined) {
       obj.isResolvableParticipant = message.isResolvableParticipant;
     }
-    if (
-      message.internationalStandardRecordingCode !== undefined &&
-      message.internationalStandardRecordingCode !== ""
-    ) {
+    if (message.internationalStandardRecordingCode !== undefined) {
       obj.internationalStandardRecordingCode =
         message.internationalStandardRecordingCode;
     }
-    if (
-      message.isInTransition !== undefined &&
-      message.isInTransition !== false
-    ) {
+    if (message.isInTransition !== undefined) {
       obj.isInTransition = message.isInTransition;
     }
-    if (
-      message.excludeFromSuggestions !== undefined &&
-      message.excludeFromSuggestions !== false
-    ) {
+    if (message.excludeFromSuggestions !== undefined) {
       obj.excludeFromSuggestions = message.excludeFromSuggestions;
     }
-    if (
-      message.transcriptAlignmentsAvailable !== undefined &&
-      message.transcriptAlignmentsAvailable !== false
-    ) {
+    if (message.transcriptAlignmentsAvailable !== undefined) {
       obj.transcriptAlignmentsAvailable = message.transcriptAlignmentsAvailable;
     }
-    if (message.subtitleShort !== undefined && message.subtitleShort !== "") {
+    if (message.subtitleShort !== undefined) {
       obj.subtitleShort = message.subtitleShort;
     }
-    if (
-      message.transitionInfoData !== undefined &&
-      message.transitionInfoData.length !== 0
-    ) {
+    if (message.transitionInfoData !== undefined) {
       obj.transitionInfoData = base64FromBytes(message.transitionInfoData);
     }
     return obj;
@@ -2631,96 +2274,99 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
     object: I
   ): ContentItemMetadata {
     const message = createBaseContentItemMetadata();
-    message.title = object.title ?? "";
-    message.subtitle = object.subtitle ?? "";
-    message.isContainer = object.isContainer ?? false;
-    message.isPlayable = object.isPlayable ?? false;
-    message.playbackProgress = object.playbackProgress ?? 0;
-    message.albumName = object.albumName ?? "";
-    message.trackArtistName = object.trackArtistName ?? "";
-    message.albumArtistName = object.albumArtistName ?? "";
-    message.directorName = object.directorName ?? "";
-    message.seasonNumber = object.seasonNumber ?? 0;
-    message.episodeNumber = object.episodeNumber ?? 0;
-    message.releaseDate = object.releaseDate ?? 0;
-    message.playCount = object.playCount ?? 0;
-    message.duration = object.duration ?? 0;
-    message.localizedContentRating = object.localizedContentRating ?? "";
-    message.isExplicitItem = object.isExplicitItem ?? false;
-    message.playlistType = object.playlistType ?? 0;
-    message.radioStationType = object.radioStationType ?? 0;
-    message.artworkAvailable = object.artworkAvailable ?? false;
-    message.infoAvailable = object.infoAvailable ?? false;
-    message.languageOptionsAvailable = object.languageOptionsAvailable ?? false;
-    message.numberOfSections = object.numberOfSections ?? 0;
-    message.lyricsAvailable = object.lyricsAvailable ?? false;
-    message.editingStyleFlags = object.editingStyleFlags ?? 0;
-    message.isStreamingContent = object.isStreamingContent ?? false;
-    message.isCurrentlyPlaying = object.isCurrentlyPlaying ?? false;
-    message.collectionIdentifier = object.collectionIdentifier ?? "";
-    message.profileIdentifier = object.profileIdentifier ?? "";
-    message.startTime = object.startTime ?? 0;
-    message.artworkMIMEType = object.artworkMIMEType ?? "";
-    message.assetURLString = object.assetURLString ?? "";
-    message.composer = object.composer ?? "";
-    message.discNumber = object.discNumber ?? 0;
-    message.elapsedTime = object.elapsedTime ?? 0;
-    message.genre = object.genre ?? "";
-    message.isAlwaysLive = object.isAlwaysLive ?? false;
-    message.playbackRate = object.playbackRate ?? 0;
-    message.chapterCount = object.chapterCount ?? 0;
-    message.totalDiscCount = object.totalDiscCount ?? 0;
-    message.totalTrackCount = object.totalTrackCount ?? 0;
-    message.trackNumber = object.trackNumber ?? 0;
-    message.contentIdentifier = object.contentIdentifier ?? "";
-    message.isSharable = object.isSharable ?? false;
-    message.isLiked = object.isLiked ?? false;
-    message.isInWishList = object.isInWishList ?? false;
-    message.radioStationIdentifier = object.radioStationIdentifier ?? 0;
-    message.radioStationName = object.radioStationName ?? "";
-    message.radioStationString = object.radioStationString ?? "";
-    message.iTunesStoreIdentifier = object.iTunesStoreIdentifier ?? 0;
+    message.title = object.title ?? undefined;
+    message.subtitle = object.subtitle ?? undefined;
+    message.isContainer = object.isContainer ?? undefined;
+    message.isPlayable = object.isPlayable ?? undefined;
+    message.playbackProgress = object.playbackProgress ?? undefined;
+    message.albumName = object.albumName ?? undefined;
+    message.trackArtistName = object.trackArtistName ?? undefined;
+    message.albumArtistName = object.albumArtistName ?? undefined;
+    message.directorName = object.directorName ?? undefined;
+    message.seasonNumber = object.seasonNumber ?? undefined;
+    message.episodeNumber = object.episodeNumber ?? undefined;
+    message.releaseDate = object.releaseDate ?? undefined;
+    message.playCount = object.playCount ?? undefined;
+    message.duration = object.duration ?? undefined;
+    message.localizedContentRating = object.localizedContentRating ?? undefined;
+    message.isExplicitItem = object.isExplicitItem ?? undefined;
+    message.playlistType = object.playlistType ?? undefined;
+    message.radioStationType = object.radioStationType ?? undefined;
+    message.artworkAvailable = object.artworkAvailable ?? undefined;
+    message.infoAvailable = object.infoAvailable ?? undefined;
+    message.languageOptionsAvailable =
+      object.languageOptionsAvailable ?? undefined;
+    message.numberOfSections = object.numberOfSections ?? undefined;
+    message.lyricsAvailable = object.lyricsAvailable ?? undefined;
+    message.editingStyleFlags = object.editingStyleFlags ?? undefined;
+    message.isStreamingContent = object.isStreamingContent ?? undefined;
+    message.isCurrentlyPlaying = object.isCurrentlyPlaying ?? undefined;
+    message.collectionIdentifier = object.collectionIdentifier ?? undefined;
+    message.profileIdentifier = object.profileIdentifier ?? undefined;
+    message.startTime = object.startTime ?? undefined;
+    message.artworkMIMEType = object.artworkMIMEType ?? undefined;
+    message.assetURLString = object.assetURLString ?? undefined;
+    message.composer = object.composer ?? undefined;
+    message.discNumber = object.discNumber ?? undefined;
+    message.elapsedTime = object.elapsedTime ?? undefined;
+    message.genre = object.genre ?? undefined;
+    message.isAlwaysLive = object.isAlwaysLive ?? undefined;
+    message.playbackRate = object.playbackRate ?? undefined;
+    message.chapterCount = object.chapterCount ?? undefined;
+    message.totalDiscCount = object.totalDiscCount ?? undefined;
+    message.totalTrackCount = object.totalTrackCount ?? undefined;
+    message.trackNumber = object.trackNumber ?? undefined;
+    message.contentIdentifier = object.contentIdentifier ?? undefined;
+    message.isSharable = object.isSharable ?? undefined;
+    message.isLiked = object.isLiked ?? undefined;
+    message.isInWishList = object.isInWishList ?? undefined;
+    message.radioStationIdentifier = object.radioStationIdentifier ?? undefined;
+    message.radioStationName = object.radioStationName ?? undefined;
+    message.radioStationString = object.radioStationString ?? undefined;
+    message.iTunesStoreIdentifier = object.iTunesStoreIdentifier ?? undefined;
     message.iTunesStoreSubscriptionIdentifier =
-      object.iTunesStoreSubscriptionIdentifier ?? 0;
+      object.iTunesStoreSubscriptionIdentifier ?? undefined;
     message.iTunesStoreArtistIdentifier =
-      object.iTunesStoreArtistIdentifier ?? 0;
-    message.iTunesStoreAlbumIdentifier = object.iTunesStoreAlbumIdentifier ?? 0;
-    message.purchaseInfoData = object.purchaseInfoData ?? Buffer.alloc(0);
-    message.defaultPlaybackRate = object.defaultPlaybackRate ?? 0;
-    message.downloadState = object.downloadState ?? 0;
-    message.downloadProgress = object.downloadProgress ?? 0;
-    message.appMetricsData = object.appMetricsData ?? Buffer.alloc(0);
-    message.seriesName = object.seriesName ?? "";
-    message.mediaType = object.mediaType ?? 0;
-    message.mediaSubType = object.mediaSubType ?? 0;
-    message.nowPlayingInfoData = object.nowPlayingInfoData ?? Buffer.alloc(0);
-    message.userInfoData = object.userInfoData ?? Buffer.alloc(0);
-    message.isSteerable = object.isSteerable ?? false;
-    message.artworkURL = object.artworkURL ?? "";
-    message.lyricsURL = object.lyricsURL ?? "";
+      object.iTunesStoreArtistIdentifier ?? undefined;
+    message.iTunesStoreAlbumIdentifier =
+      object.iTunesStoreAlbumIdentifier ?? undefined;
+    message.purchaseInfoData = object.purchaseInfoData ?? undefined;
+    message.defaultPlaybackRate = object.defaultPlaybackRate ?? undefined;
+    message.downloadState = object.downloadState ?? undefined;
+    message.downloadProgress = object.downloadProgress ?? undefined;
+    message.appMetricsData = object.appMetricsData ?? undefined;
+    message.seriesName = object.seriesName ?? undefined;
+    message.mediaType = object.mediaType ?? undefined;
+    message.mediaSubType = object.mediaSubType ?? undefined;
+    message.nowPlayingInfoData = object.nowPlayingInfoData ?? undefined;
+    message.userInfoData = object.userInfoData ?? undefined;
+    message.isSteerable = object.isSteerable ?? undefined;
+    message.artworkURL = object.artworkURL ?? undefined;
+    message.lyricsURL = object.lyricsURL ?? undefined;
     message.deviceSpecificUserInfoData =
-      object.deviceSpecificUserInfoData ?? Buffer.alloc(0);
-    message.collectionInfoData = object.collectionInfoData ?? Buffer.alloc(0);
-    message.elapsedTimeTimestamp = object.elapsedTimeTimestamp ?? 0;
-    message.inferredTimestamp = object.inferredTimestamp ?? 0;
-    message.serviceIdentifier = object.serviceIdentifier ?? "";
-    message.artworkDataWidth = object.artworkDataWidth ?? 0;
-    message.artworkDataHeight = object.artworkDataHeight ?? 0;
+      object.deviceSpecificUserInfoData ?? undefined;
+    message.collectionInfoData = object.collectionInfoData ?? undefined;
+    message.elapsedTimeTimestamp = object.elapsedTimeTimestamp ?? undefined;
+    message.inferredTimestamp = object.inferredTimestamp ?? undefined;
+    message.serviceIdentifier = object.serviceIdentifier ?? undefined;
+    message.artworkDataWidth = object.artworkDataWidth ?? undefined;
+    message.artworkDataHeight = object.artworkDataHeight ?? undefined;
     message.currentPlaybackDateData =
-      object.currentPlaybackDateData ?? Buffer.alloc(0);
-    message.artworkIdentifier = object.artworkIdentifier ?? "";
-    message.isLoading = object.isLoading ?? false;
+      object.currentPlaybackDateData ?? undefined;
+    message.artworkIdentifier = object.artworkIdentifier ?? undefined;
+    message.isLoading = object.isLoading ?? undefined;
     message.artworkURLTemplatesData =
-      object.artworkURLTemplatesData ?? Buffer.alloc(0);
-    message.legacyUniqueIdentifier = object.legacyUniqueIdentifier ?? 0;
-    message.episodeType = object.episodeType ?? 0;
-    message.artworkFileURL = object.artworkFileURL ?? "";
-    message.brandIdentifier = object.brandIdentifier ?? "";
-    message.localizedDurationString = object.localizedDurationString ?? "";
-    message.albumYear = object.albumYear ?? "";
-    message.songTraits = object.songTraits ?? 0;
-    message.albumTraits = object.albumTraits ?? 0;
-    message.playlistTraits = object.playlistTraits ?? 0;
+      object.artworkURLTemplatesData ?? undefined;
+    message.legacyUniqueIdentifier = object.legacyUniqueIdentifier ?? undefined;
+    message.episodeType = object.episodeType ?? undefined;
+    message.artworkFileURL = object.artworkFileURL ?? undefined;
+    message.brandIdentifier = object.brandIdentifier ?? undefined;
+    message.localizedDurationString =
+      object.localizedDurationString ?? undefined;
+    message.albumYear = object.albumYear ?? undefined;
+    message.songTraits = object.songTraits ?? undefined;
+    message.albumTraits = object.albumTraits ?? undefined;
+    message.playlistTraits = object.playlistTraits ?? undefined;
     message.preferredFormat =
       object.preferredFormat !== undefined && object.preferredFormat !== null
         ? AudioFormat.fromPartial(object.preferredFormat)
@@ -2729,34 +2375,36 @@ export const ContentItemMetadata: MessageFns<ContentItemMetadata> = {
       object.activeFormat !== undefined && object.activeFormat !== null
         ? AudioFormat.fromPartial(object.activeFormat)
         : undefined;
-    message.activeFormatJustification = object.activeFormatJustification ?? 0;
-    message.formatTierPreference = object.formatTierPreference ?? 1;
+    message.activeFormatJustification =
+      object.activeFormatJustification ?? undefined;
+    message.formatTierPreference = object.formatTierPreference ?? undefined;
     message.audioRoute =
       object.audioRoute !== undefined && object.audioRoute !== null
         ? AudioRoute.fromPartial(object.audioRoute)
         : undefined;
     message.alternativeFormats =
       object.alternativeFormats?.map((e) => AudioFormat.fromPartial(e)) || [];
-    message.isAdvertisement = object.isAdvertisement ?? false;
-    message.hasAlternativeFormats = object.hasAlternativeFormats ?? false;
-    message.participantName = object.participantName ?? "";
-    message.participantIdentifier = object.participantIdentifier ?? "";
-    message.classicalWork = object.classicalWork ?? "";
-    message.reportingAdamId = object.reportingAdamId ?? 0;
-    message.lyricsAdamId = object.lyricsAdamId ?? 0;
+    message.isAdvertisement = object.isAdvertisement ?? undefined;
+    message.hasAlternativeFormats = object.hasAlternativeFormats ?? undefined;
+    message.participantName = object.participantName ?? undefined;
+    message.participantIdentifier = object.participantIdentifier ?? undefined;
+    message.classicalWork = object.classicalWork ?? undefined;
+    message.reportingAdamId = object.reportingAdamId ?? undefined;
+    message.lyricsAdamId = object.lyricsAdamId ?? undefined;
     message.iTunesStoreAlbumArtistIdentifier =
-      object.iTunesStoreAlbumArtistIdentifier ?? 0;
+      object.iTunesStoreAlbumArtistIdentifier ?? undefined;
     message.durationStringLocalizationKey =
-      object.durationStringLocalizationKey ?? "";
-    message.isResolvableParticipant = object.isResolvableParticipant ?? false;
+      object.durationStringLocalizationKey ?? undefined;
+    message.isResolvableParticipant =
+      object.isResolvableParticipant ?? undefined;
     message.internationalStandardRecordingCode =
-      object.internationalStandardRecordingCode ?? "";
-    message.isInTransition = object.isInTransition ?? false;
-    message.excludeFromSuggestions = object.excludeFromSuggestions ?? false;
+      object.internationalStandardRecordingCode ?? undefined;
+    message.isInTransition = object.isInTransition ?? undefined;
+    message.excludeFromSuggestions = object.excludeFromSuggestions ?? undefined;
     message.transcriptAlignmentsAvailable =
-      object.transcriptAlignmentsAvailable ?? false;
-    message.subtitleShort = object.subtitleShort ?? "";
-    message.transitionInfoData = object.transitionInfoData ?? Buffer.alloc(0);
+      object.transcriptAlignmentsAvailable ?? undefined;
+    message.subtitleShort = object.subtitleShort ?? undefined;
+    message.transitionInfoData = object.transitionInfoData ?? undefined;
     return message;
   },
 };

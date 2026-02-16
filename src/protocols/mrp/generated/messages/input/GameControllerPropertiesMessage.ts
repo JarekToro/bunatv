@@ -26,11 +26,11 @@ export interface GameControllerPropertiesMessage {
 
 function createBaseGameControllerProperties(): GameControllerProperties {
   return {
-    playerIndex: 0,
-    vendorName: "",
-    buttonAUpDelay: 0,
-    profile: 0,
-    supportsExtendedMotion: false,
+    playerIndex: undefined,
+    vendorName: undefined,
+    buttonAUpDelay: undefined,
+    profile: undefined,
+    supportsExtendedMotion: undefined,
     _unknownFields: {},
   };
 }
@@ -40,22 +40,19 @@ export const GameControllerProperties: MessageFns<GameControllerProperties> = {
     message: GameControllerProperties,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.playerIndex !== undefined && message.playerIndex !== 0) {
+    if (message.playerIndex !== undefined) {
       writer.uint32(8).uint32(message.playerIndex);
     }
-    if (message.vendorName !== undefined && message.vendorName !== "") {
+    if (message.vendorName !== undefined) {
       writer.uint32(18).string(message.vendorName);
     }
-    if (message.buttonAUpDelay !== undefined && message.buttonAUpDelay !== 0) {
+    if (message.buttonAUpDelay !== undefined) {
       writer.uint32(24).int32(message.buttonAUpDelay);
     }
-    if (message.profile !== undefined && message.profile !== 0) {
+    if (message.profile !== undefined) {
       writer.uint32(32).int32(message.profile);
     }
-    if (
-      message.supportsExtendedMotion !== undefined &&
-      message.supportsExtendedMotion !== false
-    ) {
+    if (message.supportsExtendedMotion !== undefined) {
       writer.uint32(40).bool(message.supportsExtendedMotion);
     }
     if (message._unknownFields !== undefined) {
@@ -143,38 +140,37 @@ export const GameControllerProperties: MessageFns<GameControllerProperties> = {
     return {
       playerIndex: isSet(object.playerIndex)
         ? globalThis.Number(object.playerIndex)
-        : 0,
+        : undefined,
       vendorName: isSet(object.vendorName)
         ? globalThis.String(object.vendorName)
-        : "",
+        : undefined,
       buttonAUpDelay: isSet(object.buttonAUpDelay)
         ? globalThis.Number(object.buttonAUpDelay)
-        : 0,
-      profile: isSet(object.profile) ? globalThis.Number(object.profile) : 0,
+        : undefined,
+      profile: isSet(object.profile)
+        ? globalThis.Number(object.profile)
+        : undefined,
       supportsExtendedMotion: isSet(object.supportsExtendedMotion)
         ? globalThis.Boolean(object.supportsExtendedMotion)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: GameControllerProperties): unknown {
     const obj: any = {};
-    if (message.playerIndex !== undefined && message.playerIndex !== 0) {
+    if (message.playerIndex !== undefined) {
       obj.playerIndex = Math.round(message.playerIndex);
     }
-    if (message.vendorName !== undefined && message.vendorName !== "") {
+    if (message.vendorName !== undefined) {
       obj.vendorName = message.vendorName;
     }
-    if (message.buttonAUpDelay !== undefined && message.buttonAUpDelay !== 0) {
+    if (message.buttonAUpDelay !== undefined) {
       obj.buttonAUpDelay = Math.round(message.buttonAUpDelay);
     }
-    if (message.profile !== undefined && message.profile !== 0) {
+    if (message.profile !== undefined) {
       obj.profile = Math.round(message.profile);
     }
-    if (
-      message.supportsExtendedMotion !== undefined &&
-      message.supportsExtendedMotion !== false
-    ) {
+    if (message.supportsExtendedMotion !== undefined) {
       obj.supportsExtendedMotion = message.supportsExtendedMotion;
     }
     return obj;
@@ -189,17 +185,17 @@ export const GameControllerProperties: MessageFns<GameControllerProperties> = {
     object: I
   ): GameControllerProperties {
     const message = createBaseGameControllerProperties();
-    message.playerIndex = object.playerIndex ?? 0;
-    message.vendorName = object.vendorName ?? "";
-    message.buttonAUpDelay = object.buttonAUpDelay ?? 0;
-    message.profile = object.profile ?? 0;
-    message.supportsExtendedMotion = object.supportsExtendedMotion ?? false;
+    message.playerIndex = object.playerIndex ?? undefined;
+    message.vendorName = object.vendorName ?? undefined;
+    message.buttonAUpDelay = object.buttonAUpDelay ?? undefined;
+    message.profile = object.profile ?? undefined;
+    message.supportsExtendedMotion = object.supportsExtendedMotion ?? undefined;
     return message;
   },
 };
 
 function createBaseGameControllerPropertiesMessage(): GameControllerPropertiesMessage {
-  return { controllerID: 0, properties: undefined, _unknownFields: {} };
+  return { controllerID: undefined, properties: undefined, _unknownFields: {} };
 }
 
 export const GameControllerPropertiesMessage: MessageFns<GameControllerPropertiesMessage> =
@@ -208,7 +204,7 @@ export const GameControllerPropertiesMessage: MessageFns<GameControllerPropertie
       message: GameControllerPropertiesMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.controllerID !== undefined && message.controllerID !== 0) {
+      if (message.controllerID !== undefined) {
         writer.uint32(8).uint64(message.controllerID);
       }
       if (message.properties !== undefined) {
@@ -281,7 +277,7 @@ export const GameControllerPropertiesMessage: MessageFns<GameControllerPropertie
       return {
         controllerID: isSet(object.controllerID)
           ? globalThis.Number(object.controllerID)
-          : 0,
+          : undefined,
         properties: isSet(object.properties)
           ? GameControllerProperties.fromJSON(object.properties)
           : undefined,
@@ -290,7 +286,7 @@ export const GameControllerPropertiesMessage: MessageFns<GameControllerPropertie
 
     toJSON(message: GameControllerPropertiesMessage): unknown {
       const obj: any = {};
-      if (message.controllerID !== undefined && message.controllerID !== 0) {
+      if (message.controllerID !== undefined) {
         obj.controllerID = Math.round(message.controllerID);
       }
       if (message.properties !== undefined) {
@@ -308,7 +304,7 @@ export const GameControllerPropertiesMessage: MessageFns<GameControllerPropertie
       I extends Exact<DeepPartial<GameControllerPropertiesMessage>, I>,
     >(object: I): GameControllerPropertiesMessage {
       const message = createBaseGameControllerPropertiesMessage();
-      message.controllerID = object.controllerID ?? 0;
+      message.controllerID = object.controllerID ?? undefined;
       message.properties =
         object.properties !== undefined && object.properties !== null
           ? GameControllerProperties.fromPartial(object.properties)

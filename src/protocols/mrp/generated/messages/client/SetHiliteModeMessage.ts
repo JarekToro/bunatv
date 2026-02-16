@@ -15,7 +15,7 @@ export interface SetHiliteModeMessage {
 }
 
 function createBaseSetHiliteModeMessage(): SetHiliteModeMessage {
-  return { hiliteMode: false, _unknownFields: {} };
+  return { hiliteMode: undefined, _unknownFields: {} };
 }
 
 export const SetHiliteModeMessage: MessageFns<SetHiliteModeMessage> = {
@@ -23,7 +23,7 @@ export const SetHiliteModeMessage: MessageFns<SetHiliteModeMessage> = {
     message: SetHiliteModeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.hiliteMode !== undefined && message.hiliteMode !== false) {
+    if (message.hiliteMode !== undefined) {
       writer.uint32(8).bool(message.hiliteMode);
     }
     if (message._unknownFields !== undefined) {
@@ -79,13 +79,13 @@ export const SetHiliteModeMessage: MessageFns<SetHiliteModeMessage> = {
     return {
       hiliteMode: isSet(object.hiliteMode)
         ? globalThis.Boolean(object.hiliteMode)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: SetHiliteModeMessage): unknown {
     const obj: any = {};
-    if (message.hiliteMode !== undefined && message.hiliteMode !== false) {
+    if (message.hiliteMode !== undefined) {
       obj.hiliteMode = message.hiliteMode;
     }
     return obj;
@@ -100,7 +100,7 @@ export const SetHiliteModeMessage: MessageFns<SetHiliteModeMessage> = {
     object: I
   ): SetHiliteModeMessage {
     const message = createBaseSetHiliteModeMessage();
-    message.hiliteMode = object.hiliteMode ?? false;
+    message.hiliteMode = object.hiliteMode ?? undefined;
     return message;
   },
 };

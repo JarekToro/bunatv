@@ -10,13 +10,13 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "";
 
 export interface SystemPlaybackCustomDataQueue {
-  identifier: string;
+  identifier?: string | undefined;
   data?: Buffer | undefined;
   _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
 }
 
 function createBaseSystemPlaybackCustomDataQueue(): SystemPlaybackCustomDataQueue {
-  return { identifier: "", data: Buffer.alloc(0), _unknownFields: {} };
+  return { identifier: undefined, data: undefined, _unknownFields: {} };
 }
 
 export const SystemPlaybackCustomDataQueue: MessageFns<SystemPlaybackCustomDataQueue> =
@@ -25,10 +25,10 @@ export const SystemPlaybackCustomDataQueue: MessageFns<SystemPlaybackCustomDataQ
       message: SystemPlaybackCustomDataQueue,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.identifier !== "") {
+      if (message.identifier !== undefined) {
         writer.uint32(10).string(message.identifier);
       }
-      if (message.data !== undefined && message.data.length !== 0) {
+      if (message.data !== undefined) {
         writer.uint32(18).bytes(message.data);
       }
       if (message._unknownFields !== undefined) {
@@ -92,19 +92,19 @@ export const SystemPlaybackCustomDataQueue: MessageFns<SystemPlaybackCustomDataQ
       return {
         identifier: isSet(object.identifier)
           ? globalThis.String(object.identifier)
-          : "",
+          : undefined,
         data: isSet(object.data)
           ? Buffer.from(bytesFromBase64(object.data))
-          : Buffer.alloc(0),
+          : undefined,
       };
     },
 
     toJSON(message: SystemPlaybackCustomDataQueue): unknown {
       const obj: any = {};
-      if (message.identifier !== "") {
+      if (message.identifier !== undefined) {
         obj.identifier = message.identifier;
       }
-      if (message.data !== undefined && message.data.length !== 0) {
+      if (message.data !== undefined) {
         obj.data = base64FromBytes(message.data);
       }
       return obj;
@@ -119,8 +119,8 @@ export const SystemPlaybackCustomDataQueue: MessageFns<SystemPlaybackCustomDataQ
       object: I
     ): SystemPlaybackCustomDataQueue {
       const message = createBaseSystemPlaybackCustomDataQueue();
-      message.identifier = object.identifier ?? "";
-      message.data = object.data ?? Buffer.alloc(0);
+      message.identifier = object.identifier ?? undefined;
+      message.data = object.data ?? undefined;
       return message;
     },
   };

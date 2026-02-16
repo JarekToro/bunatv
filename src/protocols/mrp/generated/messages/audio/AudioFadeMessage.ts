@@ -17,7 +17,7 @@ export interface AudioFadeMessage {
 }
 
 function createBaseAudioFadeMessage(): AudioFadeMessage {
-  return { playerPath: undefined, fadeType: 0, _unknownFields: {} };
+  return { playerPath: undefined, fadeType: undefined, _unknownFields: {} };
 }
 
 export const AudioFadeMessage: MessageFns<AudioFadeMessage> = {
@@ -28,7 +28,7 @@ export const AudioFadeMessage: MessageFns<AudioFadeMessage> = {
     if (message.playerPath !== undefined) {
       PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join();
     }
-    if (message.fadeType !== undefined && message.fadeType !== 0) {
+    if (message.fadeType !== undefined) {
       writer.uint32(16).int32(message.fadeType);
     }
     if (message._unknownFields !== undefined) {
@@ -90,7 +90,9 @@ export const AudioFadeMessage: MessageFns<AudioFadeMessage> = {
       playerPath: isSet(object.playerPath)
         ? PlayerPath.fromJSON(object.playerPath)
         : undefined,
-      fadeType: isSet(object.fadeType) ? globalThis.Number(object.fadeType) : 0,
+      fadeType: isSet(object.fadeType)
+        ? globalThis.Number(object.fadeType)
+        : undefined,
     };
   },
 
@@ -99,7 +101,7 @@ export const AudioFadeMessage: MessageFns<AudioFadeMessage> = {
     if (message.playerPath !== undefined) {
       obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
-    if (message.fadeType !== undefined && message.fadeType !== 0) {
+    if (message.fadeType !== undefined) {
       obj.fadeType = Math.round(message.fadeType);
     }
     return obj;
@@ -118,7 +120,7 @@ export const AudioFadeMessage: MessageFns<AudioFadeMessage> = {
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
         : undefined;
-    message.fadeType = object.fadeType ?? 0;
+    message.fadeType = object.fadeType ?? undefined;
     return message;
   },
 };

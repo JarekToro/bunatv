@@ -50,7 +50,12 @@ export function userIdentity_TypeToJSON(object: UserIdentity_Type): string {
 }
 
 function createBaseUserIdentity(): UserIdentity {
-  return { identifier: "", displayName: "", type: 0, _unknownFields: {} };
+  return {
+    identifier: undefined,
+    displayName: undefined,
+    type: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const UserIdentity: MessageFns<UserIdentity> = {
@@ -58,13 +63,13 @@ export const UserIdentity: MessageFns<UserIdentity> = {
     message: UserIdentity,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(18).string(message.displayName);
     }
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(24).int32(message.type);
     }
     if (message._unknownFields !== undefined) {
@@ -133,23 +138,25 @@ export const UserIdentity: MessageFns<UserIdentity> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
-      type: isSet(object.type) ? userIdentity_TypeFromJSON(object.type) : 0,
+        : undefined,
+      type: isSet(object.type)
+        ? userIdentity_TypeFromJSON(object.type)
+        : undefined,
     };
   },
 
   toJSON(message: UserIdentity): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = userIdentity_TypeToJSON(message.type);
     }
     return obj;
@@ -164,9 +171,9 @@ export const UserIdentity: MessageFns<UserIdentity> = {
     object: I
   ): UserIdentity {
     const message = createBaseUserIdentity();
-    message.identifier = object.identifier ?? "";
-    message.displayName = object.displayName ?? "";
-    message.type = object.type ?? 0;
+    message.identifier = object.identifier ?? undefined;
+    message.displayName = object.displayName ?? undefined;
+    message.type = object.type ?? undefined;
     return message;
   },
 };

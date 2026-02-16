@@ -1038,12 +1038,12 @@ export interface Error {
 
 function createBaseError(): Error {
   return {
-    domain: "",
-    code: 0,
-    localizedDescription: "",
-    localizedFailureReason: "",
+    domain: undefined,
+    code: undefined,
+    localizedDescription: undefined,
+    localizedFailureReason: undefined,
     underlyingErrors: [],
-    debugMessage: "",
+    debugMessage: undefined,
     userInfo: undefined,
     _unknownFields: {},
   };
@@ -1054,28 +1054,22 @@ export const Error: MessageFns<Error> = {
     message: Error,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.domain !== undefined && message.domain !== "") {
+    if (message.domain !== undefined) {
       writer.uint32(10).string(message.domain);
     }
-    if (message.code !== undefined && message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(16).int32(message.code);
     }
-    if (
-      message.localizedDescription !== undefined &&
-      message.localizedDescription !== ""
-    ) {
+    if (message.localizedDescription !== undefined) {
       writer.uint32(26).string(message.localizedDescription);
     }
-    if (
-      message.localizedFailureReason !== undefined &&
-      message.localizedFailureReason !== ""
-    ) {
+    if (message.localizedFailureReason !== undefined) {
       writer.uint32(34).string(message.localizedFailureReason);
     }
     for (const v of message.underlyingErrors) {
       Error.encode(v!, writer.uint32(42).fork()).join();
     }
-    if (message.debugMessage !== undefined && message.debugMessage !== "") {
+    if (message.debugMessage !== undefined) {
       writer.uint32(50).string(message.debugMessage);
     }
     if (message.userInfo !== undefined) {
@@ -1177,20 +1171,22 @@ export const Error: MessageFns<Error> = {
 
   fromJSON(object: any): Error {
     return {
-      domain: isSet(object.domain) ? globalThis.String(object.domain) : "",
-      code: isSet(object.code) ? globalThis.Number(object.code) : 0,
+      domain: isSet(object.domain)
+        ? globalThis.String(object.domain)
+        : undefined,
+      code: isSet(object.code) ? globalThis.Number(object.code) : undefined,
       localizedDescription: isSet(object.localizedDescription)
         ? globalThis.String(object.localizedDescription)
-        : "",
+        : undefined,
       localizedFailureReason: isSet(object.localizedFailureReason)
         ? globalThis.String(object.localizedFailureReason)
-        : "",
+        : undefined,
       underlyingErrors: globalThis.Array.isArray(object?.underlyingErrors)
         ? object.underlyingErrors.map((e: any) => Error.fromJSON(e))
         : [],
       debugMessage: isSet(object.debugMessage)
         ? globalThis.String(object.debugMessage)
-        : "",
+        : undefined,
       userInfo: isSet(object.userInfo)
         ? Dictionary.fromJSON(object.userInfo)
         : undefined,
@@ -1199,22 +1195,16 @@ export const Error: MessageFns<Error> = {
 
   toJSON(message: Error): unknown {
     const obj: any = {};
-    if (message.domain !== undefined && message.domain !== "") {
+    if (message.domain !== undefined) {
       obj.domain = message.domain;
     }
-    if (message.code !== undefined && message.code !== 0) {
+    if (message.code !== undefined) {
       obj.code = Math.round(message.code);
     }
-    if (
-      message.localizedDescription !== undefined &&
-      message.localizedDescription !== ""
-    ) {
+    if (message.localizedDescription !== undefined) {
       obj.localizedDescription = message.localizedDescription;
     }
-    if (
-      message.localizedFailureReason !== undefined &&
-      message.localizedFailureReason !== ""
-    ) {
+    if (message.localizedFailureReason !== undefined) {
       obj.localizedFailureReason = message.localizedFailureReason;
     }
     if (message.underlyingErrors?.length) {
@@ -1222,7 +1212,7 @@ export const Error: MessageFns<Error> = {
         Error.toJSON(e)
       );
     }
-    if (message.debugMessage !== undefined && message.debugMessage !== "") {
+    if (message.debugMessage !== undefined) {
       obj.debugMessage = message.debugMessage;
     }
     if (message.userInfo !== undefined) {
@@ -1236,13 +1226,13 @@ export const Error: MessageFns<Error> = {
   },
   fromPartial<I extends Exact<DeepPartial<Error>, I>>(object: I): Error {
     const message = createBaseError();
-    message.domain = object.domain ?? "";
-    message.code = object.code ?? 0;
-    message.localizedDescription = object.localizedDescription ?? "";
-    message.localizedFailureReason = object.localizedFailureReason ?? "";
+    message.domain = object.domain ?? undefined;
+    message.code = object.code ?? undefined;
+    message.localizedDescription = object.localizedDescription ?? undefined;
+    message.localizedFailureReason = object.localizedFailureReason ?? undefined;
     message.underlyingErrors =
       object.underlyingErrors?.map((e) => Error.fromPartial(e)) || [];
-    message.debugMessage = object.debugMessage ?? "";
+    message.debugMessage = object.debugMessage ?? undefined;
     message.userInfo =
       object.userInfo !== undefined && object.userInfo !== null
         ? Dictionary.fromPartial(object.userInfo)

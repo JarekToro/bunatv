@@ -19,10 +19,10 @@ export interface VirtualTouchDeviceDescriptor {
 
 function createBaseVirtualTouchDeviceDescriptor(): VirtualTouchDeviceDescriptor {
   return {
-    absolute: false,
-    integratedDisplay: false,
-    screenSizeWidth: 0,
-    screenSizeHeight: 0,
+    absolute: undefined,
+    integratedDisplay: undefined,
+    screenSizeWidth: undefined,
+    screenSizeHeight: undefined,
     _unknownFields: {},
   };
 }
@@ -33,25 +33,16 @@ export const VirtualTouchDeviceDescriptor: MessageFns<VirtualTouchDeviceDescript
       message: VirtualTouchDeviceDescriptor,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.absolute !== undefined && message.absolute !== false) {
+      if (message.absolute !== undefined) {
         writer.uint32(8).bool(message.absolute);
       }
-      if (
-        message.integratedDisplay !== undefined &&
-        message.integratedDisplay !== false
-      ) {
+      if (message.integratedDisplay !== undefined) {
         writer.uint32(16).bool(message.integratedDisplay);
       }
-      if (
-        message.screenSizeWidth !== undefined &&
-        message.screenSizeWidth !== 0
-      ) {
+      if (message.screenSizeWidth !== undefined) {
         writer.uint32(29).float(message.screenSizeWidth);
       }
-      if (
-        message.screenSizeHeight !== undefined &&
-        message.screenSizeHeight !== 0
-      ) {
+      if (message.screenSizeHeight !== undefined) {
         writer.uint32(37).float(message.screenSizeHeight);
       }
       if (message._unknownFields !== undefined) {
@@ -131,40 +122,31 @@ export const VirtualTouchDeviceDescriptor: MessageFns<VirtualTouchDeviceDescript
       return {
         absolute: isSet(object.absolute)
           ? globalThis.Boolean(object.absolute)
-          : false,
+          : undefined,
         integratedDisplay: isSet(object.integratedDisplay)
           ? globalThis.Boolean(object.integratedDisplay)
-          : false,
+          : undefined,
         screenSizeWidth: isSet(object.screenSizeWidth)
           ? globalThis.Number(object.screenSizeWidth)
-          : 0,
+          : undefined,
         screenSizeHeight: isSet(object.screenSizeHeight)
           ? globalThis.Number(object.screenSizeHeight)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: VirtualTouchDeviceDescriptor): unknown {
       const obj: any = {};
-      if (message.absolute !== undefined && message.absolute !== false) {
+      if (message.absolute !== undefined) {
         obj.absolute = message.absolute;
       }
-      if (
-        message.integratedDisplay !== undefined &&
-        message.integratedDisplay !== false
-      ) {
+      if (message.integratedDisplay !== undefined) {
         obj.integratedDisplay = message.integratedDisplay;
       }
-      if (
-        message.screenSizeWidth !== undefined &&
-        message.screenSizeWidth !== 0
-      ) {
+      if (message.screenSizeWidth !== undefined) {
         obj.screenSizeWidth = message.screenSizeWidth;
       }
-      if (
-        message.screenSizeHeight !== undefined &&
-        message.screenSizeHeight !== 0
-      ) {
+      if (message.screenSizeHeight !== undefined) {
         obj.screenSizeHeight = message.screenSizeHeight;
       }
       return obj;
@@ -179,10 +161,10 @@ export const VirtualTouchDeviceDescriptor: MessageFns<VirtualTouchDeviceDescript
       object: I
     ): VirtualTouchDeviceDescriptor {
       const message = createBaseVirtualTouchDeviceDescriptor();
-      message.absolute = object.absolute ?? false;
-      message.integratedDisplay = object.integratedDisplay ?? false;
-      message.screenSizeWidth = object.screenSizeWidth ?? 0;
-      message.screenSizeHeight = object.screenSizeHeight ?? 0;
+      message.absolute = object.absolute ?? undefined;
+      message.integratedDisplay = object.integratedDisplay ?? undefined;
+      message.screenSizeWidth = object.screenSizeWidth ?? undefined;
+      message.screenSizeHeight = object.screenSizeHeight ?? undefined;
       return message;
     },
   };

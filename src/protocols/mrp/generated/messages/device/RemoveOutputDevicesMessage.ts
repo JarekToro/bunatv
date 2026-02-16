@@ -16,7 +16,7 @@ export interface RemoveOutputDevicesMessage {
 }
 
 function createBaseRemoveOutputDevicesMessage(): RemoveOutputDevicesMessage {
-  return { outputDeviceUIDs: [], endpointUID: "", _unknownFields: {} };
+  return { outputDeviceUIDs: [], endpointUID: undefined, _unknownFields: {} };
 }
 
 export const RemoveOutputDevicesMessage: MessageFns<RemoveOutputDevicesMessage> =
@@ -28,7 +28,7 @@ export const RemoveOutputDevicesMessage: MessageFns<RemoveOutputDevicesMessage> 
       for (const v of message.outputDeviceUIDs) {
         writer.uint32(10).string(v!);
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+      if (message.endpointUID !== undefined) {
         writer.uint32(18).string(message.endpointUID);
       }
       if (message._unknownFields !== undefined) {
@@ -95,7 +95,7 @@ export const RemoveOutputDevicesMessage: MessageFns<RemoveOutputDevicesMessage> 
           : [],
         endpointUID: isSet(object.endpointUID)
           ? globalThis.String(object.endpointUID)
-          : "",
+          : undefined,
       };
     },
 
@@ -104,7 +104,7 @@ export const RemoveOutputDevicesMessage: MessageFns<RemoveOutputDevicesMessage> 
       if (message.outputDeviceUIDs?.length) {
         obj.outputDeviceUIDs = message.outputDeviceUIDs;
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+      if (message.endpointUID !== undefined) {
         obj.endpointUID = message.endpointUID;
       }
       return obj;
@@ -120,7 +120,7 @@ export const RemoveOutputDevicesMessage: MessageFns<RemoveOutputDevicesMessage> 
     ): RemoveOutputDevicesMessage {
       const message = createBaseRemoveOutputDevicesMessage();
       message.outputDeviceUIDs = object.outputDeviceUIDs?.map((e) => e) || [];
-      message.endpointUID = object.endpointUID ?? "";
+      message.endpointUID = object.endpointUID ?? undefined;
       return message;
     },
   };

@@ -17,8 +17,8 @@ export interface OriginClientPropertiesMessage {
 
 function createBaseOriginClientPropertiesMessage(): OriginClientPropertiesMessage {
   return {
-    lastPlayingTimestamp: 0,
-    devicePlaybackSessionId: "",
+    lastPlayingTimestamp: undefined,
+    devicePlaybackSessionId: undefined,
     _unknownFields: {},
   };
 }
@@ -29,16 +29,10 @@ export const OriginClientPropertiesMessage: MessageFns<OriginClientPropertiesMes
       message: OriginClientPropertiesMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.lastPlayingTimestamp !== undefined &&
-        message.lastPlayingTimestamp !== 0
-      ) {
+      if (message.lastPlayingTimestamp !== undefined) {
         writer.uint32(9).double(message.lastPlayingTimestamp);
       }
-      if (
-        message.devicePlaybackSessionId !== undefined &&
-        message.devicePlaybackSessionId !== ""
-      ) {
+      if (message.devicePlaybackSessionId !== undefined) {
         writer.uint32(18).string(message.devicePlaybackSessionId);
       }
       if (message._unknownFields !== undefined) {
@@ -102,25 +96,19 @@ export const OriginClientPropertiesMessage: MessageFns<OriginClientPropertiesMes
       return {
         lastPlayingTimestamp: isSet(object.lastPlayingTimestamp)
           ? globalThis.Number(object.lastPlayingTimestamp)
-          : 0,
+          : undefined,
         devicePlaybackSessionId: isSet(object.devicePlaybackSessionId)
           ? globalThis.String(object.devicePlaybackSessionId)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: OriginClientPropertiesMessage): unknown {
       const obj: any = {};
-      if (
-        message.lastPlayingTimestamp !== undefined &&
-        message.lastPlayingTimestamp !== 0
-      ) {
+      if (message.lastPlayingTimestamp !== undefined) {
         obj.lastPlayingTimestamp = message.lastPlayingTimestamp;
       }
-      if (
-        message.devicePlaybackSessionId !== undefined &&
-        message.devicePlaybackSessionId !== ""
-      ) {
+      if (message.devicePlaybackSessionId !== undefined) {
         obj.devicePlaybackSessionId = message.devicePlaybackSessionId;
       }
       return obj;
@@ -135,8 +123,9 @@ export const OriginClientPropertiesMessage: MessageFns<OriginClientPropertiesMes
       object: I
     ): OriginClientPropertiesMessage {
       const message = createBaseOriginClientPropertiesMessage();
-      message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? 0;
-      message.devicePlaybackSessionId = object.devicePlaybackSessionId ?? "";
+      message.lastPlayingTimestamp = object.lastPlayingTimestamp ?? undefined;
+      message.devicePlaybackSessionId =
+        object.devicePlaybackSessionId ?? undefined;
       return message;
     },
   };

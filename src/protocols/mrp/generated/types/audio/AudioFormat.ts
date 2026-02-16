@@ -31,17 +31,17 @@ export interface AudioFormat {
 
 function createBaseAudioFormat(): AudioFormat {
   return {
-    tier: 1,
-    bitrate: 0,
-    sampleRate: 0,
-    bitDepth: 0,
-    codec: 0,
-    spatialized: false,
-    multiChannel: false,
-    channelLayout: 0,
-    audioChannelLayoutDescription: "",
-    groupID: "",
-    stableVariantID: "",
+    tier: undefined,
+    bitrate: undefined,
+    sampleRate: undefined,
+    bitDepth: undefined,
+    codec: undefined,
+    spatialized: undefined,
+    multiChannel: undefined,
+    channelLayout: undefined,
+    audioChannelLayoutDescription: undefined,
+    groupID: undefined,
+    stableVariantID: undefined,
     _unknownFields: {},
   };
 }
@@ -51,43 +51,37 @@ export const AudioFormat: MessageFns<AudioFormat> = {
     message: AudioFormat,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.tier !== undefined && message.tier !== 1) {
+    if (message.tier !== undefined) {
       writer.uint32(8).int32(message.tier);
     }
-    if (message.bitrate !== undefined && message.bitrate !== 0) {
+    if (message.bitrate !== undefined) {
       writer.uint32(16).int64(message.bitrate);
     }
-    if (message.sampleRate !== undefined && message.sampleRate !== 0) {
+    if (message.sampleRate !== undefined) {
       writer.uint32(24).int64(message.sampleRate);
     }
-    if (message.bitDepth !== undefined && message.bitDepth !== 0) {
+    if (message.bitDepth !== undefined) {
       writer.uint32(32).int64(message.bitDepth);
     }
-    if (message.codec !== undefined && message.codec !== 0) {
+    if (message.codec !== undefined) {
       writer.uint32(40).uint32(message.codec);
     }
-    if (message.spatialized !== undefined && message.spatialized !== false) {
+    if (message.spatialized !== undefined) {
       writer.uint32(48).bool(message.spatialized);
     }
-    if (message.multiChannel !== undefined && message.multiChannel !== false) {
+    if (message.multiChannel !== undefined) {
       writer.uint32(56).bool(message.multiChannel);
     }
-    if (message.channelLayout !== undefined && message.channelLayout !== 0) {
+    if (message.channelLayout !== undefined) {
       writer.uint32(64).uint32(message.channelLayout);
     }
-    if (
-      message.audioChannelLayoutDescription !== undefined &&
-      message.audioChannelLayoutDescription !== ""
-    ) {
+    if (message.audioChannelLayoutDescription !== undefined) {
       writer.uint32(74).string(message.audioChannelLayoutDescription);
     }
-    if (message.groupID !== undefined && message.groupID !== "") {
+    if (message.groupID !== undefined) {
       writer.uint32(82).string(message.groupID);
     }
-    if (
-      message.stableVariantID !== undefined &&
-      message.stableVariantID !== ""
-    ) {
+    if (message.stableVariantID !== undefined) {
       writer.uint32(90).string(message.stableVariantID);
     }
     if (message._unknownFields !== undefined) {
@@ -218,71 +212,73 @@ export const AudioFormat: MessageFns<AudioFormat> = {
 
   fromJSON(object: any): AudioFormat {
     return {
-      tier: isSet(object.tier) ? audioTier_EnumFromJSON(object.tier) : 1,
-      bitrate: isSet(object.bitrate) ? globalThis.Number(object.bitrate) : 0,
+      tier: isSet(object.tier)
+        ? audioTier_EnumFromJSON(object.tier)
+        : undefined,
+      bitrate: isSet(object.bitrate)
+        ? globalThis.Number(object.bitrate)
+        : undefined,
       sampleRate: isSet(object.sampleRate)
         ? globalThis.Number(object.sampleRate)
-        : 0,
-      bitDepth: isSet(object.bitDepth) ? globalThis.Number(object.bitDepth) : 0,
-      codec: isSet(object.codec) ? globalThis.Number(object.codec) : 0,
+        : undefined,
+      bitDepth: isSet(object.bitDepth)
+        ? globalThis.Number(object.bitDepth)
+        : undefined,
+      codec: isSet(object.codec) ? globalThis.Number(object.codec) : undefined,
       spatialized: isSet(object.spatialized)
         ? globalThis.Boolean(object.spatialized)
-        : false,
+        : undefined,
       multiChannel: isSet(object.multiChannel)
         ? globalThis.Boolean(object.multiChannel)
-        : false,
+        : undefined,
       channelLayout: isSet(object.channelLayout)
         ? globalThis.Number(object.channelLayout)
-        : 0,
+        : undefined,
       audioChannelLayoutDescription: isSet(object.audioChannelLayoutDescription)
         ? globalThis.String(object.audioChannelLayoutDescription)
-        : "",
-      groupID: isSet(object.groupID) ? globalThis.String(object.groupID) : "",
+        : undefined,
+      groupID: isSet(object.groupID)
+        ? globalThis.String(object.groupID)
+        : undefined,
       stableVariantID: isSet(object.stableVariantID)
         ? globalThis.String(object.stableVariantID)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: AudioFormat): unknown {
     const obj: any = {};
-    if (message.tier !== undefined && message.tier !== 1) {
+    if (message.tier !== undefined) {
       obj.tier = audioTier_EnumToJSON(message.tier);
     }
-    if (message.bitrate !== undefined && message.bitrate !== 0) {
+    if (message.bitrate !== undefined) {
       obj.bitrate = Math.round(message.bitrate);
     }
-    if (message.sampleRate !== undefined && message.sampleRate !== 0) {
+    if (message.sampleRate !== undefined) {
       obj.sampleRate = Math.round(message.sampleRate);
     }
-    if (message.bitDepth !== undefined && message.bitDepth !== 0) {
+    if (message.bitDepth !== undefined) {
       obj.bitDepth = Math.round(message.bitDepth);
     }
-    if (message.codec !== undefined && message.codec !== 0) {
+    if (message.codec !== undefined) {
       obj.codec = Math.round(message.codec);
     }
-    if (message.spatialized !== undefined && message.spatialized !== false) {
+    if (message.spatialized !== undefined) {
       obj.spatialized = message.spatialized;
     }
-    if (message.multiChannel !== undefined && message.multiChannel !== false) {
+    if (message.multiChannel !== undefined) {
       obj.multiChannel = message.multiChannel;
     }
-    if (message.channelLayout !== undefined && message.channelLayout !== 0) {
+    if (message.channelLayout !== undefined) {
       obj.channelLayout = Math.round(message.channelLayout);
     }
-    if (
-      message.audioChannelLayoutDescription !== undefined &&
-      message.audioChannelLayoutDescription !== ""
-    ) {
+    if (message.audioChannelLayoutDescription !== undefined) {
       obj.audioChannelLayoutDescription = message.audioChannelLayoutDescription;
     }
-    if (message.groupID !== undefined && message.groupID !== "") {
+    if (message.groupID !== undefined) {
       obj.groupID = message.groupID;
     }
-    if (
-      message.stableVariantID !== undefined &&
-      message.stableVariantID !== ""
-    ) {
+    if (message.stableVariantID !== undefined) {
       obj.stableVariantID = message.stableVariantID;
     }
     return obj;
@@ -295,18 +291,18 @@ export const AudioFormat: MessageFns<AudioFormat> = {
     object: I
   ): AudioFormat {
     const message = createBaseAudioFormat();
-    message.tier = object.tier ?? 1;
-    message.bitrate = object.bitrate ?? 0;
-    message.sampleRate = object.sampleRate ?? 0;
-    message.bitDepth = object.bitDepth ?? 0;
-    message.codec = object.codec ?? 0;
-    message.spatialized = object.spatialized ?? false;
-    message.multiChannel = object.multiChannel ?? false;
-    message.channelLayout = object.channelLayout ?? 0;
+    message.tier = object.tier ?? undefined;
+    message.bitrate = object.bitrate ?? undefined;
+    message.sampleRate = object.sampleRate ?? undefined;
+    message.bitDepth = object.bitDepth ?? undefined;
+    message.codec = object.codec ?? undefined;
+    message.spatialized = object.spatialized ?? undefined;
+    message.multiChannel = object.multiChannel ?? undefined;
+    message.channelLayout = object.channelLayout ?? undefined;
     message.audioChannelLayoutDescription =
-      object.audioChannelLayoutDescription ?? "";
-    message.groupID = object.groupID ?? "";
-    message.stableVariantID = object.stableVariantID ?? "";
+      object.audioChannelLayoutDescription ?? undefined;
+    message.groupID = object.groupID ?? undefined;
+    message.stableVariantID = object.stableVariantID ?? undefined;
     return message;
   },
 };

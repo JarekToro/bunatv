@@ -68,7 +68,12 @@ export function setDiscoveryModeMessage_ModeToJSON(
 }
 
 function createBaseSetDiscoveryModeMessage(): SetDiscoveryModeMessage {
-  return { mode: 0, features: 0, configuration: undefined, _unknownFields: {} };
+  return {
+    mode: undefined,
+    features: undefined,
+    configuration: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const SetDiscoveryModeMessage: MessageFns<SetDiscoveryModeMessage> = {
@@ -76,10 +81,10 @@ export const SetDiscoveryModeMessage: MessageFns<SetDiscoveryModeMessage> = {
     message: SetDiscoveryModeMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.mode !== undefined && message.mode !== 0) {
+    if (message.mode !== undefined) {
       writer.uint32(8).int32(message.mode);
     }
-    if (message.features !== undefined && message.features !== 0) {
+    if (message.features !== undefined) {
       writer.uint32(16).int32(message.features);
     }
     if (message.configuration !== undefined) {
@@ -160,8 +165,10 @@ export const SetDiscoveryModeMessage: MessageFns<SetDiscoveryModeMessage> = {
     return {
       mode: isSet(object.mode)
         ? setDiscoveryModeMessage_ModeFromJSON(object.mode)
-        : 0,
-      features: isSet(object.features) ? globalThis.Number(object.features) : 0,
+        : undefined,
+      features: isSet(object.features)
+        ? globalThis.Number(object.features)
+        : undefined,
       configuration: isSet(object.configuration)
         ? DiscoverySessionConfiguration.fromJSON(object.configuration)
         : undefined,
@@ -170,10 +177,10 @@ export const SetDiscoveryModeMessage: MessageFns<SetDiscoveryModeMessage> = {
 
   toJSON(message: SetDiscoveryModeMessage): unknown {
     const obj: any = {};
-    if (message.mode !== undefined && message.mode !== 0) {
+    if (message.mode !== undefined) {
       obj.mode = setDiscoveryModeMessage_ModeToJSON(message.mode);
     }
-    if (message.features !== undefined && message.features !== 0) {
+    if (message.features !== undefined) {
       obj.features = Math.round(message.features);
     }
     if (message.configuration !== undefined) {
@@ -193,8 +200,8 @@ export const SetDiscoveryModeMessage: MessageFns<SetDiscoveryModeMessage> = {
     object: I
   ): SetDiscoveryModeMessage {
     const message = createBaseSetDiscoveryModeMessage();
-    message.mode = object.mode ?? 0;
-    message.features = object.features ?? 0;
+    message.mode = object.mode ?? undefined;
+    message.features = object.features ?? undefined;
     message.configuration =
       object.configuration !== undefined && object.configuration !== null
         ? DiscoverySessionConfiguration.fromPartial(object.configuration)

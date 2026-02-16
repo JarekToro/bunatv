@@ -17,7 +17,7 @@ export interface VolumeMutedDidChangeMessage {
 }
 
 function createBaseVolumeMutedDidChangeMessage(): VolumeMutedDidChangeMessage {
-  return { isMuted: false, outputDeviceUID: "", _unknownFields: {} };
+  return { isMuted: undefined, outputDeviceUID: undefined, _unknownFields: {} };
 }
 
 export const VolumeMutedDidChangeMessage: MessageFns<VolumeMutedDidChangeMessage> =
@@ -26,13 +26,10 @@ export const VolumeMutedDidChangeMessage: MessageFns<VolumeMutedDidChangeMessage
       message: VolumeMutedDidChangeMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.isMuted !== undefined && message.isMuted !== false) {
+      if (message.isMuted !== undefined) {
         writer.uint32(8).bool(message.isMuted);
       }
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         writer.uint32(18).string(message.outputDeviceUID);
       }
       if (message._unknownFields !== undefined) {
@@ -96,22 +93,19 @@ export const VolumeMutedDidChangeMessage: MessageFns<VolumeMutedDidChangeMessage
       return {
         isMuted: isSet(object.isMuted)
           ? globalThis.Boolean(object.isMuted)
-          : false,
+          : undefined,
         outputDeviceUID: isSet(object.outputDeviceUID)
           ? globalThis.String(object.outputDeviceUID)
-          : "",
+          : undefined,
       };
     },
 
     toJSON(message: VolumeMutedDidChangeMessage): unknown {
       const obj: any = {};
-      if (message.isMuted !== undefined && message.isMuted !== false) {
+      if (message.isMuted !== undefined) {
         obj.isMuted = message.isMuted;
       }
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         obj.outputDeviceUID = message.outputDeviceUID;
       }
       return obj;
@@ -126,8 +120,8 @@ export const VolumeMutedDidChangeMessage: MessageFns<VolumeMutedDidChangeMessage
       object: I
     ): VolumeMutedDidChangeMessage {
       const message = createBaseVolumeMutedDidChangeMessage();
-      message.isMuted = object.isMuted ?? false;
-      message.outputDeviceUID = object.outputDeviceUID ?? "";
+      message.isMuted = object.isMuted ?? undefined;
+      message.outputDeviceUID = object.outputDeviceUID ?? undefined;
       return message;
     },
   };

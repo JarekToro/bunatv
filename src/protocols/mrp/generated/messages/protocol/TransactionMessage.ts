@@ -20,7 +20,7 @@ export interface TransactionMessage {
 
 function createBaseTransactionMessage(): TransactionMessage {
   return {
-    name: 0,
+    name: undefined,
     packets: undefined,
     playerPath: undefined,
     _unknownFields: {},
@@ -32,7 +32,7 @@ export const TransactionMessage: MessageFns<TransactionMessage> = {
     message: TransactionMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.name !== undefined && message.name !== 0) {
+    if (message.name !== undefined) {
       writer.uint32(8).uint64(message.name);
     }
     if (message.packets !== undefined) {
@@ -111,7 +111,7 @@ export const TransactionMessage: MessageFns<TransactionMessage> = {
 
   fromJSON(object: any): TransactionMessage {
     return {
-      name: isSet(object.name) ? globalThis.Number(object.name) : 0,
+      name: isSet(object.name) ? globalThis.Number(object.name) : undefined,
       packets: isSet(object.packets)
         ? TransactionPackets.fromJSON(object.packets)
         : undefined,
@@ -123,7 +123,7 @@ export const TransactionMessage: MessageFns<TransactionMessage> = {
 
   toJSON(message: TransactionMessage): unknown {
     const obj: any = {};
-    if (message.name !== undefined && message.name !== 0) {
+    if (message.name !== undefined) {
       obj.name = Math.round(message.name);
     }
     if (message.packets !== undefined) {
@@ -144,7 +144,7 @@ export const TransactionMessage: MessageFns<TransactionMessage> = {
     object: I
   ): TransactionMessage {
     const message = createBaseTransactionMessage();
-    message.name = object.name ?? 0;
+    message.name = object.name ?? undefined;
     message.packets =
       object.packets !== undefined && object.packets !== null
         ? TransactionPackets.fromPartial(object.packets)

@@ -16,7 +16,7 @@ export interface GenericMessage {
 }
 
 function createBaseGenericMessage(): GenericMessage {
-  return { key: "", value: Buffer.alloc(0), _unknownFields: {} };
+  return { key: undefined, value: undefined, _unknownFields: {} };
 }
 
 export const GenericMessage: MessageFns<GenericMessage> = {
@@ -24,10 +24,10 @@ export const GenericMessage: MessageFns<GenericMessage> = {
     message: GenericMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.key !== undefined && message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== undefined && message.value.length !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(18).bytes(message.value);
     }
     if (message._unknownFields !== undefined) {
@@ -86,19 +86,19 @@ export const GenericMessage: MessageFns<GenericMessage> = {
 
   fromJSON(object: any): GenericMessage {
     return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : undefined,
       value: isSet(object.value)
         ? Buffer.from(bytesFromBase64(object.value))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: GenericMessage): unknown {
     const obj: any = {};
-    if (message.key !== undefined && message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
-    if (message.value !== undefined && message.value.length !== 0) {
+    if (message.value !== undefined) {
       obj.value = base64FromBytes(message.value);
     }
     return obj;
@@ -113,8 +113,8 @@ export const GenericMessage: MessageFns<GenericMessage> = {
     object: I
   ): GenericMessage {
     const message = createBaseGenericMessage();
-    message.key = object.key ?? "";
-    message.value = object.value ?? Buffer.alloc(0);
+    message.key = object.key ?? undefined;
+    message.value = object.value ?? undefined;
     return message;
   },
 };

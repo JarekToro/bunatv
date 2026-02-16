@@ -17,7 +17,12 @@ export interface TranscriptAlignment {
 }
 
 function createBaseTranscriptAlignment(): TranscriptAlignment {
-  return { startTime: 0, endTime: 0, text: "", _unknownFields: {} };
+  return {
+    startTime: undefined,
+    endTime: undefined,
+    text: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const TranscriptAlignment: MessageFns<TranscriptAlignment> = {
@@ -25,13 +30,13 @@ export const TranscriptAlignment: MessageFns<TranscriptAlignment> = {
     message: TranscriptAlignment,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.startTime !== undefined && message.startTime !== 0) {
+    if (message.startTime !== undefined) {
       writer.uint32(9).double(message.startTime);
     }
-    if (message.endTime !== undefined && message.endTime !== 0) {
+    if (message.endTime !== undefined) {
       writer.uint32(17).double(message.endTime);
     }
-    if (message.text !== undefined && message.text !== "") {
+    if (message.text !== undefined) {
       writer.uint32(26).string(message.text);
     }
     if (message._unknownFields !== undefined) {
@@ -105,25 +110,25 @@ export const TranscriptAlignment: MessageFns<TranscriptAlignment> = {
         ? globalThis.Number(object.startTime)
         : isSet(object.start_time)
           ? globalThis.Number(object.start_time)
-          : 0,
+          : undefined,
       endTime: isSet(object.endTime)
         ? globalThis.Number(object.endTime)
         : isSet(object.end_time)
           ? globalThis.Number(object.end_time)
-          : 0,
-      text: isSet(object.text) ? globalThis.String(object.text) : "",
+          : undefined,
+      text: isSet(object.text) ? globalThis.String(object.text) : undefined,
     };
   },
 
   toJSON(message: TranscriptAlignment): unknown {
     const obj: any = {};
-    if (message.startTime !== undefined && message.startTime !== 0) {
+    if (message.startTime !== undefined) {
       obj.startTime = message.startTime;
     }
-    if (message.endTime !== undefined && message.endTime !== 0) {
+    if (message.endTime !== undefined) {
       obj.endTime = message.endTime;
     }
-    if (message.text !== undefined && message.text !== "") {
+    if (message.text !== undefined) {
       obj.text = message.text;
     }
     return obj;
@@ -138,9 +143,9 @@ export const TranscriptAlignment: MessageFns<TranscriptAlignment> = {
     object: I
   ): TranscriptAlignment {
     const message = createBaseTranscriptAlignment();
-    message.startTime = object.startTime ?? 0;
-    message.endTime = object.endTime ?? 0;
-    message.text = object.text ?? "";
+    message.startTime = object.startTime ?? undefined;
+    message.endTime = object.endTime ?? undefined;
+    message.text = object.text ?? undefined;
     return message;
   },
 };

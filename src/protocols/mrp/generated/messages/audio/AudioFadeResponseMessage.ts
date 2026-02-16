@@ -15,7 +15,7 @@ export interface AudioFadeResponseMessage {
 }
 
 function createBaseAudioFadeResponseMessage(): AudioFadeResponseMessage {
-  return { fadeDuration: 0, _unknownFields: {} };
+  return { fadeDuration: undefined, _unknownFields: {} };
 }
 
 export const AudioFadeResponseMessage: MessageFns<AudioFadeResponseMessage> = {
@@ -23,7 +23,7 @@ export const AudioFadeResponseMessage: MessageFns<AudioFadeResponseMessage> = {
     message: AudioFadeResponseMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.fadeDuration !== undefined && message.fadeDuration !== 0) {
+    if (message.fadeDuration !== undefined) {
       writer.uint32(8).int64(message.fadeDuration);
     }
     if (message._unknownFields !== undefined) {
@@ -79,13 +79,13 @@ export const AudioFadeResponseMessage: MessageFns<AudioFadeResponseMessage> = {
     return {
       fadeDuration: isSet(object.fadeDuration)
         ? globalThis.Number(object.fadeDuration)
-        : 0,
+        : undefined,
     };
   },
 
   toJSON(message: AudioFadeResponseMessage): unknown {
     const obj: any = {};
-    if (message.fadeDuration !== undefined && message.fadeDuration !== 0) {
+    if (message.fadeDuration !== undefined) {
       obj.fadeDuration = Math.round(message.fadeDuration);
     }
     return obj;
@@ -100,7 +100,7 @@ export const AudioFadeResponseMessage: MessageFns<AudioFadeResponseMessage> = {
     object: I
   ): AudioFadeResponseMessage {
     const message = createBaseAudioFadeResponseMessage();
-    message.fadeDuration = object.fadeDuration ?? 0;
+    message.fadeDuration = object.fadeDuration ?? undefined;
     return message;
   },
 };

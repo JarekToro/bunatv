@@ -85,7 +85,7 @@ export function modifyOutputContextRequestMessage_TypeToJSON(
 
 function createBaseModifyOutputContextRequestMessage(): ModifyOutputContextRequestMessage {
   return {
-    type: 0,
+    type: undefined,
     addingDevices: [],
     removingDevices: [],
     settingDevices: [],
@@ -103,7 +103,7 @@ export const ModifyOutputContextRequestMessage: MessageFns<ModifyOutputContextRe
       message: ModifyOutputContextRequestMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         writer.uint32(8).int32(message.type);
       }
       for (const v of message.addingDevices) {
@@ -242,7 +242,7 @@ export const ModifyOutputContextRequestMessage: MessageFns<ModifyOutputContextRe
       return {
         type: isSet(object.type)
           ? modifyOutputContextRequestMessage_TypeFromJSON(object.type)
-          : 0,
+          : undefined,
         addingDevices: globalThis.Array.isArray(object?.addingDevices)
           ? object.addingDevices.map((e: any) => globalThis.String(e))
           : [],
@@ -281,7 +281,7 @@ export const ModifyOutputContextRequestMessage: MessageFns<ModifyOutputContextRe
 
     toJSON(message: ModifyOutputContextRequestMessage): unknown {
       const obj: any = {};
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         obj.type = modifyOutputContextRequestMessage_TypeToJSON(message.type);
       }
       if (message.addingDevices?.length) {
@@ -317,7 +317,7 @@ export const ModifyOutputContextRequestMessage: MessageFns<ModifyOutputContextRe
       I extends Exact<DeepPartial<ModifyOutputContextRequestMessage>, I>,
     >(object: I): ModifyOutputContextRequestMessage {
       const message = createBaseModifyOutputContextRequestMessage();
-      message.type = object.type ?? 0;
+      message.type = object.type ?? undefined;
       message.addingDevices = object.addingDevices?.map((e) => e) || [];
       message.removingDevices = object.removingDevices?.map((e) => e) || [];
       message.settingDevices = object.settingDevices?.map((e) => e) || [];

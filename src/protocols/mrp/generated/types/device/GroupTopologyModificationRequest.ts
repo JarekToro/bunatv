@@ -77,16 +77,16 @@ export function groupTopologyModificationRequest_TypeToJSON(
 function createBaseGroupTopologyModificationRequest(): GroupTopologyModificationRequest {
   return {
     details: undefined,
-    type: 0,
+    type: undefined,
     outputDeviceUIDs: [],
-    fadeAudio: false,
-    password: "",
-    suppressErrorDialog: false,
-    shouldNotPauseIfLastDeviceRemoved: false,
-    muteUntilFinished: false,
-    shouldModifyPredictedRoutes: false,
-    shouldClearPredictedRoutes: false,
-    shouldWaitForUpdatedOutputDevices: false,
+    fadeAudio: undefined,
+    password: undefined,
+    suppressErrorDialog: undefined,
+    shouldNotPauseIfLastDeviceRemoved: undefined,
+    muteUntilFinished: undefined,
+    shouldModifyPredictedRoutes: undefined,
+    shouldClearPredictedRoutes: undefined,
+    shouldWaitForUpdatedOutputDevices: undefined,
     _unknownFields: {},
   };
 }
@@ -100,52 +100,34 @@ export const GroupTopologyModificationRequest: MessageFns<GroupTopologyModificat
       if (message.details !== undefined) {
         RequestDetails.encode(message.details, writer.uint32(10).fork()).join();
       }
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         writer.uint32(16).int32(message.type);
       }
       for (const v of message.outputDeviceUIDs) {
         writer.uint32(26).string(v!);
       }
-      if (message.fadeAudio !== undefined && message.fadeAudio !== false) {
+      if (message.fadeAudio !== undefined) {
         writer.uint32(32).bool(message.fadeAudio);
       }
-      if (message.password !== undefined && message.password !== "") {
+      if (message.password !== undefined) {
         writer.uint32(42).string(message.password);
       }
-      if (
-        message.suppressErrorDialog !== undefined &&
-        message.suppressErrorDialog !== false
-      ) {
+      if (message.suppressErrorDialog !== undefined) {
         writer.uint32(48).bool(message.suppressErrorDialog);
       }
-      if (
-        message.shouldNotPauseIfLastDeviceRemoved !== undefined &&
-        message.shouldNotPauseIfLastDeviceRemoved !== false
-      ) {
+      if (message.shouldNotPauseIfLastDeviceRemoved !== undefined) {
         writer.uint32(56).bool(message.shouldNotPauseIfLastDeviceRemoved);
       }
-      if (
-        message.muteUntilFinished !== undefined &&
-        message.muteUntilFinished !== false
-      ) {
+      if (message.muteUntilFinished !== undefined) {
         writer.uint32(64).bool(message.muteUntilFinished);
       }
-      if (
-        message.shouldModifyPredictedRoutes !== undefined &&
-        message.shouldModifyPredictedRoutes !== false
-      ) {
+      if (message.shouldModifyPredictedRoutes !== undefined) {
         writer.uint32(72).bool(message.shouldModifyPredictedRoutes);
       }
-      if (
-        message.shouldClearPredictedRoutes !== undefined &&
-        message.shouldClearPredictedRoutes !== false
-      ) {
+      if (message.shouldClearPredictedRoutes !== undefined) {
         writer.uint32(80).bool(message.shouldClearPredictedRoutes);
       }
-      if (
-        message.shouldWaitForUpdatedOutputDevices !== undefined &&
-        message.shouldWaitForUpdatedOutputDevices !== false
-      ) {
+      if (message.shouldWaitForUpdatedOutputDevices !== undefined) {
         writer.uint32(88).bool(message.shouldWaitForUpdatedOutputDevices);
       }
       if (message._unknownFields !== undefined) {
@@ -284,38 +266,38 @@ export const GroupTopologyModificationRequest: MessageFns<GroupTopologyModificat
           : undefined,
         type: isSet(object.type)
           ? groupTopologyModificationRequest_TypeFromJSON(object.type)
-          : 0,
+          : undefined,
         outputDeviceUIDs: globalThis.Array.isArray(object?.outputDeviceUIDs)
           ? object.outputDeviceUIDs.map((e: any) => globalThis.String(e))
           : [],
         fadeAudio: isSet(object.fadeAudio)
           ? globalThis.Boolean(object.fadeAudio)
-          : false,
+          : undefined,
         password: isSet(object.password)
           ? globalThis.String(object.password)
-          : "",
+          : undefined,
         suppressErrorDialog: isSet(object.suppressErrorDialog)
           ? globalThis.Boolean(object.suppressErrorDialog)
-          : false,
+          : undefined,
         shouldNotPauseIfLastDeviceRemoved: isSet(
           object.shouldNotPauseIfLastDeviceRemoved
         )
           ? globalThis.Boolean(object.shouldNotPauseIfLastDeviceRemoved)
-          : false,
+          : undefined,
         muteUntilFinished: isSet(object.muteUntilFinished)
           ? globalThis.Boolean(object.muteUntilFinished)
-          : false,
+          : undefined,
         shouldModifyPredictedRoutes: isSet(object.shouldModifyPredictedRoutes)
           ? globalThis.Boolean(object.shouldModifyPredictedRoutes)
-          : false,
+          : undefined,
         shouldClearPredictedRoutes: isSet(object.shouldClearPredictedRoutes)
           ? globalThis.Boolean(object.shouldClearPredictedRoutes)
-          : false,
+          : undefined,
         shouldWaitForUpdatedOutputDevices: isSet(
           object.shouldWaitForUpdatedOutputDevices
         )
           ? globalThis.Boolean(object.shouldWaitForUpdatedOutputDevices)
-          : false,
+          : undefined,
       };
     },
 
@@ -324,53 +306,35 @@ export const GroupTopologyModificationRequest: MessageFns<GroupTopologyModificat
       if (message.details !== undefined) {
         obj.details = RequestDetails.toJSON(message.details);
       }
-      if (message.type !== undefined && message.type !== 0) {
+      if (message.type !== undefined) {
         obj.type = groupTopologyModificationRequest_TypeToJSON(message.type);
       }
       if (message.outputDeviceUIDs?.length) {
         obj.outputDeviceUIDs = message.outputDeviceUIDs;
       }
-      if (message.fadeAudio !== undefined && message.fadeAudio !== false) {
+      if (message.fadeAudio !== undefined) {
         obj.fadeAudio = message.fadeAudio;
       }
-      if (message.password !== undefined && message.password !== "") {
+      if (message.password !== undefined) {
         obj.password = message.password;
       }
-      if (
-        message.suppressErrorDialog !== undefined &&
-        message.suppressErrorDialog !== false
-      ) {
+      if (message.suppressErrorDialog !== undefined) {
         obj.suppressErrorDialog = message.suppressErrorDialog;
       }
-      if (
-        message.shouldNotPauseIfLastDeviceRemoved !== undefined &&
-        message.shouldNotPauseIfLastDeviceRemoved !== false
-      ) {
+      if (message.shouldNotPauseIfLastDeviceRemoved !== undefined) {
         obj.shouldNotPauseIfLastDeviceRemoved =
           message.shouldNotPauseIfLastDeviceRemoved;
       }
-      if (
-        message.muteUntilFinished !== undefined &&
-        message.muteUntilFinished !== false
-      ) {
+      if (message.muteUntilFinished !== undefined) {
         obj.muteUntilFinished = message.muteUntilFinished;
       }
-      if (
-        message.shouldModifyPredictedRoutes !== undefined &&
-        message.shouldModifyPredictedRoutes !== false
-      ) {
+      if (message.shouldModifyPredictedRoutes !== undefined) {
         obj.shouldModifyPredictedRoutes = message.shouldModifyPredictedRoutes;
       }
-      if (
-        message.shouldClearPredictedRoutes !== undefined &&
-        message.shouldClearPredictedRoutes !== false
-      ) {
+      if (message.shouldClearPredictedRoutes !== undefined) {
         obj.shouldClearPredictedRoutes = message.shouldClearPredictedRoutes;
       }
-      if (
-        message.shouldWaitForUpdatedOutputDevices !== undefined &&
-        message.shouldWaitForUpdatedOutputDevices !== false
-      ) {
+      if (message.shouldWaitForUpdatedOutputDevices !== undefined) {
         obj.shouldWaitForUpdatedOutputDevices =
           message.shouldWaitForUpdatedOutputDevices;
       }
@@ -390,20 +354,20 @@ export const GroupTopologyModificationRequest: MessageFns<GroupTopologyModificat
         object.details !== undefined && object.details !== null
           ? RequestDetails.fromPartial(object.details)
           : undefined;
-      message.type = object.type ?? 0;
+      message.type = object.type ?? undefined;
       message.outputDeviceUIDs = object.outputDeviceUIDs?.map((e) => e) || [];
-      message.fadeAudio = object.fadeAudio ?? false;
-      message.password = object.password ?? "";
-      message.suppressErrorDialog = object.suppressErrorDialog ?? false;
+      message.fadeAudio = object.fadeAudio ?? undefined;
+      message.password = object.password ?? undefined;
+      message.suppressErrorDialog = object.suppressErrorDialog ?? undefined;
       message.shouldNotPauseIfLastDeviceRemoved =
-        object.shouldNotPauseIfLastDeviceRemoved ?? false;
-      message.muteUntilFinished = object.muteUntilFinished ?? false;
+        object.shouldNotPauseIfLastDeviceRemoved ?? undefined;
+      message.muteUntilFinished = object.muteUntilFinished ?? undefined;
       message.shouldModifyPredictedRoutes =
-        object.shouldModifyPredictedRoutes ?? false;
+        object.shouldModifyPredictedRoutes ?? undefined;
       message.shouldClearPredictedRoutes =
-        object.shouldClearPredictedRoutes ?? false;
+        object.shouldClearPredictedRoutes ?? undefined;
       message.shouldWaitForUpdatedOutputDevices =
-        object.shouldWaitForUpdatedOutputDevices ?? false;
+        object.shouldWaitForUpdatedOutputDevices ?? undefined;
       return message;
     },
   };

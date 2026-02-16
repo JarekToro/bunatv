@@ -16,7 +16,7 @@ export interface SendHIDReportMessage {
 }
 
 function createBaseSendHIDReportMessage(): SendHIDReportMessage {
-  return { virtualDeviceID: "", report: Buffer.alloc(0), _unknownFields: {} };
+  return { virtualDeviceID: undefined, report: undefined, _unknownFields: {} };
 }
 
 export const SendHIDReportMessage: MessageFns<SendHIDReportMessage> = {
@@ -24,13 +24,10 @@ export const SendHIDReportMessage: MessageFns<SendHIDReportMessage> = {
     message: SendHIDReportMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (
-      message.virtualDeviceID !== undefined &&
-      message.virtualDeviceID !== ""
-    ) {
+    if (message.virtualDeviceID !== undefined) {
       writer.uint32(10).string(message.virtualDeviceID);
     }
-    if (message.report !== undefined && message.report.length !== 0) {
+    if (message.report !== undefined) {
       writer.uint32(18).bytes(message.report);
     }
     if (message._unknownFields !== undefined) {
@@ -94,22 +91,19 @@ export const SendHIDReportMessage: MessageFns<SendHIDReportMessage> = {
     return {
       virtualDeviceID: isSet(object.virtualDeviceID)
         ? globalThis.String(object.virtualDeviceID)
-        : "",
+        : undefined,
       report: isSet(object.report)
         ? Buffer.from(bytesFromBase64(object.report))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: SendHIDReportMessage): unknown {
     const obj: any = {};
-    if (
-      message.virtualDeviceID !== undefined &&
-      message.virtualDeviceID !== ""
-    ) {
+    if (message.virtualDeviceID !== undefined) {
       obj.virtualDeviceID = message.virtualDeviceID;
     }
-    if (message.report !== undefined && message.report.length !== 0) {
+    if (message.report !== undefined) {
       obj.report = base64FromBytes(message.report);
     }
     return obj;
@@ -124,8 +118,8 @@ export const SendHIDReportMessage: MessageFns<SendHIDReportMessage> = {
     object: I
   ): SendHIDReportMessage {
     const message = createBaseSendHIDReportMessage();
-    message.virtualDeviceID = object.virtualDeviceID ?? "";
-    message.report = object.report ?? Buffer.alloc(0);
+    message.virtualDeviceID = object.virtualDeviceID ?? undefined;
+    message.report = object.report ?? undefined;
     return message;
   },
 };

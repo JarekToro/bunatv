@@ -15,7 +15,7 @@ export interface UnregisterGameControllerMessage {
 }
 
 function createBaseUnregisterGameControllerMessage(): UnregisterGameControllerMessage {
-  return { controllerID: 0, _unknownFields: {} };
+  return { controllerID: undefined, _unknownFields: {} };
 }
 
 export const UnregisterGameControllerMessage: MessageFns<UnregisterGameControllerMessage> =
@@ -24,7 +24,7 @@ export const UnregisterGameControllerMessage: MessageFns<UnregisterGameControlle
       message: UnregisterGameControllerMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.controllerID !== undefined && message.controllerID !== 0) {
+      if (message.controllerID !== undefined) {
         writer.uint32(8).uint64(message.controllerID);
       }
       if (message._unknownFields !== undefined) {
@@ -80,13 +80,13 @@ export const UnregisterGameControllerMessage: MessageFns<UnregisterGameControlle
       return {
         controllerID: isSet(object.controllerID)
           ? globalThis.Number(object.controllerID)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: UnregisterGameControllerMessage): unknown {
       const obj: any = {};
-      if (message.controllerID !== undefined && message.controllerID !== 0) {
+      if (message.controllerID !== undefined) {
         obj.controllerID = Math.round(message.controllerID);
       }
       return obj;
@@ -101,7 +101,7 @@ export const UnregisterGameControllerMessage: MessageFns<UnregisterGameControlle
       I extends Exact<DeepPartial<UnregisterGameControllerMessage>, I>,
     >(object: I): UnregisterGameControllerMessage {
       const message = createBaseUnregisterGameControllerMessage();
-      message.controllerID = object.controllerID ?? 0;
+      message.controllerID = object.controllerID ?? undefined;
       return message;
     },
   };

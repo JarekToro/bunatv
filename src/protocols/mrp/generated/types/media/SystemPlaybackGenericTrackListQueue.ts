@@ -32,11 +32,11 @@ export interface SystemPlaybackGenericTracklistQueue {
 
 function createBaseSystemPlaybackGenericTracklistQueue(): SystemPlaybackGenericTracklistQueue {
   return {
-    firstTrackIdentifier: "",
-    trackIdentifiers: "",
-    collectionIdentifierSet: Buffer.alloc(0),
-    shuffleMode: 0,
-    repeatMode: 0,
+    firstTrackIdentifier: undefined,
+    trackIdentifiers: undefined,
+    collectionIdentifierSet: undefined,
+    shuffleMode: undefined,
+    repeatMode: undefined,
     _unknownFields: {},
   };
 }
@@ -47,28 +47,19 @@ export const SystemPlaybackGenericTracklistQueue: MessageFns<SystemPlaybackGener
       message: SystemPlaybackGenericTracklistQueue,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.firstTrackIdentifier !== undefined &&
-        message.firstTrackIdentifier !== ""
-      ) {
+      if (message.firstTrackIdentifier !== undefined) {
         writer.uint32(10).string(message.firstTrackIdentifier);
       }
-      if (
-        message.trackIdentifiers !== undefined &&
-        message.trackIdentifiers !== ""
-      ) {
+      if (message.trackIdentifiers !== undefined) {
         writer.uint32(18).string(message.trackIdentifiers);
       }
-      if (
-        message.collectionIdentifierSet !== undefined &&
-        message.collectionIdentifierSet.length !== 0
-      ) {
+      if (message.collectionIdentifierSet !== undefined) {
         writer.uint32(26).bytes(message.collectionIdentifierSet);
       }
-      if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+      if (message.shuffleMode !== undefined) {
         writer.uint32(32).int32(message.shuffleMode);
       }
-      if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+      if (message.repeatMode !== undefined) {
         writer.uint32(40).int32(message.repeatMode);
       }
       if (message._unknownFields !== undefined) {
@@ -156,48 +147,39 @@ export const SystemPlaybackGenericTracklistQueue: MessageFns<SystemPlaybackGener
       return {
         firstTrackIdentifier: isSet(object.firstTrackIdentifier)
           ? globalThis.String(object.firstTrackIdentifier)
-          : "",
+          : undefined,
         trackIdentifiers: isSet(object.trackIdentifiers)
           ? globalThis.String(object.trackIdentifiers)
-          : "",
+          : undefined,
         collectionIdentifierSet: isSet(object.collectionIdentifierSet)
           ? Buffer.from(bytesFromBase64(object.collectionIdentifierSet))
-          : Buffer.alloc(0),
+          : undefined,
         shuffleMode: isSet(object.shuffleMode)
           ? shuffleMode_EnumFromJSON(object.shuffleMode)
-          : 0,
+          : undefined,
         repeatMode: isSet(object.repeatMode)
           ? repeatMode_EnumFromJSON(object.repeatMode)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: SystemPlaybackGenericTracklistQueue): unknown {
       const obj: any = {};
-      if (
-        message.firstTrackIdentifier !== undefined &&
-        message.firstTrackIdentifier !== ""
-      ) {
+      if (message.firstTrackIdentifier !== undefined) {
         obj.firstTrackIdentifier = message.firstTrackIdentifier;
       }
-      if (
-        message.trackIdentifiers !== undefined &&
-        message.trackIdentifiers !== ""
-      ) {
+      if (message.trackIdentifiers !== undefined) {
         obj.trackIdentifiers = message.trackIdentifiers;
       }
-      if (
-        message.collectionIdentifierSet !== undefined &&
-        message.collectionIdentifierSet.length !== 0
-      ) {
+      if (message.collectionIdentifierSet !== undefined) {
         obj.collectionIdentifierSet = base64FromBytes(
           message.collectionIdentifierSet
         );
       }
-      if (message.shuffleMode !== undefined && message.shuffleMode !== 0) {
+      if (message.shuffleMode !== undefined) {
         obj.shuffleMode = shuffleMode_EnumToJSON(message.shuffleMode);
       }
-      if (message.repeatMode !== undefined && message.repeatMode !== 0) {
+      if (message.repeatMode !== undefined) {
         obj.repeatMode = repeatMode_EnumToJSON(message.repeatMode);
       }
       return obj;
@@ -214,12 +196,12 @@ export const SystemPlaybackGenericTracklistQueue: MessageFns<SystemPlaybackGener
       I extends Exact<DeepPartial<SystemPlaybackGenericTracklistQueue>, I>,
     >(object: I): SystemPlaybackGenericTracklistQueue {
       const message = createBaseSystemPlaybackGenericTracklistQueue();
-      message.firstTrackIdentifier = object.firstTrackIdentifier ?? "";
-      message.trackIdentifiers = object.trackIdentifiers ?? "";
+      message.firstTrackIdentifier = object.firstTrackIdentifier ?? undefined;
+      message.trackIdentifiers = object.trackIdentifiers ?? undefined;
       message.collectionIdentifierSet =
-        object.collectionIdentifierSet ?? Buffer.alloc(0);
-      message.shuffleMode = object.shuffleMode ?? 0;
-      message.repeatMode = object.repeatMode ?? 0;
+        object.collectionIdentifierSet ?? undefined;
+      message.shuffleMode = object.shuffleMode ?? undefined;
+      message.repeatMode = object.repeatMode ?? undefined;
       return message;
     },
   };

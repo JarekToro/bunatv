@@ -61,11 +61,11 @@ export function origin_TypeToJSON(object: Origin_Type): string {
 
 function createBaseOrigin(): Origin {
   return {
-    type: 0,
-    displayName: "",
-    identifier: 0,
+    type: undefined,
+    displayName: undefined,
+    identifier: undefined,
     deviceInfo: undefined,
-    isLocallyHosted: false,
+    isLocallyHosted: undefined,
     _unknownFields: {},
   };
 }
@@ -75,13 +75,13 @@ export const Origin: MessageFns<Origin> = {
     message: Origin,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(18).string(message.displayName);
     }
-    if (message.identifier !== undefined && message.identifier !== 0) {
+    if (message.identifier !== undefined) {
       writer.uint32(24).int32(message.identifier);
     }
     if (message.deviceInfo !== undefined) {
@@ -90,10 +90,7 @@ export const Origin: MessageFns<Origin> = {
         writer.uint32(34).fork()
       ).join();
     }
-    if (
-      message.isLocallyHosted !== undefined &&
-      message.isLocallyHosted !== false
-    ) {
+    if (message.isLocallyHosted !== undefined) {
       writer.uint32(40).bool(message.isLocallyHosted);
     }
     if (message._unknownFields !== undefined) {
@@ -179,40 +176,37 @@ export const Origin: MessageFns<Origin> = {
 
   fromJSON(object: any): Origin {
     return {
-      type: isSet(object.type) ? origin_TypeFromJSON(object.type) : 0,
+      type: isSet(object.type) ? origin_TypeFromJSON(object.type) : undefined,
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
+        : undefined,
       identifier: isSet(object.identifier)
         ? globalThis.Number(object.identifier)
-        : 0,
+        : undefined,
       deviceInfo: isSet(object.deviceInfo)
         ? DeviceInfoMessage.fromJSON(object.deviceInfo)
         : undefined,
       isLocallyHosted: isSet(object.isLocallyHosted)
         ? globalThis.Boolean(object.isLocallyHosted)
-        : false,
+        : undefined,
     };
   },
 
   toJSON(message: Origin): unknown {
     const obj: any = {};
-    if (message.type !== undefined && message.type !== 0) {
+    if (message.type !== undefined) {
       obj.type = origin_TypeToJSON(message.type);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
-    if (message.identifier !== undefined && message.identifier !== 0) {
+    if (message.identifier !== undefined) {
       obj.identifier = Math.round(message.identifier);
     }
     if (message.deviceInfo !== undefined) {
       obj.deviceInfo = DeviceInfoMessage.toJSON(message.deviceInfo);
     }
-    if (
-      message.isLocallyHosted !== undefined &&
-      message.isLocallyHosted !== false
-    ) {
+    if (message.isLocallyHosted !== undefined) {
       obj.isLocallyHosted = message.isLocallyHosted;
     }
     return obj;
@@ -223,14 +217,14 @@ export const Origin: MessageFns<Origin> = {
   },
   fromPartial<I extends Exact<DeepPartial<Origin>, I>>(object: I): Origin {
     const message = createBaseOrigin();
-    message.type = object.type ?? 0;
-    message.displayName = object.displayName ?? "";
-    message.identifier = object.identifier ?? 0;
+    message.type = object.type ?? undefined;
+    message.displayName = object.displayName ?? undefined;
+    message.identifier = object.identifier ?? undefined;
     message.deviceInfo =
       object.deviceInfo !== undefined && object.deviceInfo !== null
         ? DeviceInfoMessage.fromPartial(object.deviceInfo)
         : undefined;
-    message.isLocallyHosted = object.isLocallyHosted ?? false;
+    message.isLocallyHosted = object.isLocallyHosted ?? undefined;
     return message;
   },
 };

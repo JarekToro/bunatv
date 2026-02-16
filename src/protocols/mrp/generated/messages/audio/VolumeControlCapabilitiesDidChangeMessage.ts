@@ -21,8 +21,8 @@ export interface VolumeControlCapabilitiesDidChangeMessage {
 function createBaseVolumeControlCapabilitiesDidChangeMessage(): VolumeControlCapabilitiesDidChangeMessage {
   return {
     capabilities: undefined,
-    endpointUID: "",
-    outputDeviceUID: "",
+    endpointUID: undefined,
+    outputDeviceUID: undefined,
     _unknownFields: {},
   };
 }
@@ -39,13 +39,10 @@ export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControl
           writer.uint32(10).fork()
         ).join();
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+      if (message.endpointUID !== undefined) {
         writer.uint32(26).string(message.endpointUID);
       }
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         writer.uint32(34).string(message.outputDeviceUID);
       }
       if (message._unknownFields !== undefined) {
@@ -123,10 +120,10 @@ export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControl
           : undefined,
         endpointUID: isSet(object.endpointUID)
           ? globalThis.String(object.endpointUID)
-          : "",
+          : undefined,
         outputDeviceUID: isSet(object.outputDeviceUID)
           ? globalThis.String(object.outputDeviceUID)
-          : "",
+          : undefined,
       };
     },
 
@@ -137,13 +134,10 @@ export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControl
           message.capabilities
         );
       }
-      if (message.endpointUID !== undefined && message.endpointUID !== "") {
+      if (message.endpointUID !== undefined) {
         obj.endpointUID = message.endpointUID;
       }
-      if (
-        message.outputDeviceUID !== undefined &&
-        message.outputDeviceUID !== ""
-      ) {
+      if (message.outputDeviceUID !== undefined) {
         obj.outputDeviceUID = message.outputDeviceUID;
       }
       return obj;
@@ -170,8 +164,8 @@ export const VolumeControlCapabilitiesDidChangeMessage: MessageFns<VolumeControl
         object.capabilities !== undefined && object.capabilities !== null
           ? VolumeControlAvailabilityMessage.fromPartial(object.capabilities)
           : undefined;
-      message.endpointUID = object.endpointUID ?? "";
-      message.outputDeviceUID = object.outputDeviceUID ?? "";
+      message.endpointUID = object.endpointUID ?? undefined;
+      message.outputDeviceUID = object.outputDeviceUID ?? undefined;
       return message;
     },
   };

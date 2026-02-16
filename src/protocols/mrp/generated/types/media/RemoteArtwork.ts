@@ -16,7 +16,7 @@ export interface RemoteArtwork {
 }
 
 function createBaseRemoteArtwork(): RemoteArtwork {
-  return { url: "", type: "", _unknownFields: {} };
+  return { url: undefined, type: undefined, _unknownFields: {} };
 }
 
 export const RemoteArtwork: MessageFns<RemoteArtwork> = {
@@ -24,10 +24,10 @@ export const RemoteArtwork: MessageFns<RemoteArtwork> = {
     message: RemoteArtwork,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.url !== undefined && message.url !== "") {
+    if (message.url !== undefined) {
       writer.uint32(10).string(message.url);
     }
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(18).string(message.type);
     }
     if (message._unknownFields !== undefined) {
@@ -86,17 +86,17 @@ export const RemoteArtwork: MessageFns<RemoteArtwork> = {
 
   fromJSON(object: any): RemoteArtwork {
     return {
-      url: isSet(object.url) ? globalThis.String(object.url) : "",
-      type: isSet(object.type) ? globalThis.String(object.type) : "",
+      url: isSet(object.url) ? globalThis.String(object.url) : undefined,
+      type: isSet(object.type) ? globalThis.String(object.type) : undefined,
     };
   },
 
   toJSON(message: RemoteArtwork): unknown {
     const obj: any = {};
-    if (message.url !== undefined && message.url !== "") {
+    if (message.url !== undefined) {
       obj.url = message.url;
     }
-    if (message.type !== undefined && message.type !== "") {
+    if (message.type !== undefined) {
       obj.type = message.type;
     }
     return obj;
@@ -111,8 +111,8 @@ export const RemoteArtwork: MessageFns<RemoteArtwork> = {
     object: I
   ): RemoteArtwork {
     const message = createBaseRemoteArtwork();
-    message.url = object.url ?? "";
-    message.type = object.type ?? "";
+    message.url = object.url ?? undefined;
+    message.type = object.type ?? undefined;
     return message;
   },
 };

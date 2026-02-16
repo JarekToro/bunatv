@@ -66,13 +66,13 @@ export function nowPlayingPlayer_AudioSessionTypeToJSON(
 
 function createBaseNowPlayingPlayer(): NowPlayingPlayer {
   return {
-    identifier: "",
-    displayName: "",
-    isDefaultPlayer: false,
-    audioSessionType: 0,
+    identifier: undefined,
+    displayName: undefined,
+    isDefaultPlayer: undefined,
+    audioSessionType: undefined,
     mxSessionIDs: [],
-    audioSessionID: 0,
-    iconURL: "",
+    audioSessionID: undefined,
+    iconURL: undefined,
     _unknownFields: {},
   };
 }
@@ -82,31 +82,25 @@ export const NowPlayingPlayer: MessageFns<NowPlayingPlayer> = {
     message: NowPlayingPlayer,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(18).string(message.displayName);
     }
-    if (
-      message.isDefaultPlayer !== undefined &&
-      message.isDefaultPlayer !== false
-    ) {
+    if (message.isDefaultPlayer !== undefined) {
       writer.uint32(24).bool(message.isDefaultPlayer);
     }
-    if (
-      message.audioSessionType !== undefined &&
-      message.audioSessionType !== 0
-    ) {
+    if (message.audioSessionType !== undefined) {
       writer.uint32(32).int32(message.audioSessionType);
     }
     for (const v of message.mxSessionIDs) {
       writer.uint32(40).int64(v!);
     }
-    if (message.audioSessionID !== undefined && message.audioSessionID !== 0) {
+    if (message.audioSessionID !== undefined) {
       writer.uint32(48).uint32(message.audioSessionID);
     }
-    if (message.iconURL !== undefined && message.iconURL !== "") {
+    if (message.iconURL !== undefined) {
       writer.uint32(58).string(message.iconURL);
     }
     if (message._unknownFields !== undefined) {
@@ -217,44 +211,40 @@ export const NowPlayingPlayer: MessageFns<NowPlayingPlayer> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       displayName: isSet(object.displayName)
         ? globalThis.String(object.displayName)
-        : "",
+        : undefined,
       isDefaultPlayer: isSet(object.isDefaultPlayer)
         ? globalThis.Boolean(object.isDefaultPlayer)
-        : false,
+        : undefined,
       audioSessionType: isSet(object.audioSessionType)
         ? nowPlayingPlayer_AudioSessionTypeFromJSON(object.audioSessionType)
-        : 0,
+        : undefined,
       mxSessionIDs: globalThis.Array.isArray(object?.mxSessionIDs)
         ? object.mxSessionIDs.map((e: any) => globalThis.Number(e))
         : [],
       audioSessionID: isSet(object.audioSessionID)
         ? globalThis.Number(object.audioSessionID)
-        : 0,
-      iconURL: isSet(object.iconURL) ? globalThis.String(object.iconURL) : "",
+        : undefined,
+      iconURL: isSet(object.iconURL)
+        ? globalThis.String(object.iconURL)
+        : undefined,
     };
   },
 
   toJSON(message: NowPlayingPlayer): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.displayName !== undefined && message.displayName !== "") {
+    if (message.displayName !== undefined) {
       obj.displayName = message.displayName;
     }
-    if (
-      message.isDefaultPlayer !== undefined &&
-      message.isDefaultPlayer !== false
-    ) {
+    if (message.isDefaultPlayer !== undefined) {
       obj.isDefaultPlayer = message.isDefaultPlayer;
     }
-    if (
-      message.audioSessionType !== undefined &&
-      message.audioSessionType !== 0
-    ) {
+    if (message.audioSessionType !== undefined) {
       obj.audioSessionType = nowPlayingPlayer_AudioSessionTypeToJSON(
         message.audioSessionType
       );
@@ -262,10 +252,10 @@ export const NowPlayingPlayer: MessageFns<NowPlayingPlayer> = {
     if (message.mxSessionIDs?.length) {
       obj.mxSessionIDs = message.mxSessionIDs.map((e) => Math.round(e));
     }
-    if (message.audioSessionID !== undefined && message.audioSessionID !== 0) {
+    if (message.audioSessionID !== undefined) {
       obj.audioSessionID = Math.round(message.audioSessionID);
     }
-    if (message.iconURL !== undefined && message.iconURL !== "") {
+    if (message.iconURL !== undefined) {
       obj.iconURL = message.iconURL;
     }
     return obj;
@@ -280,13 +270,13 @@ export const NowPlayingPlayer: MessageFns<NowPlayingPlayer> = {
     object: I
   ): NowPlayingPlayer {
     const message = createBaseNowPlayingPlayer();
-    message.identifier = object.identifier ?? "";
-    message.displayName = object.displayName ?? "";
-    message.isDefaultPlayer = object.isDefaultPlayer ?? false;
-    message.audioSessionType = object.audioSessionType ?? 0;
+    message.identifier = object.identifier ?? undefined;
+    message.displayName = object.displayName ?? undefined;
+    message.isDefaultPlayer = object.isDefaultPlayer ?? undefined;
+    message.audioSessionType = object.audioSessionType ?? undefined;
     message.mxSessionIDs = object.mxSessionIDs?.map((e) => e) || [];
-    message.audioSessionID = object.audioSessionID ?? 0;
-    message.iconURL = object.iconURL ?? "";
+    message.audioSessionID = object.audioSessionID ?? undefined;
+    message.iconURL = object.iconURL ?? undefined;
     return message;
   },
 };

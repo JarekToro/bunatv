@@ -15,7 +15,7 @@ export interface SetArtworkMessage {
 }
 
 function createBaseSetArtworkMessage(): SetArtworkMessage {
-  return { jpegData: Buffer.alloc(0), _unknownFields: {} };
+  return { jpegData: undefined, _unknownFields: {} };
 }
 
 export const SetArtworkMessage: MessageFns<SetArtworkMessage> = {
@@ -23,7 +23,7 @@ export const SetArtworkMessage: MessageFns<SetArtworkMessage> = {
     message: SetArtworkMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.jpegData !== undefined && message.jpegData.length !== 0) {
+    if (message.jpegData !== undefined) {
       writer.uint32(10).bytes(message.jpegData);
     }
     if (message._unknownFields !== undefined) {
@@ -76,13 +76,13 @@ export const SetArtworkMessage: MessageFns<SetArtworkMessage> = {
     return {
       jpegData: isSet(object.jpegData)
         ? Buffer.from(bytesFromBase64(object.jpegData))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: SetArtworkMessage): unknown {
     const obj: any = {};
-    if (message.jpegData !== undefined && message.jpegData.length !== 0) {
+    if (message.jpegData !== undefined) {
       obj.jpegData = base64FromBytes(message.jpegData);
     }
     return obj;
@@ -97,7 +97,7 @@ export const SetArtworkMessage: MessageFns<SetArtworkMessage> = {
     object: I
   ): SetArtworkMessage {
     const message = createBaseSetArtworkMessage();
-    message.jpegData = object.jpegData ?? Buffer.alloc(0);
+    message.jpegData = object.jpegData ?? undefined;
     return message;
   },
 };

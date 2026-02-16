@@ -16,7 +16,7 @@ export interface GetVolumeMutedResultMessage {
 }
 
 function createBaseGetVolumeMutedResultMessage(): GetVolumeMutedResultMessage {
-  return { isMuted: false, _unknownFields: {} };
+  return { isMuted: undefined, _unknownFields: {} };
 }
 
 export const GetVolumeMutedResultMessage: MessageFns<GetVolumeMutedResultMessage> =
@@ -25,7 +25,7 @@ export const GetVolumeMutedResultMessage: MessageFns<GetVolumeMutedResultMessage
       message: GetVolumeMutedResultMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.isMuted !== undefined && message.isMuted !== false) {
+      if (message.isMuted !== undefined) {
         writer.uint32(8).bool(message.isMuted);
       }
       if (message._unknownFields !== undefined) {
@@ -81,13 +81,13 @@ export const GetVolumeMutedResultMessage: MessageFns<GetVolumeMutedResultMessage
       return {
         isMuted: isSet(object.isMuted)
           ? globalThis.Boolean(object.isMuted)
-          : false,
+          : undefined,
       };
     },
 
     toJSON(message: GetVolumeMutedResultMessage): unknown {
       const obj: any = {};
-      if (message.isMuted !== undefined && message.isMuted !== false) {
+      if (message.isMuted !== undefined) {
         obj.isMuted = message.isMuted;
       }
       return obj;
@@ -102,7 +102,7 @@ export const GetVolumeMutedResultMessage: MessageFns<GetVolumeMutedResultMessage
       object: I
     ): GetVolumeMutedResultMessage {
       const message = createBaseGetVolumeMutedResultMessage();
-      message.isMuted = object.isMuted ?? false;
+      message.isMuted = object.isMuted ?? undefined;
       return message;
     },
   };

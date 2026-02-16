@@ -36,8 +36,8 @@ export interface VolumeControlAvailabilityMessage {
 
 function createBaseVolumeControlAvailabilityMessage(): VolumeControlAvailabilityMessage {
   return {
-    volumeControlAvailable: false,
-    volumeCapabilities: 0,
+    volumeControlAvailable: undefined,
+    volumeCapabilities: undefined,
     _unknownFields: {},
   };
 }
@@ -48,16 +48,10 @@ export const VolumeControlAvailabilityMessage: MessageFns<VolumeControlAvailabil
       message: VolumeControlAvailabilityMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (
-        message.volumeControlAvailable !== undefined &&
-        message.volumeControlAvailable !== false
-      ) {
+      if (message.volumeControlAvailable !== undefined) {
         writer.uint32(8).bool(message.volumeControlAvailable);
       }
-      if (
-        message.volumeCapabilities !== undefined &&
-        message.volumeCapabilities !== 0
-      ) {
+      if (message.volumeCapabilities !== undefined) {
         writer.uint32(16).int32(message.volumeCapabilities);
       }
       if (message._unknownFields !== undefined) {
@@ -121,25 +115,19 @@ export const VolumeControlAvailabilityMessage: MessageFns<VolumeControlAvailabil
       return {
         volumeControlAvailable: isSet(object.volumeControlAvailable)
           ? globalThis.Boolean(object.volumeControlAvailable)
-          : false,
+          : undefined,
         volumeCapabilities: isSet(object.volumeCapabilities)
           ? globalThis.Number(object.volumeCapabilities)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: VolumeControlAvailabilityMessage): unknown {
       const obj: any = {};
-      if (
-        message.volumeControlAvailable !== undefined &&
-        message.volumeControlAvailable !== false
-      ) {
+      if (message.volumeControlAvailable !== undefined) {
         obj.volumeControlAvailable = message.volumeControlAvailable;
       }
-      if (
-        message.volumeCapabilities !== undefined &&
-        message.volumeCapabilities !== 0
-      ) {
+      if (message.volumeCapabilities !== undefined) {
         obj.volumeCapabilities = Math.round(message.volumeCapabilities);
       }
       return obj;
@@ -154,8 +142,9 @@ export const VolumeControlAvailabilityMessage: MessageFns<VolumeControlAvailabil
       I extends Exact<DeepPartial<VolumeControlAvailabilityMessage>, I>,
     >(object: I): VolumeControlAvailabilityMessage {
       const message = createBaseVolumeControlAvailabilityMessage();
-      message.volumeControlAvailable = object.volumeControlAvailable ?? false;
-      message.volumeCapabilities = object.volumeCapabilities ?? 0;
+      message.volumeControlAvailable =
+        object.volumeControlAvailable ?? undefined;
+      message.volumeCapabilities = object.volumeCapabilities ?? undefined;
       return message;
     },
   };

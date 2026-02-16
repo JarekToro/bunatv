@@ -31,7 +31,7 @@ export interface Dictionary {
  */
 export interface KeyValuePair {
   /** Dictionary key */
-  key: string;
+  key?: string | undefined;
   /** Dictionary value (variant type) */
   value: Value | undefined;
   _unknownFields?: { [key: number]: Uint8Array[] } | undefined;
@@ -165,7 +165,7 @@ export const Dictionary: MessageFns<Dictionary> = {
 };
 
 function createBaseKeyValuePair(): KeyValuePair {
-  return { key: "", value: undefined, _unknownFields: {} };
+  return { key: undefined, value: undefined, _unknownFields: {} };
 }
 
 export const KeyValuePair: MessageFns<KeyValuePair> = {
@@ -173,7 +173,7 @@ export const KeyValuePair: MessageFns<KeyValuePair> = {
     message: KeyValuePair,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
@@ -235,14 +235,14 @@ export const KeyValuePair: MessageFns<KeyValuePair> = {
 
   fromJSON(object: any): KeyValuePair {
     return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
+      key: isSet(object.key) ? globalThis.String(object.key) : undefined,
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined,
     };
   },
 
   toJSON(message: KeyValuePair): unknown {
     const obj: any = {};
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       obj.key = message.key;
     }
     if (message.value !== undefined) {
@@ -260,7 +260,7 @@ export const KeyValuePair: MessageFns<KeyValuePair> = {
     object: I
   ): KeyValuePair {
     const message = createBaseKeyValuePair();
-    message.key = object.key ?? "";
+    message.key = object.key ?? undefined;
     message.value =
       object.value !== undefined && object.value !== null
         ? Value.fromPartial(object.value)
@@ -271,13 +271,13 @@ export const KeyValuePair: MessageFns<KeyValuePair> = {
 
 function createBaseValue(): Value {
   return {
-    stringValue: "",
-    int64Value: 0,
-    floatValue: 0,
-    doubleValue: 0,
-    dataValue: Buffer.alloc(0),
-    boolValue: false,
-    dateValue: "",
+    stringValue: undefined,
+    int64Value: undefined,
+    floatValue: undefined,
+    doubleValue: undefined,
+    dataValue: undefined,
+    boolValue: undefined,
+    dateValue: undefined,
     arrayValues: [],
     dictionaryValue: undefined,
     _unknownFields: {},
@@ -289,25 +289,25 @@ export const Value: MessageFns<Value> = {
     message: Value,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.stringValue !== undefined && message.stringValue !== "") {
+    if (message.stringValue !== undefined) {
       writer.uint32(10).string(message.stringValue);
     }
-    if (message.int64Value !== undefined && message.int64Value !== 0) {
+    if (message.int64Value !== undefined) {
       writer.uint32(16).int64(message.int64Value);
     }
-    if (message.floatValue !== undefined && message.floatValue !== 0) {
+    if (message.floatValue !== undefined) {
       writer.uint32(29).float(message.floatValue);
     }
-    if (message.doubleValue !== undefined && message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined) {
       writer.uint32(33).double(message.doubleValue);
     }
-    if (message.dataValue !== undefined && message.dataValue.length !== 0) {
+    if (message.dataValue !== undefined) {
       writer.uint32(42).bytes(message.dataValue);
     }
-    if (message.boolValue !== undefined && message.boolValue !== false) {
+    if (message.boolValue !== undefined) {
       writer.uint32(48).bool(message.boolValue);
     }
-    if (message.dateValue !== undefined && message.dateValue !== "") {
+    if (message.dateValue !== undefined) {
       writer.uint32(58).string(message.dateValue);
     }
     for (const v of message.arrayValues) {
@@ -433,25 +433,25 @@ export const Value: MessageFns<Value> = {
     return {
       stringValue: isSet(object.stringValue)
         ? globalThis.String(object.stringValue)
-        : "",
+        : undefined,
       int64Value: isSet(object.int64Value)
         ? globalThis.Number(object.int64Value)
-        : 0,
+        : undefined,
       floatValue: isSet(object.floatValue)
         ? globalThis.Number(object.floatValue)
-        : 0,
+        : undefined,
       doubleValue: isSet(object.doubleValue)
         ? globalThis.Number(object.doubleValue)
-        : 0,
+        : undefined,
       dataValue: isSet(object.dataValue)
         ? Buffer.from(bytesFromBase64(object.dataValue))
-        : Buffer.alloc(0),
+        : undefined,
       boolValue: isSet(object.boolValue)
         ? globalThis.Boolean(object.boolValue)
-        : false,
+        : undefined,
       dateValue: isSet(object.dateValue)
         ? globalThis.String(object.dateValue)
-        : "",
+        : undefined,
       arrayValues: globalThis.Array.isArray(object?.arrayValues)
         ? object.arrayValues.map((e: any) => Value.fromJSON(e))
         : [],
@@ -463,25 +463,25 @@ export const Value: MessageFns<Value> = {
 
   toJSON(message: Value): unknown {
     const obj: any = {};
-    if (message.stringValue !== undefined && message.stringValue !== "") {
+    if (message.stringValue !== undefined) {
       obj.stringValue = message.stringValue;
     }
-    if (message.int64Value !== undefined && message.int64Value !== 0) {
+    if (message.int64Value !== undefined) {
       obj.int64Value = Math.round(message.int64Value);
     }
-    if (message.floatValue !== undefined && message.floatValue !== 0) {
+    if (message.floatValue !== undefined) {
       obj.floatValue = message.floatValue;
     }
-    if (message.doubleValue !== undefined && message.doubleValue !== 0) {
+    if (message.doubleValue !== undefined) {
       obj.doubleValue = message.doubleValue;
     }
-    if (message.dataValue !== undefined && message.dataValue.length !== 0) {
+    if (message.dataValue !== undefined) {
       obj.dataValue = base64FromBytes(message.dataValue);
     }
-    if (message.boolValue !== undefined && message.boolValue !== false) {
+    if (message.boolValue !== undefined) {
       obj.boolValue = message.boolValue;
     }
-    if (message.dateValue !== undefined && message.dateValue !== "") {
+    if (message.dateValue !== undefined) {
       obj.dateValue = message.dateValue;
     }
     if (message.arrayValues?.length) {
@@ -498,13 +498,13 @@ export const Value: MessageFns<Value> = {
   },
   fromPartial<I extends Exact<DeepPartial<Value>, I>>(object: I): Value {
     const message = createBaseValue();
-    message.stringValue = object.stringValue ?? "";
-    message.int64Value = object.int64Value ?? 0;
-    message.floatValue = object.floatValue ?? 0;
-    message.doubleValue = object.doubleValue ?? 0;
-    message.dataValue = object.dataValue ?? Buffer.alloc(0);
-    message.boolValue = object.boolValue ?? false;
-    message.dateValue = object.dateValue ?? "";
+    message.stringValue = object.stringValue ?? undefined;
+    message.int64Value = object.int64Value ?? undefined;
+    message.floatValue = object.floatValue ?? undefined;
+    message.doubleValue = object.doubleValue ?? undefined;
+    message.dataValue = object.dataValue ?? undefined;
+    message.boolValue = object.boolValue ?? undefined;
+    message.dateValue = object.dateValue ?? undefined;
     message.arrayValues =
       object.arrayValues?.map((e) => Value.fromPartial(e)) || [];
     message.dictionaryValue =

@@ -25,16 +25,16 @@ export interface RequestDetails {
 
 function createBaseRequestDetails(): RequestDetails {
   return {
-    initiator: "",
-    requestID: "",
-    reason: "",
-    qos: 0,
-    startDate: 0,
-    userInitiated: false,
-    initiatorWasInferred: false,
-    originatingBundleID: "",
-    operationID: "",
-    surface: "",
+    initiator: undefined,
+    requestID: undefined,
+    reason: undefined,
+    qos: undefined,
+    startDate: undefined,
+    userInitiated: undefined,
+    initiatorWasInferred: undefined,
+    originatingBundleID: undefined,
+    operationID: undefined,
+    surface: undefined,
     _unknownFields: {},
   };
 }
@@ -44,43 +44,34 @@ export const RequestDetails: MessageFns<RequestDetails> = {
     message: RequestDetails,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.initiator !== undefined && message.initiator !== "") {
+    if (message.initiator !== undefined) {
       writer.uint32(10).string(message.initiator);
     }
-    if (message.requestID !== undefined && message.requestID !== "") {
+    if (message.requestID !== undefined) {
       writer.uint32(18).string(message.requestID);
     }
-    if (message.reason !== undefined && message.reason !== "") {
+    if (message.reason !== undefined) {
       writer.uint32(26).string(message.reason);
     }
-    if (message.qos !== undefined && message.qos !== 0) {
+    if (message.qos !== undefined) {
       writer.uint32(32).uint32(message.qos);
     }
-    if (message.startDate !== undefined && message.startDate !== 0) {
+    if (message.startDate !== undefined) {
       writer.uint32(40).uint64(message.startDate);
     }
-    if (
-      message.userInitiated !== undefined &&
-      message.userInitiated !== false
-    ) {
+    if (message.userInitiated !== undefined) {
       writer.uint32(48).bool(message.userInitiated);
     }
-    if (
-      message.initiatorWasInferred !== undefined &&
-      message.initiatorWasInferred !== false
-    ) {
+    if (message.initiatorWasInferred !== undefined) {
       writer.uint32(56).bool(message.initiatorWasInferred);
     }
-    if (
-      message.originatingBundleID !== undefined &&
-      message.originatingBundleID !== ""
-    ) {
+    if (message.originatingBundleID !== undefined) {
       writer.uint32(66).string(message.originatingBundleID);
     }
-    if (message.operationID !== undefined && message.operationID !== "") {
+    if (message.operationID !== undefined) {
       writer.uint32(74).string(message.operationID);
     }
-    if (message.surface !== undefined && message.surface !== "") {
+    if (message.surface !== undefined) {
       writer.uint32(82).string(message.surface);
     }
     if (message._unknownFields !== undefined) {
@@ -205,70 +196,65 @@ export const RequestDetails: MessageFns<RequestDetails> = {
     return {
       initiator: isSet(object.initiator)
         ? globalThis.String(object.initiator)
-        : "",
+        : undefined,
       requestID: isSet(object.requestID)
         ? globalThis.String(object.requestID)
-        : "",
-      reason: isSet(object.reason) ? globalThis.String(object.reason) : "",
-      qos: isSet(object.qos) ? globalThis.Number(object.qos) : 0,
+        : undefined,
+      reason: isSet(object.reason)
+        ? globalThis.String(object.reason)
+        : undefined,
+      qos: isSet(object.qos) ? globalThis.Number(object.qos) : undefined,
       startDate: isSet(object.startDate)
         ? globalThis.Number(object.startDate)
-        : 0,
+        : undefined,
       userInitiated: isSet(object.userInitiated)
         ? globalThis.Boolean(object.userInitiated)
-        : false,
+        : undefined,
       initiatorWasInferred: isSet(object.initiatorWasInferred)
         ? globalThis.Boolean(object.initiatorWasInferred)
-        : false,
+        : undefined,
       originatingBundleID: isSet(object.originatingBundleID)
         ? globalThis.String(object.originatingBundleID)
-        : "",
+        : undefined,
       operationID: isSet(object.operationID)
         ? globalThis.String(object.operationID)
-        : "",
-      surface: isSet(object.surface) ? globalThis.String(object.surface) : "",
+        : undefined,
+      surface: isSet(object.surface)
+        ? globalThis.String(object.surface)
+        : undefined,
     };
   },
 
   toJSON(message: RequestDetails): unknown {
     const obj: any = {};
-    if (message.initiator !== undefined && message.initiator !== "") {
+    if (message.initiator !== undefined) {
       obj.initiator = message.initiator;
     }
-    if (message.requestID !== undefined && message.requestID !== "") {
+    if (message.requestID !== undefined) {
       obj.requestID = message.requestID;
     }
-    if (message.reason !== undefined && message.reason !== "") {
+    if (message.reason !== undefined) {
       obj.reason = message.reason;
     }
-    if (message.qos !== undefined && message.qos !== 0) {
+    if (message.qos !== undefined) {
       obj.qos = Math.round(message.qos);
     }
-    if (message.startDate !== undefined && message.startDate !== 0) {
+    if (message.startDate !== undefined) {
       obj.startDate = Math.round(message.startDate);
     }
-    if (
-      message.userInitiated !== undefined &&
-      message.userInitiated !== false
-    ) {
+    if (message.userInitiated !== undefined) {
       obj.userInitiated = message.userInitiated;
     }
-    if (
-      message.initiatorWasInferred !== undefined &&
-      message.initiatorWasInferred !== false
-    ) {
+    if (message.initiatorWasInferred !== undefined) {
       obj.initiatorWasInferred = message.initiatorWasInferred;
     }
-    if (
-      message.originatingBundleID !== undefined &&
-      message.originatingBundleID !== ""
-    ) {
+    if (message.originatingBundleID !== undefined) {
       obj.originatingBundleID = message.originatingBundleID;
     }
-    if (message.operationID !== undefined && message.operationID !== "") {
+    if (message.operationID !== undefined) {
       obj.operationID = message.operationID;
     }
-    if (message.surface !== undefined && message.surface !== "") {
+    if (message.surface !== undefined) {
       obj.surface = message.surface;
     }
     return obj;
@@ -283,16 +269,16 @@ export const RequestDetails: MessageFns<RequestDetails> = {
     object: I
   ): RequestDetails {
     const message = createBaseRequestDetails();
-    message.initiator = object.initiator ?? "";
-    message.requestID = object.requestID ?? "";
-    message.reason = object.reason ?? "";
-    message.qos = object.qos ?? 0;
-    message.startDate = object.startDate ?? 0;
-    message.userInitiated = object.userInitiated ?? false;
-    message.initiatorWasInferred = object.initiatorWasInferred ?? false;
-    message.originatingBundleID = object.originatingBundleID ?? "";
-    message.operationID = object.operationID ?? "";
-    message.surface = object.surface ?? "";
+    message.initiator = object.initiator ?? undefined;
+    message.requestID = object.requestID ?? undefined;
+    message.reason = object.reason ?? undefined;
+    message.qos = object.qos ?? undefined;
+    message.startDate = object.startDate ?? undefined;
+    message.userInitiated = object.userInitiated ?? undefined;
+    message.initiatorWasInferred = object.initiatorWasInferred ?? undefined;
+    message.originatingBundleID = object.originatingBundleID ?? undefined;
+    message.operationID = object.operationID ?? undefined;
+    message.surface = object.surface ?? undefined;
     return message;
   },
 };

@@ -64,7 +64,7 @@ export function setConnectionStateMessage_ConnectionStateToJSON(
 }
 
 function createBaseSetConnectionStateMessage(): SetConnectionStateMessage {
-  return { state: 0, _unknownFields: {} };
+  return { state: undefined, _unknownFields: {} };
 }
 
 export const SetConnectionStateMessage: MessageFns<SetConnectionStateMessage> =
@@ -73,7 +73,7 @@ export const SetConnectionStateMessage: MessageFns<SetConnectionStateMessage> =
       message: SetConnectionStateMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.state !== undefined && message.state !== 0) {
+      if (message.state !== undefined) {
         writer.uint32(8).int32(message.state);
       }
       if (message._unknownFields !== undefined) {
@@ -129,13 +129,13 @@ export const SetConnectionStateMessage: MessageFns<SetConnectionStateMessage> =
       return {
         state: isSet(object.state)
           ? setConnectionStateMessage_ConnectionStateFromJSON(object.state)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: SetConnectionStateMessage): unknown {
       const obj: any = {};
-      if (message.state !== undefined && message.state !== 0) {
+      if (message.state !== undefined) {
         obj.state = setConnectionStateMessage_ConnectionStateToJSON(
           message.state
         );
@@ -152,7 +152,7 @@ export const SetConnectionStateMessage: MessageFns<SetConnectionStateMessage> =
       object: I
     ): SetConnectionStateMessage {
       const message = createBaseSetConnectionStateMessage();
-      message.state = object.state ?? 0;
+      message.state = object.state ?? undefined;
       return message;
     },
   };

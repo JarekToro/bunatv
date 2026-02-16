@@ -15,7 +15,7 @@ export interface RegisterGameControllerResponseMessage {
 }
 
 function createBaseRegisterGameControllerResponseMessage(): RegisterGameControllerResponseMessage {
-  return { controllerID: 0, _unknownFields: {} };
+  return { controllerID: undefined, _unknownFields: {} };
 }
 
 export const RegisterGameControllerResponseMessage: MessageFns<RegisterGameControllerResponseMessage> =
@@ -24,7 +24,7 @@ export const RegisterGameControllerResponseMessage: MessageFns<RegisterGameContr
       message: RegisterGameControllerResponseMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.controllerID !== undefined && message.controllerID !== 0) {
+      if (message.controllerID !== undefined) {
         writer.uint32(8).uint64(message.controllerID);
       }
       if (message._unknownFields !== undefined) {
@@ -80,13 +80,13 @@ export const RegisterGameControllerResponseMessage: MessageFns<RegisterGameContr
       return {
         controllerID: isSet(object.controllerID)
           ? globalThis.Number(object.controllerID)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: RegisterGameControllerResponseMessage): unknown {
       const obj: any = {};
-      if (message.controllerID !== undefined && message.controllerID !== 0) {
+      if (message.controllerID !== undefined) {
         obj.controllerID = Math.round(message.controllerID);
       }
       return obj;
@@ -103,7 +103,7 @@ export const RegisterGameControllerResponseMessage: MessageFns<RegisterGameContr
       I extends Exact<DeepPartial<RegisterGameControllerResponseMessage>, I>,
     >(object: I): RegisterGameControllerResponseMessage {
       const message = createBaseRegisterGameControllerResponseMessage();
-      message.controllerID = object.controllerID ?? 0;
+      message.controllerID = object.controllerID ?? undefined;
       return message;
     },
   };

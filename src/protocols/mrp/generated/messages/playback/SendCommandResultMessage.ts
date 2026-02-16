@@ -762,12 +762,12 @@ export const SendCommandResultType: MessageFns<SendCommandResultType> = {
 
 function createBaseSendCommandResultStatus(): SendCommandResultStatus {
   return {
-    statusCode: 0,
-    type: 1,
+    statusCode: undefined,
+    type: undefined,
     dialog: undefined,
     error: undefined,
-    customData: Buffer.alloc(0),
-    customDataType: "",
+    customData: undefined,
+    customDataType: undefined,
     _unknownFields: {},
   };
 }
@@ -777,10 +777,10 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
     message: SendCommandResultStatus,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.statusCode !== undefined && message.statusCode !== 0) {
+    if (message.statusCode !== undefined) {
       writer.uint32(8).int32(message.statusCode);
     }
-    if (message.type !== undefined && message.type !== 1) {
+    if (message.type !== undefined) {
       writer.uint32(16).int32(message.type);
     }
     if (message.dialog !== undefined) {
@@ -792,10 +792,10 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
     if (message.error !== undefined) {
       Error.encode(message.error, writer.uint32(34).fork()).join();
     }
-    if (message.customData !== undefined && message.customData.length !== 0) {
+    if (message.customData !== undefined) {
       writer.uint32(42).bytes(message.customData);
     }
-    if (message.customDataType !== undefined && message.customDataType !== "") {
+    if (message.customDataType !== undefined) {
       writer.uint32(50).string(message.customDataType);
     }
     if (message._unknownFields !== undefined) {
@@ -894,29 +894,29 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
     return {
       statusCode: isSet(object.statusCode)
         ? sendCommandStatusCode_EnumFromJSON(object.statusCode)
-        : 0,
+        : undefined,
       type: isSet(object.type)
         ? sendCommandResultType_EnumFromJSON(object.type)
-        : 1,
+        : undefined,
       dialog: isSet(object.dialog)
         ? SendCommandResultHandlerDialog.fromJSON(object.dialog)
         : undefined,
       error: isSet(object.error) ? Error.fromJSON(object.error) : undefined,
       customData: isSet(object.customData)
         ? Buffer.from(bytesFromBase64(object.customData))
-        : Buffer.alloc(0),
+        : undefined,
       customDataType: isSet(object.customDataType)
         ? globalThis.String(object.customDataType)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: SendCommandResultStatus): unknown {
     const obj: any = {};
-    if (message.statusCode !== undefined && message.statusCode !== 0) {
+    if (message.statusCode !== undefined) {
       obj.statusCode = sendCommandStatusCode_EnumToJSON(message.statusCode);
     }
-    if (message.type !== undefined && message.type !== 1) {
+    if (message.type !== undefined) {
       obj.type = sendCommandResultType_EnumToJSON(message.type);
     }
     if (message.dialog !== undefined) {
@@ -925,10 +925,10 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
     if (message.error !== undefined) {
       obj.error = Error.toJSON(message.error);
     }
-    if (message.customData !== undefined && message.customData.length !== 0) {
+    if (message.customData !== undefined) {
       obj.customData = base64FromBytes(message.customData);
     }
-    if (message.customDataType !== undefined && message.customDataType !== "") {
+    if (message.customDataType !== undefined) {
       obj.customDataType = message.customDataType;
     }
     return obj;
@@ -943,8 +943,8 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
     object: I
   ): SendCommandResultStatus {
     const message = createBaseSendCommandResultStatus();
-    message.statusCode = object.statusCode ?? 0;
-    message.type = object.type ?? 1;
+    message.statusCode = object.statusCode ?? undefined;
+    message.type = object.type ?? undefined;
     message.dialog =
       object.dialog !== undefined && object.dialog !== null
         ? SendCommandResultHandlerDialog.fromPartial(object.dialog)
@@ -953,8 +953,8 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
       object.error !== undefined && object.error !== null
         ? Error.fromPartial(object.error)
         : undefined;
-    message.customData = object.customData ?? Buffer.alloc(0);
-    message.customDataType = object.customDataType ?? "";
+    message.customData = object.customData ?? undefined;
+    message.customDataType = object.customDataType ?? undefined;
     return message;
   },
 };
@@ -962,9 +962,9 @@ export const SendCommandResultStatus: MessageFns<SendCommandResultStatus> = {
 function createBaseSendCommandResult(): SendCommandResult {
   return {
     playerPath: undefined,
-    sendError: 0,
+    sendError: undefined,
     statuses: [],
-    sendErrorDescription: "",
+    sendErrorDescription: undefined,
     error: undefined,
     _unknownFields: {},
   };
@@ -978,16 +978,13 @@ export const SendCommandResult: MessageFns<SendCommandResult> = {
     if (message.playerPath !== undefined) {
       PlayerPath.encode(message.playerPath, writer.uint32(10).fork()).join();
     }
-    if (message.sendError !== undefined && message.sendError !== 0) {
+    if (message.sendError !== undefined) {
       writer.uint32(16).int32(message.sendError);
     }
     for (const v of message.statuses) {
       SendCommandResultStatus.encode(v!, writer.uint32(26).fork()).join();
     }
-    if (
-      message.sendErrorDescription !== undefined &&
-      message.sendErrorDescription !== ""
-    ) {
+    if (message.sendErrorDescription !== undefined) {
       writer.uint32(34).string(message.sendErrorDescription);
     }
     if (message.error !== undefined) {
@@ -1080,13 +1077,13 @@ export const SendCommandResult: MessageFns<SendCommandResult> = {
         : undefined,
       sendError: isSet(object.sendError)
         ? sendError_EnumFromJSON(object.sendError)
-        : 0,
+        : undefined,
       statuses: globalThis.Array.isArray(object?.statuses)
         ? object.statuses.map((e: any) => SendCommandResultStatus.fromJSON(e))
         : [],
       sendErrorDescription: isSet(object.sendErrorDescription)
         ? globalThis.String(object.sendErrorDescription)
-        : "",
+        : undefined,
       error: isSet(object.error) ? Error.fromJSON(object.error) : undefined,
     };
   },
@@ -1096,7 +1093,7 @@ export const SendCommandResult: MessageFns<SendCommandResult> = {
     if (message.playerPath !== undefined) {
       obj.playerPath = PlayerPath.toJSON(message.playerPath);
     }
-    if (message.sendError !== undefined && message.sendError !== 0) {
+    if (message.sendError !== undefined) {
       obj.sendError = sendError_EnumToJSON(message.sendError);
     }
     if (message.statuses?.length) {
@@ -1104,10 +1101,7 @@ export const SendCommandResult: MessageFns<SendCommandResult> = {
         SendCommandResultStatus.toJSON(e)
       );
     }
-    if (
-      message.sendErrorDescription !== undefined &&
-      message.sendErrorDescription !== ""
-    ) {
+    if (message.sendErrorDescription !== undefined) {
       obj.sendErrorDescription = message.sendErrorDescription;
     }
     if (message.error !== undefined) {
@@ -1129,10 +1123,10 @@ export const SendCommandResult: MessageFns<SendCommandResult> = {
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)
         : undefined;
-    message.sendError = object.sendError ?? 0;
+    message.sendError = object.sendError ?? undefined;
     message.statuses =
       object.statuses?.map((e) => SendCommandResultStatus.fromPartial(e)) || [];
-    message.sendErrorDescription = object.sendErrorDescription ?? "";
+    message.sendErrorDescription = object.sendErrorDescription ?? undefined;
     message.error =
       object.error !== undefined && object.error !== null
         ? Error.fromPartial(object.error)
@@ -1143,10 +1137,10 @@ export const SendCommandResult: MessageFns<SendCommandResult> = {
 
 function createBaseSendCommandResultMessage(): SendCommandResultMessage {
   return {
-    sendError: 0,
-    handlerReturnStatus: 0,
+    sendError: undefined,
+    handlerReturnStatus: undefined,
     handlerReturnStatusDatas: [],
-    commandID: "",
+    commandID: undefined,
     playerPath: undefined,
     commandResult: undefined,
     _unknownFields: {},
@@ -1158,19 +1152,16 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
     message: SendCommandResultMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.sendError !== undefined && message.sendError !== 0) {
+    if (message.sendError !== undefined) {
       writer.uint32(8).int32(message.sendError);
     }
-    if (
-      message.handlerReturnStatus !== undefined &&
-      message.handlerReturnStatus !== 0
-    ) {
+    if (message.handlerReturnStatus !== undefined) {
       writer.uint32(16).int32(message.handlerReturnStatus);
     }
     for (const v of message.handlerReturnStatusDatas) {
       writer.uint32(26).bytes(v!);
     }
-    if (message.commandID !== undefined && message.commandID !== "") {
+    if (message.commandID !== undefined) {
       writer.uint32(34).string(message.commandID);
     }
     if (message.playerPath !== undefined) {
@@ -1278,10 +1269,10 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
     return {
       sendError: isSet(object.sendError)
         ? sendError_EnumFromJSON(object.sendError)
-        : 0,
+        : undefined,
       handlerReturnStatus: isSet(object.handlerReturnStatus)
         ? handlerReturnStatus_EnumFromJSON(object.handlerReturnStatus)
-        : 0,
+        : undefined,
       handlerReturnStatusDatas: globalThis.Array.isArray(
         object?.handlerReturnStatusDatas
       )
@@ -1291,7 +1282,7 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
         : [],
       commandID: isSet(object.commandID)
         ? globalThis.String(object.commandID)
-        : "",
+        : undefined,
       playerPath: isSet(object.playerPath)
         ? PlayerPath.fromJSON(object.playerPath)
         : undefined,
@@ -1303,13 +1294,10 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
 
   toJSON(message: SendCommandResultMessage): unknown {
     const obj: any = {};
-    if (message.sendError !== undefined && message.sendError !== 0) {
+    if (message.sendError !== undefined) {
       obj.sendError = sendError_EnumToJSON(message.sendError);
     }
-    if (
-      message.handlerReturnStatus !== undefined &&
-      message.handlerReturnStatus !== 0
-    ) {
+    if (message.handlerReturnStatus !== undefined) {
       obj.handlerReturnStatus = handlerReturnStatus_EnumToJSON(
         message.handlerReturnStatus
       );
@@ -1319,7 +1307,7 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
         base64FromBytes(e)
       );
     }
-    if (message.commandID !== undefined && message.commandID !== "") {
+    if (message.commandID !== undefined) {
       obj.commandID = message.commandID;
     }
     if (message.playerPath !== undefined) {
@@ -1340,11 +1328,11 @@ export const SendCommandResultMessage: MessageFns<SendCommandResultMessage> = {
     object: I
   ): SendCommandResultMessage {
     const message = createBaseSendCommandResultMessage();
-    message.sendError = object.sendError ?? 0;
-    message.handlerReturnStatus = object.handlerReturnStatus ?? 0;
+    message.sendError = object.sendError ?? undefined;
+    message.handlerReturnStatus = object.handlerReturnStatus ?? undefined;
     message.handlerReturnStatusDatas =
       object.handlerReturnStatusDatas?.map((e) => e) || [];
-    message.commandID = object.commandID ?? "";
+    message.commandID = object.commandID ?? undefined;
     message.playerPath =
       object.playerPath !== undefined && object.playerPath !== null
         ? PlayerPath.fromPartial(object.playerPath)

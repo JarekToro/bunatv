@@ -16,7 +16,7 @@ export interface LyricsToken {
 }
 
 function createBaseLyricsToken(): LyricsToken {
-  return { identifier: "", userData: Buffer.alloc(0), _unknownFields: {} };
+  return { identifier: undefined, userData: undefined, _unknownFields: {} };
 }
 
 export const LyricsToken: MessageFns<LyricsToken> = {
@@ -24,10 +24,10 @@ export const LyricsToken: MessageFns<LyricsToken> = {
     message: LyricsToken,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
-    if (message.userData !== undefined && message.userData.length !== 0) {
+    if (message.userData !== undefined) {
       writer.uint32(18).bytes(message.userData);
     }
     if (message._unknownFields !== undefined) {
@@ -88,19 +88,19 @@ export const LyricsToken: MessageFns<LyricsToken> = {
     return {
       identifier: isSet(object.identifier)
         ? globalThis.String(object.identifier)
-        : "",
+        : undefined,
       userData: isSet(object.userData)
         ? Buffer.from(bytesFromBase64(object.userData))
-        : Buffer.alloc(0),
+        : undefined,
     };
   },
 
   toJSON(message: LyricsToken): unknown {
     const obj: any = {};
-    if (message.identifier !== undefined && message.identifier !== "") {
+    if (message.identifier !== undefined) {
       obj.identifier = message.identifier;
     }
-    if (message.userData !== undefined && message.userData.length !== 0) {
+    if (message.userData !== undefined) {
       obj.userData = base64FromBytes(message.userData);
     }
     return obj;
@@ -113,8 +113,8 @@ export const LyricsToken: MessageFns<LyricsToken> = {
     object: I
   ): LyricsToken {
     const message = createBaseLyricsToken();
-    message.identifier = object.identifier ?? "";
-    message.userData = object.userData ?? Buffer.alloc(0);
+    message.identifier = object.identifier ?? undefined;
+    message.userData = object.userData ?? undefined;
     return message;
   },
 };

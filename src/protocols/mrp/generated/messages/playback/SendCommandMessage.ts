@@ -25,7 +25,7 @@ export interface SendCommandMessage {
 
 function createBaseSendCommandMessage(): SendCommandMessage {
   return {
-    command: 0,
+    command: undefined,
     options: undefined,
     playerPath: undefined,
     _unknownFields: {},
@@ -37,7 +37,7 @@ export const SendCommandMessage: MessageFns<SendCommandMessage> = {
     message: SendCommandMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.command !== undefined && message.command !== 0) {
+    if (message.command !== undefined) {
       writer.uint32(8).int32(message.command);
     }
     if (message.options !== undefined) {
@@ -113,7 +113,9 @@ export const SendCommandMessage: MessageFns<SendCommandMessage> = {
 
   fromJSON(object: any): SendCommandMessage {
     return {
-      command: isSet(object.command) ? commandFromJSON(object.command) : 0,
+      command: isSet(object.command)
+        ? commandFromJSON(object.command)
+        : undefined,
       options: isSet(object.options)
         ? CommandOptions.fromJSON(object.options)
         : undefined,
@@ -125,7 +127,7 @@ export const SendCommandMessage: MessageFns<SendCommandMessage> = {
 
   toJSON(message: SendCommandMessage): unknown {
     const obj: any = {};
-    if (message.command !== undefined && message.command !== 0) {
+    if (message.command !== undefined) {
       obj.command = commandToJSON(message.command);
     }
     if (message.options !== undefined) {
@@ -146,7 +148,7 @@ export const SendCommandMessage: MessageFns<SendCommandMessage> = {
     object: I
   ): SendCommandMessage {
     const message = createBaseSendCommandMessage();
-    message.command = object.command ?? 0;
+    message.command = object.command ?? undefined;
     message.options =
       object.options !== undefined && object.options !== null
         ? CommandOptions.fromPartial(object.options)

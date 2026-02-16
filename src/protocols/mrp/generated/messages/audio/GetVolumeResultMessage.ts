@@ -15,7 +15,7 @@ export interface GetVolumeResultMessage {
 }
 
 function createBaseGetVolumeResultMessage(): GetVolumeResultMessage {
-  return { volume: 0, _unknownFields: {} };
+  return { volume: undefined, _unknownFields: {} };
 }
 
 export const GetVolumeResultMessage: MessageFns<GetVolumeResultMessage> = {
@@ -23,7 +23,7 @@ export const GetVolumeResultMessage: MessageFns<GetVolumeResultMessage> = {
     message: GetVolumeResultMessage,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.volume !== undefined && message.volume !== 0) {
+    if (message.volume !== undefined) {
       writer.uint32(13).float(message.volume);
     }
     if (message._unknownFields !== undefined) {
@@ -77,13 +77,15 @@ export const GetVolumeResultMessage: MessageFns<GetVolumeResultMessage> = {
 
   fromJSON(object: any): GetVolumeResultMessage {
     return {
-      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
+      volume: isSet(object.volume)
+        ? globalThis.Number(object.volume)
+        : undefined,
     };
   },
 
   toJSON(message: GetVolumeResultMessage): unknown {
     const obj: any = {};
-    if (message.volume !== undefined && message.volume !== 0) {
+    if (message.volume !== undefined) {
       obj.volume = message.volume;
     }
     return obj;
@@ -98,7 +100,7 @@ export const GetVolumeResultMessage: MessageFns<GetVolumeResultMessage> = {
     object: I
   ): GetVolumeResultMessage {
     const message = createBaseGetVolumeResultMessage();
-    message.volume = object.volume ?? 0;
+    message.volume = object.volume ?? undefined;
     return message;
   },
 };

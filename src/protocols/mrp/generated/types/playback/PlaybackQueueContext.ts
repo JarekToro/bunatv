@@ -15,7 +15,7 @@ export interface PlaybackQueueContext {
 }
 
 function createBasePlaybackQueueContext(): PlaybackQueueContext {
-  return { revision: "", _unknownFields: {} };
+  return { revision: undefined, _unknownFields: {} };
 }
 
 export const PlaybackQueueContext: MessageFns<PlaybackQueueContext> = {
@@ -23,7 +23,7 @@ export const PlaybackQueueContext: MessageFns<PlaybackQueueContext> = {
     message: PlaybackQueueContext,
     writer: BinaryWriter = new BinaryWriter()
   ): BinaryWriter {
-    if (message.revision !== undefined && message.revision !== "") {
+    if (message.revision !== undefined) {
       writer.uint32(10).string(message.revision);
     }
     if (message._unknownFields !== undefined) {
@@ -79,13 +79,13 @@ export const PlaybackQueueContext: MessageFns<PlaybackQueueContext> = {
     return {
       revision: isSet(object.revision)
         ? globalThis.String(object.revision)
-        : "",
+        : undefined,
     };
   },
 
   toJSON(message: PlaybackQueueContext): unknown {
     const obj: any = {};
-    if (message.revision !== undefined && message.revision !== "") {
+    if (message.revision !== undefined) {
       obj.revision = message.revision;
     }
     return obj;
@@ -100,7 +100,7 @@ export const PlaybackQueueContext: MessageFns<PlaybackQueueContext> = {
     object: I
   ): PlaybackQueueContext {
     const message = createBasePlaybackQueueContext();
-    message.revision = object.revision ?? "";
+    message.revision = object.revision ?? undefined;
     return message;
   },
 };

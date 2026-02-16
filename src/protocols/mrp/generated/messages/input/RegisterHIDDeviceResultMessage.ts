@@ -16,7 +16,11 @@ export interface RegisterHIDDeviceResultMessage {
 }
 
 function createBaseRegisterHIDDeviceResultMessage(): RegisterHIDDeviceResultMessage {
-  return { errorCode: 0, deviceIdentifier: 0, _unknownFields: {} };
+  return {
+    errorCode: undefined,
+    deviceIdentifier: undefined,
+    _unknownFields: {},
+  };
 }
 
 export const RegisterHIDDeviceResultMessage: MessageFns<RegisterHIDDeviceResultMessage> =
@@ -25,13 +29,10 @@ export const RegisterHIDDeviceResultMessage: MessageFns<RegisterHIDDeviceResultM
       message: RegisterHIDDeviceResultMessage,
       writer: BinaryWriter = new BinaryWriter()
     ): BinaryWriter {
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         writer.uint32(8).int32(message.errorCode);
       }
-      if (
-        message.deviceIdentifier !== undefined &&
-        message.deviceIdentifier !== 0
-      ) {
+      if (message.deviceIdentifier !== undefined) {
         writer.uint32(16).int32(message.deviceIdentifier);
       }
       if (message._unknownFields !== undefined) {
@@ -95,22 +96,19 @@ export const RegisterHIDDeviceResultMessage: MessageFns<RegisterHIDDeviceResultM
       return {
         errorCode: isSet(object.errorCode)
           ? globalThis.Number(object.errorCode)
-          : 0,
+          : undefined,
         deviceIdentifier: isSet(object.deviceIdentifier)
           ? globalThis.Number(object.deviceIdentifier)
-          : 0,
+          : undefined,
       };
     },
 
     toJSON(message: RegisterHIDDeviceResultMessage): unknown {
       const obj: any = {};
-      if (message.errorCode !== undefined && message.errorCode !== 0) {
+      if (message.errorCode !== undefined) {
         obj.errorCode = Math.round(message.errorCode);
       }
-      if (
-        message.deviceIdentifier !== undefined &&
-        message.deviceIdentifier !== 0
-      ) {
+      if (message.deviceIdentifier !== undefined) {
         obj.deviceIdentifier = Math.round(message.deviceIdentifier);
       }
       return obj;
@@ -125,8 +123,8 @@ export const RegisterHIDDeviceResultMessage: MessageFns<RegisterHIDDeviceResultM
       I extends Exact<DeepPartial<RegisterHIDDeviceResultMessage>, I>,
     >(object: I): RegisterHIDDeviceResultMessage {
       const message = createBaseRegisterHIDDeviceResultMessage();
-      message.errorCode = object.errorCode ?? 0;
-      message.deviceIdentifier = object.deviceIdentifier ?? 0;
+      message.errorCode = object.errorCode ?? undefined;
+      message.deviceIdentifier = object.deviceIdentifier ?? undefined;
       return message;
     },
   };
