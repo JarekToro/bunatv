@@ -257,15 +257,16 @@ export type AppleServiceInstance =
 // ============================================================================
 
 /**
- * Apple TV device with all associated services
+ * Common fields shared by all Apple device types.
+ * Used as the base for concrete device interfaces and StoredDevice.
  */
-export interface AppleTVDevice {
+export interface BaseAppleDevice {
   /** Display name (e.g., "Apple TV 4K", "Living Room") */
   name: string;
+  /** Unique device identifier (Device ID from AirPlay TXT record) */
+  identifier: string;
   /** Main address (first IPv4 or IPv6) */
   address: string;
-  /** identifier (Device ID from AirPlay TXT record) */
-  identifier: string;
   /** Hostname (e.g., "Apple-TV-4K.local") */
   hostname: string;
   /** IPv4 addresses */
@@ -274,47 +275,37 @@ export interface AppleTVDevice {
   ipv6: string[];
   /** Device model (e.g., "J305AP", "B520AP") */
   model: string;
-  /** Associated services */
+  /** Last seen timestamp (epoch ms) */
+  lastSeen: number;
+}
+
+/**
+ * Apple TV device with all associated services
+ */
+export interface AppleTVDevice extends BaseAppleDevice {
   services: {
     airPlay?: AirPlayService;
     raop?: RAOPService;
     companionLink?: CompanionLinkService;
     deviceInfo?: DeviceInfoService;
   };
-  /** Last seen timestamp */
-  lastSeen: number;
 }
 
 /**
  * HomePod device
  */
-export interface HomePodDevice {
-  name: string;
-  identifier: string;
-  address: string;
-  hostname: string;
-  ipv4: string[];
-  ipv6: string[];
-  model: string;
+export interface HomePodDevice extends BaseAppleDevice {
   services: {
     airPlay?: AirPlayService;
     raop?: RAOPService;
     companionLink?: CompanionLinkService;
   };
-  lastSeen: number;
 }
 
 /**
  * Mac device
  */
-export interface MacDevice {
-  name: string;
-  identifier: string;
-  address: string;
-  hostname: string;
-  ipv4: string[];
-  ipv6: string[];
-  model: string;
+export interface MacDevice extends BaseAppleDevice {
   osxVersion?: string;
   services: {
     airPlay?: AirPlayService;
@@ -322,7 +313,6 @@ export interface MacDevice {
     companionLink?: CompanionLinkService;
     deviceInfo?: DeviceInfoService;
   };
-  lastSeen: number;
 }
 
 /**

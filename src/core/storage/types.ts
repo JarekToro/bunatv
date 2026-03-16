@@ -10,16 +10,15 @@ import type {
   CredentialStore,
 } from "@/protocols/types/BaseProtocol.ts";
 import type { ClientDeviceInfo } from "@/core/client-identity.ts";
-import type { AppleDevice } from "@/core/discovery/discovery-types.ts";
+import type { BaseAppleDevice } from "@/core/discovery/discovery-types.ts";
 
 /**
- * Extended device information with storage metadata
+ * Extended device information with storage metadata.
+ * Extends BaseAppleDevice (not AppleDevice union) for identity fields.
  */
-export interface StoredDevice extends AppleDevice {
-  /** When this device was first discovered */
-  firstSeen: string;
-  /** When this device was last seen/updated */
-  lastSeen: string;
+export interface StoredDevice extends BaseAppleDevice {
+  /** When this device was first discovered (epoch ms) */
+  firstSeen: number;
   /** User-friendly alias for the device */
   alias?: string;
   /** Additional metadata */

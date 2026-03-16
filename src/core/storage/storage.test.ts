@@ -31,15 +31,13 @@ describe("JsonStorage", () => {
     const testDevice: StoredDevice = {
       name: "Test Apple TV",
       identifier: "test-device-123",
-      deviceId: "ABC123",
       address: "192.168.1.100",
-      port: 7000,
-      protocols: ["companion", "airplay"],
+      hostname: "test-apple-tv.local",
+      ipv4: ["192.168.1.100"],
+      ipv6: [],
       model: "Apple TV 4K",
-      osVersion: "17.0",
-      manufacturer: "Apple",
-      firstSeen: new Date().toISOString(),
-      lastSeen: new Date().toISOString(),
+      firstSeen: Date.now(),
+      lastSeen: Date.now(),
     };
 
     it("should save and retrieve a device", async () => {
@@ -49,7 +47,7 @@ describe("JsonStorage", () => {
       expect(retrieved).toBeDefined();
       expect(retrieved?.name).toBe(testDevice.name);
       expect(retrieved?.identifier).toBe(testDevice.identifier);
-      expect(retrieved?.protocols).toEqual(testDevice.protocols);
+      expect(retrieved?.model).toBe(testDevice.model);
     });
 
     it("should update existing device", async () => {
@@ -394,12 +392,13 @@ describe("JsonStorage", () => {
       const device: StoredDevice = {
         name: "Persistent TV",
         identifier: "persist-123",
-        deviceId: "XYZ789",
         address: "192.168.1.200",
-        port: 7000,
-        protocols: ["mrp"],
-        firstSeen: new Date().toISOString(),
-        lastSeen: new Date().toISOString(),
+        hostname: "persistent-tv.local",
+        ipv4: ["192.168.1.200"],
+        ipv6: [],
+        model: "Apple TV 4K",
+        firstSeen: Date.now(),
+        lastSeen: Date.now(),
       };
 
       await storage.saveDevice(device);
@@ -428,12 +427,13 @@ describe("JsonStorage", () => {
       const device: StoredDevice = {
         name: "Export TV",
         identifier: "export-123",
-        deviceId: "EXP123",
         address: "192.168.1.150",
-        port: 7000,
-        protocols: ["companion"],
-        firstSeen: new Date().toISOString(),
-        lastSeen: new Date().toISOString(),
+        hostname: "export-tv.local",
+        ipv4: ["192.168.1.150"],
+        ipv6: [],
+        model: "Apple TV 4K",
+        firstSeen: Date.now(),
+        lastSeen: Date.now(),
       };
 
       await storage.saveDevice(device);

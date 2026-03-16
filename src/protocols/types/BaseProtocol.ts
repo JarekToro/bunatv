@@ -3,7 +3,6 @@
 // ============================================================================
 
 // Minimal protocol interface
-import type { ConnectionOptions } from "@/cli/core/protocol-manager.ts";
 import { EventEmitter } from "eventemitter3";
 
 /**
