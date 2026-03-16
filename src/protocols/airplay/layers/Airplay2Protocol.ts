@@ -41,11 +41,6 @@ export interface Airplay2SessionEvents extends ProtocolEvents {
   "event-received": (data: Buffer) => void;
 }
 
-export interface Airplay2SessionOptions {
-  /** Callback for PIN entry during pairing */
-  onPinRequired?: () => Promise<string>;
-}
-
 export interface Airplay2SessionInfo {
   eventPort: number;
   dataPort: number;
@@ -59,9 +54,15 @@ export interface Airplay2SessionInfo {
 const DEFAULT_AIRPLAY_PORT = 7000;
 const KEEP_ALIVE_INTERVAL_MS = 2000;
 
-export class Airplay2Session
+export interface AirPlay2ConnectionOptions {
+  authOptions?: {
+    onPinRequired?: () => Promise<string>;
+  };
+}
+
+export class Airplay2Protocol
   extends EmitterEx<Airplay2SessionEvents>
-  implements Protocol<Airplay2SessionEvents>
+  implements Protocol<Airplay2SessionEvents, AirPlay2ConnectionOptions>
 {
   // State management
   private readonly stateMachine = new ProtocolStateMachine();
@@ -98,9 +99,9 @@ export class Airplay2Session
   static async create(
     device: AppleDevice,
     storage: Storage
-  ): Promise<Airplay2Session> {
+  ): Promise<Airplay2Protocol> {
     const clientDeviceInfo = await storage.getClientDeviceInfo();
-    return new Airplay2Session(device, storage, clientDeviceInfo);
+    return new Airplay2Protocol(device, storage, clientDeviceInfo);
   }
 
   private constructor(
@@ -177,7 +178,7 @@ export class Airplay2Session
   /**
    * Connect to the AirPlay device and establish a remote control session
    */
-  async connect(options?: Airplay2SessionOptions): Promise<void> {
+  async connect(options?: AirPlay2ConnectionOptions): Promise<void> {
     try {
       await this.recoveryManager.runWithRecovery(() => this._connect(options), {
         maxAttempts: 3,
@@ -282,7 +283,7 @@ export class Airplay2Session
   // Private Implementation
   // ============================================================================
 
-  private async _connect(options?: Airplay2SessionOptions): Promise<void> {
+  private async _connect(options?: AirPlay2ConnectionOptions): Promise<void> {
     this.stateMachine.assertState(ProtocolState.Idle, "connect");
 
     // Step 1: Connect transport
@@ -307,7 +308,7 @@ export class Airplay2Session
     let credentials = await this.credentialStore.load(this.device.identifier);
 
     const authResult = await this.authClient.authenticate(credentials, {
-      onPinRequired: options?.onPinRequired,
+      onPinRequired: options?.authOptions?.onPinRequired,
     });
 
     if (authResult.credentials && !credentials) {
