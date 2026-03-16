@@ -73,10 +73,10 @@ export interface ProtocolEvents {
   error: (error: Error, context?: string) => void;
 }
 
-export interface Protocol<T extends ProtocolEvents> extends EventEmitter<T> {
+export interface Protocol<T extends ProtocolEvents, C> extends EventEmitter<T> {
   readonly state: ProtocolState;
   readonly isReady: boolean;
 
-  connect(options?: ConnectionOptions): Promise<void>;
+  connect(options?: C): Promise<void>;
   disconnect(reason?: string): Promise<void>;
 }
