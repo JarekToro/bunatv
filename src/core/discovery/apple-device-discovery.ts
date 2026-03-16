@@ -1,4 +1,7 @@
-import { MDNSServiceRegistry } from "./mdns-service-registry";
+import {
+  MDNSServiceRegistry,
+  type ServiceInstance,
+} from "./mdns-service-registry";
 import { MDNSNetworkDiscovery } from "./mdns-network-discovery";
 import { isIP } from "net";
 import {
@@ -22,7 +25,10 @@ import {
   isCompanionLinkMetadata,
   isDeviceInfoMetadata,
   isAirPlayMetadata,
+  type AppleServiceType,
+  type AppleServiceTypeMap,
 } from "./discovery-types";
+import { parseFeatures } from "@/core/utils/airplay-utils.ts";
 
 // ============================================================================
 // Apple TV Discovery Service
@@ -140,6 +146,7 @@ export class AppleTVDiscoveryService {
     // Check if device exists and is not expired
     let device = this._findDevice(name);
     if (!device || this._isDeviceExpired(device)) {
+      this.registry.pruneExpired();
       // If we have a stale device with an IP, use it for unicast refresh
       const refreshTarget = device?.ipv4?.[0] || name;
       await this._refreshDevice(refreshTarget);
@@ -158,6 +165,7 @@ export class AppleTVDiscoveryService {
     // Check if device exists and is not expired
     let device = this._findDeviceByHostname(hostname);
     if (!device || this._isDeviceExpired(device)) {
+      this.registry.pruneExpired();
       // If we have a stale device with an IP, use it for unicast refresh
       const refreshTarget = device?.ipv4?.[0] || hostname;
       await this._refreshDevice(refreshTarget);
@@ -176,6 +184,7 @@ export class AppleTVDiscoveryService {
     // Check if device exists and is not expired
     let device = this._getDeviceByIPAddress(ipAddress);
     if (!device || this._isDeviceExpired(device)) {
+      this.registry.pruneExpired();
       // If we have a stale device with an IP, use it for unicast refresh
       await this._refreshDevice(ipAddress);
       device = this._getDeviceByIPAddress(ipAddress);
@@ -190,85 +199,42 @@ export class AppleTVDiscoveryService {
   /**
    * Get all AirPlay services with typed metadata
    */
-  getAirPlayServices(): AirPlayService[] {
-    const instances = this.registry.getServiceInstances(
-      APPLE_SERVICE_TYPES.AIRPLAY
-    );
+  getServices<T extends AppleServiceType>(type: T): AppleServiceTypeMap[T][] {
+    const instances = this.registry.getServiceInstances(type);
     return instances.map((instance) => {
-      if (!isAirPlayMetadata(instance.txt)) {
-        console.warn(`Invalid AirPlay metadata for ${instance.instanceName}`);
-      }
-      const txt = instance.txt as unknown as AirPlayMetadata;
-      return {
-        ...instance,
-        serviceType: APPLE_SERVICE_TYPES.AIRPLAY,
-        txt,
-      };
-    }) as AirPlayService[];
-  }
-
-  /**
-   * Get all RAOP services with typed metadata
-   */
-  getRAOPServices(): RAOPService[] {
-    const instances = this.registry.getServiceInstances(
-      APPLE_SERVICE_TYPES.RAOP
-    );
-    return instances.map((instance) => {
-      if (!isRAOPMetadata(instance.txt)) {
-        console.warn(`Invalid RAOP metadata for ${instance.instanceName}`);
-      }
-      const txt = instance.txt as unknown as RAOPMetadata;
-      return {
-        ...instance,
-        serviceType: APPLE_SERVICE_TYPES.RAOP,
-        txt,
-      };
+      return this.resolveAppleService(instance, type);
     });
   }
 
-  /**
-   * Get all Companion Link services with typed metadata
-   */
-  getCompanionLinkServices(): CompanionLinkService[] {
-    const instances = this.registry.getServiceInstances(
-      APPLE_SERVICE_TYPES.COMPANION_LINK
-    );
-    return instances.map((instance) => {
-      if (!isCompanionLinkMetadata(instance.txt)) {
-        console.warn(
-          `Invalid Companion Link metadata for ${instance.instanceName}`
-        );
-      }
-      const txt = instance.txt as unknown as CompanionLinkMetadata;
-      return {
-        ...instance,
-        serviceType: APPLE_SERVICE_TYPES.COMPANION_LINK,
-        txt,
-      };
-    });
-  }
+  private resolveAppleService<T extends AppleServiceType>(
+    instance: ServiceInstance,
+    type: T
+  ): AppleServiceTypeMap[typeof type] {
+    const validators = {
+      [APPLE_SERVICE_TYPES.AIRPLAY]: isAirPlayMetadata,
+      [APPLE_SERVICE_TYPES.RAOP]: isRAOPMetadata,
+      [APPLE_SERVICE_TYPES.COMPANION_LINK]: isCompanionLinkMetadata,
+      [APPLE_SERVICE_TYPES.DEVICE_INFO]: isDeviceInfoMetadata,
+      [APPLE_SERVICE_TYPES.HOMEKIT]: () => false,
+    };
+    const validator = validators[type];
 
-  /**
-   * Get all Device Info services with typed metadata
-   */
-  getDeviceInfoServices(): DeviceInfoService[] {
-    const instances = this.registry.getServiceInstances(
-      APPLE_SERVICE_TYPES.DEVICE_INFO
-    );
-    return instances.map((instance) => {
-      if (!isDeviceInfoMetadata(instance.txt)) {
-        console.warn(
-          `Invalid Device Info metadata for ${instance.instanceName}`
-        );
-      }
-      const txt = instance.txt as unknown as DeviceInfoMetadata;
-      return {
-        ...instance,
-        serviceType: APPLE_SERVICE_TYPES.DEVICE_INFO,
-        txt,
-      };
-    }) as DeviceInfoService[];
+    if (!validator(instance.txt)) {
+      console.warn(`Invalid metadata for ${instance.instanceName}`);
+    }
+    const txt = instance.txt;
+    const additionalInfo: Record<string, any> = {};
+    if (isAirPlayMetadata(txt)) {
+      additionalInfo["features"] = parseFeatures(txt.features);
+    } else if (isRAOPMetadata(txt)) {
+      additionalInfo["features"] = parseFeatures(txt.ft);
+    }
+    return {
+      ...instance,
+      serviceType: APPLE_SERVICE_TYPES.AIRPLAY,
+      ...additionalInfo,
+      txt,
+    } as AppleServiceTypeMap[T];
   }
 
   // ========================================================================
@@ -285,7 +251,7 @@ export class AppleTVDiscoveryService {
     const now = Date.now();
 
     // Get all AirPlay services as they're the primary indicator of Apple devices
-    const airplayServices = this.getAirPlayServices();
+    const airplayServices = this.getServices(APPLE_SERVICE_TYPES.AIRPLAY);
 
     for (const airplay of airplayServices) {
       const model = airplay.txt.model;
@@ -311,15 +277,12 @@ export class AppleTVDiscoveryService {
       const addresses = this.registry.getAllAddresses(hostname);
 
       // Find related services for this device
-      const raop = this._findRelatedService<RAOPService>(
-        name,
-        APPLE_SERVICE_TYPES.RAOP
-      );
-      const companionLink = this._findRelatedService<CompanionLinkService>(
+      const raop = this._findRelatedService(name, APPLE_SERVICE_TYPES.RAOP);
+      const companionLink = this._findRelatedService(
         name,
         APPLE_SERVICE_TYPES.COMPANION_LINK
       );
-      const deviceInfo = this._findRelatedService<DeviceInfoService>(
+      const deviceInfo = this._findRelatedService(
         name,
         APPLE_SERVICE_TYPES.DEVICE_INFO
       );
@@ -388,9 +351,12 @@ export class AppleTVDiscoveryService {
   /**
    * Find a related service for a device by matching the device name
    */
-  private _findRelatedService<
-    T extends { instanceName: string; serviceType: string },
-  >(deviceName: string, serviceType: string): T | undefined {
+  // getServices<T extends AppleServiceType>(type: T): AppleServiceTypeMap[T][] {
+
+  private _findRelatedService<T extends AppleServiceType>(
+    deviceName: string,
+    serviceType: T
+  ): AppleServiceTypeMap[T] | undefined {
     const instances = this.registry.getServiceInstances(serviceType);
 
     for (const instance of instances) {
@@ -398,7 +364,7 @@ export class AppleTVDiscoveryService {
       // e.g., "Apple TV 4K._raop._tcp.local" contains "Apple TV 4K"
       // or "3E7EE578B0CB@Apple TV 4K._raop._tcp.local" contains "Apple TV 4K"
       if (instance.instanceName.includes(deviceName)) {
-        return instance as unknown as T;
+        return this.resolveAppleService(instance, serviceType);
       }
     }
 
@@ -497,98 +463,11 @@ export class AppleTVDiscoveryService {
     this.refreshing = true;
 
     try {
-      this.network.start();
-
-      const types = [
-        APPLE_SERVICE_TYPES.AIRPLAY,
-        APPLE_SERVICE_TYPES.RAOP,
-        APPLE_SERVICE_TYPES.COMPANION_LINK,
-        APPLE_SERVICE_TYPES.DEVICE_INFO,
-      ];
-
-      // Check if identifier looks like an IP
-      if (isIP(identifier)) {
-        // Unicast query to specific IP
-        this.network.query(types, 5353, identifier);
-      } else {
-        // Fallback to global multicast refresh
-        this.network.query(types);
-      }
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      this.network.stop();
+      await this.discover();
     } finally {
       this.refreshing = false;
     }
   }
-
-  /**
-   * Get AirPlay connection info for a device
-   */
-  async getAirPlayConnection(deviceName: string): Promise<{
-    host: string;
-    port: number;
-    deviceId: string;
-    model: string;
-    features: string;
-  } | null> {
-    const device = await this.getAppleDevice(deviceName);
-    if (!device?.services.airPlay) return null;
-
-    const ip = device.ipv4[0] || device.ipv6[0];
-    if (!ip) return null;
-
-    const airplay = device.services.airPlay;
-    return {
-      host: ip,
-      port: airplay.port,
-      deviceId: airplay.txt.deviceid,
-      model: airplay.txt.model,
-      features: airplay.txt.features,
-    };
-  }
-
-  /**
-   * Check if a device supports specific AirPlay features
-   */
-  async supportsAirPlayFeatures(
-    deviceName: string,
-    features: string[]
-  ): Promise<boolean> {
-    const device = await this.getAppleDevice(deviceName);
-    if (!device?.services.airPlay) return false;
-
-    const deviceFeatures = device.services.airPlay.txt.features;
-    // Note: This is a simplified check. Real feature checking would parse the hex flags
-    return features.every((feature) => deviceFeatures.includes(feature));
-  }
-
-  /**
-   * Get device model and OS version info
-   */
-  async getDeviceInfo(deviceName: string): Promise<{
-    model: string;
-    friendlyModel: string;
-    osVersion?: string;
-    firmwareVersion?: string;
-  } | null> {
-    const device = await this.getAppleDevice(deviceName);
-    if (!device) return null;
-
-    const airplay = device.services.airPlay;
-    if (!("deviceInfo" in device.services)) {
-      return null;
-    }
-    const deviceInfo = device.services.deviceInfo;
-
-    return {
-      model: airplay?.txt.model || deviceInfo?.txt.model || "Unknown",
-      friendlyModel: device.model,
-      osVersion: airplay?.txt.osvers,
-      firmwareVersion: airplay?.txt.srcvers,
-    };
-  }
-
   /**
    * Export Apple devices summary
    */
@@ -626,66 +505,4 @@ export class AppleTVDiscoveryService {
       timestamp: Date.now(),
     };
   }
-}
-
-// ============================================================================
-// Helper Functions
-// ============================================================================
-
-/**
- * Create queries for all Apple services
- */
-export function createAppleServiceQueries() {
-  return [
-    { name: APPLE_SERVICE_TYPES.AIRPLAY, type: "PTR" as const },
-    { name: APPLE_SERVICE_TYPES.RAOP, type: "PTR" as const },
-    { name: APPLE_SERVICE_TYPES.COMPANION_LINK, type: "PTR" as const },
-    { name: APPLE_SERVICE_TYPES.DEVICE_INFO, type: "PTR" as const },
-  ];
-}
-
-/**
- * Parse AirPlay features flags
- * Features are in hex format like "0x4A7FDFD5,0x3C175FDE"
- */
-export function parseAirPlayFeatures(featuresHex: string): {
-  supportsVideo: boolean;
-  supportsAudio: boolean;
-  supportsScreen: boolean;
-  supportsPhoto: boolean;
-  requiresPassword: boolean;
-} {
-  // This is a simplified parser - real implementation would need
-  // to parse the hex values and check specific bit flags
-  const features = featuresHex.toLowerCase();
-
-  return {
-    supportsVideo: true, // Most devices support video
-    supportsAudio: true, // Most devices support audio
-    supportsScreen: features.includes("0x4a7"), // Screen mirroring
-    supportsPhoto: true, // Most devices support photos
-    requiresPassword: features.includes("password"), // Simplified check
-  };
-}
-
-/**
- * Extract device name from service instance name
- * e.g., "Apple TV 4K._airplay._tcp.local" -> "Apple TV 4K"
- * e.g., "3E7EE578B0CB@Apple TV 4K._raop._tcp.local" -> "Apple TV 4K"
- */
-export function extractDeviceName(instanceName: string): string {
-  // Remove service suffix
-  let name = instanceName
-    .replace(/\._airplay\._tcp\.local$/, "")
-    .replace(/\._raop\._tcp\.local$/, "")
-    .replace(/\._companion-link\._tcp\.local$/, "")
-    .replace(/\._device-info\._tcp\.local$/, "");
-
-  // Remove RAOP prefix (MAC@Name format)
-  const atIndex = name.indexOf("@");
-  if (atIndex !== -1) {
-    name = name.substring(atIndex + 1);
-  }
-
-  return name;
 }

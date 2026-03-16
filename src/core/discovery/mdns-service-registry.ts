@@ -86,12 +86,9 @@ export class MDNSServiceRegistry {
     const host = this.hosts.get(hostname);
     if (!host) return [];
 
-    const now = Date.now();
     const records = type === "A" ? host.ipv4 : host.ipv6;
 
-    return records
-      .filter((record) => record.expiresAt > now)
-      .map((record) => record.address);
+    return records.map((record) => record.address);
   }
 
   /**
@@ -128,10 +125,7 @@ export class MDNSServiceRegistry {
    * Get all instances of a service type
    */
   getServiceInstances(serviceType: string): ServiceInstance[] {
-    const instances = this.services.get(serviceType) || [];
-    const now = Date.now();
-
-    return instances.filter((instance) => instance.expiresAt > now);
+    return this.services.get(serviceType) || [];
   }
 
   /**
@@ -145,11 +139,10 @@ export class MDNSServiceRegistry {
    * Get all service instances across all types
    */
   getAllServiceInstances(): ServiceInstance[] {
-    const now = Date.now();
     const allInstances: ServiceInstance[] = [];
 
     for (const instances of this.services.values()) {
-      allInstances.push(...instances.filter((i) => i.expiresAt > now));
+      allInstances.push(...instances);
     }
 
     return allInstances;
@@ -575,7 +568,6 @@ export class MDNSServiceRegistry {
       if (!existsSync(this.cachePath)) {
         return; // Cache doesn't exist yet
       }
-
       const data = await readFile(this.cachePath, "utf-8");
       const parsed = JSON.parse(data);
 

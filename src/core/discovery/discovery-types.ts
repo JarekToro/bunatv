@@ -1,115 +1,3 @@
-/**
- * Discovery-related type definitions
- */
-import type { ProtocolType } from "@/core/storage/types.ts";
-import type {
-  Answer,
-  BufferAnswer,
-  CaaAnswer,
-  DnskeyAnswer,
-  DSAnswer,
-  HInfoAnswer,
-  MxAnswer,
-  NaptrAnswer,
-  Nsec3Answer,
-  NsecAnswer,
-  OptAnswer,
-  Question,
-  RpAnswer,
-  RrsigAnswer,
-  SoaAnswer,
-  SrvAnswer,
-  SshfpAnswer,
-  StringAnswer,
-  TlsaAnswer,
-  TxtAnswer,
-} from "dns-packet";
-import type { ResponsePacket } from "multicast-dns";
-
-export interface DiscoveredDevice {
-  name: string;
-  identifier: string;
-  macAddress?: string;
-  deviceId: string;
-  address: string;
-  port: number;
-  protocols: ProtocolType[];
-  model?: string;
-  osVersion?: string;
-  manufacturer?: string;
-  services?: {
-    airPlay?: { port: number };
-    raop?: { port: number };
-    companionLink?: { port: number };
-    mrp?: { port: number };
-  };
-  records?: any[];
-}
-
-export interface RawDevice {
-  records: any[];
-  id: string;
-  name: string;
-  hostname: string | null;
-  macAddress: string | null;
-  addresses: string[];
-  services: {
-    airplay: RawServiceInfo;
-    raop: RawServiceInfo;
-    "companion-link": RawServiceInfo;
-    mrp: RawServiceInfo;
-  };
-  model: string | null;
-  manufacturer: string | null;
-  osVersion?: string;
-  availableServices?: string[];
-}
-
-export interface RawServiceInfo {
-  txt: Record<string, string>;
-  srv: any | null;
-  ptr: any | null;
-}
-
-export type ParsedTxtAnswer = {
-  [key: string]: string | number | boolean;
-} & Omit<TxtAnswer, "data">;
-
-export type MDNSResponseAnswers =
-  | StringAnswer
-  | BufferAnswer
-  | CaaAnswer
-  | DnskeyAnswer
-  | DSAnswer
-  | HInfoAnswer
-  | MxAnswer
-  | NaptrAnswer
-  | Nsec3Answer
-  | NsecAnswer
-  | OptAnswer
-  | RpAnswer
-  | RrsigAnswer
-  | SoaAnswer
-  | SrvAnswer
-  | SshfpAnswer
-  | TlsaAnswer
-  | ParsedTxtAnswer;
-
-export type MDNSResponsePacket = {
-  /**
-   * Whether the packet is a query or a response. This field may be
-   * omitted if it is clear from the context of usage what type of packet
-   * it is.
-   */
-  type?: "response";
-  id?: number | undefined;
-  flags?: number | undefined;
-  questions: Question[];
-  answers: MDNSResponseAnswers[];
-  additionals: MDNSResponseAnswers[];
-  authorities: MDNSResponseAnswers[];
-};
-
 // ============================================================================
 // Apple Service Types
 // ============================================================================
@@ -127,6 +15,14 @@ export const APPLE_SERVICE_TYPES = {
 
 export type AppleServiceType =
   (typeof APPLE_SERVICE_TYPES)[keyof typeof APPLE_SERVICE_TYPES];
+
+export type AppleServiceTypeMap = {
+  [APPLE_SERVICE_TYPES.AIRPLAY]: AirPlayService;
+  [APPLE_SERVICE_TYPES.RAOP]: RAOPService;
+  [APPLE_SERVICE_TYPES.COMPANION_LINK]: CompanionLinkService;
+  [APPLE_SERVICE_TYPES.DEVICE_INFO]: DeviceInfoService;
+  [APPLE_SERVICE_TYPES.HOMEKIT]: undefined;
+};
 
 // ============================================================================
 // Device Info (_device-info._tcp.local)
@@ -209,7 +105,13 @@ export interface AirPlayMetadata extends Record<string, string | undefined> {
 }
 
 export const isAirPlayMetadata = (arg: any): arg is AirPlayMetadata => {
-  return true;
+  return (
+    "features" in arg &&
+    "flags" in arg &&
+    "deviceid" in arg &&
+    "model" in arg &&
+    "osvers" in arg
+  );
 };
 
 // ============================================================================
@@ -250,7 +152,7 @@ export interface RAOPMetadata extends Record<string, string | undefined> {
 }
 
 export const isRAOPMetadata = (arg: any): arg is RAOPMetadata => {
-  return true;
+  return "ft" in arg;
 };
 
 // ============================================================================
@@ -314,6 +216,7 @@ export interface BaseServiceInstance<
  */
 export interface AirPlayService extends BaseServiceInstance<AirPlayMetadata> {
   serviceType: typeof APPLE_SERVICE_TYPES.AIRPLAY;
+  features: bigint;
 }
 
 /**
@@ -321,6 +224,7 @@ export interface AirPlayService extends BaseServiceInstance<AirPlayMetadata> {
  */
 export interface RAOPService extends BaseServiceInstance<RAOPMetadata> {
   serviceType: typeof APPLE_SERVICE_TYPES.RAOP;
+  features: bigint;
 }
 
 /**

@@ -9,13 +9,13 @@ import type {
   BaseCredentials,
   CredentialStore,
 } from "@/protocols/types/BaseProtocol.ts";
-import type { DiscoveredDevice } from "../discovery/discovery-types";
 import type { ClientDeviceInfo } from "@/core/client-identity.ts";
+import type { AppleDevice } from "@/core/discovery/discovery-types.ts";
 
 /**
  * Extended device information with storage metadata
  */
-export interface StoredDevice extends DiscoveredDevice {
+export interface StoredDevice extends AppleDevice {
   /** When this device was first discovered */
   firstSeen: string;
   /** When this device was last seen/updated */
