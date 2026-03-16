@@ -80,6 +80,10 @@ export class MRPProtocol
   private readonly defaultTimeout = 5000; // 5 seconds
   private readonly capture = new MRPCapture();
 
+  // Stored handler references for targeted cleanup (we don't own the data channel)
+  private protobufHandler?: (data: Buffer) => void;
+  private connectionStatusHandler?: () => Promise<void>;
+
   static async create(
     airPlaySession: Airplay2Protocol,
     storage: Storage
@@ -129,21 +133,58 @@ export class MRPProtocol
   }
 
   async disconnect(reason?: string) {
+    if (
+      this.state === ProtocolState.Idle ||
+      this.state === ProtocolState.Disconnecting
+    ) {
+      return;
+    }
     this.stateMachine.setState(ProtocolState.Disconnecting);
-    console.warn("Must close airplay session to disconnect MRP protocol");
+
+    // Clean up outstanding requests
+    await this.tearDown();
+
+    // Remove our specific listeners from the data channel (which we don't own)
+    if (this.protobufHandler) {
+      this.airPlaySession.dataChannel?.off("protobuf", this.protobufHandler);
+      this.protobufHandler = undefined;
+    }
+    if (this.connectionStatusHandler) {
+      this.airPlaySession.dataChannel?.off(
+        "connectionStatus",
+        this.connectionStatusHandler
+      );
+      this.connectionStatusHandler = undefined;
+    }
+
+    // Remove all listeners on owned emitters
+    this.stateMachine.removeAllListeners();
+    this.removeAllListeners();
+
+    this.stateMachine.setState(ProtocolState.Idle);
   }
 
   private async _setup() {
-    this.airPlaySession.dataChannel?.on("protobuf", (data: Buffer) => {
+    this.protobufHandler = (data: Buffer) => {
       this.messageReceived(data);
-    });
+    };
+    this.airPlaySession.dataChannel?.on("protobuf", this.protobufHandler);
+
+    this.connectionStatusHandler = async () => {
+      await this.tearDown();
+      this.stateMachine.setState(ProtocolState.Failed);
+      this.emit(
+        "error",
+        new Error("AirPlay data channel disconnected"),
+        "data-channel"
+      );
+    };
     this.airPlaySession.dataChannel?.once(
       "connectionStatus",
-      async (state) => {
-        await this.tearDown();
-      },
+      this.connectionStatusHandler,
       { filter: (state) => state === "disconnected" }
     );
+
     await this.sendDeviceInfoMessage();
     await this.sendConnectionStateMessage();
     await this.sendClientUpdatesConfigMessage();

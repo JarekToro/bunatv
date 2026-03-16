@@ -20,6 +20,7 @@ import {
   BunTCPTransport,
   type TransportOptions,
 } from "@/protocols/shared/layers/BunTCPTransport.ts";
+import { ConnectionState } from "@/protocols/types/ConnectionState.ts";
 import { ChaCha20EncryptionLayer } from "@/protocols/shared/layers/ChaCha20EncryptionLayer.ts";
 import type { Storage } from "@/core/storage/types.ts";
 import { createLogger } from "@/logging/logging.ts";
@@ -161,15 +162,36 @@ export class CompanionProtocol
       }
     });
 
-    // this.transport.on('disconnected', (reason) => {
-    //   if (this.state !== ProtocolState.Disconnecting && this.state !== ProtocolState.Idle) {
-    //     this.handleUnexpectedDisconnection(reason)
-    //   }
-    // })
+    this.transport.on("connectionStatus", (state) => {
+      if (
+        state === ConnectionState.DISCONNECTED &&
+        this.state !== ProtocolState.Disconnecting &&
+        this.state !== ProtocolState.Idle
+      ) {
+        this.handleUnexpectedDisconnect();
+      }
+    });
 
     this.transport.on("error", (error) => {
       this.emit("error", error, "transport");
     });
+  }
+
+  private async handleUnexpectedDisconnect(): Promise<void> {
+    logger.warn("Transport disconnected unexpectedly");
+    try {
+      await this.session.stop();
+    } catch {
+      // Best-effort session cleanup
+    }
+    this.encryption.disable();
+    this.cleanupListeners();
+    this.stateMachine.setState(ProtocolState.Failed);
+    this.emit(
+      "error",
+      new Error("Transport disconnected unexpectedly"),
+      "transport"
+    );
   }
 
   get state() {
@@ -251,11 +273,24 @@ export class CompanionProtocol
         { currentState: this.state },
         "Already idle or disconnecting, ignoring disconnect request"
       );
+      return;
     }
     this.stateMachine.setState(ProtocolState.Disconnecting);
     await this.session.stop();
     this.encryption.disable();
     await this.transport.disconnect(reason);
+
+    // Clean up all event listeners
+    this.cleanupListeners();
+    this.stateMachine.setState(ProtocolState.Idle);
+  }
+
+  private cleanupListeners(): void {
+    this.session.removeAllListeners();
+    this.hapFramedChannel.removeAllListeners();
+    this.stateMachine.removeAllListeners();
+    this.transport.removeAllListeners();
+    this.removeAllListeners();
   }
 
   async sendCommandRaw<T extends CompanionCommand>(

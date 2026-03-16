@@ -135,8 +135,21 @@ export class CompanionApi {
     return resp;
   }
 
+  /**
+   * Clean up sub-controller event listeners without disconnecting the protocol.
+   * Called by DeviceApi before protocol disconnect to prevent listener leaks.
+   */
+  cleanup(): void {
+    logger.debug("Cleaning up CompanionApi sub-controllers");
+    this.power.removeAllListeners();
+    this.input.removeAllListeners();
+    this.textInput.removeAllListeners();
+    this.audio.removeAllListeners();
+  }
+
   async disconnect(): Promise<void> {
     logger.info("Disposing CompanionApi resources");
+    this.cleanup();
     await this.protocol.disconnect("CompanionApi disposed");
   }
 }

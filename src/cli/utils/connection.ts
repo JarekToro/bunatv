@@ -34,7 +34,7 @@ export async function connectToDevice(
     companion: {
       transportOptions: {
         timeout: options?.timeout ?? 10000,
-        autoReconnect: options?.autoRecover ?? true,
+        autoReconnect: options?.autoRecover ?? false,
       },
     },
   });

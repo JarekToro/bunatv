@@ -23,6 +23,7 @@ import {
 import type { Storage } from "@/core/storage/types.ts";
 import { createLogger } from "@/logging/logging.ts";
 import { DataStreamChannel } from "@/protocols/airplay/layers/DataStreamChannel.ts";
+import { ConnectionState } from "@/protocols/types/ConnectionState.ts";
 import { HkdfUtils } from "@/core/crypto/hkdf.ts";
 import { NonceFormat } from "@/core/encoding/buffer-utils.ts";
 import { EventStreamChannel } from "@/protocols/airplay/layers/EventStreamChannel.ts";
@@ -148,6 +149,28 @@ export class Airplay2Protocol
     this.transport.on("error", (error) => {
       this.emit("error", error, "transport");
     });
+
+    this.transport.on("connectionStatus", (state) => {
+      if (
+        state === ConnectionState.DISCONNECTED &&
+        this.state !== ProtocolState.Disconnecting &&
+        this.state !== ProtocolState.Idle
+      ) {
+        this.handleUnexpectedDisconnect();
+      }
+    });
+  }
+
+  private handleUnexpectedDisconnect(): void {
+    logger.warn("Transport disconnected unexpectedly");
+    this.stopKeepAlive();
+    this.cleanupListeners();
+    this.stateMachine.setState(ProtocolState.Failed);
+    this.emit(
+      "error",
+      new Error("Transport disconnected unexpectedly"),
+      "transport"
+    );
   }
 
   private setupDataChannel(): void {
@@ -240,8 +263,20 @@ export class Airplay2Protocol
     await this.transport.disconnect(reason);
 
     this.sessionInfo = undefined;
-    this.stateMachine.setState(ProtocolState.Idle);
+
+    // Emit disconnected before cleaning up listeners so consumers receive it
     this.emit("disconnected", reason);
+
+    // Clean up all event listeners
+    this.cleanupListeners();
+    this.stateMachine.setState(ProtocolState.Idle);
+  }
+
+  private cleanupListeners(): void {
+    this.stateMachine.removeAllListeners();
+    this.transport.removeAllListeners();
+    this.channel.removeAllListeners();
+    this.removeAllListeners();
   }
 
   /**

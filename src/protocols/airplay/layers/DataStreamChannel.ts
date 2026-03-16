@@ -154,6 +154,8 @@ export class DataStreamChannel extends EmitterEx<DataStreamChannelEvents> {
   }
   async disconnect(): Promise<void> {
     await this.teardown();
+    this.transport.removeAllListeners();
+    this.removeAllListeners();
     return this.transport.disconnect();
   }
 

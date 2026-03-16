@@ -71,8 +71,11 @@ export class MRPApi {
 
   /**
    * Disconnect and clean up all resources.
+   * Removes event listeners from sub-controllers that are EventEmitters.
    */
   disconnect(): void {
     logger.debug("MRPApi disconnecting");
+    this.remote.power.removeAllListeners();
+    this.remote.audio.removeAllListeners();
   }
 }
