@@ -164,13 +164,15 @@ export class Airplay2Protocol
   private handleUnexpectedDisconnect(): void {
     logger.warn("Transport disconnected unexpectedly");
     this.stopKeepAlive();
-    this.cleanupListeners();
+
+    // Emit state change and error BEFORE cleanup so DeviceApi listeners receive them
     this.stateMachine.setState(ProtocolState.Failed);
     this.emit(
       "error",
       new Error("Transport disconnected unexpectedly"),
       "transport"
     );
+    this.cleanupListeners();
   }
 
   private setupDataChannel(): void {

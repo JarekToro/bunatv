@@ -507,7 +507,7 @@ export class MRPPlayerState {
   private clients = new Map<string, ClientState>();
   private _activeClientBundleId: string | undefined;
 
-  private boundPlayers = new WeakSet<PlayerState>();
+  private boundPlayers = new Set<PlayerState>();
 
   additionalDataRequested = new Set<string>();
 
@@ -618,6 +618,20 @@ export class MRPPlayerState {
       this.resolveClient(msg.playerPath);
     });
   }
+  /**
+   * Clean up all per-player listeners added by bindActiveItemChange.
+   * Called from MRPApi.disconnect() to prevent listener leaks.
+   */
+  cleanup(): void {
+    for (const player of this.boundPlayers) {
+      player.removeAllListeners();
+    }
+    this.boundPlayers.clear();
+    this.additionalDataRequested.clear();
+    this.clients.clear();
+    this._activeClientBundleId = undefined;
+  }
+
   get activeClient(): ClientState | undefined {
     if (this._activeClientBundleId == null) return undefined;
     return this.clients.get(this._activeClientBundleId);

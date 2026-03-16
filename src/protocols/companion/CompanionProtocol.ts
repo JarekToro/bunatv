@@ -185,13 +185,15 @@ export class CompanionProtocol
       // Best-effort session cleanup
     }
     this.encryption.disable();
-    this.cleanupListeners();
+
+    // Emit state change and error BEFORE cleanup so DeviceApi listeners receive them
     this.stateMachine.setState(ProtocolState.Failed);
     this.emit(
       "error",
       new Error("Transport disconnected unexpectedly"),
       "transport"
     );
+    this.cleanupListeners();
   }
 
   get state() {
