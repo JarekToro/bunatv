@@ -8,13 +8,30 @@ import {
   createCompanionCommand,
   createSimpleCompanionCommand,
 } from "@/protocols/companion/messages/CompanionOpackMessage.ts";
+import { DeviceState } from "@/protocols/types/DeviceState.ts";
 
-export enum AttentionState {
+/** Wire-format attention state values from the Companion protocol */
+enum AttentionStateWire {
   Unknown = 0,
   Asleep = 1,
   Screensaver = 2,
   Awake = 3,
   Idle = 4,
+}
+
+function mapAttentionWireToDeviceState(wire: number): DeviceState {
+  switch (wire) {
+    case AttentionStateWire.Asleep:
+      return DeviceState.Asleep;
+    case AttentionStateWire.Screensaver:
+      return DeviceState.Screensaver;
+    case AttentionStateWire.Awake:
+      return DeviceState.Awake;
+    case AttentionStateWire.Idle:
+      return DeviceState.Idle;
+    default:
+      return DeviceState.Unknown;
+  }
 }
 
 export interface FetchAttentionStateRequest
@@ -24,7 +41,7 @@ export interface FetchAttentionStateRequest
 }
 
 export interface FetchAttentionStateResponseContent {
-  state: AttentionState;
+  state: number;
 }
 
 export interface FetchAttentionStateResponse
@@ -37,29 +54,14 @@ export interface FetchAttentionStateResponse
 export function createFetchAttentionStateCommand(): CompanionCommand<
   FetchAttentionStateRequest,
   FetchAttentionStateResponse,
-  AttentionState
+  DeviceState
 > {
   return createCompanionCommand({
     identifier: "FetchAttentionState",
     name: "FetchAttentionState",
     buildContent: () => ({}),
     parse: (response) => {
-      return response._c.state;
+      return mapAttentionWireToDeviceState(response._c.state);
     },
   });
 }
-
-// Simple factory function for empty command
-export function createSystemSleepCommand(): SimpleCompanionCommand<"_systemSleep"> {
-  return createSimpleCompanionCommand("_systemSleep", "SystemSleep");
-}
-
-// Simple factory function for empty command
-export function createSystemWakeCommand(): SimpleCompanionCommand<"_systemWake"> {
-  return createSimpleCompanionCommand("_systemWake", "SystemWake");
-}
-
-// Usage:
-// const fetchState = createFetchAttentionStateCommand()
-// const sleep = createSystemSleepCommand()
-// const wake = createSystemWakeCommand()

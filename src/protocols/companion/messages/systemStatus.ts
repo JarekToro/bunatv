@@ -3,6 +3,7 @@ import {
   createCompanionEvent,
   MessageType,
 } from "@/protocols/companion/messages/CompanionOpackMessage.ts";
+import { DeviceState } from "@/protocols/types/DeviceState.ts";
 
 export enum SystemState {
   Asleep = 0x01,
@@ -48,4 +49,19 @@ export function parseSystemStatusEvent(
     state: message._c.state,
     raw: message,
   };
+}
+
+export function mapSystemStateToDeviceState(state: SystemState): DeviceState {
+  switch (state) {
+    case SystemState.Asleep:
+      return DeviceState.Asleep;
+    case SystemState.Screensaver:
+      return DeviceState.Screensaver;
+    case SystemState.Awake:
+      return DeviceState.Awake;
+    case SystemState.Idle:
+      return DeviceState.Idle;
+    default:
+      return DeviceState.Unknown;
+  }
 }

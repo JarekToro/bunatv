@@ -14,7 +14,7 @@ import {
 } from "@/protocols/companion/layers/HAPAuthenticationService.ts";
 import { RecoveryManager } from "@/core/utils/RecoveryManager.ts";
 import { ProtocolStateMachine } from "@/core/utils/ProtocolStateMachine.ts";
-import type { DiscoveredDevice } from "@/core/discovery/discovery-types.ts";
+import type { AppleDevice } from "@/core/discovery/discovery-types.ts";
 import type { ClientDeviceInfo } from "@/core/client-identity.ts";
 import {
   BunTCPTransport,
@@ -49,12 +49,14 @@ interface CompanionProtocolEvents extends ProtocolEvents {
 }
 
 const logger = createLogger("bunatv:companion:protocol");
-
+export interface CompanionConnectionOptions {
+  authOptions?: { onPinRequired?: (deviceName?: string) => Promise<string> };
+  transportOptions?: TransportOptions;
+}
 export class CompanionProtocol
   extends EventEmitter<CompanionProtocolEvents>
-  implements Protocol<CompanionProtocolEvents>
+  implements Protocol<CompanionProtocolEvents, CompanionConnectionOptions>
 {
-  // Simple, focused state
   private stateMachine = new ProtocolStateMachine();
   private recoveryManager = new RecoveryManager();
   private readonly credentialStore: CredentialStore<HAPCredentials>;
@@ -70,7 +72,7 @@ export class CompanionProtocol
   private readonly connectionInfo: { address: string; port: number };
 
   static async create(
-    device: DiscoveredDevice,
+    device: AppleDevice,
     storage: Storage
   ): Promise<CompanionProtocol> {
     const clientDeviceInfo = await storage.getClientDeviceInfo();
@@ -78,7 +80,7 @@ export class CompanionProtocol
   }
 
   private constructor(
-    private readonly device: DiscoveredDevice,
+    private readonly device: AppleDevice,
     private readonly storage: Storage,
     private readonly clientDeviceInfo: ClientDeviceInfo
   ) {
@@ -86,7 +88,7 @@ export class CompanionProtocol
     if (!device.address) {
       throw new Error("Device must have a valid address");
     }
-    if (!device.protocols || !device.protocols.includes("companion")) {
+    if (!device.services.companionLink) {
       throw new Error("Device must support Companion protocol");
     }
     this.connectionInfo = {
@@ -100,7 +102,7 @@ export class CompanionProtocol
 
     this.authService = new HAPAuthenticationService(
       {
-        deviceId: device.deviceId,
+        deviceId: device.identifier,
         clientDeviceInfo: this.clientDeviceInfo,
       },
       this.hapFramedChannel
@@ -220,13 +222,10 @@ export class CompanionProtocol
     this.stateMachine.setState(ProtocolState.Ready);
   }
 
-  async connect(
-    authOptions?: { onPinRequired?: (deviceName?: string) => Promise<string> },
-    options?: TransportOptions
-  ): Promise<void> {
+  async connect(options?: CompanionConnectionOptions): Promise<void> {
     try {
       await this.recoveryManager.runWithRecovery(
-        () => this._connect(authOptions, options),
+        () => this._connect(options?.authOptions, options?.transportOptions),
         {
           maxAttempts: 3,
           delay: 300,

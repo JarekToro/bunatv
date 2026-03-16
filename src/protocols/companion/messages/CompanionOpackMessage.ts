@@ -9,12 +9,6 @@ export enum MessageType {
   Response = 3,
 }
 
-export enum InputAction {
-  Hold = 1,
-  Single = 2,
-  Double = 3,
-}
-
 /**
  * OPACK message structure for Companion protocol
  * Note: Does not extend BaseMessage due to different property names
