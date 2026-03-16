@@ -5,7 +5,7 @@ import { createOutput } from "@/cli/utils/output.ts";
 import { withErrorHandling } from "@/cli/utils/errors.ts";
 import type { GlobalOptions } from "@/cli/cli.ts";
 import { HidCommandType } from "@/protocols/companion/messages/hidCommand.ts";
-import { InputAction } from "@/protocols/companion/messages/CompanionOpackMessage.ts";
+import { InputAction } from "@/protocols/types/InputAction.ts";
 import { sleep } from "@/core/utils/timing.ts";
 import type { ControlOptions } from "@/cli/commands/control.ts";
 
@@ -44,16 +44,17 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
     await withErrorHandling(output, async () => {
       // Connect to device
       const storage = new JsonStorage();
-      const protocol = await connectToDevice(device, storage, {
+      const deviceApi = await connectToDevice(device, storage, {
         timeout: timeout * 1000,
         autoRecover: autoRecover,
       });
+      const companion = deviceApi.companion();
 
       try {
         switch (action.toLowerCase()) {
           case "get": {
             output.startSpinner("Getting volume...");
-            const volume = await protocol.getVolume();
+            const volume = await companion.audio.getVolume();
             output.succeedSpinner(`Volume: ${volume}`);
 
             if (outputFormat === "json") {
@@ -77,7 +78,7 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
             }
 
             output.startSpinner(`Setting volume to ${value}%...`);
-            await protocol.setVolume(value / 100);
+            await companion.audio.setVolume(value / 100);
             output.succeedSpinner(`Volume set to ${value}%`);
 
             if (outputFormat === "json") {
@@ -91,7 +92,7 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
           case "up": {
             const step = value;
             if (step == undefined) {
-              await protocol.pressButton(
+              await companion.input.pressButton(
                 HidCommandType.VolumeUp,
                 InputAction.Single
               );
@@ -99,9 +100,9 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
               break;
             }
             output.startSpinner("Increasing volume...");
-            const currentVolume = await protocol.getVolume();
+            const currentVolume = await companion.audio.getVolume();
             const newVolume = Math.min(100, currentVolume + step);
-            await protocol.setVolume(newVolume / 100);
+            await companion.audio.setVolume(newVolume / 100);
             output.succeedSpinner(`Volume: ${currentVolume}% → ${newVolume}%`);
             break;
           }
@@ -109,7 +110,7 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
           case "down": {
             const step = value;
             if (step == undefined) {
-              await protocol.pressButton(
+              await companion.input.pressButton(
                 HidCommandType.VolumeDown,
                 InputAction.Single
               );
@@ -117,9 +118,9 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
               break;
             }
             output.startSpinner("Decreasing volume...");
-            const currentVolume = await protocol.getVolume();
+            const currentVolume = await companion.audio.getVolume();
             const newVolume = Math.max(0, currentVolume - step);
-            await protocol.setVolume(newVolume / 100);
+            await companion.audio.setVolume(newVolume / 100);
             output.succeedSpinner(`Volume: ${currentVolume}% → ${newVolume}%`);
             break;
           }
@@ -130,7 +131,7 @@ export const volumeCommand = new Command<GlobalOptions & ControlOptions>()
             process.exit(1);
         }
       } finally {
-        await protocol.disconnect();
+        await deviceApi.disconnect();
         process.exit(0);
       }
     });

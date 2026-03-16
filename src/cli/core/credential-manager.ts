@@ -1,17 +1,21 @@
 import type { Storage } from "@/core/storage/types.ts";
+import type { ProtocolType as StorageProtocolType } from "@/core/storage/types.ts";
 import type { HAPCredentials } from "@/protocols/companion/layers/HAPAuthenticationService.ts";
 
 export class CredentialManager {
   constructor(private storage: Storage) {}
 
   /**
-   * Check if credentials exist for a device
+   * Check if credentials exist for a device and protocol
    */
-  async hasCredentials(identifier: string): Promise<boolean> {
+  async hasCredentials(
+    identifier: string,
+    protocol: StorageProtocolType = "companion"
+  ): Promise<boolean> {
     try {
       const store = this.storage.getCredentialStore<HAPCredentials>(
         identifier,
-        "companion"
+        protocol
       );
       const credentials = await store.load(identifier);
       return credentials !== undefined;

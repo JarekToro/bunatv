@@ -5,16 +5,35 @@ import { createOutput } from "@/cli/utils/output.ts";
 import { withErrorHandling } from "@/cli/utils/errors.ts";
 import type { GlobalOptions } from "@/cli/cli.ts";
 import type { DebugOptions } from "@/cli/commands/debug.ts";
-import type { CompanionState } from "@/protocols/companion/CompanionApi.ts";
-import { getSystemStateName } from "@/protocols/companion/messages/systemStatus.ts";
-import { HidCommandType } from "@/protocols/companion/messages/hidCommand.ts";
+
+import { type DeviceState } from "@/protocols/types/DeviceState.ts";
+
+interface DebugState {
+  volume: number;
+  systemState: DeviceState;
+  textInput: {
+    documentText: string;
+    cursorPosition: number;
+    selectionLength: number;
+    isSecure: boolean;
+    autoCorrection: boolean;
+  };
+  mediaControls: unknown[];
+  lastTouch: {
+    x: number;
+    y: number;
+    phase: number;
+    phaseName: string;
+    fingerId: number;
+    timestamp: number;
+  };
+}
 
 // ANSI escape codes for terminal control
 const CLEAR_SCREEN = "\x1b[2J";
 const MOVE_TO_TOP = "\x1b[H";
-const CLEAR_LINE = "\x1b[2K";
 
-function renderState(state: Partial<CompanionState>): string {
+function renderState(state: Partial<DebugState>): string {
   const lines: string[] = [];
 
   lines.push("═══════════════════════════════════════════════════");
@@ -29,7 +48,7 @@ function renderState(state: Partial<CompanionState>): string {
   // System State
   lines.push("🖥️  System State:");
   if (state.systemState) {
-    lines.push(`   ${getSystemStateName(state.systemState)}`);
+    lines.push(`   ${state.systemState}`);
   } else {
     lines.push("   (none)");
   }
@@ -114,19 +133,28 @@ export const interestCommand = new Command<GlobalOptions & DebugOptions>()
 
     await withErrorHandling(output, async () => {
       const storage = new JsonStorage();
-      const api = await connectToDevice(device, storage, {
+      const deviceApi = await connectToDevice(device, storage, {
         timeout: timeout * 1000,
         autoRecover: true,
       });
+      const companion = deviceApi.companion();
 
       // Initial render
       clearAndRender(`Connected to ${device}\nWaiting for state changes...`);
 
-      api.on("state-change", (state: Partial<CompanionState>) => {
+      const state: Partial<DebugState> = {};
+
+      companion.audio.on("volumeChanged", (volume: number) => {
+        state.volume = volume;
         clearAndRender(renderState(state));
       });
 
-      await api.toggleMute();
+      companion.power.on("stateChanged", (deviceState: DeviceState) => {
+        state.systemState = deviceState;
+        clearAndRender(renderState(state));
+      });
+
+      await companion.audio.toggleMute();
 
       // Handle graceful shutdown
       process.on("SIGINT", () => {

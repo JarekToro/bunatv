@@ -2,7 +2,7 @@ import type { CliOutput } from "@/cli/utils/output.ts";
 import {
   DeviceNotFoundError,
   NoDevicesFoundError,
-} from "@/cli/core/device-manager.ts";
+} from "@/cli/utils/device-lookup.ts";
 import { NotPairedError } from "@/cli/utils/connection.ts";
 
 /**

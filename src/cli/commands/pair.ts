@@ -3,8 +3,9 @@
  */
 
 import { Command } from "@cliffy/command";
-import { DeviceManager } from "@/cli/core/device-manager.ts";
-import { ProtocolManager } from "@/cli/core/protocol-manager.ts";
+import { Secret } from "@cliffy/prompt";
+import { findDevice } from "@/cli/utils/device-lookup.ts";
+import { DeviceApi, ProtocolType } from "@/core/DeviceApi.ts";
 import { CredentialManager } from "@/cli/core/credential-manager.ts";
 import { JsonStorage } from "@/core/storage/json-storage.ts";
 import { createOutput } from "../utils/output";
@@ -48,21 +49,23 @@ export const pairCommand = new Command<GlobalOptions>()
       }
 
       // Find device
-      const deviceManager = new DeviceManager();
-      const device = await deviceManager.findDevice(deviceArg);
+      const device = await findDevice(deviceArg);
 
       output.info(`   Found: ${device.name} (${device.address})`);
 
+      // Setup DeviceApi
+      const storage = new JsonStorage();
+      const deviceApi = new DeviceApi(device, storage);
+
       // Validate protocol support
-      if (!deviceManager.supportsProtocol(device, "companion")) {
+      if (!deviceApi.hasProtocol(ProtocolType.Companion)) {
         output.error("Device does not support Companion protocol");
         process.exit(1);
       }
 
       // Check existing pairing
-      const storage = new JsonStorage();
       const credManager = new CredentialManager(storage);
-      const alreadyPaired = await credManager.hasCredentials(device.identifier);
+      const alreadyPaired = await deviceApi.isPaired(ProtocolType.Companion);
 
       if (alreadyPaired && !force) {
         output.warn("Device is already paired");
@@ -75,32 +78,39 @@ export const pairCommand = new Command<GlobalOptions>()
         await credManager.deleteCredentials(device.identifier);
       }
 
-      // Create protocol
-      const protocolManager = new ProtocolManager();
-      const companionProtocol = await protocolManager.createProtocol(
-        device,
-        storage
-      );
-
       // Setup PIN prompt
-      const onPinRequired = protocolManager.setupPinPrompt();
+      const onPinRequired = async (): Promise<string> => {
+        return await Secret.prompt({
+          message: "Enter 4-digit PIN from Apple TV",
+          validate: (value: string) => {
+            if (!/^\d{4}$/.test(value)) {
+              return "PIN must be exactly 4 digits";
+            }
+            return true;
+          },
+        });
+      };
 
       // Start pairing
       output.info("Initiating pairing...");
       output.info("\n🔢 A 4-digit PIN will appear on your Apple TV screen");
 
       try {
-        await protocolManager.connect(companionProtocol, {
-          onPinRequired,
-          timeout: timeout * 1000,
-          autoRecover: false,
+        await deviceApi.connect({
+          companion: {
+            authOptions: { onPinRequired },
+            transportOptions: {
+              timeout: timeout * 1000,
+              autoReconnect: false,
+            },
+          },
         });
 
         output.info("Pairing successful!");
 
         // Verify credentials were saved
-        const credentialsSaved = await credManager.hasCredentials(
-          device.identifier
+        const credentialsSaved = await deviceApi.isPaired(
+          ProtocolType.Companion
         );
 
         if (save && credentialsSaved) {
@@ -111,7 +121,7 @@ export const pairCommand = new Command<GlobalOptions>()
         }
 
         // Disconnect
-        await protocolManager.disconnect(companionProtocol, "Pairing complete");
+        await deviceApi.disconnect("Pairing complete");
 
         // Output result
         const result = {
@@ -130,7 +140,7 @@ export const pairCommand = new Command<GlobalOptions>()
           output.result({
             "✅ Status": "Successfully paired",
             Device: device.name,
-            Address: `${device.address}:${device.port}`,
+            Address: `${device.address}:${device.services.companionLink?.port ?? device.services.airPlay?.port ?? 0}`,
             Credentials: save ? "Saved" : "Not saved",
           });
         }

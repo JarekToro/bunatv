@@ -3,10 +3,7 @@
  */
 
 import { Command } from "@cliffy/command";
-import {
-  DeviceManager,
-  DeviceNotFoundError,
-} from "@/cli/core/device-manager.ts";
+import { findDevice, DeviceNotFoundError } from "@/cli/utils/device-lookup.ts";
 import { createOutput } from "../utils/output";
 import { withErrorHandling } from "../utils/errors";
 import type { GlobalOptions } from "@/cli/cli.ts";
@@ -22,14 +19,12 @@ export const infoCommand = new Command<GlobalOptions>()
     });
 
     await withErrorHandling(output, async () => {
-      const deviceManager = new DeviceManager();
-
       output.status("🔍", `Searching for device: ${identifier}...`);
 
       const startTime = performance.now();
       let device;
       try {
-        device = await deviceManager.findDevice(identifier);
+        device = await findDevice(identifier);
       } catch (error) {
         if (error instanceof DeviceNotFoundError) {
           output.failSpinner(`Device not found: ${identifier}`);
@@ -43,6 +38,16 @@ export const infoCommand = new Command<GlobalOptions>()
       if (device) {
         output.succeedSpinner(`Found device in ${duration}ms`);
 
+        const protocols: string[] = [];
+        if (device.services.airPlay) protocols.push("airplay");
+        if (device.services.companionLink) protocols.push("companion");
+        if (device.services.raop) protocols.push("raop");
+
+        const port =
+          device.services.airPlay?.port ??
+          device.services.companionLink?.port ??
+          0;
+
         if (options.output === "json") {
           output.result({
             device,
@@ -53,9 +58,11 @@ export const infoCommand = new Command<GlobalOptions>()
           output.info(`   Name: ${device.name}`);
           output.info(`   Model: ${device.model || "Unknown"}`);
           output.info(`   ID: ${device.identifier}`);
-          output.info(`   Address: ${device.address}:${device.port}`);
-          output.info(`   OS Version: ${device.osVersion || "Unknown"}`);
-          output.info(`   Protocols: ${device.protocols.join(", ")}`);
+          output.info(`   Address: ${device.address}:${port}`);
+          output.info(
+            `   OS Version: ${device.services.airPlay?.txt.osvers || "Unknown"}`
+          );
+          output.info(`   Protocols: ${protocols.join(", ")}`);
 
           output.info(`\n⏱️  Lookup Speed: ${duration}ms`);
           if (parseFloat(duration) < 50) {

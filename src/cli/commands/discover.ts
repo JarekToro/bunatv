@@ -3,12 +3,27 @@
  */
 
 import { Command } from "@cliffy/command";
-import { DeviceManager } from "@/cli/core/device-manager.ts";
+import { discoverDevices } from "@/cli/utils/device-lookup.ts";
 import { CredentialManager } from "@/cli/core/credential-manager.ts";
 import { JsonStorage } from "@/core/storage/json-storage.ts";
 import { createOutput } from "../utils/output";
 import { withErrorHandling } from "../utils/errors";
 import type { GlobalOptions } from "@/cli/cli.ts";
+import type { AppleDevice } from "@/core/discovery/discovery-types.ts";
+
+function getDevicePort(device: AppleDevice): number {
+  return (
+    device.services.airPlay?.port ?? device.services.companionLink?.port ?? 0
+  );
+}
+
+function getDeviceProtocols(device: AppleDevice): string[] {
+  const protocols: string[] = [];
+  if (device.services.airPlay) protocols.push("airplay");
+  if (device.services.companionLink) protocols.push("companion");
+  if (device.services.raop) protocols.push("raop");
+  return protocols;
+}
 
 export const discoverCommand = new Command<GlobalOptions>()
   .description("Discover Apple TV devices on the network")
@@ -38,12 +53,11 @@ export const discoverCommand = new Command<GlobalOptions>()
       // Start discovery
       output.startSpinner("Scanning network for Apple TV devices");
 
-      const deviceManager = new DeviceManager();
-      let devices = await deviceManager.discover(timeout);
+      let devices = await discoverDevices(timeout);
 
       // Filter to Companion-capable devices if requested
       if (companionOnly) {
-        devices = deviceManager.filterByProtocol(devices, "companion");
+        devices = devices.filter((d) => d.services.companionLink !== undefined);
       }
 
       // Apply name/ID filter if provided
@@ -64,7 +78,10 @@ export const discoverCommand = new Command<GlobalOptions>()
       const devicesWithStatus = await Promise.all(
         devices.map(async (device) => ({
           ...device,
-          paired: await credManager.hasCredentials(device.identifier),
+          paired: await credManager.hasCredentials(
+            device.identifier,
+            "companion"
+          ),
         }))
       );
 
@@ -91,8 +108,8 @@ export const discoverCommand = new Command<GlobalOptions>()
         if (options.output === "table") {
           const tableData = devicesWithStatus.map((d) => ({
             Name: d.name,
-            Address: `${d.address}:${d.port}`,
-            Protocols: d.protocols.join(", "),
+            Address: `${d.address}:${getDevicePort(d)}`,
+            Protocols: getDeviceProtocols(d).join(", "),
             Model: d.model || "Unknown",
             Paired: d.paired ? "✓" : "✗",
           }));
@@ -102,18 +119,20 @@ export const discoverCommand = new Command<GlobalOptions>()
             const info: Record<string, string> = {
               "📺 Name": device.name,
               Identifier: device.identifier,
-              Address: `${device.address}:${device.port}`,
-              Protocols: device.protocols.join(", "),
+              Address: `${device.address}:${getDevicePort(device)}`,
+              Protocols: getDeviceProtocols(device).join(", "),
               Paired: device.paired ? "✓ Yes" : "✗ No",
             };
 
             if (options.verbose) {
               info["Model"] = device.model || "Unknown";
-              info["OS Version"] = device.osVersion || "Unknown";
-              if (device.macAddress) {
-                info["MAC"] = device.macAddress;
+              info["OS Version"] =
+                device.services.airPlay?.txt.osvers || "Unknown";
+              const deviceId = device.services.airPlay?.txt.deviceid;
+              if (deviceId) {
+                info["Device ID"] = deviceId;
               }
-              if (device.services?.companionLink) {
+              if (device.services.companionLink) {
                 info["Companion Port"] =
                   device.services.companionLink.port.toString();
               }

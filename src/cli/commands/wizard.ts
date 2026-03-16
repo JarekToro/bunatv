@@ -5,16 +5,15 @@
  */
 
 import { Command } from "@cliffy/command";
-import { Select, Confirm, Input } from "@cliffy/prompt";
+import { Select, Confirm, Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
-import type { DiscoveredDevice } from "../../core/discovery/discovery-types";
 import { createOutput } from "../utils/output";
 import type { GlobalOptions } from "@/cli/cli.ts";
-import { DeviceManager } from "@/cli/core/device-manager.ts";
-import { ProtocolManager } from "@/cli/core/protocol-manager.ts";
+import { findDevice, discoverDevices } from "@/cli/utils/device-lookup.ts";
+import { DeviceApi, ProtocolType } from "@/core/DeviceApi.ts";
 import { CredentialManager } from "@/cli/core/credential-manager.ts";
 import { JsonStorage } from "@/core/storage/json-storage.ts";
-import { AttentionState } from "@/protocols/companion/messages/systemPower.ts";
+import { DeviceState } from "@/protocols/types/DeviceState.ts";
 import { withErrorHandling } from "@/cli/utils/errors.ts";
 
 export const wizardCommand = new Command<GlobalOptions>()
@@ -55,12 +54,10 @@ export const wizardCommand = new Command<GlobalOptions>()
     if (shouldDiscover) {
       output.startSpinner("Scanning for devices...");
 
-      // Real device discovery
-      const deviceManager = new DeviceManager();
-      let devices = await deviceManager.discover(5);
+      let devices = await discoverDevices(5);
 
       // Filter to Companion-capable devices
-      devices = deviceManager.filterByProtocol(devices, "companion");
+      devices = devices.filter((d) => d.services.companionLink !== undefined);
 
       if (devices.length === 0) {
         output.failSpinner("No devices found");
@@ -88,7 +85,10 @@ export const wizardCommand = new Command<GlobalOptions>()
         const devicesWithStatus = await Promise.all(
           devices.map(async (device) => ({
             ...device,
-            paired: await credManager.hasCredentials(device.identifier),
+            paired: await credManager.hasCredentials(
+              device.identifier,
+              "companion"
+            ),
           }))
         );
 
@@ -153,20 +153,19 @@ export const wizardCommand = new Command<GlobalOptions>()
     // Step 3: Pairing
     output.section("Step 3: Device Pairing");
 
-    // Find the device
     const storage = new JsonStorage();
-    const deviceManager = new DeviceManager();
     const credManager = new CredentialManager(storage);
 
     await withErrorHandling(output, async () => {
-      const device = await deviceManager.findDevice(selectedDevice);
+      const device = await findDevice(selectedDevice);
+      const deviceApi = new DeviceApi(device, storage);
 
       output.status("📱", `Preparing to pair with: ${device.name}`);
       output.info(`   Address: ${device.address}:${device.port}`);
       output.info(`   Protocol: ${protocol}`);
 
       // Check if already paired
-      const alreadyPaired = await credManager.hasCredentials(device.identifier);
+      const alreadyPaired = await deviceApi.isPaired(ProtocolType.Companion);
 
       if (alreadyPaired) {
         const shouldRepair = await Confirm.prompt({
@@ -176,7 +175,6 @@ export const wizardCommand = new Command<GlobalOptions>()
 
         if (!shouldRepair) {
           output.info("Skipping pairing (already paired).");
-          // Skip to connection test
           return;
         } else {
           output.info("Removing existing credentials...");
@@ -197,30 +195,34 @@ export const wizardCommand = new Command<GlobalOptions>()
       output.info("\n🔢 A 4-digit PIN will appear on your Apple TV screen.");
       output.info("   Please enter it below when it appears.\n");
 
-      // Create protocol
-      const protocolManager = new ProtocolManager();
-      const companionProtocol = await protocolManager.createProtocol(
-        device,
-        storage
-      );
-
       // Setup PIN prompt
-      const onPinRequired = protocolManager.setupPinPrompt();
+      const onPinRequired = async (): Promise<string> => {
+        return await Secret.prompt({
+          message: "Enter 4-digit PIN from Apple TV",
+          validate: (value: string) => {
+            if (!/^\d{4}$/.test(value)) {
+              return "PIN must be exactly 4 digits";
+            }
+            return true;
+          },
+        });
+      };
 
       // Start pairing
       output.startSpinner("Pairing in progress...");
 
       try {
-        await protocolManager.connect(companionProtocol, {
-          onPinRequired,
-          timeout: 30000,
-          autoRecover: false,
+        await deviceApi.connect({
+          companion: {
+            authOptions: { onPinRequired },
+            transportOptions: { timeout: 30000, autoReconnect: false },
+          },
         });
 
         output.succeedSpinner("Pairing successful!");
 
         // Disconnect after pairing
-        await protocolManager.disconnect(companionProtocol, "Pairing complete");
+        await deviceApi.disconnect("Pairing complete");
       } catch (error) {
         output.failSpinner("Pairing failed");
         throw error;
@@ -231,10 +233,9 @@ export const wizardCommand = new Command<GlobalOptions>()
     output.section("Step 4: Verify Configuration");
 
     await withErrorHandling(output, async () => {
-      const device = await deviceManager.findDevice(selectedDevice);
-      const credentialsSaved = await credManager.hasCredentials(
-        device.identifier
-      );
+      const device = await findDevice(selectedDevice);
+      const deviceApi = new DeviceApi(device, storage);
+      const credentialsSaved = await deviceApi.isPaired(ProtocolType.Companion);
 
       if (credentialsSaved) {
         output.success("✅ Credentials saved successfully!");
@@ -257,32 +258,30 @@ export const wizardCommand = new Command<GlobalOptions>()
 
     if (shouldTest) {
       await withErrorHandling(output, async () => {
-        const device = await deviceManager.findDevice(selectedDevice);
-        const protocolManager = new ProtocolManager();
-        const companionProtocol = await protocolManager.createProtocol(
-          device,
-          storage
-        );
+        const device = await findDevice(selectedDevice);
+        const deviceApi = new DeviceApi(device, storage);
 
         output.startSpinner("Testing connection...");
 
         try {
-          await protocolManager.connect(companionProtocol, {
-            timeout: 10000,
-            autoRecover: false,
+          await deviceApi.connect({
+            companion: {
+              transportOptions: { timeout: 10000, autoReconnect: false },
+            },
           });
 
           // Get device status to test
-          const attentionState = await companionProtocol.getAttentionState();
-          const volume = await companionProtocol.getVolume();
+          const api = deviceApi.companion();
+          const attentionState = await api.power.getDeviceState();
+          const volume = await api.audio.getVolume();
 
           output.succeedSpinner("Connection test successful!");
-          output.info(`   Attention State: ${AttentionState[attentionState]}`);
+          output.info(`   Attention State: ${DeviceState[attentionState]}`);
           output.info(`   Volume: ${volume}%`);
           output.info("   Your Apple TV is ready to use.");
 
           // Disconnect
-          await protocolManager.disconnect(companionProtocol, "Test complete");
+          await deviceApi.disconnect("Test complete");
         } catch (error) {
           output.failSpinner("Connection test failed");
           output.error((error as Error).message);

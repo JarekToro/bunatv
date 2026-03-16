@@ -5,7 +5,7 @@ import { createOutput } from "@/cli/utils/output.ts";
 import { withErrorHandling } from "@/cli/utils/errors.ts";
 import type { GlobalOptions } from "@/cli/cli.ts";
 import { HidCommandType } from "@/protocols/companion/messages/hidCommand.ts";
-import { InputAction } from "@/protocols/companion/messages/CompanionOpackMessage.ts";
+import { InputAction } from "@/protocols/types/InputAction.ts";
 import type { ControlOptions } from "@/cli/commands/control.ts";
 
 // Button name to HID command mapping
@@ -138,16 +138,17 @@ export const remoteCommand = new Command<GlobalOptions & ControlOptions>()
     await withErrorHandling(output, async () => {
       // Connect to device
       const storage = new JsonStorage();
-      const protocol = await connectToDevice(device, storage, {
+      const deviceApi = await connectToDevice(device, storage, {
         timeout: timeout * 1000,
         autoRecover: autoRecover,
       });
+      const companion = deviceApi.companion();
 
       try {
         output.startSpinner(`Sending ${buttonName} ${actionDesc}...`);
 
         // Send button press with action
-        await protocol.pressButton(hidCommand, action);
+        await companion.input.pressButton(hidCommand, action);
 
         output.succeedSpinner(`${buttonName} ${actionDesc} sent`);
 
@@ -162,7 +163,7 @@ export const remoteCommand = new Command<GlobalOptions & ControlOptions>()
           output.success(`✅ ${buttonName} ${actionDesc} sent successfully`);
         }
       } finally {
-        await protocol.disconnect();
+        await deviceApi.disconnect();
       }
     });
   });
