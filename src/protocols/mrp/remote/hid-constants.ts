@@ -81,22 +81,6 @@ export type ConsumerUsageType =
   (typeof ConsumerUsage)[keyof typeof ConsumerUsage];
 
 // ============================================================================
-// Input Action Types
-// ============================================================================
-
-/**
- * Input action types for button presses
- */
-export enum InputAction {
-  /** Single tap/press and release */
-  SingleTap = "single_tap",
-  /** Double tap (two quick presses) */
-  DoubleTap = "double_tap",
-  /** Long press/hold */
-  Hold = "hold",
-}
-
-// ============================================================================
 // Button Event Types
 // ============================================================================
 

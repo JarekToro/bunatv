@@ -24,16 +24,11 @@ import {
   UsagePage,
   GenericDesktopUsage,
   ConsumerUsage,
-  InputAction,
   type ButtonEvent,
 } from "./hid-constants";
 import { sleep } from "@/core/utils/timing";
-
+import { InputAction } from "@/protocols/types/InputAction.ts";
 const logger = createLogger("bunatv:mrp:remote");
-
-// Re-export for convenience
-export { InputAction, UsagePage, GenericDesktopUsage, ConsumerUsage };
-export type { ButtonEvent };
 
 // ============================================================================
 // MRPRemote Class
@@ -144,11 +139,11 @@ export class MRPRemote {
   }
 
   /**
-   * Perform a button action with support for SingleTap, DoubleTap, and Hold.
+   * Perform a button action with support for Single, Double, and Hold.
    *
    * @param usagePage - USB HID usage page
    * @param usage - USB HID usage code
-   * @param action - Input action type (SingleTap, DoubleTap, Hold)
+   * @param action - Input action type (Single, Double, Hold)
    */
   async performAction(
     usagePage: number,
@@ -156,10 +151,10 @@ export class MRPRemote {
     action: InputAction
   ): Promise<void> {
     switch (action) {
-      case InputAction.SingleTap:
+      case InputAction.Single:
         await this.pressButton(usagePage, usage);
         break;
-      case InputAction.DoubleTap:
+      case InputAction.Double:
         await this.pressButton(usagePage, usage);
         await sleep(this.defaultButtonPressDuration);
         await this.pressButton(usagePage, usage);
@@ -175,9 +170,7 @@ export class MRPRemote {
   // ── Navigation Buttons ─────────────────────────────────────────────────────
 
   /** Press the Select/OK button */
-  async pressSelect(
-    action: InputAction = InputAction.SingleTap
-  ): Promise<void> {
+  async pressSelect(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Select,
@@ -186,7 +179,7 @@ export class MRPRemote {
   }
 
   /** Press the Menu/Back button */
-  async pressMenu(action: InputAction = InputAction.SingleTap): Promise<void> {
+  async pressMenu(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Menu,
@@ -195,7 +188,7 @@ export class MRPRemote {
   }
 
   /** Press the Home button */
-  async pressHome(action: InputAction = InputAction.SingleTap): Promise<void> {
+  async pressHome(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(UsagePage.Consumer, ConsumerUsage.Home, action);
   }
 
@@ -213,12 +206,12 @@ export class MRPRemote {
     await this.performAction(
       UsagePage.Consumer,
       ConsumerUsage.TopMenu,
-      InputAction.SingleTap
+      InputAction.Single
     );
   }
 
   /** Press the Up navigation button */
-  async pressUp(action: InputAction = InputAction.SingleTap): Promise<void> {
+  async pressUp(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Up,
@@ -227,7 +220,7 @@ export class MRPRemote {
   }
 
   /** Press the Down navigation button */
-  async pressDown(action: InputAction = InputAction.SingleTap): Promise<void> {
+  async pressDown(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Down,
@@ -236,7 +229,7 @@ export class MRPRemote {
   }
 
   /** Press the Left navigation button */
-  async pressLeft(action: InputAction = InputAction.SingleTap): Promise<void> {
+  async pressLeft(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Left,
@@ -245,7 +238,7 @@ export class MRPRemote {
   }
 
   /** Press the Right navigation button */
-  async pressRight(action: InputAction = InputAction.SingleTap): Promise<void> {
+  async pressRight(action: InputAction = InputAction.Single): Promise<void> {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Right,
@@ -258,7 +251,7 @@ export class MRPRemote {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Suspend,
-      InputAction.SingleTap
+      InputAction.Single
     );
   }
 
@@ -267,7 +260,7 @@ export class MRPRemote {
     await this.performAction(
       UsagePage.GenericDesktop,
       GenericDesktopUsage.Wakeup,
-      InputAction.SingleTap
+      InputAction.Single
     );
   }
 

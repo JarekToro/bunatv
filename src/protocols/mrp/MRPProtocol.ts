@@ -1,5 +1,5 @@
 import { EventEmitter } from "eventemitter3";
-import type { Airplay2Session } from "@/protocols/airplay/layers/Airplay2Session.ts";
+import type { Airplay2Protocol } from "@/protocols/airplay/layers/Airplay2Protocol.ts";
 import {
   buildProtocolMessageForPayload,
   ProtocolMessageExtensionDisplayNameMap,
@@ -23,6 +23,15 @@ import {
 } from "@/protocols/mrp/generated/messages/device/SetConnectionStateMessage.ts";
 import { ClientUpdatesConfigMessage } from "@/protocols/mrp/generated/messages/client/ClientUpdatesConfigMessage.ts";
 import { GetKeyboardSessionMessage } from "@/protocols/mrp/generated/messages/input/GetKeyboardSessionMessage.ts";
+import type { AppleDevice } from "@/core/discovery/discovery-types.ts";
+import type { Storage } from "@/core/storage/types.ts";
+import {
+  type Protocol,
+  type ProtocolEvents,
+  ProtocolState,
+} from "@/protocols/types/BaseProtocol.ts";
+import type { CompanionConnectionOptions } from "@/protocols/companion/CompanionProtocol.ts";
+import { ProtocolStateMachine } from "@/core/utils/ProtocolStateMachine.ts";
 
 const logger = createLogger("bunatv:mrp:protocol");
 
@@ -36,7 +45,7 @@ export type MRPProtocolEvents = {
   [K in keyof typeof ProtocolMessageExtensionDisplayNameMap as `message:${(typeof ProtocolMessageExtensionDisplayNameMap)[K]}`]: (
     message: ProtocolMessageResult & { extensionType: K }
   ) => void;
-};
+} & ProtocolEvents;
 
 export class MRPError extends Error {
   constructor(
@@ -58,21 +67,52 @@ interface OutstandingRequest {
 // ============================================================================
 // MRPProtocol Implementation
 // ============================================================================
+export interface MRPConnectionOptions {
+  timeout?: number;
+}
 
-export class MRPProtocol extends EventEmitter<MRPProtocolEvents> {
+export class MRPProtocol
+  extends EventEmitter<MRPProtocolEvents>
+  implements Protocol<MRPProtocolEvents, MRPConnectionOptions>
+{
+  private stateMachine = new ProtocolStateMachine();
   private readonly outstanding = new Map<string, OutstandingRequest>();
   private readonly defaultTimeout = 5000; // 5 seconds
   private readonly capture = new MRPCapture();
 
+  static async create(
+    airPlaySession: Airplay2Protocol,
+    storage: Storage
+  ): Promise<MRPProtocol> {
+    const clientDeviceInfo = await storage.getClientDeviceInfo();
+    return new MRPProtocol(airPlaySession, clientDeviceInfo);
+  }
+
   constructor(
-    private airPlaySession: Airplay2Session,
+    private airPlaySession: Airplay2Protocol,
     private clientDeviceInfo: ClientDeviceInfo
   ) {
     super();
+    this.stateMachine.on("state-changed", (newState, oldState) => {
+      this.emit("state-changed", newState, oldState);
+      if (newState === ProtocolState.Ready) {
+        this.emit("ready");
+      }
+    });
   }
 
-  async start() {
+  get state() {
+    return this.stateMachine.state;
+  }
+  get isReady() {
+    return this.stateMachine.isReady;
+  }
+
+  async connect(options?: MRPConnectionOptions) {
+    const timeout = options?.timeout ?? this.defaultTimeout;
+    this.stateMachine.setState(ProtocolState.Connecting);
     if (!this.airPlaySession.dataChannel) {
+      this.stateMachine.setState(ProtocolState.Failed);
       throw new Error("AirPlay data channel is not available");
     }
     if (this.airPlaySession.dataChannel.isConnected) {
@@ -82,9 +122,15 @@ export class MRPProtocol extends EventEmitter<MRPProtocolEvents> {
 
     await this.airPlaySession.dataChannel.waitFor("connectionStatus", {
       filter: (state) => state === "connected",
-      timeout: 5000,
+      timeout,
     });
     await this._setup();
+    this.stateMachine.setState(ProtocolState.Ready);
+  }
+
+  async disconnect(reason?: string) {
+    this.stateMachine.setState(ProtocolState.Disconnecting);
+    console.warn("Must close airplay session to disconnect MRP protocol");
   }
 
   private async _setup() {

@@ -11,8 +11,8 @@ import type { WakeDeviceMessage } from "@/protocols/mrp/generated/messages/devic
 import type { DeviceInfoMessage } from "@/protocols/mrp/generated/messages/device/DeviceInfoMessage.ts";
 import { createLogger } from "@/logging/logging.ts";
 import { sleep } from "@/core/utils/timing";
-import { InputAction } from "./hid-constants";
-
+import { DeviceState } from "@/protocols/types/DeviceState.ts";
+import { InputAction } from "@/protocols/types/InputAction.ts";
 const logger = createLogger("bunatv:mrp:power");
 
 /** Delay between commands when turning off (ms) */
@@ -22,24 +22,14 @@ const DELAY_BETWEEN_COMMANDS = 500;
 // Types
 // ============================================================================
 
-/**
- * Power state of the Apple TV device
- */
-export enum PowerState {
-  /** Device is on and active */
-  On = "on",
-  /** Device is off or in sleep mode */
-  Off = "off",
-  /** Power state cannot be determined */
-  Unknown = "unknown",
-}
+export { DeviceState } from "@/protocols/types/DeviceState.ts";
 
 /**
  * Events emitted by MRPPower
  */
 export type MRPPowerEvents = {
   /** Emitted when the power state changes */
-  powerStateChanged: (oldState: PowerState, newState: PowerState) => void;
+  powerStateChanged: (oldState: DeviceState, newState: DeviceState) => void;
 };
 
 // ============================================================================
@@ -81,7 +71,7 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
 
   /** Waiters for specific power states */
   private _waiters = new Map<
-    PowerState,
+    DeviceState,
     { resolve: () => void; promise: Promise<void> }
   >();
 
@@ -116,22 +106,22 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
   /**
    * Get the current power state of the device.
    */
-  get powerState(): PowerState {
-    return this._getPowerStateFromDeviceInfo(this._deviceInfo);
+  get powerState(): DeviceState {
+    return this._getDeviceStateFromDeviceInfo(this._deviceInfo);
   }
 
   /**
    * Check if the device is currently on.
    */
   get isOn(): boolean {
-    return this.powerState === PowerState.On;
+    return this.powerState === DeviceState.Awake;
   }
 
   /**
    * Check if the device is currently off.
    */
   get isOff(): boolean {
-    return this.powerState === PowerState.Off;
+    return this.powerState === DeviceState.Asleep;
   }
 
   // ==========================================================================
@@ -155,7 +145,7 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
   private _handleDeviceInfo(msg: DeviceInfoMessage): void {
     const oldState = this.powerState;
     this._deviceInfo = msg;
-    const newState = this._getPowerStateFromDeviceInfo(msg);
+    const newState = this._getDeviceStateFromDeviceInfo(msg);
 
     logger.debug(
       {
@@ -179,28 +169,28 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
     }
   }
 
-  private _getPowerStateFromDeviceInfo(
+  private _getDeviceStateFromDeviceInfo(
     deviceInfo: DeviceInfoMessage | undefined
-  ): PowerState {
+  ): DeviceState {
     if (!deviceInfo) {
-      return PowerState.Unknown;
+      return DeviceState.Unknown;
     }
 
     const logicalDeviceCount = deviceInfo.logicalDeviceCount;
 
     if (logicalDeviceCount === undefined) {
-      return PowerState.Unknown;
+      return DeviceState.Unknown;
     }
 
     if (logicalDeviceCount >= 1) {
-      return PowerState.On;
+      return DeviceState.Awake;
     }
 
     if (logicalDeviceCount === 0) {
-      return PowerState.Off;
+      return DeviceState.Asleep;
     }
 
-    return PowerState.Unknown;
+    return DeviceState.Unknown;
   }
 
   // ==========================================================================
@@ -221,8 +211,8 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
       message: {} satisfies WakeDeviceMessage,
     });
 
-    if (options?.awaitNewState && this.powerState !== PowerState.On) {
-      await this._waitForState(PowerState.On);
+    if (options?.awaitNewState && this.powerState !== DeviceState.Awake) {
+      await this._waitForState(DeviceState.Awake);
     }
   }
 
@@ -254,8 +244,8 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
     // Press Select to confirm sleep
     await this._remote.pressSelect();
 
-    if (options?.awaitNewState && this.powerState !== PowerState.Off) {
-      await this._waitForState(PowerState.Off);
+    if (options?.awaitNewState && this.powerState !== DeviceState.Asleep) {
+      await this._waitForState(DeviceState.Asleep);
     }
   }
 
@@ -277,7 +267,7 @@ export class MRPPower extends EventEmitter<MRPPowerEvents> {
   // Utilities
   // ==========================================================================
 
-  private _waitForState(state: PowerState): Promise<void> {
+  private _waitForState(state: DeviceState): Promise<void> {
     // Check if we already have a waiter for this state
     const existing = this._waiters.get(state);
     if (existing) {
