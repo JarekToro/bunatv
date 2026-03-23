@@ -16,20 +16,20 @@ All commits must follow the [Conventional Commits](https://www.conventionalcommi
 
 ### Types and Their Release Impact
 
-| Type       | Description                                      | Release bump        |
-| ---------- | ------------------------------------------------ | ------------------- |
-| `feat`     | A new feature                                    | minor (patch pre-1.0) |
-| `fix`      | A bug fix                                        | patch               |
-| `feat!`    | A breaking change feature (or `BREAKING CHANGE:` footer) | major        |
-| `fix!`     | A breaking change fix                            | major               |
-| `chore`    | Maintenance tasks, dependency updates            | none                |
-| `docs`     | Documentation changes only                      | none                |
-| `style`    | Formatting, whitespace (no logic change)         | none                |
-| `refactor` | Code change that neither fixes a bug nor adds a feature | none        |
-| `perf`     | Performance improvements                         | none                |
-| `test`     | Adding or updating tests                         | none                |
-| `build`    | Changes to the build system or external dependencies | none            |
-| `ci`       | Changes to CI/CD configuration                  | none                |
+| Type       | Description                                              | Release bump          |
+| ---------- | -------------------------------------------------------- | --------------------- |
+| `feat`     | A new feature                                            | minor (patch pre-1.0) |
+| `fix`      | A bug fix                                                | patch                 |
+| `feat!`    | A breaking change feature (or `BREAKING CHANGE:` footer) | major                 |
+| `fix!`     | A breaking change fix                                    | major                 |
+| `chore`    | Maintenance tasks, dependency updates                    | none                  |
+| `docs`     | Documentation changes only                               | none                  |
+| `style`    | Formatting, whitespace (no logic change)                 | none                  |
+| `refactor` | Code change that neither fixes a bug nor adds a feature  | none                  |
+| `perf`     | Performance improvements                                 | none                  |
+| `test`     | Adding or updating tests                                 | none                  |
+| `build`    | Changes to the build system or external dependencies     | none                  |
+| `ci`       | Changes to CI/CD configuration                           | none                  |
 
 ### Examples
 
