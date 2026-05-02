@@ -463,7 +463,25 @@ export class AppleTVDiscoveryService {
     this.refreshing = true;
 
     try {
-      await this.discover();
+      this.network.start();
+
+      const types = [
+        APPLE_SERVICE_TYPES.AIRPLAY,
+        APPLE_SERVICE_TYPES.RAOP,
+        APPLE_SERVICE_TYPES.COMPANION_LINK,
+        APPLE_SERVICE_TYPES.DEVICE_INFO,
+      ];
+
+      // If the identifier is a valid IP address, send a unicast query directly
+      // to that host instead of broadcasting to the entire network.
+      if (isIP(identifier) !== 0) {
+        this.network.query(types, 5353, identifier);
+      } else {
+        this.network.query(types);
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      this.network.stop();
     } finally {
       this.refreshing = false;
     }
