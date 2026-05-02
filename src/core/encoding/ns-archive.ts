@@ -145,7 +145,13 @@ class UIDResolver {
     }
 
     if (value instanceof ArrayBuffer) {
-      return value;
+      // Mirror the Python implementation: if a binary blob is itself a valid
+      // NSKeyedArchiver, recursively decode it; otherwise return it as-is.
+      try {
+        return NSArchive.decode(value);
+      } catch {
+        return value;
+      }
     }
 
     if (Array.isArray(value)) {
@@ -164,91 +170,87 @@ class UIDResolver {
       return this.resolveRawDict(obj);
     }
 
-    // Read the class entry directly from $objects to avoid stripping
-    // $-prefixed keys before we can extract the class name.
+    // Read the class entry directly from $objects to get the full $classes
+    // hierarchy.  Matching against $classes (not just $classname) mirrors the
+    // Python implementation and correctly handles private Apple subclasses such
+    // as __NSSingleObjectArrayI (whose $classes list contains "NSArray").
     const classIndex = uidToIndex(classRef as unknown as PlistUID);
-    const classObj = this.objects[classIndex];
-    const className = getClassName(classObj);
+    const classes = getClasses(this.objects[classIndex]);
 
-    switch (className) {
-      case "NSDictionary":
-      case "NSMutableDictionary": {
-        const keys = obj["NS.keys"];
-        const values = obj["NS.objects"];
-        if (!Array.isArray(keys) || !Array.isArray(values)) {
-          return this.resolveRawDict(obj);
-        }
-        const dict: Record<string, PlistValue> = {};
-        for (let i = 0; i < keys.length; i++) {
-          const resolvedKey = this.resolveValue(keys[i]!);
-          const resolvedVal = this.resolveValue(values[i] ?? null);
-          if (typeof resolvedKey === "string") {
-            dict[resolvedKey] = resolvedVal;
-          }
-        }
-        return dict;
-      }
-
-      case "NSArray":
-      case "NSMutableArray":
-      case "NSSet":
-      case "NSMutableSet": {
-        const items = obj["NS.objects"];
-        if (!Array.isArray(items)) {
-          return this.resolveRawDict(obj);
-        }
-        return items.map((item) => this.resolveValue(item));
-      }
-
-      case "NSData":
-      case "NSMutableData": {
-        const data = obj["NS.data"];
-        if (data instanceof ArrayBuffer) return data;
-        return this.resolveValue(data ?? null);
-      }
-
-      case "NSString":
-      case "NSMutableString": {
-        const str = obj["NS.string"];
-        if (str != null) return this.resolveValue(str);
+    if (classes.includes("NSArray") || classes.includes("NSSet")) {
+      const items = obj["NS.objects"];
+      if (!Array.isArray(items)) {
         return this.resolveRawDict(obj);
       }
-
-      case "NSNumber":
-      case "NSDecimalNumber": {
-        // NSNumber stores its value directly — look for NS.intval / NS.dblval
-        const intVal = obj["NS.intval"];
-        if (intVal != null) return this.resolveValue(intVal);
-        const dblVal = obj["NS.dblval"];
-        if (dblVal != null) return this.resolveValue(dblVal);
-        return this.resolveRawDict(obj);
-      }
-
-      case "NSDate": {
-        const time = obj["NS.time"];
-        if (typeof time === "number") {
-          // NSDate stores seconds since Cocoa epoch (2001-01-01)
-          return new Date((time + 978307200) * 1000);
-        }
-        return this.resolveRawDict(obj);
-      }
-
-      default: {
-        // Unknown class — resolve any UID values, keep $class name for
-        // introspection by callers.
-        const result = this.resolveRawDict(obj);
-        if (
-          result !== null &&
-          typeof result === "object" &&
-          !Array.isArray(result) &&
-          !(result instanceof Date) &&
-          !(result instanceof ArrayBuffer)
-        ) {
-          (result as Record<string, PlistValue>)["$class"] = className ?? null;
-        }
-        return result;
-      }
+      return items.map((item) => this.resolveValue(item));
     }
+
+    if (
+      classes.includes("NSDictionary") ||
+      classes.includes("NSMutableDictionary")
+    ) {
+      const keys = obj["NS.keys"];
+      const values = obj["NS.objects"];
+      if (!Array.isArray(keys) || !Array.isArray(values)) {
+        return this.resolveRawDict(obj);
+      }
+      const dict: Record<string, PlistValue> = {};
+      for (let i = 0; i < keys.length; i++) {
+        const resolvedKey = this.resolveValue(keys[i]!);
+        const resolvedVal = this.resolveValue(values[i] ?? null);
+        if (typeof resolvedKey === "string") {
+          dict[resolvedKey] = resolvedVal;
+        }
+      }
+      return dict;
+    }
+
+    if (classes.includes("NSString") || classes.includes("NSMutableString")) {
+      const str = obj["NS.string"];
+      if (str != null) return this.resolveValue(str);
+      return this.resolveRawDict(obj);
+    }
+
+    if (classes.includes("NSData") || classes.includes("NSMutableData")) {
+      const data = obj["NS.data"];
+      if (data instanceof ArrayBuffer) return this.resolveValue(data);
+      return this.resolveValue(data ?? null);
+    }
+
+    if (
+      classes.includes("NSNumber") ||
+      classes.includes("NSDecimalNumber")
+    ) {
+      const intVal = obj["NS.intval"];
+      if (intVal != null) return this.resolveValue(intVal);
+      const dblVal = obj["NS.dblval"];
+      if (dblVal != null) return this.resolveValue(dblVal);
+      return this.resolveRawDict(obj);
+    }
+
+    if (classes.includes("NSDate")) {
+      const time = obj["NS.time"];
+      if (typeof time === "number") {
+        // NSDate stores seconds since Cocoa epoch (2001-01-01)
+        return new Date((time + 978307200) * 1000);
+      }
+      return this.resolveRawDict(obj);
+    }
+
+    // Unknown class — resolve UID values and preserve the leaf class name
+    // for introspection by callers.
+    const result = this.resolveRawDict(obj);
+    if (
+      result !== null &&
+      typeof result === "object" &&
+      !Array.isArray(result) &&
+      !(result instanceof Date) &&
+      !(result instanceof ArrayBuffer)
+    ) {
+      const leafName = getLeafClassName(this.objects[classIndex]);
+      (result as Record<string, PlistValue>)["$class"] = leafName ?? null;
+    }
+    return result;
   }
 
   /** Resolve all values in a plain dict, skipping `$`-prefixed meta-keys. */
@@ -262,8 +264,29 @@ class UIDResolver {
   }
 }
 
-/** Extract the class name from a resolved `$class` object. */
-function getClassName(classObj: PlistValue): string | null {
+/**
+ * Return the `$classes` array from a class-descriptor object in $objects.
+ * This is the full class hierarchy (e.g. ["NSMutableArray", "NSArray", "NSObject"])
+ * and is used for class detection so that private Apple subclasses (e.g.
+ * __NSSingleObjectArrayI) are still recognised as NSArray.
+ */
+function getClasses(classObj: PlistValue): string[] {
+  if (
+    classObj === null ||
+    typeof classObj !== "object" ||
+    Array.isArray(classObj) ||
+    classObj instanceof Date ||
+    classObj instanceof ArrayBuffer
+  ) {
+    return [];
+  }
+  const classes = (classObj as Record<string, PlistValue>)["$classes"];
+  if (!Array.isArray(classes)) return [];
+  return classes.filter((c): c is string => typeof c === "string");
+}
+
+/** Return `$classname` from a class-descriptor object (the leaf / concrete class name). */
+function getLeafClassName(classObj: PlistValue): string | null {
   if (
     classObj === null ||
     typeof classObj !== "object" ||
