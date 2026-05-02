@@ -6,7 +6,7 @@ import {
   type CompanionEventOpackMessage,
   createCompanionCommand,
 } from "@/protocols/companion/messages/CompanionOpackMessage.ts";
-import { parse as parsePlist } from "@plist/plist";
+import { NSArchive } from "@/core/encoding/ns-archive.ts";
 
 export interface TextInputStartRequest extends CompanionRequestOpackMessage {
   _i: "_tiStart";
@@ -119,9 +119,9 @@ function parseTextInputPlist(buffer: Uint8Array): DecodedTextInputData {
       buffer.byteOffset,
       buffer.byteOffset + buffer.byteLength
     );
-    return parsePlist(arrayBuffer as ArrayBuffer) as DecodedTextInputData;
+    return NSArchive.decode(arrayBuffer as ArrayBuffer) as DecodedTextInputData;
   } catch (error) {
-    console.error("Failed to parse text input plist:", error);
+    console.error("Failed to parse text input NSArchive/plist:", error);
     return {};
   }
 }

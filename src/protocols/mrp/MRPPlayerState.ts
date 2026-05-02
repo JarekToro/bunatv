@@ -24,7 +24,7 @@ import { PlaybackQueueRequestMessage } from "@/protocols/mrp/generated/messages/
 import { EventEmitter } from "eventemitter3";
 import { GetStateMessage } from "@/protocols/mrp/generated/messages/client/GetStateMessage.ts";
 import type { DePlistify } from "@/core/utils/types.ts";
-import { Plist } from "@/core/encoding/plist.ts";
+import { NSArchive } from "@/core/encoding/ns-archive.ts";
 import { createLogger } from "@/logging/logging.ts";
 import { SendLyricsEventMessage } from "@/protocols/mrp/generated/messages/playback/SendLyricsEventMessage.ts";
 
@@ -413,7 +413,7 @@ export class PlayerState extends EventEmitter<PlayerStateEvents> {
       let buf = metadata[key];
       if (buf) {
         try {
-          const value = Plist.decode(buf);
+          const value = NSArchive.decode(buf);
           if (value) {
             processed[key] = value;
           }

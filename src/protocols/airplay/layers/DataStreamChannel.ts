@@ -10,6 +10,7 @@ import {
   BunOptimizedUtils,
 } from "@/core/encoding/buffer-utils.ts";
 import { createLogger } from "@/logging/logging";
+import { NSArchive } from "@/core/encoding/ns-archive.ts";
 import {
   Plist,
   plistObjectGuard,
@@ -314,14 +315,14 @@ export class DataStreamChannel extends EmitterEx<DataStreamChannelEvents> {
     if (payload.length === 0) return null;
 
     try {
-      return Plist.decode(
+      return NSArchive.decode(
         payload.buffer.slice(
           payload.byteOffset,
           payload.byteOffset + payload.byteLength
         )
       );
     } catch (err) {
-      logger.error({ err }, "Failed to decode plist payload");
+      logger.error({ err }, "Failed to decode NSArchive/plist payload");
       return null;
     }
   }
