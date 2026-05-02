@@ -140,7 +140,7 @@ describe("NSArchive", () => {
       expect(dict["payload"]).toBe("nested-string");
     });
 
-    it("returns null for an empty buffer", () => {
+    it("throws for an empty buffer", () => {
       // Plist.decode throws on empty buffer; NSArchive.decode propagates that
       expect(() => NSArchive.decode(new ArrayBuffer(0))).toThrow();
     });

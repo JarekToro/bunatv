@@ -82,7 +82,7 @@ export class NSArchive {
     // Resolve the top-level object. The "root" key is canonical but Apple
     // sometimes uses other keys; fall back to the first key in $top.
     const topKey = "root" in top ? "root" : Object.keys(top)[0];
-    if (topKey == null) {
+    if (!topKey) {
       return plist;
     }
 
