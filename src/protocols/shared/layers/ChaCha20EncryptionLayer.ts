@@ -42,7 +42,7 @@ export class ChaCha20EncryptionLayer {
   }
 
   enable(keys: DerivedKeys): void {
-    logger.info(
+    logger.trace(
       {
         writeKeyHex: Buffer.from(keys.writeKey).toString("hex"),
         readKeyHex: Buffer.from(keys.readKey).toString("hex"),
@@ -55,7 +55,7 @@ export class ChaCha20EncryptionLayer {
     this.receiveNonce = 0;
     this._state = EncryptionState.Enabled;
 
-    logger.info("ChaCha20 encryption enabled - nonces reset to 0");
+    logger.debug("ChaCha20 encryption enabled (nonces reset)");
   }
 
   disable(): void {
@@ -83,15 +83,13 @@ export class ChaCha20EncryptionLayer {
         this.nonceFormat
       );
 
-      // DETAILED DEBUG LOGGING
-      logger.info(
+      logger.trace(
         {
-          aadHex: aad ? aad.toString("hex") : undefined,
           counter: counterValue,
-          nonce: Buffer.from(nonce).toString("hex"),
           plaintextLength: data.length,
+          aadLength: aad?.length,
         },
-        "🔐 ENCRYPTING: " + aad?.toString("hex")
+        "Encrypting frame"
       );
 
       const encrypted = ChaCha20Utils.encryptSync(
@@ -99,14 +97,6 @@ export class ChaCha20EncryptionLayer {
         nonce,
         new Uint8Array(data),
         aad ? new Uint8Array(aad) : undefined
-      );
-
-      logger.info(
-        {
-          encryptedLength: encrypted.length,
-          authTagHex: Buffer.from(encrypted.slice(-16)).toString("hex"),
-        },
-        "✅ ENCRYPTED"
       );
 
       return Buffer.from(encrypted);

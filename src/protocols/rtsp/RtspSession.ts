@@ -15,21 +15,11 @@ export interface RtspSetupResponse {
   timingPort?: number;
 }
 
-interface DigestInfo {
-  username: string;
-  realm: string;
-  password: string;
-  nonce: string;
-}
-
 export class RtspSession {
   private cseq = -1;
   private sessionId?: string;
-  // ADD THESE:
   private dacpId: string;
   private activeRemote: number;
-  private rtspSessionId?: number; // Session ID from SETUP response
-  private digestInfo?: DigestInfo; // For password auth
 
   constructor(
     private readonly channel: HttpFramedChannel,
@@ -69,12 +59,6 @@ export class RtspSession {
       "Active-Remote": String(this.activeRemote),
       "Client-Instance": this.dacpId,
     };
-    if (this.digestInfo) {
-      // baseHeaders['Authorization'] = this.getDigestPayload(method, path)
-    }
-    // 10591776268497152000
-    // 2556675073518460928
-    // 14511846595692938970
     const response = await this.channel.sendRequest(
       method,
       path,
@@ -82,8 +66,7 @@ export class RtspSession {
       body,
       "RTSP/1.0"
     );
-    // {"isRemoteControlOnly":true,"osName":"iPhone OS","sourceVersion":"550.10","timingProtocol":"None","model":"iPhone10,6","deviceID":"62:75:6E:61:74:76",            "osVersion":"14.7.1","osBuildVersion":"18G82","macAddress":"62:75:6E:61:74:76","sessionUUID":"292A6343-D7E2-408A-A3F0-AEF2C181BCB5","isMultiSelectAirPlay":false,"groupContainsGroupLeader":false,"senderSupportsRelay":false,"statsCollectionEnabled":false}
-    // {'isRemoteControlOnly': True, 'osName': 'iPhone OS', 'sourceVersion': '550.10', 'timingProtocol': 'None', 'model': 'iPhone10,6', 'deviceID': 'FF:70:79:61:74:76', 'osVersion': '14.7.1', 'osBuildVersion': '18G82', 'macAddress': '02:70:79:61:74:76', 'sessionUUID': 'C7E71F6A-7A77-4426-9D30-15FFDED45A2A', 'name': 'pyatv'}
+
     // Validate CSeq matches
     const responseCseq = response.headers.get("cseq");
 
@@ -161,7 +144,6 @@ export class RtspSession {
         name: setupInfo.name,
       })
     );
-    await Bun.write(Bun.file("./debug-rc-setup.plist"), body);
 
     logger.debug({ sessionUrl: this.sessionUrl }, "Setting up remote control");
 
@@ -171,8 +153,6 @@ export class RtspSession {
       { "Content-Type": "application/x-apple-binary-plist" },
       body
     );
-
-    const rtspSessionHeader = response.headers.get("session");
 
     const parsed = Plist.decode(response.body) as Record<string, unknown>;
 

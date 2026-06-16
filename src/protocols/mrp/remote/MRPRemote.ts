@@ -20,6 +20,7 @@ import { MRPPlayback } from "./MRPPlayback";
 import { MRPAudio } from "./MRPAudio";
 import { MRPTouch } from "./MRPTouch";
 import { MRPPower } from "./MRPPower";
+import { MRPTextInput } from "./MRPTextInput";
 import {
   UsagePage,
   GenericDesktopUsage,
@@ -82,6 +83,9 @@ export class MRPRemote {
   /** Power state and control */
   readonly power: MRPPower;
 
+  /** Keyboard / text-field input control */
+  readonly textInput: MRPTextInput;
+
   /** Default duration for button press/release in milliseconds */
   private readonly defaultButtonPressDuration = 50;
 
@@ -93,6 +97,7 @@ export class MRPRemote {
     this.audio = new MRPAudio(protocol);
     this.touch = new MRPTouch(protocol);
     this.power = new MRPPower(protocol);
+    this.textInput = new MRPTextInput(protocol);
 
     // Wire up power controller with remote reference for turnOff
     this.power.setRemote(this);

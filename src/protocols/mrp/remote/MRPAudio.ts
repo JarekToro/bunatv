@@ -10,6 +10,8 @@ import type { MRPProtocol } from "@/protocols/mrp/MRPProtocol.ts";
 import { ProtocolMessage_Type } from "@/protocols/mrp/generated/protocol/ProtocolMessage.ts";
 import type { SetVolumeMessage } from "@/protocols/mrp/generated/messages/audio/SetVolumeMessage.ts";
 import type { SetVolumeMutedMessage } from "@/protocols/mrp/generated/messages/audio/SetVolumeMutedMessage.ts";
+import type { GetVolumeMessage } from "@/protocols/mrp/generated/messages/audio/GetVolumeMessage.ts";
+import type { GetVolumeMutedMessage } from "@/protocols/mrp/generated/messages/audio/GetVolumeMutedMessage.ts";
 import type { VolumeControlAvailabilityMessage } from "@/protocols/mrp/generated/messages/audio/VolumeControlAvailabilityMessage.ts";
 import type { VolumeControlCapabilitiesDidChangeMessage } from "@/protocols/mrp/generated/messages/audio/VolumeControlCapabilitiesDidChangeMessage.ts";
 import type { SendButtonEventMessage } from "@/protocols/mrp/generated/messages/input/SendButtonEventMessage.ts";
@@ -542,6 +544,56 @@ export class MRPAudio extends EventEmitter<MRPAudioEvents> {
    */
   setVolumePercent(deviceUID: string, percent: number): void {
     this.setVolume(deviceUID, percent / 100);
+  }
+
+  /**
+   * Query the current volume of an output device (request/response).
+   *
+   * @param deviceUID - The output device UID. Defaults to the active/connected
+   *   device when omitted.
+   * @returns The volume level from 0.0 to 1.0, or `undefined` if the device did
+   *   not report one.
+   */
+  async getVolume(deviceUID?: string): Promise<number | undefined> {
+    const uid = deviceUID ?? this._activeDeviceUid ?? this._connectedDeviceUid;
+    logger.debug({ deviceUID: uid }, "Querying volume");
+
+    const response = await this.protocol.sendAndReceive({
+      extensionType: ProtocolMessage_Type.GET_VOLUME_MESSAGE,
+      message: { outputDeviceUID: uid } satisfies GetVolumeMessage,
+    });
+
+    if (
+      response?.extensionType === ProtocolMessage_Type.GET_VOLUME_RESULT_MESSAGE
+    ) {
+      return response.innerMessage.volume;
+    }
+    return undefined;
+  }
+
+  /**
+   * Query the current mute state of an output device (request/response).
+   *
+   * @param deviceUID - The output device UID. Defaults to the active/connected
+   *   device when omitted.
+   * @returns Whether the device is muted, or `undefined` if it did not report.
+   */
+  async getVolumeMuted(deviceUID?: string): Promise<boolean | undefined> {
+    const uid = deviceUID ?? this._activeDeviceUid ?? this._connectedDeviceUid;
+    logger.debug({ deviceUID: uid }, "Querying mute state");
+
+    const response = await this.protocol.sendAndReceive({
+      extensionType: ProtocolMessage_Type.GET_VOLUME_MUTED_MESSAGE,
+      message: { outputDeviceUID: uid } satisfies GetVolumeMutedMessage,
+    });
+
+    if (
+      response?.extensionType ===
+      ProtocolMessage_Type.GET_VOLUME_MUTED_RESULT_MESSAGE
+    ) {
+      return response.innerMessage.isMuted;
+    }
+    return undefined;
   }
 
   // ==========================================================================

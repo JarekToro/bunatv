@@ -9,12 +9,14 @@ import { MRPProtocol } from "@/protocols/mrp/MRPProtocol.ts";
 import { Airplay2Protocol } from "@/protocols/airplay/layers/Airplay2Protocol.ts";
 import { CompanionApi } from "@/protocols/companion/CompanionApi.ts";
 import { MRPApi } from "@/protocols/mrp/MRPApi.ts";
+import { RaopApi } from "@/protocols/raop/RaopApi.ts";
 import { ProtocolState } from "@/protocols/types/BaseProtocol.ts";
 
 export enum ProtocolType {
   Companion = "companion",
   MRP = "mrp",
   AirPlay = "airplay",
+  RAOP = "raop",
 }
 
 export interface DeviceConnectionOptions {
@@ -44,10 +46,13 @@ export class DeviceApi extends EventEmitter<DeviceApiEvents> {
   private apis: {
     [ProtocolType.Companion]: CompanionApi | null;
     [ProtocolType.MRP]: MRPApi | null;
+    [ProtocolType.RAOP]: RaopApi | null;
   } = {
     [ProtocolType.Companion]: null,
     [ProtocolType.MRP]: null,
+    [ProtocolType.RAOP]: null,
   };
+
   constructor(
     readonly device: AppleDevice,
     private readonly storage: Storage
@@ -84,6 +89,8 @@ export class DeviceApi extends EventEmitter<DeviceApiEvents> {
         );
       case ProtocolType.AirPlay:
         return this.device.services.airPlay !== undefined;
+      case ProtocolType.RAOP:
+        return this.device.services.raop !== undefined;
       default:
         return false;
     }
@@ -100,6 +107,13 @@ export class DeviceApi extends EventEmitter<DeviceApiEvents> {
       throw new Error("Companion protocol not initialized");
     }
     return this.apis[ProtocolType.Companion]!;
+  }
+
+  raop(): RaopApi {
+    if (!this.apis[ProtocolType.RAOP]) {
+      throw new Error("RAOP protocol not initialized");
+    }
+    return this.apis[ProtocolType.RAOP]!;
   }
 
   async connect(options?: DeviceConnectionOptions): Promise<void> {
@@ -226,6 +240,10 @@ export class DeviceApi extends EventEmitter<DeviceApiEvents> {
       this.apis[ProtocolType.MRP] = new MRPApi(
         this.protocols[ProtocolType.MRP]!
       );
+    }
+    if (this.supportsProtocol(ProtocolType.RAOP)) {
+      const service = this.device.services.raop!;
+      this.apis[ProtocolType.RAOP] = new RaopApi(service);
     }
   }
 }

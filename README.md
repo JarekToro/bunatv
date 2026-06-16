@@ -30,6 +30,7 @@ A CLI (`bunatv`) is included for convenience, but it’s a thin layer on top of 
 - **Companion Protocol:** working — pairing, connection, remote control, volume, power, app launch, text input, touch
 - **MRP Protocol:** functional — core remote, playback, and now-playing working; many advanced message types (voice, game controllers, keyboard) unhandled
 - **AirPlay 2:** infrastructure implemented (transport, auth, framing) — used as MRP’s underlying transport
+- **RAOP (AirPlay 1 audio):** streaming stack implemented — RTSP ANNOUNCE/SETUP/RECORD, UDP RTP audio, sync packets, retransmit backlog, DAAP metadata
 - **CLI:** functional for discovery, pairing, and basic control
 
 ## What works
@@ -52,11 +53,26 @@ A CLI (`bunatv`) is included for convenience, but it’s a thin layer on top of 
 
 - **Now-playing state** — active player, track metadata, playback position with millisecond-precision extrapolation
 - **Playback control** — play, pause, skip, seek, chapters, shuffle/repeat modes, playback rate
+- **Music/library commands** — like, dislike, ban, bookmark, rate, wish-list, album/playlist navigation
 - **Advanced remote** — full HID command set with protobuf messaging
+- **Keyboard / text input** — set, insert, and clear focused text fields, with keyboard-session state and editing-attribute events
+- **Volume** — set/mute plus explicit `getVolume`/`getVolumeMuted` queries and passive volume-change tracking
 - **Speaker management** — add, remove, and set AirPlay output devices
 - **Touch/gesture control** — tap and swipe with configurable duration
 
-Not yet implemented: voice input, game controller input, keyboard via MRP, volume change monitoring, playback session migration, device endpoint discovery.
+Not yet implemented: voice input, game controller input, playback session migration, device endpoint discovery.
+
+### RAOP / AirPlay 1 Audio
+
+- **RTSP session** — ANNOUNCE with SDP (L16 PCM, 44100 Hz, stereo), SETUP (UDP port negotiation), RECORD, FLUSH, TEARDOWN
+- **UDP audio channel** — real-time RTP packet sending with burst compensation for timing drift
+- **Control channel** — UDP sync packets (NTP wall-clock ↔ RTP timestamp anchoring) sent every second; handles retransmit requests from the receiver
+- **DAAP metadata** — publishes title, artist, album, and duration via RTSP `SET_PARAMETER` with `application/x-dmap-tagged`
+- **Artwork** — publishes album artwork (JPEG or PNG auto-detected) via `SET_PARAMETER`
+- **Progress** — publishes playback position in RTP timestamp units via `SET_PARAMETER`
+- **Volume** — set volume in dBFS or as a 0–100 percentage (`pctToDbfs` conversion included)
+- **MFi-SAP** — `authSetup` for AirPort Express devices (static Curve25519 key)
+- **Digest auth** — optional password for protected receivers
 
 ## Install / run
 
@@ -144,7 +160,7 @@ To find all available namespaces, using [astgrep](https://ast-grep.github.io/) r
 ## Roadmap
 
 - **Companion Now Playing** — newer protocol messages for now-playing info exist in the Companion protocol but need further reverse engineering to fully map out
-- **AirPlay audio/video streaming** — the AirPlay 2 transport infrastructure is in place; actual media streaming is next
+- **AirPlay audio/video streaming** — RAOP/AirPlay 1 audio sender is done; AirPlay 2 audio/video streaming is next
 - **Publishable package** — clean public API surface and publish to npm/JSR
 
 ## Acknowledgments
