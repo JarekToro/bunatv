@@ -289,4 +289,73 @@ export class MRPPlayback {
       sendOptions: 0,
     });
   }
+
+  // ==========================================================================
+  // Rating & Library (music apps)
+  // ==========================================================================
+
+  /** Like the now-playing track (e.g. Apple Music thumbs up). */
+  async likeTrack(): Promise<CommandResult> {
+    return this.sendCommand(Command.LikeTrack);
+  }
+
+  /** Dislike the now-playing track. */
+  async dislikeTrack(): Promise<CommandResult> {
+    return this.sendCommand(Command.DislikeTrack);
+  }
+
+  /** Ban the now-playing track (radio "never play this"). */
+  async banTrack(): Promise<CommandResult> {
+    return this.sendCommand(Command.BanTrack);
+  }
+
+  /** Bookmark the now-playing track. */
+  async bookmarkTrack(): Promise<CommandResult> {
+    return this.sendCommand(Command.BookmarkTrack);
+  }
+
+  /**
+   * Set an explicit rating on the now-playing track.
+   *
+   * @param rating - Rating from 0.0 to 1.0 (clamped).
+   */
+  async rateTrack(rating: number): Promise<CommandResult> {
+    return this.sendCommand(Command.RateTrack, {
+      rating: Math.max(0, Math.min(1, rating)),
+    });
+  }
+
+  /** Add the now-playing track to the user's wish list. */
+  async addToWishList(): Promise<CommandResult> {
+    return this.sendCommand(Command.AddTrackToWishList);
+  }
+
+  /** Remove the now-playing track from the user's wish list. */
+  async removeFromWishList(): Promise<CommandResult> {
+    return this.sendCommand(Command.RemoveTrackFromWishList);
+  }
+
+  // ==========================================================================
+  // Album / Playlist Navigation
+  // ==========================================================================
+
+  /** Skip to the next album. */
+  async nextAlbum(): Promise<CommandResult> {
+    return this.sendCommand(Command.NextAlbum);
+  }
+
+  /** Skip to the previous album. */
+  async previousAlbum(): Promise<CommandResult> {
+    return this.sendCommand(Command.PreviousAlbum);
+  }
+
+  /** Skip to the next playlist. */
+  async nextPlaylist(): Promise<CommandResult> {
+    return this.sendCommand(Command.NextPlaylist);
+  }
+
+  /** Skip to the previous playlist. */
+  async previousPlaylist(): Promise<CommandResult> {
+    return this.sendCommand(Command.PreviousPlaylist);
+  }
 }

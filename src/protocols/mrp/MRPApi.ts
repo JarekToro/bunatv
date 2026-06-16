@@ -77,6 +77,7 @@ export class MRPApi {
     logger.debug("MRPApi disconnecting");
     this.remote.power.removeAllListeners();
     this.remote.audio.removeAllListeners();
+    this.remote.textInput.cleanup();
     this.playerState.cleanup();
   }
 }
