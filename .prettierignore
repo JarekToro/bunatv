@@ -1,0 +1,12 @@
+# Dependencies and lock files
+node_modules/
+bun.lock
+
+# Build output
+dist/
+
+# Generated protobuf files
+src/protocols/mrp/generated/
+
+# Patch files
+patches/
